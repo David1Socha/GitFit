@@ -14,7 +14,7 @@ namespace HealthTrac.Models
         }
         public int ID { get; set; }
         public int TeamID { get; set; }
-        public int UserID { get; set; }
+        public int ApplicationUserID { get; set; }
         public DateTime CreationDate { get; set; }
         public Status Status { get; set; }
 
