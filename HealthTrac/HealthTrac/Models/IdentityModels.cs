@@ -20,6 +20,7 @@ namespace HealthTrac.Models
         public double Height { get; set; }
         public double Width { get; set; }
         public DateTime BirthDate { get; set; }
+        public virtual Membership Membership { get; set; }
     }
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
