@@ -19,6 +19,6 @@ namespace HealthTrac.Models
         public Status Status { get; set; }
 
         public virtual Team Team { get; set; }
-        public virtual ApplicationUser User { get; set; }
+        public virtual ApplicationUser ApplicationUser { get; set; }
     }
 }
