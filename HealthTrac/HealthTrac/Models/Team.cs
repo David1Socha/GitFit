@@ -12,6 +12,8 @@ namespace HealthTrac.Models
         public string Name { get; set; }
         public DateTime CreationDate { get; set; }
 
+        public bool Enabled { get; set; }
+
         public virtual ICollection<Membership> Memberships { get; set; }
     }
 }
