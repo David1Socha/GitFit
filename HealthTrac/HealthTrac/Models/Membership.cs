@@ -18,7 +18,7 @@ namespace HealthTrac.Models
         public DateTime CreationDate { get; set; }
         public Status Status { get; set; }
 
-        public virtual User Team { get; set; }
-        public virtual User User { get; set; }
+        public virtual Team Team { get; set; }
+        public virtual ApplicationUser User { get; set; }
     }
 }
