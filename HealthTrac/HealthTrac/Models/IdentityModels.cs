@@ -4,13 +4,14 @@ using System.Collections.Generic;
 
 namespace HealthTrac.Models
 {
+    public enum Sex
+    {
+        MALE, FEMALE
+    }
+
     // You can add profile data for the user by adding more properties to your ApplicationUser class, please visit http://go.microsoft.com/fwlink/?LinkID=317594 to learn more.
     public class ApplicationUser : IdentityUser
     {
-        public enum Sex
-        {
-            MALE, FEMALE
-        }
         public bool Enabled { get; set; }
         public DateTime DateCreated { get; set; }
         public String FirstName { get; set; }

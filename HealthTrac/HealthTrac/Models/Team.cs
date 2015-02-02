@@ -6,12 +6,13 @@ using System.ComponentModel.DataAnnotations;
 
 namespace HealthTrac.Models
 {
+    public enum Visibility
+    {
+        PUBLIC, PRIVATE, SECRET
+    }
+
     public class Team
     {
-        public enum Visibility
-        {
-            PUBLIC, PRIVATE, SECRET
-        }
         public int ID { get; set; }
         public string Name { get; set; }
         public DateTime CreationDate { get; set; }
