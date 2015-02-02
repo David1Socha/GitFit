@@ -177,7 +177,12 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Activity.cs" />
+    <Compile Include="Models\ExerciseSession.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\Status.cs" />
+    <Compile Include="Models\Membership.cs" />
+    <Compile Include="Models\Team.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
