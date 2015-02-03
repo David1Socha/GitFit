@@ -1,7 +1,10 @@
 ﻿using Microsoft.AspNet.Identity.EntityFramework;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
+using System.Linq;
 
 namespace HealthTrac.Models
 {
@@ -34,9 +37,31 @@ namespace HealthTrac.Models
         public DbSet<Membership> Memberships { get; set; }
         public DbSet<Status> Statuses { get; set; }
         public DbSet<Team> Teams { get; set; }
+
         public ApplicationDbContext()
             : base("DefaultConnection")
         {
+        }
+
+        public override int SaveChanges()
+        {
+            IEnumerable<DbEntityEntry> entities = _GetChangedDateTrackingEntities();
+
+            foreach (var entity in entities)
+            {
+                if (entity.State == EntityState.Added)
+                {
+                    ((IDateTrackingModel)entity.Entity).DateCreated = DateTime.Now;
+                }
+                ((IDateTrackingModel)entity.Entity).DateModified = DateTime.Now;
+            }
+
+            return base.SaveChanges();
+        }
+
+        private IEnumerable<DbEntityEntry> _GetChangedDateTrackingEntities()
+        {
+            return ChangeTracker.Entries().Where(x => x.Entity is IDateTrackingModel && (x.State == EntityState.Added || x.State == EntityState.Modified));
         }
     }
 }
