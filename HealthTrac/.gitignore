@@ -73,3 +73,6 @@ _[Ss]cripts
 *.nupkg
 *.ncrunchsolution
 *.dot[Cc]over
+# SQL Server files
+HealthTrac/App_Data/*.mdf
+HealthTrac/App_Data/*.ldf
