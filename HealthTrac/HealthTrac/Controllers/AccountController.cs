@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Owin.Security;
 using HealthTrac.Models;
+using Microsoft.AspNet.Identity.Owin;
 
 namespace HealthTrac.Controllers
 {
@@ -196,7 +197,7 @@ namespace HealthTrac.Controllers
         [AllowAnonymous]
         public async Task<ActionResult> ExternalLoginCallback(string returnUrl)
         {
-            var loginInfo = await AuthenticationManager.GetExternalLoginInfoAsync();
+            var loginInfo = await AuthenticationManager_GetExternalLoginInfoAsync_Workaround();
             if (loginInfo == null)
             {
                 return RedirectToAction("Login");
@@ -260,7 +261,7 @@ namespace HealthTrac.Controllers
             if (ModelState.IsValid)
             {
                 // Get the information about the user from the external login provider
-                var info = await AuthenticationManager.GetExternalLoginInfoAsync();
+                var info = await AuthenticationManager_GetExternalLoginInfoAsync_Workaround();
                 if (info == null)
                 {
                     return View("ExternalLoginFailure");
@@ -378,7 +379,8 @@ namespace HealthTrac.Controllers
 
         private class ChallengeResult : HttpUnauthorizedResult
         {
-            public ChallengeResult(string provider, string redirectUri) : this(provider, redirectUri, null)
+            public ChallengeResult(string provider, string redirectUri)
+                : this(provider, redirectUri, null)
             {
             }
 
@@ -404,5 +406,26 @@ namespace HealthTrac.Controllers
             }
         }
         #endregion
+
+        private async Task<ExternalLoginInfo> AuthenticationManager_GetExternalLoginInfoAsync_Workaround()
+        {
+            ExternalLoginInfo loginInfo = null;
+
+            var result = await AuthenticationManager.AuthenticateAsync(DefaultAuthenticationTypes.ExternalCookie);
+
+            if (result != null && result.Identity != null)
+            {
+                var idClaim = result.Identity.FindFirst(ClaimTypes.NameIdentifier);
+                if (idClaim != null)
+                {
+                    loginInfo = new ExternalLoginInfo()
+                    {
+                        DefaultUserName = result.Identity.Name == null ? "" : result.Identity.Name.Replace(" ", ""),
+                        Login = new UserLoginInfo(idClaim.Issuer, idClaim.Value)
+                    };
+                }
+            }
+            return loginInfo;
+        }
     }
 }
