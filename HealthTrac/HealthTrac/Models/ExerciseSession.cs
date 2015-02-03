@@ -5,7 +5,7 @@ using System.Web;
 
 namespace HealthTrac.Models
 {
-    public class ExerciseSession
+    public class ExerciseSession : DateTrackingModel
     {
         public int ID { get; set; }
         public int ActivityID { get; set; }

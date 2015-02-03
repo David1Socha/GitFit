@@ -11,15 +11,13 @@ namespace HealthTrac.Models
         PUBLIC, PRIVATE, SECRET
     }
 
-    public class Team
+    public class Team : DateTrackingModel
     {
         public int ID { get; set; }
         public string Name { get; set; }
-        public DateTime CreationDate { get; set; }
         public String Description { get; set; }
         public Visibility Visibility { get; set; }
         public bool Enabled { get; set; }
-
         public virtual ICollection<Membership> Memberships { get; set; }
     }
 }

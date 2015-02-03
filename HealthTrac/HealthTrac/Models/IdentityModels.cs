@@ -10,10 +10,11 @@ namespace HealthTrac.Models
     }
 
     // You can add profile data for the user by adding more properties to your ApplicationUser class, please visit http://go.microsoft.com/fwlink/?LinkID=317594 to learn more.
-    public class ApplicationUser : IdentityUser
+    public class ApplicationUser : IdentityUser, IDateTrackingModel
     {
         public bool Enabled { get; set; }
         public DateTime DateCreated { get; set; }
+        public DateTime DateModified { get; set; }
         public String FirstName { get; set; }
         public String LastName { get; set; }
         public String PreferredName { get; set; }
