@@ -38,65 +38,6 @@ namespace HealthTrac.Controllers
         }
 
         //
-        // POST: /Account/Login
-        [HttpPost]
-        [AllowAnonymous]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
-        {
-            if (ModelState.IsValid)
-            {
-                var user = await UserManager.FindAsync(model.UserName, model.Password);
-                if (user != null)
-                {
-                    await SignInAsync(user, model.RememberMe);
-                    return RedirectToLocal(returnUrl);
-                }
-                else
-                {
-                    ModelState.AddModelError("", "Invalid username or password.");
-                }
-            }
-
-            // If we got this far, something failed, redisplay form
-            return View(model);
-        }
-
-        //
-        // GET: /Account/Register
-        [AllowAnonymous]
-        public ActionResult Register()
-        {
-            return View();
-        }
-
-        //
-        // POST: /Account/Register
-        [HttpPost]
-        [AllowAnonymous]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Register(RegisterViewModel model)
-        {
-            if (ModelState.IsValid)
-            {
-                var user = new ApplicationUser() { UserName = model.UserName };
-                var result = await UserManager.CreateAsync(user, model.Password);
-                if (result.Succeeded)
-                {
-                    await SignInAsync(user, isPersistent: false);
-                    return RedirectToAction("Index", "Home");
-                }
-                else
-                {
-                    AddErrors(result);
-                }
-            }
-
-            // If we got this far, something failed, redisplay form
-            return View(model);
-        }
-
-        //
         // POST: /Account/Disassociate
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -124,61 +65,11 @@ namespace HealthTrac.Controllers
                 : message == ManageMessageId.SetPasswordSuccess ? "Your password has been set."
                 : message == ManageMessageId.RemoveLoginSuccess ? "The external login was removed."
                 : message == ManageMessageId.Error ? "An error has occurred."
+                : message == ManageMessageId.AlreadyLinked ? "You have already linked that account."
                 : "";
             ViewBag.HasLocalPassword = HasPassword();
             ViewBag.ReturnUrl = Url.Action("Manage");
             return View();
-        }
-
-        //
-        // POST: /Account/Manage
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Manage(ManageUserViewModel model)
-        {
-            bool hasPassword = HasPassword();
-            ViewBag.HasLocalPassword = hasPassword;
-            ViewBag.ReturnUrl = Url.Action("Manage");
-            if (hasPassword)
-            {
-                if (ModelState.IsValid)
-                {
-                    IdentityResult result = await UserManager.ChangePasswordAsync(User.Identity.GetUserId(), model.OldPassword, model.NewPassword);
-                    if (result.Succeeded)
-                    {
-                        return RedirectToAction("Manage", new { Message = ManageMessageId.ChangePasswordSuccess });
-                    }
-                    else
-                    {
-                        AddErrors(result);
-                    }
-                }
-            }
-            else
-            {
-                // User does not have a password so remove any validation errors caused by a missing OldPassword field
-                ModelState state = ModelState["OldPassword"];
-                if (state != null)
-                {
-                    state.Errors.Clear();
-                }
-
-                if (ModelState.IsValid)
-                {
-                    IdentityResult result = await UserManager.AddPasswordAsync(User.Identity.GetUserId(), model.NewPassword);
-                    if (result.Succeeded)
-                    {
-                        return RedirectToAction("Manage", new { Message = ManageMessageId.SetPasswordSuccess });
-                    }
-                    else
-                    {
-                        AddErrors(result);
-                    }
-                }
-            }
-
-            // If we got this far, something failed, redisplay form
-            return View(model);
         }
 
         //
@@ -197,7 +88,7 @@ namespace HealthTrac.Controllers
         [AllowAnonymous]
         public async Task<ActionResult> ExternalLoginCallback(string returnUrl)
         {
-            var loginInfo = await AuthenticationManager_GetExternalLoginInfoAsync_Workaround();
+            var loginInfo = await GetExternalLoginInfoAsync_Workaround(AuthenticationManager);
             if (loginInfo == null)
             {
                 return RedirectToAction("Login");
@@ -233,7 +124,7 @@ namespace HealthTrac.Controllers
         // GET: /Account/LinkLoginCallback
         public async Task<ActionResult> LinkLoginCallback()
         {
-            var loginInfo = await AuthenticationManager.GetExternalLoginInfoAsync(XsrfKey, User.Identity.GetUserId());
+            ExternalLoginInfo loginInfo = await GetExternalLoginInfoAsync_Workaround(AuthenticationManager, XsrfKey, User.Identity.GetUserId());
             if (loginInfo == null)
             {
                 return RedirectToAction("Manage", new { Message = ManageMessageId.Error });
@@ -243,8 +134,15 @@ namespace HealthTrac.Controllers
             {
                 return RedirectToAction("Manage");
             }
+            var e = result.Errors;
+            bool alreadyLinked = e.Any(err => err.Equals("A user with that external login already exists."));
+            if (alreadyLinked)
+            {
+                return RedirectToAction("Manage", new { Message = ManageMessageId.AlreadyLinked });
+            }
             return RedirectToAction("Manage", new { Message = ManageMessageId.Error });
         }
+
 
         //
         // POST: /Account/ExternalLoginConfirmation
@@ -261,7 +159,7 @@ namespace HealthTrac.Controllers
             if (ModelState.IsValid)
             {
                 // Get the information about the user from the external login provider
-                var info = await AuthenticationManager_GetExternalLoginInfoAsync_Workaround();
+                var info = await GetExternalLoginInfoAsync_Workaround(AuthenticationManager);
                 if (info == null)
                 {
                     return View("ExternalLoginFailure");
@@ -362,7 +260,8 @@ namespace HealthTrac.Controllers
             ChangePasswordSuccess,
             SetPasswordSuccess,
             RemoveLoginSuccess,
-            Error
+            Error,
+            AlreadyLinked
         }
 
         private ActionResult RedirectToLocal(string returnUrl)
@@ -405,13 +304,13 @@ namespace HealthTrac.Controllers
                 context.HttpContext.GetOwinContext().Authentication.Challenge(properties, LoginProvider);
             }
         }
-        #endregion
 
-        private async Task<ExternalLoginInfo> AuthenticationManager_GetExternalLoginInfoAsync_Workaround()
+        //method below based on discussion at http://stackoverflow.com/questions/19564479/mvc-5-owin-facebook-auth-results-in-null-reference-exception
+        private static async Task<ExternalLoginInfo> GetExternalLoginInfoAsync_Workaround(IAuthenticationManager authenticationManager)
         {
             ExternalLoginInfo loginInfo = null;
 
-            var result = await AuthenticationManager.AuthenticateAsync(DefaultAuthenticationTypes.ExternalCookie);
+            var result = await authenticationManager.AuthenticateAsync(DefaultAuthenticationTypes.ExternalCookie);
 
             if (result != null && result.Identity != null)
             {
@@ -427,5 +326,12 @@ namespace HealthTrac.Controllers
             }
             return loginInfo;
         }
+        private static async Task<ExternalLoginInfo> GetExternalLoginInfoAsync_Workaround(IAuthenticationManager authenticationManager, string xsrfKey, string userId)
+        {
+            //The dictionary connecting the xsrfKey to the current user id doesn't seem to be saved by Authentication class, so there's no way to validate the xsrfKey here
+            return await GetExternalLoginInfoAsync_Workaround(authenticationManager);
+        }
+        #endregion
+
     }
 }
