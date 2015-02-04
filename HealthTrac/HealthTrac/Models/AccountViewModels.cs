@@ -9,11 +9,6 @@ namespace HealthTrac.Models
         public string UserName { get; set; }
     }
 
-    public class ManageUserViewModel
-    {
-
-    }
-
     public class LoginViewModel
     {
         [Required]
