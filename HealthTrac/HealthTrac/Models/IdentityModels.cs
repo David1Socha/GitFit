@@ -21,6 +21,7 @@ namespace HealthTrac.Models
             DateCreated = DateTime.Now;
             DateModified = DateTime.Now;
         }
+
         public bool Enabled { get; set; }
         public DateTime DateCreated { get; set; }
         public DateTime DateModified { get; set; }
@@ -31,7 +32,7 @@ namespace HealthTrac.Models
         public Sex Sex { get; set; }
         public double Height { get; set; }
         public double Width { get; set; }
-        public DateTime BirthDate { get; set; }
+        public DateTime? BirthDate { get; set; }
         public virtual ICollection<Membership> Memberships { get; set; }
     }
 
