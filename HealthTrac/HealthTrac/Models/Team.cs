@@ -6,14 +6,18 @@ using System.ComponentModel.DataAnnotations;
 
 namespace HealthTrac.Models
 {
-    public class Team
+    public enum Visibility
+    {
+        PUBLIC, PRIVATE, SECRET
+    }
+
+    public class Team : DateTrackingModel
     {
         public int ID { get; set; }
         public string Name { get; set; }
-        public DateTime CreationDate { get; set; }
-
+        public String Description { get; set; }
+        public Visibility Visibility { get; set; }
         public bool Enabled { get; set; }
-
         public virtual ICollection<Membership> Memberships { get; set; }
     }
 }
