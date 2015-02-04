@@ -197,7 +197,7 @@ namespace HealthTrac.Controllers
         [AllowAnonymous]
         public async Task<ActionResult> ExternalLoginCallback(string returnUrl)
         {
-            var loginInfo = await AuthenticationManager_GetExternalLoginInfoAsync_Workaround();
+            var loginInfo = await GetExternalLoginInfoAsync_Workaround(AuthenticationManager);
             if (loginInfo == null)
             {
                 return RedirectToAction("Login");
@@ -233,7 +233,7 @@ namespace HealthTrac.Controllers
         // GET: /Account/LinkLoginCallback
         public async Task<ActionResult> LinkLoginCallback()
         {
-            var loginInfo = await AuthenticationManager.GetExternalLoginInfoAsync(XsrfKey, User.Identity.GetUserId());
+            ExternalLoginInfo loginInfo = await GetExternalLoginInfoAsync_Workaround(AuthenticationManager, XsrfKey, User.Identity.GetUserId());
             if (loginInfo == null)
             {
                 return RedirectToAction("Manage", new { Message = ManageMessageId.Error });
@@ -245,6 +245,7 @@ namespace HealthTrac.Controllers
             }
             return RedirectToAction("Manage", new { Message = ManageMessageId.Error });
         }
+
 
         //
         // POST: /Account/ExternalLoginConfirmation
@@ -261,7 +262,7 @@ namespace HealthTrac.Controllers
             if (ModelState.IsValid)
             {
                 // Get the information about the user from the external login provider
-                var info = await AuthenticationManager_GetExternalLoginInfoAsync_Workaround();
+                var info = await GetExternalLoginInfoAsync_Workaround(AuthenticationManager);
                 if (info == null)
                 {
                     return View("ExternalLoginFailure");
@@ -405,13 +406,13 @@ namespace HealthTrac.Controllers
                 context.HttpContext.GetOwinContext().Authentication.Challenge(properties, LoginProvider);
             }
         }
-        #endregion
 
-        private async Task<ExternalLoginInfo> AuthenticationManager_GetExternalLoginInfoAsync_Workaround()
+        //method below based on discussion at http://stackoverflow.com/questions/19564479/mvc-5-owin-facebook-auth-results-in-null-reference-exception
+        private static async Task<ExternalLoginInfo> GetExternalLoginInfoAsync_Workaround(IAuthenticationManager authenticationManager)
         {
             ExternalLoginInfo loginInfo = null;
 
-            var result = await AuthenticationManager.AuthenticateAsync(DefaultAuthenticationTypes.ExternalCookie);
+            var result = await authenticationManager.AuthenticateAsync(DefaultAuthenticationTypes.ExternalCookie);
 
             if (result != null && result.Identity != null)
             {
@@ -427,5 +428,12 @@ namespace HealthTrac.Controllers
             }
             return loginInfo;
         }
+        private static async Task<ExternalLoginInfo> GetExternalLoginInfoAsync_Workaround(IAuthenticationManager authenticationManager, string xsrfKey, string userId)
+        {
+            //The dictionary connecting the xsrfKey to the current user id doesn't seem to be saved by Authentication class, so there's no way to validate the xsrfKey here
+            return await GetExternalLoginInfoAsync_Workaround(authenticationManager);
+        }
+        #endregion
+
     }
 }
