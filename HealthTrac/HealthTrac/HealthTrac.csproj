@@ -173,6 +173,11 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="DataAccess\ActivityAccessor.cs" />
+    <Compile Include="DataAccess\ApplicationUserAccessor.cs" />
+    <Compile Include="DataAccess\SessionAccessor.cs" />
+    <Compile Include="DataAccess\StatusAccessor.cs" />
+    <Compile Include="DataAccess\TeamAccessor.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
