@@ -65,6 +65,7 @@ namespace HealthTrac.Controllers
                 : message == ManageMessageId.SetPasswordSuccess ? "Your password has been set."
                 : message == ManageMessageId.RemoveLoginSuccess ? "The external login was removed."
                 : message == ManageMessageId.Error ? "An error has occurred."
+                : message == ManageMessageId.AlreadyLinked ? "You have already linked that account."
                 : "";
             ViewBag.HasLocalPassword = HasPassword();
             ViewBag.ReturnUrl = Url.Action("Manage");
@@ -132,6 +133,12 @@ namespace HealthTrac.Controllers
             if (result.Succeeded)
             {
                 return RedirectToAction("Manage");
+            }
+            var e = result.Errors;
+            bool alreadyLinked = e.Any(err => err.Equals("A user with that external login already exists."));
+            if (alreadyLinked)
+            {
+                return RedirectToAction("Manage", new { Message = ManageMessageId.AlreadyLinked });
             }
             return RedirectToAction("Manage", new { Message = ManageMessageId.Error });
         }
@@ -253,7 +260,8 @@ namespace HealthTrac.Controllers
             ChangePasswordSuccess,
             SetPasswordSuccess,
             RemoveLoginSuccess,
-            Error
+            Error,
+            AlreadyLinked
         }
 
         private ActionResult RedirectToLocal(string returnUrl)
