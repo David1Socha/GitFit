@@ -1,4 +1,4 @@
-package com.example.david.healthtracmobile;
+package com.example.raik383h_group_6.healthtracmobile;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;
