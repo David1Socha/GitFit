@@ -1,4 +1,18 @@
+buildscript {
+    repositories {
+        jcenter()
+        maven { url 'https://maven.fabric.io/repo' }
+    }
+    dependencies {
+        // The Fabric Gradle plugin uses an open ended version to
+        // react quickly to Android tooling updates
+        classpath 'io.fabric.tools:gradle:1.+'
+    }
+
+}
+
 apply plugin: 'com.android.application'
+apply plugin: 'io.fabric'
 
 android {
     compileSdkVersion 21
@@ -19,13 +33,17 @@ android {
     }
 }
 
-repositories { mavenCentral() }
+repositories {
+    mavenCentral()
+    jcenter()
+    maven { url 'https://maven.fabric.io/public' }
+}
 
 dependencies {
-    compile('com.twitter.sdk.android:twitter-core:1.0.0@aar') {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile('com.twitter.sdk.android:twitter:1.1.0@aar') {
         transitive = true;
     }
-    compile fileTree(dir: 'libs', include: ['*.jar'])
     compile 'com.android.support:appcompat-v7:21.0.3'
     compile 'com.facebook.android:facebook-android-sdk:3.21.1'
 }
