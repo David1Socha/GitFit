@@ -3,6 +3,7 @@ package com.example.raik383h_group_6.healthtracmobile;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -16,6 +17,7 @@ public class MainActivity extends Activity {
     private TextView textInstructionsOrLink;
     private Button buttonLoginLogout;
     private Session.StatusCallback statusCallback = new SessionStatusCallback();
+    private String accessToken;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -70,12 +72,12 @@ public class MainActivity extends Activity {
     private void updateView() {
         Session session = Session.getActiveSession();
         if (session.isOpened()) {
-            buttonLoginLogout.setText(R.string.logout);
+            buttonLoginLogout.setText(R.string.facebook_logout);
             buttonLoginLogout.setOnClickListener(new OnClickListener() {
                 public void onClick(View view) { onClickLogout(); }
             });
         } else {
-            buttonLoginLogout.setText(R.string.login);
+            buttonLoginLogout.setText(R.string.facebook_login);
             buttonLoginLogout.setOnClickListener(new OnClickListener() {
                 public void onClick(View view) { onClickLogin(); }
             });
@@ -101,6 +103,8 @@ public class MainActivity extends Activity {
     private class SessionStatusCallback implements Session.StatusCallback {
         @Override
         public void call(Session session, SessionState state, Exception exception) {
+            accessToken = session.getAccessToken();
+            Log.d("access_token", accessToken);
             updateView();
         }
     }
