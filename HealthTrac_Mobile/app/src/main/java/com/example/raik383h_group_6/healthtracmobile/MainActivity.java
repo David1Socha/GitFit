@@ -7,10 +7,9 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
-import com.facebook.LoggingBehavior;
+
 import com.facebook.Session;
 import com.facebook.SessionState;
-import com.facebook.Settings;
 
 public class MainActivity extends Activity {
 
@@ -21,9 +20,8 @@ public class MainActivity extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity);
+        setContentView(R.layout.main_activity);
         buttonLoginLogout = (Button)findViewById(R.id.buttonLoginLogout);
-        textInstructionsOrLink = (TextView)findViewById(R.id.instructionsOrLink);
         setUpSession(savedInstanceState);
         updateView();
     }
@@ -72,13 +70,11 @@ public class MainActivity extends Activity {
     private void updateView() {
         Session session = Session.getActiveSession();
         if (session.isOpened()) {
-            textInstructionsOrLink.setText("Access token is: " + session.getAccessToken());
             buttonLoginLogout.setText(R.string.logout);
             buttonLoginLogout.setOnClickListener(new OnClickListener() {
                 public void onClick(View view) { onClickLogout(); }
             });
         } else {
-            textInstructionsOrLink.setText(R.string.instructions);
             buttonLoginLogout.setText(R.string.login);
             buttonLoginLogout.setOnClickListener(new OnClickListener() {
                 public void onClick(View view) { onClickLogin(); }
