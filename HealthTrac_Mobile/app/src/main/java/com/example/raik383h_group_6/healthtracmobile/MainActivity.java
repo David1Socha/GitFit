@@ -1,50 +1,111 @@
 package com.example.raik383h_group_6.healthtracmobile;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
-import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.TextView;
+import com.facebook.LoggingBehavior;
+import com.facebook.Session;
+import com.facebook.SessionState;
+import com.facebook.Settings;
 
-public class MainActivity extends FragmentActivity {
+public class MainActivity extends Activity {
 
-    private MainFragment mainFragment;
+    private TextView textInstructionsOrLink;
+    private Button buttonLoginLogout;
+    private Session.StatusCallback statusCallback = new SessionStatusCallback();
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (savedInstanceState == null) {
-            mainFragment = new MainFragment();
-            getSupportFragmentManager()
-                    .beginTransaction()
-                    .add(android.R.id.content, mainFragment)
-                    .commit();
+        setContentView(R.layout.activity);
+        buttonLoginLogout = (Button)findViewById(R.id.buttonLoginLogout);
+        textInstructionsOrLink = (TextView)findViewById(R.id.instructionsOrLink);
+
+        Settings.addLoggingBehavior(LoggingBehavior.INCLUDE_ACCESS_TOKENS);
+
+        Session session = Session.getActiveSession();
+        if (session == null) {
+            if (savedInstanceState != null) {
+                session = Session.restoreSession(this, null, statusCallback, savedInstanceState);
+            }
+            if (session == null) {
+                session = new Session(this);
+            }
+            Session.setActiveSession(session);
+            if (session.getState().equals(SessionState.CREATED_TOKEN_LOADED)) {
+                session.openForRead(new Session.OpenRequest(this).setCallback(statusCallback));
+            }
+        }
+
+        updateView();
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        Session.getActiveSession().addCallback(statusCallback);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        Session.getActiveSession().removeCallback(statusCallback);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        Session.getActiveSession().onActivityResult(this, requestCode, resultCode, data);
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        Session session = Session.getActiveSession();
+        Session.saveSession(session, outState);
+    }
+
+    private void updateView() {
+        Session session = Session.getActiveSession();
+        if (session.isOpened()) {
+            textInstructionsOrLink.setText("Access token is: " + session.getAccessToken());
+            buttonLoginLogout.setText(R.string.logout);
+            buttonLoginLogout.setOnClickListener(new OnClickListener() {
+                public void onClick(View view) { onClickLogout(); }
+            });
         } else {
-            mainFragment = (MainFragment) getSupportFragmentManager()
-                    .findFragmentById(android.R.id.content);
+            textInstructionsOrLink.setText(R.string.instructions);
+            buttonLoginLogout.setText(R.string.login);
+            buttonLoginLogout.setOnClickListener(new OnClickListener() {
+                public void onClick(View view) { onClickLogin(); }
+            });
         }
     }
 
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
+    private void onClickLogin() {
+        Session session = Session.getActiveSession();
+        if (!session.isOpened() && !session.isClosed()) {
+            session.openForRead(new Session.OpenRequest(this).setCallback(statusCallback));
+        } else {
+            Session.openActiveSession(this, true, statusCallback);
+        }
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+    private void onClickLogout() {
+        Session session = Session.getActiveSession();
+        if (!session.isClosed()) {
+            session.closeAndClearTokenInformation();
         }
+    }
 
-        return super.onOptionsItemSelected(item);
+    private class SessionStatusCallback implements Session.StatusCallback {
+        @Override
+        public void call(Session session, SessionState state, Exception exception) {
+            updateView();
+        }
     }
 }
