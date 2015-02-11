@@ -17,7 +17,7 @@ namespace HealthTrac.Service_References
                 return team;
             }
         }
-        public IEnumerable<Team> FindTeams(int userID)
+        public IEnumerable<Team> FindTeams(string userID)
         {
             using (var db = new ApplicationDbContext())
             {
