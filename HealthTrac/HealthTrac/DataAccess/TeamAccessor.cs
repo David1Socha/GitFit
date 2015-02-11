@@ -31,5 +31,23 @@ namespace HealthTrac.Service_References
                 return teams;
             }
         }
+        public Team SaveTeam(Team team)
+        {
+            using (var db = new ApplicationDbContext())
+            {
+                if (team.ID == 0)
+                {
+                    db.Teams.Add(team);
+                }
+                else
+                {
+                    db.Teams.Attach(team);
+                    db.Entry(team).State = System.Data.Entity.EntityState.Modified;
+                }
+                db.SaveChanges();
+            }
+            return team;
+        }
+
     }
 }
