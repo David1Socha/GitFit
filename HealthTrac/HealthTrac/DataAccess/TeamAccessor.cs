@@ -11,7 +11,7 @@ namespace HealthTrac.Service_References
         public Team FindTeam(int ID)
         {
             using (var db = new ApplicationDbContext())
-            {
+            {            
                 var team = db.Teams
                                 .Where(t => t.ID == ID).FirstOrDefault();
                 return team;
