@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Healthtrac Mobile</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="facebook_app_id">512959195512759</string>
+    <string name="facebook_login">Log in through Facebook</string>
+    <string name="facebook_logout">Log out of Facebook</string>
+    <string name="title_facebook_login">Facebook Login</string>
+</resources>
