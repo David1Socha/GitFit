@@ -17,9 +17,9 @@ namespace HealthTrac.Controllers
             return View();
         }
 
-        public IEnumerable<Team> GetTeams(string userId)
+        public List<Team> GetTeams(string userId)
         {
-            return new TeamAccessor().FindTeams(userId);
+            return new TeamAccessor().FindTeams(userId).ToList();
         }
         public Team CreateTeam(Team team)
         {
