@@ -29,9 +29,33 @@ namespace HealthTrac.Controllers
         {
             return new TeamAccessor().SaveTeam(team);
         }
-        public Membership InviteUsers(string[] userIds)
+        public List<Membership> InviteUsers(string[] userIds, int teamId)
         {
-            return new TeamAccessor().SaveMemberships(IEnumerable<Membership> memberships);
+            List<Membership> memberships = new List<Membership>();
+            foreach (string userId in userIds)
+            {
+                Membership membership = new Membership
+                {
+                    DateCreated = DateTime.Now,
+                    DateModified = DateTime.Now,
+                    ID = 0,
+                    ApplicationUserID = userId,
+                    TeamID = teamId,
+                    MembershipStatus = MembershipStatus.WAITING_USER
+                };
+                memberships.Add(membership);
+            }
+            return new TeamAccessor().SaveMemberships(memberships).ToList();
+        }
+
+        public Membership confirmUser(int membershipId)
+        {
+            // Don't know for sure if you need to pass down an object with all previous properties for update. TEST THIS
+            TeamAccessor teamAccessor = new TeamAccessor();
+            Membership membership = teamAccessor.FindMembership(membershipId);
+            membership.DateModified = DateTime.Now;
+            membership.MembershipStatus = MembershipStatus.MEMBER;
+            return teamAccessor.SaveMembership(membership);
         }
 	}
 }
