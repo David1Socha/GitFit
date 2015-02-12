@@ -7,8 +7,9 @@ namespace HealthTrac.Models
 {
     public class ExerciseSession : DateTrackingModel
     {
-        public int ID { get; set; }
-        public int ActivityID { get; set; }
+        public long ID { get; set; }
+        public long ActivityID { get; set; }
+        public string ApplicationUserID { get; set; }
         public int Seconds { get; set; }
         public int Steps { get; set; }
         public int Distance { get; set; }

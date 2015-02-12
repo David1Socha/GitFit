@@ -13,9 +13,9 @@ namespace HealthTrac.Models
 
     public class Status : DateTrackingModel
     {
-        public int ID { get; set; }
-        public int ApplicationUserID { get; set; }
-        public int? ExerciseSessionID { get; set; }
+        public long ID { get; set; }
+        public string ApplicationUserID { get; set; }
+        public long? ExerciseSessionID { get; set; }
         public String Message { get; set; }
         public Mood Mood { get; set; }
         public virtual ApplicationUser ApplicationUser { get; set; }
