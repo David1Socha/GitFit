@@ -49,5 +49,53 @@ namespace HealthTrac.Service_References
             return team;
         }
 
+        public IEnumerable<Membership> SaveMemberships(List<Membership> memberships)
+        {
+            using (var db = new ApplicationDbContext())
+            {
+                if (memberships[0].ID == 0)
+                {
+                    db.Memberships.AddRange(memberships);
+                }
+                else
+                {
+                    // **** NEEDS to be tested to see if update works for multiple memberships
+                    foreach (Membership membership in memberships)
+                    {
+                        db.Memberships.Attach(membership);
+                        db.Entry(membership).State = System.Data.Entity.EntityState.Modified;
+                    }
+                }
+                db.SaveChanges();
+            }
+            return memberships;
+        }
+        public Membership SaveMembership(Membership membership)
+        {
+            using (var db = new ApplicationDbContext())
+            {
+                if (membership.ID == 0)
+                {
+                    db.Memberships.Add(membership);
+                }
+                else
+                {
+                    db.Memberships.Attach(membership);
+                    db.Entry(membership).State = System.Data.Entity.EntityState.Modified;
+                }
+                db.SaveChanges();
+            }
+            return membership;
+        }
+        public Membership FindMembership(int membershipID)
+        {
+            using (var db = new ApplicationDbContext())
+            {
+                var membership = db.Memberships
+                                .Where(m => m.ID == membershipID).FirstOrDefault();
+                return membership;
+            }
+        }
+
     }
 }
