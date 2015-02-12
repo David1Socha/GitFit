@@ -8,19 +8,19 @@ namespace HealthTrac.DataAccess
 {
     public class SessionAccessor
     {
-        public ExerciseSession GetSession(int ID)
+        public ExerciseSession GetSession(long ID)
         {
 
         }
-        public IEnumerable<ExerciseSession> GetSessions(List<int> IDs)
+        public IEnumerable<ExerciseSession> GetSessions(List<long> IDs)
         {
 
         }
-        public IEnumerable<ExerciseSession> GetSessions(int userId, DateTime from, DateTime to)
+        public IEnumerable<ExerciseSession> GetSessions(string userId, DateTime from, DateTime to)
         {
 
         }
-        public IEnumerable<ExerciseSession> GetSessions(int userId, int activityId, DateTime from, DateTime to)
+        public IEnumerable<ExerciseSession> GetSessions(string userId, long activityId, DateTime from, DateTime to)
         {
 
         }
@@ -28,7 +28,7 @@ namespace HealthTrac.DataAccess
         {
             
         }
-        public Boolean DeleteSession(int sessionId)
+        public Boolean DeleteSession(long sessionId)
         {
 
         }

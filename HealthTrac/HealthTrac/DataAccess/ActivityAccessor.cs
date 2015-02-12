@@ -8,11 +8,11 @@ namespace HealthTrac.DataAccess
 {
     public class ActivityAccessor
     {
-        public Activity GetActivity(int ID)
+        public Activity GetActivity(long ID)
         {
 
         }
-        public IEnumerable<Activity> GetActivities(int userId)
+        public IEnumerable<Activity> GetActivities(string userId)
         {
 
         }
@@ -20,7 +20,7 @@ namespace HealthTrac.DataAccess
         {
 
         }
-        public Boolean deleteActivity(int ID)
+        public Boolean deleteActivity(long ID)
         {
 
         }

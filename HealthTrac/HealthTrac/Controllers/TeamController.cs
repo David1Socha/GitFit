@@ -29,7 +29,7 @@ namespace HealthTrac.Controllers
         {
             return new TeamAccessor().SaveTeam(team);
         }
-        public List<Membership> InviteUsers(string[] userIds, int teamId)
+        public List<Membership> InviteUsers(string[] userIds, long teamId)
         {
             List<Membership> memberships = new List<Membership>();
             foreach (string userId in userIds)
@@ -48,7 +48,7 @@ namespace HealthTrac.Controllers
             return new TeamAccessor().SaveMemberships(memberships).ToList();
         }
 
-        public Membership ConfirmUser(int membershipId)
+        public Membership ConfirmUser(long membershipId)
         {
             // Don't know for sure if you need to pass down an object with all previous properties for update. TEST THIS
             TeamAccessor teamAccessor = new TeamAccessor();
@@ -58,7 +58,7 @@ namespace HealthTrac.Controllers
             return teamAccessor.SaveMembership(membership);
         }
 
-        public Membership BanUser(int membershipId)
+        public Membership BanUser(long membershipId)
         {
             // Don't know for sure if you need to pass down an object with all previous properties for update. TEST THIS
             TeamAccessor teamAccessor = new TeamAccessor();
@@ -68,7 +68,7 @@ namespace HealthTrac.Controllers
             return teamAccessor.SaveMembership(membership);
         }
 
-        public Membership RemoveUser(int membershipId)
+        public Membership RemoveUser(long membershipId)
         {
             // Don't know for sure if you need to pass down an object with all previous properties for update. TEST THIS
             TeamAccessor teamAccessor = new TeamAccessor();

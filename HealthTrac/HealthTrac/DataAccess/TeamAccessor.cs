@@ -8,7 +8,7 @@ namespace HealthTrac.Service_References
 {
     public class TeamAccessor
     {
-        public Team FindTeam(int ID)
+        public Team FindTeam(long ID)
         {
             using (var db = new ApplicationDbContext())
             {            
@@ -87,7 +87,7 @@ namespace HealthTrac.Service_References
             }
             return membership;
         }
-        public Membership FindMembership(int membershipID)
+        public Membership FindMembership(long membershipID)
         {
             using (var db = new ApplicationDbContext())
             {
