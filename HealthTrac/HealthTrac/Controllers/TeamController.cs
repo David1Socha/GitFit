@@ -64,7 +64,17 @@ namespace HealthTrac.Controllers
             TeamAccessor teamAccessor = new TeamAccessor();
             Membership membership = teamAccessor.FindMembership(membershipId);
             membership.DateModified = DateTime.Now;
-            membership.MembershipStatus = MembershipStatus.MEMBER;
+            membership.MembershipStatus = MembershipStatus.BANNED;
+            return teamAccessor.SaveMembership(membership);
+        }
+
+        public Membership RemoveUser(int membershipId)
+        {
+            // Don't know for sure if you need to pass down an object with all previous properties for update. TEST THIS
+            TeamAccessor teamAccessor = new TeamAccessor();
+            Membership membership = teamAccessor.FindMembership(membershipId);
+            membership.DateModified = DateTime.Now;
+            membership.MembershipStatus = MembershipStatus.INACTIVE;
             return teamAccessor.SaveMembership(membership);
         }
 	}
