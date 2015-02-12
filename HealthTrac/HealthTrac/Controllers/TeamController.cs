@@ -17,15 +17,15 @@ namespace HealthTrac.Controllers
             return View();
         }
 
-        public IEnumerable<Team> getTeams(string userId)
+        public IEnumerable<Team> GetTeams(string userId)
         {
             return new TeamAccessor().FindTeams(userId);
         }
-        public Team createTeam(Team team)
+        public Team CreateTeam(Team team)
         {
             return new TeamAccessor().SaveTeam(team);
         }
-        public Team updateTeam(Team team)
+        public Team UpdateTeam(Team team)
         {
             return new TeamAccessor().SaveTeam(team);
         }
@@ -48,7 +48,17 @@ namespace HealthTrac.Controllers
             return new TeamAccessor().SaveMemberships(memberships).ToList();
         }
 
-        public Membership confirmUser(int membershipId)
+        public Membership ConfirmUser(int membershipId)
+        {
+            // Don't know for sure if you need to pass down an object with all previous properties for update. TEST THIS
+            TeamAccessor teamAccessor = new TeamAccessor();
+            Membership membership = teamAccessor.FindMembership(membershipId);
+            membership.DateModified = DateTime.Now;
+            membership.MembershipStatus = MembershipStatus.MEMBER;
+            return teamAccessor.SaveMembership(membership);
+        }
+
+        public Membership BanUser(int membershipId)
         {
             // Don't know for sure if you need to pass down an object with all previous properties for update. TEST THIS
             TeamAccessor teamAccessor = new TeamAccessor();
