@@ -11,4 +11,6 @@
     <string name="twitter_login">Log in through Twitter</string>
     <string name="twitter_logout">Log out of Twitter</string>
     <string name="title_facebook_login">Facebook Login</string>
+    <string name="title_activity_login_webview">LoginWebviewActivity</string>
+
 </resources>
