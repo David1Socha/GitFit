@@ -4,9 +4,14 @@
     android:orientation="vertical" >
 
     <Button
-        android:id="@+id/buttonLoginLogout"
+        android:id="@+id/fb_login_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/facebook_login" />
+    <Button
+        android:id="@+id/tw_login_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/twitter_login"/>
 
 </LinearLayout>

@@ -9,21 +9,31 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.twitter.sdk.android.Twitter;
+import com.twitter.sdk.android.core.Callback;
+import com.twitter.sdk.android.core.Result;
+import com.twitter.sdk.android.core.TwitterException;
+import com.twitter.sdk.android.core.TwitterSession;
+import com.twitter.sdk.android.core.identity.TwitterAuthClient;
+import com.twitter.sdk.android.core.identity
+        .TwitterLoginButton;
+
 import com.facebook.Session;
 import com.facebook.SessionState;
 
 public class LoginActivity extends Activity {
 
     private TextView textInstructionsOrLink;
-    private Button buttonLoginLogout;
-    private Session.StatusCallback statusCallback = new SessionStatusCallback();
-    private String accessToken;
+    private Button fbLoginButton;
+    private Session.StatusCallback fbStatusCallback = new SessionStatusCallback();
+    private String fbAccessToken;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_activity);
-        buttonLoginLogout = (Button)findViewById(R.id.buttonLoginLogout);
+        fbLoginButton = (Button)findViewById(R.id.fb_login_button);
+
         setUpSession(savedInstanceState);
         updateView();
     }
@@ -31,13 +41,13 @@ public class LoginActivity extends Activity {
     @Override
     public void onStart() {
         super.onStart();
-        Session.getActiveSession().addCallback(statusCallback);
+        Session.getActiveSession().addCallback(fbStatusCallback);
     }
 
     @Override
     public void onStop() {
         super.onStop();
-        Session.getActiveSession().removeCallback(statusCallback);
+        Session.getActiveSession().removeCallback(fbStatusCallback);
     }
 
     @Override
@@ -57,14 +67,14 @@ public class LoginActivity extends Activity {
         Session session = Session.getActiveSession();
         if (session == null) {
             if (savedInstanceState != null) {
-                session = Session.restoreSession(this, null, statusCallback, savedInstanceState);
+                session = Session.restoreSession(this, null, fbStatusCallback, savedInstanceState);
             }
             if (session == null) {
                 session = new Session(this);
             }
             Session.setActiveSession(session);
             if (session.getState().equals(SessionState.CREATED_TOKEN_LOADED)) {
-                session.openForRead(new Session.OpenRequest(this).setCallback(statusCallback));
+                session.openForRead(new Session.OpenRequest(this).setCallback(fbStatusCallback));
             }
         }
     }
@@ -72,14 +82,18 @@ public class LoginActivity extends Activity {
     private void updateView() {
         Session session = Session.getActiveSession();
         if (session.isOpened()) {
-            buttonLoginLogout.setText(R.string.facebook_logout);
-            buttonLoginLogout.setOnClickListener(new OnClickListener() {
-                public void onClick(View view) { onClickLogout(); }
+            fbLoginButton.setText(R.string.facebook_logout);
+            fbLoginButton.setOnClickListener(new OnClickListener() {
+                public void onClick(View view) {
+                    onClickLogout();
+                }
             });
         } else {
-            buttonLoginLogout.setText(R.string.facebook_login);
-            buttonLoginLogout.setOnClickListener(new OnClickListener() {
-                public void onClick(View view) { onClickLogin(); }
+            fbLoginButton.setText(R.string.facebook_login);
+            fbLoginButton.setOnClickListener(new OnClickListener() {
+                public void onClick(View view) {
+                    onClickLogin();
+                }
             });
         }
     }
@@ -87,9 +101,9 @@ public class LoginActivity extends Activity {
     private void onClickLogin() {
         Session session = Session.getActiveSession();
         if (!session.isOpened() && !session.isClosed()) {
-            session.openForRead(new Session.OpenRequest(this).setCallback(statusCallback));
+            session.openForRead(new Session.OpenRequest(this).setCallback(fbStatusCallback));
         } else {
-            Session.openActiveSession(this, true, statusCallback);
+            Session.openActiveSession(this, true, fbStatusCallback);
         }
     }
 
@@ -103,8 +117,8 @@ public class LoginActivity extends Activity {
     private class SessionStatusCallback implements Session.StatusCallback {
         @Override
         public void call(Session session, SessionState state, Exception exception) {
-            accessToken = session.getAccessToken();
-            Log.d("access_token", accessToken);
+            fbAccessToken = session.getAccessToken();
+            Log.d("access_token", fbAccessToken);
             updateView();
         }
     }
