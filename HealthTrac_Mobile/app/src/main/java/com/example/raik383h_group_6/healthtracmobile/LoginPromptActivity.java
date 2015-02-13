@@ -4,22 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.Button;
-import android.widget.TextView;
-
-import com.twitter.sdk.android.Twitter;
-import com.twitter.sdk.android.core.Callback;
-import com.twitter.sdk.android.core.Result;
-import com.twitter.sdk.android.core.TwitterException;
-import com.twitter.sdk.android.core.TwitterSession;
-import com.twitter.sdk.android.core.identity.TwitterAuthClient;
-import com.twitter.sdk.android.core.identity
-        .TwitterLoginButton;
-
-import com.facebook.Session;
-import com.facebook.SessionState;
 
 public class LoginPromptActivity extends Activity {
 
@@ -38,6 +23,16 @@ public class LoginPromptActivity extends Activity {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         //TODO monitor
+    }
+
+    public void loginTwitter() {
+        //TODO launch twitter login activity
+        Log.i("davidsocha", "to be added");
+    }
+
+    public void loginFacebook() {
+        //TODO launch facebook login activity
+        Log.i("davidsocha", "to be added");
     }
 
 }
