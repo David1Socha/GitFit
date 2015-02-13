@@ -15,7 +15,7 @@
             android:name="com.crashlytics.ApiKey"
             android:value="bf40b74ea59ac704ecdc0c539a52725467e651c2" />
         <activity
-            android:name=".LoginActivity"
+            android:name=".LoginPromptActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
