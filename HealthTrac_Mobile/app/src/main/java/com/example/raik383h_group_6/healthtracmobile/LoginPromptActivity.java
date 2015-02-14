@@ -27,13 +27,12 @@ public class LoginPromptActivity extends Activity {
     }
 
     public void loginTwitter(View v) {
-        //TODO launch twitter login activity
-        Log.i("davidsocha", "to be added");
+        Intent intent = new Intent(this, TwitterLoginWebViewActivity.class);
+        startActivity(intent);
     }
 
     public void loginFacebook(View v) {
-        //TODO launch facebook login activity
-        Log.i("davidsocha", "to be added");
+        Intent intent = new Intent(this, FacebookLoginWebViewActivity.class);
+        startActivity(intent);
     }
-
 }
