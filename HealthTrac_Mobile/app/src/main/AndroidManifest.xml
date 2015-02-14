@@ -30,7 +30,7 @@
             android:label="@string/title_facebook_login" >
         </activity>
         <activity
-            android:name=".LoginWebviewActivity"
+            android:name=".LoginWebViewActivity"
             android:label="@string/title_activity_login_webview"
             android:parentActivityName=".LoginPromptActivity" >
             <meta-data

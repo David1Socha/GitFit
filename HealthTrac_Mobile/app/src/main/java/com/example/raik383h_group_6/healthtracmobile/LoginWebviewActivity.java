@@ -7,7 +7,7 @@ import android.view.MenuItem;
 import android.webkit.WebView;
 
 
-public abstract class LoginWebviewActivity extends ActionBarActivity {
+public abstract class LoginWebViewActivity extends ActionBarActivity {
 
     private String apiClassStr;
     private String apiKey;
@@ -49,8 +49,14 @@ public abstract class LoginWebviewActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        setOauthFields();
+
         WebView webview = new WebView(this);
         setContentView(webview);
+
     }
+
+    public abstract void setOauthFields();
 
 }
