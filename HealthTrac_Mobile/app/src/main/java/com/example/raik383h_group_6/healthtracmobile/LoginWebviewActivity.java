@@ -6,57 +6,50 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.webkit.WebView;
 
+import org.scribe.builder.ServiceBuilder;
+import org.scribe.oauth.OAuthService;
+
 
 public abstract class LoginWebViewActivity extends ActionBarActivity {
 
-    private String apiClassStr;
-    private String apiKey;
-    private String apiSecret;
-    private String callbackUrl;
-
-    public String getApiKey() {
-        return apiKey;
-    }
+    private String apiKey, apiSecret, callbackUrl;
+    private Class apiClass;
+    private WebView webView;
+    private OAuthService oAuthService;
 
     public void setApiKey(String apiKey) {
         this.apiKey = apiKey;
-    }
-
-    public String getApiSecret() {
-        return apiSecret;
     }
 
     public void setApiSecret(String apiSecret) {
         this.apiSecret = apiSecret;
     }
 
-    public String getCallbackUrl() {
-        return callbackUrl;
-    }
-
     public void setCallbackUrl(String callbackUrl) {
         this.callbackUrl = callbackUrl;
     }
 
-    public String getApiClassStr() {
-        return apiClassStr;
-    }
-
-    public void setApiClassStr(String apiClassStr) {
-        this.apiClassStr = apiClassStr;
+    public void setApiClass(Class apiClass) {
+        this.apiClass = apiClass;
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setOauthFields();
+        setOAuthFields();
+        oAuthService = new ServiceBuilder()
+                .provider(apiClass)
+                .apiKey(apiKey)
+                .apiSecret(apiSecret)
+                .callback(callbackUrl)
+                .build();
 
-        WebView webview = new WebView(this);
-        setContentView(webview);
+        webView = new WebView(this);
+        setContentView(webView);
 
     }
 
-    public abstract void setOauthFields();
+    public abstract void setOAuthFields();
 
 }
