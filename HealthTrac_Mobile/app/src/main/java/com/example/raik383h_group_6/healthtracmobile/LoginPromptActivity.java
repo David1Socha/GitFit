@@ -9,6 +9,8 @@ import android.widget.Button;
 
 public class LoginPromptActivity extends Activity {
 
+    private static final int FB_LOGIN_REQ = 1,
+            TW_LOGIN_REQ = 2;
     private Button fbLoginButton, twLoginButton;
     private String fbAccessToken, twAccessToken, twAccessSecret;
 
@@ -23,16 +25,24 @@ public class LoginPromptActivity extends Activity {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        //TODO monitor
+        Bundle extras = data.getExtras();
+        switch (requestCode) {
+            case FB_LOGIN_REQ: fbAccessToken = "dummy";
+                break;
+            case TW_LOGIN_REQ: twAccessToken = "dummy";
+                twAccessSecret = "dummy";
+                break;
+            default: break;
+        }
     }
 
     public void loginTwitter(View v) {
         Intent intent = new Intent(this, TwitterLoginWebViewActivity.class);
-        startActivity(intent);
+        startActivityForResult(intent, TW_LOGIN_REQ);
     }
 
     public void loginFacebook(View v) {
         Intent intent = new Intent(this, FacebookLoginWebViewActivity.class);
-        startActivity(intent);
+        startActivityForResult(intent, FB_LOGIN_REQ);
     }
 }

@@ -93,8 +93,7 @@ public abstract class LoginWebViewActivity extends ActionBarActivity {
     private class LoginWebViewClient extends WebViewClient {
         @Override
         public void onPageStarted(WebView view, String url, Bitmap favicon) {
-            Log.d("urldavidsocha", url);
-            if ((url != null) && (url.startsWith(DUMMY_CALLBACK))) { // Override webview when goes to callbackUrl
+            if ((url != null) && (url.startsWith(DUMMY_CALLBACK))) { // Don't use callback
                 webView.stopLoading();
                 webView.setVisibility(View.INVISIBLE);
                 Uri uri = Uri.parse(url);
