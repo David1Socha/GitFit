@@ -24,7 +24,7 @@ import org.scribe.model.Token;
 public abstract class LoginWebViewActivity extends ActionBarActivity {
 
     private static String DUMMY_CALLBACK = "http://www.example.com/oauth_callback";
-    private String apiKey, apiSecret, callbackUrl;
+    private String apiKey, apiSecret;
     private Class apiClass;
     private WebView webView;
     private OAuthService oAuthService;
@@ -37,10 +37,6 @@ public abstract class LoginWebViewActivity extends ActionBarActivity {
 
     public void setApiSecret(String apiSecret) {
         this.apiSecret = apiSecret;
-    }
-
-    public void setCallbackUrl(String callbackUrl) {
-        this.callbackUrl = callbackUrl;
     }
 
     public void setApiClass(Class apiClass) {
@@ -60,6 +56,7 @@ public abstract class LoginWebViewActivity extends ActionBarActivity {
                 .build();
 
         webView = new WebView(this);
+        setUpWebView();
 
         setContentView(webView);
 
@@ -91,13 +88,13 @@ public abstract class LoginWebViewActivity extends ActionBarActivity {
         settings.setBuiltInZoomControls(true);
         settings.setDisplayZoomControls(false);
         webView.setWebViewClient(webViewClient);
-        webView.setWebChromeClient(new WebChromeClient());
     }
 
     private class LoginWebViewClient extends WebViewClient {
         @Override
         public void onPageStarted(WebView view, String url, Bitmap favicon) {
-            if ((url != null) && (url.startsWith(callbackUrl))) { // Override webview when goes to callbackUrl
+            Log.d("urldavidsocha", url);
+            if ((url != null) && (url.startsWith(DUMMY_CALLBACK))) { // Override webview when goes to callbackUrl
                 webView.stopLoading();
                 webView.setVisibility(View.INVISIBLE);
                 Uri uri = Uri.parse(url);
@@ -119,7 +116,6 @@ public abstract class LoginWebViewActivity extends ActionBarActivity {
                 super.onPageStarted(view, url, favicon);
             }
         }
-
     }
 
 }
