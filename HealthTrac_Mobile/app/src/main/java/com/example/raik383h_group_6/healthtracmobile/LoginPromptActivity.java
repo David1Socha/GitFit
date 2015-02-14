@@ -9,10 +9,6 @@ import android.widget.Button;
 
 public class LoginPromptActivity extends Activity {
 
-    public static final String API_CLASS_STR = "com.example.raik383h_group_6.healthtracmobile.API_CLASS_STR",
-            API_KEY = "com.example.raik383h_group_6.healthtracmobile.API_KEY",
-            API_SECRET = "com.example.raik383h_group_6.healthtracmobile.API_SECRET",
-            CALLBACK_URL =  "com.example.raik383h_group_6.healthtracmobile.CALLBACK_URL";
     private Button fbLoginButton, twLoginButton;
     private String fbAccessToken, twAccessToken, twAccessSecret;
 
