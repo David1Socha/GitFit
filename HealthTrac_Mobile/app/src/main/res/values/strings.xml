@@ -11,8 +11,11 @@
     <string name="twitter_login">Log in through Twitter</string>
     <string name="twitter_logout">Log out of Twitter</string>
     <string name="title_facebook_login">Facebook Login</string>
-    <string name="title_activity_login_web_view_facebook">FacebookLoginWebViewActivity</string>
-    <string name="title_activity_login_web_view_twitter">TwitterLoginWebViewActivity</string>
+    <string name="title_activity_login_web_view_facebook">Log in to Facebook</string>
+    <string name="title_activity_login_web_view_twitter">Log in to Twitter</string>
+    <string name="PROVIDER_FACEBOOK">Facebook</string>
+    <string name="PROVIDER_TWITTER">Twitter</string>
+    <string name="EXTRA_PROVIDER">com.example.raik383h_group_6.healthtracmobile.PROVIDER</string>
     <string name="EXTRA_ACCESS_TOKEN">com.example.raik383h_group_6.healthtracmobile.ACCESS_TOKEN</string>
     <string name="EXTRA_ACCESS_SECRET">com.example.raik383h_group_6.healthtracmobile.ACCESS_SECRET</string>
 </resources>

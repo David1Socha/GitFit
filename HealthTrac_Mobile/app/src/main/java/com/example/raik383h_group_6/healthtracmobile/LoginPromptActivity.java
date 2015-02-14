@@ -11,15 +11,12 @@ public class LoginPromptActivity extends Activity {
 
     private static final int FB_LOGIN_REQ = 1,
             TW_LOGIN_REQ = 2;
-    private Button fbLoginButton, twLoginButton;
-    private String fbAccessToken, twAccessToken, twAccessSecret, fbAccessSecret;
+    private String accessToken, accessSecret, provider;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_prompt_activity);
-        fbLoginButton = (Button) findViewById(R.id.fb_login_button);
-        twLoginButton = (Button) findViewById(R.id.tw_login_button);
     }
 
     @Override
@@ -27,16 +24,14 @@ public class LoginPromptActivity extends Activity {
         super.onActivityResult(requestCode, resultCode, data);
         if (data != null) {
             Bundle extras = data.getExtras();
-            switch (requestCode) {
-                case FB_LOGIN_REQ: fbAccessToken = extras.getString(getString(R.string.EXTRA_ACCESS_TOKEN));
-                    fbAccessSecret = extras.getString(getString(R.string.EXTRA_ACCESS_SECRET));
-                    Log.d("fb access token", fbAccessToken);
-                    Log.d("fb access secret", fbAccessSecret);
+            switch (requestCode) { //TODO finish this activity and return oauth codes
+                case FB_LOGIN_REQ: accessToken = extras.getString(getString(R.string.EXTRA_ACCESS_TOKEN));
+                    accessSecret = extras.getString(getString(R.string.EXTRA_ACCESS_SECRET));
+                    provider = getString(R.string.PROVIDER_FACEBOOK);
                     break;
-                case TW_LOGIN_REQ: twAccessToken = extras.getString(getString(R.string.EXTRA_ACCESS_TOKEN));
-                    twAccessSecret = extras.getString(getString(R.string.EXTRA_ACCESS_SECRET));
-                    Log.d("tw access token", twAccessToken);
-                    Log.d("tw access secret", twAccessSecret);
+                case TW_LOGIN_REQ: accessToken = extras.getString(getString(R.string.EXTRA_ACCESS_TOKEN));
+                    accessSecret = extras.getString(getString(R.string.EXTRA_ACCESS_SECRET));
+                    provider = getString(R.string.PROVIDER_TWITTER);
                     break;
                 default: break;
             }
