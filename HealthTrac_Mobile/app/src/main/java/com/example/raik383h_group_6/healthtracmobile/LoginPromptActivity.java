@@ -12,7 +12,7 @@ public class LoginPromptActivity extends Activity {
     private static final int FB_LOGIN_REQ = 1,
             TW_LOGIN_REQ = 2;
     private Button fbLoginButton, twLoginButton;
-    private String fbAccessToken, twAccessToken, twAccessSecret;
+    private String fbAccessToken, twAccessToken, twAccessSecret, fbAccessSecret;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -27,10 +27,15 @@ public class LoginPromptActivity extends Activity {
         super.onActivityResult(requestCode, resultCode, data);
         Bundle extras = data.getExtras();
         switch (requestCode) {
-            case FB_LOGIN_REQ: fbAccessToken = "dummy";
+            case FB_LOGIN_REQ: fbAccessToken = extras.getString(getString(R.string.EXTRA_ACCESS_TOKEN));
+                fbAccessSecret = extras.getString(getString(R.string.EXTRA_ACCESS_SECRET));
+                Log.d("fb access token", fbAccessToken);
+                Log.d("fb access secret", fbAccessSecret);
                 break;
-            case TW_LOGIN_REQ: twAccessToken = "dummy";
-                twAccessSecret = "dummy";
+            case TW_LOGIN_REQ: twAccessToken = extras.getString(getString(R.string.EXTRA_ACCESS_TOKEN));
+                twAccessSecret = extras.getString(getString(R.string.EXTRA_ACCESS_SECRET));
+                Log.d("tw access token", twAccessToken);
+                Log.d("tw access secret", twAccessSecret);
                 break;
             default: break;
         }

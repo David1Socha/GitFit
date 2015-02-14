@@ -13,4 +13,6 @@
     <string name="title_facebook_login">Facebook Login</string>
     <string name="title_activity_login_web_view_facebook">FacebookLoginWebViewActivity</string>
     <string name="title_activity_login_web_view_twitter">TwitterLoginWebViewActivity</string>
+    <string name="EXTRA_ACCESS_TOKEN">com.example.raik383h_group_6.healthtracmobile.ACCESS_TOKEN</string>
+    <string name="EXTRA_ACCESS_SECRET">com.example.raik383h_group_6.healthtracmobile.ACCESS_SECRET</string>
 </resources>

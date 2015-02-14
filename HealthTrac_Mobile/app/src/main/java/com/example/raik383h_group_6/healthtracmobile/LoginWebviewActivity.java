@@ -1,5 +1,6 @@
 package com.example.raik383h_group_6.healthtracmobile;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.media.session.MediaSession;
 import android.net.Uri;
@@ -90,6 +91,14 @@ public abstract class LoginWebViewActivity extends ActionBarActivity {
         webView.setWebViewClient(webViewClient);
     }
 
+    private void saveTokenAndFinish(Token token) {
+        Intent data = new Intent();
+        data.putExtra(getString(R.string.EXTRA_ACCESS_SECRET), token.getSecret());
+        data.putExtra(getString(R.string.EXTRA_ACCESS_TOKEN), token.getToken());
+        setResult(RESULT_OK, data);
+        finish();
+    }
+
     private class LoginWebViewClient extends WebViewClient {
         @Override
         public void onPageStarted(WebView view, String url, Bitmap favicon) {
@@ -106,9 +115,7 @@ public abstract class LoginWebViewActivity extends ActionBarActivity {
 
                     @Override
                     protected void onPostExecute(Token accessToken) {
-                        Log.d("secret", accessToken.getSecret());
-                        Log.d("token", accessToken.getToken());
-                        finish();
+                        saveTokenAndFinish(accessToken);
                     }
                 }).execute();
             } else {
