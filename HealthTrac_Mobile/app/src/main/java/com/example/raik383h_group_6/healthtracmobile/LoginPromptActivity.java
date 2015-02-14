@@ -25,19 +25,21 @@ public class LoginPromptActivity extends Activity {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        Bundle extras = data.getExtras();
-        switch (requestCode) {
-            case FB_LOGIN_REQ: fbAccessToken = extras.getString(getString(R.string.EXTRA_ACCESS_TOKEN));
-                fbAccessSecret = extras.getString(getString(R.string.EXTRA_ACCESS_SECRET));
-                Log.d("fb access token", fbAccessToken);
-                Log.d("fb access secret", fbAccessSecret);
-                break;
-            case TW_LOGIN_REQ: twAccessToken = extras.getString(getString(R.string.EXTRA_ACCESS_TOKEN));
-                twAccessSecret = extras.getString(getString(R.string.EXTRA_ACCESS_SECRET));
-                Log.d("tw access token", twAccessToken);
-                Log.d("tw access secret", twAccessSecret);
-                break;
-            default: break;
+        if (data != null) {
+            Bundle extras = data.getExtras();
+            switch (requestCode) {
+                case FB_LOGIN_REQ: fbAccessToken = extras.getString(getString(R.string.EXTRA_ACCESS_TOKEN));
+                    fbAccessSecret = extras.getString(getString(R.string.EXTRA_ACCESS_SECRET));
+                    Log.d("fb access token", fbAccessToken);
+                    Log.d("fb access secret", fbAccessSecret);
+                    break;
+                case TW_LOGIN_REQ: twAccessToken = extras.getString(getString(R.string.EXTRA_ACCESS_TOKEN));
+                    twAccessSecret = extras.getString(getString(R.string.EXTRA_ACCESS_SECRET));
+                    Log.d("tw access token", twAccessToken);
+                    Log.d("tw access secret", twAccessSecret);
+                    break;
+                default: break;
+            }
         }
     }
 

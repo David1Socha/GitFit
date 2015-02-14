@@ -99,6 +99,11 @@ public abstract class LoginWebViewActivity extends ActionBarActivity {
         finish();
     }
 
+    private void finishInShame() {
+        setResult(RESULT_CANCELED);
+        finish();
+    }
+
     private class LoginWebViewClient extends WebViewClient {
         @Override
         public void onPageStarted(WebView view, String url, Bitmap favicon) {
@@ -106,18 +111,22 @@ public abstract class LoginWebViewActivity extends ActionBarActivity {
                 webView.stopLoading();
                 webView.setVisibility(View.INVISIBLE);
                 Uri uri = Uri.parse(url);
-                final Verifier verifier = new Verifier(uri.getQueryParameter("oauth_verifier"));
-                (new AsyncTask<Void, Void, Token>() {
-                    @Override
-                    protected Token doInBackground(Void... params) {
-                        return oAuthService.getAccessToken(requestToken, verifier);
-                    }
+                if (uri.getQueryParameter("oauth_verifier") == null) { //Check if we're getting called back because of OAuth cancellation
+                    finishInShame();
+                } else {
+                    final Verifier verifier = new Verifier(uri.getQueryParameter("oauth_verifier"));
+                    (new AsyncTask<Void, Void, Token>() {
+                        @Override
+                        protected Token doInBackground(Void... params) {
+                            return oAuthService.getAccessToken(requestToken, verifier);
+                        }
 
-                    @Override
-                    protected void onPostExecute(Token accessToken) {
-                        saveTokenAndFinish(accessToken);
-                    }
-                }).execute();
+                        @Override
+                        protected void onPostExecute(Token accessToken) {
+                            saveTokenAndFinish(accessToken);
+                        }
+                    }).execute();
+                }
             } else {
                 super.onPageStarted(view, url, favicon);
             }
