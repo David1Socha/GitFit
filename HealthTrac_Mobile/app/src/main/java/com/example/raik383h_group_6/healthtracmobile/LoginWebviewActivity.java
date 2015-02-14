@@ -7,17 +7,48 @@ import android.view.MenuItem;
 import android.webkit.WebView;
 
 
-public class LoginWebviewActivity extends ActionBarActivity {
+public abstract class LoginWebviewActivity extends ActionBarActivity {
 
-    private String apiClassStr, apiKey, apiSecret, callbackUrl;
+    private String apiClassStr;
+    private String apiKey;
+    private String apiSecret;
+    private String callbackUrl;
+
+    public String getApiKey() {
+        return apiKey;
+    }
+
+    public void setApiKey(String apiKey) {
+        this.apiKey = apiKey;
+    }
+
+    public String getApiSecret() {
+        return apiSecret;
+    }
+
+    public void setApiSecret(String apiSecret) {
+        this.apiSecret = apiSecret;
+    }
+
+    public String getCallbackUrl() {
+        return callbackUrl;
+    }
+
+    public void setCallbackUrl(String callbackUrl) {
+        this.callbackUrl = callbackUrl;
+    }
+
+    public String getApiClassStr() {
+        return apiClassStr;
+    }
+
+    public void setApiClassStr(String apiClassStr) {
+        this.apiClassStr = apiClassStr;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        apiClassStr = getIntent().getStringExtra(LoginPromptActivity.API_CLASS_STR);
-        apiKey = getIntent().getStringExtra(LoginPromptActivity.API_KEY);
-        apiSecret = getIntent().getStringExtra(LoginPromptActivity.API_SECRET);
-        callbackUrl = getIntent().getStringExtra(LoginPromptActivity.CALLBACK_URL);
         WebView webview = new WebView(this);
         setContentView(webview);
     }
