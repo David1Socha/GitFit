@@ -23,6 +23,7 @@ import org.scribe.model.Token;
 
 public abstract class LoginWebViewActivity extends ActionBarActivity {
 
+    private static String DUMMY_CALLBACK = "http://www.example.com/oauth_callback";
     private String apiKey, apiSecret, callbackUrl;
     private Class apiClass;
     private WebView webView;
@@ -55,7 +56,7 @@ public abstract class LoginWebViewActivity extends ActionBarActivity {
                 .provider(apiClass)
                 .apiKey(apiKey)
                 .apiSecret(apiSecret)
-                .callback(callbackUrl)
+                .callback(DUMMY_CALLBACK)
                 .build();
 
         webView = new WebView(this);
