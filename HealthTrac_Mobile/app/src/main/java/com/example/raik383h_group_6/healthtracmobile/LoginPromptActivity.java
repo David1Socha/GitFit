@@ -35,6 +35,9 @@ public class LoginPromptActivity extends Activity {
                     break;
                 default: break;
             }
+            Log.d("accessToken", accessToken);
+            Log.d("accessSecret", accessSecret);
+            Log.d("provider", provider);
         }
     }
 
