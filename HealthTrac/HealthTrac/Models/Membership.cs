@@ -13,9 +13,9 @@ namespace HealthTrac.Models
 
     public class Membership : DateTrackingModel
     {
-        public int ID { get; set; }
-        public int TeamID { get; set; }
-        public int ApplicationUserID { get; set; }
+        public long ID { get; set; }
+        public long TeamID { get; set; }
+        public string ApplicationUserID { get; set; }
         public MembershipStatus MembershipStatus { get; set; }
         public virtual Team Team { get; set; }
         public virtual ApplicationUser ApplicationUser { get; set; }
