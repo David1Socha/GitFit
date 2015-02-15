@@ -2,16 +2,11 @@ package com.example.raik383h_group_6.healthtracmobile;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.media.session.MediaSession;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
-import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -66,6 +61,8 @@ public abstract class LoginWebViewActivity extends ActionBarActivity {
 
     protected abstract void setOAuthFields();
 
+    protected abstract String getVerifierName();
+
     private void beginAuthorization() {
         (new AsyncTask<Void, Void, String>() {
             @Override
@@ -76,7 +73,6 @@ public abstract class LoginWebViewActivity extends ActionBarActivity {
                 } catch (UnsupportedOperationException e) {
                     return oAuthService.getAuthorizationUrl(null);
                 }
-
             }
 
             @Override
@@ -112,14 +108,14 @@ public abstract class LoginWebViewActivity extends ActionBarActivity {
     private class LoginWebViewClient extends WebViewClient {
         @Override
         public void onPageStarted(WebView view, String url, Bitmap favicon) {
-            if ((url != null) && (url.startsWith(DUMMY_CALLBACK))) { // Don't use callback
+            if ((url != null) && (url.startsWith(DUMMY_CALLBACK))) { // Don't open callback url
                 webView.stopLoading();
                 webView.setVisibility(View.INVISIBLE);
                 Uri uri = Uri.parse(url);
-                if (uri.getQueryParameter("oauth_verifier") == null) { //Check if we're getting called back because of OAuth cancellation
+                if (uri.getQueryParameter(getVerifierName()) == null) { //Check if we're getting called back because of OAuth cancellation
                     finishInShame();
                 } else {
-                    final Verifier verifier = new Verifier(uri.getQueryParameter("oauth_verifier"));
+                    final Verifier verifier = new Verifier(uri.getQueryParameter(getVerifierName()));
                     (new AsyncTask<Void, Void, Token>() {
                         @Override
                         protected Token doInBackground(Void... params) {
