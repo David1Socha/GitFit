@@ -70,8 +70,13 @@ public abstract class LoginWebViewActivity extends ActionBarActivity {
         (new AsyncTask<Void, Void, String>() {
             @Override
             protected String doInBackground(Void... params) {
-                requestToken = oAuthService.getRequestToken();
-                return oAuthService.getAuthorizationUrl(requestToken);
+                try { //OAuth 2.0 doesn't use request tokens...
+                    requestToken = oAuthService.getRequestToken();
+                    return oAuthService.getAuthorizationUrl(requestToken);
+                } catch (UnsupportedOperationException e) {
+                    return oAuthService.getAuthorizationUrl(null);
+                }
+
             }
 
             @Override
