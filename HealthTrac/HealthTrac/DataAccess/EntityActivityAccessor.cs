@@ -6,7 +6,7 @@ using System.Web;
 
 namespace HealthTrac.DataAccess
 {
-    public class ActivityAccessor : IActivityAccessor
+    public class EntityActivityAccessor : IActivityAccessor
     {
         public Activity GetActivity(long ID)
         {
