@@ -29,7 +29,12 @@ namespace HealthTrac.DataAccess
         }
         public Boolean CreateActivity(Activity activity)
         {
-
+            using (var db = new ApplicationDbContext())
+            {
+                db.Activities.Add(activity);
+                int objectsWritten = db.SaveChanges();
+                return objectsWritten == 1;
+            }
         }
         public Boolean deleteActivity(long ID)
         {
