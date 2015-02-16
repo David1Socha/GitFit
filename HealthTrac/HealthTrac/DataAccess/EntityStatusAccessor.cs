@@ -31,7 +31,13 @@ namespace HealthTrac.DataAccess
 
         public Models.Status GetStatus(long id)
         {
-            throw new NotImplementedException();
+            using (var db = new ApplicationDbContext())
+            {
+                var status = db.Statuses
+                    .Where(s => s.ID == id)
+                    .FirstOrDefault();
+                return status;
+            }
         }
 
         public IEnumerable<Models.Status> GetStatuses(ApplicationUser user)
