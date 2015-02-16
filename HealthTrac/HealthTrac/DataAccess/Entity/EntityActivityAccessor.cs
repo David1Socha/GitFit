@@ -55,5 +55,20 @@ namespace HealthTrac.DataAccess.Entity
                 }
             }
         }
+
+
+        public bool DeleteActivity(Activity activity)
+        {
+            using (var db = new ApplicationDbContext())
+            {
+                if (activity == null)
+                {
+                    return false;
+                }
+                db.Activities.Remove(activity);
+                int changes = db.SaveChanges();
+                return changes == 1;
+            }
+        }
     }
 }
