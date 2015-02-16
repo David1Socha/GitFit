@@ -8,6 +8,8 @@ namespace HealthTrac.Models
     public class ExerciseSession : DateTrackingModel
     {
         public long ID { get; set; }
+        public DateTime startTime { get; set; }
+        public Boolean isDeleted { get; set; }
         public long ActivityID { get; set; }
         public string ApplicationUserID { get; set; }
         public int Seconds { get; set; }
