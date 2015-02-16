@@ -7,7 +7,7 @@ using System.Web;
 
 namespace HealthTrac.DataAccess
 {
-    public class TeamAccessor : ITeamAccessor
+    public class EntityTeamAccessor : ITeamAccessor
     {
         public Team FindTeam(long ID)
         {

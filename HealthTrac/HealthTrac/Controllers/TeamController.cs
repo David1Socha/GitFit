@@ -1,5 +1,5 @@
 ﻿using HealthTrac.Models;
-using HealthTrac.Service_References;
+using HealthTrac.DataAccess;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,15 +19,15 @@ namespace HealthTrac.Controllers
 
         public List<Team> GetTeams(string userId)
         {
-            return new TeamAccessor().FindTeams(userId).ToList();
+            return new EntityTeamAccessor().FindTeams(userId).ToList();
         }
         public Team CreateTeam(Team team)
         {
-            return new TeamAccessor().SaveTeam(team);
+            return new EntityTeamAccessor().SaveTeam(team);
         }
         public Team UpdateTeam(Team team)
         {
-            return new TeamAccessor().SaveTeam(team);
+            return new EntityTeamAccessor().SaveTeam(team);
         }
         public List<Membership> InviteUsers(string[] userIds, long teamId)
         {
@@ -45,13 +45,13 @@ namespace HealthTrac.Controllers
                 };
                 memberships.Add(membership);
             }
-            return new TeamAccessor().SaveMemberships(memberships).ToList();
+            return new EntityTeamAccessor().SaveMemberships(memberships).ToList();
         }
 
         public Membership ConfirmUser(long membershipId)
         {
             // Don't know for sure if you need to pass down an object with all previous properties for update. TEST THIS
-            TeamAccessor teamAccessor = new TeamAccessor();
+            EntityTeamAccessor teamAccessor = new EntityTeamAccessor();
             Membership membership = teamAccessor.FindMembership(membershipId);
             membership.DateModified = DateTime.Now;
             membership.MembershipStatus = MembershipStatus.MEMBER;
@@ -61,7 +61,7 @@ namespace HealthTrac.Controllers
         public Membership BanUser(long membershipId)
         {
             // Don't know for sure if you need to pass down an object with all previous properties for update. TEST THIS
-            TeamAccessor teamAccessor = new TeamAccessor();
+            EntityTeamAccessor teamAccessor = new EntityTeamAccessor();
             Membership membership = teamAccessor.FindMembership(membershipId);
             membership.DateModified = DateTime.Now;
             membership.MembershipStatus = MembershipStatus.BANNED;
@@ -71,7 +71,7 @@ namespace HealthTrac.Controllers
         public Membership RemoveUser(long membershipId)
         {
             // Don't know for sure if you need to pass down an object with all previous properties for update. TEST THIS
-            TeamAccessor teamAccessor = new TeamAccessor();
+            EntityTeamAccessor teamAccessor = new EntityTeamAccessor();
             Membership membership = teamAccessor.FindMembership(membershipId);
             membership.DateModified = DateTime.Now;
             membership.MembershipStatus = MembershipStatus.INACTIVE;
