@@ -1,7 +1,7 @@
 ﻿using System;
 namespace HealthTrac.DataAccess
 {
-    interface ITeamAccessor
+    public interface ITeamAccessor
     {
         HealthTrac.Models.Membership FindMembership(long membershipID);
         HealthTrac.Models.Team FindTeam(long ID);

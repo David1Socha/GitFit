@@ -1,5 +1,6 @@
 ﻿using HealthTrac.Models;
 using HealthTrac.DataAccess;
+using HealthTrac.DataAccess.Entity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +11,18 @@ namespace HealthTrac.Controllers
 {
     public class TeamController : Controller
     {
-        
+        private ITeamAccessor teamAccessor;
+
+        public TeamController()
+            : this(new EntityTeamAccessor())
+        {
+
+        }
+        public TeamController(ITeamAccessor acc)
+        {
+            this.teamAccessor = acc;
+        }
+
         // GET: /Team/
         public ActionResult Index()
         {
@@ -19,15 +31,15 @@ namespace HealthTrac.Controllers
 
         public List<Team> GetTeams(string userId)
         {
-            return new EntityTeamAccessor().FindTeams(userId).ToList();
+            return teamAccessor.FindTeams(userId).ToList();
         }
         public Team CreateTeam(Team team)
         {
-            return new EntityTeamAccessor().SaveTeam(team);
+            return teamAccessor.SaveTeam(team);
         }
         public Team UpdateTeam(Team team)
         {
-            return new EntityTeamAccessor().SaveTeam(team);
+            return teamAccessor.SaveTeam(team);
         }
         public List<Membership> InviteUsers(string[] userIds, long teamId)
         {
@@ -45,7 +57,7 @@ namespace HealthTrac.Controllers
                 };
                 memberships.Add(membership);
             }
-            return new EntityTeamAccessor().SaveMemberships(memberships).ToList();
+            return teamAccessor.SaveMemberships(memberships).ToList();
         }
 
         public Membership ConfirmUser(long membershipId)
@@ -77,5 +89,5 @@ namespace HealthTrac.Controllers
             membership.MembershipStatus = MembershipStatus.INACTIVE;
             return teamAccessor.SaveMembership(membership);
         }
-	}
+    }
 }

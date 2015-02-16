@@ -1,7 +1,7 @@
 ﻿using System;
 namespace HealthTrac.DataAccess
 {
-    interface ISessionAccessor
+    public interface ISessionAccessor
     {
         bool DeleteSession(long sessionId);
         HealthTrac.Models.ExerciseSession GetSession(long ID);
