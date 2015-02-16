@@ -6,11 +6,17 @@ using System.Web;
 
 namespace HealthTrac.DataAccess
 {
-    public class SessionAccessor
+    public class SessionAccessor : ISessionAccessor
     {
         public ExerciseSession GetSession(long ID)
         {
-
+            using (var db = new ApplicationDbContext())
+            {
+                ExerciseSession session = db.ExerciseSessions
+                    .Where(s => s.ID == ID)
+                    .FirstOrDefault();
+                return session;
+            }
         }
         public IEnumerable<ExerciseSession> GetSessions(List<long> IDs)
         {
@@ -26,7 +32,7 @@ namespace HealthTrac.DataAccess
         }
         public Boolean SaveSession(ExerciseSession Session)
         {
-            
+
         }
         public Boolean DeleteSession(long sessionId)
         {
