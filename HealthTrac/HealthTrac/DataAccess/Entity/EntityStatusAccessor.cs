@@ -5,7 +5,7 @@ using System.Web;
 using HealthTrac.Models;
 using System.Data.Entity;
 
-namespace HealthTrac.DataAccess
+namespace HealthTrac.DataAccess.Entity
 {
     public class EntityStatusAccessor : IStatusAccessor
     {

@@ -7,14 +7,14 @@ using HealthTrac.Models;
 
 namespace HealthTrac.DataAccess
 {
-    interface IStatusAccessor
+    public interface IStatusAccessor
     {
-        public bool CreateStatus(Status s);
+        bool CreateStatus(Status s);
 
-        public bool UpdateStatus(Status s);
+        bool UpdateStatus(Status s);
 
-        public Status GetStatus(long id);
+        Status GetStatus(long id);
 
-        public IEnumerable<Status> GetStatuses(ApplicationUser user);
+        IEnumerable<Status> GetStatuses(ApplicationUser user);
     }
 }

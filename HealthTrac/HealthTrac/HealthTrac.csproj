@@ -177,11 +177,16 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\TeamController.cs" />
-    <Compile Include="DataAccess\ActivityAccessor.cs" />
-    <Compile Include="DataAccess\ApplicationUserAccessor.cs" />
-    <Compile Include="DataAccess\SessionAccessor.cs" />
-    <Compile Include="DataAccess\StatusAccessor.cs" />
-    <Compile Include="DataAccess\TeamAccessor.cs" />
+    <Compile Include="DataAccess\Entity\EntityActivityAccessor.cs" />
+    <Compile Include="DataAccess\Entity\EntityUserAccessor.cs" />
+    <Compile Include="DataAccess\IActivityAccessor.cs" />
+    <Compile Include="DataAccess\IStatusAccessor.cs" />
+    <Compile Include="DataAccess\IUserAccessor.cs" />
+    <Compile Include="DataAccess\ISessionAccessor.cs" />
+    <Compile Include="DataAccess\Entity\EntitySessionAccessor.cs" />
+    <Compile Include="DataAccess\ITeamAccessor.cs" />
+    <Compile Include="DataAccess\Entity\EntityStatusAccessor.cs" />
+    <Compile Include="DataAccess\Entity\EntityTeamAccessor.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace HealthTrac.DataAccess
+namespace HealthTrac.DataAccess.Entity
 {
     public class EntitySessionAccessor : ISessionAccessor
     {

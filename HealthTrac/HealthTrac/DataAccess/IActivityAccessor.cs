@@ -8,13 +8,13 @@ namespace HealthTrac.DataAccess
 {
     public interface IActivityAccessor
     {
-        public Activity GetActivity(long id);
+        Activity GetActivity(long id);
 
-        public IEnumerable<Activity> GetActivities(String userId);
+        IEnumerable<Activity> GetActivities(String userId);
 
-        public bool CreateActivity(Activity activity);
+        bool CreateActivity(Activity activity);
 
-        public bool DeleteActivity(Activity activity);
+        bool DeleteActivity(Activity activity);
 
     }
 }
