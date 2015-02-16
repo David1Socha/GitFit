@@ -61,7 +61,23 @@ namespace HealthTrac.DataAccess
         }
         public Boolean DeleteSession(long sessionId)
         {
+            using (var db = new ApplicationDbContext())
+            {
+                var session = db.ExerciseSessions
+                    .Where(s => s.ID == sessionId)
+                    .FirstOrDefault();
+                if (session == null)
+                {
+                    return false;
+                }
+                else
+                {
+                    db.ExerciseSessions.Remove(session);
+                    int changes = db.SaveChanges();
+                    return changes == 1;
+                }
 
+            }
         }
     }
 }
