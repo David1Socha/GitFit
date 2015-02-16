@@ -1,17 +1,18 @@
-﻿using HealthTrac.Models;
+﻿using HealthTrac.DataAccess;
+using HealthTrac.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace HealthTrac.Service_References
+namespace HealthTrac.DataAccess
 {
-    public class TeamAccessor
+    public class TeamAccessor : ITeamAccessor
     {
         public Team FindTeam(long ID)
         {
             using (var db = new ApplicationDbContext())
-            {            
+            {
                 var team = db.Teams
                                 .Where(t => t.ID == ID).FirstOrDefault();
                 return team;
