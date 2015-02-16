@@ -5,7 +5,7 @@ using System.Web;
 
 namespace HealthTrac.DataAccess
 {
-    public class StatusAccessor
+    public class EntityStatusAccessor
     {
     }
 }
