@@ -13,13 +13,19 @@ namespace HealthTrac.DataAccess
             using (var db = new ApplicationDbContext())
             {
                 Activity activity = db.Activities
-                    .Where(a => a.ID == ID).FirstOrDefault();
+                    .Where(a => a.ID == ID)
+                    .FirstOrDefault();
                 return activity;
             }
         }
         public IEnumerable<Activity> GetActivities(string userId)
         {
-
+            using (var db = new ApplicationDbContext())
+            {
+                IEnumerable<Activity> activities = db.Activities
+                    .Where(a => a.UserID.Equals(userId));
+                return activities;
+            }
         }
         public Boolean CreateActivity(Activity activity)
         {
