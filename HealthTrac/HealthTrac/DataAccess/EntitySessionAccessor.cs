@@ -29,7 +29,14 @@ namespace HealthTrac.DataAccess
         }
         public IEnumerable<ExerciseSession> GetSessions(string userId, DateTime from, DateTime to)
         {
-
+            using (var db = new ApplicationDbContext())
+            {
+                var sessions = db.ExerciseSessions
+                    .Where(s => s.ApplicationUserID.Equals(userId)
+                        && s.DateCreated > from
+                        && s.DateCreated < to);
+                return sessions;
+            }
         }
         public IEnumerable<ExerciseSession> GetSessions(string userId, long activityId, DateTime from, DateTime to)
         {
