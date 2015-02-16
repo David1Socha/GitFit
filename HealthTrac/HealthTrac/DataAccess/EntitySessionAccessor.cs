@@ -50,11 +50,13 @@ namespace HealthTrac.DataAccess
                 return sessions;
             }
         }
-        public Boolean CreateSession(ExerciseSession Session)
+        public Boolean CreateSession(ExerciseSession session)
         {
             using (var db = new ApplicationDbContext())
             {
-                db.ExerciseSessions.
+                db.ExerciseSessions.Add(session);
+                int changes = db.SaveChanges();
+                return changes == 1;
             }
         }
         public Boolean DeleteSession(long sessionId)
