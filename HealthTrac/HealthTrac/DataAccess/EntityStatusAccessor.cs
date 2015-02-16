@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using HealthTrac.Models;
+using System.Data.Entity;
 
 namespace HealthTrac.DataAccess
 {
@@ -10,7 +11,8 @@ namespace HealthTrac.DataAccess
     {
         public bool CreateStatus(Status s)
         {
-            using(var db = new ApplicationDbContext) {
+            using (var db = new ApplicationDbContext())
+            {
                 db.Statuses.Add(s);
                 int changes = db.SaveChanges();
                 return changes == 1;
@@ -19,7 +21,12 @@ namespace HealthTrac.DataAccess
 
         public bool UpdateStatus(Status s)
         {
-            throw new NotImplementedException();
+            using (var db = new ApplicationDbContext())
+            {
+                db.Entry(s).State = EntityState.Modified;
+                int changes = db.SaveChanges();
+                return changes == 1;
+            }
         }
 
         public Models.Status GetStatus(long id)
