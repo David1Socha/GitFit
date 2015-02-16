@@ -6,7 +6,7 @@ using System.Web;
 
 namespace HealthTrac.DataAccess
 {
-    public class ApplicationUserAccessor
+    public class ApplicationUserAccessor : IApplicationUserAccessor
     {
         public ApplicationUser FindUser(string ID)
         {
