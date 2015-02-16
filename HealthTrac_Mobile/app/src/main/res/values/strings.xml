@@ -8,4 +8,14 @@
     <string name="facebook_login">Log in through Facebook</string>
     <string name="facebook_logout">Log out of Facebook</string>
     <string name="title_facebook_login">Facebook Login</string>
+    <string name="title_activity_account">AccountActivity</string>
+    <string name="title_activity_account_view">accountViewActivity</string>
+    <string name="creation_date">Member since 201X</string>
+    <string name="name_label">Name</string>
+    <string name="birth_label">Date of Birth</string>
+    <string name="height_label">Height</string>
+    <string name="weight_label">Weight</string>
+    <string name="sex_label">Sex</string>
+    <string name="name_edit">Enter Name Here</string>
+
 </resources>
