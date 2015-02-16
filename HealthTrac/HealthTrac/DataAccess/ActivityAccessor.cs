@@ -6,11 +6,16 @@ using System.Web;
 
 namespace HealthTrac.DataAccess
 {
-    public class ActivityAccessor
+    public class ActivityAccessor : IActivityAccessor
     {
         public Activity GetActivity(long ID)
         {
-
+            using (var db = new ApplicationDbContext())
+            {
+                Activity activity = db.Activities
+                    .Where(a => a.ID == ID).FirstOrDefault();
+                return activity;
+            }
         }
         public IEnumerable<Activity> GetActivities(string userId)
         {
