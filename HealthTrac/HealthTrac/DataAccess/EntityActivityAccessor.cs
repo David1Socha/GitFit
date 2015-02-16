@@ -36,9 +36,24 @@ namespace HealthTrac.DataAccess
                 return objectsWritten == 1;
             }
         }
-        public Boolean deleteActivity(long ID)
+        public Boolean DeleteActivity(long ID)
         {
-
+            using (var db = new ApplicationDbContext())
+            {
+                Activity activity = db.Activities
+                    .Where(a => a.ID == ID)
+                    .FirstOrDefault();
+                if (activity == null)
+                {
+                    return false;
+                }
+                else
+                {
+                    db.Activities.Remove(activity);
+                    int changes = db.SaveChanges();
+                    return changes == 1;
+                }
+            }
         }
     }
 }
