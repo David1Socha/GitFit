@@ -6,7 +6,7 @@ using System.Web;
 
 namespace HealthTrac.DataAccess
 {
-    public class SessionAccessor : ISessionAccessor
+    public class EntitySessionAccessor : ISessionAccessor
     {
         public ExerciseSession GetSession(long ID)
         {
@@ -20,7 +20,12 @@ namespace HealthTrac.DataAccess
         }
         public IEnumerable<ExerciseSession> GetSessions(List<long> IDs)
         {
-
+            using (var db = new ApplicationDbContext())
+            {
+                var sessions = db.ExerciseSessions
+                    .Where(s => IDs.Contains(s.ID));
+                return sessions;
+            }
         }
         public IEnumerable<ExerciseSession> GetSessions(string userId, DateTime from, DateTime to)
         {
