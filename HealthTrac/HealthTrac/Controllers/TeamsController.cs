@@ -37,8 +37,7 @@ namespace HealthTrac.Controllers
         [ResponseType(typeof(Team))]
         public IHttpActionResult GetTeam(long id)
         {
-            //Team team = db.Teams.Find(id);
-            Team team = null;
+            Team team = acc.GetTeam(id);
             if (team == null)
             {
                 return NotFound();
