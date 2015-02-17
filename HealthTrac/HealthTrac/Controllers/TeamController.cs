@@ -11,6 +11,7 @@ namespace HealthTrac.Controllers
 {
     public class TeamController : Controller
     {
+        //Changing the accessor interface broke this temporarily. Some of these methods are going to be in MembershipAccessor now
         private ITeamAccessor teamAccessor;
         private IMembershipAccessor membershipAccessor;
 
@@ -59,38 +60,47 @@ namespace HealthTrac.Controllers
                 };
                 memberships.Add(membership);
             } */
-            //Changing the accessor interface broke this temporarily. 
+
             throw new NotImplementedException();
         }
 
         public Membership ConfirmUser(long membershipId)
         {
             // Don't know for sure if you need to pass down an object with all previous properties for update. TEST THIS
+            /*
             EntityTeamAccessor teamAccessor = new EntityTeamAccessor();
             Membership membership = teamAccessor.FindMembership(membershipId);
             membership.DateModified = DateTime.Now;
             membership.MembershipStatus = MembershipStatus.MEMBER;
             return teamAccessor.SaveMembership(membership);
+             */
+            throw new NotImplementedException();
         }
 
         public Membership BanUser(long membershipId)
         {
             // Don't know for sure if you need to pass down an object with all previous properties for update. TEST THIS
+            /*
             EntityTeamAccessor teamAccessor = new EntityTeamAccessor();
             Membership membership = teamAccessor.FindMembership(membershipId);
             membership.DateModified = DateTime.Now;
             membership.MembershipStatus = MembershipStatus.BANNED;
             return teamAccessor.SaveMembership(membership);
+             */
+            throw new NotImplementedException();
         }
 
         public Membership RemoveUser(long membershipId)
         {
             // Don't know for sure if you need to pass down an object with all previous properties for update. TEST THIS
+            /*
             EntityTeamAccessor teamAccessor = new EntityTeamAccessor();
             Membership membership = teamAccessor.FindMembership(membershipId);
             membership.DateModified = DateTime.Now;
             membership.MembershipStatus = MembershipStatus.INACTIVE;
             return teamAccessor.SaveMembership(membership);
+             */
+            throw new NotImplementedException();
         }
     }
 }
