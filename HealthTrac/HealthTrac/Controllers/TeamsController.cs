@@ -95,7 +95,7 @@ namespace HealthTrac.Controllers
                 return BadRequest(ModelState);
             }
 
-            acc.SaveTeam(team);
+            acc.CreateTeam(team);
 
             return CreatedAtRoute("DefaultApi", new { id = team.ID }, team);
         }

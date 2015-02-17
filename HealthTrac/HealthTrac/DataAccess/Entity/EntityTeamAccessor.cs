@@ -67,14 +67,7 @@ namespace HealthTrac.DataAccess.Entity
             using (var db = new ApplicationDbContext())
             {
                 db.Teams.Add(team);
-                try
-                {
-                    db.SaveChanges();
-                }
-                catch (DbUpdateConcurrencyException ex)
-                {
-                    throw new ConcurrentUpdateException("The team you are trying to create has been modified externally.", ex);
-                }
+                db.SaveChanges();
 
             }
             return team;
