@@ -10,7 +10,7 @@ namespace HealthTrac.DataAccess.Entity
 {
     public class EntityTeamAccessor : ITeamAccessor
     {
-        public Team FindTeam(long ID)
+        public Team GetTeam(long ID)
         {
             using (var db = new ApplicationDbContext())
             {
@@ -19,7 +19,16 @@ namespace HealthTrac.DataAccess.Entity
                 return team;
             }
         }
-        public IEnumerable<Team> FindTeams(string userID)
+
+        public IEnumerable<Team> GetTeams()
+        {
+            using (var db = new ApplicationDbContext())
+            {
+                var teams = db.Teams.ToList();
+                return teams;
+            }
+        }
+        public IEnumerable<Team> GetTeams(string userID)
         {
             using (var db = new ApplicationDbContext())
             {
@@ -30,7 +39,7 @@ namespace HealthTrac.DataAccess.Entity
                                 && (membership.MembershipStatus.Equals(MembershipStatus.ADMIN)
                                 || membership.MembershipStatus.Equals(MembershipStatus.MEMBER))
                             select team;
-                return teams;
+                return teams.ToList();
             }
         }
         public Team SaveTeam(Team team)
