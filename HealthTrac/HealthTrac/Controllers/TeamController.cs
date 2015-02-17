@@ -12,15 +12,17 @@ namespace HealthTrac.Controllers
     public class TeamController : Controller
     {
         private ITeamAccessor teamAccessor;
+        private IMembershipAccessor membershipAccessor;
 
         public TeamController()
-            : this(new EntityTeamAccessor())
+            : this(new EntityTeamAccessor(), new EntityMembershipAccessor())
         {
 
         }
-        public TeamController(ITeamAccessor acc)
+        public TeamController(ITeamAccessor teamAcc, IMembershipAccessor membershipAcc)
         {
-            this.teamAccessor = acc;
+            this.teamAccessor = teamAcc;
+            this.membershipAccessor = membershipAcc;
         }
 
         // GET: /Team/
@@ -42,7 +44,7 @@ namespace HealthTrac.Controllers
             return teamAccessor.UpdateTeam(team);
         }
         public List<Membership> InviteUsers(string[] userIds, long teamId)
-        {
+        { /*
             List<Membership> memberships = new List<Membership>();
             foreach (string userId in userIds)
             {
@@ -56,8 +58,9 @@ namespace HealthTrac.Controllers
                     MembershipStatus = MembershipStatus.WAITING_USER
                 };
                 memberships.Add(membership);
-            }
-            return teamAccessor.SaveMemberships(memberships).ToList();
+            } */
+            //Changing the accessor interface broke this temporarily. 
+            throw new NotImplementedException();
         }
 
         public Membership ConfirmUser(long membershipId)
