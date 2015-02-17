@@ -44,26 +44,36 @@ namespace HealthTrac.DataAccess.Entity
                 return teams.ToList();
             }
         }
-        public Team SaveTeam(Team team)
+
+        public Team UpdateTeam(Team team)
         {
             using (var db = new ApplicationDbContext())
             {
-                if (team.ID == 0)
-                {
-                    db.Teams.Add(team);
-                }
-                else
-                {
-                    db.Teams.Attach(team);
-                    db.Entry(team).State = System.Data.Entity.EntityState.Modified;
-                }
+                db.Entry(team).State = System.Data.Entity.EntityState.Modified;
                 try
                 {
                     db.SaveChanges();
                 }
                 catch (DbUpdateConcurrencyException ex)
                 {
-                    throw new ConcurrentUpdateException("The team you are trying to save has been modified externally.", ex);
+                    throw new ConcurrentUpdateException("The team you are trying to update has been modified externally", ex);
+                }
+                return team;
+            }
+        }
+
+        public Team CreateTeam(Team team)
+        {
+            using (var db = new ApplicationDbContext())
+            {
+                db.Teams.Add(team);
+                try
+                {
+                    db.SaveChanges();
+                }
+                catch (DbUpdateConcurrencyException ex)
+                {
+                    throw new ConcurrentUpdateException("The team you are trying to create has been modified externally.", ex);
                 }
 
             }

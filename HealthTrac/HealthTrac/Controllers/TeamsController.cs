@@ -67,11 +67,9 @@ namespace HealthTrac.Controllers
                 return BadRequest();
             }
 
-            // db.Entry(team).State = EntityState.Modified;
-
             try
             {
-                acc.SaveTeam(team);
+                acc.UpdateTeam(team);
             }
             catch (ConcurrentUpdateException)
             {

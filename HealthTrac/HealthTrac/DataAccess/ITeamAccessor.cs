@@ -9,6 +9,7 @@ namespace HealthTrac.DataAccess
         System.Collections.Generic.IEnumerable<HealthTrac.Models.Team> GetTeams();
         HealthTrac.Models.Membership SaveMembership(HealthTrac.Models.Membership membership);
         System.Collections.Generic.IEnumerable<HealthTrac.Models.Membership> SaveMemberships(System.Collections.Generic.List<HealthTrac.Models.Membership> memberships);
-        HealthTrac.Models.Team SaveTeam(HealthTrac.Models.Team team);
+        HealthTrac.Models.Team CreateTeam(HealthTrac.Models.Team team);
+        HealthTrac.Models.Team UpdateTeam(HealthTrac.Models.Team team);
     }
 }
