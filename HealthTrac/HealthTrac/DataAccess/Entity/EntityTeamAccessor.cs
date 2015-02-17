@@ -38,10 +38,8 @@ namespace HealthTrac.DataAccess.Entity
                 {
                     m.TeamID,
                 });
-                var teams = (from team in db.Teams
-                             join membership in memberships
-                                 on team.ID equals membership.TeamID
-                             select team);
+                IEnumerable<long> teamIdsWhereUserMember = memberships.Select(m => m.TeamID);
+                var teams = db.Teams.Where(t => teamIdsWhereUserMember.Contains(t.ID));
 
                 return teams.ToList();
             }
