@@ -35,5 +35,13 @@ namespace HealthTrac.DataAccess.Entity
             }
             return user;
         }
+
+        public IEnumerable<User> GetUsers()
+        {
+            using (var db = new ApplicationDbContext())
+            {
+                return db.Users.ToList();
+            }
+        }
     }
 }
