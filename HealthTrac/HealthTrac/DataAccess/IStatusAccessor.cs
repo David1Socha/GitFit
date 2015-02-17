@@ -15,6 +15,6 @@ namespace HealthTrac.DataAccess
 
         Status GetStatus(long id);
 
-        IEnumerable<Status> GetStatuses(ApplicationUser user);
+        IEnumerable<Status> GetStatuses(User user);
     }
 }

@@ -40,7 +40,7 @@ namespace HealthTrac.DataAccess.Entity
             }
         }
 
-        public IEnumerable<Models.Status> GetStatuses(ApplicationUser user)
+        public IEnumerable<Models.Status> GetStatuses(User user)
         {
             using (var db = new ApplicationDbContext())
             {

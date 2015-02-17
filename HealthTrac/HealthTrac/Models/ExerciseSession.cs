@@ -11,7 +11,7 @@ namespace HealthTrac.Models
         public DateTime startTime { get; set; }
         public Boolean isDeleted { get; set; }
         public long ActivityID { get; set; }
-        public string ApplicationUserID { get; set; }
+        public string UserID { get; set; }
         public int Seconds { get; set; }
         public int Steps { get; set; }
         public int Distance { get; set; }

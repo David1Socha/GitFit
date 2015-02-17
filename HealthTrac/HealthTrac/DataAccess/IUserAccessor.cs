@@ -3,7 +3,7 @@ namespace HealthTrac.DataAccess
 {
     public interface IApplicationUserAccessor
     {
-        HealthTrac.Models.ApplicationUser FindUser(string ID);
-        HealthTrac.Models.ApplicationUser SaveUser(HealthTrac.Models.ApplicationUser user);
+        HealthTrac.Models.User FindUser(string ID);
+        HealthTrac.Models.User SaveUser(HealthTrac.Models.User user);
     }
 }

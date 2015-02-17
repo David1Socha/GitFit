@@ -177,6 +177,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\TeamController.cs" />
+    <Compile Include="DataAccess\Entity\ApplicationDbContext.cs" />
     <Compile Include="DataAccess\Entity\EntityActivityAccessor.cs" />
     <Compile Include="DataAccess\Entity\EntityUserAccessor.cs" />
     <Compile Include="DataAccess\IActivityAccessor.cs" />
@@ -195,7 +196,7 @@
     <Compile Include="Models\DateTrackingModel.cs" />
     <Compile Include="Models\IDateTrackingModel.cs" />
     <Compile Include="Models\ExerciseSession.cs" />
-    <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\User.cs" />
     <Compile Include="Models\Status.cs" />
     <Compile Include="Models\Membership.cs" />
     <Compile Include="Models\Team.cs" />

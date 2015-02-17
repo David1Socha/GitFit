@@ -32,7 +32,7 @@ namespace HealthTrac.DataAccess.Entity
             using (var db = new ApplicationDbContext())
             {
                 var sessions = db.ExerciseSessions
-                    .Where(s => s.ApplicationUserID.Equals(userId)
+                    .Where(s => s.UserID.Equals(userId)
                         && s.DateCreated > from
                         && s.DateCreated < to);
                 return sessions;
@@ -43,7 +43,7 @@ namespace HealthTrac.DataAccess.Entity
             using (var db = new ApplicationDbContext())
             {
                 var sessions = db.ExerciseSessions
-                    .Where(s => s.ApplicationUserID.Equals(userId)
+                    .Where(s => s.UserID.Equals(userId)
                         && s.ActivityID == activityId
                         && s.DateCreated > from
                         && s.DateCreated < to);

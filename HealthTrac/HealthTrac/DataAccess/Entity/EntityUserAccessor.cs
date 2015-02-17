@@ -8,7 +8,7 @@ namespace HealthTrac.DataAccess.Entity
 {
     public class ApplicationUserAccessor : IApplicationUserAccessor
     {
-        public ApplicationUser FindUser(string ID)
+        public User FindUser(string ID)
         {
             using (var db = new ApplicationDbContext())
             {
@@ -18,7 +18,7 @@ namespace HealthTrac.DataAccess.Entity
             }
         }
 
-        public ApplicationUser SaveUser(ApplicationUser user)
+        public User SaveUser(User user)
         {
             using (var db = new ApplicationDbContext())
             {
