@@ -15,7 +15,19 @@ namespace HealthTrac.Controllers
 {
     public class UsersController : ApiController
     {
-        private IUserAccessor accessor = new EntityUserAccessor();
+        //TODO add login in this or another API controller
+        private IUserAccessor accessor;
+
+        public UsersController()
+            : this(new EntityUserAccessor())
+        {
+
+        }
+
+        public UsersController(IUserAccessor acc)
+        {
+            this.accessor = acc;
+        }
 
         // GET: api/Users
         public IEnumerable<UserDto> GetIdentityUsers()
