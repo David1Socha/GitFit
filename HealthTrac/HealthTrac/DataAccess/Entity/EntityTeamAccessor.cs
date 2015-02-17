@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Data.Entity.Infrastructure;
 
 namespace HealthTrac.DataAccess.Entity
 {
@@ -45,7 +46,15 @@ namespace HealthTrac.DataAccess.Entity
                     db.Teams.Attach(team);
                     db.Entry(team).State = System.Data.Entity.EntityState.Modified;
                 }
-                db.SaveChanges();
+                try
+                {
+                    db.SaveChanges();
+                }
+                catch (DbUpdateConcurrencyException ex)
+                {
+                    throw new ConcurrentUpdateException("The team you are trying to save has been modified externally.", ex);
+                }
+
             }
             return team;
         }
@@ -67,7 +76,15 @@ namespace HealthTrac.DataAccess.Entity
                         db.Entry(membership).State = System.Data.Entity.EntityState.Modified;
                     }
                 }
-                db.SaveChanges();
+                try
+                {
+                    db.SaveChanges();
+                }
+                catch (DbUpdateConcurrencyException ex)
+                {
+                    throw new ConcurrentUpdateException("One or more of the teams you are trying to save have been modified externally.", ex);
+                }
+
             }
             return memberships;
         }
@@ -84,7 +101,15 @@ namespace HealthTrac.DataAccess.Entity
                     db.Memberships.Attach(membership);
                     db.Entry(membership).State = System.Data.Entity.EntityState.Modified;
                 }
-                db.SaveChanges();
+                try
+                {
+                    db.SaveChanges();
+                }
+                catch (DbUpdateConcurrencyException ex)
+                {
+                    throw new ConcurrentUpdateException("The membership you are trying to save has been modified externally.", ex);
+                }
+
             }
             return membership;
         }

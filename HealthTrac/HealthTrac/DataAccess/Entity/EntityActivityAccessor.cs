@@ -1,6 +1,7 @@
 ﻿using HealthTrac.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Web;
 
@@ -27,7 +28,7 @@ namespace HealthTrac.DataAccess.Entity
                 return activities;
             }
         }
-        public Boolean CreateActivity(Activity activity)
+        public bool CreateActivity(Activity activity)
         {
             using (var db = new ApplicationDbContext())
             {
@@ -36,7 +37,7 @@ namespace HealthTrac.DataAccess.Entity
                 return objectsWritten == 1;
             }
         }
-        public Boolean DeleteActivity(long ID)
+        public bool DeleteActivity(long ID)
         {
             using (var db = new ApplicationDbContext())
             {
@@ -50,8 +51,16 @@ namespace HealthTrac.DataAccess.Entity
                 else
                 {
                     db.Activities.Remove(activity);
-                    int changes = db.SaveChanges();
-                    return changes == 1;
+                    try
+                    {
+                        int changes = db.SaveChanges();
+                        return changes == 1;
+                    }
+                    catch (DbUpdateConcurrencyException ex)
+                    {
+                        throw new ConcurrentUpdateException("The Activity you are trying to delete has been modified externally", ex);
+                    }
+
                 }
             }
         }
@@ -66,8 +75,16 @@ namespace HealthTrac.DataAccess.Entity
                     return false;
                 }
                 db.Activities.Remove(activity);
-                int changes = db.SaveChanges();
-                return changes == 1;
+                try
+                {
+                    int changes = db.SaveChanges();
+                    return changes == 1;
+                }
+                catch (DbUpdateConcurrencyException ex)
+                {
+                    throw new ConcurrentUpdateException("The Activity you are trying to delete has been modified externally", ex);
+                }
+
             }
         }
     }

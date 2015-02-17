@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Data.Entity.Infrastructure;
 
 namespace HealthTrac.DataAccess.Entity
 {
@@ -73,8 +74,16 @@ namespace HealthTrac.DataAccess.Entity
                 else
                 {
                     db.ExerciseSessions.Remove(session);
-                    int changes = db.SaveChanges();
-                    return changes == 1;
+                    try
+                    {
+                        int changes = db.SaveChanges();
+                        return changes == 1;
+                    }
+                    catch (DbUpdateConcurrencyException ex)
+                    {
+                        throw new ConcurrentUpdateException("The Session you are trying to delete has been modified externally.", ex);
+                    }
+
                 }
 
             }

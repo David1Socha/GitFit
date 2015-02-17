@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using HealthTrac.Models;
 using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
 
 namespace HealthTrac.DataAccess.Entity
 {
@@ -24,8 +25,16 @@ namespace HealthTrac.DataAccess.Entity
             using (var db = new ApplicationDbContext())
             {
                 db.Entry(s).State = EntityState.Modified;
-                int changes = db.SaveChanges();
-                return changes == 1;
+                try
+                {
+                    int changes = db.SaveChanges();
+                    return changes == 1;
+                }
+                catch (DbUpdateConcurrencyException ex)
+                {
+                    throw new ConcurrentUpdateException("The status you are trying to update has been modified externally.", ex);
+                }
+
             }
         }
 
