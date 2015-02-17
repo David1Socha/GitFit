@@ -43,7 +43,14 @@ namespace HealthTrac.DataAccess.Entity
             using (var db = new ApplicationDbContext())
             {
                 db.Users.Remove(user);
-                int changes = db.SaveChanges();
+                try
+                {
+                    db.SaveChanges();
+                }
+                catch (DbUpdateConcurrencyException ex)
+                {
+                    throw new ConcurrentUpdateException("The User you are attempting to delete has been externally modified", ex);
+                }
                 return user;
             }
         }
