@@ -11,7 +11,7 @@ using HealthTrac.DataAccess;
 using HealthTrac.Models;
 using HealthTrac.Models.Dto;
 
-namespace HealthTrac.Controllers
+namespace HealthTrac.Controllers.Api
 {
     public class TeamsController : ApiController
     {
