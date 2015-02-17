@@ -42,5 +42,7 @@ namespace HealthTrac.DataAccess.Entity
         {
             return ChangeTracker.Entries().Where(x => x.Entity is IDateTrackingModel && (x.State == EntityState.Added || x.State == EntityState.Modified));
         }
+
+        public System.Data.Entity.DbSet<HealthTrac.Models.User> IdentityUsers { get; set; }
     }
 }

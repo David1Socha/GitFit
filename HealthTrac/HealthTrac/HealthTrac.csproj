@@ -177,6 +177,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\TeamController.cs" />
+    <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="DataAccess\Entity\ApplicationDbContext.cs" />
     <Compile Include="DataAccess\Entity\EntityActivityAccessor.cs" />
     <Compile Include="DataAccess\Entity\EntityUserAccessor.cs" />
