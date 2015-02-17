@@ -46,6 +46,13 @@ namespace HealthTrac.Controllers
             return Ok(team);
         }
 
+        //GET: api/Teams?userId=xxx
+        public IEnumerable<Team> GetTeams(string userId)
+        {
+            var teams = acc.GetTeams(userId);
+            return teams;
+        }
+
         // PUT: api/Teams/5
         [ResponseType(typeof(void))]
         public IHttpActionResult PutTeam(long id, Team team)

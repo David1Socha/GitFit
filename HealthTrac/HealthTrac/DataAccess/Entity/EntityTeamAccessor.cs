@@ -32,13 +32,17 @@ namespace HealthTrac.DataAccess.Entity
         {
             using (var db = new ApplicationDbContext())
             {
-                var teams = from team in db.Teams
-                            join membership in db.Memberships
-                                on team.ID equals membership.TeamID
-                            where membership.ApplicationUserID == userID
-                                && (membership.MembershipStatus.Equals(MembershipStatus.ADMIN)
-                                || membership.MembershipStatus.Equals(MembershipStatus.MEMBER))
-                            select team;
+                var memberships = db.Memberships.Where(m => m.UserId == userID &&
+                    (m.MembershipStatus == MembershipStatus.ADMIN
+                    || m.MembershipStatus == MembershipStatus.MEMBER)).Select(m => new
+                {
+                    m.TeamID,
+                });
+                var teams = (from team in db.Teams
+                             join membership in memberships
+                                 on team.ID equals membership.TeamID
+                             select team);
+
                 return teams.ToList();
             }
         }

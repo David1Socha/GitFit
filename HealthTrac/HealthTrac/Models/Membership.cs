@@ -15,7 +15,7 @@ namespace HealthTrac.Models
     {
         public long ID { get; set; }
         public long TeamID { get; set; }
-        public string ApplicationUserID { get; set; }
+        public string UserId { get; set; }
         public MembershipStatus MembershipStatus { get; set; }
         public virtual Team Team { get; set; }
         public virtual User User { get; set; }

@@ -51,7 +51,7 @@ namespace HealthTrac.Controllers
                     DateCreated = DateTime.Now,
                     DateModified = DateTime.Now,
                     ID = 0,
-                    ApplicationUserID = userId,
+                    UserId = userId,
                     TeamID = teamId,
                     MembershipStatus = MembershipStatus.WAITING_USER
                 };
