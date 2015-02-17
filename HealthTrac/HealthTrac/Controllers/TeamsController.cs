@@ -29,13 +29,16 @@ namespace HealthTrac.Controllers
         // GET: api/Teams
         public IEnumerable<Team> GetTeams()
         {
+            var teams = acc.GetTeams();
+            return teams;
         }
 
         // GET: api/Teams/5
         [ResponseType(typeof(Team))]
         public IHttpActionResult GetTeam(long id)
         {
-            Team team = db.Teams.Find(id);
+            //Team team = db.Teams.Find(id);
+            Team team = null;
             if (team == null)
             {
                 return NotFound();
@@ -58,13 +61,13 @@ namespace HealthTrac.Controllers
                 return BadRequest();
             }
 
-            db.Entry(team).State = EntityState.Modified;
+            // db.Entry(team).State = EntityState.Modified;
 
             try
             {
-                db.SaveChanges();
+                acc.SaveTeam(team);
             }
-            catch (DbUpdateConcurrencyException)
+            catch (ConcurrentUpdateException)
             {
                 if (!TeamExists(id))
                 {
@@ -88,40 +91,15 @@ namespace HealthTrac.Controllers
                 return BadRequest(ModelState);
             }
 
-            db.Teams.Add(team);
-            db.SaveChanges();
+            acc.SaveTeam(team);
 
             return CreatedAtRoute("DefaultApi", new { id = team.ID }, team);
         }
 
-        // DELETE: api/Teams/5
-        [ResponseType(typeof(Team))]
-        public IHttpActionResult DeleteTeam(long id)
-        {
-            Team team = db.Teams.Find(id);
-            if (team == null)
-            {
-                return NotFound();
-            }
-
-            db.Teams.Remove(team);
-            db.SaveChanges();
-
-            return Ok(team);
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
 
         private bool TeamExists(long id)
         {
-            return db.Teams.Count(e => e.ID == id) > 0;
+            return acc.GetTeams().Count(e => e.ID == id) > 0;
         }
     }
 }
