@@ -10,6 +10,7 @@ using System.Web.Http;
 using System.Web.Http.Description;
 using HealthTrac.DataAccess.Entity;
 using HealthTrac.Models;
+using HealthTrac.Models.Dto;
 using HealthTrac.DataAccess;
 
 namespace HealthTrac.Controllers
@@ -20,9 +21,10 @@ namespace HealthTrac.Controllers
         private IUserAccessor accessor = new EntityUserAccessor();
 
         // GET: api/Users
-        public IEnumerable<User> GetIdentityUsers()
+        public IEnumerable<UserDto> GetIdentityUsers()
         {
-            return db.Users;
+            var users = accessor.GetUsers();
+            return users.Select(u => UserDto.FromUser(u));
         }
 
         // GET: api/Users/5
