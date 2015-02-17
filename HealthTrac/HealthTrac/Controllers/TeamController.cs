@@ -35,11 +35,11 @@ namespace HealthTrac.Controllers
         }
         public Team CreateTeam(Team team)
         {
-            return teamAccessor.SaveTeam(team);
+            return teamAccessor.CreateTeam(team);
         }
         public Team UpdateTeam(Team team)
         {
-            return teamAccessor.SaveTeam(team);
+            return teamAccessor.UpdateTeam(team);
         }
         public List<Membership> InviteUsers(string[] userIds, long teamId)
         {

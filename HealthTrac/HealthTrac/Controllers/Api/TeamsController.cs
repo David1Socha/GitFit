@@ -9,8 +9,9 @@ using System.Web.Http.Description;
 using HealthTrac.DataAccess.Entity;
 using HealthTrac.DataAccess;
 using HealthTrac.Models;
+using HealthTrac.Models.Dto;
 
-namespace HealthTrac.Controllers
+namespace HealthTrac.Controllers.Api
 {
     public class TeamsController : ApiController
     {
@@ -27,14 +28,15 @@ namespace HealthTrac.Controllers
             this.acc = acc;
         }
         // GET: api/Teams
-        public IEnumerable<Team> GetTeams()
+        public IEnumerable<TeamDto> GetTeams()
         {
             var teams = acc.GetTeams();
-            return teams;
+            var teamDtos = teams.Select(t => TeamDto.FromTeam(t));
+            return teamDtos;
         }
 
         // GET: api/Teams/5
-        [ResponseType(typeof(Team))]
+        [ResponseType(typeof(TeamDto))]
         public IHttpActionResult GetTeam(long id)
         {
             Team team = acc.GetTeam(id);
@@ -42,15 +44,16 @@ namespace HealthTrac.Controllers
             {
                 return NotFound();
             }
-
-            return Ok(team);
+            var teamDto = TeamDto.FromTeam(team);
+            return Ok(teamDto);
         }
 
         //GET: api/Teams?userId=xxx
-        public IEnumerable<Team> GetTeams(string userId)
+        public IEnumerable<TeamDto> GetTeams(string userId)
         {
             var teams = acc.GetTeams(userId);
-            return teams;
+            var teamDtos = teams.Select(t => TeamDto.FromTeam(t));
+            return teamDtos;
         }
 
         // PUT: api/Teams/5
@@ -87,7 +90,7 @@ namespace HealthTrac.Controllers
         }
 
         // POST: api/Teams
-        [ResponseType(typeof(Team))]
+        [ResponseType(typeof(TeamDto))]
         public IHttpActionResult PostTeam(Team team)
         {
             if (!ModelState.IsValid)
@@ -95,9 +98,9 @@ namespace HealthTrac.Controllers
                 return BadRequest(ModelState);
             }
 
-            acc.SaveTeam(team);
+            acc.CreateTeam(team);
 
-            return CreatedAtRoute("DefaultApi", new { id = team.ID }, team);
+            return CreatedAtRoute("DefaultApi", new { id = team.ID }, TeamDto.FromTeam(team));
         }
 
 

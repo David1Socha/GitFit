@@ -177,8 +177,8 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\TeamController.cs" />
-    <Compile Include="Controllers\TeamsController.cs" />
-    <Compile Include="Controllers\UsersController.cs" />
+    <Compile Include="Controllers\Api\TeamsController.cs" />
+    <Compile Include="Controllers\Api\UsersController.cs" />
     <Compile Include="DataAccess\ConcurrentUpdateException.cs" />
     <Compile Include="DataAccess\Entity\ApplicationDbContext.cs" />
     <Compile Include="DataAccess\Entity\EntityActivityAccessor.cs" />
@@ -197,6 +197,7 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Activity.cs" />
     <Compile Include="Models\DateTrackingModel.cs" />
+    <Compile Include="Models\Dto\TeamDto.cs" />
     <Compile Include="Models\Dto\UserDto.cs" />
     <Compile Include="Models\IDateTrackingModel.cs" />
     <Compile Include="Models\ExerciseSession.cs" />
