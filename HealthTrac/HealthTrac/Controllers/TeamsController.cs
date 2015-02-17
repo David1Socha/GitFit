@@ -1,26 +1,34 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Data.Entity;
-using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
 using HealthTrac.DataAccess.Entity;
+using HealthTrac.DataAccess;
 using HealthTrac.Models;
 
 namespace HealthTrac.Controllers
 {
     public class TeamsController : ApiController
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
+        private ITeamAccessor acc;
 
-        // GET: api/Teams
-        public IQueryable<Team> GetTeams()
+        public TeamsController()
+            : this(new EntityTeamAccessor())
         {
-            return db.Teams;
+
+        }
+
+        public TeamsController(ITeamAccessor acc)
+        {
+            this.acc = acc;
+        }
+        // GET: api/Teams
+        public IEnumerable<Team> GetTeams()
+        {
         }
 
         // GET: api/Teams/5
