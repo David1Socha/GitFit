@@ -1,6 +1,7 @@
 ﻿using HealthTrac.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Web;
 
@@ -18,20 +19,13 @@ namespace HealthTrac.DataAccess.Entity
             }
         }
 
-        public User SaveUser(User user)
+        public User UpdateUser(User user)
         {
             using (var db = new ApplicationDbContext())
             {
-                if (user.Id == "0")
-                {
-                    db.Users.Add(user);
-                }
-                else
-                {
-                    db.Users.Attach(user);
-                    db.Entry(user).State = System.Data.Entity.EntityState.Modified;
-                }
+                db.Entry(user).State = System.Data.Entity.EntityState.Modified;
                 db.SaveChanges();
+
             }
             return user;
         }
@@ -41,6 +35,16 @@ namespace HealthTrac.DataAccess.Entity
             using (var db = new ApplicationDbContext())
             {
                 return db.Users.ToList();
+            }
+        }
+
+        public User DeleteUser(User user)
+        {
+            using (var db = new ApplicationDbContext())
+            {
+                db.Users.Remove(user);
+                int changes = db.SaveChanges();
+                return user;
             }
         }
     }

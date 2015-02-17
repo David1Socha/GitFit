@@ -17,7 +17,6 @@ namespace HealthTrac.Controllers
 {
     public class UsersController : ApiController
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
         private IUserAccessor accessor = new EntityUserAccessor();
 
         // GET: api/Users
@@ -28,16 +27,18 @@ namespace HealthTrac.Controllers
         }
 
         // GET: api/Users/5
-        [ResponseType(typeof(User))]
+        [ResponseType(typeof(UserDto))]
         public IHttpActionResult GetUser(string id)
         {
-            User user = db.Users.Find(id);
-            if (user == null)
+            User u = accessor.FindUser(id);
+            if (u == null)
             {
                 return NotFound();
             }
-
-            return Ok(user);
+            else
+            {
+                return Ok(UserDto.FromUser(u));
+            }
         }
 
         // PUT: api/Users/5
@@ -54,13 +55,11 @@ namespace HealthTrac.Controllers
                 return BadRequest();
             }
 
-            db.Entry(user).State = EntityState.Modified;
-
             try
             {
-                db.SaveChanges();
+                accessor.UpdateUser(user);
             }
-            catch (DbUpdateConcurrencyException)
+            catch (DbUpdateConcurrencyException) //TODO generalize
             {
                 if (!UserExists(id))
                 {
@@ -75,64 +74,25 @@ namespace HealthTrac.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // POST: api/Users
-        [ResponseType(typeof(User))]
-        public IHttpActionResult PostUser(User user)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            db.Users.Add(user);
-
-            try
-            {
-                db.SaveChanges();
-            }
-            catch (DbUpdateException)
-            {
-                if (UserExists(user.Id))
-                {
-                    return Conflict();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return CreatedAtRoute("DefaultApi", new { id = user.Id }, user);
-        }
 
         // DELETE: api/Users/5
-        [ResponseType(typeof(User))]
+        [ResponseType(typeof(UserDto))]
         public IHttpActionResult DeleteUser(string id)
         {
-            User user = db.Users.Find(id);
+            User user = accessor.FindUser(id);
             if (user == null)
             {
                 return NotFound();
             }
 
-            db.Users.Remove(user);
-            db.SaveChanges();
+            accessor.DeleteUser(user);
 
-            return Ok(user);
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
+            return Ok(UserDto.FromUser(user));
         }
 
         private bool UserExists(string id)
         {
-            return db.Users.Count(e => e.Id == id) > 0;
+            return accessor.GetUsers().Count(e => e.Id == id) > 0;
         }
     }
 }
