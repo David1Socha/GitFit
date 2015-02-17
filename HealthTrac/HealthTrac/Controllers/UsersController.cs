@@ -10,24 +10,26 @@ using System.Web.Http;
 using System.Web.Http.Description;
 using HealthTrac.DataAccess.Entity;
 using HealthTrac.Models;
+using HealthTrac.DataAccess;
 
 namespace HealthTrac.Controllers
 {
     public class UsersController : ApiController
     {
         private ApplicationDbContext db = new ApplicationDbContext();
+        private IUserAccessor accessor = new EntityUserAccessor();
 
         // GET: api/Users
-        public IQueryable<User> GetIdentityUsers()
+        public IEnumerable<User> GetIdentityUsers()
         {
-            return db.IdentityUsers;
+            return db.Users;
         }
 
         // GET: api/Users/5
         [ResponseType(typeof(User))]
         public IHttpActionResult GetUser(string id)
         {
-            User user = db.IdentityUsers.Find(id);
+            User user = db.Users.Find(id);
             if (user == null)
             {
                 return NotFound();
@@ -80,7 +82,7 @@ namespace HealthTrac.Controllers
                 return BadRequest(ModelState);
             }
 
-            db.IdentityUsers.Add(user);
+            db.Users.Add(user);
 
             try
             {
@@ -105,13 +107,13 @@ namespace HealthTrac.Controllers
         [ResponseType(typeof(User))]
         public IHttpActionResult DeleteUser(string id)
         {
-            User user = db.IdentityUsers.Find(id);
+            User user = db.Users.Find(id);
             if (user == null)
             {
                 return NotFound();
             }
 
-            db.IdentityUsers.Remove(user);
+            db.Users.Remove(user);
             db.SaveChanges();
 
             return Ok(user);
@@ -128,7 +130,7 @@ namespace HealthTrac.Controllers
 
         private bool UserExists(string id)
         {
-            return db.IdentityUsers.Count(e => e.Id == id) > 0;
+            return db.Users.Count(e => e.Id == id) > 0;
         }
     }
 }
