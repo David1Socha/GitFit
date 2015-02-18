@@ -7,6 +7,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Http;
+using HealthTrac.Models.Dto;
+using System.Web.Http.Description;
 
 namespace HealthTrac.Controllers.Api
 {
@@ -25,5 +27,11 @@ namespace HealthTrac.Controllers.Api
         }
 
         public UserManager<User> UserManager { get; private set; }
+
+        [ResponseType(typeof(UserDto))]
+        public IHttpActionResult PostAccount()
+        {
+            return null;
+        }
     }
 }
