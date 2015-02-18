@@ -6,7 +6,7 @@ android {
 
     defaultConfig {
         applicationId "com.example.raik383h_group_6.healthtracmobile"
-        minSdkVersion 14
+        minSdkVersion 17
         targetSdkVersion 21
         versionCode 1
         versionName "1.0"
@@ -15,6 +15,9 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            debuggable true
         }
     }
 }

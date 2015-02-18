@@ -17,5 +17,13 @@
     <string name="weight_label">Weight</string>
     <string name="sex_label">Sex</string>
     <string name="name_edit">Enter Name Here</string>
+    <string name="title_activity_team_list">TeamListActivity</string>
+    <string name="title_activity_navigation">NavigationActivity</string>
+    <string name="title_section1">Account</string>
+    <string name="title_section2">Teams</string>
+    <string name="title_section3">IDK</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="action_example">Example action</string>
 
 </resources>

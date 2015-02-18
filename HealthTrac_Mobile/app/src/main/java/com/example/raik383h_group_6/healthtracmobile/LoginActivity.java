@@ -12,7 +12,7 @@ import android.widget.TextView;
 import com.facebook.Session;
 import com.facebook.SessionState;
 
-public class MainActivity extends Activity {
+public class LoginActivity extends Activity {
 
     private TextView textInstructionsOrLink;
     private Button buttonLoginLogout;
@@ -22,7 +22,7 @@ public class MainActivity extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.main_activity);
+        setContentView(R.layout.activity_login);
         buttonLoginLogout = (Button)findViewById(R.id.buttonLoginLogout);
         setUpSession(savedInstanceState);
         updateView();
