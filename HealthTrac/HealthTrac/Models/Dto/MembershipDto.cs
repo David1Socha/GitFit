@@ -11,5 +11,16 @@ namespace HealthTrac.Models.Dto
         public long TeamID { get; set; }
         public string UserID { get; set; }
         public MembershipStatus MembershipStatus { get; set; }
+
+        public static MembershipDto FromMembership(Membership m)
+        {
+            return new MembershipDto()
+            {
+                ID = m.ID,
+                TeamID = m.TeamID,
+                UserID = m.UserID,
+                MembershipStatus = m.MembershipStatus
+            };
+        }
     }
 }
