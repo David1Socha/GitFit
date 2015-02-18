@@ -40,7 +40,7 @@ namespace HealthTrac.Controllers.Api
         [ResponseType(typeof(Membership))]
         public IHttpActionResult GetMembership(long id)
         {
-            Membership membership = db.Memberships.Find(id);
+            Membership membership = acc.GetMembership(id);
             if (membership == null)
             {
                 return NotFound();
