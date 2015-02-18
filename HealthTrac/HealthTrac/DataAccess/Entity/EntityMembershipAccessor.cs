@@ -28,7 +28,7 @@ namespace HealthTrac.DataAccess.Entity
             {
                 Membership membership = db.Memberships
                     .Where(m => m.TeamID == teamId
-                    && m.UserId == userId)
+                    && m.UserID == userId)
                     .FirstOrDefault();
                 return membership;
             }
@@ -59,7 +59,7 @@ namespace HealthTrac.DataAccess.Entity
             using (var db = new ApplicationDbContext())
             {
                 var memberships = db.Memberships.
-                    Where(m => m.UserId == userId).
+                    Where(m => m.UserID == userId).
                     ToList();
                 return memberships;
             }
