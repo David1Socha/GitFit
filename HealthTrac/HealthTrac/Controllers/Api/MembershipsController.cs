@@ -91,8 +91,7 @@ namespace HealthTrac.Controllers.Api
                 return BadRequest(ModelState);
             }
 
-            db.Memberships.Add(membership);
-            db.SaveChanges();
+            acc.CreateMembership(membership);
 
             return CreatedAtRoute("DefaultApi", new { id = membership.ID }, membership);
         }
