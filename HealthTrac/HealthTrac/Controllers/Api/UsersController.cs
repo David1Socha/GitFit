@@ -30,7 +30,7 @@ namespace HealthTrac.Controllers.Api
         }
 
         // GET: api/Users
-        public IEnumerable<UserDto> GetIdentityUsers()
+        public IEnumerable<UserDto> GetUsers()
         {
             var users = accessor.GetUsers();
             return users.Select(u => UserDto.FromUser(u));
@@ -81,22 +81,6 @@ namespace HealthTrac.Controllers.Api
             }
 
             return StatusCode(HttpStatusCode.NoContent);
-        }
-
-
-        // DELETE: api/Users/5
-        [ResponseType(typeof(UserDto))]
-        public IHttpActionResult DeleteUser(string id)
-        {
-            User user = accessor.FindUser(id);
-            if (user == null)
-            {
-                return NotFound();
-            }
-
-            accessor.DeleteUser(user);
-
-            return Ok(UserDto.FromUser(user));
         }
 
         private bool UserExists(string id)
