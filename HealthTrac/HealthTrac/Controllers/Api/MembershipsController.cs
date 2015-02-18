@@ -8,19 +8,32 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
-using HealthTrac.DataAccess.Entity;
 using HealthTrac.Models;
+using HealthTrac.DataAccess;
+using HealthTrac.DataAccess.Entity;
 
 namespace HealthTrac.Controllers.Api
 {
     public class MembershipsController : ApiController
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: api/Memberships
-        public IQueryable<Membership> GetMemberships()
+        private IMembershipAccessor acc;
+        private ApplicationDbContext db;
+
+        public MembershipsController()
+            : this(new EntityMembershipAccessor())
         {
-            return db.Memberships;
+
+        }
+
+        public MembershipsController(IMembershipAccessor acc)
+        {
+            this.acc = acc;
+        }
+        // GET: api/Memberships
+        public IEnumerable<Membership> GetMemberships()
+        {
+            return acc.GetMemberships();
         }
 
         // GET: api/Memberships/5
@@ -100,15 +113,6 @@ namespace HealthTrac.Controllers.Api
             db.SaveChanges();
 
             return Ok(membership);
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
         }
 
         private bool MembershipExists(long id)
