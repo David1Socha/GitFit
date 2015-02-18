@@ -63,11 +63,9 @@ namespace HealthTrac.Controllers.Api
                 return BadRequest();
             }
 
-            db.Entry(membership).State = EntityState.Modified;
-
             try
             {
-                db.SaveChanges();
+                acc.UpdateMembership(membership);
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -117,7 +115,7 @@ namespace HealthTrac.Controllers.Api
 
         private bool MembershipExists(long id)
         {
-            return db.Memberships.Count(e => e.ID == id) > 0;
+            return acc.GetMemberships().Count(e => e.ID == id) > 0;
         }
     }
 }
