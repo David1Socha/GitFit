@@ -11,6 +11,7 @@ using System.Web.Http.Description;
 using HealthTrac.Models;
 using HealthTrac.DataAccess;
 using HealthTrac.DataAccess.Entity;
+using HealthTrac.Models.Dto;
 
 namespace HealthTrac.Controllers.Api
 {
@@ -31,13 +32,13 @@ namespace HealthTrac.Controllers.Api
             this.acc = acc;
         }
         // GET: api/Memberships
-        public IEnumerable<Membership> GetMemberships()
+        public IEnumerable<MembershipDto> GetMemberships()
         {
-            return acc.GetMemberships();
+            return acc.GetMemberships().Select(m => MembershipDto.FromMembership(m));
         }
 
         // GET: api/Memberships/5
-        [ResponseType(typeof(Membership))]
+        [ResponseType(typeof(MembershipDto))]
         public IHttpActionResult GetMembership(long id)
         {
             Membership membership = acc.GetMembership(id);
@@ -46,7 +47,7 @@ namespace HealthTrac.Controllers.Api
                 return NotFound();
             }
 
-            return Ok(membership);
+            return Ok(MembershipDto.FromMembership(membership));
         }
 
         // PUT: api/Memberships/5
@@ -83,7 +84,7 @@ namespace HealthTrac.Controllers.Api
         }
 
         // POST: api/Memberships
-        [ResponseType(typeof(Membership))]
+        [ResponseType(typeof(MembershipDto))]
         public IHttpActionResult PostMembership(Membership membership)
         {
             if (!ModelState.IsValid)
@@ -93,11 +94,11 @@ namespace HealthTrac.Controllers.Api
 
             acc.CreateMembership(membership);
 
-            return CreatedAtRoute("DefaultApi", new { id = membership.ID }, membership);
+            return CreatedAtRoute("DefaultApi", new { id = membership.ID }, MembershipDto.FromMembership(membership));
         }
 
         // DELETE: api/Memberships/5
-        [ResponseType(typeof(Membership))]
+        [ResponseType(typeof(MembershipDto))]
         public IHttpActionResult DeleteMembership(long id)
         {
             Membership membership = db.Memberships.Find(id);
@@ -109,7 +110,7 @@ namespace HealthTrac.Controllers.Api
             db.Memberships.Remove(membership);
             db.SaveChanges();
 
-            return Ok(membership);
+            return Ok(MembershipDto.FromMembership(membership));
         }
 
         private bool MembershipExists(long id)
