@@ -13,7 +13,8 @@ namespace HealthTrac.DataAccess.Entity
 
         public Models.Membership GetMembership(long id)
         {
-            using (var db = new ApplicationDbContext) {
+            using (var db = new ApplicationDbContext())
+            {
                 Membership membership = db.Memberships
                 .Where(m => m.ID == id)
                 .FirstOrDefault();
