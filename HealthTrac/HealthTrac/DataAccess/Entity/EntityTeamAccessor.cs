@@ -32,7 +32,7 @@ namespace HealthTrac.DataAccess.Entity
         {
             using (var db = new ApplicationDbContext())
             {
-                var memberships = db.Memberships.Where(m => m.UserId == userID &&
+                var memberships = db.Memberships.Where(m => m.UserID == userID &&
                     (m.MembershipStatus == MembershipStatus.ADMIN
                     || m.MembershipStatus == MembershipStatus.MEMBER)).Select(m => new
                 {
