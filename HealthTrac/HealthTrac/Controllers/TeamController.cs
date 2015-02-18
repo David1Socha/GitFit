@@ -1,6 +1,7 @@
 ﻿using HealthTrac.Models;
 using HealthTrac.DataAccess;
 using HealthTrac.DataAccess.Entity;
+using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +15,7 @@ namespace HealthTrac.Controllers
         //Changing the accessor interface broke this temporarily. Some of these methods are going to be in MembershipAccessor now
         private ITeamAccessor teamAccessor;
         private IMembershipAccessor membershipAccessor;
+        private AccountController accountController = new AccountController();
 
         public TeamController()
             : this(new EntityTeamAccessor(), new EntityMembershipAccessor())
@@ -32,9 +34,10 @@ namespace HealthTrac.Controllers
             return View();
         }
 
-        public List<Team> GetTeams(string userId)
+        public ActionResult GetTeams()
         {
-            return teamAccessor.GetTeams(userId).ToList();
+            string userId = User.Identity.GetUserId();
+            return View(teamAccessor.GetTeams(userId).ToList());
         }
         public Team CreateTeam(Team team)
         {

@@ -1,8 +1,38 @@
-﻿
+﻿@model IEnumerable<HealthTrac.Models.Team>
+
 @{
     ViewBag.Title = "Teams";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
+<h2>@ViewBag.Title</h2>
+<% if (Request.IsAuthenticated) { %>
+    <b>Your Teams</b>
+    <table>
+        
+        @foreach (var team in Model)
+        {
+
+            <tr>
+                <th>Team Name</th>
+                <th>Team Description</th>
+                <th>Created</th>
+                <td>
+                    @Html.DisplayFor(modelTeam => team.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelTeam => team.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelTeam => team.DateCreated)
+                </td>
+            </tr>
+        }
+    </table>
+<% } else {%>
+    <b>Login to see your teams</b>
+<% } %>
+
+
+
 
