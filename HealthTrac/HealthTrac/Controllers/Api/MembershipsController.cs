@@ -54,6 +54,7 @@ namespace HealthTrac.Controllers.Api
         [ResponseType(typeof(void))]
         public IHttpActionResult PutMembership(long id, Membership membership)
         {
+            //TODO validate current user admin status on team
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
@@ -95,22 +96,6 @@ namespace HealthTrac.Controllers.Api
             acc.CreateMembership(membership);
 
             return CreatedAtRoute("DefaultApi", new { id = membership.ID }, MembershipDto.FromMembership(membership));
-        }
-
-        // DELETE: api/Memberships/5
-        [ResponseType(typeof(MembershipDto))]
-        public IHttpActionResult DeleteMembership(long id)
-        {
-            Membership membership = db.Memberships.Find(id);
-            if (membership == null)
-            {
-                return NotFound();
-            }
-
-            db.Memberships.Remove(membership);
-            db.SaveChanges();
-
-            return Ok(MembershipDto.FromMembership(membership));
         }
 
         private bool MembershipExists(long id)
