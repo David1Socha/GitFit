@@ -182,8 +182,10 @@
     <Compile Include="DataAccess\ConcurrentUpdateException.cs" />
     <Compile Include="DataAccess\Entity\ApplicationDbContext.cs" />
     <Compile Include="DataAccess\Entity\EntityActivityAccessor.cs" />
+    <Compile Include="DataAccess\Entity\EntityMembershipAccessor.cs" />
     <Compile Include="DataAccess\Entity\EntityUserAccessor.cs" />
     <Compile Include="DataAccess\IActivityAccessor.cs" />
+    <Compile Include="DataAccess\IMembershipAccessor.cs" />
     <Compile Include="DataAccess\IStatusAccessor.cs" />
     <Compile Include="DataAccess\IUserAccessor.cs" />
     <Compile Include="DataAccess\ISessionAccessor.cs" />

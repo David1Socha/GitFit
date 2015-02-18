@@ -11,16 +11,19 @@ namespace HealthTrac.Controllers
 {
     public class TeamController : Controller
     {
+        //Changing the accessor interface broke this temporarily. Some of these methods are going to be in MembershipAccessor now
         private ITeamAccessor teamAccessor;
+        private IMembershipAccessor membershipAccessor;
 
         public TeamController()
-            : this(new EntityTeamAccessor())
+            : this(new EntityTeamAccessor(), new EntityMembershipAccessor())
         {
 
         }
-        public TeamController(ITeamAccessor acc)
+        public TeamController(ITeamAccessor teamAcc, IMembershipAccessor membershipAcc)
         {
-            this.teamAccessor = acc;
+            this.teamAccessor = teamAcc;
+            this.membershipAccessor = membershipAcc;
         }
 
         // GET: /Team/
@@ -42,7 +45,7 @@ namespace HealthTrac.Controllers
             return teamAccessor.UpdateTeam(team);
         }
         public List<Membership> InviteUsers(string[] userIds, long teamId)
-        {
+        { /*
             List<Membership> memberships = new List<Membership>();
             foreach (string userId in userIds)
             {
@@ -56,38 +59,48 @@ namespace HealthTrac.Controllers
                     MembershipStatus = MembershipStatus.WAITING_USER
                 };
                 memberships.Add(membership);
-            }
-            return teamAccessor.SaveMemberships(memberships).ToList();
+            } */
+
+            throw new NotImplementedException();
         }
 
         public Membership ConfirmUser(long membershipId)
         {
             // Don't know for sure if you need to pass down an object with all previous properties for update. TEST THIS
+            /*
             EntityTeamAccessor teamAccessor = new EntityTeamAccessor();
             Membership membership = teamAccessor.FindMembership(membershipId);
             membership.DateModified = DateTime.Now;
             membership.MembershipStatus = MembershipStatus.MEMBER;
             return teamAccessor.SaveMembership(membership);
+             */
+            throw new NotImplementedException();
         }
 
         public Membership BanUser(long membershipId)
         {
             // Don't know for sure if you need to pass down an object with all previous properties for update. TEST THIS
+            /*
             EntityTeamAccessor teamAccessor = new EntityTeamAccessor();
             Membership membership = teamAccessor.FindMembership(membershipId);
             membership.DateModified = DateTime.Now;
             membership.MembershipStatus = MembershipStatus.BANNED;
             return teamAccessor.SaveMembership(membership);
+             */
+            throw new NotImplementedException();
         }
 
         public Membership RemoveUser(long membershipId)
         {
             // Don't know for sure if you need to pass down an object with all previous properties for update. TEST THIS
+            /*
             EntityTeamAccessor teamAccessor = new EntityTeamAccessor();
             Membership membership = teamAccessor.FindMembership(membershipId);
             membership.DateModified = DateTime.Now;
             membership.MembershipStatus = MembershipStatus.INACTIVE;
             return teamAccessor.SaveMembership(membership);
+             */
+            throw new NotImplementedException();
         }
     }
 }
