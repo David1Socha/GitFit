@@ -29,9 +29,18 @@ namespace HealthTrac.Controllers
         }
 
         // GET: /Team/
-        public ActionResult Index()
+        public ActionResult Index(string id)
         {
-            return View();
+            string searchString = id;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                return GetTeams();
+            }
+            else
+            {
+                return View(teamAccessor.SearchTeams(id).ToList());
+            }
         }
 
         public ActionResult GetTeams()
@@ -39,6 +48,10 @@ namespace HealthTrac.Controllers
             string userId = User.Identity.GetUserId();
             return View(teamAccessor.GetTeams(userId).ToList());
         }
+        //public ActionResult FindTeams(string search)
+        //{
+            
+        //}
         public Team CreateTeam(Team team)
         {
             return teamAccessor.CreateTeam(team);
