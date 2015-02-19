@@ -13,9 +13,9 @@ using HealthTrac.DataAccess;
 
 namespace HealthTrac.Controllers.Api
 {
+    [Authorize]
     public class UsersController : ApiController
     {
-        //TODO add login in this or another API controller
         private IUserAccessor accessor;
 
         public UsersController()

@@ -15,6 +15,7 @@ using HealthTrac.Models.Dto;
 
 namespace HealthTrac.Controllers.Api
 {
+    [Authorize]
     public class MembershipsController : ApiController
     {
 
