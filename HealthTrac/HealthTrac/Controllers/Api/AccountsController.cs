@@ -126,7 +126,7 @@ namespace HealthTrac.Controllers.Api
             {
                 var content = response.Content.ReadAsStringAsync().Result;
                 dynamic data = JObject.Parse(content);
-                return data.id;
+                return data.id_str;
             }
             return null;
         }
