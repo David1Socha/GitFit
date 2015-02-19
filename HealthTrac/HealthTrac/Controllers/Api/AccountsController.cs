@@ -10,12 +10,21 @@ using System.Web.Http;
 using HealthTrac.Models.Dto;
 using System.Web.Http.Description;
 using System.Threading.Tasks;
+using Microsoft.Owin.Security;
+using System;
+using System.Collections.Generic;
+using System.Net.Http;
 
 namespace HealthTrac.Controllers.Api
 {
     //TODO remove hardcoded dependency on entity context (IOC container?)
     public class AccountsController : ApiController
     {
+
+        private IAuthenticationManager Authentication
+        {
+            get { return Request.GetOwinContext().Authentication; }
+        }
         public AccountsController()
             : this(new UserManager<User>(new UserStore<User>(new ApplicationDbContext())))
         {
