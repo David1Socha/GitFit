@@ -14,6 +14,7 @@ using Microsoft.Owin.Security;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
+using System.Net;
 
 namespace HealthTrac.Controllers.Api
 {
@@ -43,7 +44,7 @@ namespace HealthTrac.Controllers.Api
         [Route("Register")]
         public IHttpActionResult Register(UserDto userDto)
         {
-            UserLoginInfo loginInfo = GetExternalLoginInfo(AuthenticationManager);
+            UserLoginInfo loginInfo = GetExternalLoginInfo(Authentication);
             User user = new User()
             {
                 BirthDate = userDto.BirthDate,

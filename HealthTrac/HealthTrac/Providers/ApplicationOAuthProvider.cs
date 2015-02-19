@@ -27,7 +27,7 @@ namespace HealthTrac.Providers
             _publicClientId = publicClientId;
         }
 
-        public override void GrantResourceOwnerCredentials(OAuthGrantResourceOwnerCredentialsContext context)
+        public override async Task GrantResourceOwnerCredentials(OAuthGrantResourceOwnerCredentialsContext context)
         {
             var userManager = context.OwinContext.GetUserManager<UserManager<User>>();
 
@@ -39,7 +39,7 @@ namespace HealthTrac.Providers
                 return;
             }
 
-            ClaimsIdentity oAuthIdentity = userManager.CreateIdentity(user, OAuthDefaults.AuthenticationType)
+            ClaimsIdentity oAuthIdentity = userManager.CreateIdentity(user, OAuthDefaults.AuthenticationType);
             ClaimsIdentity cookiesIdentity = userManager.CreateIdentity(user,
                 CookieAuthenticationDefaults.AuthenticationType);
 
