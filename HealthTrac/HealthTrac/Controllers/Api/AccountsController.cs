@@ -27,7 +27,9 @@ namespace HealthTrac.Controllers.Api
     {
 
         private static readonly string FACEBOOK_BASE_URL = "https://graph.facebook.com/me?access_token=",
-            TWITTER_BASE_URL = "https://api.twitter.com/1.1/account/verify_credentials.json?";
+            TWITTER_BASE_URL = "https://api.twitter.com/1.1/account/verify_credentials.json?",
+            TWITTER_CONSUMER_KEY = "fHG53L9zDOTltJ77JPjFGzxf8",
+            TWITTER_CONSUMER_SECRET = "QbX7YXFiZb49HQP0jz0H72pKp5pBUEgJuJBswIroh29NjUrfXU";
 
         private IAuthenticationManager Authentication
         {
@@ -114,7 +116,7 @@ namespace HealthTrac.Controllers.Api
 
         private static string GetTwitterId(string token, string secret)
         {
-            OAuthRequest oAuth = OAuthRequest.ForProtectedResource("GET", "fHG53L9zDOTltJ77JPjFGzxf8", "QbX7YXFiZb49HQP0jz0H72pKp5pBUEgJuJBswIroh29NjUrfXU", token, secret);
+            OAuthRequest oAuth = OAuthRequest.ForProtectedResource("GET", TWITTER_CONSUMER_KEY, TWITTER_CONSUMER_SECRET, token, secret);
             oAuth.RequestUrl = TWITTER_BASE_URL;
             var auth = oAuth.GetAuthorizationQuery();
             var uri = new Uri(oAuth.RequestUrl + auth);
