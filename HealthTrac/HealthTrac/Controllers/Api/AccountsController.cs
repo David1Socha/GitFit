@@ -88,7 +88,6 @@ namespace HealthTrac.Controllers.Api
         }
 
         [Route("api/Account/Logout")]
-        [Authorize]
         [HttpPost]
         public IHttpActionResult Logout()
         {
