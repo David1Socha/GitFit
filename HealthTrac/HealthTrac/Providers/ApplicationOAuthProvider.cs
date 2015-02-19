@@ -16,37 +16,45 @@ namespace HealthTrac.Providers
     public class ApplicationOAuthProvider : OAuthAuthorizationServerProvider
     {
         private readonly string _publicClientId;
+        private readonly Func<UserManager<IdentityUser>> _userManagerFactory;
 
-        public ApplicationOAuthProvider(string publicClientId)
+        public ApplicationOAuthProvider(string publicClientId, Func<UserManager<IdentityUser>> userManagerFactory)
         {
             if (publicClientId == null)
             {
                 throw new ArgumentNullException("publicClientId");
             }
 
+            if (userManagerFactory == null)
+            {
+                throw new ArgumentNullException("userManagerFactory");
+            }
+
             _publicClientId = publicClientId;
+            _userManagerFactory = userManagerFactory;
         }
 
         public override async Task GrantResourceOwnerCredentials(OAuthGrantResourceOwnerCredentialsContext context)
         {
-            var userManager = context.OwinContext.GetUserManager<UserManager<User>>();
-
-            User user = userManager.Find(context.UserName, context.Password);
-
-            if (user == null)
+            using (UserManager<IdentityUser> userManager = _userManagerFactory())
             {
-                context.SetError("invalid_grant", "The user name or password is incorrect.");
-                return;
+                IdentityUser user = await userManager.FindAsync(context.UserName, context.Password);
+
+                if (user == null)
+                {
+                    context.SetError("invalid_grant", "The user name or password is incorrect.");
+                    return;
+                }
+
+                ClaimsIdentity oAuthIdentity = await userManager.CreateIdentityAsync(user,
+                    context.Options.AuthenticationType);
+                ClaimsIdentity cookiesIdentity = await userManager.CreateIdentityAsync(user,
+                    CookieAuthenticationDefaults.AuthenticationType);
+                AuthenticationProperties properties = CreateProperties(user.UserName);
+                AuthenticationTicket ticket = new AuthenticationTicket(oAuthIdentity, properties);
+                context.Validated(ticket);
+                context.Request.Context.Authentication.SignIn(cookiesIdentity);
             }
-
-            ClaimsIdentity oAuthIdentity = userManager.CreateIdentity(user, OAuthDefaults.AuthenticationType);
-            ClaimsIdentity cookiesIdentity = userManager.CreateIdentity(user,
-                CookieAuthenticationDefaults.AuthenticationType);
-
-            AuthenticationProperties properties = CreateProperties(user.UserName);
-            AuthenticationTicket ticket = new AuthenticationTicket(oAuthIdentity, properties);
-            context.Validated(ticket);
-            context.Request.Context.Authentication.SignIn(cookiesIdentity);
         }
 
         public override Task TokenEndpoint(OAuthTokenEndpointContext context)

@@ -18,6 +18,7 @@ using System.Security.Claims;
 using Newtonsoft.Json.Linq;
 using OAuth;
 using System.Net.Http.Headers;
+using Microsoft.Owin.Security.Cookies;
 
 namespace HealthTrac.Controllers.Api
 {
@@ -80,6 +81,15 @@ namespace HealthTrac.Controllers.Api
             );
             var json = Newtonsoft.Json.JsonConvert.SerializeObject(blob);
             return Ok(blob);
+        }
+
+        [Route("api/Account/Logout")]
+        [Authorize]
+        [HttpPost]
+        public IHttpActionResult Logout()
+        {
+            Authentication.SignOut(CookieAuthenticationDefaults.AuthenticationType);
+            return Ok();
         }
 
         //POST api/Account/Register
