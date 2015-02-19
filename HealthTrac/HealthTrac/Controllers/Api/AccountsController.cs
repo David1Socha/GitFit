@@ -50,7 +50,7 @@ namespace HealthTrac.Controllers.Api
         //POST api/Account/Register
         [OverrideAuthentication]
         [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
-        [Route("Register")]
+        [Route("api/Account/Register")]
         public IHttpActionResult Register(UserLoginDto userLoginDto)
         {
             var userDto = userLoginDto.User;
@@ -99,13 +99,13 @@ namespace HealthTrac.Controllers.Api
             if (provider == CredentialsDto.FACEBOOK)
             {
                 string id = GetFacebookId(credentials.Token);
-                var loginInfo = id == null ? null : new UserLoginInfo(id, provider);
+                var loginInfo = id == null ? null : new UserLoginInfo(provider, id);
                 return loginInfo;
             }
             else if (provider == CredentialsDto.TWITTER)
             {
                 string id = GetTwitterId(credentials.Token, credentials.Secret);
-                var loginInfo = id == null ? null : new UserLoginInfo(id, provider);
+                var loginInfo = id == null ? null : new UserLoginInfo(provider, id);
                 return loginInfo;
             }
             else
