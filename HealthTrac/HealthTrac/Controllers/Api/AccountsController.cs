@@ -56,6 +56,10 @@ namespace HealthTrac.Controllers.Api
         {
             var tokenExpirationTimeSpan = TimeSpan.FromDays(14);
             var loginInfo = GetUserLogin(credentials);
+            if (loginInfo == null)
+            {
+                return BadRequest("Invalid authentication information");
+            }
             User user = UserManager.Find(loginInfo);
             if (user == null)
             {
@@ -117,7 +121,7 @@ namespace HealthTrac.Controllers.Api
             var loginInfo = GetUserLogin(credentials);
             if (loginInfo == null)
             {
-                return BadRequest();
+                return BadRequest("Invalid authentication data");
             }
             var result = UserManager.Create(user);
             if (result.Succeeded)
