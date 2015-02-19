@@ -14,7 +14,6 @@ using System.Threading.Tasks;
 namespace HealthTrac.Controllers.Api
 {
     //TODO remove hardcoded dependency on entity context (IOC container?)
-    [Authorize]
     public class AccountsController : ApiController
     {
         public AccountsController()
@@ -30,7 +29,6 @@ namespace HealthTrac.Controllers.Api
         public UserManager<User> UserManager { get; private set; }
 
         [ResponseType(typeof(UserDto))]
-        [AllowAnonymous]
         public IHttpActionResult PostAccount(UserLoginDto userLogin)
         {
             var userDto = userLogin.User;
@@ -46,7 +44,7 @@ namespace HealthTrac.Controllers.Api
                 result = UserManager.AddLogin(user.Id, loginInfo);
                 if (result.Succeeded)
                 {
-
+                    var identity = UserManager.CreateIdentity(user, DefaultAuthenticationTypes.ApplicationCookie);
                 }
                 else
                 {
