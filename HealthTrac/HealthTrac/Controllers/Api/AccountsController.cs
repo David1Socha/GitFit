@@ -9,6 +9,7 @@ using System.Web;
 using System.Web.Http;
 using HealthTrac.Models.Dto;
 using System.Web.Http.Description;
+using System.Threading.Tasks;
 
 namespace HealthTrac.Controllers.Api
 {
@@ -29,9 +30,50 @@ namespace HealthTrac.Controllers.Api
         public UserManager<User> UserManager { get; private set; }
 
         [ResponseType(typeof(UserDto))]
-        public IHttpActionResult PostAccount()
+        [AllowAnonymous]
+        public IHttpActionResult PostAccount(UserLoginDto userLogin)
+        {
+            var userDto = userLogin.User;
+            var credentials = userLogin.Credentials;
+            UserLoginInfo loginInfo = GetLoginInfo(credentials);
+            User user = new User()
+            {
+                UserName = userDto.UserName
+            };
+            var result = UserManager.Create(user);
+            if (result.Succeeded)
+            {
+                result = UserManager.AddLogin(user.Id, loginInfo);
+                if (result.Succeeded)
+                {
+
+                }
+                else
+                {
+                    return BadRequest();
+                }
+            }
+            else
+            {
+                return BadRequest();
+            }
+            return null;
+        }
+
+        private static UserLoginInfo GetLoginInfo(CredentialsDto credentials)
         {
             return null;
         }
+
+        private static UserLoginInfo GetLoginInfoFacebook(CredentialsDto credentials)
+        {
+            return null;
+        }
+
+        private static UserLoginInfo GetLoginInfoTwitter(CredentialsDto credentials)
+        {
+            return null;
+        }
+
     }
 }
