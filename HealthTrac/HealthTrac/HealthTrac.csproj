@@ -264,6 +264,7 @@
     <Content Include="Views\Team\Profile.cshtml" />
     <Content Include="Views\Team\YourTeams.cshtml" />
     <Content Include="Views\User\Index.cshtml" />
+    <Content Include="Views\User\Profile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
