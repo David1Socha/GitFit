@@ -17,6 +17,7 @@ using System.Net.Http;
 using System.Net;
 using System.Security.Claims;
 using Newtonsoft.Json.Linq;
+using OAuth;
 
 namespace HealthTrac.Controllers.Api
 {
@@ -111,6 +112,7 @@ namespace HealthTrac.Controllers.Api
 
         private static string GetTwitterId(string token, string secret)
         {
+            OAuthRequest a;
             return null;
         }
 
