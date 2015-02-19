@@ -18,6 +18,7 @@ using System.Net;
 using System.Security.Claims;
 using Newtonsoft.Json.Linq;
 using OAuth;
+using System.Net.Http.Headers;
 
 namespace HealthTrac.Controllers.Api
 {
@@ -25,7 +26,8 @@ namespace HealthTrac.Controllers.Api
     public class AccountsController : ApiController
     {
 
-        private static readonly string FACEBOOK_BASE_URL = "https://graph.facebook.com/me?access_token=";
+        private static readonly string FACEBOOK_BASE_URL = "https://graph.facebook.com/me?access_token=",
+            TWITTER_BASE_URL = "https://api.twitter.com/1.1/account/verify_credentials.json?";
 
         private IAuthenticationManager Authentication
         {
@@ -112,7 +114,18 @@ namespace HealthTrac.Controllers.Api
 
         private static string GetTwitterId(string token, string secret)
         {
-            OAuthRequest a;
+            OAuthRequest oAuth = OAuthRequest.ForProtectedResource("GET", "fHG53L9zDOTltJ77JPjFGzxf8", "QbX7YXFiZb49HQP0jz0H72pKp5pBUEgJuJBswIroh29NjUrfXU", token, secret);
+            oAuth.RequestUrl = TWITTER_BASE_URL;
+            var auth = oAuth.GetAuthorizationQuery();
+            var uri = new Uri(oAuth.RequestUrl + auth);
+            var client = new HttpClient();
+            var response = client.GetAsync(uri).Result;
+            if (response.IsSuccessStatusCode)
+            {
+                var content = response.Content.ReadAsStringAsync().Result;
+                dynamic data = JObject.Parse(content);
+                return data.id;
+            }
             return null;
         }
 
