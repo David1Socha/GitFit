@@ -15,7 +15,7 @@ namespace HealthTrac.DataAccess.Entity
             using (var db = new ApplicationDbContext())
             {
                 var team = db.Teams
-                                .Where(t => t.ID == ID).FirstOrDefault();
+                                .Where(t => t.ID == ID && t.Enabled).FirstOrDefault();
                 return team;
             }
         }
@@ -24,7 +24,7 @@ namespace HealthTrac.DataAccess.Entity
         {
             using (var db = new ApplicationDbContext())
             {
-                var teams = db.Teams.ToList();
+                var teams = db.Teams.Where(t => t.Enabled).ToList();
                 return teams;
             }
         }
@@ -39,7 +39,7 @@ namespace HealthTrac.DataAccess.Entity
                     m.TeamID,
                 });
                 IEnumerable<long> teamIdsWhereUserMember = memberships.Select(m => m.TeamID);
-                var teams = db.Teams.Where(t => teamIdsWhereUserMember.Contains(t.ID));
+                var teams = db.Teams.Where(t => teamIdsWhereUserMember.Contains(t.ID) && t.Enabled);
 
                 return teams.ToList();
             }
