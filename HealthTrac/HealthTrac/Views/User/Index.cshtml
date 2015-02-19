@@ -6,36 +6,31 @@
 }
 
 <h2>@ViewBag.Title</h2>
-@if (Model != null)
+@using (Html.BeginForm())
 {
-    @using (Html.BeginForm())
-    {
-        <p>
-            Search for Users: @Html.TextBox("id") <br />
-            <input type="submit" value="Search" />
-        </p>
-    }
-    
+    <p>
+        Search for Users: @Html.TextBox("id") <br />
+        <input type="submit" value="Search" />
+    </p>
+}
+@if (Model != null) 
+{    
     if (Model.Count() == 0)
     {
         <h4>No results were found</h4>
     }
     else
     {
-        <table>
+        <table cellpadding="5">
             <tr>
-                <th>First Name</th>
-                <th>Last Name</th>
+                <th>User Name</th>
                 <th>Created</th>
             </tr>
             @foreach (var user in Model)
             {
                 <tr>
                     <td>
-                        @Html.DisplayFor(modelUser => user.FirstName)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelUser => user.LastName)
+                        @Html.DisplayFor(modelUser => user.UserName)
                     </td>
                     <td>
                         @Html.DisplayFor(modelUser => user.DateCreated)
@@ -44,7 +39,6 @@
             }
         </table>
     }
-    
 }
 
 

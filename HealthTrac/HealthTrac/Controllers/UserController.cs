@@ -1,5 +1,7 @@
 ﻿using System;
 using HealthTrac.DataAccess;
+using HealthTrac.DataAccess.Entity;
+using HealthTrac.Models;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -10,7 +12,7 @@ namespace HealthTrac.Controllers
     public class UserController : Controller
     {
 
-        private IUserAccessor userAccessor;
+        private IUserAccessor userAccessor = new EntityUserAccessor();
         private AccountController accountController = new AccountController();
         //
         // GET: /User/
@@ -20,9 +22,17 @@ namespace HealthTrac.Controllers
 
             if (!String.IsNullOrEmpty(searchString))
             {
-                return View(userAccessor.SearchUsers(id).ToList());
+                var users = userAccessor.SearchUsers(id);
+                if (users.Count() == 0)
+                {
+                    return View(new List<User>());
+                }
+                else
+                {
+                    return View(users);
+                }                
             }
-            return null;
+            return View();
 
         }
 	}
