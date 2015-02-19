@@ -23,6 +23,11 @@ namespace HealthTrac
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Team", action = "Index", id = UrlParameter.Optional }
             );
+            routes.MapRoute(
+                name: "User",
+                url: "{controller}/{action}/{id}",
+                defaults: new { controller = "User", action = "Index", id = UrlParameter.Optional }
+            );
         }
     }
 }
