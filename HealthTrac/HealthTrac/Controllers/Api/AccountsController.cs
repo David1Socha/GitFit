@@ -38,16 +38,26 @@ namespace HealthTrac.Controllers.Api
         public UserManager<User> UserManager { get; private set; }
 
         //POST api/Account/Register
+        [OverrideAuthentication]
+        [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
         [Route("Register")]
-        public IHttpActionResult Register(UserLoginDto userLogin)
+        public IHttpActionResult Register(UserDto userDto)
         {
-            var userDto = userLogin.User;
-            var credentials = userLogin.Credentials;
-            UserLoginInfo loginInfo = GetLoginInfo(credentials);
+            UserLoginInfo loginInfo = GetExternalLoginInfo(AuthenticationManager);
             User user = new User()
             {
+                BirthDate = userDto.BirthDate,
+                Email = userDto.Email,
+                Enabled = userDto.Enabled,
+                FirstName = userDto.FirstName,
+                Height = userDto.Height,
+                LastName = userDto.LastName,
+                PreferredName = userDto.PreferredName,
+                Sex = userDto.Sex,
+                Width = userDto.Width,
                 UserName = userDto.UserName
             };
+            Authentication.GetExternalLoginInfo();
             var result = UserManager.Create(user);
             if (result.Succeeded)
             {
@@ -68,19 +78,9 @@ namespace HealthTrac.Controllers.Api
             return Ok();
         }
 
-        private static UserLoginInfo GetLoginInfo(CredentialsDto credentials)
+        private static UserLoginInfo GetExternalLoginInfo(IAuthenticationManager auth)
         {
-            return null;
-        }
-
-        private static UserLoginInfo GetLoginInfoFacebook(CredentialsDto credentials)
-        {
-            return null;
-        }
-
-        private static UserLoginInfo GetLoginInfoTwitter(CredentialsDto credentials)
-        {
-            return null;
+            return null; //TODO
         }
 
     }
