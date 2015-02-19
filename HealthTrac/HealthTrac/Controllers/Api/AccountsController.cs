@@ -15,12 +15,16 @@ using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Net;
+using System.Security.Claims;
+using Newtonsoft.Json.Linq;
 
 namespace HealthTrac.Controllers.Api
 {
     //TODO remove hardcoded dependency on entity context (IOC container?)
     public class AccountsController : ApiController
     {
+
+        private static readonly string FACEBOOK_BASE_URL = "https://graph.facebook.com/me?access_token=";
 
         private IAuthenticationManager Authentication
         {
@@ -42,9 +46,10 @@ namespace HealthTrac.Controllers.Api
         [OverrideAuthentication]
         [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
         [Route("Register")]
-        public IHttpActionResult Register(UserDto userDto)
+        public IHttpActionResult Register(UserLoginDto userLoginDto)
         {
-            UserLoginInfo loginInfo = GetExternalLoginInfo(Authentication);
+            var userDto = userLoginDto.User;
+            var credentials = userLoginDto.Credentials;
             User user = new User()
             {
                 BirthDate = userDto.BirthDate,
@@ -58,7 +63,11 @@ namespace HealthTrac.Controllers.Api
                 Width = userDto.Width,
                 UserName = userDto.UserName
             };
-            Authentication.GetExternalLoginInfo();
+            var loginInfo = GetUserLogin(credentials);
+            if (loginInfo == null)
+            {
+                return BadRequest();
+            }
             var result = UserManager.Create(user);
             if (result.Succeeded)
             {
@@ -79,9 +88,46 @@ namespace HealthTrac.Controllers.Api
             return Ok();
         }
 
-        private static UserLoginInfo GetExternalLoginInfo(IAuthenticationManager auth)
+        private UserLoginInfo GetUserLogin(CredentialsDto credentials)
         {
-            return null; //TODO
+            String provider = credentials.Provider;
+            if (provider == CredentialsDto.FACEBOOK)
+            {
+                string id = GetFacebookId(credentials.Token);
+                var loginInfo = id == null ? null : new UserLoginInfo(id, provider);
+                return loginInfo;
+            }
+            else if (provider == CredentialsDto.TWITTER)
+            {
+                string id = GetTwitterId(credentials.Token, credentials.Secret);
+                var loginInfo = id == null ? null : new UserLoginInfo(id, provider);
+                return loginInfo;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        private static string GetTwitterId(string token, string secret)
+        {
+            return null;
+        }
+
+        private static string GetFacebookId(string token)
+        {
+
+            var path = FACEBOOK_BASE_URL + token;
+            var client = new HttpClient();
+            var uri = new Uri(path);
+            var response = client.GetAsync(uri).Result;
+            if (response.IsSuccessStatusCode)
+            {
+                var content = response.Content.ReadAsStringAsync().Result;
+                dynamic data = JObject.Parse(content);
+                return data.id;
+            }
+            return null;
         }
 
     }
