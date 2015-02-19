@@ -15,7 +15,7 @@ namespace HealthTrac.DataAccess.Entity
             using (var db = new ApplicationDbContext())
             {
                 var team = db.Teams
-                                .Where(t => t.ID == ID).FirstOrDefault();
+                                .Where(t => t.ID == ID && t.Enabled).FirstOrDefault();
                 return team;
             }
         }
@@ -24,7 +24,7 @@ namespace HealthTrac.DataAccess.Entity
         {
             using (var db = new ApplicationDbContext())
             {
-                var teams = db.Teams.ToList();
+                var teams = db.Teams.Where(t => t.Enabled).ToList();
                 return teams;
             }
         }
@@ -39,7 +39,7 @@ namespace HealthTrac.DataAccess.Entity
                     m.TeamID,
                 });
                 IEnumerable<long> teamIdsWhereUserMember = memberships.Select(m => m.TeamID);
-                var teams = db.Teams.Where(t => teamIdsWhereUserMember.Contains(t.ID));
+                var teams = db.Teams.Where(t => teamIdsWhereUserMember.Contains(t.ID) && t.Enabled);
 
                 return teams.ToList();
             }
@@ -71,70 +71,6 @@ namespace HealthTrac.DataAccess.Entity
 
             }
             return team;
-        }
-
-        public IEnumerable<Membership> SaveMemberships(List<Membership> memberships)
-        {
-            using (var db = new ApplicationDbContext())
-            {
-                if (memberships[0].ID == 0)
-                {
-                    db.Memberships.AddRange(memberships);
-                }
-                else
-                {
-                    // **** NEEDS to be tested to see if update works for multiple memberships
-                    foreach (Membership membership in memberships)
-                    {
-                        db.Memberships.Attach(membership);
-                        db.Entry(membership).State = System.Data.Entity.EntityState.Modified;
-                    }
-                }
-                try
-                {
-                    db.SaveChanges();
-                }
-                catch (DbUpdateConcurrencyException ex)
-                {
-                    throw new ConcurrentUpdateException("One or more of the teams you are trying to save have been modified externally.", ex);
-                }
-
-            }
-            return memberships;
-        }
-        public Membership SaveMembership(Membership membership)
-        {
-            using (var db = new ApplicationDbContext())
-            {
-                if (membership.ID == 0)
-                {
-                    db.Memberships.Add(membership);
-                }
-                else
-                {
-                    db.Memberships.Attach(membership);
-                    db.Entry(membership).State = System.Data.Entity.EntityState.Modified;
-                }
-                try
-                {
-                    db.SaveChanges();
-                }
-                catch (DbUpdateConcurrencyException ex)
-                {
-                    throw new ConcurrentUpdateException("The membership you are trying to save has been modified externally.", ex);
-                }
-
-            }
-            return membership;
-        }
-        public Membership FindMembership(long membershipID)
-        {
-            using (var db = new ApplicationDbContext())
-            {
-                var membership = db.Memberships
-                                .Where(m => m.ID == membershipID).FirstOrDefault();
-                return membership;
-            }
         }
 
     }
