@@ -37,8 +37,9 @@ namespace HealthTrac.Controllers.Api
 
         public UserManager<User> UserManager { get; private set; }
 
-        [ResponseType(typeof(UserDto))]
-        public IHttpActionResult PostAccount(UserLoginDto userLogin)
+        //POST api/Account/Register
+        [Route("Register")]
+        public IHttpActionResult Register(UserLoginDto userLogin)
         {
             var userDto = userLogin.User;
             var credentials = userLogin.Credentials;
@@ -64,7 +65,7 @@ namespace HealthTrac.Controllers.Api
             {
                 return BadRequest();
             }
-            return null;
+            return Ok();
         }
 
         private static UserLoginInfo GetLoginInfo(CredentialsDto credentials)
