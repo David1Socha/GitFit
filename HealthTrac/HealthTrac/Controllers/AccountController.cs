@@ -234,6 +234,7 @@ namespace HealthTrac.Controllers
         private async Task SignInAsync(User user, bool isPersistent)
         {
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ExternalCookie);
+            user.SecurityStamp = Guid.NewGuid().ToString();
             var identity = await UserManager.CreateIdentityAsync(user, DefaultAuthenticationTypes.ApplicationCookie);
             AuthenticationManager.SignIn(new AuthenticationProperties() { IsPersistent = isPersistent }, identity);
         }

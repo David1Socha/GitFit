@@ -13,6 +13,7 @@ using HealthTrac.Models.Dto;
 
 namespace HealthTrac.Controllers.Api
 {
+    [Authorize]
     public class TeamsController : ApiController
     {
         private ITeamAccessor acc;
