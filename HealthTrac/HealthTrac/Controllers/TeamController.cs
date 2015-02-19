@@ -35,11 +35,19 @@ namespace HealthTrac.Controllers
 
             if (!String.IsNullOrEmpty(searchString))
             {
-                return View(teamAccessor.SearchTeams(id).ToList());               
+                var teams = teamAccessor.SearchTeams(id).ToList();
+                if (teams.Count == 0)
+                {
+                    return View(new List<Team>());
+                }
+                else
+                {
+                    return View(teams);
+                }             
             }
             else
             {
-                return GetTeams();
+                return View();
             }
         }
 

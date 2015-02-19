@@ -14,10 +14,10 @@
     </p>
 }
  
-@if (Request.IsAuthenticated) { 
-    <b>Your Teams</b>
-    if (Model.Count() == 0) {
-        <b>You aren't a member of any team yet. Go join one on the mobile app!</b>
+@if (Model != null) { 
+    if (Model.Count() == 0) 
+    {
+        <h4>No results found</h4>
     }
     else
     {        
@@ -45,10 +45,7 @@
     }
         
 }
-else 
-{ 
-    <b>Login to see your teams</b>
-}
+
 
 
 
