@@ -12,7 +12,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.support.v4.widget.DrawerLayout;
-import android.widget.Toast;
+
+import com.example.raik383h_group_6.healthtracmobile.Teams.TeamListFragment;
 
 
 public class NavigationActivity extends ActionBarActivity
@@ -52,12 +53,10 @@ public class NavigationActivity extends ActionBarActivity
             fragmentManager.beginTransaction()
                     .replace(R.id.container, AccountFragment.newInstance())
                     .commit();
-            System.out.println("Position " + position);
         } else if(position == 1) {
             fragmentManager.beginTransaction()
                     .replace(R.id.container, TeamListFragment.newInstance())
                     .commit();
-            System.out.println("Position " + position);
         }
 
 
