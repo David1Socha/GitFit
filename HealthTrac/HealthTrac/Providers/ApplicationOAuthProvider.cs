@@ -9,7 +9,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.OAuth;
-using Microsoft.AspNet.Identity.Owin;
+using HealthTrac.Models;
 
 namespace HealthTrac.Providers
 {
@@ -27,11 +27,11 @@ namespace HealthTrac.Providers
             _publicClientId = publicClientId;
         }
 
-        public override async Task GrantResourceOwnerCredentials(OAuthGrantResourceOwnerCredentialsContext context)
+        public override void GrantResourceOwnerCredentials(OAuthGrantResourceOwnerCredentialsContext context)
         {
-            var userManager = context.OwinContext.GetUserManager<ApplicationUserManager>();
+            var userManager = context.OwinContext.GetUserManager<UserManager<User>>();
 
-            ApplicationUser user = await userManager.FindAsync(context.UserName, context.Password);
+            User user = userManager.Find(context.UserName, context.Password);
 
             if (user == null)
             {
@@ -39,9 +39,8 @@ namespace HealthTrac.Providers
                 return;
             }
 
-            ClaimsIdentity oAuthIdentity = await user.GenerateUserIdentityAsync(userManager,
-               OAuthDefaults.AuthenticationType);
-            ClaimsIdentity cookiesIdentity = await user.GenerateUserIdentityAsync(userManager,
+            ClaimsIdentity oAuthIdentity = userManager.CreateIdentity(user, OAuthDefaults.AuthenticationType)
+            ClaimsIdentity cookiesIdentity = userManager.CreateIdentity(user,
                 CookieAuthenticationDefaults.AuthenticationType);
 
             AuthenticationProperties properties = CreateProperties(user.UserName);
