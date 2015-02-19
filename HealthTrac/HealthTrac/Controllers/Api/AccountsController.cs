@@ -11,8 +11,7 @@ using HealthTrac.Models.Dto;
 using System.Web.Http.Description;
 using System.Threading.Tasks;
 using Microsoft.Owin.Security;
-using System;
-using System.Collections.Generic;
+using System.Net.Http.Formatting;
 using System.Net.Http;
 using System.Net;
 using System.Security.Claims;
@@ -23,6 +22,7 @@ using System.Net.Http.Headers;
 namespace HealthTrac.Controllers.Api
 {
     //TODO remove hardcoded dependency on entity context (IOC container?)
+    [Authorize]
     public class AccountsController : ApiController
     {
 
@@ -47,8 +47,44 @@ namespace HealthTrac.Controllers.Api
 
         public UserManager<User> UserManager { get; private set; }
 
+        //POST api/Account/Login
+        [HttpPost]
+        [AllowAnonymous]
+        [Route("api/Account/Login")]
+        public IHttpActionResult Login(CredentialsDto credentials)
+        {
+            var tokenExpirationTimeSpan = TimeSpan.FromDays(14);
+            var loginInfo = GetUserLogin(credentials);
+            User user = UserManager.Find(loginInfo);
+            if (user == null)
+            {
+                return BadRequest();
+            }
+            var identity = new ClaimsIdentity(Startup.OAuthBearerOptions.AuthenticationType);
+            identity.AddClaim(new Claim(ClaimTypes.Name, user.Id, null, credentials.Provider));
+            identity.AddClaim(new Claim(ClaimTypes.NameIdentifier, user.Id, null, "LOCAL_AUTHORITY"));
+            AuthenticationTicket ticket = new AuthenticationTicket(identity, new AuthenticationProperties());
+            var currentUtc = new Microsoft.Owin.Infrastructure.SystemClock().UtcNow;
+            ticket.Properties.IssuedUtc = currentUtc;
+            ticket.Properties.ExpiresUtc = currentUtc.Add(tokenExpirationTimeSpan);
+            var accesstoken = Startup.OAuthBearerOptions.AccessTokenFormat.Protect(ticket);
+            Authentication.SignIn(identity);
+
+            JObject blob = new JObject(
+                new JProperty("userName", user.UserName),
+                new JProperty("access_token", accesstoken),
+                new JProperty("token_type", "bearer"),
+                new JProperty("expires_in", tokenExpirationTimeSpan.TotalSeconds.ToString()),
+                new JProperty(".issued", ticket.Properties.IssuedUtc.ToString()),
+                new JProperty(".expires", ticket.Properties.ExpiresUtc.ToString())
+            );
+            var json = Newtonsoft.Json.JsonConvert.SerializeObject(blob);
+            return Ok(blob);
+        }
+
         //POST api/Account/Register
         [OverrideAuthentication]
+        [AllowAnonymous]
         [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
         [Route("api/Account/Register")]
         public IHttpActionResult Register(UserLoginDto userLoginDto)
@@ -80,6 +116,7 @@ namespace HealthTrac.Controllers.Api
                 if (result.Succeeded)
                 {
                     var identity = UserManager.CreateIdentity(user, DefaultAuthenticationTypes.ApplicationCookie);
+                    return Ok();
                 }
                 else
                 {
@@ -90,7 +127,6 @@ namespace HealthTrac.Controllers.Api
             {
                 return BadRequest();
             }
-            return Ok();
         }
 
         private UserLoginInfo GetUserLogin(CredentialsDto credentials)
