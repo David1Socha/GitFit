@@ -43,5 +43,17 @@ namespace HealthTrac.Tests.Helpers
                 && membershipDto.UserID == membership.UserID;
             return equal;
         }
+
+        public static bool EqualValues(this IEnumerable<MembershipDto> membershipDtos, IEnumerable<Membership> memberships)
+        {
+            if (membershipDtos.Count() != memberships.Count())
+            {
+                return false;
+            }
+            bool equal = membershipDtos
+                .Zip(memberships, (dto, m) => new Tuple<MembershipDto, Membership>(dto, m))
+                .All(t => t.Item1.EqualValues(t.Item2));
+            return equal;
+        }
     }
 }
