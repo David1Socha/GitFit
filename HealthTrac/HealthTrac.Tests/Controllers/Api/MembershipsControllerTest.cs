@@ -63,5 +63,19 @@ namespace HealthTrac.Tests.Controllers.Api
             Assert.IsTrue(memberships.EqualValues(userMemberships));
         }
 
+        [TestMethod]
+        public void MembershipsControllerGetMembership()
+        {
+            long id = 1;
+            var acc = Mock.Of<IMembershipAccessor>(a => a.GetMembership(id) == _adminMembership);
+            var con = new MembershipsController(acc);
+            var response = con.GetMembership(id);
+            var result = response as OkNegotiatedContentResult<MembershipDto>;
+            var resultMembership = result.Content;
+            Assert.IsTrue(resultMembership.EqualValues(_adminMembership));
+        }
+
+
+
     }
 }
