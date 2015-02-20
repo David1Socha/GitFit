@@ -1,0 +1,208 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context="com.example.raik383h_group_6.healthtracmobile.AccountFragment"
+    android:id="@+id/account_layout">
+
+    <ImageView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:id="@+id/profile_image"
+        android:layout_marginTop="36dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignLeft="@+id/name_static"
+        android:layout_alignStart="@+id/name_static" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/creation_date"
+        android:id="@+id/creation_date_static"
+        android:layout_alignBottom="@+id/profile_image"
+        android:layout_marginLeft="80dp"
+        android:layout_marginStart="80dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/name_label"
+        android:id="@+id/name_static"
+        android:layout_marginBottom="24dp"
+        android:layout_above="@+id/birth_edit"
+        android:layout_toLeftOf="@+id/creation_date_static"
+        android:layout_toStartOf="@+id/creation_date_static"
+        android:layout_marginRight="24dp"
+        android:layout_marginEnd="24dp" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:id="@+id/name_edit"
+        android:layout_alignBottom="@+id/name_static"
+        android:layout_alignLeft="@+id/creation_date_static"
+        android:layout_alignStart="@+id/creation_date_static"
+        android:hint="@string/name_edit"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/birth_label"
+        android:id="@+id/birth_static"
+        android:layout_centerVertical="true"
+        android:layout_alignLeft="@+id/name_static"
+        android:layout_alignStart="@+id/name_static" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="date"
+        android:ems="10"
+        android:id="@+id/birth_edit"
+        android:layout_alignBottom="@+id/birth_static"
+        android:layout_alignLeft="@+id/name_edit"
+        android:layout_alignStart="@+id/name_edit" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/height_label"
+        android:id="@+id/height_static"
+        android:layout_below="@+id/birth_static"
+        android:layout_alignLeft="@+id/birth_static"
+        android:layout_alignStart="@+id/birth_static"
+        android:layout_marginTop="32dp" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/height_static"
+        android:layout_alignLeft="@+id/birth_edit"
+        android:layout_alignStart="@+id/birth_edit"
+        android:weightSum="1"
+        android:id="@+id/height_edit">
+
+        <EditText
+            android:layout_width="44dp"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:ems="10"
+            android:id="@+id/height_ft_edit"
+            android:layout_weight="0.32" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="ft."
+            android:gravity="bottom"
+            android:id="@+id/height_ft_static" />
+
+        <EditText
+            android:layout_width="49dp"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:ems="10"
+            android:id="@+id/height_in_edit"
+            android:layout_weight="0.25" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="in."
+            android:gravity="bottom"
+            android:id="@+id/height_in_static" />
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/weight_label"
+        android:id="@+id/weight_static"
+        android:layout_below="@+id/height_static"
+        android:layout_alignLeft="@+id/height_static"
+        android:layout_alignStart="@+id/height_static"
+        android:layout_marginTop="34dp" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/weight_edit"
+        android:layout_alignBottom="@+id/weight_static"
+        android:layout_alignLeft="@+id/height_edit"
+        android:layout_alignStart="@+id/height_edit"
+        android:layout_alignRight="@+id/height_edit"
+        android:layout_alignEnd="@+id/height_edit"
+        android:weightSum="1">
+
+        <EditText
+            android:layout_width="104dp"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:ems="10"
+            android:id="@+id/weight_lb_edit"
+            android:layout_weight="0.55" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="lb"
+            android:id="@+id/weight_lb_static"
+            android:gravity="bottom" />
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/sex_label"
+        android:id="@+id/sex_static"
+        android:layout_below="@+id/weight_static"
+        android:layout_alignLeft="@+id/weight_static"
+        android:layout_alignStart="@+id/weight_static"
+        android:layout_marginTop="41dp" />
+
+    <RadioGroup
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_alignBottom="@+id/sex_static"
+        android:layout_alignLeft="@+id/weight_edit"
+        android:layout_alignStart="@+id/weight_edit"
+        android:layout_alignTop="@+id/sex_static"
+        android:layout_alignRight="@+id/weight_edit"
+        android:layout_alignEnd="@+id/weight_edit"
+        android:orientation="horizontal"
+        android:id="@+id/radio_sex">
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Male"
+            android:id="@+id/radio_sex_male"
+            android:checked="false" />
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Female"
+            android:id="@+id/radio_sex_female"
+            android:checked="false"
+            android:layout_gravity="right" />
+    </RadioGroup>
+
+</RelativeLayout>
