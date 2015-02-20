@@ -15,6 +15,7 @@ import org.scribe.builder.ServiceBuilder;
 import org.scribe.model.Verifier;
 import org.scribe.oauth.OAuthService;
 import org.scribe.model.Token;
+import com.example.raik383h_group_6.healthtracmobile.R;
 
 
 public abstract class LoginWebViewActivity extends ActionBarActivity {
