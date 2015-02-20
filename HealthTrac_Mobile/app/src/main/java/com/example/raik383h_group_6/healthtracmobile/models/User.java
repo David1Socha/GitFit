@@ -1,14 +1,19 @@
 package com.example.raik383h_group_6.healthtracmobile.models;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.Date;
 
 /**
  * Created by Aaron on 2/19/2015.
  */
-public class User {
+public class User implements Parcelable{
+
     public enum Sex {
         Male, Female
     }
+
 
     private long id;
     private String firstName;
@@ -18,10 +23,11 @@ public class User {
     private Sex sex;
     private int height;
     private int weight;
-    private Date birthdate;
+    private String birthdate;
     private String username;
+    private String dateCreated;
 
-    public User(long id, String firstName, String lastName, String preferredName, String email, Sex sex, int height, int weight, Date birthdate, String username) {
+    public User(long id, String firstName, String lastName, String preferredName, String email, Sex sex, int height, int weight, String birthdate, String username, String dateCreated) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -32,6 +38,27 @@ public class User {
         this.weight = weight;
         this.birthdate = birthdate;
         this.username = username;
+        this.dateCreated = dateCreated;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeLong(id);
+        dest.writeString(firstName);
+        dest.writeString(lastName);
+        dest.writeString(preferredName);
+        dest.writeString(email);
+        dest.writeValue(sex);
+        dest.writeInt(height);
+        dest.writeInt(weight);
+        dest.writeValue(birthdate);
+        dest.writeString(username);
+        dest.writeString(dateCreated);
     }
 
     public long getId() {
@@ -98,11 +125,11 @@ public class User {
         this.weight = weight;
     }
 
-    public Date getBirthdate() {
+    public String getBirthdate() {
         return birthdate;
     }
 
-    public void setBirthdate(Date birthdate) {
+    public void setBirthdate(String birthdate) {
         this.birthdate = birthdate;
     }
 
@@ -113,4 +140,8 @@ public class User {
     public void setUsername(String username) {
         this.username = username;
     }
+
+    public String getDateCreated() { return dateCreated; }
+
+    public void setDateCreated(String dateCreated) { this.dateCreated = dateCreated; }
 }

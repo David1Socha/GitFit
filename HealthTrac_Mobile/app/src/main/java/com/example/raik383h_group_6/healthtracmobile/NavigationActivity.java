@@ -1,6 +1,7 @@
 package com.example.raik383h_group_6.healthtracmobile;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
@@ -12,12 +13,16 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.support.v4.widget.DrawerLayout;
+import android.widget.EditText;
 
+import com.example.raik383h_group_6.healthtracmobile.models.User;
 import com.example.raik383h_group_6.healthtracmobile.teams.TeamListFragment;
 
 
 public class NavigationActivity extends ActionBarActivity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks {
+    //private User user = new User(123,"test","lol","idk","stuff", User.Sex.Female,12,12,"420","USERNAME","2020");
+    private User user;
 
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
@@ -33,6 +38,13 @@ public class NavigationActivity extends ActionBarActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_navigation);
+        Bundle b = this.getIntent().getExtras();
+        if(b!=null) {
+            user = b.getParcelable("User");
+            System.out.println(user.getUsername());
+        }
+
+
 
         mNavigationDrawerFragment = (NavigationDrawerFragment)
                 getSupportFragmentManager().findFragmentById(R.id.navigation_drawer);
@@ -50,8 +62,12 @@ public class NavigationActivity extends ActionBarActivity
         FragmentManager fragmentManager = getSupportFragmentManager();
 
         if(position == 0) {
+            AccountFragment accountFragment = new AccountFragment();
+            Bundle userBundle = new Bundle();
+            userBundle.putParcelable("User", user);
+            accountFragment.setArguments(userBundle);
             fragmentManager.beginTransaction()
-                    .replace(R.id.container, AccountFragment.newInstance())
+                    .replace(R.id.container, accountFragment)
                     .commit();
         } else if(position == 1) {
             fragmentManager.beginTransaction()
