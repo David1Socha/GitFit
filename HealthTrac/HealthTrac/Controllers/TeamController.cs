@@ -51,15 +51,16 @@ namespace HealthTrac.Controllers
             }
         }
 
-        public ActionResult GetTeams()
+        public ActionResult Profile(long id)
+        {
+            return View(teamAccessor.GetTeam(id));
+        }
+
+        public ActionResult YourTeams()
         {
             string userId = User.Identity.GetUserId();
             return View(teamAccessor.GetTeams(userId).ToList());
         }
-        //public ActionResult FindTeams(string search)
-        //{
-            
-        //}
         public Team CreateTeam(Team team)
         {
             return teamAccessor.CreateTeam(team);

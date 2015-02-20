@@ -1,3 +1,10 @@
-﻿@{
+﻿@model HealthTrac.Models.Team
+
+@{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<h1>@Model.Name </h1>
+<h3>Team Since @Model.DateCreated.ToString("MMMM dd, yyyy")</h3>
+<h3>Team Description: @Model.Description</h3>
+<h3>Privacy: @Model.Visibility</h3>
+
