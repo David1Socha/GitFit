@@ -21,7 +21,6 @@ using Microsoft.Owin.Security.Cookies;
 
 namespace HealthTrac.Controllers.Api
 {
-    //TODO remove hardcoded dependency on entity context (IOC container?)
     [Authorize]
     public class AccountsController : ApiController
     {
