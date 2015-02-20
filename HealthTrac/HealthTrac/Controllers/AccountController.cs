@@ -16,9 +16,10 @@ namespace HealthTrac.Controllers
     public class AccountController : Controller
     {
 
-        public AccountController(UserManager<User> userManager)
+        public AccountController(UserManager<User> userManager, IAuthenticationManager auth)
         {
             UserManager = userManager;
+            AuthenticationManager = auth;
         }
 
         public UserManager<User> UserManager { get; private set; }
@@ -219,10 +220,8 @@ namespace HealthTrac.Controllers
 
         private IAuthenticationManager AuthenticationManager
         {
-            get
-            {
-                return HttpContext.GetOwinContext().Authentication;
-            }
+            get;
+            set;
         }
 
         private async Task SignInAsync(User user, bool isPersistent)
