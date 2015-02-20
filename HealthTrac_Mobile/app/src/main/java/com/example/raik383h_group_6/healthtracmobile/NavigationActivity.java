@@ -21,8 +21,8 @@ import com.example.raik383h_group_6.healthtracmobile.teams.TeamListFragment;
 
 public class NavigationActivity extends ActionBarActivity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks {
-    //private User user = new User(123,"test","lol","idk","stuff", User.Sex.Female,12,12,"420","USERNAME","2020");
-    private User user;
+    private User user = new User("51651","test","lol","idk","stuff", User.Sex.Female,12,12,"420","USERNAME","2020");
+ //   private User user;
 
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
@@ -40,8 +40,8 @@ public class NavigationActivity extends ActionBarActivity
         setContentView(R.layout.activity_navigation);
         Bundle b = this.getIntent().getExtras();
         if(b!=null) {
-            user = b.getParcelable("User");
-            System.out.println(user.getUsername());
+//            user = b.getParcelable("User");
+ //           System.out.println(user.getUsername());
         }
 
 

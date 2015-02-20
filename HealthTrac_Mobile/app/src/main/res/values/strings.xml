@@ -35,5 +35,7 @@
     <string name="EXTRA_PROVIDER">com.example.raik383h_group_6.healthtracmobile.PROVIDER</string>
     <string name="EXTRA_ACCESS_TOKEN">com.example.raik383h_group_6.healthtracmobile.ACCESS_TOKEN</string>
     <string name="EXTRA_ACCESS_SECRET">com.example.raik383h_group_6.healthtracmobile.ACCESS_SECRET</string>
+    <string name="facebook_create">CREATE ACCOUNT THROUGH FACEBOOK</string>
+    <string name="twitter_create">CREATE ACCOUNT THROUGH TWITTER</string>
 
 </resources>

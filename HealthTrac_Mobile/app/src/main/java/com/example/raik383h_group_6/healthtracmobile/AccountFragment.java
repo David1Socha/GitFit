@@ -17,8 +17,8 @@ import org.w3c.dom.Text;
 
 
 public class AccountFragment extends Fragment {
-//    private User user = new User(123,"test","lol","idk","stuff", User.Sex.Female,12,12,"420","USERNAME", "2015");
-    private User user;
+    private User user = new User("123213","test","lol","idk","stuff", User.Sex.Female,12,12,"420","USERNAME", "2015");
+//    private User user;
     private EditText firstName, lastName, dateOfBirth, height_ft, height_in, weight;
     private TextView dateCreated;
     private RadioButton sex;
@@ -36,7 +36,7 @@ public class AccountFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_account, container, false);
         Bundle bundle = this.getArguments();
-        user = bundle.getParcelable("User");
+  //      user = bundle.getParcelable("User");
 
         int ft = user.getHeight()/12;
         int in = user.getHeight()%12;
