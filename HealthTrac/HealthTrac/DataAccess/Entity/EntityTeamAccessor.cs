@@ -14,7 +14,7 @@ namespace HealthTrac.DataAccess.Entity
         {
             using (var db = new ApplicationDbContext())
             {
-                var team = db.Teams
+                var team = db.Teams.Include("Memberships").Include("Memberships.User")
                                 .Where(t => t.ID == ID && t.Enabled).FirstOrDefault();
                 return team;
             }

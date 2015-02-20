@@ -4,10 +4,10 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <h1>@Model.Name </h1>
-<h3>Team Since @Model.DateCreated.ToString("MMMM dd, yyyy")</h3>
+<h3>Created @Model.DateCreated.ToString("MMMM dd, yyyy")</h3>
 <h3>Team Description: @Model.Description</h3>
 <h3>Privacy: @Model.Visibility</h3>
-
+<h3>Team Members</h3>
 <table cellpadding="10">
     <tr>
         <th>User Name</th>
@@ -23,10 +23,10 @@
                     @Html.ActionLink(membership.User.UserName, "Profile", "User", new { id = membership.User.Id }, null)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelMember => membership.DateCreated.ToString("MMMM dd, yyy"));
+                    @membership.DateCreated.ToString("MMMM dd, yyyy")
                 </td>
                 <td>
-                    @Html.DisplayFor(modelMember => membership.MembershipStatus);
+                    @Html.DisplayFor(modelMember => membership.MembershipStatus)
                 </td>
             </tr>
         }
