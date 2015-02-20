@@ -25,6 +25,7 @@ namespace HealthTrac.Tests.Controllers.Api
         [TestInitialize]
         public void Initialize()
         {
+
         }
 
     }
