@@ -11,6 +11,7 @@ using Microsoft.Owin.Security;
 
 namespace HealthTrac.Controllers
 {
+    [Authorize]
     public class UserController : Controller
     {
 
@@ -42,7 +43,7 @@ namespace HealthTrac.Controllers
             }
             return View();
 
-        }
+        }     
         public ActionResult Profile(string id)
         {
             return ViewProfile(id);

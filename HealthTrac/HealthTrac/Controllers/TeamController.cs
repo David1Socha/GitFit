@@ -11,6 +11,7 @@ using Microsoft.Owin.Security;
 
 namespace HealthTrac.Controllers
 {
+    [Authorize]
     public class TeamController : Controller
     {
         //Changing the accessor interface broke this temporarily. Some of these methods are going to be in MembershipAccessor now
