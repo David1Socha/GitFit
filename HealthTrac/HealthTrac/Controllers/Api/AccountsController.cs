@@ -32,12 +32,14 @@ namespace HealthTrac.Controllers.Api
 
         private IAuthenticationManager Authentication
         {
-            get { return Request.GetOwinContext().Authentication; }
+            get;
+            set;
         }
 
-        public AccountsController(UserManager<User> userManager)
+        public AccountsController(UserManager<User> userManager, IAuthenticationManager auth)
         {
             UserManager = userManager;
+            Authentication = auth;
         }
 
         public UserManager<User> UserManager { get; private set; }
