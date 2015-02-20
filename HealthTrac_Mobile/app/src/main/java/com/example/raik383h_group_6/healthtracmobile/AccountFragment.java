@@ -38,7 +38,6 @@ public class AccountFragment extends Fragment {
         Bundle bundle = this.getArguments();
         user = bundle.getParcelable("User");
 
-  //      user = i.getParcelableExtra("User");
         int ft = user.getHeight()/12;
         int in = user.getHeight()%12;
 

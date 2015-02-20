@@ -17,6 +17,7 @@ import com.example.raik383h_group_6.healthtracmobile.teams.TeamPageFragment;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
@@ -37,8 +38,9 @@ public class LoginPromptActivity extends Activity {
             TW_LOGIN_REQ = 2;
     private String accessToken, accessSecret, provider;
     private final String loginURL = "http://gitfit.azurewebsites.net/api/Account/Login";
+    private final String userURL = "http://gitfit.azurewebsites.net/api/Users/";
  //   public User user;
-    public User user = new User(123,"test","lol","idk","stuff", User.Sex.Female,12,12,"420","USERNAME","2020");
+    public User user = new User("123adga312","test","lol","idk","stuff", User.Sex.Female,12,12,"420","USERNAME","2020");
     public LoginPromptActivity activity = this;
 
     @Override
@@ -72,7 +74,12 @@ public class LoginPromptActivity extends Activity {
       //      while(getUser.getStatus() != AsyncTask.Status.FINISHED) {
 
 //            }
-
+            Intent i = new Intent();
+            Bundle b = new Bundle();
+            b.putParcelable("User", user);
+            i.putExtras(b);
+            i.setClass(this, NavigationActivity.class);
+            startActivity(i);
         }
     }
 
@@ -93,7 +100,6 @@ public class LoginPromptActivity extends Activity {
         @Override
         protected User doInBackground(Void... params) {
             InputStream stream = null;
-            User user = null;
             try {
 
                 HttpClient client = new DefaultHttpClient();
@@ -126,28 +132,63 @@ public class LoginPromptActivity extends Activity {
                     }
                     stream.close();
 
-                    JSONObject userInfo = new JSONObject(result);
+                    JSONObject tokenInfo = new JSONObject(result);
 
-                    long id = userInfo.getLong("id");
-                    String firstName = userInfo.getString("FirstName");
-                    String lastName = userInfo.getString("LastName");
-                    String preferredName = userInfo.getString("PreferredName");
-                    String email = userInfo.getString("email");
-                    User.Sex sex = User.Sex.valueOf(userInfo.getString("Sex"));
-                    int height = userInfo.getInt("Height");
-                    int weight = userInfo.getInt("Width");
-                    String date = userInfo.getString("Date");
-                    String userName = userInfo.getString("String");
-                    String dateCreated = userInfo.getString("DateCreated");
+                    String id = tokenInfo.getString("id");
+                    String token = tokenInfo.getString("access_token");
 
-                    user = new User(id, firstName, lastName, preferredName, email, sex, height, weight, date, userName, dateCreated);
+                    HttpGet get = new HttpGet(userURL + id);
+
+                    get.setHeader("Authorization", "bearer "+ token);
+
+                    HttpResponse httpResponse = client.execute(get);
+
+                    stream = httpResponse.getEntity().getContent();
 
 
-                    System.out.println(result);
-                    System.out.println(userInfo.get("userName"));
-                }
 
-            } catch (JSONException e) {
+
+                    if (stream != null) {
+                        reader = new BufferedReader(new InputStreamReader(stream));
+                        line = "";
+                        result = "";
+                        while ((line = reader.readLine()) != null) {
+                            result += line + "\n";
+                        }
+                        stream.close();
+
+                        JSONObject userInfo = new JSONObject(result);
+
+                        String userName = userInfo.getString("UserName");
+                        String firstName = userInfo.getString("FirstName");
+                        String lastName = userInfo.getString("LastName");
+                        String preferredName = userInfo.getString("PreferredName");
+                        String email = userInfo.getString("Email");
+                        User.Sex sex = null;
+                        if(userInfo.getInt("Sex") == 0) {
+                            sex = User.Sex.Male;
+                        } else {
+                            sex = User.Sex.Female;
+                        }
+                        int height = Integer.valueOf(userInfo.getInt("Height"));
+                        int weight = Integer.valueOf(userInfo.getInt("Width"));
+                        String date = userInfo.getString("BirthDate");
+
+                        String dateCreated = userInfo.getString("DateCreated");
+
+                        user = new User(id, firstName, lastName, preferredName, email, sex, height, weight, date, userName, dateCreated);
+
+
+                        System.out.println("RESULT " + result);
+                        System.out.println("User " + user.getUsername());
+                        Log.d("RESULT ", result);
+                        // Log.d("USERNAME ", userInfo.get("userName"));
+                        // System.out.println("User " + user.getUsername());
+
+
+                    }}
+
+                    }    catch (JSONException e) {
                 e.printStackTrace();
             } catch (UnsupportedEncodingException e) {
                 e.printStackTrace();
@@ -164,12 +205,7 @@ public class LoginPromptActivity extends Activity {
 
         @Override
         protected void onPostExecute(User user1) {
-            Intent i = new Intent();
-            Bundle b = new Bundle();
-            b.putParcelable("User", user);
-            i.putExtras(b);
-            i.setClass(activity, NavigationActivity.class);
-            startActivity(i);
+
         }
     }
 }

@@ -15,7 +15,7 @@ public class User implements Parcelable{
     }
 
 
-    private long id;
+    private String id;
     private String firstName;
     private String lastName;
     private String preferredName;
@@ -27,7 +27,11 @@ public class User implements Parcelable{
     private String username;
     private String dateCreated;
 
-    public User(long id, String firstName, String lastName, String preferredName, String email, Sex sex, int height, int weight, String birthdate, String username, String dateCreated) {
+    public User() {
+
+    }
+
+    public User(String id, String firstName, String lastName, String preferredName, String email, Sex sex, int height, int weight, String birthdate, String username, String dateCreated) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -48,7 +52,7 @@ public class User implements Parcelable{
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeLong(id);
+        dest.writeString(id);
         dest.writeString(firstName);
         dest.writeString(lastName);
         dest.writeString(preferredName);
@@ -61,11 +65,35 @@ public class User implements Parcelable{
         dest.writeString(dateCreated);
     }
 
-    public long getId() {
+    public static final Creator<User> CREATOR = new Creator<User>() {
+        @Override
+        public User createFromParcel(Parcel source) {
+            User user = new User();
+            user.id = source.readString();
+            user.firstName = source.readString();
+            user.lastName = source.readString();
+            user.preferredName = source.readString();
+            user.email = source.readString();
+            user.sex = Sex.Male;
+            user.height = Integer.valueOf(source.readString());
+            user.weight = Integer.valueOf(source.readString());
+            user.birthdate = source.readString();
+            user.username = source.readString();
+            user.dateCreated = source.readString();
+            return user;
+        }
+
+        @Override
+        public User[] newArray(int size) {
+            return new User[size];
+        }
+    };
+
+    public String getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
