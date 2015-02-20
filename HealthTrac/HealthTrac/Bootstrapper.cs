@@ -12,6 +12,7 @@ using HealthTrac.Models;
 using System.Data.Entity;
 using System.Web.Mvc;
 using System.Web.Http.Dependencies;
+using Microsoft.Owin.Security;
 
 namespace HealthTrac
 {
@@ -41,7 +42,7 @@ namespace HealthTrac
             container.RegisterType<ISessionAccessor, EntitySessionAccessor>(new HierarchicalLifetimeManager());
             container.RegisterType<IStatusAccessor, EntityStatusAccessor>(new HierarchicalLifetimeManager());
             container.RegisterType<IUserStore<User>, UserStore<User>>(new InjectionConstructor(new ApplicationDbContext()));
-            //TODO authentication manager?
+            container.RegisterType<IAuthenticationManager>(new InjectionFactory(c => HttpContext.Current.GetOwinContext().Authentication));
             return container;
         }
     }
