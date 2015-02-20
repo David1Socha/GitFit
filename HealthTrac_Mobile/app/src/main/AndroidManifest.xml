@@ -9,13 +9,6 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme">
-        <meta-data
-            android:name="com.facebook.sdk.ApplicationId"
-            android:value="@string/facebook_app_id" />
-        <meta-data
-            android:name="com.crashlytics.ApiKey"
-            android:value="bf40b74ea59ac704ecdc0c539a52725467e651c2" />
-
         <activity
             android:name="com.raik383h_group_6.healthtracmobile.LoginPromptActivity"
             android:label="@string/app_name">
