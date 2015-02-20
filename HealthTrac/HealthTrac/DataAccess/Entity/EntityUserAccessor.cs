@@ -15,7 +15,7 @@ namespace HealthTrac.DataAccess.Entity
             {
                 var user = db.Users
                                 .Where(u => u.Id == ID).FirstOrDefault();
-                user = user.Enabled ? user : null;
+                user = user != null && user.Enabled ? user : null;
                 return user;
             }
         }
@@ -48,7 +48,10 @@ namespace HealthTrac.DataAccess.Entity
 
         public User DeleteUser(User user)
         {
-            user.Enabled = false;
+            if (user != null)
+            {
+                user.Enabled = false;
+            }
             return UpdateUser(user);
         }
     }

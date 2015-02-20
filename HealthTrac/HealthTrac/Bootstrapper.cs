@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using System.Web.Mvc;
 using Microsoft.Practices.Unity;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
@@ -11,15 +10,25 @@ using HealthTrac.DataAccess;
 using HealthTrac.DataAccess.Entity;
 using HealthTrac.Models;
 using System.Data.Entity;
+using System.Web.Mvc;
+using System.Web.Http.Dependencies;
 
 namespace HealthTrac
 {
     public class Bootstrapper
     {
-        public static void Initialize()
+        public static System.Web.Mvc.IDependencyResolver GetMvcResolver()
         {
             var container = BuildUnityContainer();
-            DependencyResolver.SetResolver(new UnityDependencyResolver(container));
+            var resolver = new MvcResolver(container);
+            return resolver;
+        }
+
+        public static System.Web.Http.Dependencies.IDependencyResolver GetApiResolver()
+        {
+            var container = BuildUnityContainer();
+            System.Web.Http.Dependencies.IDependencyResolver resolver = new ApiResolver(container);
+            return resolver;
         }
 
         private static IUnityContainer BuildUnityContainer()
@@ -31,19 +40,66 @@ namespace HealthTrac
             container.RegisterType<IActivityAccessor, EntityActivityAccessor>(new HierarchicalLifetimeManager());
             container.RegisterType<ISessionAccessor, EntitySessionAccessor>(new HierarchicalLifetimeManager());
             container.RegisterType<IStatusAccessor, EntityStatusAccessor>(new HierarchicalLifetimeManager());
-            container.RegisterType<DbContext, ApplicationDbContext>(new HierarchicalLifetimeManager());
-            container.RegisterType<UserManager<User>>(new HierarchicalLifetimeManager());
-            container.RegisterType<IUserStore<User>, UserStore<User>>(new HierarchicalLifetimeManager());
+            container.RegisterType<IUserStore<User>, UserStore<User>>(new InjectionConstructor(new ApplicationDbContext()));
             //TODO authentication manager?
             return container;
         }
     }
 
-    public class UnityDependencyResolver : IDependencyResolver
+    public class ApiResolver : System.Web.Http.Dependencies.IDependencyResolver
+    {
+        protected IUnityContainer container;
+
+        public ApiResolver(IUnityContainer container)
+        {
+            if (container == null)
+            {
+                throw new ArgumentNullException("container");
+            }
+            this.container = container;
+        }
+
+        public object GetService(Type serviceType)
+        {
+            try
+            {
+                return container.Resolve(serviceType);
+            }
+            catch (ResolutionFailedException)
+            {
+                return null;
+            }
+        }
+
+        public IEnumerable<object> GetServices(Type serviceType)
+        {
+            try
+            {
+                return container.ResolveAll(serviceType);
+            }
+            catch (ResolutionFailedException)
+            {
+                return new List<object>();
+            }
+        }
+
+        public IDependencyScope BeginScope()
+        {
+            var child = container.CreateChildContainer();
+            return new ApiResolver(child);
+        }
+
+        public void Dispose()
+        {
+            container.Dispose();
+        }
+    }
+
+    public class MvcResolver : System.Web.Mvc.IDependencyResolver
     {
 
         private IUnityContainer container;
-        public UnityDependencyResolver(IUnityContainer container)
+        public MvcResolver(IUnityContainer container)
         {
             if (container == null)
             {

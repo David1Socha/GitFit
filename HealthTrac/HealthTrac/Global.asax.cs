@@ -26,7 +26,8 @@ namespace HealthTrac
             json.SerializerSettings.PreserveReferencesHandling =
                 Newtonsoft.Json.PreserveReferencesHandling.None;
             GlobalConfiguration.Configuration.Formatters.Add(json);
-            Bootstrapper.Initialize();
+            DependencyResolver.SetResolver(Bootstrapper.GetMvcResolver());
+            GlobalConfiguration.Configuration.DependencyResolver = Bootstrapper.GetApiResolver();
         }
     }
 }
