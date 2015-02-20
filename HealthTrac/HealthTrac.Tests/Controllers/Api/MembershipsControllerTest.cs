@@ -94,14 +94,26 @@ namespace HealthTrac.Tests.Controllers.Api
         [TestMethod]
         public void MembershipsControllerPutMembership()
         {
-            long id = 1;
-            var membership = _adminMembership;
+            long id = 3;
+            var membership = _bannedMembership;
             var mock = new Mock<IMembershipAccessor>();
             mock.Setup(acc => acc.UpdateMembership(membership))
                 .Returns(membership);
             var con = new MembershipsController(mock.Object);
             con.PutMembership(id, membership);
             mock.Verify(acc => acc.UpdateMembership(membership));
+        }
+
+        [TestMethod]
+        public void MembershipsControllerPostMembership()
+        {
+            var membership = _memberMembership;
+            var mock = new Mock<IMembershipAccessor>();
+            mock.Setup(acc => acc.CreateMembership(membership))
+                .Returns(membership);
+            var con = new MembershipsController(mock.Object);
+            con.PostMembership(membership);
+            mock.Verify(acc => acc.CreateMembership(membership));
         }
 
     }
