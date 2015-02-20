@@ -12,6 +12,7 @@ using HealthTrac.Models;
 using HealthTrac.Models.Dto;
 using HealthTrac.Controllers.Api;
 using Moq;
+using System.Net.Http;
 using Moq.Linq;
 using HealthTrac.Tests.Helpers;
 
@@ -50,6 +51,16 @@ namespace HealthTrac.Tests.Controllers.Api
             Assert.IsTrue(teams.EqualValues(_manyTeams));
         }
 
-
+        [TestMethod]
+        public void TeamsControllerGetTeamByIdTest()
+        {
+            long id = 12;
+            var acc = Mock.Of<ITeamAccessor>(a => a.GetTeam(id) == _sampleTeam1);
+            TeamsController con = new TeamsController(acc);
+            var response = con.GetTeam(id);
+            var result = response as OkNegotiatedContentResult<TeamDto>;
+            var team = result.Content;
+            Assert.IsTrue(team.EqualValues(_sampleTeam1));
+        }
     }
 }
