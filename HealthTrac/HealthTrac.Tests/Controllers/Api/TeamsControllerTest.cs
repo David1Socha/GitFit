@@ -49,5 +49,7 @@ namespace HealthTrac.Tests.Controllers.Api
             var teams = con.GetTeams(sampleUserId);
             Assert.IsTrue(teams.EqualValues(_manyTeams));
         }
+
+
     }
 }
