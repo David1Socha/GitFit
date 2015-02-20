@@ -5,6 +5,7 @@ using System.Text;
 using System.Web.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using HealthTrac;
+using System.Web.Http.Results;
 using HealthTrac.Controllers;
 
 namespace HealthTrac.Tests.Controllers
