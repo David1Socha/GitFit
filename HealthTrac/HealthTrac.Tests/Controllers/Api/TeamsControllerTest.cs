@@ -33,7 +33,7 @@ namespace HealthTrac.Tests.Controllers.Api
         }
 
         [TestMethod]
-        public void TeamsControllerGetManyTeamsTest()
+        public void TeamsControllerGetManyTeams()
         {
             var acc = Mock.Of<ITeamAccessor>(a => a.GetTeams() == _manyTeams);
             TeamsController controller = new TeamsController(acc);
@@ -42,7 +42,7 @@ namespace HealthTrac.Tests.Controllers.Api
         }
 
         [TestMethod]
-        public void TeamsControllerGetManyTeamsByUserTest()
+        public void TeamsControllerGetManyTeamsByUser()
         {
             var sampleUserId = "xyz";
             var acc = Mock.Of<ITeamAccessor>(a => a.GetTeams(sampleUserId) == _manyTeams);
@@ -52,7 +52,7 @@ namespace HealthTrac.Tests.Controllers.Api
         }
 
         [TestMethod]
-        public void TeamsControllerGetTeamByIdTest()
+        public void TeamsControllerGetTeamById()
         {
             long id = 12;
             var acc = Mock.Of<ITeamAccessor>(a => a.GetTeam(id) == _sampleTeam1);
@@ -61,6 +61,12 @@ namespace HealthTrac.Tests.Controllers.Api
             var result = response as OkNegotiatedContentResult<TeamDto>;
             var team = result.Content;
             Assert.IsTrue(team.EqualValues(_sampleTeam1));
+        }
+
+        [TestMethod]
+        public void TeamsControllerPutTeam()
+        {
+
         }
     }
 }
