@@ -73,5 +73,17 @@ namespace HealthTrac.Tests.Helpers
                 && userDto.Width == user.Width;
             return equal;
         }
+
+        public static bool EqualValues(this IEnumerable<UserDto> userDtos, IEnumerable<User> users)
+        {
+            if (userDtos.Count() != users.Count())
+            {
+                return false;
+            }
+            bool equal = userDtos
+                .Zip(users, (dto, u) => new Tuple<UserDto, User>(dto, u))
+                .All(t => t.Item1.EqualValues(t.Item2));
+            return equal;
+        }
     }
 }
