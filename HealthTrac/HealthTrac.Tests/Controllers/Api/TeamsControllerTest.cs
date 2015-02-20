@@ -13,6 +13,7 @@ using HealthTrac.Models.Dto;
 using HealthTrac.Controllers.Api;
 using Moq;
 using Moq.Linq;
+using HealthTrac.Tests.Helpers;
 
 namespace HealthTrac.Tests.Controllers.Api
 {
@@ -25,25 +26,9 @@ namespace HealthTrac.Tests.Controllers.Api
         [TestInitialize]
         public void Initialize()
         {
-            _sampleTeam1 = new Team
-            {
-                DateCreated = new DateTime(2000, 4, 20),
-                DateModified = new DateTime(2005, 4, 20),
-                Name = "Fake team 9000",
-                Description = null,
-                Visibility = Visibility.PUBLIC
-            };
-            _sampleTeam2 = new Team
-            {
-                DateCreated = new DateTime(1000, 10, 10),
-                DateModified = new DateTime(1111, 11, 11),
-                Description = "Enough said",
-                Name = "Team 6 is the best",
-                Visibility = Visibility.SECRET
-            };
-            _manyTeams = new Team[] {
-                _sampleTeam1, _sampleTeam2
-            };
+            _sampleTeam1 = TeamGenerator.GenerateTeam1();
+            _sampleTeam2 = TeamGenerator.GenerateTeam2();
+            _manyTeams = TeamGenerator.GenerateManyTeams();
         }
 
         [TestMethod]
