@@ -6,7 +6,7 @@ android {
     buildToolsVersion "21.1.2"
 
     defaultConfig {
-        applicationId "com.example.raik383h_group_6.healthtracmobile"
+        applicationId "com.raik383h_group_6.healthtracmobile"
         minSdkVersion 14
         targetSdkVersion 21
         versionCode 1

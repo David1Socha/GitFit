@@ -1,4 +1,4 @@
-package com.example.raik383h_group_6.healthtracmobile;
+package com.raik383h_group_6.healthtracmobile;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -10,7 +10,6 @@ import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-
 import org.scribe.builder.ServiceBuilder;
 import org.scribe.model.Verifier;
 import org.scribe.oauth.OAuthService;

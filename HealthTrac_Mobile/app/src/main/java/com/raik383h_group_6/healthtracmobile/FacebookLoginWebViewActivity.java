@@ -1,4 +1,4 @@
-package com.example.raik383h_group_6.healthtracmobile;
+package com.raik383h_group_6.healthtracmobile;
 
 import org.scribe.builder.api.FacebookApi;
 
