@@ -10,7 +10,6 @@ using System.Web.Http;
 using System.Web.Http.Description;
 using HealthTrac.Models;
 using HealthTrac.DataAccess;
-using HealthTrac.DataAccess.Entity;
 using HealthTrac.Models.Dto;
 
 namespace HealthTrac.Controllers.Api
@@ -20,13 +19,6 @@ namespace HealthTrac.Controllers.Api
     {
 
         private IMembershipAccessor acc;
-        private ApplicationDbContext db;
-
-        public MembershipsController()
-            : this(new EntityMembershipAccessor())
-        {
-
-        }
 
         public MembershipsController(IMembershipAccessor acc)
         {

@@ -1,6 +1,5 @@
 ﻿using HealthTrac.Models;
 using HealthTrac.DataAccess;
-using HealthTrac.DataAccess.Entity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,11 +14,6 @@ namespace HealthTrac.Controllers
         private ITeamAccessor teamAccessor;
         private IMembershipAccessor membershipAccessor;
 
-        public TeamController()
-            : this(new EntityTeamAccessor(), new EntityMembershipAccessor())
-        {
-
-        }
         public TeamController(ITeamAccessor teamAcc, IMembershipAccessor membershipAcc)
         {
             this.teamAccessor = teamAcc;
