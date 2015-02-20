@@ -55,6 +55,20 @@ namespace HealthTrac.Tests.Controllers.Api
             Assert.IsTrue(resultUser.EqualValues(user));
         }
 
+        [TestMethod]
+        public void UsersControllerPutUser()
+        {
+            string id = "poiuy";
+            var user = _user2;
+            var mock = new Mock<IUserAccessor>();
+            mock.Setup(a => a.UpdateUser(user))
+                .Returns(user);
+            var acc = mock.Object;
+            var con = new UsersController(acc);
+            con.PutUser(id, user);
+            mock.Verify(a => a.UpdateUser(user));
+        }
+
     }
 
 }
