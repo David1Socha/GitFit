@@ -9,6 +9,8 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using HealthTrac.Controllers;
 using HealthTrac.DataAccess;
 using HealthTrac.DataAccess.Entity;
+using HealthTrac.Models;
+using System.Data.Entity;
 
 namespace HealthTrac
 {
@@ -29,7 +31,10 @@ namespace HealthTrac
             container.RegisterType<IActivityAccessor, EntityActivityAccessor>(new HierarchicalLifetimeManager());
             container.RegisterType<ISessionAccessor, EntitySessionAccessor>(new HierarchicalLifetimeManager());
             container.RegisterType<IStatusAccessor, EntityStatusAccessor>(new HierarchicalLifetimeManager());
-            container.RegisterType<UserManager, ApplicationUserManager>(new HierarchicalLifetimeManager());
+            container.RegisterType<DbContext, ApplicationDbContext>(new HierarchicalLifetimeManager());
+            container.RegisterType<UserManager<User>>(new HierarchicalLifetimeManager());
+            container.RegisterType<IUserStore<User>, UserStore<User>>(new HierarchicalLifetimeManager());
+            //TODO authentication manager?
             return container;
         }
     }
