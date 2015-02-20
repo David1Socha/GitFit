@@ -4,9 +4,16 @@
     android:orientation="vertical" >
 
     <Button
-        android:id="@+id/buttonLoginLogout"
+        android:id="@+id/fb_login_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/facebook_login" />
+        android:text="@string/facebook_login"
+        android:onClick="loginFacebook"/>
+    <Button
+        android:id="@+id/tw_login_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/twitter_login"
+        android:onClick="loginTwitter"/>
 
 </LinearLayout>

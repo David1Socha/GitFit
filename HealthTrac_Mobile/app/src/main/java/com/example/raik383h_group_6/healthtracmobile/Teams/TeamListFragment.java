@@ -1,4 +1,4 @@
-package com.example.raik383h_group_6.healthtracmobile.Teams;
+package com.example.raik383h_group_6.healthtracmobile.teams;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -12,7 +12,6 @@ import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 
-import com.example.raik383h_group_6.healthtracmobile.AccountFragment;
 import com.example.raik383h_group_6.healthtracmobile.NavigationActivity;
 import com.example.raik383h_group_6.healthtracmobile.R;
 
@@ -31,6 +30,8 @@ public class TeamListFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_team_list, container, false);
+
+
 
         String[] userTeams = {"Enter", "Teams", "Here"};
 

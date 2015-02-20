@@ -1,4 +1,4 @@
-package com.example.raik383h_group_6.healthtracmobile.Teams;
+package com.example.raik383h_group_6.healthtracmobile.teams;
 
 import android.app.ActionBar;
 import android.support.v4.app.Fragment;

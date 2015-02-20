@@ -13,7 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.support.v4.widget.DrawerLayout;
 
-import com.example.raik383h_group_6.healthtracmobile.Teams.TeamListFragment;
+import com.example.raik383h_group_6.healthtracmobile.teams.TeamListFragment;
 
 
 public class NavigationActivity extends ActionBarActivity
