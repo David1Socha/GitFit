@@ -1,9 +1,11 @@
-﻿using HealthTrac.Models;
+﻿using HealthTrac.DataAccess;
+using HealthTrac.Models;
 using System;
 using System.Collections.Generic;
-using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Web;
+using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
 
 namespace HealthTrac.DataAccess.Entity
 {
@@ -13,7 +15,7 @@ namespace HealthTrac.DataAccess.Entity
         {
             using (var db = new ApplicationDbContext())
             {
-                var user = db.Users
+                var user = db.Users.Include("Memberships").Include("Memberships.Team")
                                 .Where(u => u.Id == ID).FirstOrDefault();
                 user = user != null && user.Enabled ? user : null;
                 return user;
