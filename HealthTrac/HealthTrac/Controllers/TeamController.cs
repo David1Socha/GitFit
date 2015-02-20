@@ -15,15 +15,11 @@ namespace HealthTrac.Controllers
         //Changing the accessor interface broke this temporarily. Some of these methods are going to be in MembershipAccessor now
         private ITeamAccessor teamAccessor;
         private IMembershipAccessor membershipAccessor;
-        private AccountController accountController = new AccountController();
+        private AccountController accountController;
 
-        public TeamController()
-            : this(new EntityTeamAccessor(), new EntityMembershipAccessor())
+        public TeamController(ITeamAccessor teamAcc, IMembershipAccessor membershipAcc, UserManager<User> userManager)
         {
-
-        }
-        public TeamController(ITeamAccessor teamAcc, IMembershipAccessor membershipAcc)
-        {
+            accountController = new AccountController(userManager);
             this.teamAccessor = teamAcc;
             this.membershipAccessor = membershipAcc;
         }

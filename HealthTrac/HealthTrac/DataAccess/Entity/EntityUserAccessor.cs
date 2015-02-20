@@ -15,6 +15,7 @@ namespace HealthTrac.DataAccess.Entity
             {
                 var user = db.Users
                                 .Where(u => u.Id == ID).FirstOrDefault();
+                user = user != null && user.Enabled ? user : null;
                 return user;
             }
         }
@@ -40,7 +41,14 @@ namespace HealthTrac.DataAccess.Entity
             using (var db = new ApplicationDbContext())
             {
                 db.Entry(user).State = System.Data.Entity.EntityState.Modified;
-                db.SaveChanges();
+                try
+                {
+                    db.SaveChanges();
+                }
+                catch (DbUpdateConcurrencyException ex)
+                {
+                    throw new ConcurrentUpdateException("The User you are attempting to update has been externally modified.", ex);
+                }
 
             }
             return user;
@@ -50,25 +58,17 @@ namespace HealthTrac.DataAccess.Entity
         {
             using (var db = new ApplicationDbContext())
             {
-                return db.Users.ToList();
+                return db.Users.Where(u => u.Enabled).ToList();
             }
         }
 
         public User DeleteUser(User user)
         {
-            using (var db = new ApplicationDbContext())
+            if (user != null)
             {
-                db.Users.Remove(user);
-                try
-                {
-                    db.SaveChanges();
-                }
-                catch (DbUpdateConcurrencyException ex)
-                {
-                    throw new ConcurrentUpdateException("The User you are attempting to delete has been externally modified", ex);
-                }
-                return user;
+                user.Enabled = false;
             }
+            return UpdateUser(user);
         }
     }
 }

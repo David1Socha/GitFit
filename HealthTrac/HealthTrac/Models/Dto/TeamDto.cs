@@ -13,7 +13,6 @@ namespace HealthTrac.Models.Dto
         public string Name { get; set; }
         public String Description { get; set; }
         public Visibility Visibility { get; set; }
-        public bool Enabled { get; set; }
 
         public static TeamDto FromTeam(Team t)
         {
@@ -22,7 +21,6 @@ namespace HealthTrac.Models.Dto
                 DateCreated = t.DateCreated,
                 DateModified = t.DateModified,
                 Description = t.Description,
-                Enabled = t.Enabled,
                 ID = t.ID,
                 Name = t.Name,
                 Visibility = t.Visibility

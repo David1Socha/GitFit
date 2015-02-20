@@ -6,21 +6,15 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Owin.Security;
 using HealthTrac.Models;
 using Microsoft.AspNet.Identity.Owin;
-using HealthTrac.DataAccess.Entity;
 
 namespace HealthTrac.Controllers
 {
     [Authorize]
     public class AccountController : Controller
     {
-        public AccountController()
-            : this(new UserManager<User>(new UserStore<User>(new ApplicationDbContext())))
-        {
-        }
 
         public AccountController(UserManager<User> userManager)
         {
@@ -234,6 +228,7 @@ namespace HealthTrac.Controllers
         private async Task SignInAsync(User user, bool isPersistent)
         {
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ExternalCookie);
+            user.SecurityStamp = Guid.NewGuid().ToString();
             var identity = await UserManager.CreateIdentityAsync(user, DefaultAuthenticationTypes.ApplicationCookie);
             AuthenticationManager.SignIn(new AuthenticationProperties() { IsPersistent = isPersistent }, identity);
         }

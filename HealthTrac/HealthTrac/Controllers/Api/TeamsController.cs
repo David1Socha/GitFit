@@ -6,22 +6,16 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
-using HealthTrac.DataAccess.Entity;
 using HealthTrac.DataAccess;
 using HealthTrac.Models;
 using HealthTrac.Models.Dto;
 
 namespace HealthTrac.Controllers.Api
 {
+    [Authorize]
     public class TeamsController : ApiController
     {
         private ITeamAccessor acc;
-
-        public TeamsController()
-            : this(new EntityTeamAccessor())
-        {
-
-        }
 
         public TeamsController(ITeamAccessor acc)
         {

@@ -17,6 +17,7 @@ namespace HealthTrac.Models
     {
         public User()
         {
+            Enabled = true;
             DateCreated = DateTime.Now;
             DateModified = DateTime.Now;
         }

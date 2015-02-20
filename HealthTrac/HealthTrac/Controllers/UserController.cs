@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
 
 namespace HealthTrac.Controllers
 {
@@ -13,7 +14,12 @@ namespace HealthTrac.Controllers
     {
 
         private IUserAccessor userAccessor = new EntityUserAccessor();
-        private AccountController accountController = new AccountController();
+        private AccountController accountController;
+
+        public UserController(UserManager<User> userManager)
+        {
+            accountController = new AccountController(userManager);
+        }
         //
         // GET: /User/
         public ActionResult Index(string id)
