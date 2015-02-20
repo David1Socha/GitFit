@@ -3,4 +3,12 @@
 }
 
 <h2>@ViewBag.Title.</h2>
-<h3 class="text-error">Unsuccessful login with service.</h3>
+@if (ViewBag.NoAccountCreated)
+{
+    <h3>You must login through the mobile app to create a profile before you can login to the web dashboard.</h3>
+}
+else
+{
+    <h3 class="text-error">Unsuccessful login with service.</h3>
+}
+
