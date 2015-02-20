@@ -10,5 +10,31 @@
 <h3>Sex: @Model.Sex</h3>
 <h3>Height: @Model.Height</h3>
 <h3>Weight: @Model.Width</h3>
+<h3>Teams</h3>
+<table cellpadding="10">
+    <tr>
+        <th>Team Name</th>
+        <th>Member Since</th>
+        <th>Admin Status</th>
+    </tr>
+    @foreach (var membership in Model.Memberships)
+    {
+        if (membership.MembershipStatus == HealthTrac.Models.MembershipStatus.MEMBER || membership.MembershipStatus == HealthTrac.Models.MembershipStatus.ADMIN)
+        {
+            <tr>
+                <td>
+                    @Html.ActionLink(membership.Team.Name, "Profile", "Team", new { id = membership.Team.ID }, null)
+                </td>
+                <td>
+                    @membership.DateCreated.ToString("MMMM dd, yyyy")
+                </td>
+                <td>
+                    @Html.DisplayFor(modelMember => membership.MembershipStatus)
+                </td>
+            </tr>
+        }
+    }
+</table>
+
 
 
