@@ -108,7 +108,6 @@ namespace HealthTrac.Controllers.Api
             {
                 BirthDate = userDto.BirthDate,
                 Email = userDto.Email,
-                Enabled = userDto.Enabled,
                 FirstName = userDto.FirstName,
                 Height = userDto.Height,
                 LastName = userDto.LastName,
