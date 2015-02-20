@@ -33,7 +33,7 @@ namespace HealthTrac.Tests.Controllers.Api
         }
 
         [TestMethod]
-        public void TeamsControllerGetManyTeams()
+        public void TeamsControllerGetTeams()
         {
             var acc = Mock.Of<ITeamAccessor>(a => a.GetTeams() == _manyTeams);
             TeamsController controller = new TeamsController(acc);
@@ -42,7 +42,7 @@ namespace HealthTrac.Tests.Controllers.Api
         }
 
         [TestMethod]
-        public void TeamsControllerGetManyTeamsByUser()
+        public void TeamsControllerGetTeamsByUser()
         {
             var sampleUserId = "xyz";
             var acc = Mock.Of<ITeamAccessor>(a => a.GetTeams(sampleUserId) == _manyTeams);

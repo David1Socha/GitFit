@@ -33,5 +33,11 @@ namespace HealthTrac.Tests.Controllers.Api
             _activeMemberships = MembershipGenerator.GenerateActiveMemberships();
         }
 
+        [TestMethod]
+        public void MembershipsControllerGetMemberships()
+        {
+
+        }
+
     }
 }
