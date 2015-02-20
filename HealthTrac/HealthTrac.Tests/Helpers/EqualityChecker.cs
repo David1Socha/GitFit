@@ -32,5 +32,16 @@ namespace HealthTrac.Tests.Helpers
                 .All(t => t.Item1.EqualValues(t.Item2));
             return equal;
         }
+
+        public static bool EqualValues(this MembershipDto membershipDto, Membership membership)
+        {
+            bool equal = membershipDto.DateCreated == membership.DateCreated
+                && membershipDto.DateModified == membership.DateModified
+                && membershipDto.ID == membership.ID
+                && membershipDto.MembershipStatus == membership.MembershipStatus
+                && membershipDto.TeamID == membership.TeamID
+                && membershipDto.UserID == membership.UserID;
+            return equal;
+        }
     }
 }
