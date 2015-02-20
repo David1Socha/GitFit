@@ -20,6 +20,16 @@ namespace HealthTrac.DataAccess.Entity
             }
         }
 
+        public IEnumerable<Team> SearchTeams(string name)
+        {
+            using (var db = new ApplicationDbContext())
+            {
+                var teams = db.Teams
+                                .Where(t => t.Name.Contains(name)).ToList();
+                return teams;
+            }
+        }
+
         public IEnumerable<Team> GetTeams()
         {
             using (var db = new ApplicationDbContext())

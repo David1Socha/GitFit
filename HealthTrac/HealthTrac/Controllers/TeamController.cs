@@ -1,5 +1,7 @@
 ﻿using HealthTrac.Models;
 using HealthTrac.DataAccess;
+using HealthTrac.DataAccess.Entity;
+using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,22 +15,47 @@ namespace HealthTrac.Controllers
         //Changing the accessor interface broke this temporarily. Some of these methods are going to be in MembershipAccessor now
         private ITeamAccessor teamAccessor;
         private IMembershipAccessor membershipAccessor;
+        private AccountController accountController;
 
-        public TeamController(ITeamAccessor teamAcc, IMembershipAccessor membershipAcc)
+        public TeamController(ITeamAccessor teamAcc, IMembershipAccessor membershipAcc, UserManager<User> userManager)
         {
+            accountController = new AccountController(userManager);
             this.teamAccessor = teamAcc;
             this.membershipAccessor = membershipAcc;
         }
 
         // GET: /Team/
-        public ActionResult Index()
+        public ActionResult Index(string id)
         {
-            return View();
+            string searchString = id;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                var teams = teamAccessor.SearchTeams(id).ToList();
+                if (teams.Count == 0)
+                {
+                    return View(new List<Team>());
+                }
+                else
+                {
+                    return View(teams);
+                }             
+            }
+            else
+            {
+                return View();
+            }
         }
 
-        public List<Team> GetTeams(string userId)
+        public ActionResult Profile(long id)
         {
-            return teamAccessor.GetTeams(userId).ToList();
+            return View(teamAccessor.GetTeam(id));
+        }
+
+        public ActionResult YourTeams()
+        {
+            string userId = User.Identity.GetUserId();
+            return View(teamAccessor.GetTeams(userId).ToList());
         }
         public Team CreateTeam(Team team)
         {

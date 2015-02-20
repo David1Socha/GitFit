@@ -20,6 +20,22 @@ namespace HealthTrac.DataAccess.Entity
             }
         }
 
+        public IEnumerable<User> SearchUsers(string name)
+        {
+            using (var db = new ApplicationDbContext())
+            {
+                String[] names = name.Split(' ');
+                List<User> users = new List<User>();
+                foreach (string tempName in names)
+                {
+                    var tempUsers = db.Users
+                                    .Where(U => U.FirstName.Contains(tempName) || U.LastName.Contains(tempName) || U.UserName.Contains(tempName)).ToList();
+                    users.AddRange(tempUsers);
+                }
+                return users;
+            }
+        }
+
         public User UpdateUser(User user)
         {
             using (var db = new ApplicationDbContext())
