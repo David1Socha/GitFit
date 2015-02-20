@@ -66,7 +66,14 @@ namespace HealthTrac.Tests.Controllers.Api
         [TestMethod]
         public void TeamsControllerPutTeam()
         {
-
+            long id = 14;
+            var team = _sampleTeam2;
+            var mock = new Mock<ITeamAccessor>();
+            mock.Setup(acc => acc.UpdateTeam(team))
+                .Returns(team);
+            var con = new TeamsController(mock.Object);
+            con.PutTeam(id, team);
+            mock.Verify(acc => acc.UpdateTeam(team));
         }
     }
 }
