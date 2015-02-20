@@ -20,5 +20,17 @@ namespace HealthTrac.Tests.Helpers
                 && teamDto.Visibility == team.Visibility;
             return equal;
         }
+
+        public static bool EqualValues(this IEnumerable<TeamDto> teamDtos, IEnumerable<Team> teams)
+        {
+            if (teamDtos.Count() != teams.Count())
+            {
+                return false;
+            }
+            bool equal = teamDtos
+                .Zip(teams, (dto, t) => new Tuple<TeamDto, Team>(dto, t))
+                .All(t => t.Item1.EqualValues(t.Item2));
+            return equal;
+        }
     }
 }
