@@ -6,7 +6,6 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
-using HealthTrac.DataAccess.Entity;
 using HealthTrac.Models;
 using HealthTrac.Models.Dto;
 using HealthTrac.DataAccess;
@@ -17,12 +16,6 @@ namespace HealthTrac.Controllers.Api
     public class UsersController : ApiController
     {
         private IUserAccessor accessor;
-
-        public UsersController()
-            : this(new EntityUserAccessor())
-        {
-
-        }
 
         public UsersController(IUserAccessor acc)
         {
