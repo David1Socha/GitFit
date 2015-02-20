@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.Owin.Security;
 
 namespace HealthTrac.Controllers
 {
@@ -17,9 +18,9 @@ namespace HealthTrac.Controllers
         private IMembershipAccessor membershipAccessor;
         private AccountController accountController;
 
-        public TeamController(ITeamAccessor teamAcc, IMembershipAccessor membershipAcc, UserManager<User> userManager)
+        public TeamController(ITeamAccessor teamAcc, IMembershipAccessor membershipAcc, UserManager<User> userManager, IAuthenticationManager auth)
         {
-            accountController = new AccountController(userManager);
+            accountController = new AccountController(userManager, auth);
             this.teamAccessor = teamAcc;
             this.membershipAccessor = membershipAcc;
         }
@@ -39,7 +40,7 @@ namespace HealthTrac.Controllers
                 else
                 {
                     return View(teams);
-                }             
+                }
             }
             else
             {

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
+using Microsoft.Owin.Security;
 
 namespace HealthTrac.Controllers
 {
@@ -16,9 +17,10 @@ namespace HealthTrac.Controllers
         private IUserAccessor userAccessor = new EntityUserAccessor();
         private AccountController accountController;
 
-        public UserController(UserManager<User> userManager)
+
+        public UserController(UserManager<User> userManager, IAuthenticationManager auth)
         {
-            accountController = new AccountController(userManager);
+            accountController = new AccountController(userManager, auth);
         }
         //
         // GET: /User/
@@ -36,7 +38,7 @@ namespace HealthTrac.Controllers
                 else
                 {
                     return View(users);
-                }                
+                }
             }
             return View();
 
@@ -49,5 +51,5 @@ namespace HealthTrac.Controllers
         {
             return View(userAccessor.FindUser(id));
         }
-	}
+    }
 }
