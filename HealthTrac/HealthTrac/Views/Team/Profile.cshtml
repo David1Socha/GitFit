@@ -8,3 +8,27 @@
 <h3>Team Description: @Model.Description</h3>
 <h3>Privacy: @Model.Visibility</h3>
 
+<table cellpadding="10">
+    <tr>
+        <th>User Name</th>
+        <th>Member Since</th>
+        <th>Admin Status</th>
+    </tr>
+    @foreach (var membership in Model.Memberships)
+    {
+        if (membership.MembershipStatus == HealthTrac.Models.MembershipStatus.MEMBER || membership.MembershipStatus == HealthTrac.Models.MembershipStatus.ADMIN) 
+        { 
+            <tr>
+                <td>
+                    @Html.ActionLink(membership.User.UserName, "Profile", "User", new { id = membership.User.Id }, null)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelMember => membership.DateCreated.ToString("MMMM dd, yyy"));
+                </td>
+                <td>
+                    @Html.DisplayFor(modelMember => membership.MembershipStatus);
+                </td>
+            </tr>
+        }
+    }
+</table>
