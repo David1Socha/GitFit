@@ -39,5 +39,15 @@ namespace HealthTrac.Tests.Controllers.Api
             var teams = controller.GetTeams();
             Assert.IsTrue(teams.EqualValues(_manyTeams));
         }
+
+        [TestMethod]
+        public void TeamsControllerGetManyTeamsByUserTest()
+        {
+            var sampleUserId = "xyz";
+            var acc = Mock.Of<ITeamAccessor>(a => a.GetTeams(sampleUserId) == _manyTeams);
+            TeamsController con = new TeamsController(acc);
+            var teams = con.GetTeams(sampleUserId);
+            Assert.IsTrue(teams.EqualValues(_manyTeams));
+        }
     }
 }
