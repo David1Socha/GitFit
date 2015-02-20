@@ -18,4 +18,6 @@
     <string name="EXTRA_PROVIDER">com.raik383h_group_6.healthtracmobile.PROVIDER</string>
     <string name="EXTRA_ACCESS_TOKEN">com.raik383h_group_6.healthtracmobile.ACCESS_TOKEN</string>
     <string name="EXTRA_ACCESS_SECRET">com.raik383h_group_6.healthtracmobile.ACCESS_SECRET</string>
+    <string name="title_activity_authentication">AuthenticationActivity</string>
+
 </resources>
