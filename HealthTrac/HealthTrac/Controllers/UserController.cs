@@ -35,5 +35,13 @@ namespace HealthTrac.Controllers
             return View();
 
         }
+        public ActionResult Profile(string id)
+        {
+            return ViewProfile(id);
+        }
+        public ActionResult ViewProfile(string id)
+        {
+            return View(userAccessor.FindUser(id));
+        }
 	}
 }

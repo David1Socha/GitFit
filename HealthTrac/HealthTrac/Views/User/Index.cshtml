@@ -30,7 +30,7 @@
             {
                 <tr>
                     <td>
-                        @Html.DisplayFor(modelUser => user.UserName)
+                        @Html.ActionLink(user.UserName, "Profile", "User", new { id = user.Id }, null)
                     </td>
                     <td>
                         @Html.DisplayFor(modelUser => user.DateCreated)
