@@ -32,5 +32,16 @@ namespace HealthTrac.Tests.Controllers.Api
             _users = UserGenerator.GenerateUsers();
         }
 
+        [TestMethod]
+        public void UsersControllerGetUsers()
+        {
+            var users = _users;
+            var accessor = Mock.Of<IUserAccessor>(acc => acc.GetUsers() == _users);
+            var con = new UsersController(accessor);
+            var resultUsers = con.GetUsers();
+            Assert.IsTrue(resultUsers.EqualValues(users));
+        }
+
     }
+
 }
