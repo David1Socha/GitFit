@@ -49,7 +49,8 @@ namespace HealthTrac.Controllers
 
         public ActionResult Profile(long id)
         {
-            return View(teamAccessor.GetTeam(id));
+            Team team = teamAccessor.GetTeam(id);
+            return View(team);
         }
 
         public ActionResult YourTeams()
