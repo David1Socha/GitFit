@@ -56,7 +56,8 @@ namespace HealthTrac.Tests.Controllers.Api
         public void MembershipsControllerGetMembershipsByTeam()
         {
             long teamId = 14;
-            var userMemberships = new Membership[] { _memberMembership };
+            var membership = _memberMembership;
+            var userMemberships = new Membership[] { membership };
             var acc = Mock.Of<IMembershipAccessor>(a => a.GetMemberships(teamId) == userMemberships);
             var con = new MembershipsController(acc);
             var memberships = con.GetMemberships(teamId);
@@ -67,12 +68,13 @@ namespace HealthTrac.Tests.Controllers.Api
         public void MembershipsControllerGetMembership()
         {
             long id = 1;
-            var acc = Mock.Of<IMembershipAccessor>(a => a.GetMembership(id) == _adminMembership);
+            var membership = _adminMembership;
+            var acc = Mock.Of<IMembershipAccessor>(a => a.GetMembership(id) == membership);
             var con = new MembershipsController(acc);
             var response = con.GetMembership(id);
             var result = response as OkNegotiatedContentResult<MembershipDto>;
             var resultMembership = result.Content;
-            Assert.IsTrue(resultMembership.EqualValues(_adminMembership));
+            Assert.IsTrue(resultMembership.EqualValues(membership));
         }
 
         [TestMethod]
@@ -80,12 +82,26 @@ namespace HealthTrac.Tests.Controllers.Api
         {
             long teamId = 14;
             string userId = "abc";
-            var acc = Mock.Of<IMembershipAccessor>(a => a.GetMembership(teamId, userId) == _memberMembership);
+            var membership = _memberMembership;
+            var acc = Mock.Of<IMembershipAccessor>(a => a.GetMembership(teamId, userId) == membership);
             var con = new MembershipsController(acc);
             var response = con.GetMembership(userId, teamId);
             var result = response as OkNegotiatedContentResult<MembershipDto>;
             var resultMembership = result.Content;
-            Assert.IsTrue(resultMembership.EqualValues(_memberMembership));
+            Assert.IsTrue(resultMembership.EqualValues(membership));
+        }
+
+        [TestMethod]
+        public void MembershipsControllerPutMembership()
+        {
+            long id = 1;
+            var membership = _adminMembership;
+            var mock = new Mock<IMembershipAccessor>();
+            mock.Setup(acc => acc.UpdateMembership(membership))
+                .Returns(membership);
+            var con = new MembershipsController(mock.Object);
+            con.PutMembership(id, membership);
+            mock.Verify(acc => acc.UpdateMembership(membership));
         }
 
     }
