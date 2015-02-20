@@ -36,7 +36,10 @@ namespace HealthTrac.Tests.Controllers.Api
         [TestMethod]
         public void MembershipsControllerGetMemberships()
         {
-
+            var acc = Mock.Of<IMembershipAccessor>(a => a.GetMemberships() == _activeMemberships);
+            var controller = new MembershipsController(acc);
+            var memberships = controller.GetMemberships();
+            Assert.IsTrue(memberships.EqualValues(_activeMemberships));
         }
 
     }
