@@ -12,6 +12,7 @@ using HealthTrac.Models;
 using HealthTrac.Models.Dto;
 using HealthTrac.Controllers.Api;
 using Moq;
+using System.Net.Http;
 using Moq.Linq;
 using HealthTrac.Tests.Helpers;
 
@@ -32,12 +33,62 @@ namespace HealthTrac.Tests.Controllers.Api
         }
 
         [TestMethod]
-        public void TeamsControllerGetManyTeamsTest()
+        public void TeamsControllerGetTeams()
         {
             var acc = Mock.Of<ITeamAccessor>(a => a.GetTeams() == _manyTeams);
             TeamsController controller = new TeamsController(acc);
             var teams = controller.GetTeams();
             Assert.IsTrue(teams.EqualValues(_manyTeams));
+        }
+
+        [TestMethod]
+        public void TeamsControllerGetTeamsByUser()
+        {
+            var sampleUserId = "xyz";
+            var acc = Mock.Of<ITeamAccessor>(a => a.GetTeams(sampleUserId) == _manyTeams);
+            TeamsController con = new TeamsController(acc);
+            var teams = con.GetTeams(sampleUserId);
+            Assert.IsTrue(teams.EqualValues(_manyTeams));
+        }
+
+        [TestMethod]
+        public void TeamsControllerGetTeamById()
+        {
+            long id = 12;
+            var acc = Mock.Of<ITeamAccessor>(a => a.GetTeam(id) == _sampleTeam1);
+            TeamsController con = new TeamsController(acc);
+            var response = con.GetTeam(id);
+            var result = response as OkNegotiatedContentResult<TeamDto>;
+            var team = result.Content;
+            Assert.IsTrue(team.EqualValues(_sampleTeam1));
+        }
+
+        [TestMethod]
+        public void TeamsControllerPutTeam()
+        {
+            long id = 14;
+            var team = _sampleTeam2;
+            var mock = new Mock<ITeamAccessor>();
+            mock.Setup(acc => acc.UpdateTeam(team))
+                .Returns(team);
+            var con = new TeamsController(mock.Object);
+            con.PutTeam(id, team);
+            mock.Verify(acc => acc.UpdateTeam(team));
+        }
+
+        [TestMethod]
+        public void TeamsControllerPostTeam()
+        {
+            var team = _sampleTeam1;
+            var mock = new Mock<ITeamAccessor>();
+            mock.Setup(acc => acc.CreateTeam(team))
+                .Returns(team);
+            var con = new TeamsController(mock.Object);
+            var response = con.PostTeam(team);
+            var result = response as CreatedAtRouteNegotiatedContentResult<TeamDto>;
+            var resultTeam = result.Content;
+            Assert.IsTrue(resultTeam.EqualValues(team));
+            mock.Verify(acc => acc.CreateTeam(team));
         }
     }
 }

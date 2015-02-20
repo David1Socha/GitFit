@@ -13,6 +13,7 @@ namespace HealthTrac.Tests.Helpers
         {
             return new Team
             {
+                ID = 12,
                 DateCreated = new DateTime(2000, 4, 20),
                 DateModified = new DateTime(2005, 4, 20),
                 Name = "Fake team 9000",
@@ -25,6 +26,7 @@ namespace HealthTrac.Tests.Helpers
         {
             return new Team
             {
+                ID = 14,
                 DateCreated = new DateTime(1000, 10, 10),
                 DateModified = new DateTime(1111, 11, 11),
                 Description = "Enough said",
