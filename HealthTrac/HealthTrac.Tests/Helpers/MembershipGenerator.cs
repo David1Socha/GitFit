@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace HealthTrac.Tests.Helpers
 {
-    class MembershipGenerator
+    public static class MembershipGenerator
     {
         public static Membership GenerateAdminMembership()
         {

@@ -21,11 +21,16 @@ namespace HealthTrac.Tests.Controllers.Api
     [TestClass]
     public class MembershipsControllerTest
     {
+        private Membership _memberMembership, _adminMembership, _bannedMembership;
+        private Membership[] _activeMemberships;
 
         [TestInitialize]
         public void Initialize()
         {
-
+            _memberMembership = MembershipGenerator.GenerateMemberMembership();
+            _adminMembership = MembershipGenerator.GenerateAdminMembership();
+            _bannedMembership = MembershipGenerator.GenerateBannedMembership();
+            _activeMemberships = MembershipGenerator.GenerateActiveMemberships();
         }
 
     }
