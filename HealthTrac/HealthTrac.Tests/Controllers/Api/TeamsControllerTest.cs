@@ -75,5 +75,20 @@ namespace HealthTrac.Tests.Controllers.Api
             con.PutTeam(id, team);
             mock.Verify(acc => acc.UpdateTeam(team));
         }
+
+        [TestMethod]
+        public void TeamsControllerPostTeam()
+        {
+            var team = _sampleTeam1;
+            var mock = new Mock<ITeamAccessor>();
+            mock.Setup(acc => acc.CreateTeam(team))
+                .Returns(team);
+            var con = new TeamsController(mock.Object);
+            var response = con.PostTeam(team);
+            var result = response as CreatedAtRouteNegotiatedContentResult<TeamDto>;
+            var resultTeam = result.Content;
+            Assert.IsTrue(resultTeam.EqualValues(team));
+            mock.Verify(acc => acc.CreateTeam(team));
+        }
     }
 }
