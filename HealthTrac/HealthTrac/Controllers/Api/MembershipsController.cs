@@ -10,22 +10,15 @@ using System.Web.Http;
 using System.Web.Http.Description;
 using HealthTrac.Models;
 using HealthTrac.DataAccess;
-using HealthTrac.DataAccess.Entity;
 using HealthTrac.Models.Dto;
 
 namespace HealthTrac.Controllers.Api
 {
+    [Authorize]
     public class MembershipsController : ApiController
     {
 
         private IMembershipAccessor acc;
-        private ApplicationDbContext db;
-
-        public MembershipsController()
-            : this(new EntityMembershipAccessor())
-        {
-
-        }
 
         public MembershipsController(IMembershipAccessor acc)
         {
@@ -35,6 +28,18 @@ namespace HealthTrac.Controllers.Api
         public IEnumerable<MembershipDto> GetMemberships()
         {
             return acc.GetMemberships().Select(m => MembershipDto.FromMembership(m));
+        }
+
+        // GET: api/Memberships?userId=xyz&teamId=5
+        [ResponseType(typeof(MembershipDto))]
+        public IHttpActionResult GetMembership(string userId, long teamId)
+        {
+            var membership = acc.GetMembership(teamId, userId);
+            if (membership == null)
+            {
+                return NotFound();
+            }
+            return Ok(MembershipDto.FromMembership(membership));
         }
 
         // GET: api/Memberships/5
@@ -48,6 +53,20 @@ namespace HealthTrac.Controllers.Api
             }
 
             return Ok(MembershipDto.FromMembership(membership));
+        }
+
+        // GET: api/Memberships?userId=xyz
+        public IEnumerable<MembershipDto> GetMemberships(string userId)
+        {
+            return acc.GetMemberships(userId).
+                Select(m => MembershipDto.FromMembership(m));
+        }
+
+        // GET: api/Memberships?teamId=5
+        public IEnumerable<MembershipDto> GetMemberships(long teamId)
+        {
+            return acc.GetMemberships(teamId).
+                Select(m => MembershipDto.FromMembership(m));
         }
 
         // PUT: api/Memberships/5

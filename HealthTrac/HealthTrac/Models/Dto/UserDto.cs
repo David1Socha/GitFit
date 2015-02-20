@@ -7,7 +7,6 @@ namespace HealthTrac.Models.Dto
 {
     public class UserDto
     {
-        public bool Enabled { get; set; }
         public DateTime DateCreated { get; set; }
         public DateTime DateModified { get; set; }
         public String FirstName { get; set; }
@@ -25,7 +24,6 @@ namespace HealthTrac.Models.Dto
         {
             return new UserDto
             {
-                Enabled = u.Enabled,
                 DateCreated = u.DateCreated,
                 DateModified = u.DateModified,
                 FirstName = u.FirstName,

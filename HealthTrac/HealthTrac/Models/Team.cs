@@ -13,6 +13,11 @@ namespace HealthTrac.Models
 
     public class Team : DateTrackingModel
     {
+
+        public Team()
+        {
+            Enabled = true;
+        }
         public long ID { get; set; }
         public string Name { get; set; }
         public String Description { get; set; }

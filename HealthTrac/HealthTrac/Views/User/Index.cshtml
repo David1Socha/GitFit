@@ -1,0 +1,45 @@
+﻿@model IEnumerable<HealthTrac.Models.User>
+
+@{
+    ViewBag.Title = "Users";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@ViewBag.Title</h2>
+@using (Html.BeginForm())
+{
+    <p>
+        Search for Users: @Html.TextBox("id") <br />
+        <input type="submit" value="Search" />
+    </p>
+}
+@if (Model != null) 
+{    
+    if (Model.Count() == 0)
+    {
+        <h4>No results were found</h4>
+    }
+    else
+    {
+        <table cellpadding="5">
+            <tr>
+                <th>User Name</th>
+                <th>Created</th>
+            </tr>
+            @foreach (var user in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.ActionLink(user.UserName, "Profile", "User", new { id = user.Id }, null)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelUser => user.DateCreated)
+                    </td>
+                </tr>
+            }
+        </table>
+    }
+}
+
+
+

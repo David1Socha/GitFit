@@ -6,25 +6,20 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Owin.Security;
 using HealthTrac.Models;
 using Microsoft.AspNet.Identity.Owin;
-using HealthTrac.DataAccess.Entity;
 
 namespace HealthTrac.Controllers
 {
     [Authorize]
     public class AccountController : Controller
     {
-        public AccountController()
-            : this(new UserManager<User>(new UserStore<User>(new ApplicationDbContext())))
-        {
-        }
 
-        public AccountController(UserManager<User> userManager)
+        public AccountController(UserManager<User> userManager, IAuthenticationManager auth)
         {
             UserManager = userManager;
+            AuthenticationManager = auth;
         }
 
         public UserManager<User> UserManager { get; private set; }
@@ -104,10 +99,12 @@ namespace HealthTrac.Controllers
             }
             else
             {
+                ViewBag.NoAccountCreated = true;
+                return View("ExternalLoginFailure");              
                 // If the user does not have an account, then prompt the user to create an account
-                ViewBag.ReturnUrl = returnUrl;
-                ViewBag.LoginProvider = loginInfo.Login.LoginProvider;
-                return View("ExternalLoginConfirmation", new ExternalLoginConfirmationViewModel { UserName = loginInfo.DefaultUserName });
+                //ViewBag.ReturnUrl = returnUrl;
+                //ViewBag.LoginProvider = loginInfo.Login.LoginProvider;
+                //return View("ExternalLoginConfirmation", new ExternalLoginConfirmationViewModel { UserName = loginInfo.DefaultUserName });
             }
         }
 
@@ -225,15 +222,14 @@ namespace HealthTrac.Controllers
 
         private IAuthenticationManager AuthenticationManager
         {
-            get
-            {
-                return HttpContext.GetOwinContext().Authentication;
-            }
+            get;
+            set;
         }
 
         private async Task SignInAsync(User user, bool isPersistent)
         {
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ExternalCookie);
+            user.SecurityStamp = Guid.NewGuid().ToString();
             var identity = await UserManager.CreateIdentityAsync(user, DefaultAuthenticationTypes.ApplicationCookie);
             AuthenticationManager.SignIn(new AuthenticationProperties() { IsPersistent = isPersistent }, identity);
         }
