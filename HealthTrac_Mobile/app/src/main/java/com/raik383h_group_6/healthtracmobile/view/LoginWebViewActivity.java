@@ -27,7 +27,6 @@ import roboguice.util.RoboContext;
 
 public abstract class LoginWebViewActivity extends ActionBarActivity implements RoboContext {
 
-    public static String DUMMY_CALLBACK = "http://www.example.com/oauth_callback";
     private WebView webView;
     private IOAuthServiceAdapter oAuthService;
     private Token requestToken;
@@ -76,13 +75,13 @@ public abstract class LoginWebViewActivity extends ActionBarActivity implements 
     }
 
     private void setUpWebView() {
-        WebViewClient webViewClient = new LoginWebViewClient();
+        //WebViewClient webViewClient = new LoginWebViewClient();
         webView.clearCache(true);
         WebSettings settings = webView.getSettings();
         settings.setJavaScriptEnabled(true);
         settings.setBuiltInZoomControls(true);
         settings.setDisplayZoomControls(false);
-        webView.setWebViewClient(webViewClient);
+        //webView.setWebViewClient(webViewClient);
     }
 
     private void saveTokenAndFinish(Token token) {

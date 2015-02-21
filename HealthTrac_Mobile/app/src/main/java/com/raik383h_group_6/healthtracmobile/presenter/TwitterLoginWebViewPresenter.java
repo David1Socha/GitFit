@@ -1,14 +1,18 @@
-package com.raik383h_group_6.healthtracmobile.view;
+package com.raik383h_group_6.healthtracmobile.presenter;
 
 import com.raik383h_group_6.healthtracmobile.service.IOAuthServiceAdapter;
 import com.raik383h_group_6.healthtracmobile.service.IOAuthServiceAdapterFactory;
 
-public class TwitterLoginWebViewActivity extends LoginWebViewActivity {
+public class TwitterLoginWebViewPresenter extends LoginWebViewPresenter {
 
     //TODO obfuscate secrets?
     private static final String API_KEY = "fHG53L9zDOTltJ77JPjFGzxf8",
             API_SECRET = "QbX7YXFiZb49HQP0jz0H72pKp5pBUEgJuJBswIroh29NjUrfXU",
             VERIFIER_NAME="oauth_verifier";
+
+    public TwitterLoginWebViewPresenter(IOAuthServiceAdapterFactory factory) {
+        super(factory);
+    }
 
     @Override
     protected String getVerifierName() {
