@@ -69,7 +69,7 @@ public abstract class BrowserLoginPresenter extends BasePresenter<BrowserLoginAc
         @Override
         public void onPageStarted(WebView view, String url, Bitmap favicon) {
             if ((url != null) && (url.startsWith(DUMMY_CALLBACK))) { // Don't open callback url
-                //view.stop / hide
+                getView().stopWebView();
                 Uri uri = Uri.parse(url);
                 if (uri.getQueryParameter(getVerifierName()) == null) { //Check if we're getting called back because of OAuth cancellation
                     getView().finishInShame();

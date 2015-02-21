@@ -48,12 +48,12 @@ public class LoginPromptActivity extends Activity {
     }
 
     public void loginTwitter(View v) {
-        Intent intent = new Intent(this, TwitterLoginWebViewActivity.class);
+        Intent intent = new Intent(this, BrowserLoginActivity.class);
         startActivityForResult(intent, TW_LOGIN_REQ);
     }
 
     public void loginFacebook(View v) {
-        Intent intent = new Intent(this, FacebookLoginWebViewActivity.class);
+        Intent intent = new Intent(this, BrowserLoginActivity.class);
         startActivityForResult(intent, FB_LOGIN_REQ);
     }
 }
