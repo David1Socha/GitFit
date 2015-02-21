@@ -13,6 +13,7 @@ import com.raik383h_group_6.healthtracmobile.model.Token;
 import com.raik383h_group_6.healthtracmobile.service.IOAuthServiceAdapter;
 import com.raik383h_group_6.healthtracmobile.service.IOAuthServiceAdapterFactory;
 import com.raik383h_group_6.healthtracmobile.view.BrowserLoginActivity;
+import com.raik383h_group_6.healthtracmobile.view.LoginPromptActivity;
 
 import java.util.concurrent.ExecutionException;
 
@@ -20,17 +21,13 @@ public abstract class BrowserLoginPresenter extends BasePresenter<BrowserLoginAc
 
     private IOAuthServiceAdapter oAuthService;
     private Token requestToken;
+    private BrowserLoginActivity view;
     public static String DUMMY_CALLBACK = "http://www.example.com/oauth_callback";
     private WebView webView;
 
     protected abstract String getVerifierName();
 
     protected abstract IOAuthServiceAdapter buildOAuthServiceAdapter(IOAuthServiceAdapterFactory factory);
-
-    @Inject
-    public BrowserLoginPresenter(IOAuthServiceAdapterFactory factory) {
-        oAuthService = buildOAuthServiceAdapter(factory);
-    }
 
     public void setUpWebView(WebView web) {
         webView = web;
@@ -41,6 +38,11 @@ public abstract class BrowserLoginPresenter extends BasePresenter<BrowserLoginAc
         settings.setBuiltInZoomControls(true);
         settings.setDisplayZoomControls(false);
         webView.setWebViewClient(webViewClient);
+    }
+
+    public void initialize(IOAuthServiceAdapterFactory factory, BrowserLoginActivity view) {
+        oAuthService = this.buildOAuthServiceAdapter(factory);
+        this.view = view;
     }
 
     public void beginAuthorization() {
@@ -87,19 +89,19 @@ public abstract class BrowserLoginPresenter extends BasePresenter<BrowserLoginAc
 
     private class LoginWebViewClient extends WebViewClient {
         @Override
-        public void onPageStarted(WebView view, String url, Bitmap favicon) {
+        public void onPageStarted(WebView webView, String url, Bitmap favicon) {
             if ((url != null) && (url.startsWith(DUMMY_CALLBACK))) { // Don't open callback url
-                view.stopLoading();
-                view.setVisibility(View.INVISIBLE);
+                webView.stopLoading();
+                webView.setVisibility(View.INVISIBLE);
                 Uri uri = Uri.parse(url);
                 if (uri.getQueryParameter(getVerifierName()) == null) { //Check if we're getting called back because of OAuth cancellation
-                    getView().finishInShame();
+                    view.finishInShame();
                 } else {
                     Token token = getToken(uri);
-                    getView().finishWithToken(token);
+                    view.finishWithToken(token);
                 }
             } else {
-                super.onPageStarted(view, url, favicon);
+                super.onPageStarted(webView, url, favicon);
             }
         }
     }

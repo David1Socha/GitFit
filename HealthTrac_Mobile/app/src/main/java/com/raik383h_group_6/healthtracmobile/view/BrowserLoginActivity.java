@@ -37,9 +37,10 @@ public class BrowserLoginActivity extends ActionBarActivity implements RoboConte
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        RoboGuice.getInjector(this).getInstance(IOAuthServiceAdapterFactory.class);
+        RoboGuice.getInjector(this).injectMembersWithoutViews(this);
         webView = new WebView(this);
         browserLoginPresenter.setUpWebView(webView);
+        browserLoginPresenter.initialize(factory, this);
         browserLoginPresenter.beginAuthorization();
     }
 
