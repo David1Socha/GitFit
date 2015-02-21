@@ -2,6 +2,7 @@ package com.raik383h_group_6.healthtracmobile.service;
 
 import org.scribe.builder.ServiceBuilder;
 import org.scribe.builder.api.FacebookApi;
+import org.scribe.builder.api.TwitterApi;
 import org.scribe.oauth.OAuthService;
 
 public class ScribeOAuthServiceAdapterFactory implements IOAuthServiceAdapterFactory{
@@ -20,7 +21,7 @@ public class ScribeOAuthServiceAdapterFactory implements IOAuthServiceAdapterFac
 
     @Override
     public IOAuthServiceAdapter buildTwitterOAuthServiceAdapter(String apiKey, String apiSecret, String callback) {
-        Class apiClass = FacebookApi.class;
+        Class apiClass = TwitterApi.class;
         OAuthService service = new ServiceBuilder()
                 .provider(apiClass)
                 .apiKey(apiKey)
