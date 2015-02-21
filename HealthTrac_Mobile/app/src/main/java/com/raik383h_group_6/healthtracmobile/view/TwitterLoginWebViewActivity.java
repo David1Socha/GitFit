@@ -1,4 +1,4 @@
-package com.raik383h_group_6.healthtracmobile;
+package com.raik383h_group_6.healthtracmobile.view;
 
 import com.raik383h_group_6.healthtracmobile.service.IOAuthServiceAdapter;
 import com.raik383h_group_6.healthtracmobile.service.IOAuthServiceAdapterFactory;

@@ -1,4 +1,4 @@
-package com.raik383h_group_6.healthtracmobile.modules;
+package com.raik383h_group_6.healthtracmobile.module;
 
 import com.google.inject.AbstractModule;
 import com.raik383h_group_6.healthtracmobile.service.IOAuthServiceAdapterFactory;

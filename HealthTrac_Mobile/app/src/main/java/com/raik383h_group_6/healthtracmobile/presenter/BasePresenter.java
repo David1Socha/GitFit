@@ -1,4 +1,4 @@
-package com.raik383h_group_6.healthtracmobile;
+package com.raik383h_group_6.healthtracmobile.presenter;
 
 import android.app.Activity;
 

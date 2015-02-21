@@ -1,4 +1,4 @@
-package com.raik383h_group_6.healthtracmobile;
+package com.raik383h_group_6.healthtracmobile.view;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -13,6 +13,7 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import com.google.inject.Inject;
 import com.google.inject.Key;
+import com.raik383h_group_6.healthtracmobile.R;
 import com.raik383h_group_6.healthtracmobile.model.Token;
 import com.raik383h_group_6.healthtracmobile.service.*;
 
@@ -30,7 +31,8 @@ public abstract class LoginWebViewActivity extends ActionBarActivity implements 
     private WebView webView;
     private IOAuthServiceAdapter oAuthService;
     private Token requestToken;
-    @Inject IOAuthServiceAdapterFactory factory;
+    @Inject
+    IOAuthServiceAdapterFactory factory;
     protected HashMap<Key<?>,Object> scopedObjects = new HashMap<Key<?>, Object>();
 
     protected abstract IOAuthServiceAdapter buildOAuthServiceAdapter(IOAuthServiceAdapterFactory factory);
