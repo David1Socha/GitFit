@@ -10,7 +10,6 @@ import android.webkit.WebViewClient;
 import com.raik383h_group_6.healthtracmobile.model.Token;
 import com.raik383h_group_6.healthtracmobile.service.IOAuthServiceAdapter;
 import com.raik383h_group_6.healthtracmobile.view.BrowserLoginActivity;
-import com.raik383h_group_6.healthtracmobile.view.LoginPromptActivity;
 
 import java.util.concurrent.ExecutionException;
 
@@ -64,7 +63,7 @@ public abstract class BrowserLoginPresenter {
     }
 
     private Token getToken(Uri uri) {
-        final String verifier = uri.getQueryParameter(getVerifierName());
+        final String verifier = uri.getQueryParameter(oAuthService.getVerifierName());
         Token token = null;
         try {
             token = (new AsyncTask<Void, Void, Token>() {
@@ -86,7 +85,7 @@ public abstract class BrowserLoginPresenter {
                 webView.stopLoading();
                 webView.setVisibility(View.INVISIBLE);
                 Uri uri = Uri.parse(url);
-                if (uri.getQueryParameter(getVerifierName()) == null) { //Check if we're getting called back because of OAuth cancellation
+                if (uri.getQueryParameter(oAuthService.getVerifierName()) == null) { //Check if we're getting called back because of OAuth cancellation
                     view.finishInShame();
                 } else {
                     Token token = getToken(uri);

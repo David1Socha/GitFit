@@ -6,7 +6,6 @@ import org.scribe.oauth.OAuthService;
 
 public abstract class ScribeOAuthServiceAdapter implements IOAuthServiceAdapter {
     private OAuthService service;
-    public static final String DUMMY_CALLBACK = ""
 
     public Token getRequestToken() {
         org.scribe.model.Token scribeToken = service.getRequestToken();
