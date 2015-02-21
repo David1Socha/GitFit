@@ -20,5 +20,7 @@
     <string name="EXTRA_ACCESS_TOKEN">com.raik383h_group_6.healthtracmobile.ACCESS_TOKEN</string>
     <string name="EXTRA_ACCESS_SECRET">com.raik383h_group_6.healthtracmobile.ACCESS_SECRET</string>
     <string name="title_activity_authentication">AuthenticationActivity</string>
+    <string name="create_account">Create account</string>
+    <string name="sign_in">Sign in to existing account</string>
 
 </resources>
