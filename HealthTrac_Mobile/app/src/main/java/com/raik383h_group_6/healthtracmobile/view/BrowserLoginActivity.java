@@ -19,14 +19,11 @@ import roboguice.RoboGuice;
 import roboguice.inject.RoboInjector;
 import roboguice.util.RoboContext;
 
-import static com.google.inject.Key.*;
-import static com.google.inject.name.Names.named;
-
 
 public class BrowserLoginActivity extends ActionBarActivity implements RoboContext {
 
     private WebView webView;
-    private BrowserLoginPresenter presenter;
+    @Inject private BrowserLoginPresenter presenter;
     private IOAuthServiceAdapter oAuthService;
 
     protected HashMap<Key<?>,Object> scopedObjects = new HashMap<Key<?>, Object>();
