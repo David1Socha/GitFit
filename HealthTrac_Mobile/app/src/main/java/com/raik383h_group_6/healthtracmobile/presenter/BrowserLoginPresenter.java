@@ -31,7 +31,7 @@ public class BrowserLoginPresenter {
         webView.setWebViewClient(webViewClient);
     }
 
-    public void initialize(IOAuthServiceAdapter serviceAdapter, BrowserLoginActivity view) {
+    public void initialize( IOAuthServiceAdapter serviceAdapter, BrowserLoginActivity view) {
         oAuthService = serviceAdapter;
         this.view = view;
     }

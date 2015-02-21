@@ -13,6 +13,10 @@ public abstract class ScribeOAuthServiceAdapter implements IOAuthServiceAdapter 
         return reqToken;
     }
 
+    public void setService(OAuthService service) {
+        this.service = service;
+    }
+
     public String getAuthorizationUrl(Token t) {
         org.scribe.model.Token scribeToken = t == null ? null
                 : new org.scribe.model.Token(t.getToken(), t.getSecret());
