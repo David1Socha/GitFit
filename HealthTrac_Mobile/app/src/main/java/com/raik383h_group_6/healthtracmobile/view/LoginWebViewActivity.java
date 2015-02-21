@@ -98,23 +98,7 @@ public abstract class LoginWebViewActivity extends ActionBarActivity implements 
         finish();
     }
 
-    private class LoginWebViewClient extends WebViewClient {
-        @Override
-        public void onPageStarted(WebView view, String url, Bitmap favicon) {
-            if ((url != null) && (url.startsWith(DUMMY_CALLBACK))) { // Don't open callback url
-                webView.stopLoading();
-                webView.setVisibility(View.INVISIBLE);
-                Uri uri = Uri.parse(url);
-                if (uri.getQueryParameter(getVerifierName()) == null) { //Check if we're getting called back because of OAuth cancellation
-                    finishInShame();
-                } else {
-                    saveToken(uri);
-                }
-            } else {
-                super.onPageStarted(view, url, favicon);
-            }
-        }
-    }
+
 
     private void saveToken(Uri uri) {
         final String verifier = uri.getQueryParameter(getVerifierName());
