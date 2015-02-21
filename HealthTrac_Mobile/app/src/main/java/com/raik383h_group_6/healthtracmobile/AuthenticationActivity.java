@@ -4,14 +4,15 @@ import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
 
 public class AuthenticationActivity extends Activity {
-    public static final int CREATE_ACCOUNT=1,
-    SIGN_IN=2;
+    public static final int CREATE_ACCOUNT = 1,
+            SIGN_IN = 2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,7 +22,18 @@ public class AuthenticationActivity extends Activity {
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-
+        if (resultCode == RESULT_OK) {
+            switch (requestCode) {
+                case SIGN_IN:
+                    Log.d("Result", "Signed in");
+                    break;
+                case CREATE_ACCOUNT:
+                    Log.d("Result", "Created account");
+                    break;
+                default:
+                    break;
+            }
+        }
     }
 
     public void signIn(View v) {
