@@ -12,6 +12,8 @@ import com.raik383h_group_6.healthtracmobile.service.IOAuthServiceAdapter;
 import com.raik383h_group_6.healthtracmobile.service.IOAuthServiceAdapterFactory;
 import com.raik383h_group_6.healthtracmobile.view.BrowserLoginActivity;
 
+import java.util.concurrent.ExecutionException;
+
 public abstract class BrowserLoginPresenter extends BasePresenter<BrowserLoginActivity> {
 
     private IOAuthServiceAdapter oAuthService;
@@ -25,24 +27,8 @@ public abstract class BrowserLoginPresenter extends BasePresenter<BrowserLoginAc
     @Inject
     public BrowserLoginPresenter(IOAuthServiceAdapterFactory factory) {
         oAuthService = buildOAuthServiceAdapter(factory);
-
     }
 
-    private void saveToken(Uri uri) {
-        final String verifier = uri.getQueryParameter(getVerifierName());
-
-        (new AsyncTask<Void, Void, Token>() {
-            @Override
-            protected Token doInBackground(Void... params) {
-                return oAuthService.getAccessToken(requestToken, verifier);
-            }
-
-            @Override
-            protected void onPostExecute(Token accessToken) {
-                //saveTokenAndFinish(accessToken);
-            }
-        }).execute();
-    }
 
     private void beginAuthorization() {
         (new AsyncTask<Void, Void, String>() {
@@ -63,16 +49,33 @@ public abstract class BrowserLoginPresenter extends BasePresenter<BrowserLoginAc
         }).execute();
     }
 
+    private Token getToken(Uri uri) {
+        final String verifier = uri.getQueryParameter(getVerifierName());
+        Token token = null;
+        try {
+            token = (new AsyncTask<Void, Void, Token>() {
+                @Override
+                protected Token doInBackground(Void... params) {
+                    return oAuthService.getAccessToken(requestToken, verifier);
+                }
+            }).execute().get();
+        } catch (InterruptedException | ExecutionException ignored) {
+        }
+
+        return token;
+    }
+
     private class LoginWebViewClient extends WebViewClient {
         @Override
         public void onPageStarted(WebView view, String url, Bitmap favicon) {
             if ((url != null) && (url.startsWith(DUMMY_CALLBACK))) { // Don't open callback url
                 //view.stop / hide
                 Uri uri = Uri.parse(url);
-                if (uri.getQueryParameter("VERIFIER NAME TODO CHANGEME") == null) { //Check if we're getting called back because of OAuth cancellation
-                    //view.finishInShame();
+                if (uri.getQueryParameter(getVerifierName()) == null) { //Check if we're getting called back because of OAuth cancellation
+                    getView().finishInShame();
                 } else {
-                    //view.saveToken(uri);
+                    Token token = getToken(uri);
+                    getView().finishWithToken(token);
                 }
             } else {
                 super.onPageStarted(view, url, favicon);

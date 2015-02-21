@@ -1,16 +1,10 @@
 package com.raik383h_group_6.healthtracmobile.view;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.net.Uri;
-import android.os.AsyncTask;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
-import android.webkit.WebViewClient;
 import com.google.inject.Inject;
 import com.google.inject.Key;
 import com.raik383h_group_6.healthtracmobile.R;
@@ -61,7 +55,7 @@ public class BrowserLoginActivity extends ActionBarActivity implements RoboConte
         //webView.setWebViewClient(webViewClient);
     }
 
-    private void saveTokenAndFinish(Token token) {
+    public void finishWithToken(Token token) {
         Intent data = new Intent();
         data.putExtra(getString(R.string.EXTRA_ACCESS_SECRET), token.getSecret());
         data.putExtra(getString(R.string.EXTRA_ACCESS_TOKEN), token.getToken());
@@ -69,7 +63,7 @@ public class BrowserLoginActivity extends ActionBarActivity implements RoboConte
         finish();
     }
 
-    private void finishInShame() {
+    public void finishInShame() {
         setResult(RESULT_CANCELED);
         finish();
     }

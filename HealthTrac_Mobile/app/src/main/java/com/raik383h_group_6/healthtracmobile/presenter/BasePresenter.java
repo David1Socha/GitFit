@@ -5,7 +5,7 @@ import android.app.Activity;
 public class BasePresenter<T> {
     private T activity;
 
-    protected T getActivity() {
+    protected T getView() {
         return activity;
     }
 
