@@ -2,6 +2,7 @@ package com.raik383h_group_6.healthtracmobile;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;
+import org.mockito.*;
 
 /**
  * <a href="http://d.android.com/tools/testing/testing_android.html">Testing Fundamentals</a>
