@@ -2,7 +2,7 @@ package com.raik383h_group_6.healthtracmobile;
 
 import android.app.Activity;
 
-public class BasePresenter<T extends Activity> {
+public class BasePresenter<T> {
     private T activity;
 
     protected T getActivity() {
