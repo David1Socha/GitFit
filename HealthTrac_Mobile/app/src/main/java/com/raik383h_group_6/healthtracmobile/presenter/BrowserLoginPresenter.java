@@ -3,6 +3,8 @@ package com.raik383h_group_6.healthtracmobile.presenter;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.view.View;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
@@ -18,6 +20,7 @@ public abstract class BrowserLoginPresenter extends BasePresenter<BrowserLoginAc
 
     private IOAuthServiceAdapter oAuthService;
     private Token requestToken;
+    private WebView webView;
     public static String DUMMY_CALLBACK = "http://www.example.com/oauth_callback";
 
     protected abstract String getVerifierName();
@@ -29,6 +32,16 @@ public abstract class BrowserLoginPresenter extends BasePresenter<BrowserLoginAc
         oAuthService = buildOAuthServiceAdapter(factory);
     }
 
+    public void setUpWebView(WebView webView) {
+        WebViewClient webViewClient = new LoginWebViewClient();
+        webView.clearCache(true);
+        WebSettings settings = webView.getSettings();
+        settings.setJavaScriptEnabled(true); //TODO see if can be disabled
+        settings.setBuiltInZoomControls(true);
+        settings.setDisplayZoomControls(false);
+        webView.setWebViewClient(webViewClient);
+        getView().setView(webView);
+    }
 
     private void beginAuthorization() {
         (new AsyncTask<Void, Void, String>() {
@@ -44,7 +57,7 @@ public abstract class BrowserLoginPresenter extends BasePresenter<BrowserLoginAc
 
             @Override
             protected void onPostExecute(String url) {
-                //webView.loadUrl(url);
+                webView.loadUrl(url);
             }
         }).execute();
     }
@@ -69,7 +82,8 @@ public abstract class BrowserLoginPresenter extends BasePresenter<BrowserLoginAc
         @Override
         public void onPageStarted(WebView view, String url, Bitmap favicon) {
             if ((url != null) && (url.startsWith(DUMMY_CALLBACK))) { // Don't open callback url
-                getView().stopWebView();
+                webView.stopLoading();
+                webView.setVisibility(View.INVISIBLE);
                 Uri uri = Uri.parse(url);
                 if (uri.getQueryParameter(getVerifierName()) == null) { //Check if we're getting called back because of OAuth cancellation
                     getView().finishInShame();

@@ -26,7 +26,7 @@ public class BrowserLoginActivity extends ActionBarActivity implements RoboConte
     private WebView webView;
 
     @Inject
-    BrowserLoginPresenter browserLoginPresenter;
+    BrowserLoginPresenter browserLoginPresenter; //TODO dynamically inject based on REQ_CODE
 
     @Inject
     IOAuthServiceAdapterFactory factory;
@@ -42,25 +42,12 @@ public class BrowserLoginActivity extends ActionBarActivity implements RoboConte
         super.onCreate(savedInstanceState);
         RoboGuice.getInjector(this).injectMembersWithoutViews(this);
         webView = new WebView(this);
-        setUpWebView();
-        setContentView(webView);
-
-        //beginAuthorization();
+        browserLoginPresenter.setUpWebView(webView);
+        //beginAuthorization(); TODO WHERE DOES THIS FIT
     }
 
-    public void stopWebView() {
-        webView.setVisibility(View.INVISIBLE);
-        webView.stopLoading();
-    }
-
-    private void setUpWebView() {
-        //WebViewClient webViewClient = new LoginWebViewClient();
-        webView.clearCache(true);
-        WebSettings settings = webView.getSettings();
-        settings.setJavaScriptEnabled(true); //TODO see if can be disabled
-        settings.setBuiltInZoomControls(true);
-        settings.setDisplayZoomControls(false);
-        //webView.setWebViewClient(webViewClient);
+    public void setView(View v) {
+        setContentView(v);
     }
 
     public void finishWithToken(Token token) {
