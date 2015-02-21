@@ -11,7 +11,6 @@ import android.webkit.WebViewClient;
 import com.google.inject.Inject;
 import com.raik383h_group_6.healthtracmobile.model.Token;
 import com.raik383h_group_6.healthtracmobile.service.IOAuthServiceAdapter;
-import com.raik383h_group_6.healthtracmobile.service.IOAuthServiceAdapterFactory;
 import com.raik383h_group_6.healthtracmobile.view.BrowserLoginActivity;
 import com.raik383h_group_6.healthtracmobile.view.LoginPromptActivity;
 
@@ -27,8 +26,6 @@ public abstract class BrowserLoginPresenter {
 
     protected abstract String getVerifierName();
 
-    protected abstract IOAuthServiceAdapter buildOAuthServiceAdapter(IOAuthServiceAdapterFactory factory);
-
     public void setUpWebView(WebView web) {
         webView = web;
         WebViewClient webViewClient = new LoginWebViewClient();
@@ -40,8 +37,8 @@ public abstract class BrowserLoginPresenter {
         webView.setWebViewClient(webViewClient);
     }
 
-    public void initialize(IOAuthServiceAdapterFactory factory, BrowserLoginActivity view) {
-        oAuthService = this.buildOAuthServiceAdapter(factory);
+    public void initialize(IOAuthServiceAdapter serviceAdapter, BrowserLoginActivity view) {
+        oAuthService = serviceAdapter;
         this.view = view;
     }
 
