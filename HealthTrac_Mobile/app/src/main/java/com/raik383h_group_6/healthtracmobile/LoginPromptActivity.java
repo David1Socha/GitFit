@@ -10,7 +10,6 @@ public class LoginPromptActivity extends Activity {
 
     private static final int FB_LOGIN_REQ = 1,
             TW_LOGIN_REQ = 2;
-    private String accessToken, accessSecret, provider;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -23,21 +22,25 @@ public class LoginPromptActivity extends Activity {
         super.onActivityResult(requestCode, resultCode, data);
         if (data != null) {
             Bundle extras = data.getExtras();
-            switch (requestCode) { //TODO finish this activity and return oauth codes
-                case FB_LOGIN_REQ: accessToken = extras.getString(getString(R.string.EXTRA_ACCESS_TOKEN));
-                    accessSecret = extras.getString(getString(R.string.EXTRA_ACCESS_SECRET));
+            String provider;
+            switch (requestCode) {
+                case FB_LOGIN_REQ:
                     provider = getString(R.string.PROVIDER_FACEBOOK);
+                    extras.putString(getString(R.string.EXTRA_PROVIDER), provider);
                     break;
-                case TW_LOGIN_REQ: accessToken = extras.getString(getString(R.string.EXTRA_ACCESS_TOKEN));
-                    accessSecret = extras.getString(getString(R.string.EXTRA_ACCESS_SECRET));
+                case TW_LOGIN_REQ:
                     provider = getString(R.string.PROVIDER_TWITTER);
+                    extras.putString(getString(R.string.EXTRA_PROVIDER), provider);
                     break;
                 default: break;
             }
-            Log.d("accessToken", accessToken);
-            Log.d("accessSecret", accessSecret);
-            Log.d("provider", provider);
         }
+        finish(data);
+    }
+
+    private void finish(Intent data) {
+        setResult(RESULT_OK, data);
+        finish();
     }
 
     public void loginTwitter(View v) {
