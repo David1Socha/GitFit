@@ -14,6 +14,11 @@ public class ScribeOAuthServiceAdapter implements IOAuthServiceAdapter {
     public Token getRequestToken() {
         org.scribe.model.Token scribeToken = service.getRequestToken();
         Token reqToken = new Token(scribeToken.getToken(), scribeToken.getSecret());
-        return  reqToken;
+        return reqToken;
+    }
+
+    public String getAuthorizationUrl(Token t) {
+        org.scribe.model.Token scribeToken = new org.scribe.model.Token(t.getToken(), t.getSecret());
+        return service.getAuthorizationUrl(scribeToken);
     }
 }
