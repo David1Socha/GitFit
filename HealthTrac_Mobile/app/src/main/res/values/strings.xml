@@ -11,8 +11,7 @@
     <string name="twitter_login">Log in through Twitter</string>
     <string name="twitter_logout">Log out of Twitter</string>
     <string name="title_facebook_login">Facebook Login</string>
-    <string name="title_activity_login_web_view_facebook">Log in to Facebook</string>
-    <string name="title_activity_login_web_view_twitter">Log in to Twitter</string>
+    <string name="title_activity_login_browser">Log in through social media</string>
     <string name="PROVIDER_FACEBOOK">Facebook</string>
     <string name="PROVIDER_TWITTER">Twitter</string>
     <string name="authentication_welcome">Welcome to HealthTrac</string>

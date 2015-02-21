@@ -2,16 +2,15 @@ package com.raik383h_group_6.healthtracmobile.presenter;
 
 import android.graphics.Bitmap;
 import android.net.Uri;
-import android.view.View;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
 import com.google.inject.Inject;
 import com.raik383h_group_6.healthtracmobile.service.IOAuthServiceAdapter;
 import com.raik383h_group_6.healthtracmobile.service.IOAuthServiceAdapterFactory;
-import com.raik383h_group_6.healthtracmobile.view.LoginWebViewActivity;
+import com.raik383h_group_6.healthtracmobile.view.BrowserLoginActivity;
 
-public abstract class LoginWebViewPresenter extends BasePresenter<LoginWebViewActivity> {
+public abstract class BrowserLoginPresenter extends BasePresenter<BrowserLoginActivity> {
 
     private IOAuthServiceAdapterFactory factory;
     public static String DUMMY_CALLBACK = "http://www.example.com/oauth_callback";
@@ -21,7 +20,7 @@ public abstract class LoginWebViewPresenter extends BasePresenter<LoginWebViewAc
     protected abstract IOAuthServiceAdapter buildOAuthServiceAdapter(IOAuthServiceAdapterFactory factory);
 
     @Inject
-    public LoginWebViewPresenter(IOAuthServiceAdapterFactory factory) {
+    public BrowserLoginPresenter(IOAuthServiceAdapterFactory factory) {
         this.factory = factory;
     }
 

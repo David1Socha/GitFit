@@ -25,7 +25,7 @@ import roboguice.inject.RoboInjector;
 import roboguice.util.RoboContext;
 
 
-public abstract class LoginWebViewActivity extends ActionBarActivity implements RoboContext {
+public class BrowserLoginActivity extends ActionBarActivity implements RoboContext {
 
     private WebView webView;
     private IOAuthServiceAdapter oAuthService;
@@ -33,8 +33,6 @@ public abstract class LoginWebViewActivity extends ActionBarActivity implements 
     @Inject
     IOAuthServiceAdapterFactory factory;
     protected HashMap<Key<?>,Object> scopedObjects = new HashMap<Key<?>, Object>();
-
-    protected abstract IOAuthServiceAdapter buildOAuthServiceAdapter(IOAuthServiceAdapterFactory factory);
 
     @Override
     public Map<Key<?>, Object> getScopedObjectMap() {
@@ -52,8 +50,6 @@ public abstract class LoginWebViewActivity extends ActionBarActivity implements 
 
         beginAuthorization();
     }
-
-    protected abstract String getVerifierName();
 
     private void beginAuthorization() {
         (new AsyncTask<Void, Void, String>() {

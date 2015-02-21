@@ -25,15 +25,8 @@
                 android:value=".view.AuthenticationActivity"/>
         </activity>
         <activity
-            android:name=".view.TwitterLoginWebViewActivity"
-            android:label="@string/title_activity_login_web_view_twitter" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".view.LoginPromptActivity" />
-        </activity>
-        <activity
-            android:name=".view.FacebookLoginWebViewActivity"
-            android:label="@string/title_activity_login_web_view_facebook" >
+            android:name=".view.BrowserLoginActivity"
+            android:label="@string/title_activity_login_browser" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".view.LoginPromptActivity" />
