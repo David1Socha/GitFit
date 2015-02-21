@@ -22,5 +22,6 @@
     <string name="title_activity_authentication">AuthenticationActivity</string>
     <string name="create_account">Create account</string>
     <string name="sign_in">Sign in to existing account</string>
+    <string name="title_authentication_activity">Welcome to HealthTrac!</string>
 
 </resources>
