@@ -21,26 +21,28 @@ public class LoginPromptActivity extends Activity {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (data != null) {
+            String accessToken = "", accessSecret = "", provider = "";
             Bundle extras = data.getExtras();
-            String provider;
             switch (requestCode) {
-                case FB_LOGIN_REQ:
+                case FB_LOGIN_REQ: accessToken = extras.getString(getString(R.string.EXTRA_ACCESS_TOKEN));
+                    accessSecret = extras.getString(getString(R.string.EXTRA_ACCESS_SECRET));
                     provider = getString(R.string.PROVIDER_FACEBOOK);
-                    extras.putString(getString(R.string.EXTRA_PROVIDER), provider);
                     break;
-                case TW_LOGIN_REQ:
+                case TW_LOGIN_REQ: accessToken = extras.getString(getString(R.string.EXTRA_ACCESS_TOKEN));
+                    accessSecret = extras.getString(getString(R.string.EXTRA_ACCESS_SECRET));
                     provider = getString(R.string.PROVIDER_TWITTER);
-                    extras.putString(getString(R.string.EXTRA_PROVIDER), provider);
                     break;
                 default: break;
             }
+            Log.d("accessToken", accessToken);
+            Log.d("accessSecret", accessSecret);
+            Log.d("provider", provider);
+            loginServer(accessToken, accessSecret, provider);
         }
-        finish(data);
     }
 
-    private void finish(Intent data) {
-        setResult(RESULT_OK, data);
-        finish();
+    public void loginServer(String accessToken, String accessSecret, String provider) {
+
     }
 
     public void loginTwitter(View v) {
