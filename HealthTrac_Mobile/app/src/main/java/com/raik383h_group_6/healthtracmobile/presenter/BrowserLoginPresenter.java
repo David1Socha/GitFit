@@ -20,8 +20,8 @@ public abstract class BrowserLoginPresenter extends BasePresenter<BrowserLoginAc
 
     private IOAuthServiceAdapter oAuthService;
     private Token requestToken;
-    private WebView webView;
     public static String DUMMY_CALLBACK = "http://www.example.com/oauth_callback";
+    private WebView webView;
 
     protected abstract String getVerifierName();
 
@@ -32,7 +32,8 @@ public abstract class BrowserLoginPresenter extends BasePresenter<BrowserLoginAc
         oAuthService = buildOAuthServiceAdapter(factory);
     }
 
-    public void setUpWebView(WebView webView) {
+    public void setUpWebView(WebView web) {
+        webView = web;
         WebViewClient webViewClient = new LoginWebViewClient();
         webView.clearCache(true);
         WebSettings settings = webView.getSettings();
@@ -40,26 +41,32 @@ public abstract class BrowserLoginPresenter extends BasePresenter<BrowserLoginAc
         settings.setBuiltInZoomControls(true);
         settings.setDisplayZoomControls(false);
         webView.setWebViewClient(webViewClient);
-        getView().setView(webView);
     }
 
-    private void beginAuthorization() {
-        (new AsyncTask<Void, Void, String>() {
-            @Override
-            protected String doInBackground(Void... params) {
-                try { //OAuth 2.0 doesn't use request tokens...
-                    requestToken = oAuthService.getRequestToken();
-                    return oAuthService.getAuthorizationUrl(requestToken);
-                } catch (UnsupportedOperationException e) {
-                    return oAuthService.getAuthorizationUrl(null);
-                }
-            }
+    public void beginAuthorization() {
+        String authUrl = getAuthorizationUrl();
+        webView.loadUrl(authUrl);
+    }
 
-            @Override
-            protected void onPostExecute(String url) {
-                webView.loadUrl(url);
-            }
-        }).execute();
+    private String getAuthorizationUrl() {
+        String authUrl = null;
+        try {
+            authUrl =
+            (new AsyncTask<Void, Void, String>() {
+                @Override
+                protected String doInBackground(Void... params) {
+                    try { //OAuth 2.0 doesn't use request tokens...
+                        requestToken = oAuthService.getRequestToken();
+                        return oAuthService.getAuthorizationUrl(requestToken);
+                    } catch (UnsupportedOperationException e) {
+                        return oAuthService.getAuthorizationUrl(null);
+                    }
+                }
+
+            }).execute().get();
+        } catch (InterruptedException | ExecutionException e) {
+        }
+        return authUrl;
     }
 
     private Token getToken(Uri uri) {
@@ -82,8 +89,8 @@ public abstract class BrowserLoginPresenter extends BasePresenter<BrowserLoginAc
         @Override
         public void onPageStarted(WebView view, String url, Bitmap favicon) {
             if ((url != null) && (url.startsWith(DUMMY_CALLBACK))) { // Don't open callback url
-                webView.stopLoading();
-                webView.setVisibility(View.INVISIBLE);
+                view.stopLoading();
+                view.setVisibility(View.INVISIBLE);
                 Uri uri = Uri.parse(url);
                 if (uri.getQueryParameter(getVerifierName()) == null) { //Check if we're getting called back because of OAuth cancellation
                     getView().finishInShame();

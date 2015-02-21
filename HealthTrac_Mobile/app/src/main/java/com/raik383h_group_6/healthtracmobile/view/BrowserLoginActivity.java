@@ -37,10 +37,10 @@ public class BrowserLoginActivity extends ActionBarActivity implements RoboConte
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        RoboGuice.getInjector(this).injectMembersWithoutViews(this);
+        RoboGuice.getInjector(this).getInstance(IOAuthServiceAdapterFactory.class);
         webView = new WebView(this);
         browserLoginPresenter.setUpWebView(webView);
-        //beginAuthorization(); TODO WHERE DOES THIS FIT RUN ME SOMEWHERE
+        browserLoginPresenter.beginAuthorization();
     }
 
     public void setView(View v) {
