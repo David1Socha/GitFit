@@ -27,6 +27,8 @@ public class BrowserLoginActivity extends ActionBarActivity implements RoboConte
 
     private WebView webView;
     private BrowserLoginPresenter presenter;
+    private IOAuthServiceAdapter oAuthService;
+
     protected HashMap<Key<?>,Object> scopedObjects = new HashMap<Key<?>, Object>();
 
     @Override
@@ -37,21 +39,29 @@ public class BrowserLoginActivity extends ActionBarActivity implements RoboConte
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        RoboInjector injector = RoboGuice.getInjector(this);
-        String provider = getIntent().getStringExtra(getString(R.string.EXTRA_PROVIDER));
-        String facebookStr = getString(R.string.PROVIDER_FACEBOOK);
-        String twitterStr = getString(R.string.PROVIDER_TWITTER);
-        IOAuthServiceAdapter oAuthService;
-        if (provider == facebookStr) {
-            oAuthService = injector.getInstance(Key.get(IOAuthServiceAdapter.class, Names.named(facebookStr)));
-        } else {
-            oAuthService = injector.getInstance(Key.get(IOAuthServiceAdapter.class, Names.named(twitterStr)));
-        }
-        RoboGuice.getInjector(this).injectMembersWithoutViews(this);
+        injectMembers();
         webView = new WebView(this);
         presenter.initialize(oAuthService, this);
         presenter.setUpWebView(webView);
         presenter.beginAuthorization();
+    }
+
+    private void injectMembers() {
+        RoboInjector injector = RoboGuice.getInjector(this);
+        oAuthService = injectOAuthService(injector);
+        injector.injectMembersWithoutViews(this);
+    }
+
+    private IOAuthServiceAdapter injectOAuthService(RoboInjector injector) {
+        String provider = getIntent().getStringExtra(getString(R.string.EXTRA_PROVIDER));
+        String facebookStr = getString(R.string.PROVIDER_FACEBOOK);
+        String twitterStr = getString(R.string.PROVIDER_TWITTER);
+
+        if (provider == facebookStr) {
+            return injector.getInstance(Key.get(IOAuthServiceAdapter.class, Names.named(facebookStr)));
+        } else {
+            return injector.getInstance(Key.get(IOAuthServiceAdapter.class, Names.named(twitterStr)));
+        }
     }
 
     public void setView(View v) {

@@ -7,8 +7,6 @@ import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-
-import com.google.inject.Inject;
 import com.raik383h_group_6.healthtracmobile.model.Token;
 import com.raik383h_group_6.healthtracmobile.service.IOAuthServiceAdapter;
 import com.raik383h_group_6.healthtracmobile.view.BrowserLoginActivity;
@@ -21,10 +19,7 @@ public abstract class BrowserLoginPresenter {
     private IOAuthServiceAdapter oAuthService;
     private Token requestToken;
     private BrowserLoginActivity view;
-    public static String DUMMY_CALLBACK = "http://www.example.com/oauth_callback";
     private WebView webView;
-
-    protected abstract String getVerifierName();
 
     public void setUpWebView(WebView web) {
         webView = web;
@@ -87,7 +82,7 @@ public abstract class BrowserLoginPresenter {
     private class LoginWebViewClient extends WebViewClient {
         @Override
         public void onPageStarted(WebView webView, String url, Bitmap favicon) {
-            if ((url != null) && (url.startsWith(DUMMY_CALLBACK))) { // Don't open callback url
+            if ((url != null) && (url.startsWith(IOAuthServiceAdapter.DUMMY_CALLBACK))) { // Don't open callback url
                 webView.stopLoading();
                 webView.setVisibility(View.INVISIBLE);
                 Uri uri = Uri.parse(url);
