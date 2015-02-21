@@ -18,7 +18,7 @@ namespace HealthTrac.DataAccess.Entity
         public DbSet<Team> Teams { get; set; }
 
         public ApplicationDbContext()
-            : base("DefaultConnection")
+            : base("DefaultConnection", throwIfV1Schema: false)
         {
         }
 
