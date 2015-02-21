@@ -5,4 +5,5 @@ import com.raik383h_group_6.healthtracmobile.model.Token;
 public interface IOAuthServiceAdapter {
     public Token getRequestToken();
     public String getAuthorizationUrl(Token t);
+    public Token getAccessToken(Token requestToken, String verifier);
 }

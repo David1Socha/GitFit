@@ -125,7 +125,8 @@ public abstract class LoginWebViewActivity extends ActionBarActivity {
     }
 
     private void saveToken(Uri uri) {
-        final Verifier verifier = new Verifier(uri.getQueryParameter(getVerifierName()));
+        final String verifier = uri.getQueryParameter(getVerifierName());
+
         (new AsyncTask<Void, Void, Token>() {
             @Override
             protected Token doInBackground(Void... params) {
