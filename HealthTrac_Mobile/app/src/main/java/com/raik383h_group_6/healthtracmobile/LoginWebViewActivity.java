@@ -31,7 +31,6 @@ public abstract class LoginWebViewActivity extends ActionBarActivity implements 
     private IOAuthServiceAdapter oAuthService;
     private Token requestToken;
     @Inject IOAuthServiceAdapterFactory factory;
-    private WebViewClient webViewClient;
     protected HashMap<Key<?>,Object> scopedObjects = new HashMap<Key<?>, Object>();
 
     protected abstract IOAuthServiceAdapter buildOAuthServiceAdapter(IOAuthServiceAdapterFactory factory);
@@ -75,7 +74,7 @@ public abstract class LoginWebViewActivity extends ActionBarActivity implements 
     }
 
     private void setUpWebView() {
-        webViewClient = new LoginWebViewClient();
+        WebViewClient webViewClient = new LoginWebViewClient();
         webView.clearCache(true);
         WebSettings settings = webView.getSettings();
         settings.setJavaScriptEnabled(true);
