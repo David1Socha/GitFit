@@ -11,9 +11,6 @@ import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import org.scribe.builder.ServiceBuilder;
-import org.scribe.model.Verifier;
-import org.scribe.oauth.OAuthService;
 
 import com.google.inject.Inject;
 import com.raik383h_group_6.healthtracmobile.model.Token;
@@ -22,32 +19,17 @@ import com.raik383h_group_6.healthtracmobile.service.*;
 
 public abstract class LoginWebViewActivity extends ActionBarActivity {
 
-    private static String DUMMY_CALLBACK = "http://www.example.com/oauth_callback";
-    private String apiKey, apiSecret;
-    private Class apiClass;
+    public static String DUMMY_CALLBACK = "http://www.example.com/oauth_callback";
     private WebView webView;
     @Inject IOAuthServiceAdapter oAuthService;
     private Token requestToken;
     private WebViewClient webViewClient;
 
-    public void setApiKey(String apiKey) {
-        this.apiKey = apiKey;
-    }
-
-    public void setApiSecret(String apiSecret) {
-        this.apiSecret = apiSecret;
-    }
-
-    public void setApiClass(Class apiClass) {
-        this.apiClass = apiClass;
-    }
+    protected abstract IOAuthServiceAdapter buildOAuthServiceAdapter(IOAuthServiceAdapterFactory factory);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        setOAuthFields();
-
         webView = new WebView(this);
         setUpWebView();
 
@@ -55,8 +37,6 @@ public abstract class LoginWebViewActivity extends ActionBarActivity {
 
         beginAuthorization();
     }
-
-    protected abstract void setOAuthFields();
 
     protected abstract String getVerifierName();
 
