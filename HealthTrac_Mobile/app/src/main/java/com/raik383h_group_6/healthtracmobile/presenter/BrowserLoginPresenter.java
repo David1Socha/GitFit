@@ -13,7 +13,7 @@ import com.raik383h_group_6.healthtracmobile.view.BrowserLoginActivity;
 
 import java.util.concurrent.ExecutionException;
 
-public abstract class BrowserLoginPresenter {
+public class BrowserLoginPresenter {
 
     private IOAuthServiceAdapter oAuthService;
     private Token requestToken;
