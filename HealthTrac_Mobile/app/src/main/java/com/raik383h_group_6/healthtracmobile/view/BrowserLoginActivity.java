@@ -7,6 +7,7 @@ import android.view.View;
 import android.webkit.WebView;
 import com.google.inject.Inject;
 import com.google.inject.Key;
+import com.google.inject.name.Named;
 import com.raik383h_group_6.healthtracmobile.R;
 import com.raik383h_group_6.healthtracmobile.model.Token;
 import com.raik383h_group_6.healthtracmobile.presenter.BrowserLoginPresenter;
@@ -23,7 +24,14 @@ public class BrowserLoginActivity extends ActionBarActivity implements RoboConte
     private WebView webView;
 
     @Inject
-    BrowserLoginPresenter browserLoginPresenter; //TODO dynamically inject based on REQ_CODE
+    @Named("Facebook")
+    BrowserLoginPresenter facebookPresenter;
+
+    @Inject
+    @Named("Twitter")
+    BrowserLoginPresenter twitterPresenter;
+
+    BrowserLoginPresenter presenter;
 
     @Inject
     IOAuthServiceAdapterFactory factory;
@@ -37,10 +45,11 @@ public class BrowserLoginActivity extends ActionBarActivity implements RoboConte
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getIntent().getStringExtra();
         RoboGuice.getInjector(this).injectMembersWithoutViews(this);
         webView = new WebView(this);
-        browserLoginPresenter.setUpWebView(webView);
         browserLoginPresenter.initialize(factory, this);
+        browserLoginPresenter.setUpWebView(webView);
         browserLoginPresenter.beginAuthorization();
     }
 

@@ -23,19 +23,10 @@ public class LoginPromptActivity extends Activity {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (data != null) {
-            String accessToken = "", accessSecret = "", provider = "";
             Bundle extras = data.getExtras();
-            switch (requestCode) {
-                case FB_LOGIN_REQ: accessToken = extras.getString(getString(R.string.EXTRA_ACCESS_TOKEN));
-                    accessSecret = extras.getString(getString(R.string.EXTRA_ACCESS_SECRET));
-                    provider = getString(R.string.PROVIDER_FACEBOOK);
-                    break;
-                case TW_LOGIN_REQ: accessToken = extras.getString(getString(R.string.EXTRA_ACCESS_TOKEN));
-                    accessSecret = extras.getString(getString(R.string.EXTRA_ACCESS_SECRET));
-                    provider = getString(R.string.PROVIDER_TWITTER);
-                    break;
-                default: break;
-            }
+            String accessToken = extras.getString(getString(R.string.EXTRA_ACCESS_TOKEN));
+            String accessSecret = extras.getString(getString(R.string.EXTRA_ACCESS_SECRET));
+            String provider = extras.getString(getString(R.string.EXTRA_PROVIDER));
             Log.d("accessToken", accessToken);
             Log.d("accessSecret", accessSecret);
             Log.d("provider", provider);
@@ -49,11 +40,13 @@ public class LoginPromptActivity extends Activity {
 
     public void loginTwitter(View v) {
         Intent intent = new Intent(this, BrowserLoginActivity.class);
+        intent.putExtra(getString(R.string.EXTRA_PROVIDER), getString(R.string.PROVIDER_TWITTER));
         startActivityForResult(intent, TW_LOGIN_REQ);
     }
 
     public void loginFacebook(View v) {
         Intent intent = new Intent(this, BrowserLoginActivity.class);
+        intent.putExtra(getString(R.string.EXTRA_PROVIDER), getString(R.string.PROVIDER_FACEBOOK));
         startActivityForResult(intent, FB_LOGIN_REQ);
     }
 }

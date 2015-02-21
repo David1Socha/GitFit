@@ -10,10 +10,6 @@ public class TwitterBrowserLoginPresenter extends BrowserLoginPresenter {
             API_SECRET = "QbX7YXFiZb49HQP0jz0H72pKp5pBUEgJuJBswIroh29NjUrfXU",
             VERIFIER_NAME="oauth_verifier";
 
-    public TwitterBrowserLoginPresenter(IOAuthServiceAdapterFactory factory) {
-        super(factory);
-    }
-
     @Override
     protected String getVerifierName() {
         return VERIFIER_NAME;

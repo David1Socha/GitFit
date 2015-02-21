@@ -8,10 +8,6 @@ public class FacebookBrowserLoginPresenter extends BrowserLoginPresenter {
             API_SECRET = "e09e263961535252750c19eb77053438",
             VERIFIER_NAME = "code";
 
-    public FacebookBrowserLoginPresenter(IOAuthServiceAdapterFactory factory) {
-        super(factory);
-    }
-
     @Override
     protected IOAuthServiceAdapter buildOAuthServiceAdapter(IOAuthServiceAdapterFactory factory) {
         return factory.buildFacebookOAuthServiceAdapter(API_KEY, API_SECRET, DUMMY_CALLBACK);
