@@ -38,10 +38,6 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.raik383h_group_6.healthtracmobile.LoginPromptActivity" />
         </activity>
-        <activity
-            android:name="com.raik383h_group_6.healthtracmobile.AuthenticationActivity"
-            android:label="@string/title_activity_authentication" >
-        </activity>
     </application>
 
 </manifest>

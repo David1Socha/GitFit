@@ -40,4 +40,8 @@ public class AuthenticationActivity extends Activity {
         Intent intent = new Intent(this, LoginPromptActivity.class);
         startActivityForResult(intent, SIGN_IN);
     }
+
+    public void createAccount(View v) {
+        //TODO
+    }
 }
