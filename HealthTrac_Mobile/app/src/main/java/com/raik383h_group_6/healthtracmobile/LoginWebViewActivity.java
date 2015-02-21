@@ -14,6 +14,8 @@ import android.webkit.WebViewClient;
 import org.scribe.builder.ServiceBuilder;
 import org.scribe.model.Verifier;
 import org.scribe.oauth.OAuthService;
+
+import com.google.inject.Inject;
 import com.raik383h_group_6.healthtracmobile.model.Token;
 import com.raik383h_group_6.healthtracmobile.service.*;
 
@@ -24,7 +26,7 @@ public abstract class LoginWebViewActivity extends ActionBarActivity {
     private String apiKey, apiSecret;
     private Class apiClass;
     private WebView webView;
-    private IOAuthServiceAdapter oAuthService;
+    @Inject IOAuthServiceAdapter oAuthService;
     private Token requestToken;
     private WebViewClient webViewClient;
 
@@ -45,12 +47,6 @@ public abstract class LoginWebViewActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
 
         setOAuthFields();
-        oAuthService = new ScribeOAuthServiceAdapter(new ServiceBuilder()
-                .provider(apiClass)
-                .apiKey(apiKey)
-                .apiSecret(apiSecret)
-                .callback(DUMMY_CALLBACK)
-                .build());
 
         webView = new WebView(this);
         setUpWebView();
