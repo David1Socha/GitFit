@@ -115,23 +115,27 @@ public abstract class LoginWebViewActivity extends ActionBarActivity {
                 if (uri.getQueryParameter(getVerifierName()) == null) { //Check if we're getting called back because of OAuth cancellation
                     finishInShame();
                 } else {
-                    final Verifier verifier = new Verifier(uri.getQueryParameter(getVerifierName()));
-                    (new AsyncTask<Void, Void, Token>() {
-                        @Override
-                        protected Token doInBackground(Void... params) {
-                            return oAuthService.getAccessToken(requestToken, verifier);
-                        }
-
-                        @Override
-                        protected void onPostExecute(Token accessToken) {
-                            saveTokenAndFinish(accessToken);
-                        }
-                    }).execute();
+                    saveToken(uri);
                 }
             } else {
                 super.onPageStarted(view, url, favicon);
             }
         }
+    }
+
+    private void saveToken(Uri uri) {
+        final Verifier verifier = new Verifier(uri.getQueryParameter(getVerifierName()));
+        (new AsyncTask<Void, Void, Token>() {
+            @Override
+            protected Token doInBackground(Void... params) {
+                return oAuthService.getAccessToken(requestToken, verifier);
+            }
+
+            @Override
+            protected void onPostExecute(Token accessToken) {
+                saveTokenAndFinish(accessToken);
+            }
+        }).execute();
     }
 
 }
