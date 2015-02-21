@@ -38,6 +38,8 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.raik383h_group_6.healthtracmobile.LoginPromptActivity" />
         </activity>
+        <meta-data android:name="roboguice.modules"
+            android:value="com.raik383h_group_6.healthtracmobile.modules.ApplicationModule" />
     </application>
 
 </manifest>

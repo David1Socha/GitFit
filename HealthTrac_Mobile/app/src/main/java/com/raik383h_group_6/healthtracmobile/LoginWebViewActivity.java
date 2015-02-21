@@ -11,28 +11,43 @@ import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-
 import com.google.inject.Inject;
+import com.google.inject.Key;
 import com.raik383h_group_6.healthtracmobile.model.Token;
 import com.raik383h_group_6.healthtracmobile.service.*;
 
+import java.util.HashMap;
+import java.util.Map;
 
-public abstract class LoginWebViewActivity extends ActionBarActivity {
+import roboguice.RoboGuice;
+import roboguice.inject.RoboInjector;
+import roboguice.util.RoboContext;
+
+
+public abstract class LoginWebViewActivity extends ActionBarActivity implements RoboContext {
 
     public static String DUMMY_CALLBACK = "http://www.example.com/oauth_callback";
     private WebView webView;
-    @Inject IOAuthServiceAdapter oAuthService;
+    private IOAuthServiceAdapter oAuthService;
     private Token requestToken;
+    @Inject IOAuthServiceAdapterFactory factory;
     private WebViewClient webViewClient;
+    protected HashMap<Key<?>,Object> scopedObjects = new HashMap<Key<?>, Object>();
 
     protected abstract IOAuthServiceAdapter buildOAuthServiceAdapter(IOAuthServiceAdapterFactory factory);
 
     @Override
+    public Map<Key<?>, Object> getScopedObjectMap() {
+        return scopedObjects;
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        RoboGuice.getInjector(this).injectMembersWithoutViews(this);
         webView = new WebView(this);
         setUpWebView();
-
+        oAuthService = buildOAuthServiceAdapter(factory);
         setContentView(webView);
 
         beginAuthorization();
