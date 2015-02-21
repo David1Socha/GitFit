@@ -45,12 +45,12 @@ public abstract class LoginWebViewActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
 
         setOAuthFields();
-        oAuthService = new ServiceBuilder()
+        oAuthService = new ScribeOAuthServiceAdapter(new ServiceBuilder()
                 .provider(apiClass)
                 .apiKey(apiKey)
                 .apiSecret(apiSecret)
                 .callback(DUMMY_CALLBACK)
-                .build();
+                .build());
 
         webView = new WebView(this);
         setUpWebView();
