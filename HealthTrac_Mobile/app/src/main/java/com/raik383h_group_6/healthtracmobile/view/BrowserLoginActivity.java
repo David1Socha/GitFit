@@ -28,8 +28,7 @@ import roboguice.util.RoboContext;
 public class BrowserLoginActivity extends ActionBarActivity implements RoboContext {
 
     private WebView webView;
-    private IOAuthServiceAdapter oAuthService;
-    private Token requestToken;
+
     @Inject
     IOAuthServiceAdapterFactory factory;
     protected HashMap<Key<?>,Object> scopedObjects = new HashMap<Key<?>, Object>();
@@ -45,30 +44,12 @@ public class BrowserLoginActivity extends ActionBarActivity implements RoboConte
         RoboGuice.getInjector(this).injectMembersWithoutViews(this);
         webView = new WebView(this);
         setUpWebView();
-        oAuthService = buildOAuthServiceAdapter(factory);
         setContentView(webView);
 
-        beginAuthorization();
+        //beginAuthorization();
     }
 
-    private void beginAuthorization() {
-        (new AsyncTask<Void, Void, String>() {
-            @Override
-            protected String doInBackground(Void... params) {
-                try { //OAuth 2.0 doesn't use request tokens...
-                    requestToken = oAuthService.getRequestToken();
-                    return oAuthService.getAuthorizationUrl(requestToken);
-                } catch (UnsupportedOperationException e) {
-                    return oAuthService.getAuthorizationUrl(null);
-                }
-            }
 
-            @Override
-            protected void onPostExecute(String url) {
-                webView.loadUrl(url);
-            }
-        }).execute();
-    }
 
     private void setUpWebView() {
         //WebViewClient webViewClient = new LoginWebViewClient();
@@ -91,24 +72,6 @@ public class BrowserLoginActivity extends ActionBarActivity implements RoboConte
     private void finishInShame() {
         setResult(RESULT_CANCELED);
         finish();
-    }
-
-
-
-    private void saveToken(Uri uri) {
-        final String verifier = uri.getQueryParameter(getVerifierName());
-
-        (new AsyncTask<Void, Void, Token>() {
-            @Override
-            protected Token doInBackground(Void... params) {
-                return oAuthService.getAccessToken(requestToken, verifier);
-            }
-
-            @Override
-            protected void onPostExecute(Token accessToken) {
-                saveTokenAndFinish(accessToken);
-            }
-        }).execute();
     }
 
 }
