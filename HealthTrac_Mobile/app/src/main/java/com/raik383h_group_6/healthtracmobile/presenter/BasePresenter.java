@@ -1,17 +1,15 @@
 package com.raik383h_group_6.healthtracmobile.presenter;
 
-import android.app.Activity;
-
 public class BasePresenter<T> {
-    private T activity;
+    private T view;
 
     protected T getView() {
-        return activity;
+        return view;
     }
 
     protected BasePresenter() {}
 
-    public void initializeWith(T activity) {
-        this.activity = activity;
+    public void initializeWith(T view) {
+        this.view = view;
     }
 }
