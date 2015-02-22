@@ -6,12 +6,16 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
+import com.google.inject.Inject;
 import com.raik383h_group_6.healthtracmobile.R;
+import com.raik383h_group_6.healthtracmobile.presenter.LoginPromptPresenter;
 
 public class LoginPromptActivity extends Activity {
 
     private static final int FB_LOGIN_REQ = 1,
             TW_LOGIN_REQ = 2;
+    @Inject
+    private LoginPromptPresenter presenter;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -30,7 +34,7 @@ public class LoginPromptActivity extends Activity {
             Log.d("accessToken", accessToken);
             Log.d("accessSecret", accessSecret);
             Log.d("provider", provider);
-            loginServer(accessToken, accessSecret, provider);
+            //presenter.login
         }
     }
 
