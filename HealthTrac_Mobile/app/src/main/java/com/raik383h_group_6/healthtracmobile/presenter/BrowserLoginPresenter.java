@@ -26,7 +26,6 @@ public class BrowserLoginPresenter {
         WebViewClient webViewClient = new LoginWebViewClient();
         webView.clearCache(true);
         WebSettings settings = webView.getSettings();
-        settings.setJavaScriptEnabled(true); //TODO see if can be disabled
         settings.setBuiltInZoomControls(true);
         settings.setDisplayZoomControls(false);
         webView.setWebViewClient(webViewClient);
