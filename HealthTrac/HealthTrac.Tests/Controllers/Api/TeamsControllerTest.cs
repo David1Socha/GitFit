@@ -33,7 +33,7 @@ namespace HealthTrac.Tests.Controllers.Api
         }
 
         [TestMethod]
-        public void TeamsControllerGetTeams()
+        public void ApiGetTeams()
         {
             var acc = Mock.Of<ITeamAccessor>(a => a.GetTeams() == _manyTeams);
             TeamsController controller = new TeamsController(acc);
@@ -42,7 +42,7 @@ namespace HealthTrac.Tests.Controllers.Api
         }
 
         [TestMethod]
-        public void TeamsControllerGetTeamsByUser()
+        public void ApiGetTeamsByUser()
         {
             var sampleUserId = "xyz";
             var acc = Mock.Of<ITeamAccessor>(a => a.GetTeams(sampleUserId) == _manyTeams);
@@ -52,7 +52,7 @@ namespace HealthTrac.Tests.Controllers.Api
         }
 
         [TestMethod]
-        public void TeamsControllerGetTeamById()
+        public void ApiGetTeamById()
         {
             long id = 12;
             var acc = Mock.Of<ITeamAccessor>(a => a.GetTeam(id) == _sampleTeam1);
@@ -64,7 +64,7 @@ namespace HealthTrac.Tests.Controllers.Api
         }
 
         [TestMethod]
-        public void TeamsControllerPutTeam()
+        public void ApiPutTeam()
         {
             long id = 14;
             var team = _sampleTeam2;
@@ -77,7 +77,7 @@ namespace HealthTrac.Tests.Controllers.Api
         }
 
         [TestMethod]
-        public void TeamsControllerPostTeam()
+        public void ApiPostTeam()
         {
             var team = _sampleTeam1;
             var mock = new Mock<ITeamAccessor>();

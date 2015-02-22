@@ -33,7 +33,7 @@ namespace HealthTrac.Tests.Controllers.Api
         }
 
         [TestMethod]
-        public void UsersControllerGetUsers()
+        public void ApiGetUsers()
         {
             var users = _users;
             var accessor = Mock.Of<IUserAccessor>(acc => acc.GetUsers() == _users);
@@ -43,7 +43,7 @@ namespace HealthTrac.Tests.Controllers.Api
         }
 
         [TestMethod]
-        public void UsersControllerGetUser()
+        public void ApiGetUser()
         {
             string id = "qwerty";
             var user = _user1;
@@ -56,7 +56,7 @@ namespace HealthTrac.Tests.Controllers.Api
         }
 
         [TestMethod]
-        public void UsersControllerPutUser()
+        public void ApiPutUser()
         {
             string id = "poiuy";
             var user = _user2;
@@ -67,6 +67,37 @@ namespace HealthTrac.Tests.Controllers.Api
             var con = new UsersController(acc);
             con.PutUser(id, user);
             mock.Verify(a => a.UpdateUser(user));
+        }
+
+        [TestMethod]
+        public void ApiUserIsAvailableWhenAvailable()
+        {
+            var userName = "Sarah";
+            var mock = new Mock<IUserAccessor>();
+            mock.Setup(a => a.GetAnyUserWithUserName(userName))
+                .Returns<User>(null);
+            var acc = mock.Object;
+            var con = new UsersController(acc);
+            var response = con.IsAvailable(userName);
+            var result = response as OkNegotiatedContentResult<bool>;
+            bool available = result.Content;
+            Assert.IsTrue(available);
+        }
+
+        [TestMethod]
+        public void ApiUserIsAvailableWhenUnavailable()
+        {
+            var user = _user1;
+            var userName = "Susan";
+            var mock = new Mock<IUserAccessor>();
+            mock.Setup(a => a.GetAnyUserWithUserName(userName))
+                .Returns(user);
+            var acc = mock.Object;
+            var con = new UsersController(acc);
+            var response = con.IsAvailable(userName);
+            var result = response as OkNegotiatedContentResult<bool>;
+            bool available = result.Content;
+            Assert.IsFalse(available);
         }
 
     }

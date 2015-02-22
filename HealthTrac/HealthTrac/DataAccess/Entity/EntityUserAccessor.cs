@@ -16,8 +16,7 @@ namespace HealthTrac.DataAccess.Entity
             using (var db = new ApplicationDbContext())
             {
                 var user = db.Users.Include("Memberships").Include("Memberships.Team")
-                                .Where(u => u.Id == ID).FirstOrDefault();
-                user = user != null && user.Enabled ? user : null;
+                                .Where(u => u.Id == ID && u.Enabled).FirstOrDefault();
                 return user;
             }
         }
@@ -71,6 +70,14 @@ namespace HealthTrac.DataAccess.Entity
                 user.Enabled = false;
             }
             return UpdateUser(user);
+        }
+
+        public User GetAnyUserWithUserName(String userName)
+        {
+            using (var db = new ApplicationDbContext())
+            {
+                return db.Users.Where(u => u.UserName == userName).FirstOrDefault();
+            }
         }
     }
 }
