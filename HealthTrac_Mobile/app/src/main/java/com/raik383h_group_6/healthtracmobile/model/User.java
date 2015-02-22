@@ -1,5 +1,7 @@
 package com.raik383h_group_6.healthtracmobile.model;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.Date;
 
 public class User {
@@ -103,9 +105,13 @@ public class User {
         this.width = width;
     }
 
+    @SerializedName("Sex")
     private Sex sex;
 
     public enum Sex {
-        MALE, FEMALE
+        @SerializedName("0")
+        MALE,
+        @SerializedName("1")
+        FEMALE
     }
 }
