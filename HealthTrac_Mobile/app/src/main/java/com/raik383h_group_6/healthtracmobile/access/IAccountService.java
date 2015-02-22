@@ -1,6 +1,7 @@
 package com.raik383h_group_6.healthtracmobile.access;
 
 import com.google.gson.Gson;
+import com.raik383h_group_6.healthtracmobile.model.UserLogin;
 
 import retrofit.converter.Converter;
 import retrofit.converter.GsonConverter;
