@@ -5,7 +5,7 @@ import com.google.inject.Provider;
 import retrofit.RestAdapter;
 import retrofit.client.Client;
 
-public class AccountServiceProvider implements Provider{
+public class RetrofitAccountServiceProvider implements Provider<AccountService>{
 
     @Override
     public AccountService get() {
