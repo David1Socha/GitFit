@@ -24,6 +24,7 @@ import roboguice.util.RoboContext;
 public class BrowserLoginActivity extends ActionBarActivity implements RoboContext {
 
     private WebView webView;
+    private String provider;
     @Inject private BrowserLoginPresenter presenter;
     private IOAuthServiceAdapter oAuthService;
 
@@ -37,6 +38,7 @@ public class BrowserLoginActivity extends ActionBarActivity implements RoboConte
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        provider = getIntent().getStringExtra(getString(R.string.EXTRA_PROVIDER));
         injectMembers();
         webView = new WebView(this);
         setView(webView);
@@ -48,12 +50,11 @@ public class BrowserLoginActivity extends ActionBarActivity implements RoboConte
     private void injectMembers() {
         RoboInjector injector = RoboGuice.getInjector(this);
         oAuthService = injectOAuthService(injector);
-        presenter = injector.getInstance(BrowserLoginPresenter.class);
         injector.injectMembersWithoutViews(this);
     }
 
     private IOAuthServiceAdapter injectOAuthService(RoboInjector injector) {
-        String provider = getIntent().getStringExtra(getString(R.string.EXTRA_PROVIDER));
+
         String facebookStr = getString(R.string.PROVIDER_FACEBOOK);
         String twitterStr = getString(R.string.PROVIDER_TWITTER);
 
@@ -72,6 +73,7 @@ public class BrowserLoginActivity extends ActionBarActivity implements RoboConte
         Intent data = new Intent();
         data.putExtra(getString(R.string.EXTRA_ACCESS_SECRET), token.getSecret());
         data.putExtra(getString(R.string.EXTRA_ACCESS_TOKEN), token.getToken());
+        data.putExtra(getString(R.string.EXTRA_PROVIDER), provider);
         setResult(RESULT_OK, data);
         finish();
     }
