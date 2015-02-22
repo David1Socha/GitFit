@@ -3,6 +3,7 @@ package com.raik383h_group_6.healthtracmobile.presenter;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.util.Log;
 import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
