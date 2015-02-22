@@ -1,13 +1,18 @@
 package com.raik383h_group_6.healthtracmobile.service;
 
+import com.google.inject.Provider;
+
 import retrofit.RestAdapter;
 import retrofit.client.Client;
 
-public class AccountServiceProvider implements Client.Provider{
+public class AccountServiceProvider implements Provider{
 
     @Override
-    public Client get() {
-        return new RestAdapter.Builder()
-                .setConverter()
+    public AccountService get() {
+        RestAdapter adapter = new RestAdapter.Builder()
+                .setConverter(AccountService.DATA_CONVERTER)
+                .setEndpoint(AccountService.SERVICE_ENDPOINT)
+                .build();
+        return adapter.create(AccountService.class);
     }
 }
