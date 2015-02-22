@@ -32,9 +32,9 @@ namespace HealthTrac.Controllers.Api
         [Route("api/Users/Available")]
         [ResponseType(typeof(bool))]
         [HttpGet]
-        public IHttpActionResult IsAvailable(User user)
+        public IHttpActionResult IsAvailable(String userName)
         {
-            User u = accessor.GetAnyUserWithUserName(user.UserName);
+            User u = accessor.GetAnyUserWithUserName(userName);
             bool available = u == null;
             return Ok(available);
         }

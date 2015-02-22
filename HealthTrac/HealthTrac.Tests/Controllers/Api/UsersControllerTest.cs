@@ -72,14 +72,13 @@ namespace HealthTrac.Tests.Controllers.Api
         [TestMethod]
         public void ApiUserIsAvailableWhenAvailable()
         {
-            var user = _user1;
-            var userName = user.UserName;
+            var userName = "Sarah";
             var mock = new Mock<IUserAccessor>();
             mock.Setup(a => a.GetAnyUserWithUserName(userName))
                 .Returns<User>(null);
             var acc = mock.Object;
             var con = new UsersController(acc);
-            var response = con.IsAvailable(user);
+            var response = con.IsAvailable(userName);
             var result = response as OkNegotiatedContentResult<bool>;
             bool available = result.Content;
             Assert.IsTrue(available);
@@ -89,13 +88,13 @@ namespace HealthTrac.Tests.Controllers.Api
         public void ApiUserIsAvailableWhenUnavailable()
         {
             var user = _user1;
-            var userName = user.UserName;
+            var userName = "Susan";
             var mock = new Mock<IUserAccessor>();
             mock.Setup(a => a.GetAnyUserWithUserName(userName))
                 .Returns(user);
             var acc = mock.Object;
             var con = new UsersController(acc);
-            var response = con.IsAvailable(user);
+            var response = con.IsAvailable(userName);
             var result = response as OkNegotiatedContentResult<bool>;
             bool available = result.Content;
             Assert.IsFalse(available);
