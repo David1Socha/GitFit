@@ -29,6 +29,16 @@ namespace HealthTrac.Controllers.Api
             return users.Select(u => UserDto.FromUser(u));
         }
 
+        [Route("api/Users/Available")]
+        [ResponseType(typeof(bool))]
+        [HttpGet]
+        public IHttpActionResult IsAvailable(User user)
+        {
+            User u = accessor.GetAnyUserWithUserName(user.UserName);
+            bool available = u == null;
+            return Ok(available);
+        }
+
         // GET: api/Users/5
         [ResponseType(typeof(UserDto))]
         public IHttpActionResult GetUser(string id)
