@@ -3,6 +3,7 @@ package com.raik383h_group_6.healthtracmobile.view;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.webkit.WebView;
 import com.google.inject.Inject;
@@ -55,7 +56,7 @@ public class BrowserLoginActivity extends ActionBarActivity implements RoboConte
         String facebookStr = getString(R.string.PROVIDER_FACEBOOK);
         String twitterStr = getString(R.string.PROVIDER_TWITTER);
 
-        if (provider == facebookStr) {
+        if (provider.equals(facebookStr)) {
             return injector.getInstance(Key.get(IOAuthServiceAdapter.class, Names.named(facebookStr)));
         } else {
             return injector.getInstance(Key.get(IOAuthServiceAdapter.class, Names.named(twitterStr)));
