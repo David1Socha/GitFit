@@ -33,7 +33,7 @@ namespace HealthTrac.Tests.Controllers.Api
         }
 
         [TestMethod]
-        public void UsersControllerGetUsers()
+        public void ApiGetUsers()
         {
             var users = _users;
             var accessor = Mock.Of<IUserAccessor>(acc => acc.GetUsers() == _users);
@@ -43,7 +43,7 @@ namespace HealthTrac.Tests.Controllers.Api
         }
 
         [TestMethod]
-        public void UsersControllerGetUser()
+        public void ApiGetUser()
         {
             string id = "qwerty";
             var user = _user1;
@@ -56,7 +56,7 @@ namespace HealthTrac.Tests.Controllers.Api
         }
 
         [TestMethod]
-        public void UsersControllerPutUser()
+        public void ApiPutUser()
         {
             string id = "poiuy";
             var user = _user2;
@@ -70,7 +70,7 @@ namespace HealthTrac.Tests.Controllers.Api
         }
 
         [TestMethod]
-        public void UsersControllerIsAvailableWhenAvailable()
+        public void ApiUserIsAvailableWhenAvailable()
         {
             var user = _user1;
             var userName = user.UserName;

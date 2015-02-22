@@ -31,7 +31,7 @@ namespace HealthTrac.Tests.Controllers.Api
         }
 
         [TestMethod]
-        public void AccountsControllerLogout()
+        public void ApiLogout()
         {
             var authMock = new Mock<IAuthenticationManager>();
             authMock.Setup(a => a.SignOut(It.IsAny<String[]>()));

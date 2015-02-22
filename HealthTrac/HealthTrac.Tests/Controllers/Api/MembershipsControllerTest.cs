@@ -34,7 +34,7 @@ namespace HealthTrac.Tests.Controllers.Api
         }
 
         [TestMethod]
-        public void MembershipsControllerGetMemberships()
+        public void ApiGetMemberships()
         {
             var acc = Mock.Of<IMembershipAccessor>(a => a.GetMemberships() == _activeMemberships);
             var controller = new MembershipsController(acc);
@@ -43,7 +43,7 @@ namespace HealthTrac.Tests.Controllers.Api
         }
 
         [TestMethod]
-        public void MembershipsControllerGetMembershipsByUser()
+        public void ApiGetMembershipsByUser()
         {
             var userId = "abc";
             var acc = Mock.Of<IMembershipAccessor>(a => a.GetMemberships(userId) == _activeMemberships);
@@ -53,7 +53,7 @@ namespace HealthTrac.Tests.Controllers.Api
         }
 
         [TestMethod]
-        public void MembershipsControllerGetMembershipsByTeam()
+        public void ApiGetMembershipsByTeam()
         {
             long teamId = 14;
             var membership = _memberMembership;
@@ -65,7 +65,7 @@ namespace HealthTrac.Tests.Controllers.Api
         }
 
         [TestMethod]
-        public void MembershipsControllerGetMembership()
+        public void ApiGetMembership()
         {
             long id = 1;
             var membership = _adminMembership;
@@ -78,7 +78,7 @@ namespace HealthTrac.Tests.Controllers.Api
         }
 
         [TestMethod]
-        public void MembershipsControllerGetMembershipByTeamUser()
+        public void ApiGetMembershipByTeamUser()
         {
             long teamId = 14;
             string userId = "abc";
@@ -92,7 +92,7 @@ namespace HealthTrac.Tests.Controllers.Api
         }
 
         [TestMethod]
-        public void MembershipsControllerPutMembership()
+        public void ApiPutMembership()
         {
             long id = 3;
             var membership = _bannedMembership;
@@ -105,7 +105,7 @@ namespace HealthTrac.Tests.Controllers.Api
         }
 
         [TestMethod]
-        public void MembershipsControllerPostMembership()
+        public void ApiPostMembership()
         {
             var membership = _memberMembership;
             var mock = new Mock<IMembershipAccessor>();
