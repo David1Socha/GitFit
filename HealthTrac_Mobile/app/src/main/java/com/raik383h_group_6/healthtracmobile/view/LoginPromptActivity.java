@@ -35,7 +35,7 @@ public class LoginPromptActivity extends Activity {
     }
 
     public void loginServer(String accessToken, String accessSecret, String provider) {
-
+        //TODO
     }
 
     public void loginTwitter(View v) {
