@@ -1,6 +1,8 @@
 package com.raik383h_group_6.healthtracmobile.access;
 
 import com.google.gson.Gson;
+import com.raik383h_group_6.healthtracmobile.model.AccessGrant;
+import com.raik383h_group_6.healthtracmobile.model.Credentials;
 import com.raik383h_group_6.healthtracmobile.model.UserLogin;
 
 import retrofit.converter.Converter;
@@ -14,5 +16,5 @@ public interface IAccountService {
     String SERVICE_ENDPOINT = "https://se6.azurewebsites.net";
 
     @POST("/api/Account/Login")
-    void logIn(@Body UserLogin request, @Header("Authorization") String token);
+    AccessGrant logIn(@Body Credentials request, @Header("Authorization") String token);
 }

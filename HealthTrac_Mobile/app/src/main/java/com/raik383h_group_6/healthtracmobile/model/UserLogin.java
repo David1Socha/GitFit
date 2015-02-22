@@ -1,32 +1,22 @@
 package com.raik383h_group_6.healthtracmobile.model;
 
 public class UserLogin {
-    private String provider;
-    private String secret;
-
-    public String getToken() {
-        return token;
+    public Credentials getCredentials() {
+        return credentials;
     }
 
-    public void setToken(String token) {
-        this.token = token;
+    public void setCredentials(Credentials credentials) {
+        this.credentials = credentials;
     }
 
-    public String getProvider() {
-        return provider;
+    public User getUser() {
+        return user;
     }
 
-    public void setProvider(String provider) {
-        this.provider = provider;
+    public void setUser(User user) {
+        this.user = user;
     }
 
-    public String getSecret() {
-        return secret;
-    }
-
-    public void setSecret(String secret) {
-        this.secret = secret;
-    }
-
-    private String token;
+    private Credentials credentials;
+    private User user;
 }
