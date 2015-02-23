@@ -39,7 +39,7 @@ public class BrowserLoginActivity extends ActionBarActivity implements RoboConte
         provider = getIntent().getStringExtra(getString(R.string.EXTRA_PROVIDER));
         injectMembers();
         webView = new WebView(this);
-        setView(webView);
+        setContentView(webView);
         presenter.initialize(oAuthService, this);
         presenter.setUpWebView(webView);
         presenter.beginAuthorization();
@@ -63,22 +63,6 @@ public class BrowserLoginActivity extends ActionBarActivity implements RoboConte
         }
     }
 
-    public void setView(View v) {
-        setContentView(v);
-    }
 
-    public void finishWithToken(Token token) {
-        Intent data = new Intent();
-        data.putExtra(getString(R.string.EXTRA_ACCESS_SECRET), token.getSecret());
-        data.putExtra(getString(R.string.EXTRA_ACCESS_TOKEN), token.getToken());
-        data.putExtra(getString(R.string.EXTRA_PROVIDER), provider);
-        setResult(RESULT_OK, data);
-        finish();
-    }
-
-    public void finishInShame() {
-        setResult(RESULT_CANCELED);
-        finish();
-    }
 
 }

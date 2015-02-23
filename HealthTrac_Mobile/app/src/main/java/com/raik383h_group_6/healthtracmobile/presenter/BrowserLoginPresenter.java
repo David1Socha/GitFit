@@ -1,5 +1,7 @@
 package com.raik383h_group_6.healthtracmobile.presenter;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -7,6 +9,8 @@ import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+
+import com.raik383h_group_6.healthtracmobile.R;
 import com.raik383h_group_6.healthtracmobile.model.Token;
 import com.raik383h_group_6.healthtracmobile.service.oauth.IOAuthServiceAdapter;
 import com.raik383h_group_6.healthtracmobile.view.BrowserLoginActivity;
@@ -33,6 +37,20 @@ public class BrowserLoginPresenter {
     public void initialize( IOAuthServiceAdapter serviceAdapter, BrowserLoginActivity view) {
         oAuthService = serviceAdapter;
         this.view = view;
+    }
+
+    private void finishWithToken(Token token) {
+        Intent data = new Intent();
+        data.putExtra(view.getString(R.string.EXTRA_ACCESS_SECRET), token.getSecret());
+        data.putExtra(view.getString(R.string.EXTRA_ACCESS_TOKEN), token.getToken());
+        data.putExtra(view.getString(R.string.EXTRA_PROVIDER), provider);
+        view.setResult(Activity.RESULT_OK, data);
+        view.finish();
+    }
+
+    public void finishInShame() {
+        view.setResult(Activity.RESULT_CANCELED);
+        view.finish();
     }
 
     public void beginAuthorization() {
@@ -85,10 +103,10 @@ public class BrowserLoginPresenter {
                 webView.setVisibility(View.INVISIBLE);
                 Uri uri = Uri.parse(url);
                 if (uri.getQueryParameter(oAuthService.getVerifierName()) == null) { //Check if we're getting called back because of OAuth cancellation
-                    view.finishInShame();
+                    finishInShame();
                 } else {
                     Token token = getToken(uri);
-                    view.finishWithToken(token);
+                    finishWithToken(token);
                 }
             } else {
                 super.onPageStarted(webView, url, favicon);
