@@ -35,12 +35,12 @@ public class AuthenticationActivity extends Activity {
         }
     }
 
-    public void signIn(View v) {
+    public void onClickSignIn(View v) {
         Intent intent = new Intent(this, OAuthPromptActivity.class);
         startActivityForResult(intent, SIGN_IN);
     }
 
-    public void createAccount(View v) {
+    public void onClickCreateAccount(View v) {
         //TODO
     }
 }
