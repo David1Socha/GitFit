@@ -3,7 +3,6 @@ package com.raik383h_group_6.healthtracmobile.service.api;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.raik383h_group_6.healthtracmobile.model.Team;
-import com.raik383h_group_6.healthtracmobile.model.User;
 
 import java.util.List;
 
@@ -28,16 +27,16 @@ public interface TeamService {
     String SERVICE_ENDPOINT = "https://se6.azurewebsites.net";
 
     @GET("/api/Teams/{id}")
-    User getTeam(@Path("id") long id, @Header("Authorization") String token);
+    Team getTeam(@Path("id") long id, @Header("Authorization") String token);
 
     @GET("api/Teams")
-    List<User> getTeams(@Header("Authorization") String token);
+    List<Team> getTeams(@Header("Authorization") String token);
 
     @GET("api/Teams")
-    List<User> getTeams(@Query("userId") String userId, @Header("Authorization") String token);
+    List<Team> getTeams(@Query("userId") String userId, @Header("Authorization") String token);
 
     @PUT("api/Teams/{id}")
-    void updateUser(@Path("id") long id, @Body Team team, @Header("Authorization") String token);
+    void updateTeam(@Path("id") long id, @Body Team team, @Header("Authorization") String token);
 
     @POST("api/Teams")
     Team createTeam(@Body Team team, @Header("Authorization") String token);

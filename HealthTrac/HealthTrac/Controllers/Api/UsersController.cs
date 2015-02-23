@@ -32,6 +32,7 @@ namespace HealthTrac.Controllers.Api
         [Route("api/Users/Available")]
         [ResponseType(typeof(bool))]
         [HttpGet]
+        [AllowAnonymous]
         public IHttpActionResult IsAvailable(String userName)
         {
             User u = accessor.GetAnyUserWithUserName(userName);
