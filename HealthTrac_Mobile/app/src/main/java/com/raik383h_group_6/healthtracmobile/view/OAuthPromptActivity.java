@@ -11,7 +11,9 @@ import com.raik383h_group_6.healthtracmobile.presenter.OAuthPromptPresenter;
 
 import roboguice.RoboGuice;
 import roboguice.activity.RoboActivity;
+import roboguice.inject.ContentView;
 
+@ContentView(R.layout.activity_oauth_prompt)
 public class OAuthPromptActivity extends RoboActivity {
 
     @Inject
@@ -20,7 +22,6 @@ public class OAuthPromptActivity extends RoboActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_oauth_prompt);
         presenter.initialize(this);
     }
 

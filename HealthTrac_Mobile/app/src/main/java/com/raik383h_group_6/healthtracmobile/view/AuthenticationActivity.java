@@ -10,7 +10,9 @@ import com.google.inject.Inject;
 import com.raik383h_group_6.healthtracmobile.R;
 import com.raik383h_group_6.healthtracmobile.presenter.AuthenticationPresenter;
 
+import roboguice.inject.ContentView;
 
+@ContentView(R.layout.activity_authentication)
 public class AuthenticationActivity extends Activity {
     public static final int CREATE_ACCOUNT = 1,
             SIGN_IN = 2;
@@ -20,7 +22,6 @@ public class AuthenticationActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_authentication);
         presenter.initialize(this);
     }
 
