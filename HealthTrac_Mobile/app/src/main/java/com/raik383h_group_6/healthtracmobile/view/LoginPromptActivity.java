@@ -31,9 +31,6 @@ public class LoginPromptActivity extends Activity {
             String accessToken = extras.getString(getString(R.string.EXTRA_ACCESS_TOKEN));
             String accessSecret = extras.getString(getString(R.string.EXTRA_ACCESS_SECRET));
             String provider = extras.getString(getString(R.string.EXTRA_PROVIDER));
-            Log.d("accessToken", accessToken);
-            Log.d("accessSecret", accessSecret);
-            Log.d("provider", provider);
             //presenter.login
         }
     }
@@ -43,8 +40,7 @@ public class LoginPromptActivity extends Activity {
     }
 
     public void loginTwitter(View v) {
-        Intent intent = new Intent(this, BrowserLoginActivity.class);
-        intent.putExtra(getString(R.string.EXTRA_PROVIDER), getString(R.string.PROVIDER_TWITTER));
+
         startActivityForResult(intent, TW_LOGIN_REQ);
     }
 
