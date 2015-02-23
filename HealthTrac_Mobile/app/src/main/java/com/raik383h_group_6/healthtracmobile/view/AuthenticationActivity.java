@@ -42,7 +42,7 @@ public class AuthenticationActivity extends RoboActivity {
         //TODO
     }
 
-    public void toast(String message) {
-        Toast.makeText(this, message, Toast.LENGTH_LONG).show();
+    public void toastShort(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
 }

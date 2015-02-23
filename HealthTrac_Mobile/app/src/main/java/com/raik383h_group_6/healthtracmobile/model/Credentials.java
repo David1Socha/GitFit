@@ -4,6 +4,13 @@ public class Credentials {
     private String provider;
     private String secret;
 
+    public Credentials() {}
+    public Credentials(String token, String secret, String provider) {
+        this.token = token;
+        this.secret = secret;
+        this.provider = provider;
+    }
+
     public String getToken() {
         return token;
     }

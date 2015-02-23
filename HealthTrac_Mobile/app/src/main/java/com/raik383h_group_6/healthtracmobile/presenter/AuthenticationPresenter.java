@@ -2,12 +2,19 @@ package com.raik383h_group_6.healthtracmobile.presenter;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.util.Log;
 
 import com.raik383h_group_6.healthtracmobile.R;
+import com.raik383h_group_6.healthtracmobile.model.AccessGrant;
+import com.raik383h_group_6.healthtracmobile.model.Credentials;
 import com.raik383h_group_6.healthtracmobile.service.api.AccountService;
 import com.raik383h_group_6.healthtracmobile.view.AuthenticationActivity;
 import com.raik383h_group_6.healthtracmobile.view.OAuthPromptActivity;
+
+import java.util.concurrent.ExecutionException;
+
+import retrofit.RetrofitError;
 
 public class AuthenticationPresenter {
     public static final int CREATE_ACCOUNT = 1,
@@ -48,7 +55,7 @@ public class AuthenticationPresenter {
         String accessToken = data.getStringExtra(view.getString(R.string.EXTRA_ACCESS_TOKEN));
         String accessSecret = data.getStringExtra(view.getString(R.string.EXTRA_ACCESS_SECRET));
         String provider = data.getStringExtra(view.getString(R.string.EXTRA_PROVIDER));
-        signIn(accessToken, accessSecret, provider);
+        AccessGrant grant = signIn(accessToken, accessSecret, provider);
         finishWithAccessGrant();
     }
 
@@ -56,9 +63,24 @@ public class AuthenticationPresenter {
         //TODO
     }
 
-    public void signIn(String accessToken, String accessSecret, String provider) {
-        //TODO
-        view.toast("Access token is " + accessToken);
+    public AccessGrant signIn(String accessToken, String accessSecret, String provider) {
+        Log.d("davidsocha", "itsa sign");
+        Credentials credentials = new Credentials(accessToken, accessSecret, provider);
+        AccessGrant grant = null;
+        try {
+            grant = (new AsyncTask<Credentials, Void, AccessGrant>() {
+
+                @Override
+                protected AccessGrant doInBackground(Credentials... params) {
+                    return accountService.logIn(params[0]);
+                }
+            }).execute(credentials).get();
+            Log.d("davidsocha", grant.getAccessToken() + grant.getId());
+            view.toastShort("Welcome, " + grant.getUserName());
+        } catch (InterruptedException | ExecutionException e) {
+            view.toastShort("Error signing in.");
+        }
+        return grant;
     }
 
     public void createAccount() {
