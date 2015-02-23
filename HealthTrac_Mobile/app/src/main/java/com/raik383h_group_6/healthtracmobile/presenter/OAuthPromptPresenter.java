@@ -4,13 +4,13 @@ import android.content.Intent;
 
 import com.raik383h_group_6.healthtracmobile.R;
 import com.raik383h_group_6.healthtracmobile.view.OAuthBrowserActivity;
-import com.raik383h_group_6.healthtracmobile.view.LoginPromptActivity;
+import com.raik383h_group_6.healthtracmobile.view.OAuthPromptActivity;
 
-public class LoginPromptPresenter {
+public class OAuthPromptPresenter {
 
-    private LoginPromptActivity view;
+    private OAuthPromptActivity view;
 
-    public void initialize(LoginPromptActivity view) {
+    public void initialize(OAuthPromptActivity view) {
         this.view = view;
     }
 

@@ -7,14 +7,14 @@ import android.view.View;
 
 import com.google.inject.Inject;
 import com.raik383h_group_6.healthtracmobile.R;
-import com.raik383h_group_6.healthtracmobile.presenter.LoginPromptPresenter;
+import com.raik383h_group_6.healthtracmobile.presenter.OAuthPromptPresenter;
 
-public class LoginPromptActivity extends Activity {
+public class OAuthPromptActivity extends Activity {
 
     private static final int FB_LOGIN_REQ = 1,
             TW_LOGIN_REQ = 2;
     @Inject
-    private LoginPromptPresenter presenter;
+    private OAuthPromptPresenter presenter;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

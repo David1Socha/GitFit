@@ -36,7 +36,7 @@ public class AuthenticationActivity extends Activity {
     }
 
     public void signIn(View v) {
-        Intent intent = new Intent(this, LoginPromptActivity.class);
+        Intent intent = new Intent(this, OAuthPromptActivity.class);
         startActivityForResult(intent, SIGN_IN);
     }
 
