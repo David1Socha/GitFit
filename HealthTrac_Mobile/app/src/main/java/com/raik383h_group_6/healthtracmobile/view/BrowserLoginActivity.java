@@ -40,9 +40,8 @@ public class BrowserLoginActivity extends ActionBarActivity implements RoboConte
         injectMembers();
         webView = new WebView(this);
         setContentView(webView);
-        presenter.initialize(oAuthService, this);
-        presenter.setUpWebView(webView);
-        presenter.beginAuthorization();
+        presenter.initialize(oAuthService, provider, webView, this);
+        presenter.onViewCreate();
     }
 
     private void injectMembers() {

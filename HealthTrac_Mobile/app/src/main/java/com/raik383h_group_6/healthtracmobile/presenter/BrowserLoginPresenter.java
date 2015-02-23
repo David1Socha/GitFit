@@ -20,12 +20,12 @@ import java.util.concurrent.ExecutionException;
 public class BrowserLoginPresenter {
 
     private IOAuthServiceAdapter oAuthService;
+    private String provider;
     private Token requestToken;
     private BrowserLoginActivity view;
     private WebView webView;
 
-    public void setUpWebView(WebView web) {
-        webView = web;
+    private void setUpWebView() {
         WebViewClient webViewClient = new LoginWebViewClient();
         webView.clearCache(true);
         WebSettings settings = webView.getSettings();
@@ -34,12 +34,20 @@ public class BrowserLoginPresenter {
         webView.setWebViewClient(webViewClient);
     }
 
-    public void initialize( IOAuthServiceAdapter serviceAdapter, BrowserLoginActivity view) {
-        oAuthService = serviceAdapter;
+    public void initialize( IOAuthServiceAdapter serviceAdapter, String provider, WebView web, BrowserLoginActivity view) {
+        this.oAuthService = serviceAdapter;
+        this.provider = provider;
         this.view = view;
+        this.webView = web;
+        setUpWebView();
     }
 
-    private void finishWithToken(Token token) {
+    public void onViewCreate() {
+        setUpWebView();
+        beginAuthorization();
+    }
+
+    private void finishWithToken(Token token) { //Should view or presenter do this?
         Intent data = new Intent();
         data.putExtra(view.getString(R.string.EXTRA_ACCESS_SECRET), token.getSecret());
         data.putExtra(view.getString(R.string.EXTRA_ACCESS_TOKEN), token.getToken());
@@ -48,12 +56,12 @@ public class BrowserLoginPresenter {
         view.finish();
     }
 
-    public void finishInShame() {
+    private void finishInShame() {
         view.setResult(Activity.RESULT_CANCELED);
         view.finish();
     }
 
-    public void beginAuthorization() {
+    private void beginAuthorization() {
         String authUrl = getAuthorizationUrl();
         webView.loadUrl(authUrl);
     }
