@@ -14,8 +14,7 @@ import roboguice.inject.ContentView;
 
 @ContentView(R.layout.activity_authentication)
 public class AuthenticationActivity extends Activity {
-    public static final int CREATE_ACCOUNT = 1,
-            SIGN_IN = 2;
+
     @Inject
     AuthenticationPresenter presenter;
 
@@ -29,10 +28,10 @@ public class AuthenticationActivity extends Activity {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode == RESULT_OK) {
             switch (requestCode) {
-                case SIGN_IN:
+                case AuthenticationPresenter.SIGN_IN:
                     Log.d("Result", "Signed in");
                     break;
-                case CREATE_ACCOUNT:
+                case AuthenticationPresenter.CREATE_ACCOUNT:
                     Log.d("Result", "Created account");
                     break;
                 default:
@@ -42,8 +41,7 @@ public class AuthenticationActivity extends Activity {
     }
 
     public void onClickSignIn(View v) {
-        Intent intent = new Intent(this, OAuthPromptActivity.class);
-        startActivityForResult(intent, SIGN_IN);
+        presenter.onClickSignIn();
     }
 
     public void onClickCreateAccount(View v) {
