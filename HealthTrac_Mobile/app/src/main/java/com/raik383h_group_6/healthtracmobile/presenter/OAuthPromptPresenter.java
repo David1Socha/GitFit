@@ -24,16 +24,16 @@ public class OAuthPromptPresenter {
             String accessToken = extras.getString(view.getString(R.string.EXTRA_ACCESS_TOKEN));
             String accessSecret = extras.getString(view.getString(R.string.EXTRA_ACCESS_SECRET));
             String provider = extras.getString(view.getString(R.string.EXTRA_PROVIDER));
-            finishWithOAuthInfos(accessToken, accessSecret, provider);
+            view.finishWithOAuthInfos(accessToken, accessSecret, provider);
         } else {
-            finishInShame();
+            view.finishInShame();
         }
     }
 
     public void onClickLoginTwitter() {
         Intent intent = new Intent(view, OAuthBrowserActivity.class);
         intent.putExtra(view.getString(R.string.EXTRA_PROVIDER), view.getString(R.string.PROVIDER_TWITTER));
-        view.finish(); //TODO fixme
+        view.finish();
         view.startActivityForResult(intent, TW_LOGIN_REQ);
     }
 
@@ -41,19 +41,5 @@ public class OAuthPromptPresenter {
         Intent intent = new Intent(view, OAuthBrowserActivity.class);
         intent.putExtra(view.getString(R.string.EXTRA_PROVIDER), view.getString(R.string.PROVIDER_FACEBOOK));
         view.startActivityForResult(intent, FB_LOGIN_REQ);
-    }
-
-    private void finishWithOAuthInfos(String accessToken, String accessSecret, String provider) {
-        Intent data = new Intent();
-        data.putExtra(view.getString(R.string.EXTRA_ACCESS_SECRET), accessSecret);
-        data.putExtra(view.getString(R.string.EXTRA_ACCESS_TOKEN), accessToken);
-        data.putExtra(view.getString(R.string.EXTRA_PROVIDER), provider);
-        view.setResult(Activity.RESULT_OK, data);
-        view.finish();
-    }
-
-    private void finishInShame() {
-        view.setResult(Activity.RESULT_CANCELED);
-        view.finish();
     }
 }

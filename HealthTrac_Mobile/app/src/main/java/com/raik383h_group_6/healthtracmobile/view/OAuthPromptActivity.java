@@ -35,4 +35,18 @@ public class OAuthPromptActivity extends Activity {
         presenter.onClickLoginTwitter();
     }
 
+    public void finishWithOAuthInfos(String accessToken, String accessSecret, String provider) {
+        Intent data = new Intent();
+        data.putExtra(getString(R.string.EXTRA_ACCESS_SECRET), accessSecret);
+        data.putExtra(getString(R.string.EXTRA_ACCESS_TOKEN), accessToken);
+        data.putExtra(getString(R.string.EXTRA_PROVIDER), provider);
+        setResult(Activity.RESULT_OK, data);
+        finish();
+    }
+
+    public void finishInShame() {
+        setResult(Activity.RESULT_CANCELED);
+        finish();
+    }
+
 }
