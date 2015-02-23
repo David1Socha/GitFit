@@ -47,20 +47,6 @@ public class OAuthBrowserPresenter {
         beginAuthorization();
     }
 
-    private void finishWithToken(Token token) { //Should view or presenter do this?
-        Intent data = new Intent();
-        data.putExtra(view.getString(R.string.EXTRA_ACCESS_SECRET), token.getSecret());
-        data.putExtra(view.getString(R.string.EXTRA_ACCESS_TOKEN), token.getToken());
-        data.putExtra(view.getString(R.string.EXTRA_PROVIDER), provider);
-        view.setResult(Activity.RESULT_OK, data);
-        view.finish();
-    }
-
-    private void finishInShame() {
-        view.setResult(Activity.RESULT_CANCELED);
-        view.finish();
-    }
-
     private void beginAuthorization() {
         String authUrl = getAuthorizationUrl();
         webView.loadUrl(authUrl);
@@ -111,10 +97,10 @@ public class OAuthBrowserPresenter {
                 webView.setVisibility(View.INVISIBLE);
                 Uri uri = Uri.parse(url);
                 if (uri.getQueryParameter(oAuthService.getVerifierName()) == null) { //Check if we're getting called back because of OAuth cancellation
-                    finishInShame();
+                    view.finishInShame();
                 } else {
                     Token token = getToken(uri);
-                    finishWithToken(token);
+                    view.finishWithToken(token);
                 }
             } else {
                 super.onPageStarted(webView, url, favicon);

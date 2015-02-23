@@ -1,5 +1,7 @@
 package com.raik383h_group_6.healthtracmobile.view;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.webkit.WebView;
@@ -7,6 +9,7 @@ import com.google.inject.Inject;
 import com.google.inject.Key;
 import com.google.inject.name.Names;
 import com.raik383h_group_6.healthtracmobile.R;
+import com.raik383h_group_6.healthtracmobile.model.Token;
 import com.raik383h_group_6.healthtracmobile.presenter.OAuthBrowserPresenter;
 import com.raik383h_group_6.healthtracmobile.service.oauth.IOAuthServiceAdapter;
 
@@ -57,6 +60,20 @@ public class OAuthBrowserActivity extends ActionBarActivity implements RoboConte
         } else {
             return injector.getInstance(Key.get(IOAuthServiceAdapter.class, Names.named(twitterStr)));
         }
+    }
+
+    public void finishWithToken(Token token) { //Should view or presenter do this?
+        Intent data = new Intent();
+        data.putExtra(getString(R.string.EXTRA_ACCESS_SECRET), token.getSecret());
+        data.putExtra(getString(R.string.EXTRA_ACCESS_TOKEN), token.getToken());
+        data.putExtra(getString(R.string.EXTRA_PROVIDER), provider);
+        setResult(Activity.RESULT_OK, data);
+        finish();
+    }
+
+    public void finishInShame() {
+        setResult(Activity.RESULT_CANCELED);
+        finish();
     }
 
 
