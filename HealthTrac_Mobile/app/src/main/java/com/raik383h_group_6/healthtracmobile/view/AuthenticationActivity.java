@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import com.google.inject.Inject;
 import com.raik383h_group_6.healthtracmobile.R;
@@ -36,5 +37,9 @@ public class AuthenticationActivity extends RoboActivity {
 
     public void onClickCreateAccount(View v) {
         //TODO
+    }
+
+    public void toast(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_LONG).show();
     }
 }
