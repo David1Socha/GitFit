@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.util.Log;
 
 import com.raik383h_group_6.healthtracmobile.R;
+import com.raik383h_group_6.healthtracmobile.service.api.AccountService;
 import com.raik383h_group_6.healthtracmobile.view.AuthenticationActivity;
 import com.raik383h_group_6.healthtracmobile.view.OAuthPromptActivity;
 
@@ -13,8 +14,10 @@ public class AuthenticationPresenter {
             OAUTH_SIGN_IN = 2,
             OAUTH_CREATE_ACCOUNT = 3;
     private AuthenticationActivity view;
+    private AccountService accountService;
 
-    public void initialize(AuthenticationActivity view) {
+    public void initialize(AccountService accountService, AuthenticationActivity view) {
+        this.accountService = accountService;
         this.view = view;
     }
 
