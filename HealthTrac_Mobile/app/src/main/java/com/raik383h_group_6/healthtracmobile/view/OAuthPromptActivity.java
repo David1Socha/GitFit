@@ -3,6 +3,7 @@ package com.raik383h_group_6.healthtracmobile.view;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 
 import com.google.inject.Inject;
 import com.raik383h_group_6.healthtracmobile.R;
@@ -29,11 +30,11 @@ public class OAuthPromptActivity extends RoboActivity {
         presenter.onActivityResult(requestCode, resultCode, data);
     }
 
-    public void onClickLoginFacebook() {
+    public void onClickLoginFacebook(View v) {
         presenter.onClickLoginFacebook();
     }
 
-    public void onClickLoginTwitter() {
+    public void onClickLoginTwitter(View v) {
         presenter.onClickLoginTwitter();
     }
 
