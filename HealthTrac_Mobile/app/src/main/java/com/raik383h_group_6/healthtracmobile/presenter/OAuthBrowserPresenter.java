@@ -13,16 +13,16 @@ import android.webkit.WebViewClient;
 import com.raik383h_group_6.healthtracmobile.R;
 import com.raik383h_group_6.healthtracmobile.model.Token;
 import com.raik383h_group_6.healthtracmobile.service.oauth.IOAuthServiceAdapter;
-import com.raik383h_group_6.healthtracmobile.view.BrowserLoginActivity;
+import com.raik383h_group_6.healthtracmobile.view.OAuthBrowserActivity;
 
 import java.util.concurrent.ExecutionException;
 
-public class BrowserLoginPresenter {
+public class OAuthBrowserPresenter {
 
     private IOAuthServiceAdapter oAuthService;
     private String provider;
     private Token requestToken;
-    private BrowserLoginActivity view;
+    private OAuthBrowserActivity view;
     private WebView webView;
 
     private void setUpWebView() {
@@ -34,7 +34,7 @@ public class BrowserLoginPresenter {
         webView.setWebViewClient(webViewClient);
     }
 
-    public void initialize( IOAuthServiceAdapter serviceAdapter, String provider, WebView web, BrowserLoginActivity view) {
+    public void initialize( IOAuthServiceAdapter serviceAdapter, String provider, WebView web, OAuthBrowserActivity view) {
         this.oAuthService = serviceAdapter;
         this.provider = provider;
         this.view = view;

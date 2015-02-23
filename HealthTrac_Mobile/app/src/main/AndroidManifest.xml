@@ -25,7 +25,7 @@
                 android:value=".view.AuthenticationActivity"/>
         </activity>
         <activity
-            android:name=".view.BrowserLoginActivity"
+            android:name=".view.OAuthBrowserActivity"
             android:label="@string/title_activity_login_browser" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

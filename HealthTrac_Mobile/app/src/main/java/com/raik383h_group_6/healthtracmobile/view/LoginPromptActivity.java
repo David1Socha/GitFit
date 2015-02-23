@@ -3,7 +3,6 @@ package com.raik383h_group_6.healthtracmobile.view;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 
 import com.google.inject.Inject;
@@ -45,7 +44,7 @@ public class LoginPromptActivity extends Activity {
     }
 
     public void loginFacebook(View v) {
-        Intent intent = new Intent(this, BrowserLoginActivity.class);
+        Intent intent = new Intent(this, OAuthBrowserActivity.class);
         intent.putExtra(getString(R.string.EXTRA_PROVIDER), getString(R.string.PROVIDER_FACEBOOK));
         startActivityForResult(intent, FB_LOGIN_REQ);
     }
