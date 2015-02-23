@@ -1,10 +1,13 @@
 package com.raik383h_group_6.healthtracmobile.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.annotations.SerializedName;
 
 import java.util.Date;
 
-public class User {
+public class User implements Parcelable {
     private Date dateCreated, dateModified, birthDate;
     private String firstName, lastName, preferredName, email, userName;
     @SerializedName("ID") private String id;
@@ -115,4 +118,57 @@ public class User {
         @SerializedName("1")
         FEMALE
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeLong(dateCreated != null ? dateCreated.getTime() : -1);
+        dest.writeLong(dateModified != null ? dateModified.getTime() : -1);
+        dest.writeLong(birthDate != null ? birthDate.getTime() : -1);
+        dest.writeString(this.firstName);
+        dest.writeString(this.lastName);
+        dest.writeString(this.preferredName);
+        dest.writeString(this.email);
+        dest.writeString(this.userName);
+        dest.writeString(this.id);
+        dest.writeDouble(this.height);
+        dest.writeDouble(this.width);
+        dest.writeInt(this.sex == null ? -1 : this.sex.ordinal());
+    }
+
+    public User() {
+    }
+
+    private User(Parcel in) {
+        long tmpDateCreated = in.readLong();
+        this.dateCreated = tmpDateCreated == -1 ? null : new Date(tmpDateCreated);
+        long tmpDateModified = in.readLong();
+        this.dateModified = tmpDateModified == -1 ? null : new Date(tmpDateModified);
+        long tmpBirthDate = in.readLong();
+        this.birthDate = tmpBirthDate == -1 ? null : new Date(tmpBirthDate);
+        this.firstName = in.readString();
+        this.lastName = in.readString();
+        this.preferredName = in.readString();
+        this.email = in.readString();
+        this.userName = in.readString();
+        this.id = in.readString();
+        this.height = in.readDouble();
+        this.width = in.readDouble();
+        int tmpSex = in.readInt();
+        this.sex = tmpSex == -1 ? null : Sex.values()[tmpSex];
+    }
+
+    public static final Parcelable.Creator<User> CREATOR = new Parcelable.Creator<User>() {
+        public User createFromParcel(Parcel source) {
+            return new User(source);
+        }
+
+        public User[] newArray(int size) {
+            return new User[size];
+        }
+    };
 }
