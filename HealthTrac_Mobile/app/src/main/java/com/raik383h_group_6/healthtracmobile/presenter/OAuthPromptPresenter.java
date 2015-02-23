@@ -1,5 +1,6 @@
 package com.raik383h_group_6.healthtracmobile.presenter;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -17,16 +18,14 @@ public class OAuthPromptPresenter {
         this.view = view;
     }
 
-    public void oAuthCompleted(String token, String secret, String provider) {
-        view.finishWithOAuthInfos(token, secret, provider);
-    }
-
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (data != null) {
             Bundle extras = data.getExtras();
             String accessToken = extras.getString(view.getString(R.string.EXTRA_ACCESS_TOKEN));
             String accessSecret = extras.getString(view.getString(R.string.EXTRA_ACCESS_SECRET));
             String provider = extras.getString(view.getString(R.string.EXTRA_PROVIDER));
+        } else {
+            finishInShame();
         }
     }
 
@@ -41,5 +40,14 @@ public class OAuthPromptPresenter {
         Intent intent = new Intent(view, OAuthBrowserActivity.class);
         intent.putExtra(view.getString(R.string.EXTRA_PROVIDER), view.getString(R.string.PROVIDER_FACEBOOK));
         view.startActivityForResult(intent, FB_LOGIN_REQ);
+    }
+
+    private void finishWithOAuthInfos() {
+
+    }
+
+    private void finishInShame() {
+        view.setResult(Activity.RESULT_CANCELED);
+        view.finish();
     }
 }
