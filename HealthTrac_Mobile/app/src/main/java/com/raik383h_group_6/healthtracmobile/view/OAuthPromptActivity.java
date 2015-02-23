@@ -18,22 +18,13 @@ public class OAuthPromptActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_oauth_prompt);
+        presenter.initialize(this);
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (data != null) {
-            Bundle extras = data.getExtras();
-            String accessToken = extras.getString(getString(R.string.EXTRA_ACCESS_TOKEN));
-            String accessSecret = extras.getString(getString(R.string.EXTRA_ACCESS_SECRET));
-            String provider = extras.getString(getString(R.string.EXTRA_PROVIDER));
-            //presenter.login
-        }
-    }
-
-    public void loginServer(String accessToken, String accessSecret, String provider) {
-        //TODO
+        presenter.onActivityResult(requestCode, resultCode, data);
     }
 
     public void onClickLoginFacebook() {

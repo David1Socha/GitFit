@@ -1,6 +1,7 @@
 package com.raik383h_group_6.healthtracmobile.presenter;
 
 import android.content.Intent;
+import android.os.Bundle;
 
 import com.raik383h_group_6.healthtracmobile.R;
 import com.raik383h_group_6.healthtracmobile.view.OAuthBrowserActivity;
@@ -18,6 +19,15 @@ public class OAuthPromptPresenter {
 
     public void oAuthCompleted(String token, String secret, String provider) {
         view.finishWithOAuthInfos(token, secret, provider);
+    }
+
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (data != null) {
+            Bundle extras = data.getExtras();
+            String accessToken = extras.getString(view.getString(R.string.EXTRA_ACCESS_TOKEN));
+            String accessSecret = extras.getString(view.getString(R.string.EXTRA_ACCESS_SECRET));
+            String provider = extras.getString(view.getString(R.string.EXTRA_PROVIDER));
+        }
     }
 
     public void onClickLoginTwitter() {
