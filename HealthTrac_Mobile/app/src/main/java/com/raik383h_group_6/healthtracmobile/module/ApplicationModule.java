@@ -4,8 +4,10 @@ import com.google.inject.AbstractModule;
 import com.google.inject.name.Names;
 import com.raik383h_group_6.healthtracmobile.model.Membership;
 import com.raik383h_group_6.healthtracmobile.service.api.AccountService;
+import com.raik383h_group_6.healthtracmobile.service.api.FacebookService;
 import com.raik383h_group_6.healthtracmobile.service.api.MembershipService;
 import com.raik383h_group_6.healthtracmobile.service.api.TeamService;
+import com.raik383h_group_6.healthtracmobile.service.api.provider.RetrofitFacebookServiceProvider;
 import com.raik383h_group_6.healthtracmobile.service.api.provider.RetrofitMembershipServiceProvider;
 import com.raik383h_group_6.healthtracmobile.service.api.provider.RetrofitTeamServiceProvider;
 import com.raik383h_group_6.healthtracmobile.service.oauth.FacebookScribeOAuthServiceAdapter;
@@ -25,5 +27,6 @@ public class ApplicationModule extends AbstractModule {
         bind(UserService.class).toProvider(RetrofitUserServiceProvider.class);
         bind(TeamService.class).toProvider(RetrofitTeamServiceProvider.class);
         bind(MembershipService.class).toProvider(RetrofitMembershipServiceProvider.class);
+        bind(FacebookService.class).toProvider(RetrofitFacebookServiceProvider.class);
     }
 }
