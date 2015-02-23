@@ -8,12 +8,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/facebook_login"
-        android:onClick="loginFacebook"/>
+        android:onClick="onClickLoginFacebook"/>
     <Button
         android:id="@+id/tw_login_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/twitter_login"
-        android:onClick="loginTwitter"/>
+        android:onClick="onClickLoginTwitter"/>
 
 </LinearLayout>

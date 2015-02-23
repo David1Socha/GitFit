@@ -3,7 +3,6 @@ package com.raik383h_group_6.healthtracmobile.view;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 
 import com.google.inject.Inject;
 import com.raik383h_group_6.healthtracmobile.R;
@@ -11,15 +10,14 @@ import com.raik383h_group_6.healthtracmobile.presenter.OAuthPromptPresenter;
 
 public class OAuthPromptActivity extends Activity {
 
-    private static final int FB_LOGIN_REQ = 1,
-            TW_LOGIN_REQ = 2;
+
     @Inject
     private OAuthPromptPresenter presenter;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login_prompt);
+        setContentView(R.layout.activity_oauth_prompt);
     }
 
     @Override
@@ -38,14 +36,12 @@ public class OAuthPromptActivity extends Activity {
         //TODO
     }
 
-    public void loginTwitter(View v) {
-
-        startActivityForResult(intent, TW_LOGIN_REQ);
+    public void onClickLoginFacebook() {
+        presenter.onClickLoginFacebook();
     }
 
-    public void loginFacebook(View v) {
-        Intent intent = new Intent(this, OAuthBrowserActivity.class);
-        intent.putExtra(getString(R.string.EXTRA_PROVIDER), getString(R.string.PROVIDER_FACEBOOK));
-        startActivityForResult(intent, FB_LOGIN_REQ);
+    public void onClickLoginTwitter() {
+        presenter.onClickLoginTwitter();
     }
+
 }
