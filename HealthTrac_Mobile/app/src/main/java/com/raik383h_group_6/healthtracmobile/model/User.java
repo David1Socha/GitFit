@@ -6,7 +6,8 @@ import java.util.Date;
 
 public class User {
     private Date dateCreated, dateModified, birthDate;
-    private String firstName, lastName, preferredName, email, id, userName;
+    private String firstName, lastName, preferredName, email, userName;
+    @SerializedName("ID") private String id;
     private double height, width;
 
     public Sex getSex() {

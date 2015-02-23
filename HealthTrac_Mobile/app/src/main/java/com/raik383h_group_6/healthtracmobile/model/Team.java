@@ -8,7 +8,7 @@ import java.util.Date;
 
 public class Team {
     private Date dateCreated, dateModified;
-    private long id;
+    @SerializedName("ID") private long id;
     private String name, description;
 
     public Visibility getVisibility() {
