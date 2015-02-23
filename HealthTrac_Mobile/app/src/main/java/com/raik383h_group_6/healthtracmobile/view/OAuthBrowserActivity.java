@@ -62,20 +62,4 @@ public class OAuthBrowserActivity extends ActionBarActivity implements RoboConte
         }
     }
 
-    public void finishWithToken(Token token) { //Should view or presenter do this?
-        Intent data = new Intent();
-        data.putExtra(getString(R.string.EXTRA_ACCESS_SECRET), token.getSecret());
-        data.putExtra(getString(R.string.EXTRA_ACCESS_TOKEN), token.getToken());
-        data.putExtra(getString(R.string.EXTRA_PROVIDER), provider);
-        setResult(Activity.RESULT_OK, data);
-        finish();
-    }
-
-    public void finishInShame() {
-        setResult(Activity.RESULT_CANCELED);
-        finish();
-    }
-
-
-
 }
