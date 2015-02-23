@@ -8,8 +8,10 @@ import com.google.inject.Inject;
 import com.raik383h_group_6.healthtracmobile.R;
 import com.raik383h_group_6.healthtracmobile.presenter.OAuthPromptPresenter;
 
-public class OAuthPromptActivity extends Activity {
+import roboguice.RoboGuice;
+import roboguice.activity.RoboActivity;
 
+public class OAuthPromptActivity extends RoboActivity {
 
     @Inject
     private OAuthPromptPresenter presenter;
