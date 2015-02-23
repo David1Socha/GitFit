@@ -64,7 +64,6 @@ public class AuthenticationPresenter {
     }
 
     public AccessGrant signIn(String accessToken, String accessSecret, String provider) {
-        Log.d("davidsocha", "itsa sign");
         Credentials credentials = new Credentials(accessToken, accessSecret, provider);
         AccessGrant grant = null;
         try {
@@ -72,13 +71,20 @@ public class AuthenticationPresenter {
 
                 @Override
                 protected AccessGrant doInBackground(Credentials... params) {
-                    return accountService.logIn(params[0]);
+                    try {
+                        return accountService.logIn(params[0]);
+                    } catch (Exception e) {
+                        return null;
+                    }
+
                 }
             }).execute(credentials).get();
-            Log.d("davidsocha", grant.getAccessToken() + grant.getId());
-            view.toastShort("Welcome, " + grant.getUserName());
-        } catch (InterruptedException | ExecutionException e) {
+
+        } catch (InterruptedException | ExecutionException ignored) {}
+        if (grant == null) {
             view.toastShort("Error signing in.");
+        } else {
+            view.toastShort("Welcome, " + grant.getUserName());
         }
         return grant;
     }
