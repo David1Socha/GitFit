@@ -25,7 +25,6 @@ public class AuthenticationActivity extends Activity {
             switch (requestCode) {
                 case SIGN_IN:
                     Log.d("Result", "Signed in");
-                    Log.d("accToken", data.getExtras().getString(getString(R.string.EXTRA_ACCESS_TOKEN)));
                     break;
                 case CREATE_ACCOUNT:
                     Log.d("Result", "Created account");

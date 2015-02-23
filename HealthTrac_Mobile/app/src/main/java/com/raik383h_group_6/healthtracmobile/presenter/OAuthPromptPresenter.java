@@ -33,7 +33,6 @@ public class OAuthPromptPresenter {
     public void onClickLoginTwitter() {
         Intent intent = new Intent(view, OAuthBrowserActivity.class);
         intent.putExtra(view.getString(R.string.EXTRA_PROVIDER), view.getString(R.string.PROVIDER_TWITTER));
-        view.finish();
         view.startActivityForResult(intent, TW_LOGIN_REQ);
     }
 
