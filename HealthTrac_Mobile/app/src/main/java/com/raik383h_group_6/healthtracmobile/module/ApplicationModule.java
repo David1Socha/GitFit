@@ -16,7 +16,7 @@ public class ApplicationModule extends AbstractModule {
     protected void configure() {
         bind(IOAuthServiceAdapter.class).annotatedWith(Names.named("Facebook")).to(FacebookScribeOAuthServiceAdapter.class);
         bind(IOAuthServiceAdapter.class).annotatedWith(Names.named("Twitter")).to(TwitterScribeOAuthServiceAdapter.class);
-        bind(AccountService.class).toProvider(RetrofitAccountServiceProvider.class).asEagerSingleton();
-        bind(UserService.class).toProvider(RetrofitUserServiceProvider.class).asEagerSingleton();
+        bind(AccountService.class).toProvider(RetrofitAccountServiceProvider.class);
+        bind(UserService.class).toProvider(RetrofitUserServiceProvider.class);
     }
 }
