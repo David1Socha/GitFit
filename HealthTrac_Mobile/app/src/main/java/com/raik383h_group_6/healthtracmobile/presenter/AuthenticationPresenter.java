@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.util.Log;
 
+import com.raik383h_group_6.healthtracmobile.R;
 import com.raik383h_group_6.healthtracmobile.view.AuthenticationActivity;
 import com.raik383h_group_6.healthtracmobile.view.OAuthPromptActivity;
 
@@ -26,14 +27,13 @@ public class AuthenticationPresenter {
         if (resultCode == Activity.RESULT_OK) {
             switch (requestCode) {
                 case OAUTH_SIGN_IN:
-                    signIn();
-                    finishWithUser();
+                    signInAndFinish(data);
                     break;
                 case OAUTH_CREATE_ACCOUNT:
                     createAccount();
                     break;
                 case CREATE_ACCOUNT:
-                    finishWithUser();
+                    signInAndFinish(data);
                     break;
                 default:
                     break;
@@ -41,12 +41,21 @@ public class AuthenticationPresenter {
         }
     }
 
-    public void finishWithUser() {
+    private void signInAndFinish(Intent data) {
+        String accessToken = data.getStringExtra(view.getString(R.string.EXTRA_ACCESS_TOKEN));
+        String accessSecret = data.getStringExtra(view.getString(R.string.EXTRA_ACCESS_SECRET));
+        String provider = data.getStringExtra(view.getString(R.string.EXTRA_PROVIDER));
+        signIn(accessToken, accessSecret, provider);
+        finishWithAccessGrant();
+    }
+
+    public void finishWithAccessGrant() {
         //TODO
     }
 
-    public void signIn() {
+    public void signIn(String accessToken, String accessSecret, String provider) {
         //TODO
+        view.toast("Access token is " + accessToken);
     }
 
     public void createAccount() {
