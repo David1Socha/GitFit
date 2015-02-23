@@ -24,6 +24,7 @@ public class OAuthPromptPresenter {
             String accessToken = extras.getString(view.getString(R.string.EXTRA_ACCESS_TOKEN));
             String accessSecret = extras.getString(view.getString(R.string.EXTRA_ACCESS_SECRET));
             String provider = extras.getString(view.getString(R.string.EXTRA_PROVIDER));
+            finishWithOAuthInfos(accessToken, accessSecret, provider);
         } else {
             finishInShame();
         }
@@ -42,8 +43,13 @@ public class OAuthPromptPresenter {
         view.startActivityForResult(intent, FB_LOGIN_REQ);
     }
 
-    private void finishWithOAuthInfos() {
-
+    private void finishWithOAuthInfos(String accessToken, String accessSecret, String provider) {
+        Intent data = new Intent();
+        data.putExtra(view.getString(R.string.EXTRA_ACCESS_SECRET), accessSecret);
+        data.putExtra(view.getString(R.string.EXTRA_ACCESS_TOKEN), accessToken);
+        data.putExtra(view.getString(R.string.EXTRA_PROVIDER), provider);
+        view.setResult(Activity.RESULT_OK, data);
+        view.finish();
     }
 
     private void finishInShame() {
