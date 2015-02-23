@@ -10,10 +10,11 @@ import com.google.inject.Inject;
 import com.raik383h_group_6.healthtracmobile.R;
 import com.raik383h_group_6.healthtracmobile.presenter.AuthenticationPresenter;
 
+import roboguice.activity.RoboActivity;
 import roboguice.inject.ContentView;
 
 @ContentView(R.layout.activity_authentication)
-public class AuthenticationActivity extends Activity {
+public class AuthenticationActivity extends RoboActivity {
 
     @Inject
     AuthenticationPresenter presenter;
@@ -26,18 +27,7 @@ public class AuthenticationActivity extends Activity {
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (resultCode == RESULT_OK) {
-            switch (requestCode) {
-                case AuthenticationPresenter.SIGN_IN:
-                    Log.d("Result", "Signed in");
-                    break;
-                case AuthenticationPresenter.CREATE_ACCOUNT:
-                    Log.d("Result", "Created account");
-                    break;
-                default:
-                    break;
-            }
-        }
+        presenter.onActivityResult(requestCode, resultCode, data);
     }
 
     public void onClickSignIn(View v) {
