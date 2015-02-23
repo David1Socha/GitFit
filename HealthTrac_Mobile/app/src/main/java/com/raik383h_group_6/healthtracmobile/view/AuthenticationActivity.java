@@ -6,12 +6,16 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
+import com.google.inject.Inject;
 import com.raik383h_group_6.healthtracmobile.R;
+import com.raik383h_group_6.healthtracmobile.presenter.AuthenticationPresenter;
 
 
 public class AuthenticationActivity extends Activity {
     public static final int CREATE_ACCOUNT = 1,
             SIGN_IN = 2;
+    @Inject
+    AuthenticationPresenter presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
