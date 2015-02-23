@@ -1,6 +1,7 @@
-package com.raik383h_group_6.healthtracmobile.service;
+package com.raik383h_group_6.healthtracmobile.service.api.provider;
 
 import com.google.inject.Provider;
+import com.raik383h_group_6.healthtracmobile.service.api.UserService;
 
 import retrofit.RestAdapter;
 

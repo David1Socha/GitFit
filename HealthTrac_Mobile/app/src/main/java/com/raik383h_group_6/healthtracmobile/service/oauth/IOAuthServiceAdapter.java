@@ -1,4 +1,4 @@
-package com.raik383h_group_6.healthtracmobile.service;
+package com.raik383h_group_6.healthtracmobile.service.oauth;
 
 import com.raik383h_group_6.healthtracmobile.model.Token;
 

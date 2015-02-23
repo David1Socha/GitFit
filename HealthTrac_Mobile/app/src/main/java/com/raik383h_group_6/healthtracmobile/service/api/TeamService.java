@@ -1,7 +1,8 @@
-package com.raik383h_group_6.healthtracmobile.service;
+package com.raik383h_group_6.healthtracmobile.service.api;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.raik383h_group_6.healthtracmobile.model.Team;
 import com.raik383h_group_6.healthtracmobile.model.User;
 
 import java.util.List;

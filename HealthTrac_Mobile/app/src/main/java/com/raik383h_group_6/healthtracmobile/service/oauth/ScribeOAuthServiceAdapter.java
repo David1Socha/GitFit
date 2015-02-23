@@ -1,5 +1,6 @@
-package com.raik383h_group_6.healthtracmobile.service;
+package com.raik383h_group_6.healthtracmobile.service.oauth;
 import com.raik383h_group_6.healthtracmobile.model.Token;
+import com.raik383h_group_6.healthtracmobile.service.oauth.IOAuthServiceAdapter;
 
 import org.scribe.model.Verifier;
 import org.scribe.oauth.OAuthService;

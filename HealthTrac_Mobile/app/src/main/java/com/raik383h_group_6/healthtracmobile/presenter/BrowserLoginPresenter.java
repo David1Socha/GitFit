@@ -8,7 +8,7 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import com.raik383h_group_6.healthtracmobile.model.Token;
-import com.raik383h_group_6.healthtracmobile.service.IOAuthServiceAdapter;
+import com.raik383h_group_6.healthtracmobile.service.oauth.IOAuthServiceAdapter;
 import com.raik383h_group_6.healthtracmobile.view.BrowserLoginActivity;
 
 import java.util.concurrent.ExecutionException;

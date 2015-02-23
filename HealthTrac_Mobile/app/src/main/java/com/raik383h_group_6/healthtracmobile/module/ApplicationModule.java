@@ -2,13 +2,13 @@ package com.raik383h_group_6.healthtracmobile.module;
 
 import com.google.inject.AbstractModule;
 import com.google.inject.name.Names;
-import com.raik383h_group_6.healthtracmobile.service.AccountService;
-import com.raik383h_group_6.healthtracmobile.service.FacebookScribeOAuthServiceAdapter;
-import com.raik383h_group_6.healthtracmobile.service.IOAuthServiceAdapter;
-import com.raik383h_group_6.healthtracmobile.service.RetrofitAccountServiceProvider;
-import com.raik383h_group_6.healthtracmobile.service.RetrofitUserServiceProvider;
-import com.raik383h_group_6.healthtracmobile.service.TwitterScribeOAuthServiceAdapter;
-import com.raik383h_group_6.healthtracmobile.service.UserService;
+import com.raik383h_group_6.healthtracmobile.service.api.AccountService;
+import com.raik383h_group_6.healthtracmobile.service.oauth.FacebookScribeOAuthServiceAdapter;
+import com.raik383h_group_6.healthtracmobile.service.oauth.IOAuthServiceAdapter;
+import com.raik383h_group_6.healthtracmobile.service.api.provider.RetrofitAccountServiceProvider;
+import com.raik383h_group_6.healthtracmobile.service.api.provider.RetrofitUserServiceProvider;
+import com.raik383h_group_6.healthtracmobile.service.oauth.TwitterScribeOAuthServiceAdapter;
+import com.raik383h_group_6.healthtracmobile.service.api.UserService;
 
 public class ApplicationModule extends AbstractModule {
 

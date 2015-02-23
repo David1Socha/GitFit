@@ -1,4 +1,4 @@
-package com.raik383h_group_6.healthtracmobile.service;
+package com.raik383h_group_6.healthtracmobile.service.api;
 
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
