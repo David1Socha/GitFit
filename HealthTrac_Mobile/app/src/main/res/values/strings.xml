@@ -44,5 +44,6 @@
     <string name="sex_label">Sex</string>
     <string name="male_label">Male</string>
     <string name="label_female">Female</string>
+    <string name="empty_field_error">Field must not be empty</string>
 
 </resources>

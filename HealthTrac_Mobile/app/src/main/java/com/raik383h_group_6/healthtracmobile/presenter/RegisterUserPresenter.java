@@ -29,7 +29,7 @@ public class RegisterUserPresenter {
         provider = view.getIntent().getStringExtra(view.getString(R.string.EXTRA_PROVIDER));
     }
 
-    public void onCreate() {
+    public void populateFields() {
         facebookUser = null;
         if (provider.equals(view.getString(R.string.PROVIDER_FACEBOOK))) {
             try {
@@ -55,16 +55,50 @@ public class RegisterUserPresenter {
         }.execute(accessToken).get();
     }
 
-    public void onClickCreateAccount() {
-        if (validateFields()) {
+    public void validateAccount(String birthDate, String email, String firstName, String height, String lastName, String preferredName, String userName, String weight) {
+        if (fieldsValid(birthDate, email, firstName, height, lastName, preferredName, userName, weight)) {
             //create account...
         } else {
             //send error msg
         }
     }
 
-    private boolean validateFields() {
-        return true;
+    private boolean fieldsValid(String birthDate, String email, String firstName, String height, String lastName, String prefName, String username, String weight) {
+        boolean allGood = true;
+        if (birthDate.equals("")) {
+            allGood = false;
+            view.setBirthDateError(view.getString(R.string.empty_field_error));
+        }
+        if (email.equals("")) {
+            allGood = false;
+            view.setEmailError(view.getString(R.string.empty_field_error));
+        }
+        if (firstName.equals("")) {
+            allGood = false;
+            view.setFirstNameError(view.getString(R.string.empty_field_error));
+        }
+        if (height.equals("")) {
+            allGood = false;
+            view.setHeightError(view.getString(R.string.empty_field_error));
+        }
+        if (lastName.equals("")) {
+            allGood = false;
+            view.setLastNameError(view.getString(R.string.empty_field_error));
+        }
+        if (prefName.equals("")) {
+            allGood = false;
+            view.setPrefNameError(view.getString(R.string.empty_field_error));
+        }
+        if (username.equals("")) {
+            allGood = false;
+            view.setUsernameError(view.getString(R.string.empty_field_error));
+        }
+        //TODO validate username uniqueness once I can get that part of API deployed to azure
+        if (weight.equals("")) {
+            allGood = false;
+            view.setEmailError(view.getString(R.string.empty_field_error));
+        }
+        return allGood;
     }
 
     private void registerAccountAsync(UserLogin userLogin) throws ExecutionException, InterruptedException {

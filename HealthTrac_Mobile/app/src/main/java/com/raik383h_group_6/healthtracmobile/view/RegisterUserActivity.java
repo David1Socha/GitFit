@@ -53,12 +53,11 @@ public class RegisterUserActivity extends RoboActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         presenter.initialize(facebookService, accountService, this);
-        presenter.onCreate();
+        presenter.populateFields();
         createAccountButton.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                presenter.onClickCreateAccount();
-                sexRadioGroup.getCheckedRadioButtonId();
+                presenter.validateAccount(birthDateEditText.getText().toString(), emailEditText.getText().toString(), firstNameEditText.getText().toString(), heightEditText.getText().toString(), lastNameEditText.getText().toString(), prefNameEditText.getText().toString(), usernameEditText.getText().toString(), weightEditText.getText().toString());
             }
         });
     }
