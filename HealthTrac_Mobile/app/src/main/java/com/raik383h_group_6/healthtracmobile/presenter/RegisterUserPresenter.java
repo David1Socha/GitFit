@@ -27,15 +27,7 @@ public class RegisterUserPresenter {
         facebookUser = null;
         if (provider.equals(view.getString(R.string.PROVIDER_FACEBOOK))) {
             try {
-                facebookUser = new AsyncTask<String, Void, FacebookUser>() {
-                    @Override protected FacebookUser doInBackground(String... params) {
-                        try {
-                            return facebookService.getUser(accessToken);
-                        } catch (Exception e) {
-                            return null;
-                        }
-                    }
-                }.execute(accessToken).get();
+                facebookUser = getFacebookUserAsync();
             } catch (InterruptedException | ExecutionException ignored) {
             }
         }
@@ -43,5 +35,17 @@ public class RegisterUserPresenter {
             //populate fields from facebook user
         }
 
+    }
+
+    private FacebookUser getFacebookUserAsync() throws ExecutionException, InterruptedException {
+        return new AsyncTask<String, Void, FacebookUser>() {
+            @Override protected FacebookUser doInBackground(String... params) {
+                try {
+                    return facebookService.getUser(accessToken);
+                } catch (Exception e) {
+                    return null;
+                }
+            }
+        }.execute(accessToken).get();
     }
 }
