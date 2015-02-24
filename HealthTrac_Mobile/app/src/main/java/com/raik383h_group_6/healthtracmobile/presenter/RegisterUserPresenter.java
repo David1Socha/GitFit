@@ -56,7 +56,15 @@ public class RegisterUserPresenter {
     }
 
     public void onClickCreateAccount() {
-        //TODO validate, then create account...
+        if (validateFields()) {
+            //create account...
+        } else {
+            //send error msg
+        }
+    }
+
+    private boolean validateFields() {
+        return true;
     }
 
     private void registerAccountAsync(UserLogin userLogin) throws ExecutionException, InterruptedException {
