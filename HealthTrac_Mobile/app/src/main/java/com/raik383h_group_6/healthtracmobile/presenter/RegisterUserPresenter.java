@@ -59,7 +59,7 @@ public class RegisterUserPresenter {
         if (fieldsValid(birthDate, email, firstName, height, lastName, preferredName, userName, weight)) {
             //create account...
         } else {
-            //send error msg
+            view.displayMessage(view.getString(R.string.invalid_field_message));
         }
     }
 

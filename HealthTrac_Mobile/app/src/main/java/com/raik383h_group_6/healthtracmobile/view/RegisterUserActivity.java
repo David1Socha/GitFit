@@ -5,6 +5,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioGroup;
+import android.widget.Toast;
 
 import com.google.inject.Inject;
 import com.raik383h_group_6.healthtracmobile.R;
@@ -92,5 +93,9 @@ public class RegisterUserActivity extends RoboActivity {
 
     public void setWeightError(String msg) {
         weightEditText.setError(msg);
+    }
+
+    public void displayMessage(String msg) {
+        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
     }
 }

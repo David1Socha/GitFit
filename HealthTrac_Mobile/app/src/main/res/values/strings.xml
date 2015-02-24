@@ -45,5 +45,6 @@
     <string name="male_label">Male</string>
     <string name="label_female">Female</string>
     <string name="empty_field_error">Field must not be empty</string>
+    <string name="invalid_field_message">Some fields contained invalid input</string>
 
 </resources>
