@@ -11,6 +11,10 @@ import com.raik383h_group_6.healthtracmobile.service.api.AccountService;
 import com.raik383h_group_6.healthtracmobile.service.api.FacebookService;
 import com.raik383h_group_6.healthtracmobile.view.RegisterUserActivity;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.concurrent.ExecutionException;
 
 public class RegisterUserPresenter {
@@ -55,12 +59,22 @@ public class RegisterUserPresenter {
         }.execute(accessToken).get();
     }
 
-    public void validateAccount(String birthDate, String email, String firstName, String height, String lastName, String preferredName, String userName, String weight) {
-        if (fieldsValid(birthDate, email, firstName, height, lastName, preferredName, userName, weight)) {
-            //create account...
+    public void validateAccount(String birthDateStr, String email, String firstName, String heightStr, String lastName, String preferredName, String userName, String weightStr) {
+        if (fieldsValid(birthDateStr, email, firstName, heightStr, lastName, preferredName, userName, weightStr)) {
+            Date birthDate = parseDate(birthDateStr);
         } else {
             view.displayMessage(view.getString(R.string.invalid_field_message));
         }
+    }
+
+    private static Date parseDate(String dateStr) {
+        DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+        Date d = null;
+        try {
+            d = formatter.parse(dateStr);
+        } catch (ParseException ignored) {
+        }
+        return d;
     }
 
     private boolean fieldsValid(String birthDate, String email, String firstName, String height, String lastName, String prefName, String username, String weight) {
