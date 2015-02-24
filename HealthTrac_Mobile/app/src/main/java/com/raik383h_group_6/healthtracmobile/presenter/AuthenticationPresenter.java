@@ -23,6 +23,7 @@ public class AuthenticationPresenter {
             OAUTH_TO_CREATE_ACCOUNT = 3;
     private AuthenticationActivity view;
     private AccountService accountService;
+    private String accessToken, accessSecret, provider;
 
     public void initialize(AccountService accountService, AuthenticationActivity view) {
         this.accountService = accountService;
@@ -38,13 +39,15 @@ public class AuthenticationPresenter {
         if (resultCode == Activity.RESULT_OK) {
             switch (requestCode) {
                 case OAUTH_TO_SIGN_IN:
-                    signInAndFinish(data);
+                    saveLoginInfo(data);
+                    signInAndFinish(accessToken, accessSecret, provider);
                     break;
                 case OAUTH_TO_CREATE_ACCOUNT:
-                    createAccount();
+                    saveLoginInfo(data);
+                    createAccount(accessToken, accessSecret, provider);
                     break;
                 case CREATE_ACCOUNT:
-                    signInAndFinish(data);
+                    signInAndFinish(accessToken, accessSecret, provider);
                     break;
                 default:
                     break;
@@ -52,10 +55,14 @@ public class AuthenticationPresenter {
         }
     }
 
-    private void signInAndFinish(Intent data) {
-        String accessToken = data.getStringExtra(view.getString(R.string.EXTRA_ACCESS_TOKEN));
-        String accessSecret = data.getStringExtra(view.getString(R.string.EXTRA_ACCESS_SECRET));
-        String provider = data.getStringExtra(view.getString(R.string.EXTRA_PROVIDER));
+    private void saveLoginInfo(Intent data) {
+        accessToken = data.getStringExtra(view.getString(R.string.EXTRA_ACCESS_TOKEN));
+        accessSecret = data.getStringExtra(view.getString(R.string.EXTRA_ACCESS_SECRET));
+        provider = data.getStringExtra(view.getString(R.string.EXTRA_PROVIDER));
+    }
+
+    private void signInAndFinish(String accessToken, String accessSecret, String provider) {
+
         AccessGrant grant = signIn(accessToken, accessSecret, provider);
         if (grant != null) {
             finishWithAccessGrant(grant);
@@ -99,7 +106,11 @@ public class AuthenticationPresenter {
         view.startActivityForResult(intent, OAUTH_TO_CREATE_ACCOUNT);
     }
 
-    public void createAccount() {
-        //TODO
+    public void createAccount(String accessToken, String accessSecret, String provider) {
+        Intent intent = new Intent(view, RegisterUserActivity.class);
+        intent.putExtra(view.getString(R.string.EXTRA_ACCESS_TOKEN), accessToken);
+        intent.putExtra(view.getString(R.string.EXTRA_ACCESS_SECRET), accessSecret);
+        intent.putExtra(view.getString(R.string.EXTRA_PROVIDER), provider);
+        view.startActivityForResult(intent, CREATE_ACCOUNT);
     }
 }
