@@ -79,19 +79,7 @@ public class AuthenticationPresenter {
         Credentials credentials = new Credentials(accessToken, accessSecret, provider);
         AccessGrant grant = null;
         try {
-            grant = (new AsyncTask<Credentials, Void, AccessGrant>() {
-
-                @Override
-                protected AccessGrant doInBackground(Credentials... params) {
-                    try {
-                        return accountService.logIn(params[0]);
-                    } catch (Exception e) {
-                        return null;
-                    }
-
-                }
-            }).execute(credentials).get();
-
+            grant = loginAsync(credentials);
         } catch (InterruptedException | ExecutionException ignored) {}
         if (grant == null) {
             view.toastShort("Error signing in.");
@@ -99,6 +87,21 @@ public class AuthenticationPresenter {
             view.toastShort("Welcome, " + grant.getUserName());
         }
         return grant;
+    }
+
+    private AccessGrant loginAsync(Credentials credentials) throws ExecutionException, InterruptedException {
+        return (new AsyncTask<Credentials, Void, AccessGrant>() {
+
+            @Override
+            protected AccessGrant doInBackground(Credentials... params) {
+                try {
+                    return accountService.logIn(params[0]);
+                } catch (Exception e) {
+                    return null;
+                }
+
+            }
+        }).execute(credentials).get();
     }
 
     public void onClickCreateAccount() {
