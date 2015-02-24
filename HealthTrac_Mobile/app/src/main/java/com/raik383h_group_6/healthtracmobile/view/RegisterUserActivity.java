@@ -7,6 +7,7 @@ import android.widget.Button;
 import com.google.inject.Inject;
 import com.raik383h_group_6.healthtracmobile.R;
 import com.raik383h_group_6.healthtracmobile.presenter.RegisterUserPresenter;
+import com.raik383h_group_6.healthtracmobile.service.api.AccountService;
 import com.raik383h_group_6.healthtracmobile.service.api.FacebookService;
 
 import roboguice.activity.RoboActivity;
@@ -19,13 +20,15 @@ public class RegisterUserActivity extends RoboActivity {
     private RegisterUserPresenter presenter;
     @Inject
     FacebookService facebookService;
+    @Inject
+    AccountService accountService;
     @InjectView(R.id.button_create_account)
     Button createAccountButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        presenter.initialize(facebookService, this);
+        presenter.initialize(facebookService, accountService, this);
         presenter.onCreate();
         createAccountButton.setOnClickListener( new View.OnClickListener() {
             @Override

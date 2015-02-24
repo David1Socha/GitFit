@@ -4,6 +4,7 @@ import android.os.AsyncTask;
 
 import com.raik383h_group_6.healthtracmobile.R;
 import com.raik383h_group_6.healthtracmobile.model.FacebookUser;
+import com.raik383h_group_6.healthtracmobile.service.api.AccountService;
 import com.raik383h_group_6.healthtracmobile.service.api.FacebookService;
 import com.raik383h_group_6.healthtracmobile.view.RegisterUserActivity;
 
@@ -14,10 +15,12 @@ public class RegisterUserPresenter {
     private FacebookService facebookService;
     private FacebookUser facebookUser;
     private String accessToken, accessSecret, provider;
+    private AccountService accountService;
 
-    public void initialize(FacebookService facebookService, RegisterUserActivity view) {
+    public void initialize(FacebookService facebookService, AccountService accountService, RegisterUserActivity view) {
         this.facebookService = facebookService;
         this.view = view;
+        this.accountService = accountService;
         accessToken = view.getIntent().getStringExtra(view.getString(R.string.EXTRA_ACCESS_TOKEN));
         accessSecret = view.getIntent().getStringExtra(view.getString(R.string.EXTRA_ACCESS_SECRET));
         provider = view.getIntent().getStringExtra(view.getString(R.string.EXTRA_PROVIDER));
