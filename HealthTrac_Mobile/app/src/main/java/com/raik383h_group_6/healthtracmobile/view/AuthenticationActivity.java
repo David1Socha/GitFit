@@ -39,7 +39,7 @@ public class AuthenticationActivity extends RoboActivity {
     }
 
     public void onClickCreateAccount(View v) {
-        //TODO
+        presenter.onClickCreateAccount();
     }
 
     public void toastShort(String message) {

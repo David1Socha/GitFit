@@ -94,6 +94,11 @@ public class AuthenticationPresenter {
         return grant;
     }
 
+    public void onClickCreateAccount() {
+        Intent intent = new Intent(view, OAuthPromptActivity.class);
+        view.startActivityForResult(intent, OAUTH_TO_CREATE_ACCOUNT);
+    }
+
     public void createAccount() {
         //TODO
     }
