@@ -42,5 +42,7 @@
     <string name="birthdate_hint">Birth Date</string>
     <string name="birthdate_label">Birth Date</string>
     <string name="sex_label">Sex</string>
+    <string name="male_label">Male</string>
+    <string name="label_female">Female</string>
 
 </resources>
