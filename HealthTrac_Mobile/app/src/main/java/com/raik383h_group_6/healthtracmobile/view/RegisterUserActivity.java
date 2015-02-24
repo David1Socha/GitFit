@@ -61,4 +61,36 @@ public class RegisterUserActivity extends RoboActivity {
             }
         });
     }
+
+    public void setBirthDateError(String msg) {
+        birthDateEditText.setError(msg);
+    }
+
+    public void setEmailError(String msg) {
+        emailEditText.setError(msg);
+    }
+
+    public void setFirstNameError(String msg) {
+        firstNameEditText.setError(msg);
+    }
+
+    public void setHeightError(String msg) {
+        heightEditText.setError(msg);
+    }
+
+    public void setLastNameError(String msg) {
+        lastNameEditText.setError(msg);
+    }
+
+    public void setPrefNameError(String msg) {
+        prefNameEditText.setError(msg);
+    }
+
+    public void setUsernameError(String msg) {
+        usernameEditText.setError(msg);
+    }
+
+    public void setWeightError(String msg) {
+        weightEditText.setError(msg);
+    }
 }
