@@ -48,4 +48,8 @@ public class RegisterUserPresenter {
             }
         }.execute(accessToken).get();
     }
+
+    public void onClickCreateAccount() {
+        //TODO validate, then create account...
+    }
 }
