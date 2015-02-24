@@ -23,5 +23,24 @@
     <string name="sign_in">Sign in to existing account</string>
     <string name="title_authentication_activity">Welcome to HealthTrac!</string>
     <string name="EXTRA_ACCESS_GRANT">com.raik383h_group6.healthtrac.ACCESS_GRANT</string>
+    <string name="first_name_label">First Name</string>
+    <string name="first_name_hint">First Name</string>
+    <string name="last_name_label">Last Name</string>
+    <string name="last_name_hint">Last Name</string>
+    <string name="pref_name_label">Preferred Name</string>
+    <string name="pref_name_hint">Preferred Name</string>
+    <string name="email_label">Email</string>
+    <string name="email_hint">Email</string>
+    <string name="location_label">Location</string>
+    <string name="location_hint">Location</string>
+    <string name="username_label">Username</string>
+    <string name="username_hint">Username</string>
+    <string name="height_hint">Height (inches)</string>
+    <string name="height_label">Height</string>
+    <string name="weight_hint">Weight (pounds)</string>
+    <string name="weight_label">Weight</string>
+    <string name="birthdate_hint">Birth Date</string>
+    <string name="birthdate_label">Birth Date</string>
+    <string name="sex_label">Sex</string>
 
 </resources>
