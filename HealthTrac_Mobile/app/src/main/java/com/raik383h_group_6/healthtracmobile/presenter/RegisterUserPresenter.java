@@ -3,7 +3,10 @@ package com.raik383h_group_6.healthtracmobile.presenter;
 import android.os.AsyncTask;
 
 import com.raik383h_group_6.healthtracmobile.R;
+import com.raik383h_group_6.healthtracmobile.model.AccessGrant;
 import com.raik383h_group_6.healthtracmobile.model.FacebookUser;
+import com.raik383h_group_6.healthtracmobile.model.User;
+import com.raik383h_group_6.healthtracmobile.model.UserLogin;
 import com.raik383h_group_6.healthtracmobile.service.api.AccountService;
 import com.raik383h_group_6.healthtracmobile.service.api.FacebookService;
 import com.raik383h_group_6.healthtracmobile.view.RegisterUserActivity;
@@ -54,5 +57,16 @@ public class RegisterUserPresenter {
 
     public void onClickCreateAccount() {
         //TODO validate, then create account...
+    }
+
+    private void registerAccountAsync(UserLogin userLogin) throws ExecutionException, InterruptedException {
+            new AsyncTask<UserLogin, Void, Void>() {
+
+               @Override
+               protected Void doInBackground(UserLogin... params) {
+                   accountService.register(params[0]);
+                   return null;
+               }
+           }.execute(userLogin).get();
     }
 }
