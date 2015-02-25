@@ -17,7 +17,8 @@ public interface FacebookService {
             .create();
     Converter DATA_CONVERTER = new GsonConverter(GSON);
     String SERVICE_ENDPOINT = "https://graph.facebook.com/v2.2";
+    String AUTH_PREFIX = "Bearer ";
 
-    @GET("me")
+    @GET("/me")
     FacebookUser getUser(@Header("Authorization") String token);
 }

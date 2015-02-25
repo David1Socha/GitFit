@@ -42,8 +42,11 @@ public class RegisterUserPresenter {
         if (provider.equals(view.getString(R.string.PROVIDER_FACEBOOK))) {
             try {
                 facebookUser = getFacebookUserAsync();
-                populateFacebookFields(facebookUser);
+
             } catch (InterruptedException | ExecutionException ignored) {
+            }
+            if (facebookUser != null) {
+                populateFacebookFields(facebookUser);
             }
         }
     }
@@ -54,7 +57,7 @@ public class RegisterUserPresenter {
         String firstName = facebookUser.getFirstName();
         String lastName = facebookUser.getLastName();
         String prefName = facebookUser.getName();
-        String location = facebookUser.getLocation().getName();
+        String location = facebookUser.getLocation() == null ? null : facebookUser.getLocation().getName();
         if (email != null) {
             view.setEmail(email);
         }
@@ -77,7 +80,7 @@ public class RegisterUserPresenter {
         return new AsyncTask<String, Void, FacebookUser>() {
             @Override protected FacebookUser doInBackground(String... params) {
                 try {
-                    return facebookService.getUser(accessToken);
+                    return facebookService.getUser(FacebookService.AUTH_PREFIX + accessToken);
                 } catch (Exception e) {
                     return null;
                 }
