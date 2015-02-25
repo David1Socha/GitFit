@@ -72,7 +72,6 @@ public class AuthenticationPresenter {
     public void finishWithAccessGrant(AccessGrant g) {
         Intent data = new Intent(view, RegisterUserActivity.class);
         data.putExtra(view.getString(R.string.EXTRA_ACCESS_GRANT), g);
-        Log.d("davidsocha", g.getAccessToken());
         //view.finish();
     }
 

@@ -39,7 +39,7 @@
     <string name="height_label">Height</string>
     <string name="weight_hint">Weight (pounds)</string>
     <string name="weight_label">Weight</string>
-    <string name="birthdate_hint">Birth Date</string>
+    <string name="birthdate_hint">Birth Date (\'dd/mm/yyyy\')</string>
     <string name="birthdate_label">Birth Date</string>
     <string name="sex_label">Sex</string>
     <string name="male_label">Male</string>

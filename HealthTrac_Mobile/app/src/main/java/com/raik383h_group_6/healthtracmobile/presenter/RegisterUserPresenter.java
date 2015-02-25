@@ -35,8 +35,6 @@ public class RegisterUserPresenter {
         accessToken = view.getIntent().getStringExtra(view.getString(R.string.EXTRA_ACCESS_TOKEN));
         accessSecret = view.getIntent().getStringExtra(view.getString(R.string.EXTRA_ACCESS_SECRET));
         provider = view.getIntent().getStringExtra(view.getString(R.string.EXTRA_PROVIDER));
-        Log.d("davidsocha", view.getIntent().getStringExtra(view.getString(R.string.EXTRA_PROVIDER)));
-        Log.d("davidsocha", provider);
     }
 
     public void populateFields() {

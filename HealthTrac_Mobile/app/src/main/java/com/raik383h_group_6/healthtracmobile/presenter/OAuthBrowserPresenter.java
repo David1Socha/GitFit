@@ -31,6 +31,7 @@ public class OAuthBrowserPresenter {
         WebSettings settings = webView.getSettings();
         settings.setBuiltInZoomControls(true);
         settings.setDisplayZoomControls(false);
+        settings.setJavaScriptEnabled(true);
         webView.setWebViewClient(webViewClient);
     }
 
