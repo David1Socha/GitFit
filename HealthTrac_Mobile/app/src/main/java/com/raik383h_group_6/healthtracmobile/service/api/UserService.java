@@ -6,6 +6,7 @@ import com.raik383h_group_6.healthtracmobile.model.User;
 
 import java.util.List;
 
+import retrofit.client.Response;
 import retrofit.converter.Converter;
 import retrofit.converter.GsonConverter;
 import retrofit.http.Body;
@@ -35,5 +36,5 @@ public interface UserService {
     List<User> getUsers(@Header("Authorization") String token);
 
     @PUT("api/Users/{id}")
-    void updateUser(@Path("id") String id, @Body User user, @Header("Authorization") String token);
+    Response updateUser(@Path("id") String id, @Body User user, @Header("Authorization") String token);
 }

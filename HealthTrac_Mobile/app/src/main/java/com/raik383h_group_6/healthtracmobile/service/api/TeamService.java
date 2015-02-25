@@ -6,6 +6,7 @@ import com.raik383h_group_6.healthtracmobile.model.Team;
 
 import java.util.List;
 
+import retrofit.client.Response;
 import retrofit.converter.Converter;
 import retrofit.converter.GsonConverter;
 import retrofit.http.Body;
@@ -36,7 +37,7 @@ public interface TeamService {
     List<Team> getTeams(@Query("userId") String userId, @Header("Authorization") String token);
 
     @PUT("api/Teams/{id}")
-    void updateTeam(@Path("id") long id, @Body Team team, @Header("Authorization") String token);
+    Response updateTeam(@Path("id") long id, @Body Team team, @Header("Authorization") String token);
 
     @POST("api/Teams")
     Team createTeam(@Body Team team, @Header("Authorization") String token);

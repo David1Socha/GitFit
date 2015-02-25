@@ -7,6 +7,7 @@ import com.raik383h_group_6.healthtracmobile.model.AccessGrant;
 import com.raik383h_group_6.healthtracmobile.model.Credentials;
 import com.raik383h_group_6.healthtracmobile.model.UserLogin;
 
+import retrofit.client.Response;
 import retrofit.converter.Converter;
 import retrofit.converter.GsonConverter;
 import retrofit.http.Body;
@@ -28,5 +29,5 @@ public interface AccountService {
     AccessGrant logIn(@Body Credentials request);
 
     @POST("/api/Account/Register")
-    void register(@Body UserLogin request);
+    Response register(@Body UserLogin request);
 }

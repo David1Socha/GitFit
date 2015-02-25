@@ -6,6 +6,7 @@ import com.raik383h_group_6.healthtracmobile.model.Membership;
 
 import java.util.List;
 
+import retrofit.client.Response;
 import retrofit.converter.Converter;
 import retrofit.converter.GsonConverter;
 import retrofit.http.Body;
@@ -42,7 +43,7 @@ public interface MembershipService {
     List<Membership> getMemberships(@Query("teamId") long teamId, @Header("Authorization") String token);
 
     @PUT("api/Memberships/{id}")
-    void updateMembership(@Path("id") long id, @Body Membership membership, @Header("Authorization") String token);
+    Response updateMembership(@Path("id") long id, @Body Membership membership, @Header("Authorization") String token);
 
     @POST("api/Memberships")
     Membership createMembership(@Body Membership membership, @Header("Authorization") String token);
