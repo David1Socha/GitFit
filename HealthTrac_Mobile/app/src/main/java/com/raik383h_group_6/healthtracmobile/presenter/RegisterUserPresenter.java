@@ -73,7 +73,7 @@ public class RegisterUserPresenter {
             User.Sex sex  = radioValue.equals(view.getString(R.string.male_label)) ? User.Sex.MALE : User.Sex.FEMALE;
             Date dateCreated = new Date();
             Date dateModified = new Date();
-            createUser(birthDate, dateCreated, dateModified, email, firstName, height, lastName, preferredName, sex, userName, weight);
+            createUser(birthDate, dateCreated, dateModified, email, firstName, height, lastName, preferredName, sex, userName, weight); //TODO add location eventually
         } else {
             view.displayMessage(view.getString(R.string.invalid_field_message));
         }
@@ -110,6 +110,7 @@ public class RegisterUserPresenter {
 
     private static Date parseDate(String dateStr) {
         DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy", Locale.US);
+        formatter.setLenient(false);
         Date d = null;
         try {
             d = formatter.parse(dateStr);
@@ -123,6 +124,9 @@ public class RegisterUserPresenter {
         if (birthDate.equals("")) {
             allGood = false;
             view.setBirthDateError(view.getString(R.string.empty_field_error));
+        } else if (parseDate(birthDate) == null) {
+            allGood = false;
+            view.setBirthDateError(view.getString(R.string.invalid_date_error));
         }
         if (email.equals("")) {
             allGood = false;
