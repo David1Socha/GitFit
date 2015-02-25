@@ -46,6 +46,9 @@ public class AuthenticationPresenter {
                     saveLoginInfo(data);
                     createAccount(accessToken, accessSecret, provider);
                     break;
+                case CREATE_ACCOUNT:
+                    signInAndFinish(accessToken, accessSecret, provider);
+                    break;
                 default:
                     break;
             }
@@ -112,7 +115,6 @@ public class AuthenticationPresenter {
         intent.putExtra(view.getString(R.string.EXTRA_ACCESS_TOKEN), accessToken);
         intent.putExtra(view.getString(R.string.EXTRA_ACCESS_SECRET), accessSecret);
         intent.putExtra(view.getString(R.string.EXTRA_PROVIDER), provider);
-        view.startActivity(intent);
-        signInAndFinish(accessToken, accessSecret, provider);
+        view.startActivityForResult(intent, CREATE_ACCOUNT);
     }
 }
