@@ -2,6 +2,7 @@ package com.raik383h_group_6.healthtracmobile.presenter;
 
 import android.app.Activity;
 import android.os.AsyncTask;
+import android.util.Log;
 
 import com.raik383h_group_6.healthtracmobile.R;
 import com.raik383h_group_6.healthtracmobile.model.AccessGrant;
@@ -34,6 +35,8 @@ public class RegisterUserPresenter {
         accessToken = view.getIntent().getStringExtra(view.getString(R.string.EXTRA_ACCESS_TOKEN));
         accessSecret = view.getIntent().getStringExtra(view.getString(R.string.EXTRA_ACCESS_SECRET));
         provider = view.getIntent().getStringExtra(view.getString(R.string.EXTRA_PROVIDER));
+        Log.d("davidsocha", view.getIntent().getStringExtra(view.getString(R.string.EXTRA_PROVIDER)));
+        Log.d("davidsocha", provider);
     }
 
     public void populateFields() {

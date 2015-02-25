@@ -46,9 +46,6 @@ public class AuthenticationPresenter {
                     saveLoginInfo(data);
                     createAccount(accessToken, accessSecret, provider);
                     break;
-                case CREATE_ACCOUNT:
-                    signInAndFinish(accessToken, accessSecret, provider);
-                    break;
                 default:
                     break;
             }
@@ -72,7 +69,8 @@ public class AuthenticationPresenter {
     public void finishWithAccessGrant(AccessGrant g) {
         Intent data = new Intent(view, RegisterUserActivity.class);
         data.putExtra(view.getString(R.string.EXTRA_ACCESS_GRANT), g);
-        view.startActivityForResult(data, CREATE_ACCOUNT);
+        Log.d("davidsocha", g.getAccessToken());
+        //view.finish();
     }
 
     public AccessGrant signIn(String accessToken, String accessSecret, String provider) {
@@ -114,6 +112,7 @@ public class AuthenticationPresenter {
         intent.putExtra(view.getString(R.string.EXTRA_ACCESS_TOKEN), accessToken);
         intent.putExtra(view.getString(R.string.EXTRA_ACCESS_SECRET), accessSecret);
         intent.putExtra(view.getString(R.string.EXTRA_PROVIDER), provider);
-        view.startActivityForResult(intent, CREATE_ACCOUNT);
+        view.startActivity(intent);
+        signInAndFinish(accessToken, accessSecret, provider);
     }
 }
