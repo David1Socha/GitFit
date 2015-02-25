@@ -65,8 +65,8 @@ public class RegisterUserPresenter {
         }.execute(accessToken).get();
     }
 
-    public void validateAccount(String birthDateStr, String email, String firstName, String heightStr, String lastName, String preferredName, String radioValue, String userName, String weightStr) {
-        if (fieldsValid(birthDateStr, email, firstName, heightStr, lastName, preferredName, userName, weightStr)) {
+    public void validateAccount(String birthDateStr, String email, String firstName, String heightStr, String lastName, String location, String preferredName, String radioValue, String userName, String weightStr) {
+        if (fieldsValid(birthDateStr, email, firstName, heightStr, lastName, location, preferredName, userName, weightStr)) {
             Date birthDate = parseDate(birthDateStr);
             double height = parseDouble(heightStr);
             double weight = parseDouble(weightStr);
@@ -118,7 +118,7 @@ public class RegisterUserPresenter {
         return d;
     }
 
-    private boolean fieldsValid(String birthDate, String email, String firstName, String height, String lastName, String prefName, String username, String weight) {
+    private boolean fieldsValid(String birthDate, String email, String firstName, String height, String lastName, String location, String prefName, String username, String weight) {
         boolean allGood = true;
         if (birthDate.equals("")) {
             allGood = false;
@@ -139,6 +139,10 @@ public class RegisterUserPresenter {
         if (lastName.equals("")) {
             allGood = false;
             view.setLastNameError(view.getString(R.string.empty_field_error));
+        }
+        if (location.equals("")) {
+            allGood = false;
+            view.setLocationError(view.getString(R.string.empty_field_error));
         }
         if (prefName.equals("")) {
             allGood = false;

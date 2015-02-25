@@ -60,9 +60,13 @@ public class RegisterUserActivity extends RoboActivity {
             @Override
             public void onClick(View v) {
                 String sexRadioText = ((RadioButton)findViewById(sexRadioGroup.getCheckedRadioButtonId())).getText().toString();
-                presenter.validateAccount(birthDateEditText.getText().toString(), emailEditText.getText().toString(), firstNameEditText.getText().toString(), heightEditText.getText().toString(), lastNameEditText.getText().toString(), prefNameEditText.getText().toString(), sexRadioText, usernameEditText.getText().toString(), weightEditText.getText().toString());
+                presenter.validateAccount(birthDateEditText.getText().toString(), emailEditText.getText().toString(), firstNameEditText.getText().toString(), heightEditText.getText().toString(), lastNameEditText.getText().toString(), locationEditText.getText().toString(), prefNameEditText.getText().toString(), sexRadioText, usernameEditText.getText().toString(), weightEditText.getText().toString());
             }
         });
+    }
+
+    public void setLocationError(String msg) {
+        locationEditText.setError(msg);
     }
 
     public void setBirthDateError(String msg) {
