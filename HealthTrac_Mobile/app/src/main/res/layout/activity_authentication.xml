@@ -10,7 +10,7 @@
 
     <Button android:text="@string/create_account" android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:onClick="createAccount" />
+        android:onClick="onClickCreateAccount" />
 
     <Button android:text="@string/sign_in" android:layout_width="match_parent"
         android:layout_height="wrap_content"

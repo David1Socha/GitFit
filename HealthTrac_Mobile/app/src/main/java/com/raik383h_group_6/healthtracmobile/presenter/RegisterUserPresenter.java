@@ -148,7 +148,7 @@ public class RegisterUserPresenter {
         //TODO validate username uniqueness once I can get that part of API deployed to azure
         if (weight.equals("")) {
             allGood = false;
-            view.setEmailError(view.getString(R.string.empty_field_error));
+            view.setWeightError(view.getString(R.string.empty_field_error));
         }
         return allGood;
     }

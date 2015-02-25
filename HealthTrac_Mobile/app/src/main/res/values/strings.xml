@@ -47,5 +47,6 @@
     <string name="empty_field_error">Field must not be empty</string>
     <string name="invalid_field_message">Some fields contained invalid input</string>
     <string name="account_not_made">Account could not be created</string>
+    <string name="title_activity_register_user">Register User</string>
 
 </resources>
