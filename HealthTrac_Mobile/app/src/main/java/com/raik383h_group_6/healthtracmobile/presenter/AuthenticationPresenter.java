@@ -82,9 +82,9 @@ public class AuthenticationPresenter {
             grant = loginAsync(credentials);
         } catch (InterruptedException | ExecutionException ignored) {}
         if (grant == null) {
-            view.toastShort("Error signing in.");
+            view.displayMessage("Error signing in.");
         } else {
-            view.toastShort("Welcome, " + grant.getUserName());
+            view.displayMessage("Welcome, " + grant.getUserName());
         }
         return grant;
     }

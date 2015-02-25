@@ -42,7 +42,7 @@ public class AuthenticationActivity extends RoboActivity {
         presenter.onClickCreateAccount();
     }
 
-    public void toastShort(String message) {
+    public void displayMessage(String message) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
 }
