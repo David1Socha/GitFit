@@ -1,6 +1,14 @@
 package com.raik383h_group_6.healthtracmobile.model;
 
 public class UserLogin {
+
+    public UserLogin() {}
+
+    public UserLogin(User user, Credentials credentials) {
+        this.user = user;
+        this.credentials = credentials;
+    }
+
     public Credentials getCredentials() {
         return credentials;
     }

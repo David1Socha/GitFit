@@ -1,9 +1,11 @@
 package com.raik383h_group_6.healthtracmobile.presenter;
 
+import android.app.Activity;
 import android.os.AsyncTask;
 
 import com.raik383h_group_6.healthtracmobile.R;
 import com.raik383h_group_6.healthtracmobile.model.AccessGrant;
+import com.raik383h_group_6.healthtracmobile.model.Credentials;
 import com.raik383h_group_6.healthtracmobile.model.FacebookUser;
 import com.raik383h_group_6.healthtracmobile.model.User;
 import com.raik383h_group_6.healthtracmobile.model.UserLogin;
@@ -15,6 +17,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 import java.util.concurrent.ExecutionException;
 
 public class RegisterUserPresenter {
@@ -75,6 +78,26 @@ public class RegisterUserPresenter {
 
     private void createUser(Date birthDate, Date dateCreated, Date dateModified, String email, String firstName, double height, String lastName, String preferredName, User.Sex sex, String userName, double weight) {
         User userToCreate = new User(birthDate, dateCreated, dateModified, email, firstName, height, lastName, preferredName, sex, userName, weight);
+        Credentials credentials = new Credentials(accessToken, accessSecret, provider);
+        UserLogin userLogin = new UserLogin(userToCreate, credentials);
+        try {
+            registerAccountAsync(userLogin);
+            finishSuccess();
+        } catch (ExecutionException | InterruptedException e) {
+            view.displayMessage(view.getString(R.string.account_not_made));
+            finishFailure();
+        }
+
+    }
+
+    private void finishSuccess() {
+        view.setResult(Activity.RESULT_OK);
+        view.finish();
+    }
+
+    private void finishFailure() {
+        view.setResult(Activity.RESULT_CANCELED);
+        view.finish();
     }
 
     private static double parseDouble(String doubleStr) {
@@ -83,7 +106,7 @@ public class RegisterUserPresenter {
     }
 
     private static Date parseDate(String dateStr) {
-        DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+        DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy", Locale.US);
         Date d = null;
         try {
             d = formatter.parse(dateStr);
