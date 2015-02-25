@@ -77,23 +77,23 @@ public class RegisterUserActivity extends RoboActivity {
         locationEditText.setText(val);
     }
 
-    private void setEmail(String val) {
+    public void setEmail(String val) {
         emailEditText.setText(val);
     }
 
-    private void setHeight(String val) {
+    public void setHeight(String val) {
         heightEditText.setText(val);
     }
 
-    private void setUsername(String val) {
+    public void setUsername(String val) {
         usernameEditText.setText(val);
     }
 
-    private void setWeight(String val) {
+    public void setWeight(String val) {
         weightEditText.setText(val);
     }
 
-    private void setSex(User.Sex sex) {
+    public void setSex(User.Sex sex) {
         if (sex == User.Sex.FEMALE) {
             sexRadioFemale.setChecked(true);
         } else {

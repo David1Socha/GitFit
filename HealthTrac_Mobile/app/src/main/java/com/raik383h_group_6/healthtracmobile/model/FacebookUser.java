@@ -67,5 +67,8 @@ public class FacebookUser {
     private Location location;
     public class Location {
         private String id, name;
+        public String getName() {
+            return this.name;
+        }
     }
 }

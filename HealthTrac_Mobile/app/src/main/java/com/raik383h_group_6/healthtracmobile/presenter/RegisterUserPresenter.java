@@ -42,17 +42,35 @@ public class RegisterUserPresenter {
         if (provider.equals(view.getString(R.string.PROVIDER_FACEBOOK))) {
             try {
                 facebookUser = getFacebookUserAsync();
+                populateFacebookFields(facebookUser);
             } catch (InterruptedException | ExecutionException ignored) {
             }
         }
-        if (facebookUser != null) {
-            populateFacebookFields(facebookUser);
-        }
-
     }
 
     private void populateFacebookFields(FacebookUser facebookUser) {
-
+        User.Sex sex = facebookUser.getGender().equals("male") ? User.Sex.MALE : User.Sex.FEMALE;
+        String email = facebookUser.getEmail();
+        String firstName = facebookUser.getFirstName();
+        String lastName = facebookUser.getLastName();
+        String prefName = facebookUser.getName();
+        String location = facebookUser.getLocation().getName();
+        if (email != null) {
+            view.setEmail(email);
+        }
+        if (firstName != null) {
+            view.setFirstName(firstName);
+        }
+        if (lastName != null) {
+            view.setLastName(lastName);
+        }
+        if (prefName != null) {
+            view.setPrefName(prefName);
+        }
+        if (location != null) {
+            view.setLocation(location);
+        }
+        view.setSex(sex);
     }
 
     private FacebookUser getFacebookUserAsync() throws ExecutionException, InterruptedException {
@@ -111,7 +129,7 @@ public class RegisterUserPresenter {
     }
 
     private static Date parseDate(String dateStr) {
-        DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy", Locale.US);
+        DateFormat formatter = new SimpleDateFormat("MM/dd/yyyy", Locale.US);
         formatter.setLenient(false);
         Date d = null;
         try {
