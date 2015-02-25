@@ -59,12 +59,27 @@ public class RegisterUserPresenter {
         }.execute(accessToken).get();
     }
 
-    public void validateAccount(String birthDateStr, String email, String firstName, String heightStr, String lastName, String preferredName, String userName, String weightStr) {
+    public void validateAccount(String birthDateStr, String email, String firstName, String heightStr, String lastName, String preferredName, String radioValue, String userName, String weightStr) {
         if (fieldsValid(birthDateStr, email, firstName, heightStr, lastName, preferredName, userName, weightStr)) {
             Date birthDate = parseDate(birthDateStr);
+            double height = parseDouble(heightStr);
+            double weight = parseDouble(weightStr);
+            User.Sex sex  = radioValue.equals(view.getString(R.string.male_label)) ? User.Sex.MALE : User.Sex.FEMALE;
+            Date dateCreated = new Date();
+            Date dateModified = new Date();
+            createUser(birthDate, dateCreated, dateModified, email, firstName, height, lastName, preferredName, sex, userName, weight);
         } else {
             view.displayMessage(view.getString(R.string.invalid_field_message));
         }
+    }
+
+    private void createUser(Date birthDate, Date dateCreated, Date dateModified, String email, String firstName, double height, String lastName, String preferredName, User.Sex sex, String userName, double weight) {
+        User userToCreate = new User(birthDate, dateCreated, dateModified, email, firstName, height, lastName, preferredName, sex, userName, weight);
+    }
+
+    private static double parseDouble(String doubleStr) {
+        double d = Double.parseDouble(doubleStr);
+        return d;
     }
 
     private static Date parseDate(String dateStr) {

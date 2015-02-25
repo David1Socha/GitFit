@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
@@ -58,7 +59,8 @@ public class RegisterUserActivity extends RoboActivity {
         createAccountButton.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                presenter.validateAccount(birthDateEditText.getText().toString(), emailEditText.getText().toString(), firstNameEditText.getText().toString(), heightEditText.getText().toString(), lastNameEditText.getText().toString(), prefNameEditText.getText().toString(), usernameEditText.getText().toString(), weightEditText.getText().toString());
+                String sexRadioText = ((RadioButton)findViewById(sexRadioGroup.getCheckedRadioButtonId())).getText().toString();
+                presenter.validateAccount(birthDateEditText.getText().toString(), emailEditText.getText().toString(), firstNameEditText.getText().toString(), heightEditText.getText().toString(), lastNameEditText.getText().toString(), prefNameEditText.getText().toString(), sexRadioText, usernameEditText.getText().toString(), weightEditText.getText().toString());
             }
         });
     }

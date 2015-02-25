@@ -13,6 +13,20 @@ public class User implements Parcelable {
     @SerializedName("ID") private String id;
     private double height, width;
 
+    public User(Date birthDate, Date dateCreated, Date dateModified, String email, String firstName, double height, String lastName, String preferredName, User.Sex sex, String userName, double weight) {
+        this.birthDate = birthDate;
+        this.dateCreated = dateCreated;
+        this.dateModified = dateModified;
+        this.email = email;
+        this.firstName = firstName;
+        this.height = height;
+        this.lastName = lastName;
+        this.preferredName = preferredName;
+        this.sex = sex;
+        this.userName = userName;
+        this.width = weight; // :(
+    }
+
     public Sex getSex() {
         return sex;
     }

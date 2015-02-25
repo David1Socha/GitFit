@@ -62,7 +62,7 @@ public class Team {
     @SerializedName("Visibility")
     private Visibility visibility;
 
-    public enum Sex {
+    public enum Visibility {
         @SerializedName("0")
         PUBLIC,
         @SerializedName("1")

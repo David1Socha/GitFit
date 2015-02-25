@@ -278,7 +278,7 @@
                 android:orientation="horizontal"
                 android:id="@+id/radio_sex"
                 android:layout_weight="1"
-                android:checkedButton="@id/radio_sex_female">
+                android:checkedButton="@+id/radio_sex_female">
 
                 <RadioButton
                     android:layout_width="0dp"
@@ -293,7 +293,7 @@
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:text="@string/label_female"
-                    android:id="@+id/radio_sex_female"
+                    android:id="@id/radio_sex_female"
                     android:checked="false" />
             </RadioGroup>
         </LinearLayout>
