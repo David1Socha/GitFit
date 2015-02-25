@@ -46,8 +46,12 @@ public class RegisterUserPresenter {
             }
         }
         if (facebookUser != null) {
-            //populate fields from facebook user
+            populateFacebookFields(facebookUser);
         }
+
+    }
+
+    private void populateFacebookFields(FacebookUser facebookUser) {
 
     }
 

@@ -1,6 +1,7 @@
 package com.raik383h_group_6.healthtracmobile.view;
 
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -10,6 +11,7 @@ import android.widget.Toast;
 
 import com.google.inject.Inject;
 import com.raik383h_group_6.healthtracmobile.R;
+import com.raik383h_group_6.healthtracmobile.model.User;
 import com.raik383h_group_6.healthtracmobile.presenter.RegisterUserPresenter;
 import com.raik383h_group_6.healthtracmobile.service.api.AccountService;
 import com.raik383h_group_6.healthtracmobile.service.api.FacebookService;
@@ -50,6 +52,54 @@ public class RegisterUserActivity extends RoboActivity {
     EditText weightEditText;
     @InjectView(R.id.radio_sex)
     RadioGroup sexRadioGroup;
+    @InjectView(R.id.radio_sex_female)
+    RadioButton sexRadioFemale;
+    @InjectView(R.id.radio_sex_male)
+    RadioButton sexRadioMale;
+
+    public void setLastName(String val) {
+        lastNameEditText.setText(val);
+    }
+
+    public void setFirstName(String val) {
+        firstNameEditText.setText(val);
+    }
+
+    public void setPrefName(String val) {
+        prefNameEditText.setText(val);
+    }
+
+    public void setBirthDate(String val) {
+        birthDateEditText.setText(val);
+    }
+
+    public void setLocation(String val) {
+        locationEditText.setText(val);
+    }
+
+    private void setEmail(String val) {
+        emailEditText.setText(val);
+    }
+
+    private void setHeight(String val) {
+        heightEditText.setText(val);
+    }
+
+    private void setUsername(String val) {
+        usernameEditText.setText(val);
+    }
+
+    private void setWeight(String val) {
+        weightEditText.setText(val);
+    }
+
+    private void setSex(User.Sex sex) {
+        if (sex == User.Sex.FEMALE) {
+            sexRadioFemale.setChecked(true);
+        } else {
+            sexRadioMale.setChecked(true);
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
