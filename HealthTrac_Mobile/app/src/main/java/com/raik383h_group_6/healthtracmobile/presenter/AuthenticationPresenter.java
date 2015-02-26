@@ -3,11 +3,13 @@ package com.raik383h_group_6.healthtracmobile.presenter;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.os.Bundle;
 import android.util.Log;
 
 import com.google.inject.Inject;
 import com.google.inject.assistedinject.Assisted;
 import com.raik383h_group_6.healthtracmobile.R;
+import com.raik383h_group_6.healthtracmobile.content.IResources;
 import com.raik383h_group_6.healthtracmobile.model.AccessGrant;
 import com.raik383h_group_6.healthtracmobile.model.Credentials;
 import com.raik383h_group_6.healthtracmobile.service.api.AccountService;
@@ -26,9 +28,13 @@ public class AuthenticationPresenter {
     private AuthenticationActivity view;
     private AccountService accountService;
     private String accessToken, accessSecret, provider;
+    private Bundle extras;
+    private IResources resources;
 
     @Inject
-    public AuthenticationPresenter(@Assisted AccountService accountService, @Assisted AuthenticationActivity view) {
+    public AuthenticationPresenter(@Assisted AccountService accountService, @Assisted Bundle extras, @Assisted IResources resources, @Assisted AuthenticationActivity view) {
+        this.extras = extras;
+        this.resources = resources;
         this.accountService = accountService;
         this.view = view;
     }
@@ -38,15 +44,15 @@ public class AuthenticationPresenter {
         view.startActivityForResult(intent, OAUTH_TO_SIGN_IN);
     }
 
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+    public void onActivityResult(int requestCode, int resultCode, Bundle extras) {
         if (resultCode == Activity.RESULT_OK) {
             switch (requestCode) {
                 case OAUTH_TO_SIGN_IN:
-                    saveLoginInfo(data);
+                    saveLoginInfo(extras);
                     signInAndFinish(accessToken, accessSecret, provider);
                     break;
                 case OAUTH_TO_CREATE_ACCOUNT:
-                    saveLoginInfo(data);
+                    saveLoginInfo(extras);
                     createAccount(accessToken, accessSecret, provider);
                     break;
                 case CREATE_ACCOUNT:
@@ -58,10 +64,10 @@ public class AuthenticationPresenter {
         }
     }
 
-    private void saveLoginInfo(Intent data) {
-        accessToken = data.getStringExtra(view.getString(R.string.EXTRA_ACCESS_TOKEN));
-        accessSecret = data.getStringExtra(view.getString(R.string.EXTRA_ACCESS_SECRET));
-        provider = data.getStringExtra(view.getString(R.string.EXTRA_PROVIDER));
+    private void saveLoginInfo(Bundle extras) {
+        accessToken = extras.getString(resources.getString(R.string.EXTRA_ACCESS_TOKEN));
+        accessSecret = extras.getString(resources.getString(R.string.EXTRA_ACCESS_SECRET));
+        provider = extras.getString(resources.getString(R.string.EXTRA_PROVIDER));
     }
 
     private void signInAndFinish(String accessToken, String accessSecret, String provider) {
@@ -74,8 +80,8 @@ public class AuthenticationPresenter {
 
     public void finishWithAccessGrant(AccessGrant g) {
         Intent data = new Intent(view, RegisterUserActivity.class);
-        data.putExtra(view.getString(R.string.EXTRA_ACCESS_GRANT), g);
-        //view.finish();
+        data.putExtra(resources.getString(R.string.EXTRA_ACCESS_GRANT), g);
+        //view.finish(); TODO ADD ONCE PARENT ACTIVITY CREATED
     }
 
     public AccessGrant signIn(String accessToken, String accessSecret, String provider) {
@@ -114,9 +120,9 @@ public class AuthenticationPresenter {
 
     public void createAccount(String accessToken, String accessSecret, String provider) {
         Intent intent = new Intent(view, RegisterUserActivity.class);
-        intent.putExtra(view.getString(R.string.EXTRA_ACCESS_TOKEN), accessToken);
-        intent.putExtra(view.getString(R.string.EXTRA_ACCESS_SECRET), accessSecret);
-        intent.putExtra(view.getString(R.string.EXTRA_PROVIDER), provider);
+        intent.putExtra(resources.getString(R.string.EXTRA_ACCESS_TOKEN), accessToken);
+        intent.putExtra(resources.getString(R.string.EXTRA_ACCESS_SECRET), accessSecret);
+        intent.putExtra(resources.getString(R.string.EXTRA_PROVIDER), provider);
         view.startActivityForResult(intent, CREATE_ACCOUNT);
     }
 }

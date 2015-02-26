@@ -9,6 +9,8 @@ import android.widget.Toast;
 
 import com.google.inject.Inject;
 import com.raik383h_group_6.healthtracmobile.R;
+import com.raik383h_group_6.healthtracmobile.content.IResources;
+import com.raik383h_group_6.healthtracmobile.content.ResourcesAdapter;
 import com.raik383h_group_6.healthtracmobile.presenter.AuthenticationPresenter;
 import com.raik383h_group_6.healthtracmobile.presenter.PresenterFactory;
 import com.raik383h_group_6.healthtracmobile.service.api.AccountService;
@@ -28,12 +30,16 @@ public class AuthenticationActivity extends RoboActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        presenter = presenterFactory.create(accountService, this);
+        Bundle extras = getIntent().getExtras();
+        IResources resources = new ResourcesAdapter(getResources());
+        presenter = presenterFactory.create(accountService, extras, resources, this);
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        presenter.onActivityResult(requestCode, resultCode, data);
+        super.onActivityResult(requestCode, resultCode, data);
+        Bundle extras = data == null ? null : data.getExtras();
+        presenter.onActivityResult(requestCode, resultCode, extras);
     }
 
     public void onClickSignIn(View v) {

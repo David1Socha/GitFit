@@ -39,7 +39,7 @@ public class OAuthBrowserActivity extends RoboActionBarActivity {
         } else {
             oAuthService = twitterOAuthService;
         }
-        presenter = presenterFactory.create(oAuthService, extras, resources, webView, this);
+        presenter = presenterFactory.create(oAuthService, webView, extras, resources, this);
         presenter.onCreate();
     }
 
