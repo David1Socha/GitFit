@@ -19,10 +19,11 @@ import com.raik383h_group_6.healthtracmobile.service.oauth.IOAuthServiceAdapter;
 import java.util.HashMap;
 import java.util.Map;
 import roboguice.RoboGuice;
+import roboguice.activity.RoboActionBarActivity;
 import roboguice.inject.RoboInjector;
 import roboguice.util.RoboContext;
 
-public class OAuthBrowserActivity extends RoboActionBarActivity implements RoboContext {
+public class OAuthBrowserActivity extends RoboActionBarActivity {
 
     private WebView webView;
     private String provider;
@@ -36,17 +37,9 @@ public class OAuthBrowserActivity extends RoboActionBarActivity implements RoboC
     private OAuthBrowserPresenter presenter;
     private IOAuthServiceAdapter oAuthService;
 
-    protected HashMap<Key<?>,Object> scopedObjects = new HashMap<Key<?>, Object>();
-
-    @Override
-    public Map<Key<?>, Object> getScopedObjectMap() {
-        return scopedObjects;
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        RoboGuice.getInjector(this).injectMembersWithoutViews(this);
         webView = new WebView(this);
         setContentView(webView);
         Bundle extras = getIntent().getExtras();
