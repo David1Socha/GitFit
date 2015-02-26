@@ -10,6 +10,7 @@ import android.widget.Toast;
 import com.google.inject.Inject;
 import com.raik383h_group_6.healthtracmobile.R;
 import com.raik383h_group_6.healthtracmobile.presenter.AuthenticationPresenter;
+import com.raik383h_group_6.healthtracmobile.presenter.PresenterFactory;
 import com.raik383h_group_6.healthtracmobile.service.api.AccountService;
 
 import roboguice.activity.RoboActivity;
@@ -18,15 +19,16 @@ import roboguice.inject.ContentView;
 @ContentView(R.layout.activity_authentication)
 public class AuthenticationActivity extends RoboActivity {
 
-    @Inject
     AuthenticationPresenter presenter;
+    @Inject
+    PresenterFactory presenterFactory;
     @Inject
     AccountService accountService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        presenter.initialize(accountService, this);
+        presenter = presenterFactory.create(accountService, this);
     }
 
     @Override

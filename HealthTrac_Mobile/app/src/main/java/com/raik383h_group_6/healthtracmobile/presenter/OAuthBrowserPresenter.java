@@ -11,6 +11,8 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
+import com.google.inject.Inject;
+import com.google.inject.assistedinject.Assisted;
 import com.raik383h_group_6.healthtracmobile.R;
 import com.raik383h_group_6.healthtracmobile.content.IResources;
 import com.raik383h_group_6.healthtracmobile.model.Token;
@@ -38,7 +40,8 @@ public class OAuthBrowserPresenter {
         webView.setWebViewClient(webViewClient);
     }
 
-    public void initialize( IOAuthServiceAdapter serviceAdapter, Bundle extras, IResources resources, WebView web, OAuthBrowserActivity view) {
+    @Inject
+    public OAuthBrowserPresenter(@Assisted IOAuthServiceAdapter serviceAdapter, @Assisted Bundle extras, @Assisted IResources resources, @Assisted WebView web, @Assisted OAuthBrowserActivity view) {
         this.oAuthService = serviceAdapter;
         this.extras = extras;
         this.resources = resources;

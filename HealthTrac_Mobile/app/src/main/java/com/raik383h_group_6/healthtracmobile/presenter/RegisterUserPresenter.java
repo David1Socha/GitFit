@@ -33,7 +33,7 @@ public class RegisterUserPresenter {
     private IResources resources;
     private Bundle extras;
 
-    public void initialize(FacebookService facebookService, AccountService accountService, Bundle extras, IResources resources, RegisterUserActivity view) {
+    public RegisterUserPresenter(FacebookService facebookService, AccountService accountService, Bundle extras, IResources resources, RegisterUserActivity view) {
         this.facebookService = facebookService;
         this.view = view;
         this.accountService = accountService;

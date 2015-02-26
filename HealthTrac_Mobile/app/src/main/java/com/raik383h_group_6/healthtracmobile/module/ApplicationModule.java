@@ -1,8 +1,12 @@
 package com.raik383h_group_6.healthtracmobile.module;
 
 import com.google.inject.AbstractModule;
+import com.google.inject.assistedinject.FactoryModuleBuilder;
+import com.google.inject.assistedinject.FactoryProvider;
 import com.google.inject.name.Names;
 import com.raik383h_group_6.healthtracmobile.model.Membership;
+import com.raik383h_group_6.healthtracmobile.presenter.OAuthBrowserPresenter;
+import com.raik383h_group_6.healthtracmobile.presenter.PresenterFactory;
 import com.raik383h_group_6.healthtracmobile.service.api.AccountService;
 import com.raik383h_group_6.healthtracmobile.service.api.FacebookService;
 import com.raik383h_group_6.healthtracmobile.service.api.MembershipService;
@@ -28,5 +32,6 @@ public class ApplicationModule extends AbstractModule {
         bind(TeamService.class).toProvider(RetrofitTeamServiceProvider.class);
         bind(MembershipService.class).toProvider(RetrofitMembershipServiceProvider.class);
         bind(FacebookService.class).toProvider(RetrofitFacebookServiceProvider.class);
+        install(new FactoryModuleBuilder().build(PresenterFactory.class));
     }
 }

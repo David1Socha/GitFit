@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.google.inject.Inject;
+import com.google.inject.assistedinject.Assisted;
 import com.raik383h_group_6.healthtracmobile.R;
 import com.raik383h_group_6.healthtracmobile.view.OAuthBrowserActivity;
 import com.raik383h_group_6.healthtracmobile.view.OAuthPromptActivity;
@@ -15,7 +17,8 @@ public class OAuthPromptPresenter {
     private Bundle extras;
     private OAuthPromptActivity view;
 
-    public void initialize(Bundle extras, OAuthPromptActivity view) {
+    @Inject
+    public OAuthPromptPresenter(@Assisted Bundle extras, @Assisted OAuthPromptActivity view) {
         this.extras = extras;
         this.view = view;
     }

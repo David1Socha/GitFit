@@ -14,6 +14,7 @@ import com.raik383h_group_6.healthtracmobile.R;
 import com.raik383h_group_6.healthtracmobile.content.IResources;
 import com.raik383h_group_6.healthtracmobile.content.ResourcesAdapter;
 import com.raik383h_group_6.healthtracmobile.model.User;
+import com.raik383h_group_6.healthtracmobile.presenter.PresenterFactory;
 import com.raik383h_group_6.healthtracmobile.presenter.RegisterUserPresenter;
 import com.raik383h_group_6.healthtracmobile.service.api.AccountService;
 import com.raik383h_group_6.healthtracmobile.service.api.FacebookService;
@@ -27,6 +28,7 @@ import roboguice.inject.InjectView;
 @ContentView(R.layout.activity_register_user)
 public class RegisterUserActivity extends RoboActivity {
     @Inject
+    private PresenterFactory presenterFactory;
     private RegisterUserPresenter presenter;
     @Inject
     FacebookService facebookService;
@@ -108,7 +110,7 @@ public class RegisterUserActivity extends RoboActivity {
         super.onCreate(savedInstanceState);
         Bundle extras = getIntent().getExtras();
         IResources resources = new ResourcesAdapter(getResources());
-        presenter.initialize(facebookService, accountService, extras, resources, this);
+        presenter= presenterFactory.create(facebookService, accountService, extras, resources, this);
         presenter.populateFields();
         createAccountButton.setOnClickListener( new View.OnClickListener() {
             @Override

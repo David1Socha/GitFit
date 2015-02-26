@@ -8,6 +8,7 @@ import android.view.View;
 import com.google.inject.Inject;
 import com.raik383h_group_6.healthtracmobile.R;
 import com.raik383h_group_6.healthtracmobile.presenter.OAuthPromptPresenter;
+import com.raik383h_group_6.healthtracmobile.presenter.PresenterFactory;
 
 import roboguice.RoboGuice;
 import roboguice.activity.RoboActivity;
@@ -16,13 +17,14 @@ import roboguice.inject.ContentView;
 @ContentView(R.layout.activity_oauth_prompt)
 public class OAuthPromptActivity extends RoboActivity {
 
-    @Inject
     private OAuthPromptPresenter presenter;
+    @Inject
+    private PresenterFactory presenterFactory;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        presenter.initialize(getIntent().getExtras(), this);
+        presenter = presenterFactory.create(getIntent().getExtras(), this);
     }
 
     @Override

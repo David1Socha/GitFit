@@ -14,6 +14,7 @@ import com.raik383h_group_6.healthtracmobile.content.IResources;
 import com.raik383h_group_6.healthtracmobile.content.ResourcesAdapter;
 import com.raik383h_group_6.healthtracmobile.model.Token;
 import com.raik383h_group_6.healthtracmobile.presenter.OAuthBrowserPresenter;
+import com.raik383h_group_6.healthtracmobile.presenter.PresenterFactory;
 import com.raik383h_group_6.healthtracmobile.service.oauth.IOAuthServiceAdapter;
 
 import java.util.HashMap;
@@ -26,7 +27,6 @@ import roboguice.util.RoboContext;
 public class OAuthBrowserActivity extends RoboActionBarActivity {
 
     private WebView webView;
-    private String provider;
     @Inject
     @Named("Facebook")
     private IOAuthServiceAdapter facebookOAuthService;
@@ -34,6 +34,7 @@ public class OAuthBrowserActivity extends RoboActionBarActivity {
     @Named("Twitter")
     private IOAuthServiceAdapter twitterOAuthService;
     @Inject
+    private PresenterFactory presenterFactory;
     private OAuthBrowserPresenter presenter;
     private IOAuthServiceAdapter oAuthService;
 
@@ -44,7 +45,8 @@ public class OAuthBrowserActivity extends RoboActionBarActivity {
         setContentView(webView);
         Bundle extras = getIntent().getExtras();
         IResources resources = new ResourcesAdapter(getResources());
-        presenter.initialize(oAuthService, extras, resources, webView, this);
+        IOAuthServiceAdapter service = null; //TODO
+        presenter = presenterFactory.create(service, extras, resources, webView, this);
         presenter.onViewCreate();
     }
 

@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import com.google.inject.Inject;
+import com.google.inject.assistedinject.Assisted;
 import com.raik383h_group_6.healthtracmobile.R;
 import com.raik383h_group_6.healthtracmobile.model.AccessGrant;
 import com.raik383h_group_6.healthtracmobile.model.Credentials;
@@ -25,7 +27,8 @@ public class AuthenticationPresenter {
     private AccountService accountService;
     private String accessToken, accessSecret, provider;
 
-    public void initialize(AccountService accountService, AuthenticationActivity view) {
+    @Inject
+    public AuthenticationPresenter(@Assisted AccountService accountService, @Assisted AuthenticationActivity view) {
         this.accountService = accountService;
         this.view = view;
     }
