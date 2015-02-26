@@ -2,10 +2,7 @@ package com.raik383h_group_6.healthtracmobile.module;
 
 import com.google.inject.AbstractModule;
 import com.google.inject.assistedinject.FactoryModuleBuilder;
-import com.google.inject.assistedinject.FactoryProvider;
 import com.google.inject.name.Names;
-import com.raik383h_group_6.healthtracmobile.model.Membership;
-import com.raik383h_group_6.healthtracmobile.presenter.OAuthBrowserPresenter;
 import com.raik383h_group_6.healthtracmobile.presenter.PresenterFactory;
 import com.raik383h_group_6.healthtracmobile.service.api.AccountService;
 import com.raik383h_group_6.healthtracmobile.service.api.FacebookService;
@@ -15,7 +12,7 @@ import com.raik383h_group_6.healthtracmobile.service.api.provider.RetrofitFacebo
 import com.raik383h_group_6.healthtracmobile.service.api.provider.RetrofitMembershipServiceProvider;
 import com.raik383h_group_6.healthtracmobile.service.api.provider.RetrofitTeamServiceProvider;
 import com.raik383h_group_6.healthtracmobile.service.oauth.FacebookScribeOAuthServiceAdapter;
-import com.raik383h_group_6.healthtracmobile.service.oauth.IOAuthServiceAdapter;
+import com.raik383h_group_6.healthtracmobile.service.oauth.IOAuthService;
 import com.raik383h_group_6.healthtracmobile.service.api.provider.RetrofitAccountServiceProvider;
 import com.raik383h_group_6.healthtracmobile.service.api.provider.RetrofitUserServiceProvider;
 import com.raik383h_group_6.healthtracmobile.service.oauth.TwitterScribeOAuthServiceAdapter;
@@ -25,8 +22,8 @@ public class ApplicationModule extends AbstractModule {
 
     @Override
     protected void configure() {
-        bind(IOAuthServiceAdapter.class).annotatedWith(Names.named("Facebook")).to(FacebookScribeOAuthServiceAdapter.class);
-        bind(IOAuthServiceAdapter.class).annotatedWith(Names.named("Twitter")).to(TwitterScribeOAuthServiceAdapter.class);
+        bind(IOAuthService.class).annotatedWith(Names.named("Facebook")).to(FacebookScribeOAuthServiceAdapter.class);
+        bind(IOAuthService.class).annotatedWith(Names.named("Twitter")).to(TwitterScribeOAuthServiceAdapter.class);
         bind(AccountService.class).toProvider(RetrofitAccountServiceProvider.class);
         bind(UserService.class).toProvider(RetrofitUserServiceProvider.class);
         bind(TeamService.class).toProvider(RetrofitTeamServiceProvider.class);

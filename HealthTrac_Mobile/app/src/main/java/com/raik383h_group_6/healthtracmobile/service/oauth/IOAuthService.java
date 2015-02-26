@@ -2,7 +2,7 @@ package com.raik383h_group_6.healthtracmobile.service.oauth;
 
 import com.raik383h_group_6.healthtracmobile.model.Token;
 
-public interface IOAuthServiceAdapter {
+public interface IOAuthService {
     public Token getRequestToken();
     public String getAuthorizationUrl(Token t);
     public Token getAccessToken(Token requestToken, String verifier);

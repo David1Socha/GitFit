@@ -16,14 +16,14 @@ import com.google.inject.assistedinject.Assisted;
 import com.raik383h_group_6.healthtracmobile.R;
 import com.raik383h_group_6.healthtracmobile.content.IResources;
 import com.raik383h_group_6.healthtracmobile.model.Token;
-import com.raik383h_group_6.healthtracmobile.service.oauth.IOAuthServiceAdapter;
+import com.raik383h_group_6.healthtracmobile.service.oauth.IOAuthService;
 import com.raik383h_group_6.healthtracmobile.view.OAuthBrowserActivity;
 
 import java.util.concurrent.ExecutionException;
 
 public class OAuthBrowserPresenter {
 
-    private IOAuthServiceAdapter oAuthService;
+    private IOAuthService oAuthService;
     private Token requestToken;
     private OAuthBrowserActivity view;
     private WebView webView;
@@ -41,8 +41,8 @@ public class OAuthBrowserPresenter {
     }
 
     @Inject
-    public OAuthBrowserPresenter(@Assisted IOAuthServiceAdapter serviceAdapter, @Assisted Bundle extras, @Assisted IResources resources, @Assisted WebView web, @Assisted OAuthBrowserActivity view) {
-        this.oAuthService = serviceAdapter;
+    public OAuthBrowserPresenter(@Assisted IOAuthService service, @Assisted Bundle extras, @Assisted IResources resources, @Assisted WebView web, @Assisted OAuthBrowserActivity view) {
+        this.oAuthService = service;
         this.extras = extras;
         this.resources = resources;
         this.view = view;
@@ -50,7 +50,7 @@ public class OAuthBrowserPresenter {
         setUpWebView();
     }
 
-    public void onViewCreate() {
+    public void onCreate() {
         setUpWebView();
         beginAuthorization();
     }
@@ -100,7 +100,7 @@ public class OAuthBrowserPresenter {
     private class LoginWebViewClient extends WebViewClient {
         @Override
         public void onPageStarted(WebView webView, String url, Bitmap favicon) {
-            if ((url != null) && (url.startsWith(IOAuthServiceAdapter.DUMMY_CALLBACK))) { // Don't open callback url
+            if ((url != null) && (url.startsWith(IOAuthService.DUMMY_CALLBACK))) { // Don't open callback url
                 webView.stopLoading();
                 webView.setVisibility(View.INVISIBLE);
                 Uri uri = Uri.parse(url);
