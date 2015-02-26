@@ -1,7 +1,9 @@
 package com.raik383h_group_6.healthtracmobile.presenter;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.AsyncTask;
+import android.os.Bundle;
 import android.util.Log;
 
 import com.raik383h_group_6.healthtracmobile.R;
@@ -27,14 +29,17 @@ public class RegisterUserPresenter {
     private FacebookUser facebookUser;
     private String accessToken, accessSecret, provider;
     private AccountService accountService;
+    private Bundle extras;
 
-    public void initialize(FacebookService facebookService, AccountService accountService, RegisterUserActivity view) {
+    public void initialize(FacebookService facebookService, AccountService accountService, Bundle extras, RegisterUserActivity view) {
         this.facebookService = facebookService;
         this.view = view;
         this.accountService = accountService;
-        accessToken = view.getIntent().getStringExtra(view.getString(R.string.EXTRA_ACCESS_TOKEN));
-        accessSecret = view.getIntent().getStringExtra(view.getString(R.string.EXTRA_ACCESS_SECRET));
-        provider = view.getIntent().getStringExtra(view.getString(R.string.EXTRA_PROVIDER));
+        this.extras = extras;
+        accessToken = extras.getString(view.getString(R.string.EXTRA_ACCESS_TOKEN));
+        accessSecret = extras.getString(view.getString(R.string.EXTRA_ACCESS_SECRET));
+        provider = extras.getString(view.getString(R.string.EXTRA_PROVIDER));
+        view.getResources()
     }
 
     public void populateFields() {
@@ -42,7 +47,6 @@ public class RegisterUserPresenter {
         if (provider.equals(view.getString(R.string.PROVIDER_FACEBOOK))) {
             try {
                 facebookUser = getFacebookUserAsync();
-
             } catch (InterruptedException | ExecutionException ignored) {
             }
             if (facebookUser != null) {

@@ -12,9 +12,11 @@ public class OAuthPromptPresenter {
     private static final int FB_LOGIN_REQ = 1,
             TW_LOGIN_REQ = 2;
 
+    private Bundle extras;
     private OAuthPromptActivity view;
 
-    public void initialize(OAuthPromptActivity view) {
+    public void initialize(Bundle extras, OAuthPromptActivity view) {
+        this.extras = extras;
         this.view = view;
     }
 

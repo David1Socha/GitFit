@@ -104,7 +104,7 @@ public class RegisterUserActivity extends RoboActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        presenter.initialize(facebookService, accountService, this);
+        presenter.initialize(facebookService, accountService, getIntent().getExtras(), this);
         presenter.populateFields();
         createAccountButton.setOnClickListener( new View.OnClickListener() {
             @Override

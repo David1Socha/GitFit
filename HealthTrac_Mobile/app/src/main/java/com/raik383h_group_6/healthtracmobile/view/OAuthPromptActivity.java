@@ -22,7 +22,7 @@ public class OAuthPromptActivity extends RoboActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        presenter.initialize(this);
+        presenter.initialize(getIntent().getExtras(), this);
     }
 
     @Override
