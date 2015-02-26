@@ -97,6 +97,14 @@ namespace HealthTrac.Controllers.Api
             return CreatedAtRoute("DefaultApi", new { id = team.ID }, TeamDto.FromTeam(team));
         }
 
+        // DELETE: api/Teams/5
+        [ResponseType(typeof(void))]
+        public IHttpActionResult DeleteTeam(long id)
+        {
+            Team teamToDelete = acc.GetTeam(id);
+            acc.DeleteTeam(teamToDelete);
+            return Ok();
+        }
 
         private bool TeamExists(long id)
         {

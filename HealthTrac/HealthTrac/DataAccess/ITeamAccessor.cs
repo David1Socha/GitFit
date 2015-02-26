@@ -9,5 +9,6 @@ namespace HealthTrac.DataAccess
         System.Collections.Generic.IEnumerable<HealthTrac.Models.Team> GetTeams();
         HealthTrac.Models.Team CreateTeam(HealthTrac.Models.Team team);
         HealthTrac.Models.Team UpdateTeam(HealthTrac.Models.Team team);
+        HealthTrac.Models.Team DeleteTeam(HealthTrac.Models.Team team);
     }
 }

@@ -30,17 +30,6 @@ namespace HealthTrac.Tests.Controllers.Api
 
         }
 
-        [TestMethod]
-        public void ApiLogout()
-        {
-            var authMock = new Mock<IAuthenticationManager>();
-            authMock.Setup(a => a.SignOut(It.IsAny<String[]>()));
-            var uManMock = new Mock<UserManager<User>>(Mock.Of<IUserStore<User>>());
-            var controller = new AccountsController(uManMock.Object, authMock.Object);
-            var response = controller.Logout();
-            Assert.IsInstanceOfType(response, typeof(OkResult));
-        }
-
     }
 
 }

@@ -83,5 +83,11 @@ namespace HealthTrac.DataAccess.Entity
             return team;
         }
 
+        public Team DeleteTeam(Team team)
+        {
+            team.Enabled = false;
+            return UpdateTeam(team);
+        }
+
     }
 }
