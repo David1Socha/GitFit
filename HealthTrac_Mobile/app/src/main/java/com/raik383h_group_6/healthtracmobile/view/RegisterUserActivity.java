@@ -11,6 +11,8 @@ import android.widget.Toast;
 
 import com.google.inject.Inject;
 import com.raik383h_group_6.healthtracmobile.R;
+import com.raik383h_group_6.healthtracmobile.content.IResources;
+import com.raik383h_group_6.healthtracmobile.content.ResourcesAdapter;
 import com.raik383h_group_6.healthtracmobile.model.User;
 import com.raik383h_group_6.healthtracmobile.presenter.RegisterUserPresenter;
 import com.raik383h_group_6.healthtracmobile.service.api.AccountService;
@@ -104,7 +106,9 @@ public class RegisterUserActivity extends RoboActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        presenter.initialize(facebookService, accountService, getIntent().getExtras(), this);
+        Bundle extras = getIntent().getExtras();
+        IResources resources = new ResourcesAdapter(getResources());
+        presenter.initialize(facebookService, accountService, extras, resources, this);
         presenter.populateFields();
         createAccountButton.setOnClickListener( new View.OnClickListener() {
             @Override

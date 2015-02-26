@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 
 import com.raik383h_group_6.healthtracmobile.R;
+import com.raik383h_group_6.healthtracmobile.content.IResources;
 import com.raik383h_group_6.healthtracmobile.model.AccessGrant;
 import com.raik383h_group_6.healthtracmobile.model.Credentials;
 import com.raik383h_group_6.healthtracmobile.model.FacebookUser;
@@ -29,22 +30,23 @@ public class RegisterUserPresenter {
     private FacebookUser facebookUser;
     private String accessToken, accessSecret, provider;
     private AccountService accountService;
+    private IResources resources;
     private Bundle extras;
 
-    public void initialize(FacebookService facebookService, AccountService accountService, Bundle extras, RegisterUserActivity view) {
+    public void initialize(FacebookService facebookService, AccountService accountService, Bundle extras, IResources resources, RegisterUserActivity view) {
         this.facebookService = facebookService;
         this.view = view;
         this.accountService = accountService;
         this.extras = extras;
-        accessToken = extras.getString(view.getString(R.string.EXTRA_ACCESS_TOKEN));
-        accessSecret = extras.getString(view.getString(R.string.EXTRA_ACCESS_SECRET));
-        provider = extras.getString(view.getString(R.string.EXTRA_PROVIDER));
-        view.getResources()
+        this.resources = resources;
+        accessToken = extras.getString(resources.getString(R.string.EXTRA_ACCESS_TOKEN));
+        accessSecret = extras.getString(resources.getString(R.string.EXTRA_ACCESS_SECRET));
+        provider = extras.getString(resources.getString(R.string.EXTRA_PROVIDER));
     }
 
     public void populateFields() {
         facebookUser = null;
-        if (provider.equals(view.getString(R.string.PROVIDER_FACEBOOK))) {
+        if (provider.equals(resources.getString(R.string.PROVIDER_FACEBOOK))) {
             try {
                 facebookUser = getFacebookUserAsync();
             } catch (InterruptedException | ExecutionException ignored) {
@@ -97,12 +99,12 @@ public class RegisterUserPresenter {
             Date birthDate = parseDate(birthDateStr);
             double height = parseDouble(heightStr);
             double weight = parseDouble(weightStr);
-            User.Sex sex  = radioValue.equals(view.getString(R.string.male_label)) ? User.Sex.MALE : User.Sex.FEMALE;
+            User.Sex sex  = radioValue.equals(resources.getString(R.string.male_label)) ? User.Sex.MALE : User.Sex.FEMALE;
             Date dateCreated = new Date();
             Date dateModified = new Date();
             createUser(birthDate, dateCreated, dateModified, email, firstName, height, lastName, location, preferredName, sex, userName, weight); //TODO add location eventually
         } else {
-            view.displayMessage(view.getString(R.string.invalid_field_message));
+            view.displayMessage(resources.getString(R.string.invalid_field_message));
         }
     }
 
@@ -114,7 +116,7 @@ public class RegisterUserPresenter {
             registerAccountAsync(userLogin);
             finishSuccess();
         } catch (ExecutionException | InterruptedException e) {
-            view.displayMessage(view.getString(R.string.account_not_made));
+            view.displayMessage(resources.getString(R.string.account_not_made));
             finishFailure();
         }
 
@@ -150,43 +152,43 @@ public class RegisterUserPresenter {
         boolean allGood = true;
         if (birthDate.equals("")) {
             allGood = false;
-            view.setBirthDateError(view.getString(R.string.empty_field_error));
+            view.setBirthDateError(resources.getString(R.string.empty_field_error));
         } else if (parseDate(birthDate) == null) {
             allGood = false;
-            view.setBirthDateError(view.getString(R.string.invalid_date_error));
+            view.setBirthDateError(resources.getString(R.string.invalid_date_error));
         }
         if (email.equals("")) {
             allGood = false;
-            view.setEmailError(view.getString(R.string.empty_field_error));
+            view.setEmailError(resources.getString(R.string.empty_field_error));
         }
         if (firstName.equals("")) {
             allGood = false;
-            view.setFirstNameError(view.getString(R.string.empty_field_error));
+            view.setFirstNameError(resources.getString(R.string.empty_field_error));
         }
         if (height.equals("")) {
             allGood = false;
-            view.setHeightError(view.getString(R.string.empty_field_error));
+            view.setHeightError(resources.getString(R.string.empty_field_error));
         }
         if (lastName.equals("")) {
             allGood = false;
-            view.setLastNameError(view.getString(R.string.empty_field_error));
+            view.setLastNameError(resources.getString(R.string.empty_field_error));
         }
         if (location.equals("")) {
             allGood = false;
-            view.setLocationError(view.getString(R.string.empty_field_error));
+            view.setLocationError(resources.getString(R.string.empty_field_error));
         }
         if (prefName.equals("")) {
             allGood = false;
-            view.setPrefNameError(view.getString(R.string.empty_field_error));
+            view.setPrefNameError(resources.getString(R.string.empty_field_error));
         }
         if (username.equals("")) {
             allGood = false;
-            view.setUsernameError(view.getString(R.string.empty_field_error));
+            view.setUsernameError(resources.getString(R.string.empty_field_error));
         }
         //TODO validate username uniqueness once I can get that part of API deployed to azure
         if (weight.equals("")) {
             allGood = false;
-            view.setWeightError(view.getString(R.string.empty_field_error));
+            view.setWeightError(resources.getString(R.string.empty_field_error));
         }
         return allGood;
     }
