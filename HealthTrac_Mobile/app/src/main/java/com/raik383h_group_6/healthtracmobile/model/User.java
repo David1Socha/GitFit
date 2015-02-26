@@ -9,11 +9,11 @@ import java.util.Date;
 
 public class User implements Parcelable {
     private Date dateCreated, dateModified, birthDate;
-    private String firstName, lastName, preferredName, email, userName;
+    private String firstName, lastName, preferredName, email, userName, location;
     @SerializedName("ID") private String id;
     private double height, width;
 
-    public User(Date birthDate, Date dateCreated, Date dateModified, String email, String firstName, double height, String lastName, String preferredName, User.Sex sex, String userName, double weight) {
+    public User(Date birthDate, Date dateCreated, Date dateModified, String email, String firstName, double height, String lastName, String location, String preferredName, User.Sex sex, String userName, double weight) {
         this.birthDate = birthDate;
         this.dateCreated = dateCreated;
         this.dateModified = dateModified;
@@ -21,10 +21,17 @@ public class User implements Parcelable {
         this.firstName = firstName;
         this.height = height;
         this.lastName = lastName;
+        this.location = location;
         this.preferredName = preferredName;
         this.sex = sex;
         this.userName = userName;
         this.width = weight; // :(
+    }
+
+    public String getLocation() {return  location;}
+
+    public void setLocation(String location) {
+        this.location = location;
     }
 
     public Sex getSex() {
@@ -152,6 +159,7 @@ public class User implements Parcelable {
         dest.writeDouble(this.height);
         dest.writeDouble(this.width);
         dest.writeInt(this.sex == null ? -1 : this.sex.ordinal());
+        dest.writeString(this.location);
     }
 
     public User() {
@@ -174,6 +182,7 @@ public class User implements Parcelable {
         this.width = in.readDouble();
         int tmpSex = in.readInt();
         this.sex = tmpSex == -1 ? null : Sex.values()[tmpSex];
+        this.location = in.readString();
     }
 
     public static final Parcelable.Creator<User> CREATOR = new Parcelable.Creator<User>() {

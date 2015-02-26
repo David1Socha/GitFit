@@ -96,14 +96,14 @@ public class RegisterUserPresenter {
             User.Sex sex  = radioValue.equals(view.getString(R.string.male_label)) ? User.Sex.MALE : User.Sex.FEMALE;
             Date dateCreated = new Date();
             Date dateModified = new Date();
-            createUser(birthDate, dateCreated, dateModified, email, firstName, height, lastName, preferredName, sex, userName, weight); //TODO add location eventually
+            createUser(birthDate, dateCreated, dateModified, email, firstName, height, lastName, location, preferredName, sex, userName, weight); //TODO add location eventually
         } else {
             view.displayMessage(view.getString(R.string.invalid_field_message));
         }
     }
 
-    private void createUser(Date birthDate, Date dateCreated, Date dateModified, String email, String firstName, double height, String lastName, String preferredName, User.Sex sex, String userName, double weight) {
-        User userToCreate = new User(birthDate, dateCreated, dateModified, email, firstName, height, lastName, preferredName, sex, userName, weight);
+    private void createUser(Date birthDate, Date dateCreated, Date dateModified, String email, String firstName, double height, String lastName, String location, String preferredName, User.Sex sex, String userName, double weight) {
+        User userToCreate = new User(birthDate, dateCreated, dateModified, email, firstName, height, lastName, location, preferredName, sex, userName, weight);
         Credentials credentials = new Credentials(accessToken, accessSecret, provider);
         UserLogin userLogin = new UserLogin(userToCreate, credentials);
         try {
