@@ -90,5 +90,21 @@ namespace HealthTrac.Tests.Controllers.Api
             Assert.IsTrue(resultTeam.EqualValues(team));
             mock.Verify(acc => acc.CreateTeam(team));
         }
+
+        [TestMethod]
+        public void ApiDeleteTeam()
+        {
+            long id = 14;
+            var team = _sampleTeam2;
+            var mock = new Mock<ITeamAccessor>();
+            mock.Setup(acc => acc.DeleteTeam(It.IsAny<Team>()));
+            mock.Setup(acc => acc.GetTeam(id))
+                .Returns(team);
+            var con = new TeamsController(mock.Object);
+            var response = con.DeleteTeam(id);
+            Assert.IsInstanceOfType(response, typeof(OkResult));
+            mock.Verify(acc => acc.GetTeam(id));
+            mock.Verify(acc => acc.DeleteTeam(team));
+        }
     }
 }
