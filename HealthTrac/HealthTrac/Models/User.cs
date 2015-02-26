@@ -30,6 +30,7 @@ namespace HealthTrac.Models
         public String PreferredName { get; set; }
         public String Email { get; set; }
         public Sex Sex { get; set; }
+        public String Location { get; set; }
         public double Height { get; set; }
         public double Width { get; set; }
         public DateTime? BirthDate { get; set; }

@@ -12,6 +12,7 @@ namespace HealthTrac.Models.Dto
         public String FirstName { get; set; }
         public String LastName { get; set; }
         public String PreferredName { get; set; }
+        public String Location { get; set; }
         public String Email { get; set; }
         public Sex Sex { get; set; }
         public double Height { get; set; }
@@ -36,6 +37,7 @@ namespace HealthTrac.Models.Dto
                 BirthDate = u.BirthDate,
                 UserName = u.UserName,
                 Id = u.Id,
+                Location = u.Location,
             };
         }
     }
