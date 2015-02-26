@@ -118,6 +118,11 @@ namespace HealthTrac.Controllers.Api
             {
                 return BadRequest("Invalid authentication data");
             }
+            var extantUser = UserManager.Find(loginInfo);
+            if (extantUser != null)
+            {
+                return BadRequest("You have already created an account!");
+            }
             var result = UserManager.Create(user);
             if (result.Succeeded)
             {
