@@ -7,8 +7,11 @@ import android.os.Bundle;
 import android.webkit.WebView;
 import com.google.inject.Inject;
 import com.google.inject.Key;
+import com.google.inject.name.Named;
 import com.google.inject.name.Names;
 import com.raik383h_group_6.healthtracmobile.R;
+import com.raik383h_group_6.healthtracmobile.content.IResources;
+import com.raik383h_group_6.healthtracmobile.content.ResourcesAdapter;
 import com.raik383h_group_6.healthtracmobile.model.Token;
 import com.raik383h_group_6.healthtracmobile.presenter.OAuthBrowserPresenter;
 import com.raik383h_group_6.healthtracmobile.service.oauth.IOAuthServiceAdapter;
@@ -19,11 +22,18 @@ import roboguice.RoboGuice;
 import roboguice.inject.RoboInjector;
 import roboguice.util.RoboContext;
 
-public class OAuthBrowserActivity extends ActionBarActivity implements RoboContext {
+public class OAuthBrowserActivity extends RoboActionBarActivity implements RoboContext {
 
     private WebView webView;
     private String provider;
-    @Inject private OAuthBrowserPresenter presenter;
+    @Inject
+    @Named("Facebook")
+    private IOAuthServiceAdapter facebookOAuthService;
+    @Inject
+    @Named("Twitter")
+    private IOAuthServiceAdapter twitterOAuthService;
+    @Inject
+    private OAuthBrowserPresenter presenter;
     private IOAuthServiceAdapter oAuthService;
 
     protected HashMap<Key<?>,Object> scopedObjects = new HashMap<Key<?>, Object>();
@@ -36,30 +46,13 @@ public class OAuthBrowserActivity extends ActionBarActivity implements RoboConte
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        provider = getIntent().getStringExtra(getString(R.string.EXTRA_PROVIDER));
-        injectMembers();
+        RoboGuice.getInjector(this).injectMembersWithoutViews(this);
         webView = new WebView(this);
         setContentView(webView);
-        presenter.initialize(oAuthService, provider, webView, this);
+        Bundle extras = getIntent().getExtras();
+        IResources resources = new ResourcesAdapter(getResources());
+        presenter.initialize(oAuthService, extras, resources, webView, this);
         presenter.onViewCreate();
-    }
-
-    private void injectMembers() {
-        RoboInjector injector = RoboGuice.getInjector(this);
-        oAuthService = resolveOAuthService(injector);
-        injector.injectMembersWithoutViews(this);
-    }
-
-    private IOAuthServiceAdapter resolveOAuthService(RoboInjector injector) {
-
-        String facebookStr = getString(R.string.PROVIDER_FACEBOOK);
-        String twitterStr = getString(R.string.PROVIDER_TWITTER);
-
-        if (provider.equals(facebookStr)) {
-            return injector.getInstance(Key.get(IOAuthServiceAdapter.class, Names.named(facebookStr)));
-        } else {
-            return injector.getInstance(Key.get(IOAuthServiceAdapter.class, Names.named(twitterStr)));
-        }
     }
 
 }

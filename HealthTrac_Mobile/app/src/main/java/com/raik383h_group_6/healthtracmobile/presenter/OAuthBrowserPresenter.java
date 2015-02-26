@@ -5,12 +5,14 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Bundle;
 import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
 import com.raik383h_group_6.healthtracmobile.R;
+import com.raik383h_group_6.healthtracmobile.content.IResources;
 import com.raik383h_group_6.healthtracmobile.model.Token;
 import com.raik383h_group_6.healthtracmobile.service.oauth.IOAuthServiceAdapter;
 import com.raik383h_group_6.healthtracmobile.view.OAuthBrowserActivity;
@@ -20,10 +22,11 @@ import java.util.concurrent.ExecutionException;
 public class OAuthBrowserPresenter {
 
     private IOAuthServiceAdapter oAuthService;
-    private String provider;
     private Token requestToken;
     private OAuthBrowserActivity view;
     private WebView webView;
+    private IResources resources;
+    private Bundle extras;
 
     private void setUpWebView() {
         WebViewClient webViewClient = new LoginWebViewClient();
@@ -35,9 +38,10 @@ public class OAuthBrowserPresenter {
         webView.setWebViewClient(webViewClient);
     }
 
-    public void initialize( IOAuthServiceAdapter serviceAdapter, String provider, WebView web, OAuthBrowserActivity view) {
+    public void initialize( IOAuthServiceAdapter serviceAdapter, Bundle extras, IResources resources, WebView web, OAuthBrowserActivity view) {
         this.oAuthService = serviceAdapter;
-        this.provider = provider;
+        this.extras = extras;
+        this.resources = resources;
         this.view = view;
         this.webView = web;
         setUpWebView();
@@ -111,9 +115,9 @@ public class OAuthBrowserPresenter {
 
     private void finishWithToken(Token token) { //Should view or presenter do this?
         Intent data = new Intent();
-        data.putExtra(view.getString(R.string.EXTRA_ACCESS_SECRET), token.getSecret());
-        data.putExtra(view.getString(R.string.EXTRA_ACCESS_TOKEN), token.getToken());
-        data.putExtra(view.getString(R.string.EXTRA_PROVIDER), provider);
+        data.putExtra(resources.getString(R.string.EXTRA_ACCESS_SECRET), token.getSecret());
+        data.putExtra(resources.getString(R.string.EXTRA_ACCESS_TOKEN), token.getToken());
+        data.putExtra(resources.getString(R.string.EXTRA_PROVIDER), extras.getString(resources.getString(R.string.EXTRA_PROVIDER)));
         view.setResult(Activity.RESULT_OK, data);
         view.finish();
     }
