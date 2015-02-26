@@ -7,6 +7,8 @@ import android.view.View;
 
 import com.google.inject.Inject;
 import com.raik383h_group_6.healthtracmobile.R;
+import com.raik383h_group_6.healthtracmobile.content.IResources;
+import com.raik383h_group_6.healthtracmobile.content.ResourcesAdapter;
 import com.raik383h_group_6.healthtracmobile.presenter.OAuthPromptPresenter;
 import com.raik383h_group_6.healthtracmobile.presenter.PresenterFactory;
 
@@ -24,13 +26,16 @@ public class OAuthPromptActivity extends RoboActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        presenter = presenterFactory.create(getIntent().getExtras(), this);
+        Bundle extras = getIntent().getExtras();
+        IResources resources = new ResourcesAdapter(getResources());
+        presenter = presenterFactory.create(extras, resources, this);
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        presenter.onActivityResult(requestCode, resultCode, data);
+        Bundle extras = (data != null ? data.getExtras() : null);
+        presenter.onActivityResult(requestCode, resultCode, extras);
     }
 
     public void onClickLoginFacebook(View v) {

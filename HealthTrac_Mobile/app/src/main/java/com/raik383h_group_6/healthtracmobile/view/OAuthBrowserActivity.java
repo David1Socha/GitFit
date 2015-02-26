@@ -25,7 +25,6 @@ public class OAuthBrowserActivity extends RoboActionBarActivity {
     @Inject
     private PresenterFactory presenterFactory;
     private OAuthBrowserPresenter presenter;
-    private IOAuthService oAuthService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +33,7 @@ public class OAuthBrowserActivity extends RoboActionBarActivity {
         setContentView(webView);
         Bundle extras = getIntent().getExtras();
         IResources resources = new ResourcesAdapter(getResources());
+        IOAuthService oAuthService;
         if (getIntent().getStringExtra(getString(R.string.EXTRA_PROVIDER)).equals(getString(R.string.PROVIDER_FACEBOOK))) {
             oAuthService = facebookOAuthService;
         } else {
