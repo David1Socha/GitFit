@@ -23,6 +23,7 @@ public class OAuthPromptPresenter {
     public OAuthPromptPresenter( @Assisted IResources resources, @Assisted Navigator nav, @Assisted OAuthPromptActivity view) {
         this.resources = resources;
         this.view = view;
+        this.nav = nav;
     }
 
     public void onActivityResult(int requestCode, int resultCode, Bundle extras) {
