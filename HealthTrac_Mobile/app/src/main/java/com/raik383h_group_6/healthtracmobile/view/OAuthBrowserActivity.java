@@ -1,5 +1,7 @@
 package com.raik383h_group_6.healthtracmobile.view;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.webkit.WebView;
 import com.google.inject.Inject;
