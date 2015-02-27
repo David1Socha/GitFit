@@ -17,9 +17,10 @@ public class OAuthPromptPresenter {
 
     private OAuthPromptActivity view;
     private IResources resources;
+    private Navigator nav;
 
     @Inject
-    public OAuthPromptPresenter( @Assisted IResources resources, @Assisted OAuthPromptActivity view) {
+    public OAuthPromptPresenter( @Assisted IResources resources, @Assisted Navigator nav, @Assisted OAuthPromptActivity view) {
         this.resources = resources;
         this.view = view;
     }
@@ -29,35 +30,18 @@ public class OAuthPromptPresenter {
             String accessToken = extras.getString(resources.getString(R.string.EXTRA_ACCESS_TOKEN));
             String accessSecret = extras.getString(resources.getString(R.string.EXTRA_ACCESS_SECRET));
             String provider = extras.getString(resources.getString(R.string.EXTRA_PROVIDER));
-            finishWithOAuthInfos(accessToken, accessSecret, provider);
+            nav.finishOAuthPromptWithInfo(accessToken, accessSecret, provider);
         } else {
-            finishInShame();
+            nav.finishOAuthPromptInShame();
         }
     }
 
     public void onClickLoginTwitter() {
-        Intent intent = new Intent(view, OAuthBrowserActivity.class);
-        intent.putExtra(resources.getString(R.string.EXTRA_PROVIDER), resources.getString(R.string.PROVIDER_TWITTER));
-        view.startActivityForResult(intent, TW_LOGIN_REQ);
+        nav.openOAuthBrowser(resources.getString(R.string.PROVIDER_TWITTER), TW_LOGIN_REQ);
     }
 
     public void onClickLoginFacebook() {
-        Intent intent = new Intent(view, OAuthBrowserActivity.class);
-        intent.putExtra(resources.getString(R.string.EXTRA_PROVIDER), resources.getString(R.string.PROVIDER_FACEBOOK));
-        view.startActivityForResult(intent, FB_LOGIN_REQ);
+        nav.openOAuthBrowser(resources.getString(R.string.PROVIDER_FACEBOOK), FB_LOGIN_REQ);
     }
 
-    private void finishWithOAuthInfos(String accessToken, String accessSecret, String provider) {
-        Intent data = new Intent();
-        data.putExtra(resources.getString(R.string.EXTRA_ACCESS_SECRET), accessSecret);
-        data.putExtra(resources.getString(R.string.EXTRA_ACCESS_TOKEN), accessToken);
-        data.putExtra(resources.getString(R.string.EXTRA_PROVIDER), provider);
-        view.setResult(Activity.RESULT_OK, data);
-        view.finish();
-    }
-
-    private void finishInShame() {
-        view.setResult(Activity.RESULT_CANCELED);
-        view.finish();
-    }
 }

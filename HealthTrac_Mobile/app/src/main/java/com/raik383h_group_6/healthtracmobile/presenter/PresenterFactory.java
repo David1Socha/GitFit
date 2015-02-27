@@ -16,6 +16,6 @@ import com.raik383h_group_6.healthtracmobile.view.RegisterUserActivity;
 public interface PresenterFactory {
     OAuthBrowserPresenter create(IOAuthService serviceAdapter, WebView web, Bundle extras, IResources resources, OAuthBrowserActivity view);
     AuthenticationPresenter create(AccountService accountService, IResources resources, AuthenticationActivity view);
-    OAuthPromptPresenter create(IResources resources, OAuthPromptActivity view);
+    OAuthPromptPresenter create(IResources resources, Navigator nav, OAuthPromptActivity view);
     RegisterUserPresenter create(Bundle extras, IResources resources, RegisterUserActivity view);
 }
