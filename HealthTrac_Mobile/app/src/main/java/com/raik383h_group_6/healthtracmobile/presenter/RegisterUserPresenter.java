@@ -118,9 +118,12 @@ public class RegisterUserPresenter {
         Credentials credentials = new Credentials(accessToken, accessSecret, provider);
         UserLogin userLogin = new UserLogin(userToCreate, credentials);
         try {
-            registerAccountAsync(userLogin);
+            Exception registerException = registerAccountAsync(userLogin);
+            if (registerException != null) {
+                throw registerException;
+            }
             nav.finishRegisterUserSuccess();
-        } catch (ExecutionException | InterruptedException e) {
+        } catch (Exception e) {
             view.displayMessage(resources.getString(R.string.account_not_made));
             nav.finishRegisterUserFailure();
         }
@@ -188,12 +191,16 @@ public class RegisterUserPresenter {
         return allGood;
     }
 
-    private void registerAccountAsync(UserLogin userLogin) throws ExecutionException, InterruptedException {
-            new AsyncTask<UserLogin, Void, Void>() {
+    private Exception registerAccountAsync(UserLogin userLogin) throws ExecutionException, InterruptedException {
+            return new AsyncTask<UserLogin, Void, Exception>() {
 
                @Override
-               protected Void doInBackground(UserLogin... params) {
-                   accountService.register(params[0]);
+               protected Exception doInBackground(UserLogin... params){
+                   try {
+                       accountService.register(params[0]);
+                   } catch (Exception e) {
+                       return e;
+                   }
                    return null;
                }
            }.execute(userLogin).get();
