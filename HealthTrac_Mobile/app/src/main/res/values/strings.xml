@@ -49,5 +49,6 @@
     <string name="account_not_made">Account could not be created</string>
     <string name="title_activity_register_user">Register User</string>
     <string name="invalid_date_error">Date is invalid. Please use format \'mm/dd/yyyy\'</string>
+    <string name="sign_in_error">Error signing in</string>
 
 </resources>

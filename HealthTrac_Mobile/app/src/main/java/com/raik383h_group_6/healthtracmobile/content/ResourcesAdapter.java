@@ -14,4 +14,9 @@ public class ResourcesAdapter implements IResources {
     public String getString(int resId) {
         return resources.getString(resId);
     }
+
+    @Override
+    public String getString(int resId, Object... params) {
+        return resources.getString(resId, params);
+    }
 }

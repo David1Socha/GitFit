@@ -85,7 +85,7 @@ public class AuthenticationPresenter {
             grant = loginAsync(credentials);
         } catch (InterruptedException | ExecutionException ignored) {}
         if (grant == null) {
-            view.displayMessage("Error signing in.");
+            view.displayMessage(resources.getString(R.string.sign_in_error));
         } else {
             view.displayMessage("Welcome, " + grant.getUserName());
         }
