@@ -7,6 +7,7 @@ import android.content.Intent;
 import com.google.inject.Inject;
 import com.google.inject.assistedinject.Assisted;
 import com.raik383h_group_6.healthtracmobile.R;
+import com.raik383h_group_6.healthtracmobile.model.Token;
 import com.raik383h_group_6.healthtracmobile.view.OAuthBrowserActivity;
 
 import roboguice.inject.ContentView;
@@ -35,6 +36,20 @@ public class Navigator {
         data.putExtra(activity.getString(R.string.EXTRA_ACCESS_TOKEN), accessToken);
         data.putExtra(activity.getString(R.string.EXTRA_PROVIDER), provider);
         activity.setResult(Activity.RESULT_OK, data);
+        activity.finish();
+    }
+
+    public void finishOAuthBrowserWithToken(Token token, String provider) {
+        Intent data = new Intent();
+        data.putExtra(activity.getString(R.string.EXTRA_ACCESS_SECRET), token.getSecret());
+        data.putExtra(activity.getString(R.string.EXTRA_ACCESS_TOKEN), token.getToken());
+        data.putExtra(activity.getString(R.string.EXTRA_PROVIDER), provider);
+        activity.setResult(Activity.RESULT_OK, data);
+        activity.finish();
+    }
+
+    public void finishOAuthBrowserInShame() {
+        activity.setResult(Activity.RESULT_CANCELED);
         activity.finish();
     }
 }

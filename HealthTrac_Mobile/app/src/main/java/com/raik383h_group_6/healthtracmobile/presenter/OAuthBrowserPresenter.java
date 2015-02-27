@@ -29,6 +29,7 @@ public class OAuthBrowserPresenter {
     private WebView webView;
     private IResources resources;
     private Bundle extras;
+    private Navigator nav;
 
     private void setUpWebView() {
         WebViewClient webViewClient = new LoginWebViewClient();
@@ -41,11 +42,12 @@ public class OAuthBrowserPresenter {
     }
 
     @Inject
-    public OAuthBrowserPresenter(@Assisted IOAuthService service, @Assisted Bundle extras, @Assisted IResources resources, @Assisted WebView web, @Assisted OAuthBrowserActivity view) {
+    public OAuthBrowserPresenter(@Assisted IOAuthService service, @Assisted Bundle extras, @Assisted IResources resources, @Assisted WebView web, @Assisted Navigator nav, @Assisted OAuthBrowserActivity view) {
         this.oAuthService = service;
         this.extras = extras;
         this.resources = resources;
         this.view = view;
+        this.nav = nav;
         this.webView = web;
         setUpWebView();
     }
@@ -105,10 +107,10 @@ public class OAuthBrowserPresenter {
                 webView.setVisibility(View.INVISIBLE);
                 Uri uri = Uri.parse(url);
                 if (uri.getQueryParameter(oAuthService.getVerifierName()) == null) { //Check if we're getting called back because of OAuth cancellation
-                    finishInShame();
+                    nav.finishOAuthBrowserInShame();
                 } else {
                     Token token = getToken(uri);
-                    finishWithToken(token);
+                    nav.finishOAuthBrowserWithToken(token, extras.getString(resources.getString(R.string.EXTRA_PROVIDER)));
                 }
             } else {
                 super.onPageStarted(webView, url, favicon);
@@ -116,17 +118,4 @@ public class OAuthBrowserPresenter {
         }
     }
 
-    private void finishWithToken(Token token) { //Should view or presenter do this?
-        Intent data = new Intent();
-        data.putExtra(resources.getString(R.string.EXTRA_ACCESS_SECRET), token.getSecret());
-        data.putExtra(resources.getString(R.string.EXTRA_ACCESS_TOKEN), token.getToken());
-        data.putExtra(resources.getString(R.string.EXTRA_PROVIDER), extras.getString(resources.getString(R.string.EXTRA_PROVIDER)));
-        view.setResult(Activity.RESULT_OK, data);
-        view.finish();
-    }
-
-    private void finishInShame() {
-        view.setResult(Activity.RESULT_CANCELED);
-        view.finish();
-    }
 }
