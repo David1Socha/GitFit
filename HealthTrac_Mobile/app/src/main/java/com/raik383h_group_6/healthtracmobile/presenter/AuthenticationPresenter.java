@@ -48,11 +48,11 @@ public class AuthenticationPresenter {
         if (resultCode == Activity.RESULT_OK) {
             switch (requestCode) {
                 case OAUTH_TO_SIGN_IN:
-                    saveLoginInfo(extras);
+                    updateLoginInfo(extras);
                     signInAndFinish(accessToken, accessSecret, provider);
                     break;
                 case OAUTH_TO_CREATE_ACCOUNT:
-                    saveLoginInfo(extras);
+                    updateLoginInfo(extras);
                     createAccount(accessToken, accessSecret, provider);
                     break;
                 case CREATE_ACCOUNT:
@@ -64,7 +64,7 @@ public class AuthenticationPresenter {
         }
     }
 
-    private void saveLoginInfo(Bundle extras) {
+    private void updateLoginInfo(Bundle extras) {
         accessToken = extras.getString(resources.getString(R.string.EXTRA_ACCESS_TOKEN));
         accessSecret = extras.getString(resources.getString(R.string.EXTRA_ACCESS_SECRET));
         provider = extras.getString(resources.getString(R.string.EXTRA_PROVIDER));
@@ -87,7 +87,7 @@ public class AuthenticationPresenter {
         if (grant == null) {
             view.displayMessage(resources.getString(R.string.sign_in_error));
         } else {
-            view.displayMessage("Welcome, " + grant.getUserName());
+            view.displayMessage(resources.getString(R.string.welcome_user, grant.getUserName()));
         }
         return grant;
     }
