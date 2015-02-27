@@ -1,4 +1,4 @@
-package com.raik383h_group_6.healthtracmobile.module;
+package com.raik383h_group_6.healthtracmobile.application;
 
 import com.google.inject.AbstractModule;
 import com.google.inject.assistedinject.FactoryModuleBuilder;

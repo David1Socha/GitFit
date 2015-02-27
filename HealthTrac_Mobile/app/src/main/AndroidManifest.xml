@@ -8,7 +8,8 @@
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/AppTheme"
+        android:name="com.raik383h_group_6.healthtracmobile.application.CustomApplication">
         <activity android:name=".view.AuthenticationActivity"
             android:label="@string/title_authentication_activity">
             <intent-filter>
@@ -38,7 +39,7 @@
                 android:value=".view.AuthenticationActivity" />
             </activity>
         <meta-data android:name="roboguice.modules"
-            android:value="com.raik383h_group_6.healthtracmobile.module.ApplicationModule" />
+            android:value="com.raik383h_group_6.healthtracmobile.application.ApplicationModule" />
     </application>
 
 </manifest>
