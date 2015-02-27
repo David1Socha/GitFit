@@ -14,11 +14,12 @@ import com.raik383h_group_6.healthtracmobile.presenter.OAuthPromptPresenter;
 import com.raik383h_group_6.healthtracmobile.presenter.PresenterFactory;
 
 import roboguice.RoboGuice;
+import roboguice.activity.RoboActionBarActivity;
 import roboguice.activity.RoboActivity;
 import roboguice.inject.ContentView;
 
 @ContentView(R.layout.activity_oauth_prompt)
-public class OAuthPromptActivity extends RoboActivity {
+public class OAuthPromptActivity extends RoboActionBarActivity {
 
     private OAuthPromptPresenter presenter;
     @Inject

@@ -10,7 +10,6 @@
     <string name="facebook_logout">Log out of Facebook</string>
     <string name="twitter_login">Log in through Twitter</string>
     <string name="twitter_logout">Log out of Twitter</string>
-    <string name="title_facebook_login">Facebook Login</string>
     <string name="title_activity_login_browser">Log in through social media</string>
     <string name="PROVIDER_FACEBOOK">Facebook</string>
     <string name="PROVIDER_TWITTER">Twitter</string>
@@ -51,5 +50,6 @@
     <string name="invalid_date_error">Date is invalid. Please use format \'mm/dd/yyyy\'</string>
     <string name="sign_in_error">Error signing in</string>
     <string name="welcome_user">Hello, %1$s!</string>
+    <string name="title_activity_login">Log in through social media</string>
 
 </resources>
