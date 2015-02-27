@@ -49,7 +49,6 @@ public class OAuthBrowserPresenter {
         this.view = view;
         this.nav = nav;
         this.webView = web;
-        setUpWebView();
     }
 
     public void onCreate() {

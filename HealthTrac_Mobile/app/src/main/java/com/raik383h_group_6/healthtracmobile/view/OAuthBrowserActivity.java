@@ -37,7 +37,7 @@ public class OAuthBrowserActivity extends RoboActionBarActivity {
         Bundle extras = getIntent().getExtras();
         IResources resources = new ResourcesAdapter(getResources());
         IOAuthService oAuthService;
-        if (getIntent().getStringExtra(getString(R.string.EXTRA_PROVIDER)).equals(getString(R.string.PROVIDER_FACEBOOK))) {
+        if (extras.getString(getString(R.string.EXTRA_PROVIDER)).equals(getString(R.string.PROVIDER_FACEBOOK))) {
             oAuthService = facebookOAuthService;
         } else {
             oAuthService = twitterOAuthService;
