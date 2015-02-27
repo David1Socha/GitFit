@@ -38,6 +38,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".view.AuthenticationActivity" />
             </activity>
+        <meta-data android:name="roboguice.annotations.packages" android:value="com.raik383h_group_6.healthtracmobile"/>
         <meta-data android:name="roboguice.modules"
             android:value="com.raik383h_group_6.healthtracmobile.application.ApplicationModule" />
     </application>

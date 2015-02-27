@@ -1,11 +1,21 @@
 
 apply plugin: 'com.android.application'
 
+allprojects {
+    gradle.projectsEvaluated {
+        tasks.withType(JavaCompile) {
+            options.compilerArgs << "-AguiceAnnotationDatabasePackageName=com.raik383h_group_6.healthtracmobile"
+        }
+    }
+}
+
 android {
     packagingOptions {
         exclude('META-INF/DEPENDENCIES')
         exclude('META-INF/LICENSE')
         exclude('META-INF/NOTICE')
+        exclude('META-INF/LICENSE.txt')
+        exclude('META-INF/NOTICE.txt')
     }
     compileSdkVersion 21
     buildToolsVersion "21.1.2"
@@ -36,7 +46,12 @@ dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile 'org.scribe:scribe:1.3.3'
     compile 'com.android.support:appcompat-v7:21.0.3'
-    compile ('org.roboguice:roboguice:3.0.1')
+    compile 'com.google.guava:guava:17.0'
+    compile 'com.android.support:cardview-v7:21.0.2'
+    compile ('org.roboguice:roboguice:3.0.1') {
+        exclude module: 'aopalliance'
+        exclude module: 'cglib'
+    }
     compile ('com.google.inject.extensions:guice-assistedinject:4.0-beta5') {
         exclude module: 'aopalliance'
         exclude module: 'guice'

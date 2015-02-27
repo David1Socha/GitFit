@@ -6,6 +6,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.google.inject.Inject;
 import com.raik383h_group_6.healthtracmobile.R;
 import com.raik383h_group_6.healthtracmobile.content.IResources;
 import com.raik383h_group_6.healthtracmobile.model.AccessGrant;
@@ -33,6 +34,7 @@ public class RegisterUserPresenter {
     private IResources resources;
     private Bundle extras;
 
+    @Inject
     public RegisterUserPresenter(FacebookService facebookService, AccountService accountService, Bundle extras, IResources resources, RegisterUserActivity view) {
         this.facebookService = facebookService;
         this.view = view;
