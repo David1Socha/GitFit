@@ -17,5 +17,5 @@ public interface PresenterFactory {
     OAuthBrowserPresenter create(IOAuthService serviceAdapter, WebView web, Bundle extras, IResources resources, Navigator nav, OAuthBrowserActivity view);
     AuthenticationPresenter create(AccountService accountService, IResources resources, AuthenticationActivity view);
     OAuthPromptPresenter create(IResources resources, Navigator nav, OAuthPromptActivity view);
-    RegisterUserPresenter create(Bundle extras, IResources resources, RegisterUserActivity view);
+    RegisterUserPresenter create(Bundle extras, IResources resources, Navigator nav, RegisterUserActivity view);
 }

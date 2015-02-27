@@ -34,14 +34,16 @@ public class RegisterUserPresenter {
     private AccountService accountService;
     private IResources resources;
     private Bundle extras;
+    private Navigator nav;
 
     @Inject
-    public RegisterUserPresenter(FacebookService facebookService, AccountService accountService, @Assisted Bundle extras, @Assisted IResources resources, @Assisted RegisterUserActivity view) {
+    public RegisterUserPresenter(FacebookService facebookService, AccountService accountService, @Assisted Bundle extras, @Assisted IResources resources, @Assisted Navigator nav, @Assisted RegisterUserActivity view) {
         this.facebookService = facebookService;
         this.view = view;
         this.accountService = accountService;
         this.extras = extras;
         this.resources = resources;
+        this.nav = nav;
         accessToken = extras.getString(resources.getString(R.string.EXTRA_ACCESS_TOKEN));
         accessSecret = extras.getString(resources.getString(R.string.EXTRA_ACCESS_SECRET));
         provider = extras.getString(resources.getString(R.string.EXTRA_PROVIDER));
@@ -117,22 +119,12 @@ public class RegisterUserPresenter {
         UserLogin userLogin = new UserLogin(userToCreate, credentials);
         try {
             registerAccountAsync(userLogin);
-            finishSuccess();
+            nav.finishRegisterUserSuccess();
         } catch (ExecutionException | InterruptedException e) {
             view.displayMessage(resources.getString(R.string.account_not_made));
-            finishFailure();
+            nav.finishRegisterUserFailure();
         }
 
-    }
-
-    private void finishSuccess() {
-        view.setResult(Activity.RESULT_OK);
-        view.finish();
-    }
-
-    private void finishFailure() {
-        view.setResult(Activity.RESULT_CANCELED);
-        view.finish();
     }
 
     private static double parseDouble(String doubleStr) {

@@ -52,4 +52,14 @@ public class Navigator {
         activity.setResult(Activity.RESULT_CANCELED);
         activity.finish();
     }
+
+    public void finishRegisterUserSuccess() {
+        activity.setResult(Activity.RESULT_OK);
+        activity.finish();
+    }
+
+    public void finishRegisterUserFailure() {
+        activity.setResult(Activity.RESULT_CANCELED);
+        activity.finish();
+    }
 }
