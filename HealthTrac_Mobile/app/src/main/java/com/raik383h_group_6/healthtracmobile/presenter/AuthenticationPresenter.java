@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.util.Log;
 
 import com.google.inject.Inject;
@@ -28,12 +29,10 @@ public class AuthenticationPresenter {
     private AuthenticationActivity view;
     private AccountService accountService;
     private String accessToken, accessSecret, provider;
-    private Bundle extras;
     private IResources resources;
 
     @Inject
-    public AuthenticationPresenter(@Assisted AccountService accountService, @Assisted Bundle extras, @Assisted IResources resources, @Assisted AuthenticationActivity view) {
-        this.extras = extras;
+    public AuthenticationPresenter(@Assisted AccountService accountService, @Assisted IResources resources, @Assisted AuthenticationActivity view) {
         this.resources = resources;
         this.accountService = accountService;
         this.view = view;

@@ -26,9 +26,8 @@ public class OAuthPromptActivity extends RoboActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Bundle extras = getIntent().getExtras();
         IResources resources = new ResourcesAdapter(getResources());
-        presenter = presenterFactory.create(extras, resources, this);
+        presenter = presenterFactory.create(resources, this);
     }
 
     @Override
