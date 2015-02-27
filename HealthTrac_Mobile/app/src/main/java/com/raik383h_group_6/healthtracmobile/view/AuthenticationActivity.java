@@ -12,6 +12,7 @@ import com.raik383h_group_6.healthtracmobile.R;
 import com.raik383h_group_6.healthtracmobile.content.IResources;
 import com.raik383h_group_6.healthtracmobile.content.ResourcesAdapter;
 import com.raik383h_group_6.healthtracmobile.presenter.AuthenticationPresenter;
+import com.raik383h_group_6.healthtracmobile.presenter.Navigator;
 import com.raik383h_group_6.healthtracmobile.presenter.PresenterFactory;
 import com.raik383h_group_6.healthtracmobile.service.api.AccountService;
 
@@ -31,7 +32,8 @@ public class AuthenticationActivity extends RoboActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         IResources resources = new ResourcesAdapter(getResources());
-        presenter = presenterFactory.create(accountService, resources, this);
+        Navigator nav = new Navigator(this);
+        presenter = presenterFactory.create(accountService, resources, nav, this);
     }
 
     @Override

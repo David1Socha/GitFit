@@ -9,6 +9,8 @@ import com.google.inject.assistedinject.Assisted;
 import com.raik383h_group_6.healthtracmobile.R;
 import com.raik383h_group_6.healthtracmobile.model.Token;
 import com.raik383h_group_6.healthtracmobile.view.OAuthBrowserActivity;
+import com.raik383h_group_6.healthtracmobile.view.OAuthPromptActivity;
+import com.raik383h_group_6.healthtracmobile.view.RegisterUserActivity;
 
 import roboguice.inject.ContentView;
 
@@ -62,4 +64,18 @@ public class Navigator {
         activity.setResult(Activity.RESULT_CANCELED);
         activity.finish();
     }
+
+    public void openRegisterUser(String token, String secret, String provider, int reqCode) {
+            Intent intent = new Intent(activity, RegisterUserActivity.class);
+            intent.putExtra(activity.getString(R.string.EXTRA_ACCESS_TOKEN), token);
+            intent.putExtra(activity.getString(R.string.EXTRA_ACCESS_SECRET), secret);
+            intent.putExtra(activity.getString(R.string.EXTRA_PROVIDER), provider);
+            activity.startActivityForResult(intent, reqCode);
+    }
+
+    public void openOAuthPrompt(int reqCode) {
+        Intent intent = new Intent(activity, OAuthPromptActivity.class);
+        activity.startActivityForResult(intent, reqCode);
+    }
+
 }

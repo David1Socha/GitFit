@@ -30,17 +30,18 @@ public class AuthenticationPresenter {
     private AccountService accountService;
     private String accessToken, accessSecret, provider;
     private IResources resources;
+    private Navigator nav;
 
     @Inject
-    public AuthenticationPresenter(@Assisted AccountService accountService, @Assisted IResources resources, @Assisted AuthenticationActivity view) {
+    public AuthenticationPresenter(@Assisted AccountService accountService, @Assisted IResources resources, @Assisted Navigator nav, @Assisted AuthenticationActivity view) {
         this.resources = resources;
+        this.nav = nav;
         this.accountService = accountService;
         this.view = view;
     }
 
     public void onClickSignIn() {
-        Intent intent = new Intent(view, OAuthPromptActivity.class);
-        view.startActivityForResult(intent, OAUTH_TO_SIGN_IN);
+        nav.openOAuthPrompt(OAUTH_TO_SIGN_IN);
     }
 
     public void onActivityResult(int requestCode, int resultCode, Bundle extras) {
@@ -73,14 +74,8 @@ public class AuthenticationPresenter {
 
         AccessGrant grant = signIn(accessToken, accessSecret, provider);
         if (grant != null) {
-            finishWithAccessGrant(grant);
+            //nav.finishWithAccessGrant(grant);
         }
-    }
-
-    public void finishWithAccessGrant(AccessGrant g) {
-        Intent data = new Intent(view, RegisterUserActivity.class);
-        data.putExtra(resources.getString(R.string.EXTRA_ACCESS_GRANT), g);
-        //view.finish(); TODO ADD ONCE PARENT ACTIVITY CREATED
     }
 
     public AccessGrant signIn(String accessToken, String accessSecret, String provider) {
@@ -113,15 +108,10 @@ public class AuthenticationPresenter {
     }
 
     public void onClickCreateAccount() {
-        Intent intent = new Intent(view, OAuthPromptActivity.class);
-        view.startActivityForResult(intent, OAUTH_TO_CREATE_ACCOUNT);
+        nav.openOAuthPrompt(OAUTH_TO_CREATE_ACCOUNT);
     }
 
     public void createAccount(String accessToken, String accessSecret, String provider) {
-        Intent intent = new Intent(view, RegisterUserActivity.class);
-        intent.putExtra(resources.getString(R.string.EXTRA_ACCESS_TOKEN), accessToken);
-        intent.putExtra(resources.getString(R.string.EXTRA_ACCESS_SECRET), accessSecret);
-        intent.putExtra(resources.getString(R.string.EXTRA_PROVIDER), provider);
-        view.startActivityForResult(intent, CREATE_ACCOUNT);
+        nav.openRegisterUser(accessToken, accessSecret, provider, CREATE_ACCOUNT);
     }
 }
