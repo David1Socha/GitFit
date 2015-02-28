@@ -4,26 +4,26 @@
     android:layout_height="match_parent"
     android:paddingTop="10dp">
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:id="@+id/user_name"
         android:textColor="#0066FF"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"/>
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:id="@+id/location"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"/>
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:id="@+id/preferred_name"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"/>
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:id="@+id/sex"
         android:paddingLeft="10dp"

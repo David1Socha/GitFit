@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -62,6 +63,12 @@ public class ListUsersActivity extends RoboActivity {
     public void setUserListView(List<User> users) {
         ListAdapter listAdapter = new UserAdapter(this, users);
         userListView.setAdapter(listAdapter);
+        userListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                presenter.onItemClick(parent, view, position, id);
+            }
+        });
     }
 
     public void setNoUsersMessageDisplay(boolean enabled) {

@@ -4,10 +4,13 @@ import android.app.Activity;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
 
 import com.google.inject.Inject;
 import com.google.inject.assistedinject.Assisted;
 import com.raik383h_group_6.healthtracmobile.R;
+import com.raik383h_group_6.healthtracmobile.adapter.UserAdapter;
 import com.raik383h_group_6.healthtracmobile.content.IResources;
 import com.raik383h_group_6.healthtracmobile.model.AccessGrant;
 import com.raik383h_group_6.healthtracmobile.model.User;
@@ -90,5 +93,9 @@ public class ListUsersPresenter {
                 }
             }
         }.execute(authHeader).get();
+    }
+
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        User u = (User) parent.getAdapter().getItem(position);
     }
 }

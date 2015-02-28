@@ -65,7 +65,7 @@ public class UserAdapter extends BaseAdapter {
         return view;
     }
 
-    private class ViewHolder {
-        TextView preferredName, userName, location, sex;
+    public class ViewHolder {
+        public TextView preferredName, userName, location, sex;
     }
 }
