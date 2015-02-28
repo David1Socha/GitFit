@@ -30,6 +30,9 @@ public final class FormatUtils {
 
     public static String format(Date d) {
         DateFormat formatter = new SimpleDateFormat("MM/dd/yyyy", Locale.US);
+        if (d == null) {
+            return null;
+        }
         return formatter.format(d);
     }
 
