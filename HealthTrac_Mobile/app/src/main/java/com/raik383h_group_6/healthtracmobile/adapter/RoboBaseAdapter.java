@@ -11,9 +11,6 @@ import roboguice.inject.InjectView;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 
-/**
- * @author Ildar Karimov
- */
 public abstract class RoboBaseAdapter<THolder> extends BaseAdapter {
     protected ArrayList<ViewMembersInjector> viewsForInjection = new ArrayList<ViewMembersInjector>();
     private Context context;
