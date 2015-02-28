@@ -34,11 +34,11 @@
     <string name="location_hint">Location</string>
     <string name="username_label">Username</string>
     <string name="username_hint">Username</string>
-    <string name="height_hint">Height (inches)</string>
+    <string name="height_hint">(feet)</string>
     <string name="height_label">Height</string>
-    <string name="weight_hint">Weight (pounds)</string>
+    <string name="weight_hint">(stones)</string>
     <string name="weight_label">Weight</string>
-    <string name="birthdate_hint">Birth Date (\'mm/dd/yyyy\')</string>
+    <string name="birthdate_hint">(mm/dd/yyyy)</string>
     <string name="birthdate_label">Birth Date</string>
     <string name="sex_label">Sex</string>
     <string name="male_label">Male</string>

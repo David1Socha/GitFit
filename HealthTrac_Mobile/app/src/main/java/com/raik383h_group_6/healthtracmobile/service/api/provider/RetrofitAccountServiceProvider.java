@@ -11,7 +11,7 @@ public class RetrofitAccountServiceProvider implements Provider<AccountService>{
     public AccountService get() {
         RestAdapter adapter = new RestAdapter.Builder()
                 .setConverter(AccountService.DATA_CONVERTER)
-                .setEndpoint(AccountService.SERVICE_ENDPOINT)
+                .setEndpoint(AccountService.SERVICE_ENDPOINT).setLogLevel(RestAdapter.LogLevel.FULL)
                 .build();
         return adapter.create(AccountService.class);
     }
