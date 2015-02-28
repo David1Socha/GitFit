@@ -1,5 +1,6 @@
 package com.raik383h_group_6.healthtracmobile.presenter;
 
+import com.google.inject.Inject;
 import com.google.inject.assistedinject.Assisted;
 import com.raik383h_group_6.healthtracmobile.content.IResources;
 import com.raik383h_group_6.healthtracmobile.model.User;
@@ -16,11 +17,15 @@ public class ListUsersPresenter {
     private ListUsersActivity view;
     private UserService userService;
 
+    @Inject
     public ListUsersPresenter(UserService userService, @Assisted IResources resources, @Assisted Navigator nav, @Assisted ListUsersActivity view) {
         this.resources = resources;
         this.nav = nav;
         this.userService = userService;
         this.view = view;
+    }
+
+    public void onCreate() {
         User u = new User();
         u.setUserName("david1socha");
         u.setSex(User.Sex.MALE);
