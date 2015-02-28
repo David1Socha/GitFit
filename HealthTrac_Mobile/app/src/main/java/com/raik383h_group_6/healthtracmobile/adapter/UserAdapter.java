@@ -5,14 +5,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.google.gson.annotations.SerializedName;
 import com.raik383h_group_6.healthtracmobile.R;
 import com.raik383h_group_6.healthtracmobile.model.User;
 
-import java.util.Date;
+import org.apache.commons.lang3.text.WordUtils;
+
 import java.util.List;
 
 public class UserAdapter extends BaseAdapter {
@@ -59,7 +58,8 @@ public class UserAdapter extends BaseAdapter {
         User user = users.get(position);
         holder.preferredName.setText(user.getPreferredName());
         holder.location.setText(user.getLocation());
-        holder.sex.setText(user.getSex().toString());
+        String sexStr = WordUtils.capitalizeFully(user.getSex().name());
+        holder.sex.setText(sexStr);
         holder.userName.setText(user.getUserName());
 
         return view;

@@ -57,5 +57,7 @@ dependencies {
         exclude module: 'guice'
         exclude module: 'cglib'
     }
+    compile 'org.apache.commons:commons-lang3:3.1'
+
     androidTestCompile "org.mockito:mockito-core:1.9.0"
 }
