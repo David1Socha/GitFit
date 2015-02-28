@@ -10,7 +10,7 @@ import java.util.Date;
 public class User implements Parcelable {
     private Date dateCreated, dateModified, birthDate;
     private String firstName, lastName, preferredName, email, userName, location;
-    @SerializedName("ID") private String id;
+    private String id;
     private double height, width;
 
     public User(Date birthDate, Date dateCreated, Date dateModified, String email, String firstName, double height, String lastName, String location, String preferredName, User.Sex sex, String userName, double weight) {
@@ -25,7 +25,7 @@ public class User implements Parcelable {
         this.preferredName = preferredName;
         this.sex = sex;
         this.userName = userName;
-        this.width = weight; // :(
+        this.width = weight; // :( TODO fix
     }
 
     public String getLocation() {return  location;}
