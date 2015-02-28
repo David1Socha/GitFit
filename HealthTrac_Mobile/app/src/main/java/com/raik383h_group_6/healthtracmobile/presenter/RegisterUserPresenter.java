@@ -11,6 +11,7 @@ import com.raik383h_group_6.healthtracmobile.model.Credentials;
 import com.raik383h_group_6.healthtracmobile.model.FacebookUser;
 import com.raik383h_group_6.healthtracmobile.model.User;
 import com.raik383h_group_6.healthtracmobile.model.UserLogin;
+import com.raik383h_group_6.healthtracmobile.service.FormatUtils;
 import com.raik383h_group_6.healthtracmobile.service.api.AccountService;
 import com.raik383h_group_6.healthtracmobile.service.api.FacebookService;
 import com.raik383h_group_6.healthtracmobile.view.RegisterUserActivity;
@@ -97,9 +98,9 @@ public class RegisterUserPresenter {
 
     public void validateAccount(String birthDateStr, String email, String firstName, String heightStr, String lastName, String location, String preferredName, String radioValue, String userName, String weightStr) {
         if (fieldsValid(birthDateStr, email, firstName, heightStr, lastName, location, preferredName, userName, weightStr)) {
-            Date birthDate = parseDate(birthDateStr);
-            double height = parseDouble(heightStr);
-            double weight = parseDouble(weightStr);
+            Date birthDate = FormatUtils.parseDate(birthDateStr);
+            double height = FormatUtils.parseDouble(heightStr);
+            double weight = FormatUtils.parseDouble(weightStr);
             User.Sex sex  = radioValue.equals(resources.getString(R.string.male_label)) ? User.Sex.MALE : User.Sex.FEMALE;
             Date dateCreated = new Date();
             Date dateModified = new Date();
@@ -126,28 +127,13 @@ public class RegisterUserPresenter {
 
     }
 
-    private static double parseDouble(String doubleStr) {
-        double d = Double.parseDouble(doubleStr);
-        return d;
-    }
-
-    private static Date parseDate(String dateStr) {
-        DateFormat formatter = new SimpleDateFormat("MM/dd/yyyy", Locale.US);
-        formatter.setLenient(false);
-        Date d = null;
-        try {
-            d = formatter.parse(dateStr);
-        } catch (ParseException ignored) {
-        }
-        return d;
-    }
 
     private boolean fieldsValid(String birthDate, String email, String firstName, String height, String lastName, String location, String prefName, String username, String weight) {
         boolean allGood = true;
         if (birthDate.equals("")) {
             allGood = false;
             view.setBirthDateError(resources.getString(R.string.empty_field_error));
-        } else if (parseDate(birthDate) == null) {
+        } else if (FormatUtils.parseDate(birthDate) == null) {
             allGood = false;
             view.setBirthDateError(resources.getString(R.string.invalid_date_error));
         }

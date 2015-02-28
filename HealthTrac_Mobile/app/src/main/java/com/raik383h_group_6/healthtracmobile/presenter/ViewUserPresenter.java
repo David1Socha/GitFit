@@ -30,6 +30,6 @@ public class ViewUserPresenter {
     }
 
     private void updateFields() {
-        //Use user to update view with infos...
+        view.setBirthDate(user.getBirthDate().toLocaleString());
     }
 }
