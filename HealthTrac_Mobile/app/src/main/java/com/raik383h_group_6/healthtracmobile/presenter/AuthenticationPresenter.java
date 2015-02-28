@@ -77,7 +77,7 @@ public class AuthenticationPresenter {
 
         AccessGrant grant = signIn(accessToken, accessSecret, provider);
         if (grant != null) {
-            //nav.finishWithAccessGrant(grant);
+            nav.finishWithAccessGrant(grant);
         }
     }
 

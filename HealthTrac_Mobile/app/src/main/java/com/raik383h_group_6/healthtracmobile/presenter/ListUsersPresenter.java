@@ -1,11 +1,13 @@
 package com.raik383h_group_6.healthtracmobile.presenter;
 
+import android.app.Activity;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 
 import com.google.inject.Inject;
 import com.google.inject.assistedinject.Assisted;
+import com.raik383h_group_6.healthtracmobile.R;
 import com.raik383h_group_6.healthtracmobile.content.IResources;
 import com.raik383h_group_6.healthtracmobile.model.AccessGrant;
 import com.raik383h_group_6.healthtracmobile.model.User;
@@ -17,6 +19,8 @@ import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 public class ListUsersPresenter {
+
+    private static final int AUTH = 1;
 
     private IResources resources;
     private Navigator nav;
@@ -35,7 +39,7 @@ public class ListUsersPresenter {
 
     public void onCreate() {
         Log.d("davidsocha", "created");
-        nav.openAuthentication();
+        nav.openAuthentication(AUTH);
     }
 
     public void onResume() {
@@ -44,7 +48,17 @@ public class ListUsersPresenter {
     }
 
     public void onActivityResult(int requestCode, int resultCode, Bundle data) {
+        if (resultCode == Activity.RESULT_OK) {
+            switch (requestCode) {
+                case AUTH:
+                    grant = (AccessGrant) data.getParcelable(resources.getString(R.string.EXTRA_ACCESS_GRANT));
+                    populateUsers();
+                    break;
+                default:
+                    break;
+            }
 
+        }
     }
 
     public void populateUsers() {

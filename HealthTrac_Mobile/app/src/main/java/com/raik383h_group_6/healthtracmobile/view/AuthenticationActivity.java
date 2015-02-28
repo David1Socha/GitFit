@@ -24,12 +24,13 @@ import com.raik383h_group_6.healthtracmobile.service.api.AccountService;
 import java.util.ArrayList;
 import java.util.List;
 
+import roboguice.activity.RoboActionBarActivity;
 import roboguice.activity.RoboActivity;
 import roboguice.inject.ContentView;
 import roboguice.inject.InjectView;
 
 @ContentView(R.layout.activity_authentication)
-public class AuthenticationActivity extends RoboActivity {
+public class AuthenticationActivity extends RoboActionBarActivity {
 
     AuthenticationPresenter presenter;
     @Inject

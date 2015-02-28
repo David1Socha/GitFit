@@ -7,7 +7,9 @@ import android.content.Intent;
 import com.google.inject.Inject;
 import com.google.inject.assistedinject.Assisted;
 import com.raik383h_group_6.healthtracmobile.R;
+import com.raik383h_group_6.healthtracmobile.model.AccessGrant;
 import com.raik383h_group_6.healthtracmobile.model.Token;
+import com.raik383h_group_6.healthtracmobile.view.AuthenticationActivity;
 import com.raik383h_group_6.healthtracmobile.view.OAuthBrowserActivity;
 import com.raik383h_group_6.healthtracmobile.view.OAuthPromptActivity;
 import com.raik383h_group_6.healthtracmobile.view.RegisterUserActivity;
@@ -78,4 +80,16 @@ public class Navigator {
         activity.startActivityForResult(intent, reqCode);
     }
 
+    public void openAuthentication(int reqCode) {
+        Intent intent = new Intent(activity, AuthenticationActivity.class);
+        activity.startActivityForResult(intent, reqCode);
+    }
+
+
+    public void finishWithAccessGrant(AccessGrant grant) {
+        Intent data = new Intent();
+        data.putExtra(activity.getString(R.string.EXTRA_ACCESS_GRANT), grant);
+        activity.setResult(Activity.RESULT_OK, data);
+        activity.finish();
+    }
 }
