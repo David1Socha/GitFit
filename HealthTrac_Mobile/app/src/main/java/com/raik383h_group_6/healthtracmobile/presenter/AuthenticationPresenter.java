@@ -1,11 +1,8 @@
 package com.raik383h_group_6.healthtracmobile.presenter;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.util.Log;
 
 import com.google.inject.Inject;
 import com.google.inject.assistedinject.Assisted;
@@ -13,17 +10,10 @@ import com.raik383h_group_6.healthtracmobile.R;
 import com.raik383h_group_6.healthtracmobile.content.IResources;
 import com.raik383h_group_6.healthtracmobile.model.AccessGrant;
 import com.raik383h_group_6.healthtracmobile.model.Credentials;
-import com.raik383h_group_6.healthtracmobile.model.User;
 import com.raik383h_group_6.healthtracmobile.service.api.AccountService;
 import com.raik383h_group_6.healthtracmobile.view.AuthenticationActivity;
-import com.raik383h_group_6.healthtracmobile.view.OAuthPromptActivity;
-import com.raik383h_group_6.healthtracmobile.view.RegisterUserActivity;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.concurrent.ExecutionException;
-
-import retrofit.RetrofitError;
 
 public class AuthenticationPresenter {
     public static final int CREATE_ACCOUNT = 1,
@@ -33,10 +23,10 @@ public class AuthenticationPresenter {
     private AccountService accountService;
     private String accessToken, accessSecret, provider;
     private IResources resources;
-    private Navigator nav;
+    private ActivityNavigator nav;
 
     @Inject
-    public AuthenticationPresenter(@Assisted AccountService accountService, @Assisted IResources resources, @Assisted Navigator nav, @Assisted AuthenticationActivity view) {
+    public AuthenticationPresenter(@Assisted AccountService accountService, @Assisted IResources resources, @Assisted ActivityNavigator nav, @Assisted AuthenticationActivity view) {
         this.resources = resources;
         this.nav = nav;
         this.accountService = accountService;

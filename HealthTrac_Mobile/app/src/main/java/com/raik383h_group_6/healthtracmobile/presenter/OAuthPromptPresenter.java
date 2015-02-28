@@ -1,14 +1,11 @@
 package com.raik383h_group_6.healthtracmobile.presenter;
 
-import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 
 import com.google.inject.Inject;
 import com.google.inject.assistedinject.Assisted;
 import com.raik383h_group_6.healthtracmobile.R;
 import com.raik383h_group_6.healthtracmobile.content.IResources;
-import com.raik383h_group_6.healthtracmobile.view.OAuthBrowserActivity;
 import com.raik383h_group_6.healthtracmobile.view.OAuthPromptActivity;
 
 public class OAuthPromptPresenter {
@@ -17,10 +14,10 @@ public class OAuthPromptPresenter {
 
     private OAuthPromptActivity view;
     private IResources resources;
-    private Navigator nav;
+    private ActivityNavigator nav;
 
     @Inject
-    public OAuthPromptPresenter( @Assisted IResources resources, @Assisted Navigator nav, @Assisted OAuthPromptActivity view) {
+    public OAuthPromptPresenter( @Assisted IResources resources, @Assisted ActivityNavigator nav, @Assisted OAuthPromptActivity view) {
         this.resources = resources;
         this.view = view;
         this.nav = nav;

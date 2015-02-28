@@ -1,6 +1,5 @@
 package com.raik383h_group_6.healthtracmobile.view;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -9,13 +8,11 @@ import com.google.inject.Inject;
 import com.raik383h_group_6.healthtracmobile.R;
 import com.raik383h_group_6.healthtracmobile.content.IResources;
 import com.raik383h_group_6.healthtracmobile.content.ResourcesAdapter;
-import com.raik383h_group_6.healthtracmobile.presenter.Navigator;
+import com.raik383h_group_6.healthtracmobile.presenter.ActivityNavigator;
 import com.raik383h_group_6.healthtracmobile.presenter.OAuthPromptPresenter;
 import com.raik383h_group_6.healthtracmobile.presenter.PresenterFactory;
 
-import roboguice.RoboGuice;
 import roboguice.activity.RoboActionBarActivity;
-import roboguice.activity.RoboActivity;
 import roboguice.inject.ContentView;
 
 @ContentView(R.layout.activity_oauth_prompt)
@@ -29,7 +26,7 @@ public class OAuthPromptActivity extends RoboActionBarActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         IResources resources = new ResourcesAdapter(getResources());
-        Navigator nav = new Navigator(this);
+        ActivityNavigator nav = new ActivityNavigator(this);
         presenter = presenterFactory.create(resources, nav, this);
     }
 

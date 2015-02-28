@@ -22,6 +22,7 @@
     <string name="sign_in">Sign in to existing account</string>
     <string name="title_authentication_activity">Sign in or create an account</string>
     <string name="EXTRA_ACCESS_GRANT">com.raik383h_group6.healthtrac.ACCESS_GRANT</string>
+    <string name="EXTRA_USER">com.raik383h_group6.healthtrac.USER</string>
     <string name="first_name_label">First Name</string>
     <string name="first_name_hint">First Name</string>
     <string name="last_name_label">Last Name</string>
@@ -54,5 +55,6 @@
     <string name="title_activity_list_users">View Users</string>
     <string name="no_users_message">No Users found. Are you logged in?</string>
     <string name="edit_user">Edit User</string>
+    <string name="title_activity_view_user">View User</string>
 
 </resources>

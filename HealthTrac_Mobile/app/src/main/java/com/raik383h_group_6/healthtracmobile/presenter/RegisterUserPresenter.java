@@ -1,16 +1,12 @@
 package com.raik383h_group_6.healthtracmobile.presenter;
 
-import android.app.Activity;
-import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 
 import com.google.inject.Inject;
 import com.google.inject.assistedinject.Assisted;
 import com.raik383h_group_6.healthtracmobile.R;
 import com.raik383h_group_6.healthtracmobile.content.IResources;
-import com.raik383h_group_6.healthtracmobile.model.AccessGrant;
 import com.raik383h_group_6.healthtracmobile.model.Credentials;
 import com.raik383h_group_6.healthtracmobile.model.FacebookUser;
 import com.raik383h_group_6.healthtracmobile.model.User;
@@ -34,10 +30,10 @@ public class RegisterUserPresenter {
     private AccountService accountService;
     private IResources resources;
     private Bundle extras;
-    private Navigator nav;
+    private ActivityNavigator nav;
 
     @Inject
-    public RegisterUserPresenter(FacebookService facebookService, AccountService accountService, @Assisted Bundle extras, @Assisted IResources resources, @Assisted Navigator nav, @Assisted RegisterUserActivity view) {
+    public RegisterUserPresenter(FacebookService facebookService, AccountService accountService, @Assisted Bundle extras, @Assisted IResources resources, @Assisted ActivityNavigator nav, @Assisted RegisterUserActivity view) {
         this.facebookService = facebookService;
         this.view = view;
         this.accountService = accountService;

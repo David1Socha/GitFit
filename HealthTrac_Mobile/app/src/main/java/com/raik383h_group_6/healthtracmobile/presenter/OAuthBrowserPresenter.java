@@ -1,7 +1,5 @@
 package com.raik383h_group_6.healthtracmobile.presenter;
 
-import android.app.Activity;
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -29,7 +27,7 @@ public class OAuthBrowserPresenter {
     private WebView webView;
     private IResources resources;
     private Bundle extras;
-    private Navigator nav;
+    private ActivityNavigator nav;
 
     private void setUpWebView() {
         WebViewClient webViewClient = new LoginWebViewClient();
@@ -42,7 +40,7 @@ public class OAuthBrowserPresenter {
     }
 
     @Inject
-    public OAuthBrowserPresenter(@Assisted IOAuthService service, @Assisted Bundle extras, @Assisted IResources resources, @Assisted WebView web, @Assisted Navigator nav, @Assisted OAuthBrowserActivity view) {
+    public OAuthBrowserPresenter(@Assisted IOAuthService service, @Assisted Bundle extras, @Assisted IResources resources, @Assisted WebView web, @Assisted ActivityNavigator nav, @Assisted OAuthBrowserActivity view) {
         this.oAuthService = service;
         this.extras = extras;
         this.resources = resources;

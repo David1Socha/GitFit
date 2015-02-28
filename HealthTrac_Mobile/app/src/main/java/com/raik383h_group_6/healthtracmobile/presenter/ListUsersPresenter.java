@@ -3,21 +3,18 @@ package com.raik383h_group_6.healthtracmobile.presenter;
 import android.app.Activity;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 
 import com.google.inject.Inject;
 import com.google.inject.assistedinject.Assisted;
 import com.raik383h_group_6.healthtracmobile.R;
-import com.raik383h_group_6.healthtracmobile.adapter.UserAdapter;
 import com.raik383h_group_6.healthtracmobile.content.IResources;
 import com.raik383h_group_6.healthtracmobile.model.AccessGrant;
 import com.raik383h_group_6.healthtracmobile.model.User;
 import com.raik383h_group_6.healthtracmobile.service.api.UserService;
 import com.raik383h_group_6.healthtracmobile.view.ListUsersActivity;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
@@ -26,13 +23,13 @@ public class ListUsersPresenter {
     private static final int AUTH = 1;
 
     private IResources resources;
-    private Navigator nav;
+    private ActivityNavigator nav;
     private ListUsersActivity view;
     private UserService userService;
     private AccessGrant grant;
 
     @Inject
-    public ListUsersPresenter(UserService userService, @Assisted IResources resources, @Assisted Navigator nav, @Assisted ListUsersActivity view) {
+    public ListUsersPresenter(UserService userService, @Assisted IResources resources, @Assisted ActivityNavigator nav, @Assisted ListUsersActivity view) {
         this.resources = resources;
         this.nav = nav;
         this.userService = userService;

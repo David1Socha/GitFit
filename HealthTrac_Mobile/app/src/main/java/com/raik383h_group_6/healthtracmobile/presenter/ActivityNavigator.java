@@ -9,17 +9,19 @@ import com.google.inject.assistedinject.Assisted;
 import com.raik383h_group_6.healthtracmobile.R;
 import com.raik383h_group_6.healthtracmobile.model.AccessGrant;
 import com.raik383h_group_6.healthtracmobile.model.Token;
+import com.raik383h_group_6.healthtracmobile.model.User;
 import com.raik383h_group_6.healthtracmobile.view.AuthenticationActivity;
 import com.raik383h_group_6.healthtracmobile.view.OAuthBrowserActivity;
 import com.raik383h_group_6.healthtracmobile.view.OAuthPromptActivity;
 import com.raik383h_group_6.healthtracmobile.view.RegisterUserActivity;
+import com.raik383h_group_6.healthtracmobile.view.ViewUserActivity;
 
 import roboguice.inject.ContentView;
 
-public class Navigator {
+public class ActivityNavigator {
     private final Activity activity;
 
-    public Navigator( Activity activity) {
+    public ActivityNavigator(Activity activity) {
         this.activity = activity;
     }
 
@@ -85,11 +87,20 @@ public class Navigator {
         activity.startActivityForResult(intent, reqCode);
     }
 
-
     public void finishWithAccessGrant(AccessGrant grant) {
         Intent data = new Intent();
         data.putExtra(activity.getString(R.string.EXTRA_ACCESS_GRANT), grant);
         activity.setResult(Activity.RESULT_OK, data);
+        activity.finish();
+    }
+
+    public void openViewUser(User u) {
+        Intent intent = new Intent(activity, ViewUserActivity.class);
+        intent.putExtra(activity.getString(R.string.EXTRA_USER), u);
+        activity.startActivity(intent);
+    }
+
+    public void finishShowUser() {
         activity.finish();
     }
 }

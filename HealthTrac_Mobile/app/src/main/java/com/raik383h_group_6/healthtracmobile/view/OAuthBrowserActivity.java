@@ -1,7 +1,5 @@
 package com.raik383h_group_6.healthtracmobile.view;
 
-import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.webkit.WebView;
 import com.google.inject.Inject;
@@ -9,7 +7,7 @@ import com.google.inject.name.Named;
 import com.raik383h_group_6.healthtracmobile.R;
 import com.raik383h_group_6.healthtracmobile.content.IResources;
 import com.raik383h_group_6.healthtracmobile.content.ResourcesAdapter;
-import com.raik383h_group_6.healthtracmobile.presenter.Navigator;
+import com.raik383h_group_6.healthtracmobile.presenter.ActivityNavigator;
 import com.raik383h_group_6.healthtracmobile.presenter.OAuthBrowserPresenter;
 import com.raik383h_group_6.healthtracmobile.presenter.PresenterFactory;
 import com.raik383h_group_6.healthtracmobile.service.oauth.IOAuthService;
@@ -42,7 +40,7 @@ public class OAuthBrowserActivity extends RoboActionBarActivity {
         } else {
             oAuthService = twitterOAuthService;
         }
-        Navigator nav = new Navigator(this);
+        ActivityNavigator nav = new ActivityNavigator(this);
         presenter = presenterFactory.create(oAuthService, webView, extras, resources, nav, this);
         presenter.onCreate();
     }

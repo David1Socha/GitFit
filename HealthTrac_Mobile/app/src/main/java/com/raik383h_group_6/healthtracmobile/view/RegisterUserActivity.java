@@ -1,8 +1,6 @@
 package com.raik383h_group_6.healthtracmobile.view;
 
 import android.os.Bundle;
-import android.provider.MediaStore;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -15,13 +13,11 @@ import com.raik383h_group_6.healthtracmobile.R;
 import com.raik383h_group_6.healthtracmobile.content.IResources;
 import com.raik383h_group_6.healthtracmobile.content.ResourcesAdapter;
 import com.raik383h_group_6.healthtracmobile.model.User;
-import com.raik383h_group_6.healthtracmobile.presenter.Navigator;
+import com.raik383h_group_6.healthtracmobile.presenter.ActivityNavigator;
 import com.raik383h_group_6.healthtracmobile.presenter.PresenterFactory;
 import com.raik383h_group_6.healthtracmobile.presenter.RegisterUserPresenter;
 import com.raik383h_group_6.healthtracmobile.service.api.AccountService;
 import com.raik383h_group_6.healthtracmobile.service.api.FacebookService;
-
-import java.util.Date;
 
 import roboguice.activity.RoboActivity;
 import roboguice.inject.ContentView;
@@ -112,7 +108,7 @@ public class RegisterUserActivity extends RoboActivity {
         super.onCreate(savedInstanceState);
         Bundle extras = getIntent().getExtras();
         IResources resources = new ResourcesAdapter(getResources());
-        Navigator nav = new Navigator(this);
+        ActivityNavigator nav = new ActivityNavigator(this);
         presenter= presenterFactory.create(extras, resources, nav, this);
         presenter.populateFields();
         createAccountButton.setOnClickListener( new View.OnClickListener() {
