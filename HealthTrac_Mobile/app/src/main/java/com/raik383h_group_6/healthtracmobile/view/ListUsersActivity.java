@@ -17,12 +17,12 @@ import com.raik383h_group_6.healthtracmobile.presenter.PresenterFactory;
 
 import java.util.List;
 
-import roboguice.activity.RoboListActivity;
+import roboguice.activity.RoboActivity;
 import roboguice.inject.ContentView;
 import roboguice.inject.InjectView;
 
 @ContentView(R.layout.activity_list_users)
-public class ListUsersActivity extends RoboListActivity {
+public class ListUsersActivity extends RoboActivity {
     @InjectView(R.id.user_list_view)
     ListView userListView;
     @Inject
