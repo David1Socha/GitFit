@@ -58,6 +58,9 @@ public class UserAdapter extends BaseAdapter {
 
         User user = users.get(position);
         holder.preferredName.setText(user.getPreferredName());
+        holder.location.setText(user.getLocation());
+        holder.sex.setText(user.getSex().toString());
+        holder.userName.setText(user.getUserName());
 
         return view;
     }
