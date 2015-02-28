@@ -39,9 +39,12 @@ public class ListUsersPresenter {
         List<User> users = null;
         try {
             if (grant == null) {
+                view.setNoUsersMessageDisplay(true);
                 return;
             }
             users = getUsersAsync(grant.getAuthHeader());
+            view.setNoUsersMessageDisplay(false);
+            view.setUserListView(users);
         } catch (ExecutionException | InterruptedException e) {
             view.setNoUsersMessageDisplay(true);
         }
