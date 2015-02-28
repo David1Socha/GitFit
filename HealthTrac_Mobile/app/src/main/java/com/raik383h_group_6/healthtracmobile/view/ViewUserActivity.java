@@ -6,7 +6,13 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import com.google.inject.Inject;
 import com.raik383h_group_6.healthtracmobile.R;
+import com.raik383h_group_6.healthtracmobile.content.IResources;
+import com.raik383h_group_6.healthtracmobile.content.ResourcesAdapter;
+import com.raik383h_group_6.healthtracmobile.presenter.ActivityNavigator;
+import com.raik383h_group_6.healthtracmobile.presenter.PresenterFactory;
+import com.raik383h_group_6.healthtracmobile.presenter.ViewUserPresenter;
 
 import roboguice.inject.ContentView;
 import roboguice.inject.InjectView;
@@ -33,10 +39,18 @@ public class ViewUserActivity extends ActionBarActivity {
     TextView userNameTextView;
     @InjectView(R.id.weight_textview)
     TextView weightTextView;
+    @Inject
+    PresenterFactory presenterFactory;
+    private ViewUserPresenter presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        IResources resources = new ResourcesAdapter(getResources());
+        ActivityNavigator nav = new ActivityNavigator(this);
+        Bundle extras = getIntent().getExtras();
+        presenter = presenterFactory.create(extras, resources, nav, this);
+        presenter.onCreate();
     }
 
 }
