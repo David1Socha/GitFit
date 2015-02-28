@@ -33,4 +33,8 @@ public final class FormatUtils {
         return formatter.format(d);
     }
 
+    public static String format(Double d) {
+        return String.valueOf(d);
+    }
+
 }

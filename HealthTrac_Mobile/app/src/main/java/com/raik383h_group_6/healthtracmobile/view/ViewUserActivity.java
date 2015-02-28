@@ -58,6 +58,12 @@ public class ViewUserActivity extends ActionBarActivity {
         presenter.onCreate();
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        presenter.onResume();
+    }
+
     public void setBirthDate(String txt) {
         birthDateTextView.setText(txt);
     }
