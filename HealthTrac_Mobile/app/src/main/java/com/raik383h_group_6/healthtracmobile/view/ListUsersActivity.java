@@ -1,5 +1,6 @@
 package com.raik383h_group_6.healthtracmobile.view;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -33,12 +34,29 @@ public class ListUsersActivity extends RoboActivity {
     PresenterFactory presenterFactory;
     private ListUsersPresenter presenter;
 
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         IResources resources = new ResourcesAdapter(getResources());
         Navigator nav = new Navigator(this);
         presenter = presenterFactory.create(resources, nav, this);
         presenter.onCreate();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        presenter.onResume();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        Bundle extras = null;
+        if (data != null) {
+            extras = data.getExtras();
+        }
+        presenter.onActivityResult(requestCode, resultCode, extras);
     }
 
     public void setUserListView(List<User> users) {

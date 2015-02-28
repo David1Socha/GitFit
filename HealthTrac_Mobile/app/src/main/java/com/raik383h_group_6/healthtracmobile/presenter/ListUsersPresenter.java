@@ -1,6 +1,8 @@
 package com.raik383h_group_6.healthtracmobile.presenter;
 
 import android.os.AsyncTask;
+import android.os.Bundle;
+import android.util.Log;
 
 import com.google.inject.Inject;
 import com.google.inject.assistedinject.Assisted;
@@ -32,7 +34,17 @@ public class ListUsersPresenter {
     }
 
     public void onCreate() {
+        Log.d("davidsocha", "created");
+        nav.openAuthentication();
+    }
+
+    public void onResume() {
+        Log.d("davidsocha", "resumed");
         populateUsers();
+    }
+
+    public void onActivityResult(int requestCode, int resultCode, Bundle data) {
+
     }
 
     public void populateUsers() {
