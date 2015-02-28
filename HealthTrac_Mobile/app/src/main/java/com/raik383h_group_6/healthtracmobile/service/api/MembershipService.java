@@ -30,21 +30,21 @@ public interface MembershipService {
     @GET("/api/Memberships/{id}")
     Membership getMembership(@Path("id") long id, @Header("Authorization") String token);
 
-    @GET("api/Memberships")
+    @GET("/api/Memberships")
     Membership getMembership(@Query("userId") String userId, @Query("teamId") long teamId, @Header("Authorization") String token);
 
-    @GET("api/Memberships")
+    @GET("/api/Memberships")
     List<Membership> getMemberships(@Header("Authorization") String token);
 
-    @GET("api/Memberships")
+    @GET("/api/Memberships")
     List<Membership> getMemberships(@Query("userId") String userId, @Header("Authorization") String token);
 
-    @GET("api/Memberships")
+    @GET("/api/Memberships")
     List<Membership> getMemberships(@Query("teamId") long teamId, @Header("Authorization") String token);
 
-    @PUT("api/Memberships/{id}")
+    @PUT("/api/Memberships/{id}")
     Response updateMembership(@Path("id") long id, @Body Membership membership, @Header("Authorization") String token);
 
-    @POST("api/Memberships")
+    @POST("/api/Memberships")
     Membership createMembership(@Body Membership membership, @Header("Authorization") String token);
 }

@@ -32,9 +32,9 @@ public interface UserService {
     @GET("/api/Users/{id}")
     User getUser(@Path("id") String id, @Header("Authorization") String token);
 
-    @GET("api/Users")
+    @GET("/api/Users")
     List<User> getUsers(@Header("Authorization") String token);
 
-    @PUT("api/Users/{id}")
+    @PUT("/api/Users/{id}")
     Response updateUser(@Path("id") String id, @Body User user, @Header("Authorization") String token);
 }

@@ -38,12 +38,10 @@ public class ListUsersPresenter {
     }
 
     public void onCreate() {
-        Log.d("davidsocha", "created");
         nav.openAuthentication(AUTH);
     }
 
     public void onResume() {
-        Log.d("davidsocha", "resumed");
         populateUsers();
     }
 
@@ -69,12 +67,16 @@ public class ListUsersPresenter {
                 return;
             }
             users = getUsersAsync(grant.getAuthHeader());
-            view.setNoUsersMessageDisplay(false);
-            view.setUserListView(users);
+            if (users != null) {
+                view.setNoUsersMessageDisplay(false);
+                view.setUserListView(users);
+            } else {
+                view.setNoUsersMessageDisplay(true);
+            }
+
         } catch (ExecutionException | InterruptedException e) {
             view.setNoUsersMessageDisplay(true);
         }
-        view.setUserListView(users);
     }
 
     private List<User> getUsersAsync(String authHeader) throws ExecutionException, InterruptedException {

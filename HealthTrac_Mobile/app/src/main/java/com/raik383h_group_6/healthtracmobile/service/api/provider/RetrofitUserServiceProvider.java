@@ -11,7 +11,7 @@ public class RetrofitUserServiceProvider implements Provider<UserService> {
     public UserService get() {
         RestAdapter adapter = new RestAdapter.Builder()
                 .setConverter(UserService.DATA_CONVERTER)
-                .setEndpoint(UserService.SERVICE_ENDPOINT)
+                .setEndpoint(UserService.SERVICE_ENDPOINT).setLogLevel(RestAdapter.LogLevel.FULL)
                 .build();
         return adapter.create(UserService.class);
     }

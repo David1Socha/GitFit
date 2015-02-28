@@ -30,15 +30,15 @@ public interface TeamService {
     @GET("/api/Teams/{id}")
     Team getTeam(@Path("id") long id, @Header("Authorization") String token);
 
-    @GET("api/Teams")
+    @GET("/api/Teams")
     List<Team> getTeams(@Header("Authorization") String token);
 
-    @GET("api/Teams")
+    @GET("/api/Teams")
     List<Team> getTeams(@Query("userId") String userId, @Header("Authorization") String token);
 
-    @PUT("api/Teams/{id}")
+    @PUT("/api/Teams/{id}")
     Response updateTeam(@Path("id") long id, @Body Team team, @Header("Authorization") String token);
 
-    @POST("api/Teams")
+    @POST("/api/Teams")
     Team createTeam(@Body Team team, @Header("Authorization") String token);
 }
