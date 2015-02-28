@@ -6,19 +6,23 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import com.google.inject.Inject;
 import com.raik383h_group_6.healthtracmobile.R;
+import com.raik383h_group_6.healthtracmobile.adapter.UserAdapter;
 import com.raik383h_group_6.healthtracmobile.content.IResources;
 import com.raik383h_group_6.healthtracmobile.content.ResourcesAdapter;
+import com.raik383h_group_6.healthtracmobile.model.User;
 import com.raik383h_group_6.healthtracmobile.presenter.AuthenticationPresenter;
 import com.raik383h_group_6.healthtracmobile.presenter.Navigator;
 import com.raik383h_group_6.healthtracmobile.presenter.PresenterFactory;
 import com.raik383h_group_6.healthtracmobile.service.api.AccountService;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import roboguice.activity.RoboActivity;
 import roboguice.inject.ContentView;
@@ -32,8 +36,6 @@ public class AuthenticationActivity extends RoboActivity {
     PresenterFactory presenterFactory;
     @Inject
     AccountService accountService;
-    @InjectView(R.id.user_list_view)
-    ListView userListView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

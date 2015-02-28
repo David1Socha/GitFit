@@ -21,7 +21,7 @@ public class UserAdapter extends BaseAdapter {
 
     public UserAdapter(Context context, List<User> users) {
         mInflater = LayoutInflater.from(context);
-        users = users;
+        this.users = users;
     }
 
     @Override

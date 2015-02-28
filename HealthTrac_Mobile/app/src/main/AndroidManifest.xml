@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.raik383h_group_6.healthtracmobile" >
+    package="com.raik383h_group_6.healthtracmobile">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -10,8 +10,9 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme"
         android:name="com.raik383h_group_6.healthtracmobile.application.CustomApplication">
-        <activity android:name=".view.AuthenticationActivity"
-            android:label="@string/title_authentication_activity">
+        <activity
+            android:name=".view.ListUsersActivity"
+            android:label="@string/title_activity_list_users">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -19,27 +20,40 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".view.OAuthPromptActivity"
-            android:label="@string/title_activity_login" >
+            android:name=".view.AuthenticationActivity"
+            android:label="@string/title_authentication_activity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".view.AuthenticationActivity"/>
+                android:value=".view.ListUsersActivity" />
+
+        </activity>
+        <activity
+            android:name=".view.OAuthPromptActivity"
+            android:label="@string/title_activity_login">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".view.AuthenticationActivity" />
         </activity>
         <activity
             android:name=".view.OAuthBrowserActivity"
-            android:label="@string/title_activity_login_browser" >
+            android:label="@string/title_activity_login_browser">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".view.OAuthPromptActivity" />
         </activity>
-        <activity android:name=".view.RegisterUserActivity"
+        <activity
+            android:name=".view.RegisterUserActivity"
             android:label="@string/title_activity_register_user">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".view.AuthenticationActivity" />
-            </activity>
-        <meta-data android:name="roboguice.annotations.packages" android:value="com.raik383h_group_6.healthtracmobile"/>
-        <meta-data android:name="roboguice.modules"
+        </activity>
+
+        <meta-data
+            android:name="roboguice.annotations.packages"
+            android:value="com.raik383h_group_6.healthtracmobile" />
+        <meta-data
+            android:name="roboguice.modules"
             android:value="com.raik383h_group_6.healthtracmobile.application.ApplicationModule" />
     </application>
 
