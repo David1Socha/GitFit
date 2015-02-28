@@ -4,6 +4,8 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.google.inject.Inject;
@@ -39,6 +41,9 @@ public class ViewUserActivity extends ActionBarActivity {
     TextView userNameTextView;
     @InjectView(R.id.weight_textview)
     TextView weightTextView;
+    @InjectView(R.id.edit_user_button)
+    private
+    Button editUserButton;
     @Inject
     PresenterFactory presenterFactory;
     private ViewUserPresenter presenter;
@@ -53,4 +58,51 @@ public class ViewUserActivity extends ActionBarActivity {
         presenter.onCreate();
     }
 
+    public void setBirthDate(String txt) {
+        birthDateTextView.setText(txt);
+    }
+
+    public void setEmail(String txt) {
+        emailTextView.setText(txt);
+    }
+
+    public void setFirstName(String txt) {
+        firstNameTextView.setText(txt);
+    }
+
+    public void setHeight(String txt) {
+        heightTextView.setText(txt);
+    }
+
+    public void setLastName(String txt) {
+        lastNameTextView.setText(txt);
+    }
+
+    public void setLocation(String txt) {
+        locationTextView.setText(txt);
+    }
+
+    public void setPrefName(String txt) {
+        prefNameTextView.setText(txt);
+    }
+
+    public void setSex(String txt) {
+        sexTextView.setText(txt);
+    }
+
+    public void setUserName(String txt) {
+        userNameTextView.setText(txt);
+    }
+
+    public void setWeight(String txt) {
+        weightTextView.setText(txt);
+    }
+
+    public void setShowEditUserButton(boolean enabled) {
+        if (enabled) {
+            editUserButton.setVisibility(View.VISIBLE);
+        } else {
+            editUserButton.setVisibility(View.GONE);
+        }
+    }
 }
