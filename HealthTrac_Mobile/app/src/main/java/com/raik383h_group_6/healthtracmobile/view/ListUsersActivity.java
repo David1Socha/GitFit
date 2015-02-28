@@ -19,7 +19,6 @@ import com.raik383h_group_6.healthtracmobile.presenter.ActivityNavigator;
 import com.raik383h_group_6.healthtracmobile.presenter.PresenterFactory;
 
 import java.util.List;
-
 import roboguice.activity.RoboActivity;
 import roboguice.inject.ContentView;
 import roboguice.inject.InjectView;
