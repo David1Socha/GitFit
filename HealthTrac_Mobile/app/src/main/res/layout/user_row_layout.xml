@@ -2,28 +2,27 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="horizontal" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingTop="10dp">
+    android:paddingTop="20dp"
+    android:paddingBottom="20dp">
     <TextView
         android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:id="@+id/user_name"
         android:textColor="#0066FF"
-        android:paddingLeft="10dp"/>
+        android:paddingLeft="10dp"
+        android:textAppearance="?android:attr/textAppearanceMedium"/>
     <TextView
         android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:id="@+id/location"
-        android:paddingLeft="10dp"/>
+        android:paddingLeft="5dp"
+        android:textAppearance="?android:attr/textAppearanceSmall"/>
     <TextView
         android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:id="@+id/preferred_name"
-        android:paddingLeft="10dp"/>
-    <TextView
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:id="@+id/sex"
-        android:paddingLeft="10dp"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:paddingLeft="5dp"
         android:paddingRight="10dp"/>
 
 </LinearLayout>

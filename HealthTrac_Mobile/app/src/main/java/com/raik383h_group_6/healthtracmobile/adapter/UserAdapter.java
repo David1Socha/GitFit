@@ -48,7 +48,6 @@ public class UserAdapter extends BaseAdapter {
             holder.preferredName = (TextView)view.findViewById(R.id.preferred_name);
             holder.userName = (TextView) view.findViewById(R.id.user_name);
             holder.location = (TextView) view.findViewById(R.id.location);
-            holder.sex = (TextView) view.findViewById(R.id.sex);
             view.setTag(holder);
         } else {
             view = convertView;
@@ -58,14 +57,12 @@ public class UserAdapter extends BaseAdapter {
         User user = users.get(position);
         holder.preferredName.setText(user.getPreferredName());
         holder.location.setText(user.getLocation());
-        String sexStr = WordUtils.capitalizeFully(user.getSex().name());
-        holder.sex.setText(sexStr);
         holder.userName.setText(user.getUserName());
 
         return view;
     }
 
     public class ViewHolder {
-        public TextView preferredName, userName, location, sex;
+        public TextView preferredName, userName, location;
     }
 }
