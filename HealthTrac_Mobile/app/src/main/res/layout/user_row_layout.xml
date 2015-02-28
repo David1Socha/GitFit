@@ -8,7 +8,7 @@
         android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:id="@+id/user_name"
-        android:textColor="#0066FF"
+        android:textColor="@color/username"
         android:paddingLeft="10dp"
         android:textAppearance="?android:attr/textAppearanceMedium"/>
     <TextView
