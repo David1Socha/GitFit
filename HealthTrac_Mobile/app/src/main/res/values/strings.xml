@@ -52,5 +52,6 @@
     <string name="welcome_user">Hello, %1$s!</string>
     <string name="title_activity_login">Log in through social media</string>
     <string name="title_activity_list_users">View Users</string>
+    <string name="no_users_message">No Users found. Are you logged in?</string>
 
 </resources>

@@ -12,6 +12,8 @@ public class AccessGrant implements Parcelable {
     @SerializedName("expires_in") private String expiresIn;
     @SerializedName(".issued") private String issued;
 
+    public String getAuthHeader() {return tokenType + " " + accessToken;}
+
     public String getUserName() {
         return userName;
     }

@@ -2,8 +2,10 @@ package com.raik383h_group_6.healthtracmobile.view;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.google.inject.Inject;
 import com.raik383h_group_6.healthtracmobile.R;
@@ -25,21 +27,31 @@ import roboguice.inject.InjectView;
 public class ListUsersActivity extends RoboActivity {
     @InjectView(R.id.user_list_view)
     ListView userListView;
+    @InjectView(R.id.no_users_textview)
+    TextView noUsersTextView;
     @Inject
     PresenterFactory presenterFactory;
     private ListUsersPresenter presenter;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.d("Davidsocha", "yolo");
         IResources resources = new ResourcesAdapter(getResources());
         Navigator nav = new Navigator(this);
         presenter = presenterFactory.create(resources, nav, this);
         presenter.onCreate();
     }
+
     public void setUserListView(List<User> users) {
         ListAdapter listAdapter = new UserAdapter(this, users);
         userListView.setAdapter(listAdapter);
+    }
+
+    public void setNoUsersMessageDisplay(boolean enabled) {
+        if (enabled) {
+            noUsersTextView.setVisibility(View.VISIBLE);
+        } else {
+            noUsersTextView.setVisibility(View.GONE);
+        }
     }
 
 }
