@@ -94,9 +94,10 @@ public class ActivityNavigator {
         activity.finish();
     }
 
-    public void openViewUser(User u) {
+    public void openViewUser(User u, AccessGrant grant) {
         Intent intent = new Intent(activity, ViewUserActivity.class);
         intent.putExtra(activity.getString(R.string.EXTRA_USER), u);
+        intent.putExtra(activity.getString(R.string.EXTRA_ACCESS_GRANT), grant);
         activity.startActivity(intent);
     }
 

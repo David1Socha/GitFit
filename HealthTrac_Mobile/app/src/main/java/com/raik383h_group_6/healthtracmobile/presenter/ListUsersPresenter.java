@@ -94,5 +94,6 @@ public class ListUsersPresenter {
 
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         User u = (User) parent.getAdapter().getItem(position);
+        nav.openViewUser(u, grant);
     }
 }
