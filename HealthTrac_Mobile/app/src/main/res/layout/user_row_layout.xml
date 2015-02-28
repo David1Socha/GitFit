@@ -22,5 +22,11 @@
         android:id="@+id/preferred_name"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/sex"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"/>
 
 </LinearLayout>
