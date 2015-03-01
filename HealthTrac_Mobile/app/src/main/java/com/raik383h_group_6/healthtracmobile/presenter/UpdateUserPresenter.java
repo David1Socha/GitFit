@@ -8,6 +8,7 @@ import com.raik383h_group_6.healthtracmobile.R;
 import com.raik383h_group_6.healthtracmobile.content.IResources;
 import com.raik383h_group_6.healthtracmobile.model.AccessGrant;
 import com.raik383h_group_6.healthtracmobile.model.User;
+import com.raik383h_group_6.healthtracmobile.service.FormatUtils;
 import com.raik383h_group_6.healthtracmobile.service.api.UserService;
 import com.raik383h_group_6.healthtracmobile.view.UpdateUserActivity;
 
@@ -41,7 +42,18 @@ public class UpdateUserPresenter {
     }
 
     private void populateFields() {
-        //TODO
+        if (ogUser != null) {
+            view.setBirthDate(FormatUtils.format(ogUser.getBirthDate()));
+            view.setEmail(ogUser.getEmail());
+            view.setFirstName(ogUser.getFirstName());
+            view.setHeight(FormatUtils.format(ogUser.getHeight()));
+            view.setLastName(ogUser.getLastName());
+            view.setLocation(ogUser.getLocation());
+            view.setPrefName(ogUser.getPreferredName());
+            view.setSex(ogUser.getSex());
+            view.setUsername(ogUser.getUserName());
+            view.setWeight(FormatUtils.format(ogUser.getWidth()));
+        }
     }
 
     public void onClickUpdateUser() {
