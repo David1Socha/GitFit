@@ -142,11 +142,7 @@ public class UpdateUserActivity extends RoboActionBarActivity implements IUserEd
 
     @Override
     public String getSex() {
-        if (sexRadioGroup.getCheckedRadioButtonId() == R.id.radio_sex_male) {
-            return getString(R.string.male_label);
-        } else {
-            return getString(R.string.label_female);
-        }
+        return ((RadioButton)findViewById(sexRadioGroup.getCheckedRadioButtonId())).getText().toString();
     }
 
     @Override

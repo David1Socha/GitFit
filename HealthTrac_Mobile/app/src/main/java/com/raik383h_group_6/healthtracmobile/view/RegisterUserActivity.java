@@ -24,7 +24,7 @@ import roboguice.inject.ContentView;
 import roboguice.inject.InjectView;
 
 @ContentView(R.layout.activity_register_user)
-public class RegisterUserActivity extends RoboActivity {
+public class RegisterUserActivity extends RoboActivity implements IUserEditView{
     @Inject
     private PresenterFactory presenterFactory;
     private RegisterUserPresenter presenter;
@@ -58,6 +58,56 @@ public class RegisterUserActivity extends RoboActivity {
     RadioButton sexRadioFemale;
     @InjectView(R.id.radio_sex_male)
     RadioButton sexRadioMale;
+
+    @Override
+    public String getBirthDate() {
+        return birthDateEditText.getText().toString();
+    }
+
+    @Override
+    public String getEmail() {
+        return emailEditText.getText().toString();
+    }
+
+    @Override
+    public String getFirstName() {
+        return firstNameEditText.getText().toString();
+    }
+
+    @Override
+    public String getHeight() {
+        return heightEditText.getText().toString();
+    }
+
+    @Override
+    public String getLastName() {
+        return lastNameEditText.getText().toString();
+    }
+
+    @Override
+    public String getLocation() {
+        return locationEditText.getText().toString();
+    }
+
+    @Override
+    public String getPreferredName() {
+        return prefNameEditText.getText().toString();
+    }
+
+    @Override
+    public String getSex() {
+        return ((RadioButton)findViewById(sexRadioGroup.getCheckedRadioButtonId())).getText().toString();
+    }
+
+    @Override
+    public String getUsername() {
+        return usernameEditText.getText().toString();
+    }
+
+    @Override
+    public String getWeight() {
+        return weightEditText.getText().toString();
+    }
 
     public void setLastName(String val) {
         lastNameEditText.setText(val);
@@ -114,8 +164,7 @@ public class RegisterUserActivity extends RoboActivity {
         createAccountButton.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String sexRadioText = ((RadioButton)findViewById(sexRadioGroup.getCheckedRadioButtonId())).getText().toString();
-                presenter.validateAccount(birthDateEditText.getText().toString(), emailEditText.getText().toString(), firstNameEditText.getText().toString(), heightEditText.getText().toString(), lastNameEditText.getText().toString(), locationEditText.getText().toString(), prefNameEditText.getText().toString(), sexRadioText, usernameEditText.getText().toString(), weightEditText.getText().toString());
+                presenter.validateAccount(getBirthDate(), getEmail(), getFirstName(), getHeight(), getLastName(), getLocation(),getPreferredName(), getSex(), getUsername(),getWeight());
             }
         });
     }
