@@ -9,6 +9,7 @@ import android.widget.ListAdapter;
 import com.google.inject.Inject;
 import com.google.inject.assistedinject.Assisted;
 import com.raik383h_group_6.healthtracmobile.R;
+import com.raik383h_group_6.healthtracmobile.adapter.TeamAdapter;
 import com.raik383h_group_6.healthtracmobile.adapter.UserAdapter;
 import com.raik383h_group_6.healthtracmobile.content.IResources;
 import com.raik383h_group_6.healthtracmobile.model.AccessGrant;

@@ -8,7 +8,7 @@
         android:layout_width="0dp"
         android:layout_weight="1"
         android:layout_height="match_parent"
-        android:id="@+id/user_name"
+        android:id="@+id/team_name"
         android:textColor="@color/team_name"
         android:layout_marginLeft="10dp"
         android:textAppearance="?android:attr/textAppearanceMedium"/>
@@ -16,7 +16,7 @@
         android:layout_width="0dp"
         android:layout_weight="1.8"
         android:layout_height="match_parent"
-        android:id="@+id/location"
+        android:id="@+id/team_description"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="10dp"
         android:textAppearance="?android:attr/textAppearanceSmall"/>
