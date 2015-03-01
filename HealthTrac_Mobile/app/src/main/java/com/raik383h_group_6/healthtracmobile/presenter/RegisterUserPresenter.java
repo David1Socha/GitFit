@@ -11,13 +11,11 @@ import com.raik383h_group_6.healthtracmobile.model.Credentials;
 import com.raik383h_group_6.healthtracmobile.model.FacebookUser;
 import com.raik383h_group_6.healthtracmobile.model.User;
 import com.raik383h_group_6.healthtracmobile.model.UserLogin;
-import com.raik383h_group_6.healthtracmobile.service.FormatUtils;
-import com.raik383h_group_6.healthtracmobile.service.UserValidationPresenter;
 import com.raik383h_group_6.healthtracmobile.service.api.AccountService;
 import com.raik383h_group_6.healthtracmobile.service.api.FacebookService;
+import com.raik383h_group_6.healthtracmobile.service.api.UserService;
 import com.raik383h_group_6.healthtracmobile.view.RegisterUserActivity;
 
-import java.util.Date;
 import java.util.concurrent.ExecutionException;
 
 public class RegisterUserPresenter {
@@ -29,17 +27,19 @@ public class RegisterUserPresenter {
     private IResources resources;
     private Bundle extras;
     private ActivityNavigator nav;
+    private UserService userService;
     private UserValidationPresenter userValidationPresenter;
 
     @Inject
-    public RegisterUserPresenter(FacebookService facebookService, AccountService accountService, @Assisted Bundle extras, @Assisted IResources resources, @Assisted ActivityNavigator nav, @Assisted RegisterUserActivity view) {
+    public RegisterUserPresenter(FacebookService facebookService, UserService userService, AccountService accountService, @Assisted Bundle extras, @Assisted IResources resources, @Assisted ActivityNavigator nav, @Assisted RegisterUserActivity view) {
         this.facebookService = facebookService;
         this.view = view;
         this.accountService = accountService;
         this.extras = extras;
         this.resources = resources;
+        this.userService = userService;
         this.nav = nav;
-        this.userValidationPresenter = new UserValidationPresenter (accountService, view, resources);
+        this.userValidationPresenter = new UserValidationPresenter(userService, view, resources);
         accessToken = extras.getString(resources.getString(R.string.EXTRA_ACCESS_TOKEN));
         accessSecret = extras.getString(resources.getString(R.string.EXTRA_ACCESS_SECRET));
         provider = extras.getString(resources.getString(R.string.EXTRA_PROVIDER));

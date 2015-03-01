@@ -1,9 +1,11 @@
-package com.raik383h_group_6.healthtracmobile.service;
+package com.raik383h_group_6.healthtracmobile.presenter;
 
 import com.raik383h_group_6.healthtracmobile.R;
 import com.raik383h_group_6.healthtracmobile.content.IResources;
 import com.raik383h_group_6.healthtracmobile.model.User;
+import com.raik383h_group_6.healthtracmobile.service.FormatUtils;
 import com.raik383h_group_6.healthtracmobile.service.api.AccountService;
+import com.raik383h_group_6.healthtracmobile.service.api.UserService;
 import com.raik383h_group_6.healthtracmobile.view.IUserEditView;
 
 import java.util.Date;
@@ -11,12 +13,12 @@ import java.util.Date;
 public class UserValidationPresenter {
 
     private final IUserEditView view;
-    private final AccountService accountService;
+    private final UserService userService;
     private final IResources resources;
 
-    public UserValidationPresenter(AccountService accountService, IUserEditView view, IResources resources) {
+    public UserValidationPresenter(UserService userService, IUserEditView view, IResources resources) {
         this.view = view;
-        this.accountService = accountService;
+        this.userService = userService;
         this.resources = resources;
     }
 
