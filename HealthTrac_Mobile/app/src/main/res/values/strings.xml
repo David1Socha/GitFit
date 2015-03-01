@@ -62,5 +62,11 @@
     <string name="title_activity_update_user">Update User</string>
     <string name="update_user_error">Could not update user.</string>
     <string name="user_updated_message">User successfully updated</string>
+    <string name="title_section1">Account</string>
+    <string name="title_section2">Teams</string>
+    <string name="title_section3">Feed</string>
+    <string name="navigation_drawer_open">Open</string>
+    <string name="navigation_drawer_close">Close</string>
+    <string name="edit_account">Edit Account</string>
 
 </resources>
