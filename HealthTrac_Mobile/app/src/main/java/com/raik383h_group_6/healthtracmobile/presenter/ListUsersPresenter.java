@@ -57,7 +57,7 @@ public class ListUsersPresenter {
     public void populateUsers() {
         List<User> users = null;
         try {
-            if (grant == null) {
+            if (grant == null || grant.isExpired()) {
                 view.setNoUsersMessageDisplay(true);
                 return;
             }

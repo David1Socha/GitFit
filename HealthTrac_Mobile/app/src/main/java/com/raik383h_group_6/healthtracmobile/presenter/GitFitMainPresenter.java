@@ -31,7 +31,7 @@ public class GitFitMainPresenter {
     }
 
     public void onResume() {
-        if (grant == null) {
+        if (grant == null || grant.isExpired()) {
             nav.openAuthentication(AUTH);
         }
     }

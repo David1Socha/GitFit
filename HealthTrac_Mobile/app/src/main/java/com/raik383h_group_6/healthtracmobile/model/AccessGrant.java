@@ -5,6 +5,8 @@ import android.os.Parcelable;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.util.Date;
+
 public class AccessGrant implements Parcelable {
     @SerializedName("userName") private String userName;
     @SerializedName("access_token") private String accessToken;
@@ -94,6 +96,12 @@ public class AccessGrant implements Parcelable {
     }
 
     public AccessGrant() {
+    }
+
+    public boolean isExpired() {
+        Date now = new Date();
+        //TODO once date returned from server plays more nicely with java's DateFormat...
+        return false;
     }
 
     private AccessGrant(Parcel in) {
