@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <item name="username" type="color">#0066FF</item>
+    <color name="team_name">#990099</color>
 </resources>

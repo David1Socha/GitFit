@@ -9,23 +9,16 @@
         android:layout_weight="1"
         android:layout_height="match_parent"
         android:id="@+id/user_name"
-        android:textColor="@color/username"
+        android:textColor="@color/team_name"
         android:layout_marginLeft="10dp"
         android:textAppearance="?android:attr/textAppearanceMedium"/>
     <TextView
         android:layout_width="0dp"
-        android:layout_weight="1"
+        android:layout_weight="1.8"
         android:layout_height="match_parent"
         android:id="@+id/location"
         android:layout_marginLeft="5dp"
+        android:layout_marginRight="10dp"
         android:textAppearance="?android:attr/textAppearanceSmall"/>
-    <TextView
-        android:layout_width="0dp"
-        android:layout_weight="1"
-        android:layout_height="match_parent"
-        android:id="@+id/preferred_name"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="10dp"/>
 
 </LinearLayout>
