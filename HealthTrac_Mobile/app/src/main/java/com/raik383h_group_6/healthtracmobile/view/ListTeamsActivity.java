@@ -12,6 +12,7 @@ import com.raik383h_group_6.healthtracmobile.R;
 import com.raik383h_group_6.healthtracmobile.content.IResources;
 import com.raik383h_group_6.healthtracmobile.content.ResourcesAdapter;
 import com.raik383h_group_6.healthtracmobile.presenter.ActivityNavigator;
+import com.raik383h_group_6.healthtracmobile.presenter.ListTeamsPresenter;
 import com.raik383h_group_6.healthtracmobile.presenter.ListUsersPresenter;
 import com.raik383h_group_6.healthtracmobile.presenter.PresenterFactory;
 
