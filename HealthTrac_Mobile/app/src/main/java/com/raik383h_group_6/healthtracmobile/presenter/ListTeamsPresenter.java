@@ -10,15 +10,12 @@ import com.google.inject.Inject;
 import com.google.inject.assistedinject.Assisted;
 import com.raik383h_group_6.healthtracmobile.R;
 import com.raik383h_group_6.healthtracmobile.adapter.TeamAdapter;
-import com.raik383h_group_6.healthtracmobile.adapter.UserAdapter;
+import com.raik383h_group_6.healthtracmobile.application.ActivityNavigator;
 import com.raik383h_group_6.healthtracmobile.content.IResources;
 import com.raik383h_group_6.healthtracmobile.model.AccessGrant;
 import com.raik383h_group_6.healthtracmobile.model.Team;
-import com.raik383h_group_6.healthtracmobile.model.User;
 import com.raik383h_group_6.healthtracmobile.service.api.TeamService;
-import com.raik383h_group_6.healthtracmobile.service.api.UserService;
 import com.raik383h_group_6.healthtracmobile.view.ListTeamsActivity;
-import com.raik383h_group_6.healthtracmobile.view.ListUsersActivity;
 
 import java.util.List;
 import java.util.concurrent.ExecutionException;

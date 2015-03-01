@@ -13,16 +13,12 @@ import com.raik383h_group_6.healthtracmobile.R;
 import com.raik383h_group_6.healthtracmobile.content.IResources;
 import com.raik383h_group_6.healthtracmobile.content.ResourcesAdapter;
 import com.raik383h_group_6.healthtracmobile.model.User;
-import com.raik383h_group_6.healthtracmobile.presenter.ActivityNavigator;
+import com.raik383h_group_6.healthtracmobile.application.ActivityNavigator;
 import com.raik383h_group_6.healthtracmobile.presenter.PresenterFactory;
-import com.raik383h_group_6.healthtracmobile.presenter.RegisterUserPresenter;
 import com.raik383h_group_6.healthtracmobile.presenter.UpdateUserPresenter;
-import com.raik383h_group_6.healthtracmobile.service.api.AccountService;
-import com.raik383h_group_6.healthtracmobile.service.api.FacebookService;
 import com.raik383h_group_6.healthtracmobile.service.api.UserService;
 
 import roboguice.activity.RoboActionBarActivity;
-import roboguice.activity.RoboActivity;
 import roboguice.inject.ContentView;
 import roboguice.inject.InjectView;
 

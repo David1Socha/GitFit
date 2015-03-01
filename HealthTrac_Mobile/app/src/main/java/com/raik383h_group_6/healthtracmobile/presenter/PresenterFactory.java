@@ -3,7 +3,7 @@ package com.raik383h_group_6.healthtracmobile.presenter;
 import android.os.Bundle;
 import android.webkit.WebView;
 
-import com.google.inject.assistedinject.Assisted;
+import com.raik383h_group_6.healthtracmobile.application.ActivityNavigator;
 import com.raik383h_group_6.healthtracmobile.content.IResources;
 import com.raik383h_group_6.healthtracmobile.service.api.AccountService;
 import com.raik383h_group_6.healthtracmobile.service.oauth.IOAuthService;

@@ -1,4 +1,4 @@
-package com.raik383h_group_6.healthtracmobile.presenter;
+package com.raik383h_group_6.healthtracmobile.application;
 
 import android.app.Activity;
 import android.content.Context;
@@ -11,6 +11,7 @@ import com.raik383h_group_6.healthtracmobile.model.AccessGrant;
 import com.raik383h_group_6.healthtracmobile.model.Token;
 import com.raik383h_group_6.healthtracmobile.model.User;
 import com.raik383h_group_6.healthtracmobile.view.AuthenticationActivity;
+import com.raik383h_group_6.healthtracmobile.view.ListTeamsActivity;
 import com.raik383h_group_6.healthtracmobile.view.ListUsersActivity;
 import com.raik383h_group_6.healthtracmobile.view.OAuthBrowserActivity;
 import com.raik383h_group_6.healthtracmobile.view.OAuthPromptActivity;
@@ -111,6 +112,14 @@ public class ActivityNavigator {
 
     public void finishListUsers() {
         genericFinishOk();
+    }
+
+    public void finishListTeams() {genericFinishOk(); }
+
+    public void openListTeams(AccessGrant g) {
+        Intent intent = new Intent(activity, ListTeamsActivity.class);
+        intent.putExtra(activity.getString(R.string.EXTRA_ACCESS_GRANT), g);
+        activity.startActivity(intent);
     }
 
     private void genericFinishOk() {

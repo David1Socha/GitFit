@@ -11,12 +11,9 @@ import com.google.inject.Inject;
 import com.raik383h_group_6.healthtracmobile.R;
 import com.raik383h_group_6.healthtracmobile.content.IResources;
 import com.raik383h_group_6.healthtracmobile.content.ResourcesAdapter;
-import com.raik383h_group_6.healthtracmobile.presenter.ActivityNavigator;
+import com.raik383h_group_6.healthtracmobile.application.ActivityNavigator;
 import com.raik383h_group_6.healthtracmobile.presenter.ListTeamsPresenter;
-import com.raik383h_group_6.healthtracmobile.presenter.ListUsersPresenter;
 import com.raik383h_group_6.healthtracmobile.presenter.PresenterFactory;
-
-import java.util.List;
 
 import roboguice.activity.RoboActionBarActivity;
 import roboguice.inject.ContentView;
