@@ -54,16 +54,6 @@ public class ListUsersActivity extends RoboActivity {
         presenter.onResume();
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        Bundle extras = null;
-        if (data != null) {
-            extras = data.getExtras();
-        }
-        presenter.onActivityResult(requestCode, resultCode, extras);
-    }
-
     public void setUserListView(List<User> users) {
         ListAdapter listAdapter = new UserAdapter(this, users);
         userListView.setAdapter(listAdapter);

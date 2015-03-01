@@ -28,19 +28,21 @@ public class ListUsersPresenter {
     private ListUsersActivity view;
     private UserService userService;
     private AccessGrant grant;
+    private Bundle extras;
 
     @Inject
-    public ListUsersPresenter(UserService userService, @Assisted IResources resources, @Assisted ActivityNavigator nav, @Assisted ListUsersActivity view) {
+    public ListUsersPresenter(UserService userService, @Assisted Bundle extras, @Assisted IResources resources, @Assisted ActivityNavigator nav, @Assisted ListUsersActivity view) {
         this.resources = resources;
         this.nav = nav;
         this.userService = userService;
         this.view = view;
-        this.grant = null;
+        this.extras = extras;
     }
 
     public void onCreate(Bundle savedInstanceState) {
+        this.grant = extras.getParcelable(resources.getString(R.string.EXTRA_ACCESS_GRANT));
         if (savedInstanceState != null) {
-            grant = savedInstanceState.getParcelable(resources.getString(R.string.EXTRA_ACCESS_GRANT));
+            this.grant = savedInstanceState.getParcelable(resources.getString(R.string.EXTRA_ACCESS_GRANT));
         }
     }
 
@@ -49,24 +51,7 @@ public class ListUsersPresenter {
     }
 
     public void onResume() {
-        if (grant == null) {
-            nav.openAuthentication(AUTH);
-        }
         populateUsers();
-    }
-
-    public void onActivityResult(int requestCode, int resultCode, Bundle data) {
-        if (resultCode == Activity.RESULT_OK) {
-            switch (requestCode) {
-                case AUTH:
-                    grant = (AccessGrant) data.getParcelable(resources.getString(R.string.EXTRA_ACCESS_GRANT));
-                    populateUsers();
-                    break;
-                default:
-                    break;
-            }
-
-        }
     }
 
     public void populateUsers() {
