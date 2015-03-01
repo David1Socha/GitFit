@@ -1,5 +1,6 @@
 package com.raik383h_group_6.healthtracmobile.view;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -63,6 +64,16 @@ public class ViewUserActivity extends RoboActionBarActivity {
     protected void onResume() {
         super.onResume();
         presenter.onResume();
+    }
+
+    public void onClickEditUser(View v) {
+        presenter.onClickEditUser();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        Bundle extras = data == null ? null : data.getExtras();
+        presenter.onActivityResult(requestCode, resultCode, extras);
     }
 
     public void setBirthDate(String txt) {

@@ -1,5 +1,6 @@
 package com.raik383h_group_6.healthtracmobile.presenter;
 
+import android.app.Activity;
 import android.os.Bundle;
 
 import com.google.inject.Inject;
@@ -18,6 +19,7 @@ public class ViewUserPresenter {
     private final ViewUserActivity view;
     private User user;
     private AccessGrant grant;
+    public static final int UPDATE = 1;
 
     @Inject
     public ViewUserPresenter(@Assisted Bundle extras, @Assisted IResources resources, @Assisted ActivityNavigator nav, @Assisted ViewUserActivity view) {
@@ -32,8 +34,25 @@ public class ViewUserPresenter {
         grant = extras.getParcelable(resources.getString(R.string.EXTRA_ACCESS_GRANT));
     }
 
+    public void onClickEditUser() {
+        nav.openUpdateUser(grant, user, UPDATE);
+    }
+
     public void onResume() {
         updateFields();
+    }
+
+    public void onActivityResult(int requestCode, int resultCode, Bundle extras) {
+        if (resultCode == Activity.RESULT_OK) {
+            switch (requestCode) {
+                case UPDATE:
+                    user = extras.getParcelable(resources.getString(R.string.EXTRA_USER));
+                    updateFields();
+                    break;
+                default:
+                    break;
+            }
+        }
     }
 
     private void updateFields() {
