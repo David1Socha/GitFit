@@ -12,12 +12,13 @@ import com.raik383h_group_6.healthtracmobile.presenter.ActivityNavigator;
 import com.raik383h_group_6.healthtracmobile.presenter.GitFitMainPresenter;
 import com.raik383h_group_6.healthtracmobile.presenter.PresenterFactory;
 
+import roboguice.activity.RoboActionBarActivity;
 import roboguice.activity.RoboActivity;
 import roboguice.inject.ContentView;
 import roboguice.inject.InjectView;
 
 @ContentView(R.layout.git_fit_main_layout)
-public class GitFitMainActivity extends RoboActivity{
+public class GitFitMainActivity extends RoboActionBarActivity{
     private GitFitMainPresenter presenter;
     @Inject
     PresenterFactory presenterFactory;
@@ -34,6 +35,11 @@ public class GitFitMainActivity extends RoboActivity{
         ActivityNavigator nav = new ActivityNavigator(this);
         presenter = presenterFactory.create(resources, nav, this);
         presenter.onCreate(savedInstanceState);
+    }
+
+    @Override
+    protected void onResume() {
+        presenter.onResume();
     }
 
     @Override

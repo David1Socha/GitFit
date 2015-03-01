@@ -19,12 +19,14 @@ import com.raik383h_group_6.healthtracmobile.presenter.ActivityNavigator;
 import com.raik383h_group_6.healthtracmobile.presenter.PresenterFactory;
 
 import java.util.List;
+
+import roboguice.activity.RoboActionBarActivity;
 import roboguice.activity.RoboActivity;
 import roboguice.inject.ContentView;
 import roboguice.inject.InjectView;
 
 @ContentView(R.layout.activity_list_users)
-public class ListUsersActivity extends RoboActivity {
+public class ListUsersActivity extends RoboActionBarActivity {
     @InjectView(R.id.user_list_view)
     ListView userListView;
     @InjectView(R.id.no_users_textview)
@@ -38,7 +40,8 @@ public class ListUsersActivity extends RoboActivity {
         super.onCreate(savedInstanceState);
         IResources resources = new ResourcesAdapter(getResources());
         ActivityNavigator nav = new ActivityNavigator(this);
-        presenter = presenterFactory.create(resources, nav, this);
+        Bundle extras = getIntent().getExtras();
+        presenter = presenterFactory.create(extras, resources, nav, this);
         presenter.onCreate(savedInstanceState);
     }
 

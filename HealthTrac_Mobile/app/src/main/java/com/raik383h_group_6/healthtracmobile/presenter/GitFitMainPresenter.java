@@ -30,6 +30,12 @@ public class GitFitMainPresenter {
         }
     }
 
+    public void onResume() {
+        if (grant == null) {
+            nav.openAuthentication(AUTH);
+        }
+    }
+
     public void onSaveInstanceState(Bundle outState) {
         outState.putParcelable(resources.getString(R.string.EXTRA_ACCESS_GRANT), grant);
     }
