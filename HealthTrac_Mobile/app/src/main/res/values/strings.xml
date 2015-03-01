@@ -59,5 +59,6 @@
     <string name="save_changes">Save Changes</string>
     <string name="save_user">Save User</string>
     <string name="update_user">Update User</string>
+    <string name="title_activity_update_user">Update User</string>
 
 </resources>
