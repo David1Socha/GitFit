@@ -16,6 +16,7 @@ import com.raik383h_group_6.healthtracmobile.model.User;
 import com.raik383h_group_6.healthtracmobile.presenter.ActivityNavigator;
 import com.raik383h_group_6.healthtracmobile.presenter.PresenterFactory;
 import com.raik383h_group_6.healthtracmobile.presenter.RegisterUserPresenter;
+import com.raik383h_group_6.healthtracmobile.presenter.UpdateUserPresenter;
 import com.raik383h_group_6.healthtracmobile.service.api.AccountService;
 import com.raik383h_group_6.healthtracmobile.service.api.FacebookService;
 import com.raik383h_group_6.healthtracmobile.service.api.UserService;
@@ -29,7 +30,7 @@ import roboguice.inject.InjectView;
 public class UpdateUserActivity extends RoboActionBarActivity {
     @Inject
     private PresenterFactory presenterFactory;
-    private Object presenter; //TODO
+    private UpdateUserPresenter presenter;
     @Inject
     UserService userService;
     @InjectView(R.id.button_update_user)
@@ -109,12 +110,12 @@ public class UpdateUserActivity extends RoboActionBarActivity {
         Bundle extras = getIntent().getExtras();
         IResources resources = new ResourcesAdapter(getResources());
         ActivityNavigator nav = new ActivityNavigator(this);
-        presenter = null;
-        presenter.populateFields();
+        presenter = presenterFactory.create(extras, resources, nav, this);
+        presenter.onCreate();
     }
 
     public void onClickUpdateUser(View v) {
-        presenter.onClickUpdateUser(User.Sex.MALE); //TODO
+        presenter.onClickUpdateUser();
     }
 
     public void setLocationError(String msg) {

@@ -12,6 +12,7 @@ import com.raik383h_group_6.healthtracmobile.view.ListUsersActivity;
 import com.raik383h_group_6.healthtracmobile.view.OAuthBrowserActivity;
 import com.raik383h_group_6.healthtracmobile.view.OAuthPromptActivity;
 import com.raik383h_group_6.healthtracmobile.view.RegisterUserActivity;
+import com.raik383h_group_6.healthtracmobile.view.UpdateUserActivity;
 import com.raik383h_group_6.healthtracmobile.view.ViewUserActivity;
 
 public interface PresenterFactory {
@@ -21,4 +22,5 @@ public interface PresenterFactory {
     RegisterUserPresenter create(Bundle extras, IResources resources, ActivityNavigator nav, RegisterUserActivity view);
     ListUsersPresenter create(IResources resources, ActivityNavigator nav, ListUsersActivity view);
     ViewUserPresenter create( Bundle extras, IResources resources, ActivityNavigator nav, ViewUserActivity view);
+    UpdateUserPresenter create( Bundle extras, IResources resources, ActivityNavigator nav, UpdateUserActivity view);
 }

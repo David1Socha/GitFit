@@ -48,7 +48,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".view.AuthenticationActivity" />
         </activity>
-        
+
         <activity
             android:name=".view.UpdateUserActivity"
             android:label="@string/title_activity_update_user" >
