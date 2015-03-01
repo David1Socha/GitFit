@@ -56,5 +56,8 @@
     <string name="no_users_message">No Users found. Are you logged in?</string>
     <string name="edit_user">Edit User</string>
     <string name="title_activity_view_user">View User</string>
+    <string name="save_changes">Save Changes</string>
+    <string name="save_user">Save User</string>
+    <string name="update_user">Update User</string>
 
 </resources>
