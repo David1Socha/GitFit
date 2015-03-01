@@ -39,13 +39,21 @@ public class GitFitMainPresenter {
     }
 
     public void onResume() {
-        if (grant == null || grant.isExpired()) {
+        if (grantBad()) {
             nav.openAuthentication(AUTH);
         }
     }
 
     public void onClickShowUsers() {
+        if (!grantBad()) {
+            nav.openListUsers(grant);
+        } else {
+            nav.openAuthentication(AUTH);
+        }
+    }
 
+    private boolean grantBad() {
+        return grant == null || grant.isExpired();
     }
 
     public void onClickShowProfile() {

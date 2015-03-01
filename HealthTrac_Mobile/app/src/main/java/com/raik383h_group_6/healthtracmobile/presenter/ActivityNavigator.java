@@ -11,6 +11,7 @@ import com.raik383h_group_6.healthtracmobile.model.AccessGrant;
 import com.raik383h_group_6.healthtracmobile.model.Token;
 import com.raik383h_group_6.healthtracmobile.model.User;
 import com.raik383h_group_6.healthtracmobile.view.AuthenticationActivity;
+import com.raik383h_group_6.healthtracmobile.view.ListUsersActivity;
 import com.raik383h_group_6.healthtracmobile.view.OAuthBrowserActivity;
 import com.raik383h_group_6.healthtracmobile.view.OAuthPromptActivity;
 import com.raik383h_group_6.healthtracmobile.view.RegisterUserActivity;
@@ -33,8 +34,7 @@ public class ActivityNavigator {
     }
 
     public void finishOAuthPromptInShame() {
-        activity.setResult(Activity.RESULT_CANCELED);
-        activity.finish();
+        genericFinishCancelled();
     }
 
     public void finishOAuthPromptWithInfo(String accessToken, String accessSecret, String provider) {
@@ -56,18 +56,15 @@ public class ActivityNavigator {
     }
 
     public void finishOAuthBrowserInShame() {
-        activity.setResult(Activity.RESULT_CANCELED);
-        activity.finish();
+        genericFinishCancelled();
     }
 
     public void finishRegisterUserSuccess() {
-        activity.setResult(Activity.RESULT_OK);
-        activity.finish();
+        genericFinishOk();
     }
 
     public void finishRegisterUserFailure() {
-        activity.setResult(Activity.RESULT_CANCELED);
-        activity.finish();
+        genericFinishCancelled();
     }
 
     public void openRegisterUser(String token, String secret, String provider, int reqCode) {
@@ -103,7 +100,26 @@ public class ActivityNavigator {
     }
 
     public void finishShowUser() {
+        genericFinishOk();
+    }
+
+    public void openListUsers(AccessGrant g) {
+        Intent intent = new Intent(activity, ListUsersActivity.class);
+        intent.putExtra(activity.getString(R.string.EXTRA_ACCESS_GRANT), g);
+        activity.startActivity(intent);
+    }
+
+    public void finishListUsers() {
+        genericFinishOk();
+    }
+
+    private void genericFinishOk() {
         activity.setResult(Activity.RESULT_OK);
+        activity.finish();
+    }
+
+    private void genericFinishCancelled() {
+        activity.setResult(Activity.RESULT_CANCELED);
         activity.finish();
     }
 
