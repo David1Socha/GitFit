@@ -73,5 +73,6 @@
     <string name="show_profile">Show my profile</string>
     <string name="show_teams">Show all teams</string>
     <string name="error_find_profile">Could not find your profile. Are you logged in?</string>
+    <string name="no_teams_message">No teams found. Are you signed in?</string>
 
 </resources>
