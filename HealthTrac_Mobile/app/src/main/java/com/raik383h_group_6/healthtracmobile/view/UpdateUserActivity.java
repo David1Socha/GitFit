@@ -27,7 +27,7 @@ import roboguice.inject.ContentView;
 import roboguice.inject.InjectView;
 
 @ContentView(R.layout.activity_update_user)
-public class UpdateUserActivity extends RoboActionBarActivity {
+public class UpdateUserActivity extends RoboActionBarActivity implements IUserEditView {
     @Inject
     private PresenterFactory presenterFactory;
     private UpdateUserPresenter presenter;
@@ -60,70 +60,87 @@ public class UpdateUserActivity extends RoboActionBarActivity {
     @InjectView(R.id.radio_sex_male)
     RadioButton sexRadioMale;
 
+    @Override
     public void setLastName(String val) {
         lastNameEditText.setText(val);
     }
 
+    @Override
     public void setFirstName(String val) {
         firstNameEditText.setText(val);
     }
 
+    @Override
     public void setPrefName(String val) {
         prefNameEditText.setText(val);
     }
 
+    @Override
     public void setBirthDate(String val) {
         birthDateEditText.setText(val);
     }
 
+    @Override
     public void setLocation(String val) {
         locationEditText.setText(val);
     }
 
+    @Override
     public void setEmail(String val) {
         emailEditText.setText(val);
     }
 
+    @Override
     public void setHeight(String val) {
         heightEditText.setText(val);
     }
 
+    @Override
     public void setUsername(String val) {
         usernameEditText.setText(val);
     }
 
+    @Override
     public void setWeight(String val) {
         weightEditText.setText(val);
     }
 
+    @Override
     public String getBirthDate() {
         return birthDateEditText.getText().toString();
     }
 
+    @Override
     public String getEmail() {
         return emailEditText.getText().toString();
     }
 
+    @Override
     public String getFirstName() {
         return firstNameEditText.getText().toString();
     }
 
+    @Override
     public String getHeight() {
         return heightEditText.getText().toString();
     }
 
+    @Override
     public String getLastName() {
         return lastNameEditText.getText().toString();
     }
 
+    @Override
     public String getLocation() {
         return locationEditText.getText().toString();
     }
 
+    @Override
     public String getPreferredName() {
         return prefNameEditText.getText().toString();
     }
 
+    @Override
     public String getSex() {
         if (sexRadioGroup.getCheckedRadioButtonId() == R.id.radio_sex_male) {
             return getString(R.string.male_label);
@@ -132,14 +149,17 @@ public class UpdateUserActivity extends RoboActionBarActivity {
         }
     }
 
+    @Override
     public String getUsername() {
         return usernameEditText.getText().toString();
     }
 
+    @Override
     public String getWeight() {
         return weightEditText.getText().toString();
     }
 
+    @Override
     public void setSex(User.Sex sex) {
         if (sex == User.Sex.FEMALE) {
             sexRadioFemale.setChecked(true);
@@ -162,38 +182,47 @@ public class UpdateUserActivity extends RoboActionBarActivity {
         presenter.onClickUpdateUser();
     }
 
+    @Override
     public void setLocationError(String msg) {
         locationEditText.setError(msg);
     }
 
+    @Override
     public void setBirthDateError(String msg) {
         birthDateEditText.setError(msg);
     }
 
+    @Override
     public void setEmailError(String msg) {
         emailEditText.setError(msg);
     }
 
+    @Override
     public void setFirstNameError(String msg) {
         firstNameEditText.setError(msg);
     }
 
+    @Override
     public void setHeightError(String msg) {
         heightEditText.setError(msg);
     }
 
+    @Override
     public void setLastNameError(String msg) {
         lastNameEditText.setError(msg);
     }
 
+    @Override
     public void setPrefNameError(String msg) {
         prefNameEditText.setError(msg);
     }
 
+    @Override
     public void setUsernameError(String msg) {
         usernameEditText.setError(msg);
     }
 
+    @Override
     public void setWeightError(String msg) {
         weightEditText.setError(msg);
     }
