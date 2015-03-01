@@ -12,15 +12,12 @@ import com.raik383h_group_6.healthtracmobile.model.FacebookUser;
 import com.raik383h_group_6.healthtracmobile.model.User;
 import com.raik383h_group_6.healthtracmobile.model.UserLogin;
 import com.raik383h_group_6.healthtracmobile.service.FormatUtils;
+import com.raik383h_group_6.healthtracmobile.service.UserValidationPresenter;
 import com.raik383h_group_6.healthtracmobile.service.api.AccountService;
 import com.raik383h_group_6.healthtracmobile.service.api.FacebookService;
 import com.raik383h_group_6.healthtracmobile.view.RegisterUserActivity;
 
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Locale;
 import java.util.concurrent.ExecutionException;
 
 public class RegisterUserPresenter {
@@ -32,6 +29,7 @@ public class RegisterUserPresenter {
     private IResources resources;
     private Bundle extras;
     private ActivityNavigator nav;
+    private UserValidationPresenter userValidationPresenter;
 
     @Inject
     public RegisterUserPresenter(FacebookService facebookService, AccountService accountService, @Assisted Bundle extras, @Assisted IResources resources, @Assisted ActivityNavigator nav, @Assisted RegisterUserActivity view) {
@@ -41,6 +39,7 @@ public class RegisterUserPresenter {
         this.extras = extras;
         this.resources = resources;
         this.nav = nav;
+        this.userValidationPresenter = new UserValidationPresenter (accountService, view, resources);
         accessToken = extras.getString(resources.getString(R.string.EXTRA_ACCESS_TOKEN));
         accessSecret = extras.getString(resources.getString(R.string.EXTRA_ACCESS_SECRET));
         provider = extras.getString(resources.getString(R.string.EXTRA_PROVIDER));
@@ -97,21 +96,15 @@ public class RegisterUserPresenter {
     }
 
     public void validateAccount(String birthDateStr, String email, String firstName, String heightStr, String lastName, String location, String preferredName, String radioValue, String userName, String weightStr) {
-        if (fieldsValid(birthDateStr, email, firstName, heightStr, lastName, location, preferredName, userName, weightStr)) {
-            Date birthDate = FormatUtils.parseDate(birthDateStr);
-            double height = FormatUtils.parseDouble(heightStr);
-            double weight = FormatUtils.parseDouble(weightStr);
-            User.Sex sex  = radioValue.equals(resources.getString(R.string.male_label)) ? User.Sex.MALE : User.Sex.FEMALE;
-            Date dateCreated = new Date();
-            Date dateModified = new Date();
-            createUser(birthDate, dateCreated, dateModified, email, firstName, height, lastName, location, preferredName, sex, userName, weight); //TODO add location eventually
+        User userToCreate = userValidationPresenter.validateUser(birthDateStr, email, firstName, heightStr, lastName, location, preferredName, radioValue, userName, weightStr);
+        if (userToCreate != null) {
+            createUser(userToCreate);
         } else {
             view.displayMessage(resources.getString(R.string.invalid_field_message));
         }
     }
 
-    private void createUser(Date birthDate, Date dateCreated, Date dateModified, String email, String firstName, double height, String lastName, String location, String preferredName, User.Sex sex, String userName, double weight) {
-        User userToCreate = new User(birthDate, dateCreated, dateModified, email, firstName, height, lastName, location, preferredName, sex, userName, weight);
+    private void createUser(User userToCreate) {
         Credentials credentials = new Credentials(accessToken, accessSecret, provider);
         UserLogin userLogin = new UserLogin(userToCreate, credentials);
         try {
@@ -125,52 +118,6 @@ public class RegisterUserPresenter {
             nav.finishRegisterUserFailure();
         }
 
-    }
-
-
-    private boolean fieldsValid(String birthDate, String email, String firstName, String height, String lastName, String location, String prefName, String username, String weight) {
-        boolean allGood = true;
-        if (birthDate.equals("")) {
-            allGood = false;
-            view.setBirthDateError(resources.getString(R.string.empty_field_error));
-        } else if (FormatUtils.parseDate(birthDate) == null) {
-            allGood = false;
-            view.setBirthDateError(resources.getString(R.string.invalid_date_error));
-        }
-        if (email.equals("")) {
-            allGood = false;
-            view.setEmailError(resources.getString(R.string.empty_field_error));
-        }
-        if (firstName.equals("")) {
-            allGood = false;
-            view.setFirstNameError(resources.getString(R.string.empty_field_error));
-        }
-        if (height.equals("")) {
-            allGood = false;
-            view.setHeightError(resources.getString(R.string.empty_field_error));
-        }
-        if (lastName.equals("")) {
-            allGood = false;
-            view.setLastNameError(resources.getString(R.string.empty_field_error));
-        }
-        if (location.equals("")) {
-            allGood = false;
-            view.setLocationError(resources.getString(R.string.empty_field_error));
-        }
-        if (prefName.equals("")) {
-            allGood = false;
-            view.setPrefNameError(resources.getString(R.string.empty_field_error));
-        }
-        if (username.equals("")) {
-            allGood = false;
-            view.setUsernameError(resources.getString(R.string.empty_field_error));
-        }
-        //TODO validate username uniqueness once I can get that part of API deployed to azure
-        if (weight.equals("")) {
-            allGood = false;
-            view.setWeightError(resources.getString(R.string.empty_field_error));
-        }
-        return allGood;
     }
 
     private Exception registerAccountAsync(UserLogin userLogin) throws ExecutionException, InterruptedException {
