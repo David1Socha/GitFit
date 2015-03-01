@@ -68,5 +68,6 @@
     <string name="navigation_drawer_open">Open</string>
     <string name="navigation_drawer_close">Close</string>
     <string name="edit_account">Edit Account</string>
+    <string name="git_fit">GitFit</string>
 
 </resources>

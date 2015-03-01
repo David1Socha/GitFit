@@ -14,12 +14,20 @@
             android:name=".view.ListUsersActivity"
             android:launchMode="singleTop"
             android:label="@string/title_activity_list_users" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".view.GitFitMainActivity"
+                />
+        </activity>
+        <activity android:name=".view.GitFitMainActivity"
+            android:launchMode="singleTop"
+            android:label="@string/git_fit"
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
+            </activity>
         <activity
             android:name=".view.AuthenticationActivity"
             android:label="@string/title_authentication_activity" >
