@@ -55,6 +55,14 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".view.AuthenticationActivity" />
         </activity>
+        <activity
+            android:name=".view.ListTeamsActivity"
+            android:label="@string/title_activity_list_teams"
+            android:launchMode="singleTop">
+            <meta-data
+                android:value=".view.GitFitMainActivity"
+                android:name="android.support.PARENT_ACTIVITY" />
+        </activity>
 
         <activity
             android:name=".view.UpdateUserActivity"
