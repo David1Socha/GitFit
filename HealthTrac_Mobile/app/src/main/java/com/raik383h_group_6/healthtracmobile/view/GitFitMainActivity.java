@@ -71,10 +71,10 @@ public class GitFitMainActivity extends RoboActionBarActivity {
     }
 
     public void onClickShowTeams(View view) {
-       //TODO
+        presenter.onClickShowTeams();
     }
 
-    public void displayMessage( String msg) {
+    public void displayMessage(String msg) {
         Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
     }
 }

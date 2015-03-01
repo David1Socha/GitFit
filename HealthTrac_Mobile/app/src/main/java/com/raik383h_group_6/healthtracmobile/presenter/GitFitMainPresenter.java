@@ -88,6 +88,14 @@ public class GitFitMainPresenter {
         }.execute().get();
     }
 
+    public void onClickShowTeams() {
+        if (!grantBad()) {
+            nav.openListTeams(grant);
+        } else {
+            nav.openAuthentication(AUTH);
+        }
+    }
+
     public void onSaveInstanceState(Bundle outState) {
         outState.putParcelable(resources.getString(R.string.EXTRA_ACCESS_GRANT), grant);
     }
