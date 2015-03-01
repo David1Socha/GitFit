@@ -6,10 +6,12 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ListAdapter;
 
 import com.google.inject.Inject;
 import com.google.inject.assistedinject.Assisted;
 import com.raik383h_group_6.healthtracmobile.R;
+import com.raik383h_group_6.healthtracmobile.adapter.UserAdapter;
 import com.raik383h_group_6.healthtracmobile.content.IResources;
 import com.raik383h_group_6.healthtracmobile.model.AccessGrant;
 import com.raik383h_group_6.healthtracmobile.model.User;
@@ -64,7 +66,8 @@ public class ListUsersPresenter {
             users = getUsersAsync(grant.getAuthHeader());
             if (users != null) {
                 view.setNoUsersMessageDisplay(false);
-                view.setUserListView(users);
+                ListAdapter adapter = new UserAdapter(view, users);
+                view.setListAdapter(adapter);
             } else {
                 view.setNoUsersMessageDisplay(true);
             }

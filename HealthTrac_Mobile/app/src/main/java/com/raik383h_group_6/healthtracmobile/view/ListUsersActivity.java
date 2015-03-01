@@ -1,6 +1,5 @@
 package com.raik383h_group_6.healthtracmobile.view;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -10,18 +9,13 @@ import android.widget.TextView;
 
 import com.google.inject.Inject;
 import com.raik383h_group_6.healthtracmobile.R;
-import com.raik383h_group_6.healthtracmobile.adapter.UserAdapter;
 import com.raik383h_group_6.healthtracmobile.content.IResources;
 import com.raik383h_group_6.healthtracmobile.content.ResourcesAdapter;
-import com.raik383h_group_6.healthtracmobile.model.User;
-import com.raik383h_group_6.healthtracmobile.presenter.ListUsersPresenter;
 import com.raik383h_group_6.healthtracmobile.presenter.ActivityNavigator;
+import com.raik383h_group_6.healthtracmobile.presenter.ListUsersPresenter;
 import com.raik383h_group_6.healthtracmobile.presenter.PresenterFactory;
 
-import java.util.List;
-
 import roboguice.activity.RoboActionBarActivity;
-import roboguice.activity.RoboActivity;
 import roboguice.inject.ContentView;
 import roboguice.inject.InjectView;
 
@@ -41,6 +35,12 @@ public class ListUsersActivity extends RoboActionBarActivity {
         IResources resources = new ResourcesAdapter(getResources());
         ActivityNavigator nav = new ActivityNavigator(this);
         Bundle extras = getIntent().getExtras();
+        userListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                presenter.onItemClick(parent, view, position, id);
+            }
+        });
         presenter = presenterFactory.create(extras, resources, nav, this);
         presenter.onCreate(savedInstanceState);
     }
@@ -57,15 +57,8 @@ public class ListUsersActivity extends RoboActionBarActivity {
         presenter.onResume();
     }
 
-    public void setUserListView(List<User> users) {
-        ListAdapter listAdapter = new UserAdapter(this, users);
-        userListView.setAdapter(listAdapter);
-        userListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                presenter.onItemClick(parent, view, position, id);
-            }
-        });
+    public void setListAdapter(ListAdapter adapter) {
+        userListView.setAdapter(adapter);
     }
 
     public void setNoUsersMessageDisplay(boolean enabled) {
