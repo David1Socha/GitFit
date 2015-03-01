@@ -19,9 +19,9 @@
         android:padding="20dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:id="@+id/view_profile_button"
-        android:text="@string/view_profile"
-        android:onClick="onClickViewProfile"/>
+        android:id="@+id/show_profile_button"
+        android:text="@string/show_profile"
+        android:onClick="onClickShowProfile"/>
 
     <Button
         android:layout_width="match_parent"

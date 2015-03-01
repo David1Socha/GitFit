@@ -1,6 +1,7 @@
 package com.raik383h_group_6.healthtracmobile.presenter;
 
 import android.app.Activity;
+import android.os.AsyncTask;
 import android.os.Bundle;
 
 import com.google.inject.Inject;
@@ -8,7 +9,11 @@ import com.google.inject.assistedinject.Assisted;
 import com.raik383h_group_6.healthtracmobile.R;
 import com.raik383h_group_6.healthtracmobile.content.IResources;
 import com.raik383h_group_6.healthtracmobile.model.AccessGrant;
+import com.raik383h_group_6.healthtracmobile.model.User;
+import com.raik383h_group_6.healthtracmobile.service.api.UserService;
 import com.raik383h_group_6.healthtracmobile.view.GitFitMainActivity;
+
+import java.util.concurrent.ExecutionException;
 
 public class GitFitMainPresenter {
     public static final int AUTH = 1;
@@ -16,11 +21,14 @@ public class GitFitMainPresenter {
     private IResources resources;
     private ActivityNavigator nav;
     private GitFitMainActivity view;
+    private UserService userService;
+    private User user;
 
     @Inject
-    public GitFitMainPresenter(@Assisted IResources resources, @Assisted ActivityNavigator nav, @Assisted GitFitMainActivity view) {
+    public GitFitMainPresenter(UserService userService, @Assisted IResources resources, @Assisted ActivityNavigator nav, @Assisted GitFitMainActivity view) {
+        this.userService = userService;
         this.resources = resources;
-        this.nav=nav;
+        this.nav = nav;
         this.view = view;
     }
 
@@ -34,6 +42,41 @@ public class GitFitMainPresenter {
         if (grant == null || grant.isExpired()) {
             nav.openAuthentication(AUTH);
         }
+    }
+
+    public void onClickShowUsers() {
+
+    }
+
+    public void onClickShowProfile() {
+        loadUser();
+        if (user != null) {
+            nav.openViewUser(user, grant);
+        }
+    }
+
+    private void loadUser() {
+        try {
+            user = getUserAsync(grant.getId(), grant);
+        } catch (ExecutionException | InterruptedException ignored) {
+        }
+        if (user == null) {
+            view.displayMessage(resources.getString(R.string.error_find_profile));
+        }
+
+    }
+
+    private User getUserAsync(final String id, final AccessGrant accessGrant) throws ExecutionException, InterruptedException {
+        return new AsyncTask<Void, Void, User>() {
+            @Override
+            protected User doInBackground(Void... params) {
+                try {
+                    return userService.getUser(id, accessGrant.getAuthHeader());
+                } catch (Exception e) {
+                    return null;
+                }
+            }
+        }.execute().get();
     }
 
     public void onSaveInstanceState(Bundle outState) {

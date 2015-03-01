@@ -70,7 +70,8 @@
     <string name="edit_account">Edit Account</string>
     <string name="git_fit">GitFit</string>
     <string name="show_users">Show All Users</string>
-    <string name="view_profile">View my profile</string>
+    <string name="show_profile">Show my profile</string>
     <string name="show_teams">Show all teams</string>
+    <string name="error_find_profile">Could not find your profile. Are you logged in?</string>
 
 </resources>
