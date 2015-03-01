@@ -96,6 +96,50 @@ public class UpdateUserActivity extends RoboActionBarActivity {
         weightEditText.setText(val);
     }
 
+    public String getBirthDate() {
+        return birthDateEditText.getText().toString();
+    }
+
+    public String getEmail() {
+        return emailEditText.getText().toString();
+    }
+
+    public String getFirstName() {
+        return firstNameEditText.getText().toString();
+    }
+
+    public String getHeight() {
+        return heightEditText.getText().toString();
+    }
+
+    public String getLastName() {
+        return lastNameEditText.getText().toString();
+    }
+
+    public String getLocation() {
+        return locationEditText.getText().toString();
+    }
+
+    public String getPreferredName() {
+        return prefNameEditText.getText().toString();
+    }
+
+    public String getSex() {
+        if (sexRadioGroup.getCheckedRadioButtonId() == R.id.radio_sex_male) {
+            return getString(R.string.male_label);
+        } else {
+            return getString(R.string.label_female);
+        }
+    }
+
+    public String getUsername() {
+        return usernameEditText.getText().toString();
+    }
+
+    public String getWeight() {
+        return weightEditText.getText().toString();
+    }
+
     public void setSex(User.Sex sex) {
         if (sex == User.Sex.FEMALE) {
             sexRadioFemale.setChecked(true);
