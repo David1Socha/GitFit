@@ -25,7 +25,7 @@ public class User implements Parcelable {
         this.preferredName = preferredName;
         this.sex = sex;
         this.userName = userName;
-        this.width = weight; // :( TODO fix
+        this.width = weight; // :( TODO fix me to weight when possible
     }
 
     public String getLocation() {return  location;}
