@@ -14,6 +14,7 @@ import com.raik383h_group_6.healthtracmobile.view.AuthenticationActivity;
 import com.raik383h_group_6.healthtracmobile.view.OAuthBrowserActivity;
 import com.raik383h_group_6.healthtracmobile.view.OAuthPromptActivity;
 import com.raik383h_group_6.healthtracmobile.view.RegisterUserActivity;
+import com.raik383h_group_6.healthtracmobile.view.UpdateUserActivity;
 import com.raik383h_group_6.healthtracmobile.view.ViewUserActivity;
 
 import roboguice.inject.ContentView;
@@ -102,6 +103,26 @@ public class ActivityNavigator {
     }
 
     public void finishShowUser() {
+        activity.setResult(Activity.RESULT_OK);
+        activity.finish();
+    }
+
+    public void openUpdateUser(AccessGrant grant, User user, int reqCode) {
+        Intent intent = new Intent(activity, UpdateUserActivity.class);
+        intent.putExtra(activity.getString(R.string.EXTRA_ACCESS_GRANT), grant);
+        intent.putExtra(activity.getString(R.string.EXTRA_USER), user);
+        activity.startActivityForResult(intent, reqCode);
+    }
+
+    public void finishUpdateUserSuccess(User user) {
+        Intent data = new Intent();
+        data.putExtra(activity.getString(R.string.EXTRA_USER), user);
+        activity.setResult(Activity.RESULT_OK, data);
+        activity.finish();
+    }
+
+    public void finishUpdateUserFailure() {
+        activity.setResult(Activity.RESULT_CANCELED);
         activity.finish();
     }
 }
