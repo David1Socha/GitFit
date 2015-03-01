@@ -39,7 +39,13 @@ public class ListUsersActivity extends RoboActivity {
         IResources resources = new ResourcesAdapter(getResources());
         ActivityNavigator nav = new ActivityNavigator(this);
         presenter = presenterFactory.create(resources, nav, this);
-        presenter.onCreate();
+        presenter.onCreate(savedInstanceState);
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        presenter.onSaveInstanceState(outState);
+        super.onSaveInstanceState(outState);
     }
 
     @Override

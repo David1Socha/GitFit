@@ -3,6 +3,7 @@ package com.raik383h_group_6.healthtracmobile.presenter;
 import android.app.Activity;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 
@@ -37,11 +38,20 @@ public class ListUsersPresenter {
         this.grant = null;
     }
 
-    public void onCreate() {
-        nav.openAuthentication(AUTH);
+    public void onCreate(Bundle savedInstanceState) {
+        if (savedInstanceState != null) {
+            grant = savedInstanceState.getParcelable(resources.getString(R.string.EXTRA_ACCESS_GRANT));
+        }
+    }
+
+    public void onSaveInstanceState(Bundle outState) {
+        outState.putParcelable(resources.getString(R.string.EXTRA_ACCESS_GRANT), grant);
     }
 
     public void onResume() {
+        if (grant == null) {
+            nav.openAuthentication(AUTH);
+        }
         populateUsers();
     }
 

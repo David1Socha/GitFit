@@ -12,6 +12,7 @@
         android:theme="@style/AppTheme" >
         <activity
             android:name=".view.ListUsersActivity"
+            android:launchMode="singleTop"
             android:label="@string/title_activity_list_users" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -57,8 +58,7 @@
 
         <activity
             android:name=".view.ViewUserActivity"
-            android:label="@string/title_activity_view_user"
-            android:parentActivityName=".view.ListUsersActivity" >
+            android:label="@string/title_activity_view_user">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.raik383h_group_6.healthtracmobile.view.ListUsersActivity" />
