@@ -160,13 +160,11 @@ public class RegisterUserActivity extends RoboActivity implements IUserEditView{
         IResources resources = new ResourcesAdapter(getResources());
         ActivityNavigator nav = new ActivityNavigator(this);
         presenter= presenterFactory.create(extras, resources, nav, this);
-        presenter.populateFields();
-        createAccountButton.setOnClickListener( new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                presenter.validateAccount(getBirthDate(), getEmail(), getFirstName(), getHeight(), getLastName(), getLocation(),getPreferredName(), getSex(), getUsername(),getWeight());
-            }
-        });
+        presenter.onCreate();
+    }
+
+    public void onClickCreateAccount(View v) {
+        presenter.onClickCreateAccount();
     }
 
     public void setLocationError(String msg) {

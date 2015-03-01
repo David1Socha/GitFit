@@ -45,7 +45,7 @@ public class RegisterUserPresenter {
         provider = extras.getString(resources.getString(R.string.EXTRA_PROVIDER));
     }
 
-    public void populateFields() {
+    public void onCreate() {
         facebookUser = null;
         if (provider.equals(resources.getString(R.string.PROVIDER_FACEBOOK))) {
             try {
@@ -95,8 +95,8 @@ public class RegisterUserPresenter {
         }.execute(accessToken).get();
     }
 
-    public void validateAccount(String birthDateStr, String email, String firstName, String heightStr, String lastName, String location, String preferredName, String radioValue, String userName, String weightStr) {
-        User userToCreate = userValidationPresenter.validateUser(birthDateStr, email, firstName, heightStr, lastName, location, preferredName, radioValue, userName, weightStr);
+    public void onClickCreateAccount() {
+        User userToCreate = userValidationPresenter.validateUser(view.getBirthDate(), view.getEmail(), view.getFirstName(), view.getHeight(), view.getLastName(), view.getLocation(), view.getPreferredName(), view.getSex(), view.getUsername(), view.getWeight());
         if (userToCreate != null) {
             createUser(userToCreate);
         } else {

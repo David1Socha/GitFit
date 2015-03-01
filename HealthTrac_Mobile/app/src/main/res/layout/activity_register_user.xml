@@ -11,6 +11,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/create_account"
+            android:onClick="onClickCreateAccount"
             android:textSize="40sp" />
 
         <include layout="@layout/modify_user" />
