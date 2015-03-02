@@ -3,6 +3,7 @@ package com.raik383h_group_6.healthtracmobile.presenter;
 import android.app.Activity;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 
 import com.google.inject.Inject;
 import com.google.inject.assistedinject.Assisted;
@@ -45,7 +46,6 @@ public class ViewTeamPresenter {
     public void onCreate() {
         team = extras.getParcelable(resources.getString(R.string.EXTRA_TEAM));
         grant = extras.getParcelable(resources.getString(R.string.EXTRA_ACCESS_GRANT));
-        currentUserStatus = Membership.MembershipStatus.INACTIVE;
     }
 
     public void onClickEditTeam() {
@@ -116,13 +116,14 @@ public class ViewTeamPresenter {
                     return null;
                 }
             }
-        }.get();
+        }.execute().get();
     }
 
     private void updateFields() {
         view.setTeamName(team.getName());
         view.setDateCreated(FormatUtils.format(team.getDateCreated()));
         view.setDescription(team.getDescription());
+        Log.d("davidsocha", "updatefields");
         switch(currentUserStatus) {
             case MEMBER:
                 view.setShowEditTeam(false);

@@ -21,7 +21,7 @@
     <string name="create_account">Create account</string>
     <string name="sign_in">Sign in to existing account</string>
     <string name="title_authentication_activity">Sign in or create an account</string>
-    <string name="EXTRA_ACCESS_GRANT">com.raik383h_group6.healthtrac.ACCESS_GRANT</string>
+    <string name="EXTRA_ACCESS_GRANT">com.raik383h_group_6.healthtrac.ACCESS_GRANT</string>
     <string name="EXTRA_USER">com.raik383h_group6.healthtrac.USER</string>
     <string name="first_name_label">First Name</string>
     <string name="first_name_hint">First Name</string>

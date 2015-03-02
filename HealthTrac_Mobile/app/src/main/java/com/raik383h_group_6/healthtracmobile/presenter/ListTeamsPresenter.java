@@ -70,7 +70,7 @@ public class ListTeamsPresenter {
             } else {
                 view.setNoTeamsMessageDisplay(true);
             }
-        } catch (ExecutionException | InterruptedException e) {
+        } catch (Exception e) {
             view.setNoTeamsMessageDisplay(true);
         }
     }
@@ -79,11 +79,7 @@ public class ListTeamsPresenter {
         return new AsyncTask<String, Void, List<Team>>() {
             @Override
             protected List<Team> doInBackground(String... params) {
-                try {
-                    return teamService.getTeams(params[0]);
-                } catch (Exception e) {
-                    throw e;
-                }
+                return teamService.getTeams(params[0]);
             }
         }.execute(authHeader).get();
     }
