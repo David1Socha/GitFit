@@ -128,6 +128,7 @@ public class ActivityNavigator {
         Intent intent = new Intent(activity, ViewTeamActivity.class);
         intent.putExtra(activity.getString(R.string.EXTRA_TEAM), t);
         intent.putExtra(activity.getString(R.string.EXTRA_ACCESS_GRANT), g);
+        activity.startActivity(intent);
     }
 
     public void finishViewTeam() {

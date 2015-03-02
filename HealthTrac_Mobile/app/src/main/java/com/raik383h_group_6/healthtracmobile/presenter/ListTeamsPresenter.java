@@ -90,6 +90,6 @@ public class ListTeamsPresenter {
 
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Team t = (Team) parent.getAdapter().getItem(position);
-        //nav.openViewTeam(Team, grant); TODO
+        nav.openViewTeam(t, grant);
     }
 }
