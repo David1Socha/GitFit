@@ -83,7 +83,7 @@ public class ListUsersPresenter {
                 try {
                     return userService.getUsers(params[0]);
                 } catch (Exception e) {
-                    throw e;
+                    return null;
                 }
             }
         }.execute(authHeader).get();

@@ -8,6 +8,7 @@ import com.google.inject.Inject;
 import com.google.inject.assistedinject.Assisted;
 import com.raik383h_group_6.healthtracmobile.R;
 import com.raik383h_group_6.healthtracmobile.model.AccessGrant;
+import com.raik383h_group_6.healthtracmobile.model.Team;
 import com.raik383h_group_6.healthtracmobile.model.Token;
 import com.raik383h_group_6.healthtracmobile.model.User;
 import com.raik383h_group_6.healthtracmobile.view.AuthenticationActivity;
@@ -17,6 +18,7 @@ import com.raik383h_group_6.healthtracmobile.view.OAuthBrowserActivity;
 import com.raik383h_group_6.healthtracmobile.view.OAuthPromptActivity;
 import com.raik383h_group_6.healthtracmobile.view.RegisterUserActivity;
 import com.raik383h_group_6.healthtracmobile.view.UpdateUserActivity;
+import com.raik383h_group_6.healthtracmobile.view.ViewTeamActivity;
 import com.raik383h_group_6.healthtracmobile.view.ViewUserActivity;
 
 import roboguice.inject.ContentView;
@@ -100,7 +102,7 @@ public class ActivityNavigator {
         activity.startActivity(intent);
     }
 
-    public void finishShowUser() {
+    public void finishViewUser() {
         genericFinishOk();
     }
 
@@ -120,6 +122,17 @@ public class ActivityNavigator {
         Intent intent = new Intent(activity, ListTeamsActivity.class);
         intent.putExtra(activity.getString(R.string.EXTRA_ACCESS_GRANT), g);
         activity.startActivity(intent);
+    }
+
+    public void openViewTeam(Team t, AccessGrant g) {
+        Intent intent = new Intent(activity, ViewTeamActivity.class);
+        intent.putExtra(activity.getString(R.string.EXTRA_TEAM), t);
+        intent.putExtra(activity.getString(R.string.EXTRA_ACCESS_GRANT), g);
+        activity.startActivity(intent);
+    }
+
+    public void finishViewTeam() {
+        genericFinishOk();
     }
 
     private void genericFinishOk() {
