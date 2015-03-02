@@ -12,6 +12,7 @@ import com.raik383h_group_6.healthtracmobile.application.ActivityNavigator;
 import com.raik383h_group_6.healthtracmobile.content.IResources;
 import com.raik383h_group_6.healthtracmobile.content.ResourcesAdapter;
 import com.raik383h_group_6.healthtracmobile.presenter.PresenterFactory;
+import com.raik383h_group_6.healthtracmobile.presenter.ViewTeamPresenter;
 import com.raik383h_group_6.healthtracmobile.presenter.ViewUserPresenter;
 
 import org.w3c.dom.Text;

@@ -48,11 +48,26 @@ public class ViewTeamPresenter {
         currentUserStatus = Membership.MembershipStatus.INACTIVE;
     }
 
-    public void onClickUpdateTeam() {
+    public void onClickEditTeam() {
         //nav.openUpdateTeam(team) TODO
+        refreshInfo();
+    }
+
+    public void onClickLeaveTeam() {
+        //TODO
+        refreshInfo();
+    }
+
+    public void onClickJoinTeam() {
+        //TODO
+        refreshInfo();
     }
 
     public void onResume() {
+        refreshInfo();
+    }
+
+    private void refreshInfo() {
         updateTeamMemberships();
         updateCurrentUserStatus();
         updateFields();
