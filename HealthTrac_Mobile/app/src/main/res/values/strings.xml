@@ -87,5 +87,7 @@
     <string name="error_leave_team">An error was encountered in leaving this team</string>
     <string name="success_join_team">Successfully joined team</string>
     <string name="success_leave_team">Successfully left team</string>
+    <string name="access_grant_prefs">access_grant_prefs</string>
+    <string name="shared_prefs">shared_prefs</string>
 
 </resources>

@@ -1,6 +1,7 @@
 package com.raik383h_group_6.healthtracmobile.view;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -29,6 +30,7 @@ public class GitFitMainActivity extends RoboActionBarActivity {
     Button showProfileButton;
     @Inject
     PresenterFactory presenterFactory;
+    private SharedPreferences prefs;
     private GitFitMainPresenter presenter;
 
     @Override
@@ -36,8 +38,19 @@ public class GitFitMainActivity extends RoboActionBarActivity {
         super.onCreate(savedInstanceState);
         IResources resources = new ResourcesAdapter(getResources());
         ActivityNavigator nav = new ActivityNavigator(this);
+        SharedPreferences preferences = getSharedPreferences(getString(R.string.shared_prefs), MODE_PRIVATE);
         presenter = presenterFactory.create(resources, nav, this);
         presenter.onCreate(savedInstanceState);
+    }
+
+    public String getPref(String key) {
+        return prefs.getString(key, null);
+    }
+
+    public void setPref(String key, String val) {
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putString(key, val);
+        editor.apply();
     }
 
     @Override
