@@ -19,6 +19,7 @@ import com.raik383h_group_6.healthtracmobile.service.api.MembershipService;
 import com.raik383h_group_6.healthtracmobile.view.ViewTeamActivity;
 import com.raik383h_group_6.healthtracmobile.view.ViewUserActivity;
 
+import java.util.Date;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
@@ -55,14 +56,42 @@ public class ViewTeamPresenter {
 
     public void onClickLeaveTeam() {
         userMembership.setMembershipStatus(Membership.MembershipStatus.INACTIVE);
-        postCurrentMembership(resources.getString(R.string.success_leave_team), resources.getString(R.string.error_leave_team));
+        updateCurrentMembership(resources.getString(R.string.success_leave_team), resources.getString(R.string.error_leave_team));
         refreshInfo();
     }
 
-    public void onClickJoinTeam() {
+    private void createMembershipLocal() {
+        userMembership = new Membership();
+        userMembership.setDateCreated(new Date());
+        userMembership.setDateModified(new Date());
+        userMembership.setTeamID(team.getId());
+        userMembership.setUserID(grant.getId());
         userMembership.setMembershipStatus(Membership.MembershipStatus.MEMBER);
-        postCurrentMembership(resources.getString(R.string.success_join_team), resources.getString(R.string.error_join_team));
+    }
+
+    public void onClickJoinTeam() {
+        if (userMembership == null) {
+            createMembershipLocal();
+            createCurrentMembership(resources.getString(R.string.success_join_team), resources.getString(R.string.error_join_team));
+        } else {
+            userMembership.setMembershipStatus(Membership.MembershipStatus.MEMBER);
+            updateCurrentMembership(resources.getString(R.string.success_join_team), resources.getString(R.string.error_join_team));
+        }
+
         refreshInfo();
+    }
+
+    private void createCurrentMembership(String successMessage, String failureMessage) {
+        try {
+            userMembership = createMembershipAsync(userMembership, grant);
+            if (userMembership == null) {
+                view.displayMessage(failureMessage);
+            } else {
+                view.displayMessage(successMessage);
+            }
+        } catch (Exception e) {
+            view.displayMessage(failureMessage);
+        }
     }
 
     public void onResume() {
@@ -121,7 +150,7 @@ public class ViewTeamPresenter {
         }.execute().get();
     }
 
-    private void postCurrentMembership(String successMessage, String failureMessage) {
+    private void updateCurrentMembership(String successMessage, String failureMessage) {
         try {
             Exception updateException = updateMembershipAsync(userMembership, grant);
             if (updateException != null) {
@@ -146,6 +175,19 @@ public class ViewTeamPresenter {
                     return e;
                 }
 
+            }
+        }.execute().get();
+    }
+
+    private Membership createMembershipAsync(final Membership membership, final AccessGrant grant) throws ExecutionException, InterruptedException {
+        return new AsyncTask<Void, Void, Membership>() {
+            @Override
+            protected Membership doInBackground(Void... params) {
+                try {
+                    return membershipService.createMembership(membership, grant.getAuthHeader());
+                } catch (Exception e) {
+                    return null;
+                }
             }
         }.execute().get();
     }

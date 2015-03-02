@@ -9,7 +9,7 @@ public class RetrofitMembershipServiceProvider implements Provider<MembershipSer
     @Override
     public MembershipService get() {
         RestAdapter adapter = new RestAdapter.Builder()
-                .setConverter(MembershipService.DATA_CONVERTER).setLogLevel(RestAdapter.LogLevel.FULL)
+                .setConverter(MembershipService.DATA_CONVERTER)
                 .setEndpoint(MembershipService.SERVICE_ENDPOINT)
                 .build();
         return adapter.create(MembershipService.class);
