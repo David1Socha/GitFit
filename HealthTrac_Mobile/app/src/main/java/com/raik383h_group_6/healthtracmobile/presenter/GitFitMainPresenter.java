@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.os.AsyncTask;
 import android.os.Bundle;
 
+import com.google.gson.Gson;
 import com.google.inject.Inject;
 import com.google.inject.assistedinject.Assisted;
 import com.raik383h_group_6.healthtracmobile.R;
@@ -40,9 +41,30 @@ public class GitFitMainPresenter {
     }
 
     public void onResume() {
+        if (grant == null) {
+            reconstructGrant();
+        }
         if (grantBad()) {
             nav.openAuthentication(AUTH);
         }
+    }
+
+    private void reconstructGrant() {
+        Gson gson = new Gson();
+        String serializedGrant = view.getPref(resources.getString(R.string.pref_access_grant));
+        if (serializedGrant != null) {
+            grant = gson.fromJson(serializedGrant,  AccessGrant.class);
+        }
+    }
+
+    public void onPause() {
+        saveGrant();
+    }
+
+    private void saveGrant() {
+        Gson gson = new Gson();
+        String serializedGrant = gson.toJson(grant);
+        view.setPref(resources.getString(R.string.pref_access_grant), serializedGrant);
     }
 
     public void onClickShowUsers() {

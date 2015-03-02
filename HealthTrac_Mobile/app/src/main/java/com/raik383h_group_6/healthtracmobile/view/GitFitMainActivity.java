@@ -60,6 +60,12 @@ public class GitFitMainActivity extends RoboActionBarActivity {
     }
 
     @Override
+    protected void onPause() {
+        super.onPause();
+        presenter.onPause();
+    }
+
+    @Override
     protected void onSaveInstanceState(Bundle outState) {
         presenter.onSaveInstanceState(outState);
         super.onSaveInstanceState(outState);
