@@ -82,5 +82,6 @@
     <string name="join_team">Join Team</string>
     <string name="leave_team">Leave Team</string>
     <string name="EXTRA_TEAM">com.raik383h_group_6.healthtracmobile.TEAM</string>
+    <string name="title_activity_view_team">View team</string>
 
 </resources>

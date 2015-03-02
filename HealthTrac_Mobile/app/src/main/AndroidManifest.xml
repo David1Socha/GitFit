@@ -86,6 +86,13 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.raik383h_group_6.healthtracmobile.view.ListUsersActivity" />
         </activity>
+        <activity
+            android:name=".view.ViewTeamActivity"
+            android:label="@string/title_activity_view_team">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.raik383h_group_6.healthtracmobile.view.ListTeamsActivity" />
+        </activity>
     </application>
 
 </manifest>
