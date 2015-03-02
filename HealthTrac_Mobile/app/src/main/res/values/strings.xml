@@ -75,5 +75,11 @@
     <string name="error_find_profile">Could not find your profile. Are you logged in?</string>
     <string name="no_teams_message">No teams found. Are you signed in?</string>
     <string name="title_activity_list_teams">View Teams</string>
+    <string name="team_name_label">Team</string>
+    <string name="description_label">Description</string>
+    <string name="edit_team">Edit Team</string>
+    <string name="date_created_label">Creation Date</string>
+    <string name="join_team">Join Team</string>
+    <string name="leave_team">Leave Team</string>
 
 </resources>
