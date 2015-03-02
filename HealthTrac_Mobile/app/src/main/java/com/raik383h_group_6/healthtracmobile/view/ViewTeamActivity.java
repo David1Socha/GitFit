@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.inject.Inject;
 import com.raik383h_group_6.healthtracmobile.R;
@@ -84,6 +85,10 @@ public class ViewTeamActivity extends RoboActionBarActivity {
 
     public void setDateCreated(String msg) {
         dateCreatedTextView.setText(msg);
+    }
+
+    public void displayMessage(String msg) {
+        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
     }
 
     public void setShowEditTeam(boolean enabled) {

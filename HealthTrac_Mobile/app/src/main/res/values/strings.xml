@@ -83,5 +83,9 @@
     <string name="leave_team">Leave Team</string>
     <string name="EXTRA_TEAM">com.raik383h_group_6.healthtracmobile.TEAM</string>
     <string name="title_activity_view_team">View team</string>
+    <string name="error_join_team">An error was encountered attempting to join this team.</string>
+    <string name="error_leave_team">An error was encountered in leaving this team</string>
+    <string name="success_join_team">Successfully joined team</string>
+    <string name="success_leave_team">Successfully left team</string>
 
 </resources>

@@ -32,7 +32,7 @@ public class ViewTeamPresenter {
     private List<Membership> teamMemberships;
     private MembershipService membershipService;
     public static final int UPDATE = 1;
-    private Membership.MembershipStatus currentUserStatus;
+    private Membership userMembership;
 
     @Inject
     public ViewTeamPresenter(MembershipService membershipService, @Assisted Bundle extras, @Assisted IResources resources, @Assisted ActivityNavigator nav, @Assisted ViewTeamActivity view) {
@@ -54,12 +54,14 @@ public class ViewTeamPresenter {
     }
 
     public void onClickLeaveTeam() {
-        //TODO
+        userMembership.setMembershipStatus(Membership.MembershipStatus.INACTIVE);
+        postCurrentMembership(resources.getString(R.string.success_leave_team), resources.getString(R.string.error_leave_team));
         refreshInfo();
     }
 
     public void onClickJoinTeam() {
-        //TODO
+        userMembership.setMembershipStatus(Membership.MembershipStatus.MEMBER);
+        postCurrentMembership(resources.getString(R.string.success_join_team), resources.getString(R.string.error_join_team));
         refreshInfo();
     }
 
@@ -97,13 +99,13 @@ public class ViewTeamPresenter {
         try {
             for (Membership m : teamMemberships) { //where are you LINQ?
                 if (m.getUserID().equals(grant.getId())) {
-                    currentUserStatus = m.getMembershipStatus();
+                    userMembership = m;
                     return; //only one membership per team + user combo
                 }
             }
         } catch (NullPointerException ignored) {
         }
-        currentUserStatus = Membership.MembershipStatus.INACTIVE;
+        userMembership = null;
     }
 
     private List<Membership> getMembershipsAsync(final long teamId, final String auth) throws ExecutionException, InterruptedException {
@@ -119,12 +121,41 @@ public class ViewTeamPresenter {
         }.execute().get();
     }
 
+    private void postCurrentMembership(String successMessage, String failureMessage) {
+        try {
+            Exception updateException = updateMembershipAsync(userMembership, grant);
+            if (updateException != null) {
+                throw updateException;
+            } else {
+                view.displayMessage(successMessage);
+            }
+        } catch (Exception e) {
+            view.displayMessage(failureMessage);
+        }
+    }
+
+    private Exception updateMembershipAsync(final Membership membership, final AccessGrant grant) throws ExecutionException, InterruptedException {
+        final long membershipId = membership.getId();
+        return new AsyncTask<Void, Void, Exception>() {
+            @Override
+            protected Exception doInBackground(Void... params) {
+                try {
+                    membershipService.updateMembership(membershipId, membership, grant.getAuthHeader());
+                    return null;
+                } catch (Exception e) {
+                    return e;
+                }
+
+            }
+        }.execute().get();
+    }
+
     private void updateFields() {
         view.setTeamName(team.getName());
         view.setDateCreated(FormatUtils.format(team.getDateCreated()));
         view.setDescription(team.getDescription());
-        Log.d("davidsocha", "updatefields");
-        switch(currentUserStatus) {
+        Membership.MembershipStatus status = userMembership == null ? Membership.MembershipStatus.INACTIVE : userMembership.getMembershipStatus();
+        switch(status) {
             case MEMBER:
                 view.setShowEditTeam(false);
                 view.setShowJoinTeam(false);
