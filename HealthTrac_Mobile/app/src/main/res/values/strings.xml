@@ -81,5 +81,6 @@
     <string name="date_created_label">Creation Date</string>
     <string name="join_team">Join Team</string>
     <string name="leave_team">Leave Team</string>
+    <string name="EXTRA_TEAM">com.raik383h_group_6.healthtracmobile.TEAM</string>
 
 </resources>
