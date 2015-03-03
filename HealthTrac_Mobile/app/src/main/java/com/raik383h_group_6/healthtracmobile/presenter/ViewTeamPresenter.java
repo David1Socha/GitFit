@@ -14,6 +14,7 @@ import com.raik383h_group_6.healthtracmobile.model.Membership;
 import com.raik383h_group_6.healthtracmobile.model.Team;
 import com.raik383h_group_6.healthtracmobile.service.FormatUtils;
 import com.raik383h_group_6.healthtracmobile.service.api.MembershipService;
+import com.raik383h_group_6.healthtracmobile.service.api.async.IAsyncMembershipService;
 import com.raik383h_group_6.healthtracmobile.view.ViewTeamView;
 
 import java.util.Date;
@@ -28,12 +29,12 @@ public class ViewTeamPresenter {
     private Team team;
     private AccessGrant grant;
     private List<Membership> teamMemberships;
-    private MembershipService membershipService;
+    private IAsyncMembershipService membershipService;
     public static final int UPDATE = 1;
     private Membership userMembership;
 
     @Inject
-    public ViewTeamPresenter(MembershipService membershipService, @Assisted Bundle extras, @Assisted IResources resources, @Assisted IActivityNavigator nav, @Assisted ViewTeamView view) {
+    public ViewTeamPresenter(IAsyncMembershipService membershipService, @Assisted Bundle extras, @Assisted IResources resources, @Assisted IActivityNavigator nav, @Assisted ViewTeamView view) {
         this.membershipService = membershipService;
         this.extras = extras;
         this.resources = resources;
@@ -76,7 +77,7 @@ public class ViewTeamPresenter {
 
     private void createCurrentMembership(String successMessage, String failureMessage) {
         try {
-            userMembership = createMembershipAsync(userMembership, grant);
+            userMembership = membershipService.createMembershipAsync(userMembership, grant.getAuthHeader());
             if (userMembership == null) {
                 view.displayMessage(failureMessage);
             } else {
@@ -112,7 +113,7 @@ public class ViewTeamPresenter {
 
     private void updateTeamMemberships() {
         try {
-            teamMemberships = getMembershipsAsync(team.getId(), grant.getAuthHeader());
+            teamMemberships = membershipService.getMembershipsAsync(team.getId(), grant.getAuthHeader());
         } catch (ExecutionException | InterruptedException ignored) {
         }
     }
@@ -130,22 +131,9 @@ public class ViewTeamPresenter {
         userMembership = null;
     }
 
-    private List<Membership> getMembershipsAsync(final long teamId, final String auth) throws ExecutionException, InterruptedException {
-        return new AsyncTask<Void, Void, List<Membership>>() {
-            @Override
-            protected List<Membership> doInBackground(Void... params) {
-                try {
-                    return membershipService.getMemberships(teamId, auth);
-                } catch (Exception e) {
-                    return null;
-                }
-            }
-        }.execute().get();
-    }
-
     private void updateCurrentMembership(String successMessage, String failureMessage) {
         try {
-            Exception updateException = updateMembershipAsync(userMembership, grant);
+            Exception updateException = membershipService.updateMembershipAsync(userMembership.getId(), userMembership, grant.getAuthHeader());
             if (updateException != null) {
                 throw updateException;
             } else {
@@ -154,35 +142,6 @@ public class ViewTeamPresenter {
         } catch (Exception e) {
             view.displayMessage(failureMessage);
         }
-    }
-
-    private Exception updateMembershipAsync(final Membership membership, final AccessGrant grant) throws ExecutionException, InterruptedException {
-        final long membershipId = membership.getId();
-        return new AsyncTask<Void, Void, Exception>() {
-            @Override
-            protected Exception doInBackground(Void... params) {
-                try {
-                    membershipService.updateMembership(membershipId, membership, grant.getAuthHeader());
-                    return null;
-                } catch (Exception e) {
-                    return e;
-                }
-
-            }
-        }.execute().get();
-    }
-
-    private Membership createMembershipAsync(final Membership membership, final AccessGrant grant) throws ExecutionException, InterruptedException {
-        return new AsyncTask<Void, Void, Membership>() {
-            @Override
-            protected Membership doInBackground(Void... params) {
-                try {
-                    return membershipService.createMembership(membership, grant.getAuthHeader());
-                } catch (Exception e) {
-                    return null;
-                }
-            }
-        }.execute().get();
     }
 
     private void updateFields() {
