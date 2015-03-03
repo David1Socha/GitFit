@@ -14,7 +14,7 @@ import com.raik383h_group_6.healthtracmobile.view.activity.ListUsersActivity;
 import com.raik383h_group_6.healthtracmobile.view.activity.OAuthBrowserActivity;
 import com.raik383h_group_6.healthtracmobile.view.activity.OAuthPromptActivity;
 import com.raik383h_group_6.healthtracmobile.view.activity.RegisterUserActivity;
-import com.raik383h_group_6.healthtracmobile.view.activity.UpdateUserActivity;
+import com.raik383h_group_6.healthtracmobile.view.activity.EditUserActivity;
 import com.raik383h_group_6.healthtracmobile.view.activity.ViewTeamActivity;
 import com.raik383h_group_6.healthtracmobile.view.activity.ViewUserActivity;
 
@@ -161,7 +161,7 @@ public class ActivityNavigator implements IActivityNavigator {
 
     @Override
     public void openUpdateUser(AccessGrant grant, User user, int reqCode) {
-        Intent intent = new Intent(activity, UpdateUserActivity.class);
+        Intent intent = new Intent(activity, EditUserActivity.class);
         intent.putExtra(activity.getString(R.string.EXTRA_ACCESS_GRANT), grant);
         intent.putExtra(activity.getString(R.string.EXTRA_USER), user);
         activity.startActivityForResult(intent, reqCode);

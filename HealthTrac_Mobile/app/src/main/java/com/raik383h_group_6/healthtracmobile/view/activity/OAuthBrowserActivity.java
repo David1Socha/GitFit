@@ -15,7 +15,7 @@ import com.raik383h_group_6.healthtracmobile.service.oauth.IOAuthService;
 
 import roboguice.activity.RoboActionBarActivity;
 
-public class OAuthBrowserActivity extends RoboActionBarActivity {
+public class OAuthBrowserActivity extends CustomRoboActionBarActivity {
 
     private WebView webView;
     @Inject

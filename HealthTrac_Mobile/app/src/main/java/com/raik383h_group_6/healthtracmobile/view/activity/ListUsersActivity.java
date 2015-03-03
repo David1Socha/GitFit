@@ -21,7 +21,7 @@ import roboguice.inject.ContentView;
 import roboguice.inject.InjectView;
 
 @ContentView(R.layout.activity_list_users)
-public class ListUsersActivity extends RoboActionBarActivity {
+public class ListUsersActivity extends CustomRoboActionBarActivity {
     @InjectView(R.id.user_list_view)
     ListView userListView;
     @InjectView(R.id.no_users_textview)

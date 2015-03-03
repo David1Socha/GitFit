@@ -21,7 +21,7 @@ import roboguice.inject.ContentView;
 import roboguice.inject.InjectView;
 
 @ContentView(R.layout.activity_view_user)
-public class ViewUserActivity extends RoboActionBarActivity implements ViewUserView {
+public class ViewUserActivity extends CustomRoboActionBarActivity implements ViewUserView {
     @InjectView(R.id.birthdate_textview)
     TextView birthDateTextView;
     @InjectView(R.id.email_textview)

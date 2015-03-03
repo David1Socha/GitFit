@@ -65,7 +65,7 @@
         </activity>
 
         <activity
-            android:name=".view.activity.UpdateUserActivity"
+            android:name=".view.activity.EditUserActivity"
             android:label="@string/title_activity_update_user">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

@@ -11,23 +11,23 @@ import com.raik383h_group_6.healthtracmobile.model.AccessGrant;
 import com.raik383h_group_6.healthtracmobile.model.User;
 import com.raik383h_group_6.healthtracmobile.service.FormatUtils;
 import com.raik383h_group_6.healthtracmobile.service.api.UserService;
-import com.raik383h_group_6.healthtracmobile.view.activity.UpdateUserActivity;
+import com.raik383h_group_6.healthtracmobile.view.activity.EditUserActivity;
 
 import java.util.concurrent.ExecutionException;
 
-public class UpdateUserPresenter {
+public class EditUserPresenter {
 
     private final UserService userService;
     private final Bundle extras;
     private final IResources resources;
-    private final UpdateUserActivity view;
+    private final EditUserActivity view;
     private final IActivityNavigator nav;
     private UserValidationPresenter userValidationPresenter;
     private AccessGrant grant;
     private User ogUser;
 
     @Inject
-    public UpdateUserPresenter(UserService userService, @Assisted Bundle extras, @Assisted IResources resources, @Assisted IActivityNavigator nav, @Assisted UpdateUserActivity view) {
+    public EditUserPresenter(UserService userService, @Assisted Bundle extras, @Assisted IResources resources, @Assisted IActivityNavigator nav, @Assisted EditUserActivity view) {
         this.userService = userService;
         this.extras = extras;
         this.nav = nav;

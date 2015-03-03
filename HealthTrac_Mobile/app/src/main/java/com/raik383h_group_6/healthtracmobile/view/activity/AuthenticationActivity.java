@@ -19,7 +19,7 @@ import roboguice.activity.RoboActionBarActivity;
 import roboguice.inject.ContentView;
 
 @ContentView(R.layout.activity_authentication)
-public class AuthenticationActivity extends RoboActionBarActivity {
+public class AuthenticationActivity extends CustomRoboActionBarActivity {
 
     AuthenticationPresenter presenter;
     @Inject

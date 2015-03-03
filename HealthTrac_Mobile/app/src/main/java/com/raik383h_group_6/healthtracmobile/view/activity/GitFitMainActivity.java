@@ -21,7 +21,7 @@ import roboguice.inject.ContentView;
 import roboguice.inject.InjectView;
 
 @ContentView(R.layout.git_fit_main_layout)
-public class GitFitMainActivity extends RoboActionBarActivity {
+public class GitFitMainActivity extends CustomRoboActionBarActivity {
 
     @InjectView(R.id.show_users_button)
     Button showUsersButton;

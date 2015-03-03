@@ -21,7 +21,7 @@ import roboguice.inject.ContentView;
 import roboguice.inject.InjectView;
 
 @ContentView(R.layout.activity_view_team)
-public class ViewTeamActivity extends RoboActionBarActivity {
+public class ViewTeamActivity extends CustomRoboActionBarActivity {
     @InjectView(R.id.team_name_textview)
     TextView teamNameTextView;
     @InjectView(R.id.description_textview)

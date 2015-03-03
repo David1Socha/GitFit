@@ -16,7 +16,7 @@ import com.raik383h_group_6.healthtracmobile.content.ResourcesAdapter;
 import com.raik383h_group_6.healthtracmobile.model.User;
 import com.raik383h_group_6.healthtracmobile.application.ActivityNavigator;
 import com.raik383h_group_6.healthtracmobile.presenter.PresenterFactory;
-import com.raik383h_group_6.healthtracmobile.presenter.UpdateUserPresenter;
+import com.raik383h_group_6.healthtracmobile.presenter.EditUserPresenter;
 import com.raik383h_group_6.healthtracmobile.service.api.UserService;
 import com.raik383h_group_6.healthtracmobile.view.UserEditView;
 
@@ -25,10 +25,10 @@ import roboguice.inject.ContentView;
 import roboguice.inject.InjectView;
 
 @ContentView(R.layout.activity_update_user)
-public class UpdateUserActivity extends RoboActionBarActivity implements UserEditView {
+public class EditUserActivity extends RoboActionBarActivity implements UserEditView {
     @Inject
     private PresenterFactory presenterFactory;
-    private UpdateUserPresenter presenter;
+    private EditUserPresenter presenter;
     @Inject
     UserService userService;
     @InjectView(R.id.button_update_user)

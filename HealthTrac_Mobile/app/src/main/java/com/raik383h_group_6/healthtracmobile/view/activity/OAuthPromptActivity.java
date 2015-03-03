@@ -17,7 +17,7 @@ import roboguice.activity.RoboActionBarActivity;
 import roboguice.inject.ContentView;
 
 @ContentView(R.layout.activity_oauth_prompt)
-public class OAuthPromptActivity extends RoboActionBarActivity {
+public class OAuthPromptActivity extends CustomRoboActionBarActivity {
 
     private OAuthPromptPresenter presenter;
     @Inject
