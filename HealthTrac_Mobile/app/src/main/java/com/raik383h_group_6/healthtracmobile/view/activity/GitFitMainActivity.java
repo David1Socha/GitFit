@@ -21,7 +21,7 @@ import roboguice.inject.ContentView;
 import roboguice.inject.InjectView;
 
 @ContentView(R.layout.git_fit_main_layout)
-public class GitFitMainActivity extends CustomRoboActionBarActivity {
+public class GitFitMainActivity extends CustomRoboActionBarActivity implements com.raik383h_group_6.healthtracmobile.view.GitFitMainView {
 
     @InjectView(R.id.show_users_button)
     Button showUsersButton;
@@ -44,10 +44,12 @@ public class GitFitMainActivity extends CustomRoboActionBarActivity {
         presenter.onCreate(savedInstanceState);
     }
 
+    @Override
     public String getPref(String key) {
         return prefs.getString(key, null);
     }
 
+    @Override
     public void setPref(String key, String val) {
         SharedPreferences.Editor editor = prefs.edit();
         editor.putString(key, val);
@@ -94,6 +96,7 @@ public class GitFitMainActivity extends CustomRoboActionBarActivity {
         presenter.onClickShowTeams();
     }
 
+    @Override
     public void displayMessage(String msg) {
         Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
     }

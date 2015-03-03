@@ -13,7 +13,7 @@ import com.raik383h_group_6.healthtracmobile.content.IResources;
 import com.raik383h_group_6.healthtracmobile.model.AccessGrant;
 import com.raik383h_group_6.healthtracmobile.model.User;
 import com.raik383h_group_6.healthtracmobile.service.api.UserService;
-import com.raik383h_group_6.healthtracmobile.view.activity.GitFitMainActivity;
+import com.raik383h_group_6.healthtracmobile.view.GitFitMainView;
 
 import java.util.concurrent.ExecutionException;
 
@@ -22,12 +22,12 @@ public class GitFitMainPresenter {
     private AccessGrant grant;
     private IResources resources;
     private IActivityNavigator nav;
-    private GitFitMainActivity view;
+    private GitFitMainView view;
     private UserService userService;
     private User user;
 
     @Inject
-    public GitFitMainPresenter(UserService userService, @Assisted IResources resources, @Assisted IActivityNavigator nav, @Assisted GitFitMainActivity view) {
+    public GitFitMainPresenter(UserService userService, @Assisted IResources resources, @Assisted IActivityNavigator nav, @Assisted GitFitMainView view) {
         this.userService = userService;
         this.resources = resources;
         this.nav = nav;
