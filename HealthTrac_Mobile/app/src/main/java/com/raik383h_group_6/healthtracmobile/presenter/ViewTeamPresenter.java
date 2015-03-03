@@ -39,16 +39,12 @@ public class ViewTeamPresenter {
         this.resources = resources;
         this.nav = nav;
         this.view = view;
-    }
-
-    public void onCreate() {
         team = extras.getParcelable(resources.getString(R.string.EXTRA_TEAM));
         grant = extras.getParcelable(resources.getString(R.string.EXTRA_ACCESS_GRANT));
     }
 
     public void onClickEditTeam() {
         //nav.openUpdateTeam(team) TODO
-        refreshInfo();
     }
 
     public void onClickLeaveTeam() {

@@ -1,6 +1,7 @@
 package com.raik383h_group_6.healthtracmobile.helper;
 
 import com.raik383h_group_6.healthtracmobile.model.AccessGrant;
+import com.raik383h_group_6.healthtracmobile.model.Team;
 import com.raik383h_group_6.healthtracmobile.model.User;
 
 import java.util.Date;
@@ -22,6 +23,15 @@ public final class ModelGenerator {
         User u = new User(new Date(), new Date(), new Date(), "yahoo@gmail.com", "david", 22, "socha", "omaha", "david socha", User.Sex.MALE, "david1socha", 20);
         u.setId("123");
         return u;
+    }
+
+    public static Team genBasicTeam() {
+        Team t = new Team();
+        t.setDescription("Boring team");
+        t.setDateCreated(new Date());
+        t.setId(12);
+        t.setName("teeeeeeem");
+        return t;
     }
 
 }

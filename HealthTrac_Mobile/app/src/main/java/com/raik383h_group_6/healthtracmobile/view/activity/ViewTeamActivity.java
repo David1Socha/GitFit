@@ -45,7 +45,6 @@ public class ViewTeamActivity extends CustomRoboActionBarActivity implements Vie
         IActivityNavigator nav = new ActivityNavigator(this);
         Bundle extras = getIntent().getExtras();
         presenter = presenterFactory.create(extras, resources, nav, this);
-        presenter.onCreate();
     }
 
     @Override
