@@ -28,9 +28,6 @@ public class ViewUserPresenter {
         this.resources = resources;
         this.nav = nav;
         this.view = view;
-    }
-
-    public void onCreate() {
         user = extras.getParcelable(resources.getString(R.string.EXTRA_USER));
         grant = extras.getParcelable(resources.getString(R.string.EXTRA_ACCESS_GRANT));
     }

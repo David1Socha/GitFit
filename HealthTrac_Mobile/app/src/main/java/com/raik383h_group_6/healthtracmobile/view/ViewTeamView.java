@@ -1,4 +1,4 @@
-package com.raik383h_group_6.healthtracmobile.view.activity;
+package com.raik383h_group_6.healthtracmobile.view;
 
 public interface ViewTeamView {
     void setTeamName(String msg);

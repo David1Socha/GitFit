@@ -14,7 +14,7 @@ import com.raik383h_group_6.healthtracmobile.model.Membership;
 import com.raik383h_group_6.healthtracmobile.model.Team;
 import com.raik383h_group_6.healthtracmobile.service.FormatUtils;
 import com.raik383h_group_6.healthtracmobile.service.api.MembershipService;
-import com.raik383h_group_6.healthtracmobile.view.activity.ViewTeamView;
+import com.raik383h_group_6.healthtracmobile.view.ViewTeamView;
 
 import java.util.Date;
 import java.util.List;
