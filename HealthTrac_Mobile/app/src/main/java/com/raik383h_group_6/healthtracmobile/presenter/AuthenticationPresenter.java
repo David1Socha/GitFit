@@ -12,7 +12,7 @@ import com.raik383h_group_6.healthtracmobile.content.IResources;
 import com.raik383h_group_6.healthtracmobile.model.AccessGrant;
 import com.raik383h_group_6.healthtracmobile.model.Credentials;
 import com.raik383h_group_6.healthtracmobile.service.api.AccountService;
-import com.raik383h_group_6.healthtracmobile.view.activity.AuthenticationActivity;
+import com.raik383h_group_6.healthtracmobile.view.AuthenticationView;
 
 import java.util.concurrent.ExecutionException;
 
@@ -20,14 +20,14 @@ public class AuthenticationPresenter {
     public static final int CREATE_ACCOUNT = 1,
             OAUTH_TO_SIGN_IN = 2,
             OAUTH_TO_CREATE_ACCOUNT = 3;
-    private AuthenticationActivity view;
+    private AuthenticationView view;
     private AccountService accountService;
     private String accessToken, accessSecret, provider;
     private IResources resources;
     private IActivityNavigator nav;
 
     @Inject
-    public AuthenticationPresenter(@Assisted AccountService accountService, @Assisted IResources resources, @Assisted IActivityNavigator nav, @Assisted AuthenticationActivity view) {
+    public AuthenticationPresenter(@Assisted AccountService accountService, @Assisted IResources resources, @Assisted IActivityNavigator nav, @Assisted AuthenticationView view) {
         this.resources = resources;
         this.nav = nav;
         this.accountService = accountService;

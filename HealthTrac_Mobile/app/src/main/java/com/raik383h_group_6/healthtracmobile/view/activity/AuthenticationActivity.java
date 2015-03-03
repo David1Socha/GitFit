@@ -14,12 +14,12 @@ import com.raik383h_group_6.healthtracmobile.presenter.AuthenticationPresenter;
 import com.raik383h_group_6.healthtracmobile.application.ActivityNavigator;
 import com.raik383h_group_6.healthtracmobile.presenter.PresenterFactory;
 import com.raik383h_group_6.healthtracmobile.service.api.AccountService;
+import com.raik383h_group_6.healthtracmobile.view.AuthenticationView;
 
-import roboguice.activity.RoboActionBarActivity;
 import roboguice.inject.ContentView;
 
 @ContentView(R.layout.activity_authentication)
-public class AuthenticationActivity extends CustomRoboActionBarActivity {
+public class AuthenticationActivity extends CustomRoboActionBarActivity implements AuthenticationView {
 
     AuthenticationPresenter presenter;
     @Inject
@@ -50,6 +50,7 @@ public class AuthenticationActivity extends CustomRoboActionBarActivity {
         presenter.onClickCreateAccount();
     }
 
+    @Override
     public void displayMessage(String message) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
