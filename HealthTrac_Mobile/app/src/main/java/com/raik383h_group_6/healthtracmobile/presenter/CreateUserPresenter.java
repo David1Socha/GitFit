@@ -15,12 +15,13 @@ import com.raik383h_group_6.healthtracmobile.model.UserLogin;
 import com.raik383h_group_6.healthtracmobile.service.api.AccountService;
 import com.raik383h_group_6.healthtracmobile.service.api.FacebookService;
 import com.raik383h_group_6.healthtracmobile.service.api.UserService;
+import com.raik383h_group_6.healthtracmobile.view.CreateUserView;
 import com.raik383h_group_6.healthtracmobile.view.activity.CreateUserActivity;
 
 import java.util.concurrent.ExecutionException;
 
 public class CreateUserPresenter {
-    private CreateUserActivity view;
+    private CreateUserView view;
     private FacebookService facebookService;
     private FacebookUser facebookUser;
     private String accessToken, accessSecret, provider;
@@ -32,7 +33,7 @@ public class CreateUserPresenter {
     private UserValidationPresenter userValidationPresenter;
 
     @Inject
-    public CreateUserPresenter(FacebookService facebookService, UserService userService, AccountService accountService, @Assisted Bundle extras, @Assisted IResources resources, @Assisted IActivityNavigator nav, @Assisted CreateUserActivity view) {
+    public CreateUserPresenter(FacebookService facebookService, UserService userService, AccountService accountService, @Assisted Bundle extras, @Assisted IResources resources, @Assisted IActivityNavigator nav, @Assisted CreateUserView view) {
         this.facebookService = facebookService;
         this.view = view;
         this.accountService = accountService;
@@ -40,13 +41,17 @@ public class CreateUserPresenter {
         this.resources = resources;
         this.userService = userService;
         this.nav = nav;
+    }
+
+    public void onCreate() {
         this.userValidationPresenter = new UserValidationPresenter(userService, view, resources);
         accessToken = extras.getString(resources.getString(R.string.EXTRA_ACCESS_TOKEN));
         accessSecret = extras.getString(resources.getString(R.string.EXTRA_ACCESS_SECRET));
         provider = extras.getString(resources.getString(R.string.EXTRA_PROVIDER));
+        getAndPopulateFacebookUser();
     }
 
-    public void onCreate() {
+    private void getAndPopulateFacebookUser() {
         facebookUser = null;
         if (provider.equals(resources.getString(R.string.PROVIDER_FACEBOOK))) {
             try {

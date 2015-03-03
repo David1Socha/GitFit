@@ -19,13 +19,14 @@ import com.raik383h_group_6.healthtracmobile.presenter.PresenterFactory;
 import com.raik383h_group_6.healthtracmobile.presenter.CreateUserPresenter;
 import com.raik383h_group_6.healthtracmobile.service.api.AccountService;
 import com.raik383h_group_6.healthtracmobile.service.api.FacebookService;
+import com.raik383h_group_6.healthtracmobile.view.CreateUserView;
 import com.raik383h_group_6.healthtracmobile.view.InputUserView;
 
 import roboguice.inject.ContentView;
 import roboguice.inject.InjectView;
 
 @ContentView(R.layout.activity_register_user)
-public class CreateUserActivity extends CustomRoboActionBarActivity implements InputUserView {
+public class CreateUserActivity extends CustomRoboActionBarActivity implements CreateUserView {
     @Inject
     private PresenterFactory presenterFactory;
     private CreateUserPresenter presenter;
@@ -168,42 +169,52 @@ public class CreateUserActivity extends CustomRoboActionBarActivity implements I
         presenter.onClickCreateAccount();
     }
 
+    @Override
     public void setLocationError(String msg) {
         locationEditText.setError(msg);
     }
 
+    @Override
     public void setBirthDateError(String msg) {
         birthDateEditText.setError(msg);
     }
 
+    @Override
     public void setEmailError(String msg) {
         emailEditText.setError(msg);
     }
 
+    @Override
     public void setFirstNameError(String msg) {
         firstNameEditText.setError(msg);
     }
 
+    @Override
     public void setHeightError(String msg) {
         heightEditText.setError(msg);
     }
 
+    @Override
     public void setLastNameError(String msg) {
         lastNameEditText.setError(msg);
     }
 
+    @Override
     public void setPrefNameError(String msg) {
         prefNameEditText.setError(msg);
     }
 
+    @Override
     public void setUsernameError(String msg) {
         usernameEditText.setError(msg);
     }
 
+    @Override
     public void setWeightError(String msg) {
         weightEditText.setError(msg);
     }
 
+    @Override
     public void displayMessage(String msg) {
         Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
     }
