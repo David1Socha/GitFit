@@ -18,14 +18,15 @@ import com.raik383h_group_6.healthtracmobile.application.ActivityNavigator;
 import com.raik383h_group_6.healthtracmobile.presenter.PresenterFactory;
 import com.raik383h_group_6.healthtracmobile.presenter.EditUserPresenter;
 import com.raik383h_group_6.healthtracmobile.service.api.UserService;
-import com.raik383h_group_6.healthtracmobile.view.UserEditView;
+import com.raik383h_group_6.healthtracmobile.view.EditUserView;
+import com.raik383h_group_6.healthtracmobile.view.InputUserView;
 
 import roboguice.activity.RoboActionBarActivity;
 import roboguice.inject.ContentView;
 import roboguice.inject.InjectView;
 
 @ContentView(R.layout.activity_update_user)
-public class EditUserActivity extends RoboActionBarActivity implements UserEditView {
+public class EditUserActivity extends RoboActionBarActivity implements EditUserView {
     @Inject
     private PresenterFactory presenterFactory;
     private EditUserPresenter presenter;
@@ -221,6 +222,7 @@ public class EditUserActivity extends RoboActionBarActivity implements UserEditV
         weightEditText.setError(msg);
     }
 
+    @Override
     public void displayMessage(String msg) {
         Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
     }

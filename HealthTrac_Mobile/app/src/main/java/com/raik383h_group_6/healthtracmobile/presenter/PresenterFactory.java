@@ -8,6 +8,7 @@ import com.raik383h_group_6.healthtracmobile.content.IResources;
 import com.raik383h_group_6.healthtracmobile.service.api.AccountService;
 import com.raik383h_group_6.healthtracmobile.service.oauth.IOAuthService;
 import com.raik383h_group_6.healthtracmobile.view.AuthenticationView;
+import com.raik383h_group_6.healthtracmobile.view.EditUserView;
 import com.raik383h_group_6.healthtracmobile.view.activity.GitFitMainActivity;
 import com.raik383h_group_6.healthtracmobile.view.ViewUserView;
 import com.raik383h_group_6.healthtracmobile.view.activity.ListTeamsActivity;
@@ -26,7 +27,7 @@ public interface PresenterFactory {
     ListUsersPresenter create(Bundle extras, IResources resources, IActivityNavigator nav, ListUsersActivity view);
     ListTeamsPresenter create(Bundle extras, IResources resources, IActivityNavigator nav, ListTeamsActivity view);
     ViewUserPresenter create( Bundle extras, IResources resources, IActivityNavigator nav, ViewUserView view);
-    EditUserPresenter create( Bundle extras, IResources resources, IActivityNavigator nav, EditUserActivity view);
+    EditUserPresenter create( Bundle extras, IResources resources, IActivityNavigator nav, EditUserView view);
     GitFitMainPresenter create(IResources resources, IActivityNavigator nav, GitFitMainActivity view);
     ViewTeamPresenter create(Bundle extras, IResources resources, IActivityNavigator nav, ViewTeamActivity view);
 }
