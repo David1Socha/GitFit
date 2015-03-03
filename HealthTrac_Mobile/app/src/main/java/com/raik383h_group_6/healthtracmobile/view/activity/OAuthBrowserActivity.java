@@ -42,8 +42,7 @@ public class OAuthBrowserActivity extends CustomRoboActionBarActivity {
             oAuthService = twitterOAuthService;
         }
         IActivityNavigator nav = new ActivityNavigator(this);
-        presenter = presenterFactory.create(oAuthService, webView, extras, resources, nav, this);
+        presenter = presenterFactory.create(oAuthService, webView, extras, resources, nav);
         presenter.onCreate();
     }
-
 }

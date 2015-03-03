@@ -24,7 +24,6 @@ public class OAuthBrowserPresenter {
 
     private IOAuthService oAuthService;
     private Token requestToken;
-    private OAuthBrowserActivity view;
     private WebView webView;
     private IResources resources;
     private Bundle extras;
@@ -41,11 +40,10 @@ public class OAuthBrowserPresenter {
     }
 
     @Inject
-    public OAuthBrowserPresenter(@Assisted IOAuthService service, @Assisted Bundle extras, @Assisted IResources resources, @Assisted WebView web, @Assisted IActivityNavigator nav, @Assisted OAuthBrowserActivity view) {
+    public OAuthBrowserPresenter(@Assisted IOAuthService service, @Assisted Bundle extras, @Assisted IResources resources, @Assisted WebView web, @Assisted IActivityNavigator nav) {
         this.oAuthService = service;
         this.extras = extras;
         this.resources = resources;
-        this.view = view;
         this.nav = nav;
         this.webView = web;
     }
