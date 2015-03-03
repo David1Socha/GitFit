@@ -13,14 +13,12 @@ public class OAuthPromptPresenter {
     private static final int FB_LOGIN_REQ = 1,
             TW_LOGIN_REQ = 2;
 
-    private OAuthPromptActivity view;
     private IResources resources;
     private IActivityNavigator nav;
 
     @Inject
-    public OAuthPromptPresenter( @Assisted IResources resources, @Assisted IActivityNavigator nav, @Assisted OAuthPromptActivity view) {
+    public OAuthPromptPresenter( @Assisted IResources resources, @Assisted IActivityNavigator nav) {
         this.resources = resources;
-        this.view = view;
         this.nav = nav;
     }
 

@@ -21,7 +21,7 @@ import com.raik383h_group_6.healthtracmobile.view.activity.ViewTeamActivity;
 public interface PresenterFactory {
     OAuthBrowserPresenter create(IOAuthService serviceAdapter, WebView web, Bundle extras, IResources resources, IActivityNavigator nav);
     AuthenticationPresenter create(AccountService accountService, IResources resources, IActivityNavigator nav, AuthenticationView view);
-    OAuthPromptPresenter create(IResources resources, IActivityNavigator nav, OAuthPromptActivity view);
+    OAuthPromptPresenter create(IResources resources, IActivityNavigator nav);
     RegisterUserPresenter create(Bundle extras, IResources resources, IActivityNavigator nav, RegisterUserActivity view);
     ListUsersPresenter create(Bundle extras, IResources resources, IActivityNavigator nav, ListUsersView view);
     ListTeamsPresenter create(Bundle extras, IResources resources, IActivityNavigator nav, ListTeamsView view);
