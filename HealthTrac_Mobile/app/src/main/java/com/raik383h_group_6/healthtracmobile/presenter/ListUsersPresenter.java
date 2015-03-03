@@ -10,12 +10,12 @@ import com.google.inject.Inject;
 import com.google.inject.assistedinject.Assisted;
 import com.raik383h_group_6.healthtracmobile.R;
 import com.raik383h_group_6.healthtracmobile.adapter.UserAdapter;
-import com.raik383h_group_6.healthtracmobile.application.ActivityNavigator;
+import com.raik383h_group_6.healthtracmobile.application.IActivityNavigator;
 import com.raik383h_group_6.healthtracmobile.content.IResources;
 import com.raik383h_group_6.healthtracmobile.model.AccessGrant;
 import com.raik383h_group_6.healthtracmobile.model.User;
 import com.raik383h_group_6.healthtracmobile.service.api.UserService;
-import com.raik383h_group_6.healthtracmobile.view.ListUsersActivity;
+import com.raik383h_group_6.healthtracmobile.view.activity.ListUsersActivity;
 
 import java.util.List;
 import java.util.concurrent.ExecutionException;
@@ -25,14 +25,14 @@ public class ListUsersPresenter {
     private static final int AUTH = 1;
 
     private IResources resources;
-    private ActivityNavigator nav;
+    private IActivityNavigator nav;
     private ListUsersActivity view;
     private UserService userService;
     private AccessGrant grant;
     private Bundle extras;
 
     @Inject
-    public ListUsersPresenter(UserService userService, @Assisted Bundle extras, @Assisted IResources resources, @Assisted ActivityNavigator nav, @Assisted ListUsersActivity view) {
+    public ListUsersPresenter(UserService userService, @Assisted Bundle extras, @Assisted IResources resources, @Assisted IActivityNavigator nav, @Assisted ListUsersActivity view) {
         this.resources = resources;
         this.nav = nav;
         this.userService = userService;

@@ -1,4 +1,4 @@
-package com.raik383h_group_6.healthtracmobile.view;
+package com.raik383h_group_6.healthtracmobile.view.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,18 +8,20 @@ import android.widget.TextView;
 
 import com.google.inject.Inject;
 import com.raik383h_group_6.healthtracmobile.R;
+import com.raik383h_group_6.healthtracmobile.application.IActivityNavigator;
 import com.raik383h_group_6.healthtracmobile.content.IResources;
 import com.raik383h_group_6.healthtracmobile.content.ResourcesAdapter;
 import com.raik383h_group_6.healthtracmobile.application.ActivityNavigator;
 import com.raik383h_group_6.healthtracmobile.presenter.PresenterFactory;
 import com.raik383h_group_6.healthtracmobile.presenter.ViewUserPresenter;
+import com.raik383h_group_6.healthtracmobile.view.ViewUserView;
 
 import roboguice.activity.RoboActionBarActivity;
 import roboguice.inject.ContentView;
 import roboguice.inject.InjectView;
 
 @ContentView(R.layout.activity_view_user)
-public class ViewUserActivity extends RoboActionBarActivity {
+public class ViewUserActivity extends RoboActionBarActivity implements ViewUserView {
     @InjectView(R.id.birthdate_textview)
     TextView birthDateTextView;
     @InjectView(R.id.email_textview)
@@ -51,7 +53,7 @@ public class ViewUserActivity extends RoboActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         IResources resources = new ResourcesAdapter(getResources());
-        ActivityNavigator nav = new ActivityNavigator(this);
+        IActivityNavigator nav = new ActivityNavigator(this);
         Bundle extras = getIntent().getExtras();
         presenter = presenterFactory.create(extras, resources, nav, this);
         presenter.onCreate();
@@ -73,46 +75,57 @@ public class ViewUserActivity extends RoboActionBarActivity {
         presenter.onActivityResult(requestCode, resultCode, extras);
     }
 
+    @Override
     public void setBirthDate(String txt) {
         birthDateTextView.setText(txt);
     }
 
+    @Override
     public void setEmail(String txt) {
         emailTextView.setText(txt);
     }
 
+    @Override
     public void setFirstName(String txt) {
         firstNameTextView.setText(txt);
     }
 
+    @Override
     public void setHeight(String txt) {
         heightTextView.setText(txt);
     }
 
+    @Override
     public void setLastName(String txt) {
         lastNameTextView.setText(txt);
     }
 
+    @Override
     public void setLocation(String txt) {
         locationTextView.setText(txt);
     }
 
+    @Override
     public void setPrefName(String txt) {
         prefNameTextView.setText(txt);
     }
 
+    @Override
     public void setSex(String txt) {
         sexTextView.setText(txt);
     }
 
+    @Override
     public void setUserName(String txt) {
         userNameTextView.setText(txt);
     }
 
+    @Override
     public void setWeight(String txt) {
         weightTextView.setText(txt);
     }
 
+    @Override
     public void setShowEditUserButton(boolean enabled) {
         if (enabled) {
             editUserButton.setVisibility(View.VISIBLE);

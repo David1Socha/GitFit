@@ -6,24 +6,24 @@ import android.os.Bundle;
 import com.google.inject.Inject;
 import com.google.inject.assistedinject.Assisted;
 import com.raik383h_group_6.healthtracmobile.R;
-import com.raik383h_group_6.healthtracmobile.application.ActivityNavigator;
+import com.raik383h_group_6.healthtracmobile.application.IActivityNavigator;
 import com.raik383h_group_6.healthtracmobile.content.IResources;
 import com.raik383h_group_6.healthtracmobile.model.AccessGrant;
 import com.raik383h_group_6.healthtracmobile.model.User;
 import com.raik383h_group_6.healthtracmobile.service.FormatUtils;
-import com.raik383h_group_6.healthtracmobile.view.ViewUserActivity;
+import com.raik383h_group_6.healthtracmobile.view.ViewUserView;
 
 public class ViewUserPresenter {
     private final Bundle extras;
     private final IResources resources;
-    private final ActivityNavigator nav;
-    private final ViewUserActivity view;
+    private final IActivityNavigator nav;
+    private final ViewUserView view;
     private User user;
     private AccessGrant grant;
     public static final int UPDATE = 1;
 
     @Inject
-    public ViewUserPresenter(@Assisted Bundle extras, @Assisted IResources resources, @Assisted ActivityNavigator nav, @Assisted ViewUserActivity view) {
+    public ViewUserPresenter(@Assisted Bundle extras, @Assisted IResources resources, @Assisted IActivityNavigator nav, @Assisted ViewUserView view) {
         this.extras = extras;
         this.resources = resources;
         this.nav = nav;

@@ -5,13 +5,13 @@ import android.os.Bundle;
 import com.google.inject.Inject;
 import com.google.inject.assistedinject.Assisted;
 import com.raik383h_group_6.healthtracmobile.R;
-import com.raik383h_group_6.healthtracmobile.application.ActivityNavigator;
+import com.raik383h_group_6.healthtracmobile.application.IActivityNavigator;
 import com.raik383h_group_6.healthtracmobile.content.IResources;
 import com.raik383h_group_6.healthtracmobile.model.AccessGrant;
 import com.raik383h_group_6.healthtracmobile.model.User;
 import com.raik383h_group_6.healthtracmobile.service.FormatUtils;
 import com.raik383h_group_6.healthtracmobile.service.api.UserService;
-import com.raik383h_group_6.healthtracmobile.view.UpdateUserActivity;
+import com.raik383h_group_6.healthtracmobile.view.activity.UpdateUserActivity;
 
 import java.util.concurrent.ExecutionException;
 
@@ -21,13 +21,13 @@ public class UpdateUserPresenter {
     private final Bundle extras;
     private final IResources resources;
     private final UpdateUserActivity view;
-    private final ActivityNavigator nav;
+    private final IActivityNavigator nav;
     private UserValidationPresenter userValidationPresenter;
     private AccessGrant grant;
     private User ogUser;
 
     @Inject
-    public UpdateUserPresenter(UserService userService, @Assisted Bundle extras, @Assisted IResources resources, @Assisted ActivityNavigator nav, @Assisted UpdateUserActivity view) {
+    public UpdateUserPresenter(UserService userService, @Assisted Bundle extras, @Assisted IResources resources, @Assisted IActivityNavigator nav, @Assisted UpdateUserActivity view) {
         this.userService = userService;
         this.extras = extras;
         this.nav = nav;

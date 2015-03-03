@@ -1,4 +1,4 @@
-package com.raik383h_group_6.healthtracmobile.view;
+package com.raik383h_group_6.healthtracmobile.view.activity;
 
 import android.os.Bundle;
 import android.view.View;
@@ -10,30 +10,29 @@ import android.widget.Toast;
 
 import com.google.inject.Inject;
 import com.raik383h_group_6.healthtracmobile.R;
+import com.raik383h_group_6.healthtracmobile.application.IActivityNavigator;
 import com.raik383h_group_6.healthtracmobile.content.IResources;
 import com.raik383h_group_6.healthtracmobile.content.ResourcesAdapter;
 import com.raik383h_group_6.healthtracmobile.model.User;
 import com.raik383h_group_6.healthtracmobile.application.ActivityNavigator;
 import com.raik383h_group_6.healthtracmobile.presenter.PresenterFactory;
-import com.raik383h_group_6.healthtracmobile.presenter.RegisterUserPresenter;
-import com.raik383h_group_6.healthtracmobile.service.api.AccountService;
-import com.raik383h_group_6.healthtracmobile.service.api.FacebookService;
+import com.raik383h_group_6.healthtracmobile.presenter.UpdateUserPresenter;
+import com.raik383h_group_6.healthtracmobile.service.api.UserService;
+import com.raik383h_group_6.healthtracmobile.view.UserEditView;
 
-import roboguice.activity.RoboActivity;
+import roboguice.activity.RoboActionBarActivity;
 import roboguice.inject.ContentView;
 import roboguice.inject.InjectView;
 
-@ContentView(R.layout.activity_register_user)
-public class RegisterUserActivity extends RoboActivity implements IUserEditView{
+@ContentView(R.layout.activity_update_user)
+public class UpdateUserActivity extends RoboActionBarActivity implements UserEditView {
     @Inject
     private PresenterFactory presenterFactory;
-    private RegisterUserPresenter presenter;
+    private UpdateUserPresenter presenter;
     @Inject
-    FacebookService facebookService;
-    @Inject
-    AccountService accountService;
-    @InjectView(R.id.button_create_account)
-    Button createAccountButton;
+    UserService userService;
+    @InjectView(R.id.button_update_user)
+    Button updateUserButton;
     @InjectView(R.id.last_name_edittext)
     EditText lastNameEditText;
     @InjectView(R.id.first_name_edittext)
@@ -58,6 +57,51 @@ public class RegisterUserActivity extends RoboActivity implements IUserEditView{
     RadioButton sexRadioFemale;
     @InjectView(R.id.radio_sex_male)
     RadioButton sexRadioMale;
+
+    @Override
+    public void setLastName(String val) {
+        lastNameEditText.setText(val);
+    }
+
+    @Override
+    public void setFirstName(String val) {
+        firstNameEditText.setText(val);
+    }
+
+    @Override
+    public void setPrefName(String val) {
+        prefNameEditText.setText(val);
+    }
+
+    @Override
+    public void setBirthDate(String val) {
+        birthDateEditText.setText(val);
+    }
+
+    @Override
+    public void setLocation(String val) {
+        locationEditText.setText(val);
+    }
+
+    @Override
+    public void setEmail(String val) {
+        emailEditText.setText(val);
+    }
+
+    @Override
+    public void setHeight(String val) {
+        heightEditText.setText(val);
+    }
+
+    @Override
+    public void setUsername(String val) {
+        usernameEditText.setText(val);
+    }
+
+    @Override
+    public void setWeight(String val) {
+        weightEditText.setText(val);
+    }
 
     @Override
     public String getBirthDate() {
@@ -109,42 +153,7 @@ public class RegisterUserActivity extends RoboActivity implements IUserEditView{
         return weightEditText.getText().toString();
     }
 
-    public void setLastName(String val) {
-        lastNameEditText.setText(val);
-    }
-
-    public void setFirstName(String val) {
-        firstNameEditText.setText(val);
-    }
-
-    public void setPrefName(String val) {
-        prefNameEditText.setText(val);
-    }
-
-    public void setBirthDate(String val) {
-        birthDateEditText.setText(val);
-    }
-
-    public void setLocation(String val) {
-        locationEditText.setText(val);
-    }
-
-    public void setEmail(String val) {
-        emailEditText.setText(val);
-    }
-
-    public void setHeight(String val) {
-        heightEditText.setText(val);
-    }
-
-    public void setUsername(String val) {
-        usernameEditText.setText(val);
-    }
-
-    public void setWeight(String val) {
-        weightEditText.setText(val);
-    }
-
+    @Override
     public void setSex(User.Sex sex) {
         if (sex == User.Sex.FEMALE) {
             sexRadioFemale.setChecked(true);
@@ -158,47 +167,56 @@ public class RegisterUserActivity extends RoboActivity implements IUserEditView{
         super.onCreate(savedInstanceState);
         Bundle extras = getIntent().getExtras();
         IResources resources = new ResourcesAdapter(getResources());
-        ActivityNavigator nav = new ActivityNavigator(this);
-        presenter= presenterFactory.create(extras, resources, nav, this);
+        IActivityNavigator nav = new ActivityNavigator(this);
+        presenter = presenterFactory.create(extras, resources, nav, this);
         presenter.onCreate();
     }
 
-    public void onClickCreateAccount(View v) {
-        presenter.onClickCreateAccount();
+    public void onClickUpdateUser(View v) {
+        presenter.onClickUpdateUser();
     }
 
+    @Override
     public void setLocationError(String msg) {
         locationEditText.setError(msg);
     }
 
+    @Override
     public void setBirthDateError(String msg) {
         birthDateEditText.setError(msg);
     }
 
+    @Override
     public void setEmailError(String msg) {
         emailEditText.setError(msg);
     }
 
+    @Override
     public void setFirstNameError(String msg) {
         firstNameEditText.setError(msg);
     }
 
+    @Override
     public void setHeightError(String msg) {
         heightEditText.setError(msg);
     }
 
+    @Override
     public void setLastNameError(String msg) {
         lastNameEditText.setError(msg);
     }
 
+    @Override
     public void setPrefNameError(String msg) {
         prefNameEditText.setError(msg);
     }
 
+    @Override
     public void setUsernameError(String msg) {
         usernameEditText.setError(msg);
     }
 
+    @Override
     public void setWeightError(String msg) {
         weightEditText.setError(msg);
     }

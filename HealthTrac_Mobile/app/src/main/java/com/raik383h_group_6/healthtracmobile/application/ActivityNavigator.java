@@ -1,27 +1,22 @@
 package com.raik383h_group_6.healthtracmobile.application;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 
-import com.google.inject.Inject;
-import com.google.inject.assistedinject.Assisted;
 import com.raik383h_group_6.healthtracmobile.R;
 import com.raik383h_group_6.healthtracmobile.model.AccessGrant;
 import com.raik383h_group_6.healthtracmobile.model.Team;
 import com.raik383h_group_6.healthtracmobile.model.Token;
 import com.raik383h_group_6.healthtracmobile.model.User;
-import com.raik383h_group_6.healthtracmobile.view.AuthenticationActivity;
-import com.raik383h_group_6.healthtracmobile.view.ListTeamsActivity;
-import com.raik383h_group_6.healthtracmobile.view.ListUsersActivity;
-import com.raik383h_group_6.healthtracmobile.view.OAuthBrowserActivity;
-import com.raik383h_group_6.healthtracmobile.view.OAuthPromptActivity;
-import com.raik383h_group_6.healthtracmobile.view.RegisterUserActivity;
-import com.raik383h_group_6.healthtracmobile.view.UpdateUserActivity;
-import com.raik383h_group_6.healthtracmobile.view.ViewTeamActivity;
-import com.raik383h_group_6.healthtracmobile.view.ViewUserActivity;
-
-import roboguice.inject.ContentView;
+import com.raik383h_group_6.healthtracmobile.view.activity.AuthenticationActivity;
+import com.raik383h_group_6.healthtracmobile.view.activity.ListTeamsActivity;
+import com.raik383h_group_6.healthtracmobile.view.activity.ListUsersActivity;
+import com.raik383h_group_6.healthtracmobile.view.activity.OAuthBrowserActivity;
+import com.raik383h_group_6.healthtracmobile.view.activity.OAuthPromptActivity;
+import com.raik383h_group_6.healthtracmobile.view.activity.RegisterUserActivity;
+import com.raik383h_group_6.healthtracmobile.view.activity.UpdateUserActivity;
+import com.raik383h_group_6.healthtracmobile.view.activity.ViewTeamActivity;
+import com.raik383h_group_6.healthtracmobile.view.activity.ViewUserActivity;
 
 public class ActivityNavigator implements IActivityNavigator {
     private final Activity activity;

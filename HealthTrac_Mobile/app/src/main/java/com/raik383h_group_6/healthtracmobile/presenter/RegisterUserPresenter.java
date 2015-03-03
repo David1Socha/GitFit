@@ -6,7 +6,7 @@ import android.os.Bundle;
 import com.google.inject.Inject;
 import com.google.inject.assistedinject.Assisted;
 import com.raik383h_group_6.healthtracmobile.R;
-import com.raik383h_group_6.healthtracmobile.application.ActivityNavigator;
+import com.raik383h_group_6.healthtracmobile.application.IActivityNavigator;
 import com.raik383h_group_6.healthtracmobile.content.IResources;
 import com.raik383h_group_6.healthtracmobile.model.Credentials;
 import com.raik383h_group_6.healthtracmobile.model.FacebookUser;
@@ -15,7 +15,7 @@ import com.raik383h_group_6.healthtracmobile.model.UserLogin;
 import com.raik383h_group_6.healthtracmobile.service.api.AccountService;
 import com.raik383h_group_6.healthtracmobile.service.api.FacebookService;
 import com.raik383h_group_6.healthtracmobile.service.api.UserService;
-import com.raik383h_group_6.healthtracmobile.view.RegisterUserActivity;
+import com.raik383h_group_6.healthtracmobile.view.activity.RegisterUserActivity;
 
 import java.util.concurrent.ExecutionException;
 
@@ -27,12 +27,12 @@ public class RegisterUserPresenter {
     private AccountService accountService;
     private IResources resources;
     private Bundle extras;
-    private ActivityNavigator nav;
+    private IActivityNavigator nav;
     private UserService userService;
     private UserValidationPresenter userValidationPresenter;
 
     @Inject
-    public RegisterUserPresenter(FacebookService facebookService, UserService userService, AccountService accountService, @Assisted Bundle extras, @Assisted IResources resources, @Assisted ActivityNavigator nav, @Assisted RegisterUserActivity view) {
+    public RegisterUserPresenter(FacebookService facebookService, UserService userService, AccountService accountService, @Assisted Bundle extras, @Assisted IResources resources, @Assisted IActivityNavigator nav, @Assisted RegisterUserActivity view) {
         this.facebookService = facebookService;
         this.view = view;
         this.accountService = accountService;

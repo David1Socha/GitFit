@@ -10,12 +10,12 @@ import com.google.inject.Inject;
 import com.google.inject.assistedinject.Assisted;
 import com.raik383h_group_6.healthtracmobile.R;
 import com.raik383h_group_6.healthtracmobile.adapter.TeamAdapter;
-import com.raik383h_group_6.healthtracmobile.application.ActivityNavigator;
+import com.raik383h_group_6.healthtracmobile.application.IActivityNavigator;
 import com.raik383h_group_6.healthtracmobile.content.IResources;
 import com.raik383h_group_6.healthtracmobile.model.AccessGrant;
 import com.raik383h_group_6.healthtracmobile.model.Team;
 import com.raik383h_group_6.healthtracmobile.service.api.TeamService;
-import com.raik383h_group_6.healthtracmobile.view.ListTeamsActivity;
+import com.raik383h_group_6.healthtracmobile.view.activity.ListTeamsActivity;
 
 import java.util.List;
 import java.util.concurrent.ExecutionException;
@@ -25,14 +25,14 @@ public class ListTeamsPresenter {
     private static final int AUTH = 1;
 
     private IResources resources;
-    private ActivityNavigator nav;
+    private IActivityNavigator nav;
     private ListTeamsActivity view;
     private TeamService teamService;
     private AccessGrant grant;
     private Bundle extras;
 
     @Inject
-    public ListTeamsPresenter(TeamService teamService, @Assisted Bundle extras, @Assisted IResources resources, @Assisted ActivityNavigator nav, @Assisted ListTeamsActivity view) {
+    public ListTeamsPresenter(TeamService teamService, @Assisted Bundle extras, @Assisted IResources resources, @Assisted IActivityNavigator nav, @Assisted ListTeamsActivity view) {
         this.resources = resources;
         this.nav = nav;
         this.teamService = teamService;

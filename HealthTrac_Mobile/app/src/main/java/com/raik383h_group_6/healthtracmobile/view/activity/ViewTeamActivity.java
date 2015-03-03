@@ -1,8 +1,7 @@
-package com.raik383h_group_6.healthtracmobile.view;
+package com.raik383h_group_6.healthtracmobile.view.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -11,13 +10,11 @@ import android.widget.Toast;
 import com.google.inject.Inject;
 import com.raik383h_group_6.healthtracmobile.R;
 import com.raik383h_group_6.healthtracmobile.application.ActivityNavigator;
+import com.raik383h_group_6.healthtracmobile.application.IActivityNavigator;
 import com.raik383h_group_6.healthtracmobile.content.IResources;
 import com.raik383h_group_6.healthtracmobile.content.ResourcesAdapter;
 import com.raik383h_group_6.healthtracmobile.presenter.PresenterFactory;
 import com.raik383h_group_6.healthtracmobile.presenter.ViewTeamPresenter;
-import com.raik383h_group_6.healthtracmobile.presenter.ViewUserPresenter;
-
-import org.w3c.dom.Text;
 
 import roboguice.activity.RoboActionBarActivity;
 import roboguice.inject.ContentView;
@@ -45,7 +42,7 @@ public class ViewTeamActivity extends RoboActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         IResources resources = new ResourcesAdapter(getResources());
-        ActivityNavigator nav = new ActivityNavigator(this);
+        IActivityNavigator nav = new ActivityNavigator(this);
         Bundle extras = getIntent().getExtras();
         presenter = presenterFactory.create(extras, resources, nav, this);
         presenter.onCreate();

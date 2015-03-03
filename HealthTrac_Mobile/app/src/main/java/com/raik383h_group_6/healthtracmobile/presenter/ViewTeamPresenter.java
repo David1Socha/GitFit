@@ -3,21 +3,18 @@ package com.raik383h_group_6.healthtracmobile.presenter;
 import android.app.Activity;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 
 import com.google.inject.Inject;
 import com.google.inject.assistedinject.Assisted;
 import com.raik383h_group_6.healthtracmobile.R;
-import com.raik383h_group_6.healthtracmobile.application.ActivityNavigator;
+import com.raik383h_group_6.healthtracmobile.application.IActivityNavigator;
 import com.raik383h_group_6.healthtracmobile.content.IResources;
 import com.raik383h_group_6.healthtracmobile.model.AccessGrant;
 import com.raik383h_group_6.healthtracmobile.model.Membership;
 import com.raik383h_group_6.healthtracmobile.model.Team;
-import com.raik383h_group_6.healthtracmobile.model.User;
 import com.raik383h_group_6.healthtracmobile.service.FormatUtils;
 import com.raik383h_group_6.healthtracmobile.service.api.MembershipService;
-import com.raik383h_group_6.healthtracmobile.view.ViewTeamActivity;
-import com.raik383h_group_6.healthtracmobile.view.ViewUserActivity;
+import com.raik383h_group_6.healthtracmobile.view.activity.ViewTeamActivity;
 
 import java.util.Date;
 import java.util.List;
@@ -26,7 +23,7 @@ import java.util.concurrent.ExecutionException;
 public class ViewTeamPresenter {
     private final Bundle extras;
     private final IResources resources;
-    private final ActivityNavigator nav;
+    private final IActivityNavigator nav;
     private final ViewTeamActivity view;
     private Team team;
     private AccessGrant grant;
@@ -36,7 +33,7 @@ public class ViewTeamPresenter {
     private Membership userMembership;
 
     @Inject
-    public ViewTeamPresenter(MembershipService membershipService, @Assisted Bundle extras, @Assisted IResources resources, @Assisted ActivityNavigator nav, @Assisted ViewTeamActivity view) {
+    public ViewTeamPresenter(MembershipService membershipService, @Assisted Bundle extras, @Assisted IResources resources, @Assisted IActivityNavigator nav, @Assisted ViewTeamActivity view) {
         this.membershipService = membershipService;
         this.extras = extras;
         this.resources = resources;

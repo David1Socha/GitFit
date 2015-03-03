@@ -1,4 +1,4 @@
-package com.raik383h_group_6.healthtracmobile.view;
+package com.raik383h_group_6.healthtracmobile.view.activity;
 
 import android.os.Bundle;
 import android.view.View;
@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.google.inject.Inject;
 import com.raik383h_group_6.healthtracmobile.R;
+import com.raik383h_group_6.healthtracmobile.application.IActivityNavigator;
 import com.raik383h_group_6.healthtracmobile.content.IResources;
 import com.raik383h_group_6.healthtracmobile.content.ResourcesAdapter;
 import com.raik383h_group_6.healthtracmobile.application.ActivityNavigator;
@@ -33,7 +34,7 @@ public class ListTeamsActivity extends RoboActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         IResources resources = new ResourcesAdapter(getResources());
-        ActivityNavigator nav = new ActivityNavigator(this);
+        IActivityNavigator nav = new ActivityNavigator(this);
         Bundle extras = getIntent().getExtras();
         presenter = presenterFactory.create(extras, resources, nav, this);
         teamListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {

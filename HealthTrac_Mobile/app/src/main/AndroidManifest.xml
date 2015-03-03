@@ -11,15 +11,15 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".view.ListUsersActivity"
+            android:name=".view.activity.ListUsersActivity"
             android:launchMode="singleTop"
             android:label="@string/title_activity_list_users">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".view.GitFitMainActivity" />
+                android:value=".view.activity.GitFitMainActivity" />
         </activity>
         <activity
-            android:name=".view.GitFitMainActivity"
+            android:name=".view.activity.GitFitMainActivity"
             android:launchMode="singleTop"
             android:label="@string/git_fit">
             <intent-filter>
@@ -28,48 +28,48 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".view.AuthenticationActivity"
+            android:name=".view.activity.AuthenticationActivity"
             android:label="@string/title_authentication_activity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".view.ListUsersActivity" />
+                android:value=".view.activity.ListUsersActivity" />
         </activity>
         <activity
-            android:name=".view.OAuthPromptActivity"
+            android:name=".view.activity.OAuthPromptActivity"
             android:label="@string/title_activity_login">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".view.AuthenticationActivity" />
+                android:value=".view.activity.AuthenticationActivity" />
         </activity>
         <activity
-            android:name=".view.OAuthBrowserActivity"
+            android:name=".view.activity.OAuthBrowserActivity"
             android:label="@string/title_activity_login_browser">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".view.OAuthPromptActivity" />
+                android:value=".view.activity.OAuthPromptActivity" />
         </activity>
         <activity
-            android:name=".view.RegisterUserActivity"
+            android:name=".view.activity.RegisterUserActivity"
             android:label="@string/title_activity_register_user">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".view.AuthenticationActivity" />
+                android:value=".view.activity.AuthenticationActivity" />
         </activity>
         <activity
-            android:name=".view.ListTeamsActivity"
+            android:name=".view.activity.ListTeamsActivity"
             android:label="@string/title_activity_list_teams"
             android:launchMode="singleTop">
             <meta-data
-                android:value=".view.GitFitMainActivity"
+                android:value=".view.activity.GitFitMainActivity"
                 android:name="android.support.PARENT_ACTIVITY" />
         </activity>
 
         <activity
-            android:name=".view.UpdateUserActivity"
+            android:name=".view.activity.UpdateUserActivity"
             android:label="@string/title_activity_update_user">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".view.ViewUserActivity" />
+                android:value=".view.activity.ViewUserActivity" />
         </activity>
 
         <meta-data
@@ -80,18 +80,18 @@
             android:value="com.raik383h_group_6.healthtracmobile.application.ApplicationModule" />
 
         <activity
-            android:name=".view.ViewUserActivity"
+            android:name=".view.activity.ViewUserActivity"
             android:label="@string/title_activity_view_user">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.raik383h_group_6.healthtracmobile.view.ListUsersActivity" />
+                android:value=".view.activity.ListUsersActivity" />
         </activity>
         <activity
-            android:name=".view.ViewTeamActivity"
+            android:name=".view.activity.ViewTeamActivity"
             android:label="@string/title_activity_view_team">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.raik383h_group_6.healthtracmobile.view.ListTeamsActivity" />
+                android:value=".view.activity.ListTeamsActivity" />
         </activity>
     </application>
 

@@ -5,13 +5,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ListAdapter;
 import android.widget.TextView;
 
 import com.raik383h_group_6.healthtracmobile.R;
 import com.raik383h_group_6.healthtracmobile.model.Team;
-import com.raik383h_group_6.healthtracmobile.model.User;
-import com.raik383h_group_6.healthtracmobile.view.ListTeamsActivity;
 
 import java.util.List;
 

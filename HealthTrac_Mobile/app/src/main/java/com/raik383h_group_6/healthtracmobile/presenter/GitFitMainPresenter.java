@@ -8,12 +8,12 @@ import com.google.gson.Gson;
 import com.google.inject.Inject;
 import com.google.inject.assistedinject.Assisted;
 import com.raik383h_group_6.healthtracmobile.R;
-import com.raik383h_group_6.healthtracmobile.application.ActivityNavigator;
+import com.raik383h_group_6.healthtracmobile.application.IActivityNavigator;
 import com.raik383h_group_6.healthtracmobile.content.IResources;
 import com.raik383h_group_6.healthtracmobile.model.AccessGrant;
 import com.raik383h_group_6.healthtracmobile.model.User;
 import com.raik383h_group_6.healthtracmobile.service.api.UserService;
-import com.raik383h_group_6.healthtracmobile.view.GitFitMainActivity;
+import com.raik383h_group_6.healthtracmobile.view.activity.GitFitMainActivity;
 
 import java.util.concurrent.ExecutionException;
 
@@ -21,13 +21,13 @@ public class GitFitMainPresenter {
     public static final int AUTH = 1;
     private AccessGrant grant;
     private IResources resources;
-    private ActivityNavigator nav;
+    private IActivityNavigator nav;
     private GitFitMainActivity view;
     private UserService userService;
     private User user;
 
     @Inject
-    public GitFitMainPresenter(UserService userService, @Assisted IResources resources, @Assisted ActivityNavigator nav, @Assisted GitFitMainActivity view) {
+    public GitFitMainPresenter(UserService userService, @Assisted IResources resources, @Assisted IActivityNavigator nav, @Assisted GitFitMainActivity view) {
         this.userService = userService;
         this.resources = resources;
         this.nav = nav;
