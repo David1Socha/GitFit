@@ -15,13 +15,13 @@ import com.raik383h_group_6.healthtracmobile.content.ResourcesAdapter;
 import com.raik383h_group_6.healthtracmobile.application.ActivityNavigator;
 import com.raik383h_group_6.healthtracmobile.presenter.ListUsersPresenter;
 import com.raik383h_group_6.healthtracmobile.presenter.PresenterFactory;
+import com.raik383h_group_6.healthtracmobile.view.ListUsersView;
 
-import roboguice.activity.RoboActionBarActivity;
 import roboguice.inject.ContentView;
 import roboguice.inject.InjectView;
 
 @ContentView(R.layout.activity_list_users)
-public class ListUsersActivity extends CustomRoboActionBarActivity {
+public class ListUsersActivity extends CustomRoboActionBarActivity implements ListUsersView {
     @InjectView(R.id.user_list_view)
     ListView userListView;
     @InjectView(R.id.no_users_textview)
@@ -58,10 +58,12 @@ public class ListUsersActivity extends CustomRoboActionBarActivity {
         presenter.onResume();
     }
 
+    @Override
     public void setListAdapter(ListAdapter adapter) {
         userListView.setAdapter(adapter);
     }
 
+    @Override
     public void setNoUsersMessageDisplay(boolean enabled) {
         if (enabled) {
             noUsersTextView.setVisibility(View.VISIBLE);
