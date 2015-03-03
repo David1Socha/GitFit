@@ -28,7 +28,7 @@ public class OAuthPromptActivity extends CustomRoboActionBarActivity {
         super.onCreate(savedInstanceState);
         IResources resources = new ResourcesAdapter(getResources());
         IActivityNavigator nav = new ActivityNavigator(this);
-        presenter = presenterFactory.create(resources, nav, this);
+        presenter = presenterFactory.create(resources, nav);
     }
 
     @Override
