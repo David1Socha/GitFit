@@ -2,6 +2,7 @@ package com.raik383h_group_6.healthtracmobile.presenter;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
+
 import com.google.inject.Inject;
 import com.google.inject.assistedinject.Assisted;
 import com.raik383h_group_6.healthtracmobile.R;
@@ -12,7 +13,6 @@ import com.raik383h_group_6.healthtracmobile.model.User;
 import com.raik383h_group_6.healthtracmobile.service.FormatUtils;
 import com.raik383h_group_6.healthtracmobile.service.api.UserService;
 import com.raik383h_group_6.healthtracmobile.view.EditUserView;
-import com.raik383h_group_6.healthtracmobile.view.activity.EditUserActivity;
 
 import java.util.concurrent.ExecutionException;
 

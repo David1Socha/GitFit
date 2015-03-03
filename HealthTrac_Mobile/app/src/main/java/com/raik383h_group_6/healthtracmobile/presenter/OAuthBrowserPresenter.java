@@ -16,7 +16,6 @@ import com.raik383h_group_6.healthtracmobile.application.IActivityNavigator;
 import com.raik383h_group_6.healthtracmobile.content.IResources;
 import com.raik383h_group_6.healthtracmobile.model.Token;
 import com.raik383h_group_6.healthtracmobile.service.oauth.IOAuthService;
-import com.raik383h_group_6.healthtracmobile.view.activity.OAuthBrowserActivity;
 
 import java.util.concurrent.ExecutionException;
 
