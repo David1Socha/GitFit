@@ -36,7 +36,7 @@ public class ViewUserPresenter {
     }
 
     public void onClickEditUser() {
-        nav.openUpdateUser(grant, user, UPDATE);
+        nav.openEditUser(grant, user, UPDATE);
     }
 
     public void onResume() {

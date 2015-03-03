@@ -44,9 +44,9 @@ public interface IActivityNavigator {
 
     void finishViewTeam();
 
-    void openUpdateUser(AccessGrant grant, User user, int reqCode);
+    void openEditUser(AccessGrant grant, User user, int reqCode);
 
-    void finishUpdateUserSuccess(User user);
+    void finishEditUserSuccess(User user);
 
-    void finishUpdateUserFailure();
+    void finishEditUserFailure();
 }

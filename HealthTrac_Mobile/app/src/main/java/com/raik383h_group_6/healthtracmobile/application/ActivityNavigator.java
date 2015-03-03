@@ -160,7 +160,7 @@ public class ActivityNavigator implements IActivityNavigator {
     }
 
     @Override
-    public void openUpdateUser(AccessGrant grant, User user, int reqCode) {
+    public void openEditUser(AccessGrant grant, User user, int reqCode) {
         Intent intent = new Intent(activity, EditUserActivity.class);
         intent.putExtra(activity.getString(R.string.EXTRA_ACCESS_GRANT), grant);
         intent.putExtra(activity.getString(R.string.EXTRA_USER), user);
@@ -168,7 +168,7 @@ public class ActivityNavigator implements IActivityNavigator {
     }
 
     @Override
-    public void finishUpdateUserSuccess(User user) {
+    public void finishEditUserSuccess(User user) {
         Intent data = new Intent();
         data.putExtra(activity.getString(R.string.EXTRA_USER), user);
         activity.setResult(Activity.RESULT_OK, data);
@@ -176,7 +176,7 @@ public class ActivityNavigator implements IActivityNavigator {
     }
 
     @Override
-    public void finishUpdateUserFailure() {
+    public void finishEditUserFailure() {
         activity.setResult(Activity.RESULT_CANCELED);
         activity.finish();
     }

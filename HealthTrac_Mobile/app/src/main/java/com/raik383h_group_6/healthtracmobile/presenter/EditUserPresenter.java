@@ -74,10 +74,10 @@ public class EditUserPresenter {
                 throw e;
             }
             view.displayMessage(resources.getString(R.string.user_updated_message));
-            nav.finishUpdateUserSuccess(u);
+            nav.finishEditUserSuccess(u);
         } catch (Exception e) {
             view.displayMessage(resources.getString(R.string.update_user_error));
-            nav.finishUpdateUserFailure();
+            nav.finishEditUserFailure();
         }
     }
 
