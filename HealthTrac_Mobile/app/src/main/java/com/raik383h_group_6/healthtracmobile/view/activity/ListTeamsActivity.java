@@ -21,7 +21,7 @@ import roboguice.inject.ContentView;
 import roboguice.inject.InjectView;
 
 @ContentView(R.layout.activity_list_teams)
-public class ListTeamsActivity extends CustomRoboActionBarActivity {
+public class ListTeamsActivity extends CustomRoboActionBarActivity implements com.raik383h_group_6.healthtracmobile.view.ListTeamsView {
     @InjectView(R.id.team_list_view)
     ListView teamListView;
     @InjectView(R.id.no_teams_textview)
@@ -58,10 +58,12 @@ public class ListTeamsActivity extends CustomRoboActionBarActivity {
         presenter.onResume();
     }
 
+    @Override
     public void setListAdapter(ListAdapter adapter) {
         teamListView.setAdapter(adapter);
     }
 
+    @Override
     public void setNoTeamsMessageDisplay(boolean enabled) {
         if (enabled) {
             noTeamsTextView.setVisibility(View.VISIBLE);
