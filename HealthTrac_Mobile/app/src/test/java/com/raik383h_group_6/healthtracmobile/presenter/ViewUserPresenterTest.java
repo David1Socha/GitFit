@@ -11,6 +11,7 @@ import com.raik383h_group_6.healthtracmobile.model.AccessGrant;
 import com.raik383h_group_6.healthtracmobile.model.User;
 import com.raik383h_group_6.healthtracmobile.service.FormatUtils;
 import com.raik383h_group_6.healthtracmobile.view.ViewUserView;
+import com.raik383h_group_6.healthtracmobile.helper.ModelGenerator;
 
 import org.junit.Assert;
 import org.junit.Before;
@@ -34,8 +35,8 @@ public class ViewUserPresenterTest {
     @Before
     public void setup() {
         nav = mock(IActivityNavigator.class);
-        user = genBasicUser();
-        grant = genBasicGrant();
+        user = ModelGenerator.genBasicUser();
+        grant = ModelGenerator.genBasicGrant();
         bundle = mock(Bundle.class);
         view = mock(ViewUserView.class);
         when(bundle.getParcelable(USER_KEY)).thenReturn(user);
@@ -46,19 +47,6 @@ public class ViewUserPresenterTest {
         when(resources.getString(R.string.male_label)).thenReturn(MALE);
         when(resources.getString(R.string.label_female)).thenReturn(FEMALE);
         presenter = new ViewUserPresenter(bundle, resources, nav, view);
-    }
-
-    private User genBasicUser() {
-        User u = new User(new Date(), new Date(), new Date(), "yahoo@gmail.com", "david", 22, "socha", "omaha", "david socha", User.Sex.MALE, "david1socha", 20);
-        u.setId("123");
-        return u;
-    }
-
-    private AccessGrant genBasicGrant() {
-        AccessGrant g = new AccessGrant( );
-        g.setId("123");
-        g.setUserName("david1socha");
-        return g;
     }
 
     @Test
