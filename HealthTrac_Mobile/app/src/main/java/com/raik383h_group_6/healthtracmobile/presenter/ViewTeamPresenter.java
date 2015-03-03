@@ -14,7 +14,7 @@ import com.raik383h_group_6.healthtracmobile.model.Membership;
 import com.raik383h_group_6.healthtracmobile.model.Team;
 import com.raik383h_group_6.healthtracmobile.service.FormatUtils;
 import com.raik383h_group_6.healthtracmobile.service.api.MembershipService;
-import com.raik383h_group_6.healthtracmobile.view.activity.ViewTeamActivity;
+import com.raik383h_group_6.healthtracmobile.view.activity.ViewTeamView;
 
 import java.util.Date;
 import java.util.List;
@@ -24,7 +24,7 @@ public class ViewTeamPresenter {
     private final Bundle extras;
     private final IResources resources;
     private final IActivityNavigator nav;
-    private final ViewTeamActivity view;
+    private final ViewTeamView view;
     private Team team;
     private AccessGrant grant;
     private List<Membership> teamMemberships;
@@ -33,7 +33,7 @@ public class ViewTeamPresenter {
     private Membership userMembership;
 
     @Inject
-    public ViewTeamPresenter(MembershipService membershipService, @Assisted Bundle extras, @Assisted IResources resources, @Assisted IActivityNavigator nav, @Assisted ViewTeamActivity view) {
+    public ViewTeamPresenter(MembershipService membershipService, @Assisted Bundle extras, @Assisted IResources resources, @Assisted IActivityNavigator nav, @Assisted ViewTeamView view) {
         this.membershipService = membershipService;
         this.extras = extras;
         this.resources = resources;

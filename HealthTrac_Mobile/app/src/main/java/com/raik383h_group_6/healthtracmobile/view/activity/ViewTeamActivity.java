@@ -21,7 +21,7 @@ import roboguice.inject.ContentView;
 import roboguice.inject.InjectView;
 
 @ContentView(R.layout.activity_view_team)
-public class ViewTeamActivity extends CustomRoboActionBarActivity {
+public class ViewTeamActivity extends CustomRoboActionBarActivity implements ViewTeamView {
     @InjectView(R.id.team_name_textview)
     TextView teamNameTextView;
     @InjectView(R.id.description_textview)
@@ -72,22 +72,27 @@ public class ViewTeamActivity extends CustomRoboActionBarActivity {
         presenter.onActivityResult(requestCode, resultCode, extras);
     }
 
+    @Override
     public void setTeamName(String msg) {
         teamNameTextView.setText(msg);
     }
 
+    @Override
     public void setDescription(String msg) {
         descriptionTextView.setText(msg);
     }
 
+    @Override
     public void setDateCreated(String msg) {
         dateCreatedTextView.setText(msg);
     }
 
+    @Override
     public void displayMessage(String msg) {
         Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
     }
 
+    @Override
     public void setShowEditTeam(boolean enabled) {
         if (enabled) {
             editTeamButton.setVisibility(View.VISIBLE);
@@ -96,6 +101,7 @@ public class ViewTeamActivity extends CustomRoboActionBarActivity {
         }
     }
 
+    @Override
     public void setShowLeaveTeam(boolean enabled) {
         if (enabled) {
             leaveTeamButton.setVisibility(View.VISIBLE);
@@ -104,6 +110,7 @@ public class ViewTeamActivity extends CustomRoboActionBarActivity {
         }
     }
 
+    @Override
     public void setShowJoinTeam(boolean enabled) {
         if (enabled) {
             joinTeamButton.setVisibility(View.VISIBLE);

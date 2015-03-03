@@ -16,7 +16,6 @@ import com.raik383h_group_6.healthtracmobile.service.api.AccountService;
 import com.raik383h_group_6.healthtracmobile.service.api.FacebookService;
 import com.raik383h_group_6.healthtracmobile.service.api.UserService;
 import com.raik383h_group_6.healthtracmobile.view.CreateUserView;
-import com.raik383h_group_6.healthtracmobile.view.activity.CreateUserActivity;
 
 import java.util.concurrent.ExecutionException;
 
