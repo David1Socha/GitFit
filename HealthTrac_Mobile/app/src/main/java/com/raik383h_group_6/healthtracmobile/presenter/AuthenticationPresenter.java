@@ -106,6 +106,6 @@ public class AuthenticationPresenter {
     }
 
     public void createAccount(String accessToken, String accessSecret, String provider) {
-        nav.openRegisterUser(accessToken, accessSecret, provider, CREATE_ACCOUNT);
+        nav.openCreateUser(accessToken, accessSecret, provider, CREATE_ACCOUNT);
     }
 }

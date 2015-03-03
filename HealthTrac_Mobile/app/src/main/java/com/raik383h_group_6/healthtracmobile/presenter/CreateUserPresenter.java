@@ -15,12 +15,12 @@ import com.raik383h_group_6.healthtracmobile.model.UserLogin;
 import com.raik383h_group_6.healthtracmobile.service.api.AccountService;
 import com.raik383h_group_6.healthtracmobile.service.api.FacebookService;
 import com.raik383h_group_6.healthtracmobile.service.api.UserService;
-import com.raik383h_group_6.healthtracmobile.view.activity.RegisterUserActivity;
+import com.raik383h_group_6.healthtracmobile.view.activity.CreateUserActivity;
 
 import java.util.concurrent.ExecutionException;
 
-public class RegisterUserPresenter {
-    private RegisterUserActivity view;
+public class CreateUserPresenter {
+    private CreateUserActivity view;
     private FacebookService facebookService;
     private FacebookUser facebookUser;
     private String accessToken, accessSecret, provider;
@@ -32,7 +32,7 @@ public class RegisterUserPresenter {
     private UserValidationPresenter userValidationPresenter;
 
     @Inject
-    public RegisterUserPresenter(FacebookService facebookService, UserService userService, AccountService accountService, @Assisted Bundle extras, @Assisted IResources resources, @Assisted IActivityNavigator nav, @Assisted RegisterUserActivity view) {
+    public CreateUserPresenter(FacebookService facebookService, UserService userService, AccountService accountService, @Assisted Bundle extras, @Assisted IResources resources, @Assisted IActivityNavigator nav, @Assisted CreateUserActivity view) {
         this.facebookService = facebookService;
         this.view = view;
         this.accountService = accountService;
@@ -113,10 +113,10 @@ public class RegisterUserPresenter {
             if (registerException != null) {
                 throw registerException;
             }
-            nav.finishRegisterUserSuccess();
+            nav.finishCreateUserSuccess();
         } catch (Exception e) {
             view.displayMessage(resources.getString(R.string.account_not_made));
-            nav.finishRegisterUserFailure();
+            nav.finishCreateUserFailure();
         }
 
     }

@@ -16,7 +16,7 @@ import com.raik383h_group_6.healthtracmobile.content.ResourcesAdapter;
 import com.raik383h_group_6.healthtracmobile.model.User;
 import com.raik383h_group_6.healthtracmobile.application.ActivityNavigator;
 import com.raik383h_group_6.healthtracmobile.presenter.PresenterFactory;
-import com.raik383h_group_6.healthtracmobile.presenter.RegisterUserPresenter;
+import com.raik383h_group_6.healthtracmobile.presenter.CreateUserPresenter;
 import com.raik383h_group_6.healthtracmobile.service.api.AccountService;
 import com.raik383h_group_6.healthtracmobile.service.api.FacebookService;
 import com.raik383h_group_6.healthtracmobile.view.InputUserView;
@@ -25,10 +25,10 @@ import roboguice.inject.ContentView;
 import roboguice.inject.InjectView;
 
 @ContentView(R.layout.activity_register_user)
-public class RegisterUserActivity extends CustomRoboActionBarActivity implements InputUserView {
+public class CreateUserActivity extends CustomRoboActionBarActivity implements InputUserView {
     @Inject
     private PresenterFactory presenterFactory;
-    private RegisterUserPresenter presenter;
+    private CreateUserPresenter presenter;
     @Inject
     FacebookService facebookService;
     @Inject

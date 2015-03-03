@@ -16,11 +16,11 @@ public interface IActivityNavigator {
 
     void finishOAuthBrowserInShame();
 
-    void finishRegisterUserSuccess();
+    void finishCreateUserSuccess();
 
-    void finishRegisterUserFailure();
+    void finishCreateUserFailure();
 
-    void openRegisterUser(String token, String secret, String provider, int reqCode);
+    void openCreateUser(String token, String secret, String provider, int reqCode);
 
     void openOAuthPrompt(int reqCode);
 

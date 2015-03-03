@@ -13,7 +13,7 @@ import com.raik383h_group_6.healthtracmobile.view.activity.ListTeamsActivity;
 import com.raik383h_group_6.healthtracmobile.view.activity.ListUsersActivity;
 import com.raik383h_group_6.healthtracmobile.view.activity.OAuthBrowserActivity;
 import com.raik383h_group_6.healthtracmobile.view.activity.OAuthPromptActivity;
-import com.raik383h_group_6.healthtracmobile.view.activity.RegisterUserActivity;
+import com.raik383h_group_6.healthtracmobile.view.activity.CreateUserActivity;
 import com.raik383h_group_6.healthtracmobile.view.activity.EditUserActivity;
 import com.raik383h_group_6.healthtracmobile.view.activity.ViewTeamActivity;
 import com.raik383h_group_6.healthtracmobile.view.activity.ViewUserActivity;
@@ -63,18 +63,18 @@ public class ActivityNavigator implements IActivityNavigator {
     }
 
     @Override
-    public void finishRegisterUserSuccess() {
+    public void finishCreateUserSuccess() {
         genericFinishOk();
     }
 
     @Override
-    public void finishRegisterUserFailure() {
+    public void finishCreateUserFailure() {
         genericFinishCancelled();
     }
 
     @Override
-    public void openRegisterUser(String token, String secret, String provider, int reqCode) {
-            Intent intent = new Intent(activity, RegisterUserActivity.class);
+    public void openCreateUser(String token, String secret, String provider, int reqCode) {
+            Intent intent = new Intent(activity, CreateUserActivity.class);
             intent.putExtra(activity.getString(R.string.EXTRA_ACCESS_TOKEN), token);
             intent.putExtra(activity.getString(R.string.EXTRA_ACCESS_SECRET), secret);
             intent.putExtra(activity.getString(R.string.EXTRA_PROVIDER), provider);

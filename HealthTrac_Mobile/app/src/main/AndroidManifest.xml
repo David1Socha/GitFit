@@ -49,7 +49,7 @@
                 android:value=".view.activity.OAuthPromptActivity" />
         </activity>
         <activity
-            android:name=".view.activity.RegisterUserActivity"
+            android:name=".view.activity.CreateUserActivity"
             android:label="@string/title_activity_register_user">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
