@@ -23,23 +23,26 @@ import com.raik383h_group_6.healthtracmobile.view.ViewUserActivity;
 
 import roboguice.inject.ContentView;
 
-public class ActivityNavigator {
+public class ActivityNavigator implements IActivityNavigator {
     private final Activity activity;
 
     public ActivityNavigator(Activity activity) {
         this.activity = activity;
     }
 
+    @Override
     public void openOAuthBrowser(final String provider, final int reqCode) {
         Intent intent = new Intent(activity, OAuthBrowserActivity.class);
         intent.putExtra(activity.getString(R.string.EXTRA_PROVIDER), provider);
         activity.startActivityForResult(intent, reqCode);
     }
 
+    @Override
     public void finishOAuthPromptInShame() {
         genericFinishCancelled();
     }
 
+    @Override
     public void finishOAuthPromptWithInfo(String accessToken, String accessSecret, String provider) {
         Intent data = new Intent();
         data.putExtra(activity.getString(R.string.EXTRA_ACCESS_SECRET), accessSecret);
@@ -49,6 +52,7 @@ public class ActivityNavigator {
         activity.finish();
     }
 
+    @Override
     public void finishOAuthBrowserWithToken(Token token, String provider) {
         Intent data = new Intent();
         data.putExtra(activity.getString(R.string.EXTRA_ACCESS_SECRET), token.getSecret());
@@ -58,18 +62,22 @@ public class ActivityNavigator {
         activity.finish();
     }
 
+    @Override
     public void finishOAuthBrowserInShame() {
         genericFinishCancelled();
     }
 
+    @Override
     public void finishRegisterUserSuccess() {
         genericFinishOk();
     }
 
+    @Override
     public void finishRegisterUserFailure() {
         genericFinishCancelled();
     }
 
+    @Override
     public void openRegisterUser(String token, String secret, String provider, int reqCode) {
             Intent intent = new Intent(activity, RegisterUserActivity.class);
             intent.putExtra(activity.getString(R.string.EXTRA_ACCESS_TOKEN), token);
@@ -78,16 +86,19 @@ public class ActivityNavigator {
             activity.startActivityForResult(intent, reqCode);
     }
 
+    @Override
     public void openOAuthPrompt(int reqCode) {
         Intent intent = new Intent(activity, OAuthPromptActivity.class);
         activity.startActivityForResult(intent, reqCode);
     }
 
+    @Override
     public void openAuthentication(int reqCode) {
         Intent intent = new Intent(activity, AuthenticationActivity.class);
         activity.startActivityForResult(intent, reqCode);
     }
 
+    @Override
     public void finishWithAccessGrant(AccessGrant grant) {
         Intent data = new Intent();
         data.putExtra(activity.getString(R.string.EXTRA_ACCESS_GRANT), grant);
@@ -95,6 +106,7 @@ public class ActivityNavigator {
         activity.finish();
     }
 
+    @Override
     public void openViewUser(User u, AccessGrant grant) {
         Intent intent = new Intent(activity, ViewUserActivity.class);
         intent.putExtra(activity.getString(R.string.EXTRA_USER), u);
@@ -102,28 +114,34 @@ public class ActivityNavigator {
         activity.startActivity(intent);
     }
 
+    @Override
     public void finishViewUser() {
         genericFinishOk();
     }
 
+    @Override
     public void openListUsers(AccessGrant g) {
         Intent intent = new Intent(activity, ListUsersActivity.class);
         intent.putExtra(activity.getString(R.string.EXTRA_ACCESS_GRANT), g);
         activity.startActivity(intent);
     }
 
+    @Override
     public void finishListUsers() {
         genericFinishOk();
     }
 
+    @Override
     public void finishListTeams() {genericFinishOk(); }
 
+    @Override
     public void openListTeams(AccessGrant g) {
         Intent intent = new Intent(activity, ListTeamsActivity.class);
         intent.putExtra(activity.getString(R.string.EXTRA_ACCESS_GRANT), g);
         activity.startActivity(intent);
     }
 
+    @Override
     public void openViewTeam(Team t, AccessGrant g) {
         Intent intent = new Intent(activity, ViewTeamActivity.class);
         intent.putExtra(activity.getString(R.string.EXTRA_TEAM), t);
@@ -131,6 +149,7 @@ public class ActivityNavigator {
         activity.startActivity(intent);
     }
 
+    @Override
     public void finishViewTeam() {
         genericFinishOk();
     }
@@ -145,6 +164,7 @@ public class ActivityNavigator {
         activity.finish();
     }
 
+    @Override
     public void openUpdateUser(AccessGrant grant, User user, int reqCode) {
         Intent intent = new Intent(activity, UpdateUserActivity.class);
         intent.putExtra(activity.getString(R.string.EXTRA_ACCESS_GRANT), grant);
@@ -152,6 +172,7 @@ public class ActivityNavigator {
         activity.startActivityForResult(intent, reqCode);
     }
 
+    @Override
     public void finishUpdateUserSuccess(User user) {
         Intent data = new Intent();
         data.putExtra(activity.getString(R.string.EXTRA_USER), user);
@@ -159,6 +180,7 @@ public class ActivityNavigator {
         activity.finish();
     }
 
+    @Override
     public void finishUpdateUserFailure() {
         activity.setResult(Activity.RESULT_CANCELED);
         activity.finish();
