@@ -12,6 +12,7 @@ import com.raik383h_group_6.healthtracmobile.model.Team;
 import com.raik383h_group_6.healthtracmobile.model.User;
 import com.raik383h_group_6.healthtracmobile.service.FormatUtils;
 import com.raik383h_group_6.healthtracmobile.service.api.MembershipService;
+import com.raik383h_group_6.healthtracmobile.service.api.async.IAsyncMembershipService;
 import com.raik383h_group_6.healthtracmobile.view.ViewTeamView;
 import com.raik383h_group_6.healthtracmobile.view.ViewUserView;
 
@@ -29,7 +30,7 @@ public class ViewTeamPresenterTest {
     private AccessGrant grant;
     private IActivityNavigator nav;
     private ViewTeamView view;
-    private MembershipService membershipService;
+    private IAsyncMembershipService membershipService;
     private static final String TEAM_KEY ="team", GRANT_KEY = "grant";
 
     @Before
@@ -44,7 +45,7 @@ public class ViewTeamPresenterTest {
         resources = mock(IResources.class);
         when(resources.getString(R.string.EXTRA_TEAM)).thenReturn(TEAM_KEY);
         when(resources.getString(R.string.EXTRA_ACCESS_GRANT)).thenReturn(GRANT_KEY);
-        membershipService = mock(MembershipService.class);
+        membershipService = mock(IAsyncMembershipService.class);
         presenter = new ViewTeamPresenter(membershipService, bundle, resources, nav, view);
     }
 

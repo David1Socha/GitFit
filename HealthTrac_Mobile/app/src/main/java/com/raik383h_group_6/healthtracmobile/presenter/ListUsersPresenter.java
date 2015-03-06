@@ -15,6 +15,7 @@ import com.raik383h_group_6.healthtracmobile.content.IResources;
 import com.raik383h_group_6.healthtracmobile.model.AccessGrant;
 import com.raik383h_group_6.healthtracmobile.model.User;
 import com.raik383h_group_6.healthtracmobile.service.api.UserService;
+import com.raik383h_group_6.healthtracmobile.view.ListUsersView;
 import com.raik383h_group_6.healthtracmobile.view.activity.ListUsersActivity;
 
 import java.util.List;
@@ -26,13 +27,13 @@ public class ListUsersPresenter {
 
     private IResources resources;
     private IActivityNavigator nav;
-    private ListUsersActivity view;
+    private ListUsersView view;
     private UserService userService;
     private AccessGrant grant;
     private Bundle extras;
 
     @Inject
-    public ListUsersPresenter(UserService userService, @Assisted Bundle extras, @Assisted IResources resources, @Assisted IActivityNavigator nav, @Assisted ListUsersActivity view) {
+    public ListUsersPresenter(UserService userService, @Assisted Bundle extras, @Assisted IResources resources, @Assisted IActivityNavigator nav, @Assisted ListUsersView view) {
         this.resources = resources;
         this.nav = nav;
         this.userService = userService;
@@ -65,8 +66,7 @@ public class ListUsersPresenter {
             users = getUsersAsync(grant.getAuthHeader());
             if (users != null) {
                 view.setNoUsersMessageDisplay(false);
-                ListAdapter adapter = new UserAdapter(view, users);
-                view.setListAdapter(adapter);
+                view.setUsers(users);
             } else {
                 view.setNoUsersMessageDisplay(true);
             }

@@ -15,6 +15,7 @@ import com.raik383h_group_6.healthtracmobile.content.IResources;
 import com.raik383h_group_6.healthtracmobile.model.AccessGrant;
 import com.raik383h_group_6.healthtracmobile.model.Team;
 import com.raik383h_group_6.healthtracmobile.service.api.TeamService;
+import com.raik383h_group_6.healthtracmobile.view.ListTeamsView;
 import com.raik383h_group_6.healthtracmobile.view.activity.ListTeamsActivity;
 
 import java.util.List;
@@ -26,13 +27,13 @@ public class ListTeamsPresenter {
 
     private IResources resources;
     private IActivityNavigator nav;
-    private ListTeamsActivity view;
+    private ListTeamsView view;
     private TeamService teamService;
     private AccessGrant grant;
     private Bundle extras;
 
     @Inject
-    public ListTeamsPresenter(TeamService teamService, @Assisted Bundle extras, @Assisted IResources resources, @Assisted IActivityNavigator nav, @Assisted ListTeamsActivity view) {
+    public ListTeamsPresenter(TeamService teamService, @Assisted Bundle extras, @Assisted IResources resources, @Assisted IActivityNavigator nav, @Assisted ListTeamsView view) {
         this.resources = resources;
         this.nav = nav;
         this.teamService = teamService;
@@ -65,8 +66,7 @@ public class ListTeamsPresenter {
             teams = getTeamsAsync(grant.getAuthHeader());
             if (teams != null) {
                 view.setNoTeamsMessageDisplay(false);
-                ListAdapter adapter = new TeamAdapter(view, teams);
-                view.setListAdapter(adapter);
+                view.setTeamsList(teams);
             } else {
                 view.setNoTeamsMessageDisplay(true);
             }

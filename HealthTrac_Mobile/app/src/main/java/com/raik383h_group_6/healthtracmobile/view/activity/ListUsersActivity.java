@@ -9,13 +9,19 @@ import android.widget.TextView;
 
 import com.google.inject.Inject;
 import com.raik383h_group_6.healthtracmobile.R;
+import com.raik383h_group_6.healthtracmobile.adapter.TeamAdapter;
+import com.raik383h_group_6.healthtracmobile.adapter.UserAdapter;
 import com.raik383h_group_6.healthtracmobile.application.IActivityNavigator;
 import com.raik383h_group_6.healthtracmobile.content.IResources;
 import com.raik383h_group_6.healthtracmobile.content.ResourcesAdapter;
 import com.raik383h_group_6.healthtracmobile.application.ActivityNavigator;
+import com.raik383h_group_6.healthtracmobile.model.Team;
+import com.raik383h_group_6.healthtracmobile.model.User;
 import com.raik383h_group_6.healthtracmobile.presenter.ListUsersPresenter;
 import com.raik383h_group_6.healthtracmobile.presenter.PresenterFactory;
 import com.raik383h_group_6.healthtracmobile.view.ListUsersView;
+
+import java.util.List;
 
 import roboguice.inject.ContentView;
 import roboguice.inject.InjectView;
@@ -47,6 +53,13 @@ public class ListUsersActivity extends CustomRoboActionBarActivity implements Li
     }
 
     @Override
+    public void setUsers(List<User> users) {
+        UserAdapter adapter = new UserAdapter(this, users);
+        userListView.setAdapter(adapter);
+    }
+
+
+    @Override
     protected void onSaveInstanceState(Bundle outState) {
         presenter.onSaveInstanceState(outState);
         super.onSaveInstanceState(outState);
@@ -56,11 +69,6 @@ public class ListUsersActivity extends CustomRoboActionBarActivity implements Li
     protected void onResume() {
         super.onResume();
         presenter.onResume();
-    }
-
-    @Override
-    public void setListAdapter(ListAdapter adapter) {
-        userListView.setAdapter(adapter);
     }
 
     @Override

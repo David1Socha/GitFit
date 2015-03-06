@@ -2,6 +2,7 @@ package com.raik383h_group_6.healthtracmobile.service.api.async;
 
 import android.os.AsyncTask;
 
+import com.google.inject.Inject;
 import com.raik383h_group_6.healthtracmobile.model.Membership;
 import com.raik383h_group_6.healthtracmobile.service.api.MembershipService;
 
@@ -14,6 +15,7 @@ public class AsyncMembershipService implements IAsyncMembershipService {
 
     private MembershipService service;
 
+    @Inject
     public AsyncMembershipService(MembershipService service) {
         this.service = service;
     }
