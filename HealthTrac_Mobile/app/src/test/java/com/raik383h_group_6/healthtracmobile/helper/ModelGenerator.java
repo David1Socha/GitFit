@@ -1,9 +1,11 @@
 package com.raik383h_group_6.healthtracmobile.helper;
 
 import com.raik383h_group_6.healthtracmobile.model.AccessGrant;
+import com.raik383h_group_6.healthtracmobile.model.Membership;
 import com.raik383h_group_6.healthtracmobile.model.Team;
 import com.raik383h_group_6.healthtracmobile.model.User;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 public final class ModelGenerator {
@@ -34,4 +36,13 @@ public final class ModelGenerator {
         return t;
     }
 
+
+    public static Membership genMemberMembership() {
+        Membership m = new Membership();
+        m.setId(0);
+        m.setTeamID(12);
+        m.setUserID("123");
+        m.setMembershipStatus(Membership.MembershipStatus.MEMBER);
+        return m;
+    }
 }

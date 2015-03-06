@@ -8,6 +8,7 @@ import com.raik383h_group_6.healthtracmobile.application.IActivityNavigator;
 import com.raik383h_group_6.healthtracmobile.content.IResources;
 import com.raik383h_group_6.healthtracmobile.helper.ModelGenerator;
 import com.raik383h_group_6.healthtracmobile.model.AccessGrant;
+import com.raik383h_group_6.healthtracmobile.model.Membership;
 import com.raik383h_group_6.healthtracmobile.model.Team;
 import com.raik383h_group_6.healthtracmobile.model.User;
 import com.raik383h_group_6.healthtracmobile.service.FormatUtils;
@@ -20,6 +21,9 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
+
 import static org.mockito.Mockito.*;
 
 public class ViewTeamPresenterTest {
@@ -28,16 +32,20 @@ public class ViewTeamPresenterTest {
     private IResources resources;
     private Team team;
     private AccessGrant grant;
+    private Membership memberMembership;
     private IActivityNavigator nav;
     private ViewTeamView view;
     private IAsyncMembershipService membershipService;
     private static final String TEAM_KEY ="team", GRANT_KEY = "grant";
+    private ArrayList<Membership> memberships;
 
     @Before
     public void setup() {
         nav = mock(IActivityNavigator.class);
         team = ModelGenerator.genBasicTeam();
         grant = ModelGenerator.genBasicGrant();
+        memberMembership = ModelGenerator.genMemberMembership();
+        memberships = new ArrayList<Membership>();
         bundle = mock(Bundle.class);
         view = mock(ViewTeamView.class);
         when(bundle.getParcelable(TEAM_KEY)).thenReturn(team);
@@ -56,11 +64,23 @@ public class ViewTeamPresenterTest {
     }
 
     @Test
+    public void onResumeLoadsCurrentMembership() throws ExecutionException, InterruptedException {
+        memberships.add(memberMembership);
+        presenter.onResume();
+        verify(membershipService).getMembershipsAsync(team.getId(), grant.getAuthHeader());
+    }
+
+    @Test
     public void onActivityResultUpdatesFieldsOnSuccess() {
         Bundle extras = mock(Bundle.class);
         when(extras.getParcelable(TEAM_KEY)).thenReturn(team);
         presenter.onActivityResult(ViewUserPresenter.UPDATE, Activity.RESULT_OK, extras);
         assertCorrectlyUpdatesFields(view, team);
+    }
+
+    @Test
+    public void onClickLeaveTeamUpdatesMembership() {
+        presenter.onResume();
     }
 
     private void assertCorrectlyUpdatesFields(ViewTeamView view, Team team) {
