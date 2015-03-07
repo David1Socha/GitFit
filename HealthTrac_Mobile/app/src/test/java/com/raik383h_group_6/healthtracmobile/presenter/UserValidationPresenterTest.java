@@ -35,9 +35,21 @@ public class UserValidationPresenterTest {
 
     @Test
     public void validateUserReturnsUserToCreateWhenValid() {
-        String sexStr = validUser.getSex() == User.Sex.MALE ? MALE : FEMALE;
-        User userToCreate = presenter.validateUser(FormatUtils.format(validUser.getBirthDate()), validUser.getEmail(), validUser.getFirstName(), FormatUtils.format(validUser.getHeight()), validUser.getLastName(), validUser.getLocation(), validUser.getPreferredName(), sexStr, validUser.getUserName(), FormatUtils.format(validUser.getWidth()));
+        User userToCreate = runValidateUser(validUser);
         assertSameSignificantValues(userToCreate, validUser);
+    }
+
+    @Test
+    public void validateUserReturnsNullWhenInvalid() {
+        User badUser = validUser;
+        badUser.setLocation("");
+        User userToCreate = runValidateUser(badUser);
+        assertNull(userToCreate);
+    }
+
+    private User runValidateUser(User u) {
+        String sexStr = u.getSex() == User.Sex.MALE ? MALE : FEMALE;
+        return presenter.validateUser(FormatUtils.format(u.getBirthDate()), u.getEmail(), u.getFirstName(), FormatUtils.format(u.getHeight()), u.getLastName(), u.getLocation(), u.getPreferredName(), sexStr, u.getUserName(), FormatUtils.format(u.getWidth()));
     }
 
     private void assertSameSignificantValues(User u1, User u2) {
