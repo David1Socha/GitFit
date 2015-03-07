@@ -31,7 +31,7 @@ public class AsyncMembershipService implements IAsyncMembershipService {
     }
 
     @Override
-    public List<Membership> getMembershipsAsync( String token) {
+    public List<Membership> getMembershipsAsync(String token) {
         throw new UnsupportedOperationException();
     }
 
@@ -55,23 +55,26 @@ public class AsyncMembershipService implements IAsyncMembershipService {
     }
 
     @Override
-    public Exception updateMembershipAsync(final long id, final Membership membership, final String token) throws ExecutionException, InterruptedException {
-        return new AsyncTask<Void, Void, Exception>() {
+    public void updateMembershipAsync(final long id, final Membership membership, final String token) throws Exception {
+        final Exception[] errs = new Exception[1];
+        new AsyncTask<Void, Void, Void>() {
             @Override
-            protected Exception doInBackground(Void... params) {
+            protected Void doInBackground(Void... params) {
                 try {
                     service.updateMembership(id, membership, token);
-                    return null;
-                } catch (Exception e) {
-                    return e;
+                } catch (Exception ex) {
+                    errs[0] = ex;
                 }
-
+                return null;
             }
         }.execute().get();
+        if (errs[0] != null) {
+            throw errs[0];
+        }
     }
 
     @Override
-    public Membership createMembershipAsync( final Membership membership, final String token) throws ExecutionException, InterruptedException {
+    public Membership createMembershipAsync(final Membership membership, final String token) throws ExecutionException, InterruptedException {
         return new AsyncTask<Void, Void, Membership>() {
             @Override
             protected Membership doInBackground(Void... params) {

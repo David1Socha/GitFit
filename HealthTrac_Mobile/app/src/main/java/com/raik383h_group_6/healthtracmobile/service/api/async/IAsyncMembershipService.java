@@ -22,7 +22,7 @@ public interface IAsyncMembershipService {
 
     List<Membership> getMembershipsAsync( long teamId,  String token) throws ExecutionException, InterruptedException;
 
-    Exception updateMembershipAsync(long id, Membership membership, String token) throws ExecutionException, InterruptedException;
+    void updateMembershipAsync(long id, Membership membership, String token) throws Exception;
 
     Membership createMembershipAsync( Membership membership, String token) throws ExecutionException, InterruptedException;
 }

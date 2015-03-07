@@ -2,6 +2,7 @@ package com.raik383h_group_6.healthtracmobile.presenter;
 
 import com.raik383h_group_6.healthtracmobile.content.IResources;
 import com.raik383h_group_6.healthtracmobile.model.User;
+import com.raik383h_group_6.healthtracmobile.service.api.async.IAsyncUserService;
 import com.raik383h_group_6.healthtracmobile.view.UserValidationView;
 
 import org.junit.Before;
@@ -20,7 +21,7 @@ public class UserValidationPresenterTest {
     @Before
     public void setup() {
         //TODO
-        presenter = new UserValidationPresenter(userservice, view, resources);
+        //presenter = new UserValidationPresenter(userservice, view, resources);
     }
 
 }

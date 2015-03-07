@@ -53,8 +53,9 @@ public class ViewTeamPresenter {
     }
 
     public void onClickLeaveTeam() {
+        Membership.MembershipStatus resetStatus = userMembership.getMembershipStatus();
         userMembership.setMembershipStatus(Membership.MembershipStatus.INACTIVE);
-        updateCurrentMembership(resources.getString(R.string.success_leave_team), resources.getString(R.string.error_leave_team));
+        updateCurrentMembership(resources.getString(R.string.success_leave_team), resources.getString(R.string.error_leave_team), resetStatus);
         refreshInfo();
     }
 
@@ -68,12 +69,14 @@ public class ViewTeamPresenter {
     }
 
     public void onClickJoinTeam() {
+
         if (userMembership == null) {
             createMembershipLocal();
             createCurrentMembership(resources.getString(R.string.success_join_team), resources.getString(R.string.error_join_team));
         } else {
+            Membership.MembershipStatus resetStatus = userMembership.getMembershipStatus();
             userMembership.setMembershipStatus(Membership.MembershipStatus.MEMBER);
-            updateCurrentMembership(resources.getString(R.string.success_join_team), resources.getString(R.string.error_join_team));
+            updateCurrentMembership(resources.getString(R.string.success_join_team), resources.getString(R.string.error_join_team), resetStatus);
         }
         updateFields();
     }
@@ -134,16 +137,13 @@ public class ViewTeamPresenter {
         userMembership = null;
     }
 
-    private void updateCurrentMembership(String successMessage, String failureMessage) {
+    private void updateCurrentMembership(String successMessage, String failureMessage, Membership.MembershipStatus resetStatus) {
         try {
-            Exception updateException = membershipService.updateMembershipAsync(userMembership.getId(), userMembership, grant.getAuthHeader());
-            if (updateException != null) {
-                throw updateException;
-            } else {
-                view.displayMessage(successMessage);
-            }
+            membershipService.updateMembershipAsync(userMembership.getId(), userMembership, grant.getAuthHeader());
+            view.displayMessage(successMessage);
         } catch (Exception e) {
             view.displayMessage(failureMessage);
+            userMembership.setMembershipStatus(resetStatus);
         }
     }
 
@@ -152,7 +152,7 @@ public class ViewTeamPresenter {
         view.setDateCreated(FormatUtils.format(team.getDateCreated()));
         view.setDescription(team.getDescription());
         Membership.MembershipStatus status = userMembership == null ? Membership.MembershipStatus.INACTIVE : userMembership.getMembershipStatus();
-        switch(status) {
+        switch (status) {
             case MEMBER:
                 view.setShowEditTeam(false);
                 view.setShowJoinTeam(false);
