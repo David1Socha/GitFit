@@ -41,7 +41,16 @@ public class UserValidationPresenterTest {
     }
 
     private void assertSameSignificantValues(User u1, User u2) {
-        //TODO
+        assertEquals(u1.getBirthDate(), u2.getBirthDate());
+        assertEquals(u1.getEmail(), u2.getEmail());
+        assertEquals(u1.getFirstName(), u2.getFirstName());
+        assertEquals(u1.getHeight(), u2.getHeight(), 0);
+        assertEquals(u1.getLastName(), u2.getLastName());
+        assertEquals(u1.getLocation(), u2.getLocation());
+        assertEquals(u1.getPreferredName(), u2.getPreferredName());
+        assertEquals(u1.getSex(), u2.getSex());
+        assertEquals(u1.getUserName(), u2.getUserName());
+        assertEquals(u1.getWidth(), u2.getWidth(), 0);
     }
 
 }
