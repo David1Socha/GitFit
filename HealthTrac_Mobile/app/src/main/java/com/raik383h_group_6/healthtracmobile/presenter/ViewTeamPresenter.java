@@ -44,6 +44,10 @@ public class ViewTeamPresenter {
         grant = extras.getParcelable(resources.getString(R.string.EXTRA_ACCESS_GRANT));
     }
 
+    public Membership getUserMembership() {
+        return userMembership;
+    }
+
     public void onClickEditTeam() {
         //nav.openUpdateTeam(team) TODO
     }

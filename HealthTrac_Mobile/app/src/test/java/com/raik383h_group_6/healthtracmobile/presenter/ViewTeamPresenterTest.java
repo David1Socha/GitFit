@@ -25,6 +25,7 @@ import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
 import static org.mockito.Mockito.*;
+import static org.junit.Assert.*;
 
 public class ViewTeamPresenterTest {
     private ViewTeamPresenter presenter;
@@ -66,8 +67,10 @@ public class ViewTeamPresenterTest {
     @Test
     public void onResumeLoadsCurrentMembership() throws ExecutionException, InterruptedException {
         memberships.add(memberMembership);
+        when(membershipService.getMembershipsAsync(team.getId(), grant.getAuthHeader())).thenReturn(memberships);
         presenter.onResume();
         verify(membershipService).getMembershipsAsync(team.getId(), grant.getAuthHeader());
+        assertEquals(memberMembership, presenter.getUserMembership());
     }
 
     @Test
