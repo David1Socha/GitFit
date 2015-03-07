@@ -20,6 +20,7 @@ import com.raik383h_group_6.healthtracmobile.view.ViewUserView;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.ArgumentMatcher;
 import org.mockito.Mock;
 import org.mockito.internal.matchers.Any;
 
@@ -101,10 +102,33 @@ public class ViewTeamPresenterTest {
         verify(membershipService).updateMembershipAsync(memberMembership.getId(), memberMembership, grant.getAuthHeader());
     }
 
+    @Test
+    public void onClickLeaveTeamUpdatesMembershipAsInactive() throws ExecutionException, InterruptedException {
+        memberships.add(memberMembership);
+        when(membershipService.getMembershipsAsync(team.getId(), grant.getAuthHeader())).thenReturn(memberships);
+        presenter.onResume();
+        presenter.onClickLeaveTeam();
+        verify(membershipService).updateMembershipAsync(eq(memberMembership.getId()), argThat(new HasSpecifiedMembershipStatus(Membership.MembershipStatus.INACTIVE)), eq(grant.getAuthHeader()));
+    }
+
     private void assertCorrectlyUpdatesFields(ViewTeamView view, Team team) {
         verify(view).setDateCreated(FormatUtils.format(team.getDateCreated()));
         verify(view).setDescription(team.getDescription());
         verify(view).setTeamName(team.getName());
+    }
+
+    private static class HasSpecifiedMembershipStatus extends ArgumentMatcher<Membership> {
+
+        Membership.MembershipStatus expectedStatus;
+
+        public HasSpecifiedMembershipStatus(Membership.MembershipStatus status) {
+             expectedStatus = status;
+        }
+
+        @Override
+        public boolean matches(Object o) {
+            return ((Membership) o).getMembershipStatus() == expectedStatus;
+        }
     }
 
 }
