@@ -7,11 +7,10 @@ import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 public interface IAsyncUserService {
-    User getUserAsync(String id, String token);
+    User getUserAsync(String id, String token) throws ExecutionException, InterruptedException;
 
-    List<User> getUsersAsync(String token);
+    List<User> getUsersAsync(String token) throws ExecutionException, InterruptedException;
 
-    Exception updateUserAsync(long id, User user, String token) throws ExecutionException, InterruptedException;
+    void updateUserAsync(String id, User user, String token) throws Exception;
 
-    User createUserAsync(User user, String token) throws ExecutionException, InterruptedException;
 }
