@@ -5,17 +5,17 @@ import com.raik383h_group_6.healthtracmobile.content.IResources;
 import com.raik383h_group_6.healthtracmobile.model.User;
 import com.raik383h_group_6.healthtracmobile.service.FormatUtils;
 import com.raik383h_group_6.healthtracmobile.service.api.UserService;
-import com.raik383h_group_6.healthtracmobile.view.InputUserView;
+import com.raik383h_group_6.healthtracmobile.view.UserValidationView;
 
 import java.util.Date;
 
 public class UserValidationPresenter {
 
-    private final InputUserView view;
+    private final UserValidationView view;
     private final UserService userService;
     private final IResources resources;
 
-    public UserValidationPresenter(UserService userService, InputUserView view, IResources resources) {
+    public UserValidationPresenter(UserService userService, UserValidationView view, IResources resources) {
         this.view = view;
         this.userService = userService;
         this.resources = resources;

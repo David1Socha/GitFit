@@ -20,7 +20,6 @@ import com.raik383h_group_6.healthtracmobile.presenter.CreateUserPresenter;
 import com.raik383h_group_6.healthtracmobile.service.api.AccountService;
 import com.raik383h_group_6.healthtracmobile.service.api.FacebookService;
 import com.raik383h_group_6.healthtracmobile.view.CreateUserView;
-import com.raik383h_group_6.healthtracmobile.view.InputUserView;
 
 import roboguice.inject.ContentView;
 import roboguice.inject.InjectView;

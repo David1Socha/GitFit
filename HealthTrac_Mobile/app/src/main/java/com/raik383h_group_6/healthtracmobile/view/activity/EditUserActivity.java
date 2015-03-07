@@ -19,7 +19,6 @@ import com.raik383h_group_6.healthtracmobile.presenter.PresenterFactory;
 import com.raik383h_group_6.healthtracmobile.presenter.EditUserPresenter;
 import com.raik383h_group_6.healthtracmobile.service.api.UserService;
 import com.raik383h_group_6.healthtracmobile.view.EditUserView;
-import com.raik383h_group_6.healthtracmobile.view.InputUserView;
 
 import roboguice.activity.RoboActionBarActivity;
 import roboguice.inject.ContentView;

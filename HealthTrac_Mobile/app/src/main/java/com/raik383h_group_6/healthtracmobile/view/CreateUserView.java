@@ -1,6 +1,6 @@
 package com.raik383h_group_6.healthtracmobile.view;
 
-public interface CreateUserView extends InputUserView{
+public interface CreateUserView extends UserValidationView {
     void setLocationError(String msg);
 
     void setBirthDateError(String msg);

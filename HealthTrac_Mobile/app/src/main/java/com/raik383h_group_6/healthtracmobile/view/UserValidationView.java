@@ -5,7 +5,7 @@ import com.raik383h_group_6.healthtracmobile.model.User;
 /**
  * Created by David on 2/28/2015.
  */
-public interface InputUserView {
+public interface UserValidationView {
     void setLastName(String val);
 
     void setFirstName(String val);
