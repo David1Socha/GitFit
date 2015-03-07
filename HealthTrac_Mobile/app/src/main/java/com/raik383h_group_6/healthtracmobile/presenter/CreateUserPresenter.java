@@ -15,6 +15,7 @@ import com.raik383h_group_6.healthtracmobile.model.UserLogin;
 import com.raik383h_group_6.healthtracmobile.service.api.AccountService;
 import com.raik383h_group_6.healthtracmobile.service.api.FacebookService;
 import com.raik383h_group_6.healthtracmobile.service.api.UserService;
+import com.raik383h_group_6.healthtracmobile.service.api.async.IAsyncUserService;
 import com.raik383h_group_6.healthtracmobile.view.CreateUserView;
 
 import java.util.concurrent.ExecutionException;
@@ -28,11 +29,11 @@ public class CreateUserPresenter {
     private IResources resources;
     private Bundle extras;
     private IActivityNavigator nav;
-    private UserService userService;
+    private IAsyncUserService userService;
     private UserValidationPresenter userValidationPresenter;
 
     @Inject
-    public CreateUserPresenter(FacebookService facebookService, UserService userService, AccountService accountService, @Assisted Bundle extras, @Assisted IResources resources, @Assisted IActivityNavigator nav, @Assisted CreateUserView view) {
+    public CreateUserPresenter(FacebookService facebookService, IAsyncUserService userService, AccountService accountService, @Assisted Bundle extras, @Assisted IResources resources, @Assisted IActivityNavigator nav, @Assisted CreateUserView view) {
         this.facebookService = facebookService;
         this.view = view;
         this.accountService = accountService;

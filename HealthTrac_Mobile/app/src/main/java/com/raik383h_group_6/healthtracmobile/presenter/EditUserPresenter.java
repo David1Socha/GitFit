@@ -12,13 +12,14 @@ import com.raik383h_group_6.healthtracmobile.model.AccessGrant;
 import com.raik383h_group_6.healthtracmobile.model.User;
 import com.raik383h_group_6.healthtracmobile.service.FormatUtils;
 import com.raik383h_group_6.healthtracmobile.service.api.UserService;
+import com.raik383h_group_6.healthtracmobile.service.api.async.IAsyncUserService;
 import com.raik383h_group_6.healthtracmobile.view.EditUserView;
 
 import java.util.concurrent.ExecutionException;
 
 public class EditUserPresenter {
 
-    private final UserService userService;
+    private final IAsyncUserService userService;
     private final Bundle extras;
     private final IResources resources;
     private final EditUserView view;
@@ -28,7 +29,7 @@ public class EditUserPresenter {
     private User ogUser;
 
     @Inject
-    public EditUserPresenter(UserService userService, @Assisted Bundle extras, @Assisted IResources resources, @Assisted IActivityNavigator nav, @Assisted EditUserView view) {
+    public EditUserPresenter(IAsyncUserService userService, @Assisted Bundle extras, @Assisted IResources resources, @Assisted IActivityNavigator nav, @Assisted EditUserView view) {
         this.userService = userService;
         this.extras = extras;
         this.nav = nav;
@@ -70,10 +71,7 @@ public class EditUserPresenter {
 
     private void updateUser(User u) {
         try {
-            Exception e = updateUserAsync(u, grant.getAuthHeader());
-            if (e != null) {
-                throw e;
-            }
+            userService.updateUserAsync(u.getId(), u, grant.getAuthHeader());
             view.displayMessage(resources.getString(R.string.user_updated_message));
             nav.finishEditUserSuccess(u);
         } catch (Exception e) {
@@ -82,17 +80,4 @@ public class EditUserPresenter {
         }
     }
 
-    private Exception updateUserAsync(final User u, final String authHeader) throws ExecutionException, InterruptedException {
-        return new AsyncTask<Void, Void, Exception>() {
-            @Override
-            protected Exception doInBackground(Void... params) {
-                try {
-                    userService.updateUser(ogUser.getId(), u, authHeader);
-                    return null;
-                } catch (Exception e) {
-                    return e;
-                }
-            }
-        }.execute().get();
-    }
 }
