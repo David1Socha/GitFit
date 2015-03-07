@@ -35,22 +35,30 @@ public class UserValidationPresenterTest {
 
     @Test
     public void validateUserReturnsUserToCreateWhenValid() {
-        User userToCreate = runValidateUser(validUser);
+        String sexStr = getSexStr(validUser);
+        User userToCreate = presenter.validateUser(FormatUtils.format(validUser.getBirthDate()), validUser.getEmail(), validUser.getFirstName(), FormatUtils.format(validUser.getHeight()), validUser.getLastName(), validUser.getLocation(), validUser.getPreferredName(), sexStr, validUser.getUserName(), FormatUtils.format(validUser.getWidth()));
         assertSameSignificantValues(userToCreate, validUser);
     }
 
     @Test
     public void validateUserReturnsNullWhenInvalid() {
-        User badUser = validUser;
-        badUser.setLocation("");
-        User userToCreate = runValidateUser(badUser);
+        String sexStr = getSexStr(validUser);
+        User userToCreate = presenter.validateUser(FormatUtils.format(validUser.getBirthDate()), validUser.getEmail(), validUser.getFirstName(), FormatUtils.format(validUser.getHeight()), validUser.getLastName(), "", validUser.getPreferredName(), sexStr, validUser.getUserName(), FormatUtils.format(validUser.getWidth()));
         assertNull(userToCreate);
     }
 
-    private User runValidateUser(User u) {
-        String sexStr = u.getSex() == User.Sex.MALE ? MALE : FEMALE;
-        return presenter.validateUser(FormatUtils.format(u.getBirthDate()), u.getEmail(), u.getFirstName(), FormatUtils.format(u.getHeight()), u.getLastName(), u.getLocation(), u.getPreferredName(), sexStr, u.getUserName(), FormatUtils.format(u.getWidth()));
+    @Test
+    public void validateUserSetsErrorMessagesWhenErrors() {
+        User awfulUser = validUser;
+        awfulUser.setLocation("");
+        awfulUser.setUserName("");
+        //TODO
     }
+
+    private String getSexStr(User u) {
+        return u.getSex() == User.Sex.MALE ? MALE : FEMALE;
+    }
+
 
     private void assertSameSignificantValues(User u1, User u2) {
         assertEquals(FormatUtils.format(u1.getBirthDate()), FormatUtils.format(u2.getBirthDate())); //Not doing compare exact because of earlier loss of info when transferring date as mm/dd/yyyy string
