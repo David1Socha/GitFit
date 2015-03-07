@@ -21,6 +21,7 @@ import java.util.Date;
 
 import static org.mockito.Matchers.anyInt;
 import static org.mockito.Mockito.*;
+import static com.raik383h_group_6.healthtracmobile.helper.TestConstants.*;
 
 public class ViewUserPresenterTest {
     private ViewUserPresenter presenter;
@@ -30,7 +31,6 @@ public class ViewUserPresenterTest {
     private AccessGrant grant;
     private IActivityNavigator nav;
     private ViewUserView view;
-    private static final String USER_KEY ="user", GRANT_KEY = "grant", FEMALE = "Female", MALE = "Male";
 
     @Before
     public void setup() {

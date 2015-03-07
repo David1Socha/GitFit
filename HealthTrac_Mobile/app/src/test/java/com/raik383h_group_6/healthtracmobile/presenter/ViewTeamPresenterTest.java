@@ -27,6 +27,7 @@ import org.mockito.internal.matchers.Any;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
+import static com.raik383h_group_6.healthtracmobile.helper.TestConstants.*;
 import static org.mockito.Mockito.*;
 import static org.junit.Assert.*;
 
@@ -40,7 +41,6 @@ public class ViewTeamPresenterTest {
     private IActivityNavigator nav;
     private ViewTeamView view;
     private IAsyncMembershipService membershipService;
-    private static final String TEAM_KEY ="team", GRANT_KEY = "grant";
     private ArrayList<Membership> memberships;
 
     @Before
@@ -94,7 +94,7 @@ public class ViewTeamPresenterTest {
     }
 
     @Test
-    public void onClickJoinTeamUpdatesMembershipWhenExtant() throws ExecutionException, InterruptedException {
+    public void onClickJoinTeamUpdatesMembershipWhenExtant() throws Exception {
         memberships.add(memberMembership);
         when(membershipService.getMembershipsAsync(team.getId(), grant.getAuthHeader())).thenReturn(memberships);
         presenter.onResume();
@@ -103,7 +103,7 @@ public class ViewTeamPresenterTest {
     }
 
     @Test
-    public void onClickLeaveTeamUpdatesMembershipAsInactive() throws ExecutionException, InterruptedException {
+    public void onClickLeaveTeamUpdatesMembershipAsInactive() throws Exception {
         memberships.add(memberMembership);
         when(membershipService.getMembershipsAsync(team.getId(), grant.getAuthHeader())).thenReturn(memberships);
         presenter.onResume();

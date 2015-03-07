@@ -13,6 +13,7 @@ import org.junit.Test;
 
 import static org.mockito.Mockito.*;
 import static org.junit.Assert.*;
+import static com.raik383h_group_6.healthtracmobile.helper.TestConstants.*;
 
 public class UserValidationPresenterTest {
 
@@ -21,7 +22,6 @@ public class UserValidationPresenterTest {
     private UserValidationView view;
     private IResources resources;
     private IAsyncUserService userService;
-    public static final String MALE = "Male", FEMALE = "Female";
 
     @Before
     public void setup() {
