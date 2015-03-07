@@ -20,6 +20,8 @@ import com.raik383h_group_6.healthtracmobile.view.ViewUserView;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Mock;
+import org.mockito.internal.matchers.Any;
 
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
@@ -82,8 +84,12 @@ public class ViewTeamPresenterTest {
     }
 
     @Test
-    public void onClickLeaveTeamUpdatesMembership() {
+    public void onClickJoinTeamCreatesProperMembershipWhenNull() throws ExecutionException, InterruptedException {
+        when(membershipService.createMembershipAsync(any(Membership.class), eq(grant.getAuthHeader()))).thenReturn(memberMembership);
         presenter.onResume();
+        presenter.onClickJoinTeam();
+        Membership createdMembership = presenter.getUserMembership();
+        assertEquals(memberMembership, createdMembership);
     }
 
     private void assertCorrectlyUpdatesFields(ViewTeamView view, Team team) {
@@ -91,4 +97,5 @@ public class ViewTeamPresenterTest {
         verify(view).setDescription(team.getDescription());
         verify(view).setTeamName(team.getName());
     }
+
 }

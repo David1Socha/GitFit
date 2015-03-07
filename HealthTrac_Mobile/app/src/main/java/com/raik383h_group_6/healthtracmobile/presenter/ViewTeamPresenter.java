@@ -75,8 +75,7 @@ public class ViewTeamPresenter {
             userMembership.setMembershipStatus(Membership.MembershipStatus.MEMBER);
             updateCurrentMembership(resources.getString(R.string.success_join_team), resources.getString(R.string.error_join_team));
         }
-
-        refreshInfo();
+        updateFields();
     }
 
     private void createCurrentMembership(String successMessage, String failureMessage) {
