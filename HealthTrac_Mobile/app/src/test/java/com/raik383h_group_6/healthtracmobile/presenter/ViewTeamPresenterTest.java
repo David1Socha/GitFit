@@ -84,12 +84,21 @@ public class ViewTeamPresenterTest {
     }
 
     @Test
-    public void onClickJoinTeamCreatesProperMembershipWhenNull() throws ExecutionException, InterruptedException {
+    public void onClickJoinTeamCreatesMembershipWhenNull() throws ExecutionException, InterruptedException {
         when(membershipService.createMembershipAsync(any(Membership.class), eq(grant.getAuthHeader()))).thenReturn(memberMembership);
         presenter.onResume();
         presenter.onClickJoinTeam();
         Membership createdMembership = presenter.getUserMembership();
         assertEquals(memberMembership, createdMembership);
+    }
+
+    @Test
+    public void onClickJoinTeamUpdatesMembershipWhenExtant() throws ExecutionException, InterruptedException {
+        memberships.add(memberMembership);
+        when(membershipService.getMembershipsAsync(team.getId(), grant.getAuthHeader())).thenReturn(memberships);
+        presenter.onResume();
+        presenter.onClickJoinTeam();
+        verify(membershipService).updateMembershipAsync(memberMembership.getId(), memberMembership, grant.getAuthHeader());
     }
 
     private void assertCorrectlyUpdatesFields(ViewTeamView view, Team team) {
