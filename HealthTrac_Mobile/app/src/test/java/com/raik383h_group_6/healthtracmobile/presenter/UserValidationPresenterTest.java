@@ -41,7 +41,7 @@ public class UserValidationPresenterTest {
     }
 
     private void assertSameSignificantValues(User u1, User u2) {
-        assertEquals(u1.getBirthDate(), u2.getBirthDate());
+        assertEquals(FormatUtils.format(u1.getBirthDate()), FormatUtils.format(u2.getBirthDate())); //Not doing compare exact because of earlier loss of info when transferring date as mm/dd/yyyy string
         assertEquals(u1.getEmail(), u2.getEmail());
         assertEquals(u1.getFirstName(), u2.getFirstName());
         assertEquals(u1.getHeight(), u2.getHeight(), 0);
@@ -51,6 +51,7 @@ public class UserValidationPresenterTest {
         assertEquals(u1.getSex(), u2.getSex());
         assertEquals(u1.getUserName(), u2.getUserName());
         assertEquals(u1.getWidth(), u2.getWidth(), 0);
+        //TODO assertEquals(u1.getLocation(), u2.getLocation());
     }
 
 }
