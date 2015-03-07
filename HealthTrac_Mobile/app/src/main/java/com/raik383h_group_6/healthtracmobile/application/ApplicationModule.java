@@ -9,7 +9,9 @@ import com.raik383h_group_6.healthtracmobile.service.api.FacebookService;
 import com.raik383h_group_6.healthtracmobile.service.api.MembershipService;
 import com.raik383h_group_6.healthtracmobile.service.api.TeamService;
 import com.raik383h_group_6.healthtracmobile.service.api.async.AsyncMembershipService;
+import com.raik383h_group_6.healthtracmobile.service.api.async.AsyncUserService;
 import com.raik383h_group_6.healthtracmobile.service.api.async.IAsyncMembershipService;
+import com.raik383h_group_6.healthtracmobile.service.api.async.IAsyncUserService;
 import com.raik383h_group_6.healthtracmobile.service.api.provider.RetrofitFacebookServiceProvider;
 import com.raik383h_group_6.healthtracmobile.service.api.provider.RetrofitMembershipServiceProvider;
 import com.raik383h_group_6.healthtracmobile.service.api.provider.RetrofitTeamServiceProvider;
@@ -32,6 +34,7 @@ public class ApplicationModule extends AbstractModule {
         bind(MembershipService.class).toProvider(RetrofitMembershipServiceProvider.class);
         bind(FacebookService.class).toProvider(RetrofitFacebookServiceProvider.class);
         bind(IAsyncMembershipService.class).to(AsyncMembershipService.class);
+        bind(IAsyncUserService.class).to(AsyncUserService.class);
         install(new FactoryModuleBuilder().build(PresenterFactory.class));
     }
 }
