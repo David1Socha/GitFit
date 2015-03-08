@@ -2,6 +2,7 @@ package com.raik383h_group_6.healthtracmobile.service.api.async;
 
 import android.os.AsyncTask;
 
+import com.google.inject.Inject;
 import com.raik383h_group_6.healthtracmobile.model.User;
 import com.raik383h_group_6.healthtracmobile.service.api.UserService;
 
@@ -12,6 +13,7 @@ public class AsyncUserService implements IAsyncUserService{
 
     private final UserService service;
 
+    @Inject
     public AsyncUserService(UserService service) {
         this.service = service;
     }
