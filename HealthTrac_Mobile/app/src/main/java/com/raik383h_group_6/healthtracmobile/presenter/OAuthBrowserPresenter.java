@@ -15,13 +15,14 @@ import com.raik383h_group_6.healthtracmobile.R;
 import com.raik383h_group_6.healthtracmobile.application.IActivityNavigator;
 import com.raik383h_group_6.healthtracmobile.content.IResources;
 import com.raik383h_group_6.healthtracmobile.model.Token;
+import com.raik383h_group_6.healthtracmobile.service.oauth.IAsyncOAuthService;
 import com.raik383h_group_6.healthtracmobile.service.oauth.IOAuthService;
 
 import java.util.concurrent.ExecutionException;
 
 public class OAuthBrowserPresenter {
 
-    private IOAuthService oAuthService;
+    private IAsyncOAuthService oAuthService;
     private Token requestToken;
     private WebView webView;
     private IResources resources;
@@ -39,7 +40,7 @@ public class OAuthBrowserPresenter {
     }
 
     @Inject
-    public OAuthBrowserPresenter(@Assisted IOAuthService service, @Assisted Bundle extras, @Assisted IResources resources, @Assisted WebView web, @Assisted IActivityNavigator nav) {
+    public OAuthBrowserPresenter(@Assisted IAsyncOAuthService service, @Assisted Bundle extras, @Assisted IResources resources, @Assisted WebView web, @Assisted IActivityNavigator nav) {
         this.oAuthService = service;
         this.extras = extras;
         this.resources = resources;

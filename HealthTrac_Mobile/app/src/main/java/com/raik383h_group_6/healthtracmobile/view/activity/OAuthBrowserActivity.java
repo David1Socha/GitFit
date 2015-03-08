@@ -20,12 +20,6 @@ public class OAuthBrowserActivity extends CustomRoboActionBarActivity {
 
     private WebView webView;
     @Inject
-    @Named("Facebook")
-    private IOAuthService facebookOAuthService;
-    @Inject
-    @Named("Twitter")
-    private IOAuthService twitterOAuthService;
-    @Inject
     @Named("FacebookAsync")
     private IAsyncOAuthService asyncFacebookOAuthService;
     @Inject
@@ -42,11 +36,11 @@ public class OAuthBrowserActivity extends CustomRoboActionBarActivity {
         setContentView(webView);
         Bundle extras = getIntent().getExtras();
         IResources resources = new ResourcesAdapter(getResources());
-        IOAuthService oAuthService;
+        IAsyncOAuthService oAuthService;
         if (extras.getString(getString(R.string.EXTRA_PROVIDER)).equals(getString(R.string.PROVIDER_FACEBOOK))) {
-            oAuthService = facebookOAuthService;
+            oAuthService = asyncFacebookOAuthService;
         } else {
-            oAuthService = twitterOAuthService;
+            oAuthService = asyncTwitterOAuthService;
         }
         IActivityNavigator nav = new ActivityNavigator(this);
         presenter = presenterFactory.create(oAuthService, webView, extras, resources, nav);

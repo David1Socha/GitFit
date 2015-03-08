@@ -16,11 +16,14 @@ import com.raik383h_group_6.healthtracmobile.service.api.provider.RetrofitFacebo
 import com.raik383h_group_6.healthtracmobile.service.api.provider.RetrofitMembershipServiceProvider;
 import com.raik383h_group_6.healthtracmobile.service.api.provider.RetrofitTeamServiceProvider;
 import com.raik383h_group_6.healthtracmobile.service.oauth.FacebookScribeOAuthServiceAdapter;
+import com.raik383h_group_6.healthtracmobile.service.oauth.IAsyncOAuthService;
 import com.raik383h_group_6.healthtracmobile.service.oauth.IOAuthService;
 import com.raik383h_group_6.healthtracmobile.service.api.provider.RetrofitAccountServiceProvider;
 import com.raik383h_group_6.healthtracmobile.service.api.provider.RetrofitUserServiceProvider;
 import com.raik383h_group_6.healthtracmobile.service.oauth.TwitterScribeOAuthServiceAdapter;
 import com.raik383h_group_6.healthtracmobile.service.api.UserService;
+import com.raik383h_group_6.healthtracmobile.service.oauth.provider.AsyncFacebookScribeOAuthServiceProvider;
+import com.raik383h_group_6.healthtracmobile.service.oauth.provider.AsyncTwitterScribeOAuthServiceProvider;
 
 public class ApplicationModule extends AbstractModule {
 
@@ -33,6 +36,8 @@ public class ApplicationModule extends AbstractModule {
         bind(TeamService.class).toProvider(RetrofitTeamServiceProvider.class);
         bind(MembershipService.class).toProvider(RetrofitMembershipServiceProvider.class);
         bind(FacebookService.class).toProvider(RetrofitFacebookServiceProvider.class);
+        bind(IAsyncOAuthService.class).annotatedWith(Names.named("FacebookAsync")).toProvider(AsyncFacebookScribeOAuthServiceProvider.class);
+        bind(IAsyncOAuthService.class).annotatedWith(Names.named("TwitterAsync")).toProvider(AsyncTwitterScribeOAuthServiceProvider.class);
         bind(IAsyncMembershipService.class).to(AsyncMembershipService.class);
         bind(IAsyncUserService.class).to(AsyncUserService.class);
         install(new FactoryModuleBuilder().build(PresenterFactory.class));
