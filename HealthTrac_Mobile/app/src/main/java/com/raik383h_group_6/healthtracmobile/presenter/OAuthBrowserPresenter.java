@@ -54,14 +54,22 @@ public class OAuthBrowserPresenter {
     }
 
     private void beginAuthorization() {
+        loadRequestToken();
         String authUrl = getAuthorizationUrl();
         webView.loadUrl(authUrl);
+    }
+
+    private void loadRequestToken() {
+        try {
+            requestToken = oAuthService.getRequestToken();
+        } catch (InterruptedException | ExecutionException e) {
+        }
     }
 
     private String getAuthorizationUrl() {
         String authUrl = null;
         try {
-            authUrl = oAuthService.getAuthorizationUrl();
+            authUrl = oAuthService.getAuthorizationUrl(requestToken);
         } catch (InterruptedException | ExecutionException e) {
         }
         return authUrl;
