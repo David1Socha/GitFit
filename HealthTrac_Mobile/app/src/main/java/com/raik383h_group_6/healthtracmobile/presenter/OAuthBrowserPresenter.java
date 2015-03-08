@@ -28,6 +28,7 @@ public class OAuthBrowserPresenter {
     private IResources resources;
     private Bundle extras;
     private IActivityNavigator nav;
+    private String authUrl;
 
     private void setUpWebView() {
         WebViewClient webViewClient = new LoginWebViewClient();
@@ -55,24 +56,22 @@ public class OAuthBrowserPresenter {
 
     private void beginAuthorization() {
         loadRequestToken();
-        String authUrl = getAuthorizationUrl();
+        loadAuthUrl();
         webView.loadUrl(authUrl);
     }
 
     private void loadRequestToken() {
         try {
             requestToken = oAuthService.getRequestToken();
-        } catch (InterruptedException | ExecutionException e) {
+        } catch (InterruptedException | ExecutionException ignored) {
         }
     }
 
-    private String getAuthorizationUrl() {
-        String authUrl = null;
+    private void loadAuthUrl() {
         try {
             authUrl = oAuthService.getAuthorizationUrl(requestToken);
-        } catch (InterruptedException | ExecutionException e) {
+        } catch (InterruptedException | ExecutionException ignored) {
         }
-        return authUrl;
     }
 
     private Token getToken(Uri uri) {
