@@ -9,7 +9,7 @@ import com.raik383h_group_6.healthtracmobile.application.IActivityNavigator;
 import com.raik383h_group_6.healthtracmobile.content.IResources;
 
 public class OAuthPromptPresenter {
-    private static final int FB_LOGIN_REQ = 1,
+    public static final int FB_LOGIN_REQ = 1,
             TW_LOGIN_REQ = 2;
 
     private IResources resources;
