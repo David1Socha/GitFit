@@ -60,37 +60,19 @@ public class OAuthBrowserPresenter {
     private String getAuthorizationUrl() {
         String authUrl = null;
         try {
-            authUrl =
-            (new AsyncTask<Void, Void, String>() {
-                @Override
-                protected String doInBackground(Void... params) {
-                    try { //OAuth 2.0 doesn't use request tokens...
-                        requestToken = oAuthService.getRequestToken();
-                        return oAuthService.getAuthorizationUrl(requestToken);
-                    } catch (UnsupportedOperationException e) {
-                        return oAuthService.getAuthorizationUrl(null);
-                    }
-                }
-
-            }).execute().get();
+            authUrl = oAuthService.getAuthorizationUrl();
         } catch (InterruptedException | ExecutionException e) {
         }
         return authUrl;
     }
 
     private Token getToken(Uri uri) {
-        final String verifier = uri.getQueryParameter(oAuthService.getVerifierName());
+        String verifier = uri.getQueryParameter(oAuthService.getVerifierName());
         Token token = null;
         try {
-            token = (new AsyncTask<Void, Void, Token>() {
-                @Override
-                protected Token doInBackground(Void... params) {
-                    return oAuthService.getAccessToken(requestToken, verifier);
-                }
-            }).execute().get();
+            token = oAuthService.getAccessToken(requestToken, verifier);
         } catch (InterruptedException | ExecutionException ignored) {
         }
-
         return token;
     }
 
