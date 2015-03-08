@@ -29,6 +29,8 @@ public class UserValidationPresenterTest {
         view = mock(UserValidationView.class);
         resources = mock(IResources.class);
         when(resources.getString(R.string.male_label)).thenReturn(MALE);
+        when(resources.getString(R.string.empty_field_error)).thenReturn(EMPTY_FIELD_ERROR);
+        when(resources.getString(R.string.invalid_date_error)).thenReturn(INVALID_DATE_ERROR);
         userService = mock(IAsyncUserService.class);
         presenter = new UserValidationPresenter(userService, view, resources);
     }
@@ -50,7 +52,25 @@ public class UserValidationPresenterTest {
     @Test
     public void validateUserSetsErrorMessagesWhenErrors() {
         String birthDateStr = "123/234/19";
-        //TODO
+        String email = "";
+        String firstName = "";
+        String heightStr = "";
+        String lastName = "";
+        String location = "";
+        String prefName = "";
+        String userName = "";
+        String sexStr = "Male";
+        String widthStr = "";
+        presenter.validateUser(birthDateStr, email, firstName, heightStr, lastName, location, prefName, sexStr, userName, widthStr);
+        verify(view).setBirthDateError(INVALID_DATE_ERROR);
+        verify(view).setEmailError(EMPTY_FIELD_ERROR);
+        verify(view).setFirstNameError(EMPTY_FIELD_ERROR);
+        verify(view).setHeightError(EMPTY_FIELD_ERROR);
+        verify(view).setLastNameError(EMPTY_FIELD_ERROR);
+        verify(view).setLocationError(EMPTY_FIELD_ERROR);
+        verify(view).setPrefNameError(EMPTY_FIELD_ERROR);
+        verify(view).setUsernameError(EMPTY_FIELD_ERROR);
+        verify(view).setWeightError(EMPTY_FIELD_ERROR);
     }
 
     private String getSexStr(User u) {
