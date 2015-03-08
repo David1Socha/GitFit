@@ -1,5 +1,8 @@
 package com.raik383h_group_6.healthtracmobile.presenter;
 
+import android.app.Activity;
+import android.os.Bundle;
+
 import com.raik383h_group_6.healthtracmobile.R;
 import com.raik383h_group_6.healthtracmobile.application.IActivityNavigator;
 import com.raik383h_group_6.healthtracmobile.content.IResources;
@@ -21,6 +24,7 @@ public class OAuthPromptPresenterTest {
     private OAuthPromptPresenter presenter;
     private IActivityNavigator nav;
     private IResources resources;
+    private String token = "123", secret = "abc", provider = FACEBOOK;
 
     @Before
     public void setup() {
@@ -44,5 +48,21 @@ public class OAuthPromptPresenterTest {
     public void onClickLoginFacebookOpensOAuthBrowserWithFacebook() {
         presenter.onClickLoginFacebook();
         verify(nav).openOAuthBrowser(FACEBOOK, OAuthPromptPresenter.FB_LOGIN_REQ);
+    }
+
+    @Test
+    public void onActivityResultFinishesInShameWhenNoResultData() {
+        presenter.onActivityResult(OAuthPromptPresenter.FB_LOGIN_REQ, Activity.RESULT_CANCELED, null);
+        verify(nav).finishOAuthPromptInShame();
+    }
+
+    @Test
+    public void onActivityResultFinishesWithDataWhenValidData() {
+        Bundle mockBundle = mock(Bundle.class);
+        when(mockBundle.getString(TOKEN_KEY)).thenReturn(token);
+        when(mockBundle.getString(SECRET_KEY)).thenReturn(secret);
+        when(mockBundle.getString(PROVIDER_KEY)).thenReturn(provider);
+        presenter.onActivityResult(OAuthPromptPresenter.FB_LOGIN_REQ, Activity.RESULT_OK, mockBundle);
+        verify(nav).finishOAuthPromptWithInfo(token, secret, provider);
     }
 }
