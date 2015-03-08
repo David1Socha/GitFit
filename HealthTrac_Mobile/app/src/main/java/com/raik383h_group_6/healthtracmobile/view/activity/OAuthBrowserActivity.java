@@ -11,6 +11,7 @@ import com.raik383h_group_6.healthtracmobile.content.ResourcesAdapter;
 import com.raik383h_group_6.healthtracmobile.application.ActivityNavigator;
 import com.raik383h_group_6.healthtracmobile.presenter.OAuthBrowserPresenter;
 import com.raik383h_group_6.healthtracmobile.presenter.PresenterFactory;
+import com.raik383h_group_6.healthtracmobile.service.oauth.IAsyncOAuthService;
 import com.raik383h_group_6.healthtracmobile.service.oauth.IOAuthService;
 
 import roboguice.activity.RoboActionBarActivity;
@@ -24,6 +25,12 @@ public class OAuthBrowserActivity extends CustomRoboActionBarActivity {
     @Inject
     @Named("Twitter")
     private IOAuthService twitterOAuthService;
+    @Inject
+    @Named("FacebookAsync")
+    private IAsyncOAuthService asyncFacebookOAuthService;
+    @Inject
+    @Named("TwitterAsync")
+    private IAsyncOAuthService asyncTwitterOAuthService;
     @Inject
     private PresenterFactory presenterFactory;
     private OAuthBrowserPresenter presenter;
