@@ -49,9 +49,7 @@ public class UserValidationPresenterTest {
 
     @Test
     public void validateUserSetsErrorMessagesWhenErrors() {
-        User awfulUser = validUser;
-        awfulUser.setLocation("");
-        awfulUser.setUserName("");
+        String birthDateStr = "123/234/19";
         //TODO
     }
 
