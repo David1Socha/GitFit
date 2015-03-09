@@ -22,9 +22,9 @@ public class UserValidationPresenter {
         this.resources = resources;
     }
 
-    public User validateUser(String birthDateStr, String email, String firstName, String heightStr, String lastName, String location, String preferredName, String radioValue, String userName, String weightStr) {
+    public User validateUser(String birthDateStr, String email, String firstName, String heightStr, String lastName, String location, String preferredName, String radioValue, String userName, String weightStr, String currUserName) {
         User userToCreate = null;
-        if (fieldsValid(birthDateStr, email, firstName, heightStr, lastName, location, preferredName, userName, weightStr)) {
+        if (fieldsValid(birthDateStr, email, firstName, heightStr, lastName, location, preferredName, userName, weightStr, currUserName)) {
             Date birthDate = FormatUtils.parseDate(birthDateStr);
             double height = FormatUtils.parseDouble(heightStr);
             double weight = FormatUtils.parseDouble(weightStr);
@@ -36,7 +36,7 @@ public class UserValidationPresenter {
         return userToCreate;
     }
 
-    private boolean fieldsValid(String birthDate, String email, String firstName, String height, String lastName, String location, String prefName, String username, String weight) {
+    private boolean fieldsValid(String birthDate, String email, String firstName, String height, String lastName, String location, String prefName, String username, String weight, String currUserName) {
         boolean allGood = true;
         if (birthDate.equals("")) {
             allGood = false;
@@ -74,7 +74,7 @@ public class UserValidationPresenter {
             view.setUsernameError(resources.getString(R.string.empty_field_error));
         }
         try {
-            if (!userService.isAvailable(username)) {
+            if ( (currUserName == null || !username.equals(currUserName) ) &&  !userService.isAvailable(username) ) {
                 allGood = false;
                 view.setUsernameError("Username already exists");
             }

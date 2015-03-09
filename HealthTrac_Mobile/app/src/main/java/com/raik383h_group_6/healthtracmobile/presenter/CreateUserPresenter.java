@@ -102,7 +102,7 @@ public class CreateUserPresenter {
     }
 
     public void onClickCreateAccount() {
-        User userToCreate = userValidationPresenter.validateUser(view.getBirthDate(), view.getEmail(), view.getFirstName(), view.getHeight(), view.getLastName(), view.getLocation(), view.getPreferredName(), view.getSex(), view.getUsername(), view.getWeight());
+        User userToCreate = userValidationPresenter.validateUser(view.getBirthDate(), view.getEmail(), view.getFirstName(), view.getHeight(), view.getLastName(), view.getLocation(), view.getPreferredName(), view.getSex(), view.getUsername(), view.getWeight(), null);
         if (userToCreate != null) {
             createUser(userToCreate);
         } else {

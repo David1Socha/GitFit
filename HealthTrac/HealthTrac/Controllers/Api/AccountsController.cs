@@ -107,6 +107,7 @@ namespace HealthTrac.Controllers.Api
                 Email = userDto.Email,
                 FirstName = userDto.FirstName,
                 Height = userDto.Height,
+                Location = userDto.Location,
                 LastName = userDto.LastName,
                 PreferredName = userDto.PreferredName,
                 Sex = userDto.Sex,

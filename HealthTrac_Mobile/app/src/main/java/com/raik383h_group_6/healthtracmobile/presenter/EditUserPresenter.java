@@ -60,7 +60,7 @@ public class EditUserPresenter {
     }
 
     public void onClickUpdateUser() {
-        User userToUpdate = userValidationPresenter.validateUser(view.getBirthDate(), view.getEmail(), view.getFirstName(), view.getHeight(), view.getLastName(), view.getLocation(), view.getPreferredName(), view.getSex(), view.getUsername(), view.getWeight());
+        User userToUpdate = userValidationPresenter.validateUser(view.getBirthDate(), view.getEmail(), view.getFirstName(), view.getHeight(), view.getLastName(), view.getLocation(), view.getPreferredName(), view.getSex(), view.getUsername(), view.getWeight(), grant.getUserName());
         if (userToUpdate != null) {
             userToUpdate.setId(ogUser.getId());
             updateUser(userToUpdate);
