@@ -9,8 +9,10 @@ import com.raik383h_group_6.healthtracmobile.service.api.FacebookService;
 import com.raik383h_group_6.healthtracmobile.service.api.MembershipService;
 import com.raik383h_group_6.healthtracmobile.service.api.TeamService;
 import com.raik383h_group_6.healthtracmobile.service.api.async.AsyncMembershipService;
+import com.raik383h_group_6.healthtracmobile.service.api.async.AsyncTeamService;
 import com.raik383h_group_6.healthtracmobile.service.api.async.AsyncUserService;
 import com.raik383h_group_6.healthtracmobile.service.api.async.IAsyncMembershipService;
+import com.raik383h_group_6.healthtracmobile.service.api.async.IAsyncTeamService;
 import com.raik383h_group_6.healthtracmobile.service.api.async.IAsyncUserService;
 import com.raik383h_group_6.healthtracmobile.service.api.provider.RetrofitFacebookServiceProvider;
 import com.raik383h_group_6.healthtracmobile.service.api.provider.RetrofitMembershipServiceProvider;
@@ -38,6 +40,7 @@ public class ApplicationModule extends AbstractModule {
         bind(FacebookService.class).toProvider(RetrofitFacebookServiceProvider.class);
         bind(IAsyncOAuthService.class).annotatedWith(Names.named("FacebookAsync")).toProvider(AsyncFacebookScribeOAuthServiceProvider.class);
         bind(IAsyncOAuthService.class).annotatedWith(Names.named("TwitterAsync")).toProvider(AsyncTwitterScribeOAuthServiceProvider.class);
+        bind(IAsyncTeamService.class).to(AsyncTeamService.class);
         bind(IAsyncMembershipService.class).to(AsyncMembershipService.class);
         bind(IAsyncUserService.class).to(AsyncUserService.class);
         install(new FactoryModuleBuilder().build(PresenterFactory.class));
