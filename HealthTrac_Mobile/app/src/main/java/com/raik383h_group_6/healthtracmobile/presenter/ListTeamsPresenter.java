@@ -15,6 +15,7 @@ import com.raik383h_group_6.healthtracmobile.content.IResources;
 import com.raik383h_group_6.healthtracmobile.model.AccessGrant;
 import com.raik383h_group_6.healthtracmobile.model.Team;
 import com.raik383h_group_6.healthtracmobile.service.api.TeamService;
+import com.raik383h_group_6.healthtracmobile.service.api.async.IAsyncTeamService;
 import com.raik383h_group_6.healthtracmobile.view.ListTeamsView;
 import com.raik383h_group_6.healthtracmobile.view.activity.ListTeamsActivity;
 
@@ -28,12 +29,12 @@ public class ListTeamsPresenter {
     private IResources resources;
     private IActivityNavigator nav;
     private ListTeamsView view;
-    private TeamService teamService;
+    private IAsyncTeamService teamService;
     private AccessGrant grant;
     private Bundle extras;
 
     @Inject
-    public ListTeamsPresenter(TeamService teamService, @Assisted Bundle extras, @Assisted IResources resources, @Assisted IActivityNavigator nav, @Assisted ListTeamsView view) {
+    public ListTeamsPresenter(IAsyncTeamService teamService, @Assisted Bundle extras, @Assisted IResources resources, @Assisted IActivityNavigator nav, @Assisted ListTeamsView view) {
         this.resources = resources;
         this.nav = nav;
         this.teamService = teamService;
@@ -63,7 +64,7 @@ public class ListTeamsPresenter {
                 view.setNoTeamsMessageDisplay(true);
                 return;
             }
-            teams = getTeamsAsync(grant.getAuthHeader());
+            teams = teamService.getTeamsAsync(grant.getAuthHeader());
             if (teams != null) {
                 view.setNoTeamsMessageDisplay(false);
                 view.setTeamsList(teams);
@@ -73,15 +74,6 @@ public class ListTeamsPresenter {
         } catch (Exception e) {
             view.setNoTeamsMessageDisplay(true);
         }
-    }
-
-    private List<Team> getTeamsAsync(String authHeader) throws ExecutionException, InterruptedException {
-        return new AsyncTask<String, Void, List<Team>>() {
-            @Override
-            protected List<Team> doInBackground(String... params) {
-                return teamService.getTeams(params[0]);
-            }
-        }.execute(authHeader).get();
     }
 
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
