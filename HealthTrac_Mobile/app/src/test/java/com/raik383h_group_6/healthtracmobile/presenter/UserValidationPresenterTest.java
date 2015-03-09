@@ -97,7 +97,7 @@ public class UserValidationPresenterTest {
         assertEquals(u1.getSex(), u2.getSex());
         assertEquals(u1.getUserName(), u2.getUserName());
         assertEquals(u1.getWeight(), u2.getWeight(), 0);
-        //TODO assertEquals(u1.getLocation(), u2.getLocation());
+        assertEquals(u1.getLocation(), u2.getLocation());
     }
 
 }
