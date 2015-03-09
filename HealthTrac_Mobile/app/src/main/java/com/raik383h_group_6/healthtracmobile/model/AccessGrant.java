@@ -100,7 +100,7 @@ public class AccessGrant implements Parcelable {
 
     public boolean isExpired() {
         Date now = new Date();
-        boolean expired = expires.before(now);
+        boolean expired = expires != null && expires.before(now);
         return expired;
     }
 
