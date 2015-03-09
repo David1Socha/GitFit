@@ -13,6 +13,7 @@ import com.raik383h_group_6.healthtracmobile.content.IResources;
 import com.raik383h_group_6.healthtracmobile.model.AccessGrant;
 import com.raik383h_group_6.healthtracmobile.model.User;
 import com.raik383h_group_6.healthtracmobile.service.api.UserService;
+import com.raik383h_group_6.healthtracmobile.service.api.async.IAsyncUserService;
 import com.raik383h_group_6.healthtracmobile.view.GitFitMainView;
 
 import java.util.concurrent.ExecutionException;
@@ -23,11 +24,11 @@ public class GitFitMainPresenter {
     private IResources resources;
     private IActivityNavigator nav;
     private GitFitMainView view;
-    private UserService userService;
+    private IAsyncUserService userService;
     private User user;
 
     @Inject
-    public GitFitMainPresenter(UserService userService, @Assisted IResources resources, @Assisted IActivityNavigator nav, @Assisted GitFitMainView view) {
+    public GitFitMainPresenter(IAsyncUserService userService, @Assisted IResources resources, @Assisted IActivityNavigator nav, @Assisted GitFitMainView view) {
         this.userService = userService;
         this.resources = resources;
         this.nav = nav;
@@ -88,26 +89,13 @@ public class GitFitMainPresenter {
 
     private void loadUser() {
         try {
-            user = getUserAsync(grant.getId(), grant);
+            user = userService.getUserAsync(grant.getId(), grant.getAuthHeader());
         } catch (ExecutionException | InterruptedException ignored) {
         }
         if (user == null) {
             view.displayMessage(resources.getString(R.string.error_find_profile));
         }
 
-    }
-
-    private User getUserAsync(final String id, final AccessGrant accessGrant) throws ExecutionException, InterruptedException {
-        return new AsyncTask<Void, Void, User>() {
-            @Override
-            protected User doInBackground(Void... params) {
-                try {
-                    return userService.getUser(id, accessGrant.getAuthHeader());
-                } catch (Exception e) {
-                    return null;
-                }
-            }
-        }.execute().get();
     }
 
     public void onClickShowTeams() {
