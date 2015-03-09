@@ -76,8 +76,8 @@ namespace HealthTrac.Controllers.Api
                 new JProperty("access_token", accesstoken),
                 new JProperty("token_type", "bearer"),
                 new JProperty("expires_in", tokenExpirationTimeSpan.TotalSeconds.ToString()),
-                new JProperty(".issued", ticket.Properties.IssuedUtc.ToString()),
-                new JProperty(".expires", ticket.Properties.ExpiresUtc.ToString()),
+                new JProperty(".issued", ticket.Properties.IssuedUtc.Value.DateTime),
+                new JProperty(".expires", ticket.Properties.ExpiresUtc.Value.DateTime),
                 new JProperty("id", user.Id)
             );
             var json = Newtonsoft.Json.JsonConvert.SerializeObject(blob);
