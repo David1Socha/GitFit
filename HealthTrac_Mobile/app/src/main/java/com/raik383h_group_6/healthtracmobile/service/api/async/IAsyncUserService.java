@@ -13,4 +13,5 @@ public interface IAsyncUserService {
 
     void updateUserAsync(String id, User user, String token) throws Exception;
 
+    boolean isAvailable(String username, String token) throws Exception;
 }
