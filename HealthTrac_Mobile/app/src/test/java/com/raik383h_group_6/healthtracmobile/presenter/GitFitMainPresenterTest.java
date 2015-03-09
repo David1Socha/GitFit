@@ -113,4 +113,19 @@ public class GitFitMainPresenterTest {
         presenter.onClickShowProfile();
         verify(view).displayMessage(ERROR_FIND_PROFILE);
     }
+
+    @Test
+    public void onClickViewTeamsOpensListTeamsWhenGrant() {
+        when(view.getPref(GRANT_PREF_KEY)).thenReturn(FAKE_JSON);
+        when(json.fromJson(FAKE_JSON, AccessGrant.class)).thenReturn(grant);
+        presenter.onResume();
+        presenter.onClickShowTeams();
+        verify(nav).openListTeams(grant);
+    }
+
+    @Test
+    public void onClickShowTeamsOpensAuthenticationWhenGrantBad() {
+        presenter.onClickShowTeams();
+        verify(nav).openAuthentication(GitFitMainPresenter.AUTH);
+    }
 }
