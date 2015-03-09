@@ -89,7 +89,7 @@ public class GitFitMainPresenter {
     private void loadUser() {
         try {
             user = userService.getUserAsync(grant.getId(), grant.getAuthHeader());
-        } catch (ExecutionException | InterruptedException ignored) {
+        } catch (Exception ignored) {
         }
         if (user == null) {
             view.displayMessage(resources.getString(R.string.error_find_profile));

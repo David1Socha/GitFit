@@ -51,6 +51,7 @@ public class GitFitMainPresenterTest {
         userService = mock(IAsyncUserService.class);
         resources = mock(IResources.class);
         when(resources.getString(R.string.pref_access_grant)).thenReturn(GRANT_PREF_KEY);
+        when(resources.getString(R.string.error_find_profile)).thenReturn(ERROR_FIND_PROFILE);
         nav = mock(IActivityNavigator.class);
         json = mock(JsonParser.class);
         presenter = new GitFitMainPresenter(userService, json, resources, nav, view);
@@ -69,5 +70,47 @@ public class GitFitMainPresenterTest {
         when(view.getPref(GRANT_PREF_KEY)).thenReturn(null);
         presenter.onResume();
         verify(nav).openAuthentication(GitFitMainPresenter.AUTH);
+    }
+
+    @Test
+    public void onPauseSavesGrantAsSharedPref() {
+        when(json.toJson(null)).thenReturn(FAKE_JSON);
+        presenter.onPause();
+        verify(view).setPref(GRANT_PREF_KEY, FAKE_JSON);
+    }
+
+    @Test
+    public void onClickShowUsersOpensAuthenticationWhenGrantBad() {
+        presenter.onClickShowUsers();
+        verify(nav).openAuthentication(GitFitMainPresenter.AUTH);
+    }
+
+    @Test
+    public void onClickShowUsersOpensListUsersWhenGrant() {
+        when(view.getPref(GRANT_PREF_KEY)).thenReturn(FAKE_JSON);
+        when(json.fromJson(FAKE_JSON, AccessGrant.class)).thenReturn(grant);
+        presenter.onResume();
+        presenter.onClickShowUsers();
+        verify(nav).openListUsers(grant);
+    }
+
+    @Test
+    public void onClickViewUserOpensViewUserWhenServiceWorking() throws ExecutionException, InterruptedException {
+        when(view.getPref(GRANT_PREF_KEY)).thenReturn(FAKE_JSON);
+        when(json.fromJson(FAKE_JSON, AccessGrant.class)).thenReturn(grant);
+        presenter.onResume();
+        when(userService.getUserAsync(grant.getId(), grant.getAuthHeader())).thenReturn(user);
+        presenter.onClickShowProfile();
+        verify(nav).openViewUser(user, grant);
+    }
+
+    @Test
+    public void onClickViewUserDisplaysErrorWhenNoUserFound() throws ExecutionException, InterruptedException {
+        when(view.getPref(GRANT_PREF_KEY)).thenReturn(FAKE_JSON);
+        when(json.fromJson(FAKE_JSON, AccessGrant.class)).thenReturn(grant);
+        presenter.onResume();
+        when(userService.getUserAsync(grant.getId(), grant.getAuthHeader())).thenReturn(null);
+        presenter.onClickShowProfile();
+        verify(view).displayMessage(ERROR_FIND_PROFILE);
     }
 }
