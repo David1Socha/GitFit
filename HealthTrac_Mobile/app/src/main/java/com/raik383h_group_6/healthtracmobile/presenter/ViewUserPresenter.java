@@ -63,7 +63,7 @@ public class ViewUserPresenter {
         view.setPrefName(user.getPreferredName());
         view.setSex(user.getSex()== User.Sex.MALE ? resources.getString(R.string.male_label): resources.getString(R.string.label_female));
         view.setUserName(user.getUserName());
-        view.setWeight(FormatUtils.format(user.getWidth()));
+        view.setWeight(FormatUtils.format(user.getWeight()));
         boolean userViewingSelf = user.getId().equals(grant.getId());
         view.setShowEditUserButton(userViewingSelf);
     }

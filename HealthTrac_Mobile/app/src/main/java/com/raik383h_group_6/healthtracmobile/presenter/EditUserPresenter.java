@@ -55,7 +55,7 @@ public class EditUserPresenter {
             view.setPrefName(ogUser.getPreferredName());
             view.setSex(ogUser.getSex());
             view.setUsername(ogUser.getUserName());
-            view.setWeight(FormatUtils.format(ogUser.getWidth()));
+            view.setWeight(FormatUtils.format(ogUser.getWeight()));
         }
     }
 

@@ -12,7 +12,7 @@ public class AccessGrant implements Parcelable {
     @SerializedName("access_token") private String accessToken;
     @SerializedName("token_type") private String tokenType;
     @SerializedName("expires_in") private String expiresIn;
-    @SerializedName(".issued") private String issued;
+    @SerializedName(".issued") private Date issued;
 
     public String getAuthHeader() {return tokenType + " " + accessToken;}
 
@@ -48,19 +48,19 @@ public class AccessGrant implements Parcelable {
         this.expiresIn = expiresIn;
     }
 
-    public String getIssued() {
+    public Date getIssued() {
         return issued;
     }
 
-    public void setIssued(String issued) {
+    public void setIssued(Date issued) {
         this.issued = issued;
     }
 
-    public String getExpires() {
+    public Date getExpires() {
         return expires;
     }
 
-    public void setExpires(String expires) {
+    public void setExpires(Date expires) {
         this.expires = expires;
     }
 
@@ -76,7 +76,7 @@ public class AccessGrant implements Parcelable {
         return tokenType + " " + accessToken;
     }
 
-    @SerializedName(".expires") private String expires;
+    @SerializedName(".expires") private Date expires;
     @SerializedName("id") private String id;
 
     @Override
@@ -90,8 +90,8 @@ public class AccessGrant implements Parcelable {
         dest.writeString(this.accessToken);
         dest.writeString(this.tokenType);
         dest.writeString(this.expiresIn);
-        dest.writeString(this.issued);
-        dest.writeString(this.expires);
+        dest.writeLong(this.issued != null ? this.issued.getTime() : -1);
+        dest.writeLong(this.expires != null ? this.expires.getTime() : -1);
         dest.writeString(this.id);
     }
 
@@ -100,7 +100,7 @@ public class AccessGrant implements Parcelable {
 
     public boolean isExpired() {
         Date now = new Date();
-        //TODO once date returned from server plays more nicely with java's DateFormat...
+        //TODO compare
         return false;
     }
 
@@ -109,8 +109,10 @@ public class AccessGrant implements Parcelable {
         this.accessToken = in.readString();
         this.tokenType = in.readString();
         this.expiresIn = in.readString();
-        this.issued = in.readString();
-        this.expires = in.readString();
+        long tmpIssued = in.readLong();
+        this.issued = tmpIssued == -1 ? null : new Date(tmpIssued);
+        long tmpExpires = in.readLong();
+        this.expires = tmpExpires == -1 ? null : new Date(tmpExpires);
         this.id = in.readString();
     }
 

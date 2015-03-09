@@ -38,14 +38,14 @@ public class UserValidationPresenterTest {
     @Test
     public void validateUserReturnsUserToCreateWhenValid() {
         String sexStr = getSexStr(validUser);
-        User userToCreate = presenter.validateUser(FormatUtils.format(validUser.getBirthDate()), validUser.getEmail(), validUser.getFirstName(), FormatUtils.format(validUser.getHeight()), validUser.getLastName(), validUser.getLocation(), validUser.getPreferredName(), sexStr, validUser.getUserName(), FormatUtils.format(validUser.getWidth()));
+        User userToCreate = presenter.validateUser(FormatUtils.format(validUser.getBirthDate()), validUser.getEmail(), validUser.getFirstName(), FormatUtils.format(validUser.getHeight()), validUser.getLastName(), validUser.getLocation(), validUser.getPreferredName(), sexStr, validUser.getUserName(), FormatUtils.format(validUser.getWeight()));
         assertSameSignificantValues(userToCreate, validUser);
     }
 
     @Test
     public void validateUserReturnsNullWhenInvalid() {
         String sexStr = getSexStr(validUser);
-        User userToCreate = presenter.validateUser(FormatUtils.format(validUser.getBirthDate()), validUser.getEmail(), validUser.getFirstName(), FormatUtils.format(validUser.getHeight()), validUser.getLastName(), "", validUser.getPreferredName(), sexStr, validUser.getUserName(), FormatUtils.format(validUser.getWidth()));
+        User userToCreate = presenter.validateUser(FormatUtils.format(validUser.getBirthDate()), validUser.getEmail(), validUser.getFirstName(), FormatUtils.format(validUser.getHeight()), validUser.getLastName(), "", validUser.getPreferredName(), sexStr, validUser.getUserName(), FormatUtils.format(validUser.getWeight()));
         assertNull(userToCreate);
     }
 
@@ -88,7 +88,7 @@ public class UserValidationPresenterTest {
         assertEquals(u1.getPreferredName(), u2.getPreferredName());
         assertEquals(u1.getSex(), u2.getSex());
         assertEquals(u1.getUserName(), u2.getUserName());
-        assertEquals(u1.getWidth(), u2.getWidth(), 0);
+        assertEquals(u1.getWeight(), u2.getWeight(), 0);
         //TODO assertEquals(u1.getLocation(), u2.getLocation());
     }
 

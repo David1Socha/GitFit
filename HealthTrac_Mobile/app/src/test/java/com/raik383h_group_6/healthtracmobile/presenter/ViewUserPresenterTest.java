@@ -81,6 +81,6 @@ public class ViewUserPresenterTest {
         verify(view).setPrefName(user.getPreferredName());
         verify(view).setSex(user.getSex() == User.Sex.MALE ? "Male" : "Female");
         verify(view).setUserName(user.getUserName());
-        verify(view).setWeight(FormatUtils.format(user.getWidth()));
+        verify(view).setWeight(FormatUtils.format(user.getWeight()));
     }
 }
