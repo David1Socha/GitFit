@@ -38,14 +38,22 @@ public class UserValidationPresenterTest {
     @Test
     public void validateUserReturnsUserToCreateWhenValid() {
         String sexStr = getSexStr(validUser);
-        User userToCreate = presenter.validateUser(FormatUtils.format(validUser.getBirthDate()), validUser.getEmail(), validUser.getFirstName(), FormatUtils.format(validUser.getHeight()), validUser.getLastName(), validUser.getLocation(), validUser.getPreferredName(), sexStr, validUser.getUserName(), FormatUtils.format(validUser.getWeight()));
+        User userToCreate = presenter.validateUser(FormatUtils.format(validUser.getBirthDate()), validUser.getEmail(), validUser.getFirstName(), FormatUtils.format(validUser.getHeight()), validUser.getLastName(), validUser.getLocation(), validUser.getPreferredName(), sexStr, validUser.getUserName(), FormatUtils.format(validUser.getWeight()), validUser.getUserName());
         assertSameSignificantValues(userToCreate, validUser);
     }
 
     @Test
     public void validateUserReturnsNullWhenInvalid() {
         String sexStr = getSexStr(validUser);
-        User userToCreate = presenter.validateUser(FormatUtils.format(validUser.getBirthDate()), validUser.getEmail(), validUser.getFirstName(), FormatUtils.format(validUser.getHeight()), validUser.getLastName(), "", validUser.getPreferredName(), sexStr, validUser.getUserName(), FormatUtils.format(validUser.getWeight()));
+        User userToCreate = presenter.validateUser(FormatUtils.format(validUser.getBirthDate()), validUser.getEmail(), validUser.getFirstName(), FormatUtils.format(validUser.getHeight()), validUser.getLastName(), "", validUser.getPreferredName(), sexStr, validUser.getUserName(), FormatUtils.format(validUser.getWeight()), validUser.getUserName());
+        assertNull(userToCreate);
+    }
+
+    @Test
+    public void validateUserFailsWhenUserNameUnavailable() throws Exception {
+        when(userService.isAvailable(validUser.getUserName())).thenReturn(false);
+        String sexStr = getSexStr(validUser);
+        User userToCreate = presenter.validateUser(FormatUtils.format(validUser.getBirthDate()), validUser.getEmail(), validUser.getFirstName(), FormatUtils.format(validUser.getHeight()), validUser.getLastName(), "", validUser.getPreferredName(), sexStr, validUser.getUserName(), FormatUtils.format(validUser.getWeight()), null);
         assertNull(userToCreate);
     }
 
@@ -61,7 +69,7 @@ public class UserValidationPresenterTest {
         String userName = "";
         String sexStr = "Male";
         String widthStr = "";
-        presenter.validateUser(birthDateStr, email, firstName, heightStr, lastName, location, prefName, sexStr, userName, widthStr);
+        presenter.validateUser(birthDateStr, email, firstName, heightStr, lastName, location, prefName, sexStr, userName, widthStr, null);
         verify(view).setBirthDateError(INVALID_DATE_ERROR);
         verify(view).setEmailError(EMPTY_FIELD_ERROR);
         verify(view).setFirstNameError(EMPTY_FIELD_ERROR);
