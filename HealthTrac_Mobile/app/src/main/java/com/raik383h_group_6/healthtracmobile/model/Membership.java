@@ -58,20 +58,16 @@ public class Membership {
     private long teamID;
     private String userID;
     private Date dateCreated, dateModified;
-    @SerializedName("MembershipStatus") private MembershipStatus membershipStatus; //TODO attribute may be unnecessary
+    @SerializedName("MembershipStatus") private MembershipStatus membershipStatus;
 
     public enum MembershipStatus {
         @SerializedName("0")
         BANNED,
         @SerializedName("1")
-        WAITING_USER,
-        @SerializedName("2")
-        WAITING_TEAM,
-        @SerializedName("3")
         MEMBER,
-        @SerializedName("4")
+        @SerializedName("2")
         INACTIVE,
-        @SerializedName("5")
+        @SerializedName("3")
         ADMIN
     }
 }
