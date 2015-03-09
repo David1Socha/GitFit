@@ -35,12 +35,12 @@ public class EditUserPresenter {
         this.nav = nav;
         this.resources = resources;
         this.view = view;
-    }
-
-    public void onCreate() {
         userValidationPresenter = new UserValidationPresenter(userService, view, resources);
         this.grant = extras.getParcelable(resources.getString(R.string.EXTRA_ACCESS_GRANT));
         this.ogUser = extras.getParcelable(resources.getString(R.string.EXTRA_USER));
+    }
+
+    public void onCreate() {
         populateFields();
     }
 
