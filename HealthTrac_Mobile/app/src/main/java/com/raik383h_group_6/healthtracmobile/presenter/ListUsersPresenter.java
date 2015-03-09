@@ -15,6 +15,7 @@ import com.raik383h_group_6.healthtracmobile.content.IResources;
 import com.raik383h_group_6.healthtracmobile.model.AccessGrant;
 import com.raik383h_group_6.healthtracmobile.model.User;
 import com.raik383h_group_6.healthtracmobile.service.api.UserService;
+import com.raik383h_group_6.healthtracmobile.service.api.async.IAsyncUserService;
 import com.raik383h_group_6.healthtracmobile.view.ListUsersView;
 import com.raik383h_group_6.healthtracmobile.view.activity.ListUsersActivity;
 
@@ -28,12 +29,12 @@ public class ListUsersPresenter {
     private IResources resources;
     private IActivityNavigator nav;
     private ListUsersView view;
-    private UserService userService;
+    private IAsyncUserService userService;
     private AccessGrant grant;
     private Bundle extras;
 
     @Inject
-    public ListUsersPresenter(UserService userService, @Assisted Bundle extras, @Assisted IResources resources, @Assisted IActivityNavigator nav, @Assisted ListUsersView view) {
+    public ListUsersPresenter(IAsyncUserService userService, @Assisted Bundle extras, @Assisted IResources resources, @Assisted IActivityNavigator nav, @Assisted ListUsersView view) {
         this.resources = resources;
         this.nav = nav;
         this.userService = userService;
@@ -63,7 +64,7 @@ public class ListUsersPresenter {
                 view.setNoUsersMessageDisplay(true);
                 return;
             }
-            users = getUsersAsync(grant.getAuthHeader());
+            users = userService.getUsersAsync(grant.getAuthHeader());
             if (users != null) {
                 view.setNoUsersMessageDisplay(false);
                 view.setUsers(users);
@@ -74,19 +75,6 @@ public class ListUsersPresenter {
         } catch (ExecutionException | InterruptedException e) {
             view.setNoUsersMessageDisplay(true);
         }
-    }
-
-    private List<User> getUsersAsync(String authHeader) throws ExecutionException, InterruptedException {
-        return new AsyncTask<String, Void, List<User>>() {
-            @Override
-            protected List<User> doInBackground(String... params) {
-                try {
-                    return userService.getUsers(params[0]);
-                } catch (Exception e) {
-                    return null;
-                }
-            }
-        }.execute(authHeader).get();
     }
 
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
