@@ -6,7 +6,6 @@
 <h1>@Model.Name </h1>
 <h3>Created @Model.DateCreated.ToString("MMMM dd, yyyy")</h3>
 <h3>Team Description: @Model.Description</h3>
-<h3>Privacy: @Model.Visibility</h3>
 <h3>Team Members</h3>
 <table cellpadding="10">
     <tr>
@@ -16,8 +15,8 @@
     </tr>
     @foreach (var membership in Model.Memberships)
     {
-        if (membership.MembershipStatus == HealthTrac.Models.MembershipStatus.MEMBER || membership.MembershipStatus == HealthTrac.Models.MembershipStatus.ADMIN) 
-        { 
+        if (membership.MembershipStatus == HealthTrac.Models.MembershipStatus.MEMBER || membership.MembershipStatus == HealthTrac.Models.MembershipStatus.ADMIN)
+        {
             <tr>
                 <td>
                     @Html.ActionLink(membership.User.UserName, "Profile", "User", new { id = membership.User.Id }, null)

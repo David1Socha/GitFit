@@ -12,7 +12,6 @@ namespace HealthTrac.Models.Dto
         public long ID { get; set; }
         public string Name { get; set; }
         public String Description { get; set; }
-        public Visibility Visibility { get; set; }
 
         public static TeamDto FromTeam(Team t)
         {
@@ -23,7 +22,6 @@ namespace HealthTrac.Models.Dto
                 Description = t.Description,
                 ID = t.ID,
                 Name = t.Name,
-                Visibility = t.Visibility
             };
         }
     }
