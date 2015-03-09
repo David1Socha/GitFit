@@ -1,5 +1,6 @@
 package com.raik383h_group_6.healthtracmobile.application;
 
+import com.google.gson.Gson;
 import com.google.inject.AbstractModule;
 import com.google.inject.assistedinject.FactoryModuleBuilder;
 import com.google.inject.name.Names;
@@ -40,6 +41,7 @@ public class ApplicationModule extends AbstractModule {
         bind(FacebookService.class).toProvider(RetrofitFacebookServiceProvider.class);
         bind(IAsyncOAuthService.class).annotatedWith(Names.named("FacebookAsync")).toProvider(AsyncFacebookScribeOAuthServiceProvider.class);
         bind(IAsyncOAuthService.class).annotatedWith(Names.named("TwitterAsync")).toProvider(AsyncTwitterScribeOAuthServiceProvider.class);
+        bind(Gson.class);
         bind(IAsyncTeamService.class).to(AsyncTeamService.class);
         bind(IAsyncMembershipService.class).to(AsyncMembershipService.class);
         bind(IAsyncUserService.class).to(AsyncUserService.class);

@@ -41,7 +41,6 @@ public class GitFitMainActivity extends CustomRoboActionBarActivity implements c
         IActivityNavigator nav = new ActivityNavigator(this);
         prefs = getSharedPreferences(getString(R.string.shared_prefs), MODE_PRIVATE);
         presenter = presenterFactory.create(resources, nav, this);
-        presenter.onCreate(savedInstanceState);
     }
 
     @Override
@@ -66,12 +65,6 @@ public class GitFitMainActivity extends CustomRoboActionBarActivity implements c
     protected void onPause() {
         super.onPause();
         presenter.onPause();
-    }
-
-    @Override
-    protected void onSaveInstanceState(Bundle outState) {
-        presenter.onSaveInstanceState(outState);
-        super.onSaveInstanceState(outState);
     }
 
     @Override

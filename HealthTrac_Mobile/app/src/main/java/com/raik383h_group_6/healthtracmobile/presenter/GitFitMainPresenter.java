@@ -26,19 +26,15 @@ public class GitFitMainPresenter {
     private GitFitMainView view;
     private IAsyncUserService userService;
     private User user;
+    private Gson gson;
 
     @Inject
-    public GitFitMainPresenter(IAsyncUserService userService, @Assisted IResources resources, @Assisted IActivityNavigator nav, @Assisted GitFitMainView view) {
+    public GitFitMainPresenter(IAsyncUserService userService, Gson gson, @Assisted IResources resources, @Assisted IActivityNavigator nav, @Assisted GitFitMainView view) {
+        this.gson = gson;
         this.userService = userService;
         this.resources = resources;
         this.nav = nav;
         this.view = view;
-    }
-
-    public void onCreate(Bundle savedInstanceState) {
-        if (savedInstanceState != null) {
-            this.grant = savedInstanceState.getParcelable(resources.getString(R.string.EXTRA_ACCESS_GRANT));
-        }
     }
 
     public void onResume() {
@@ -51,7 +47,6 @@ public class GitFitMainPresenter {
     }
 
     private void reconstructGrant() {
-        Gson gson = new Gson();
         String serializedGrant = view.getPref(resources.getString(R.string.pref_access_grant));
         if (serializedGrant != null) {
             grant = gson.fromJson(serializedGrant,  AccessGrant.class);
@@ -63,7 +58,6 @@ public class GitFitMainPresenter {
     }
 
     private void saveGrant() {
-        Gson gson = new Gson();
         String serializedGrant = gson.toJson(grant);
         view.setPref(resources.getString(R.string.pref_access_grant), serializedGrant);
     }
@@ -95,7 +89,6 @@ public class GitFitMainPresenter {
         if (user == null) {
             view.displayMessage(resources.getString(R.string.error_find_profile));
         }
-
     }
 
     public void onClickShowTeams() {
@@ -104,10 +97,6 @@ public class GitFitMainPresenter {
         } else {
             nav.openAuthentication(AUTH);
         }
-    }
-
-    public void onSaveInstanceState(Bundle outState) {
-        outState.putParcelable(resources.getString(R.string.EXTRA_ACCESS_GRANT), grant);
     }
 
     public void onActivityResult(int requestCode, int resultCode, Bundle data) {

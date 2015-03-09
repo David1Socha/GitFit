@@ -43,4 +43,9 @@ public class GitFitMainPresenterTest {
         nav = mock(IActivityNavigator.class);
         presenter = new GitFitMainPresenter(userService, resources, nav, view);
     }
+
+    @Test
+    public void truth() {
+
+    }
 }
