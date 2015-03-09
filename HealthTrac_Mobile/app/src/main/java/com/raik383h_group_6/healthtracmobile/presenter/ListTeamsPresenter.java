@@ -47,7 +47,7 @@ public class ListTeamsPresenter {
         populateTeams();
     }
 
-    public void populateTeams() {
+    private void populateTeams() {
         List<Team> teams = null;
         try {
             if (grant == null || grant.isExpired()) {
