@@ -11,7 +11,7 @@ public class User implements Parcelable {
     private Date dateCreated, dateModified, birthDate;
     private String firstName, lastName, preferredName, email, userName, location;
     private String id;
-    private double height, width;
+    private double height, weight;
 
     public User(Date birthDate, Date dateCreated, Date dateModified, String email, String firstName, double height, String lastName, String location, String preferredName, User.Sex sex, String userName, double weight) {
         this.birthDate = birthDate;
@@ -25,7 +25,7 @@ public class User implements Parcelable {
         this.preferredName = preferredName;
         this.sex = sex;
         this.userName = userName;
-        this.width = weight; // :( TODO fix me to weight when possible
+        this.weight = weight;
     }
 
     public String getLocation() {return  location;}
@@ -122,12 +122,12 @@ public class User implements Parcelable {
         this.height = height;
     }
 
-    public double getWidth() {
-        return width;
+    public double getWeight() {
+        return weight;
     }
 
-    public void setWidth(double width) {
-        this.width = width;
+    public void setWeight(double width) {
+        this.weight = width;
     }
 
     @SerializedName("Sex")
@@ -157,7 +157,7 @@ public class User implements Parcelable {
         dest.writeString(this.userName);
         dest.writeString(this.id);
         dest.writeDouble(this.height);
-        dest.writeDouble(this.width);
+        dest.writeDouble(this.weight);
         dest.writeInt(this.sex == null ? -1 : this.sex.ordinal());
         dest.writeString(this.location);
     }
@@ -179,7 +179,7 @@ public class User implements Parcelable {
         this.userName = in.readString();
         this.id = in.readString();
         this.height = in.readDouble();
-        this.width = in.readDouble();
+        this.weight = in.readDouble();
         int tmpSex = in.readInt();
         this.sex = tmpSex == -1 ? null : Sex.values()[tmpSex];
         this.location = in.readString();
