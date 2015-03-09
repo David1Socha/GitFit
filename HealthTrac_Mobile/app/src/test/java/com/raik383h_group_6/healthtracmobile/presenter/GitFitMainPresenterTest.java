@@ -4,12 +4,14 @@ import android.os.Bundle;
 import android.widget.Adapter;
 import android.widget.AdapterView;
 
+import com.google.gson.Gson;
 import com.raik383h_group_6.healthtracmobile.R;
 import com.raik383h_group_6.healthtracmobile.application.IActivityNavigator;
 import com.raik383h_group_6.healthtracmobile.content.IResources;
 import com.raik383h_group_6.healthtracmobile.helper.ModelGenerator;
 import com.raik383h_group_6.healthtracmobile.model.AccessGrant;
 import com.raik383h_group_6.healthtracmobile.model.Team;
+import com.raik383h_group_6.healthtracmobile.model.User;
 import com.raik383h_group_6.healthtracmobile.service.api.async.IAsyncTeamService;
 import com.raik383h_group_6.healthtracmobile.service.api.async.IAsyncUserService;
 import com.raik383h_group_6.healthtracmobile.view.GitFitMainView;
@@ -22,7 +24,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
-import static com.raik383h_group_6.healthtracmobile.helper.TestConstants.GRANT_KEY;
+import static com.raik383h_group_6.healthtracmobile.helper.TestConstants.*;
+import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -34,18 +37,29 @@ public class GitFitMainPresenterTest {
     private IAsyncUserService userService;
     private IResources resources;
     private IActivityNavigator nav;
+    private Gson gson;
+    private AccessGrant grant;
+    private User user;
 
     @Before
     public void setup() {
+        grant = ModelGenerator.genBasicGrant();
+        user = ModelGenerator.genBasicUser();
+
         view = mock(GitFitMainView.class);
         userService = mock(IAsyncUserService.class);
         resources = mock(IResources.class);
+        when(resources.getString(R.string.pref_access_grant)).thenReturn(GRANT_PREF_KEY);
         nav = mock(IActivityNavigator.class);
-        presenter = new GitFitMainPresenter(userService, resources, nav, view);
+        gson = mock(Gson.class);
+        presenter = new GitFitMainPresenter(userService, gson, resources, nav, view);
     }
 
     @Test
-    public void truth() {
-
+    public void onResumeLoadsGrantFromSharedPrefs() {
+        when(view.getPref(GRANT_PREF_KEY)).thenReturn(FAKE_JSON);
+        when(gson.fromJson(FAKE_JSON, AccessGrant.class)).thenReturn(grant);
+        presenter.onResume();
+        assertEquals(grant, presenter.getGrant());
     }
 }

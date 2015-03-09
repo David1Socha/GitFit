@@ -37,6 +37,10 @@ public class GitFitMainPresenter {
         this.view = view;
     }
 
+    public AccessGrant getGrant() {
+        return grant;
+    }
+
     public void onResume() {
         if (grant == null) {
             reconstructGrant();
