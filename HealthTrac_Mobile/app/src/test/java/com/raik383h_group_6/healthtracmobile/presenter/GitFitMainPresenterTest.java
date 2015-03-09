@@ -63,4 +63,11 @@ public class GitFitMainPresenterTest {
         presenter.onResume();
         assertEquals(grant, presenter.getGrant());
     }
+
+    @Test
+    public void onResumeOpensAuthenticationWhenNoGrantInSharedPrefs() {
+        when(view.getPref(GRANT_PREF_KEY)).thenReturn(null);
+        presenter.onResume();
+        verify(nav).openAuthentication(GitFitMainPresenter.AUTH);
+    }
 }
