@@ -40,17 +40,7 @@ public class ListTeamsPresenter {
         this.teamService = teamService;
         this.view = view;
         this.extras = extras;
-    }
-
-    public void onCreate(Bundle savedInstanceState) {
         this.grant = extras.getParcelable(resources.getString(R.string.EXTRA_ACCESS_GRANT));
-        if (savedInstanceState != null) {
-            this.grant = savedInstanceState.getParcelable(resources.getString(R.string.EXTRA_ACCESS_GRANT));
-        }
-    }
-
-    public void onSaveInstanceState(Bundle outState) {
-        outState.putParcelable(resources.getString(R.string.EXTRA_ACCESS_GRANT), grant);
     }
 
     public void onResume() {

@@ -48,13 +48,6 @@ public class ListTeamsActivity extends CustomRoboActionBarActivity implements Li
                 presenter.onItemClick(parent, view, position, id);
             }
         });
-        presenter.onCreate(savedInstanceState);
-    }
-
-    @Override
-    protected void onSaveInstanceState(Bundle outState) {
-        presenter.onSaveInstanceState(outState);
-        super.onSaveInstanceState(outState);
     }
 
     @Override
