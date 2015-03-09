@@ -24,7 +24,7 @@ namespace HealthTrac.Tests.Helpers
                 PreferredName = "xXxOgrelordxXx",
                 Sex = Sex.MALE,
                 UserName = "xXxOgrelordxXx",
-                Width = 999
+                Weight = 999
             };
         }
 
@@ -43,7 +43,7 @@ namespace HealthTrac.Tests.Helpers
                 PreferredName = "John",
                 Sex = Sex.MALE,
                 UserName = "John",
-                Width = 200
+                Weight = 200
             };
         }
 

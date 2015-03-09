@@ -8,7 +8,7 @@ namespace HealthTrac.Models
 {
     public enum MembershipStatus
     {
-        BANNED, WAITING_USER, WAITING_TEAM, MEMBER, INACTIVE, ADMIN
+        BANNED, MEMBER, INACTIVE, ADMIN
     }
 
     public class Membership : DateTrackingModel

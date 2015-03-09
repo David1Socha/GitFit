@@ -1,5 +1,8 @@
-﻿using System;
+﻿using HealthTrac.DataAccess.Entity;
+using HealthTrac.Migrations;
+using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Net.Http.Formatting;
 using System.Web;
@@ -14,6 +17,7 @@ namespace HealthTrac
     {
         protected void Application_Start()
         {
+            Database.SetInitializer(new MigrateDatabaseToLatestVersion<ApplicationDbContext, Configuration>());
             AreaRegistration.RegisterAllAreas();
             ControllerBuilder.Current.DefaultNamespaces.Add("HealthTrac.Controllers.Api");
             GlobalConfiguration.Configure(WebApiConfig.Register);

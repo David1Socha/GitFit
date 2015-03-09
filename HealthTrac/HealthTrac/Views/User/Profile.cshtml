@@ -6,10 +6,14 @@
 <h1>@Model.FirstName @Model.LastName (@Model.UserName)</h1>
 
 <h3>User Since: @Model.DateCreated.ToString("MMMM dd, yyyy")</h3>
-<h3>Birthday: @if (Model.BirthDate.HasValue) { @Model.BirthDate.Value.ToString("MMMM dd, yyyy") }</h3>
+<h3>
+    Birthday: @if (Model.BirthDate.HasValue)
+    { @Model.BirthDate.Value.ToString("MMMM dd, yyyy") }
+</h3>
 <h3>Sex: @Model.Sex</h3>
 <h3>Height: @Model.Height</h3>
-<h3>Weight: @Model.Width</h3>
+<h3>Location: @Model.Location</h3>
+<h3>Weight: @Model.Weight</h3>
 <h3>Teams</h3>
 <table cellpadding="10">
     <tr>
@@ -35,6 +39,3 @@
         }
     }
 </table>
-
-
-
