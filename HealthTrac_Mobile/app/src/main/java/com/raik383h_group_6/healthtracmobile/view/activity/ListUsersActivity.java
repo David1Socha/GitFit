@@ -49,20 +49,12 @@ public class ListUsersActivity extends CustomRoboActionBarActivity implements Li
             }
         });
         presenter = presenterFactory.create(extras, resources, nav, this);
-        presenter.onCreate(savedInstanceState);
     }
 
     @Override
     public void setUsers(List<User> users) {
         UserAdapter adapter = new UserAdapter(this, users);
         userListView.setAdapter(adapter);
-    }
-
-
-    @Override
-    protected void onSaveInstanceState(Bundle outState) {
-        presenter.onSaveInstanceState(outState);
-        super.onSaveInstanceState(outState);
     }
 
     @Override

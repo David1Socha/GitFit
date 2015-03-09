@@ -24,7 +24,7 @@ import java.util.concurrent.ExecutionException;
 
 public class ListUsersPresenter {
 
-    private static final int AUTH = 1;
+    public static final int AUTH = 1;
 
     private IResources resources;
     private IActivityNavigator nav;
@@ -40,17 +40,7 @@ public class ListUsersPresenter {
         this.userService = userService;
         this.view = view;
         this.extras = extras;
-    }
-
-    public void onCreate(Bundle savedInstanceState) {
         this.grant = extras.getParcelable(resources.getString(R.string.EXTRA_ACCESS_GRANT));
-        if (savedInstanceState != null) {
-            this.grant = savedInstanceState.getParcelable(resources.getString(R.string.EXTRA_ACCESS_GRANT));
-        }
-    }
-
-    public void onSaveInstanceState(Bundle outState) {
-        outState.putParcelable(resources.getString(R.string.EXTRA_ACCESS_GRANT), grant);
     }
 
     public void onResume() {
