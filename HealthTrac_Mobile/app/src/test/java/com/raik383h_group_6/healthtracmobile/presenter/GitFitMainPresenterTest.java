@@ -1,5 +1,6 @@
 package com.raik383h_group_6.healthtracmobile.presenter;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.widget.Adapter;
 import android.widget.AdapterView;
@@ -18,6 +19,7 @@ import com.raik383h_group_6.healthtracmobile.service.json.JsonParser;
 import com.raik383h_group_6.healthtracmobile.view.GitFitMainView;
 import com.raik383h_group_6.healthtracmobile.view.ListTeamsView;
 
+import org.apache.http.auth.AUTH;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -50,6 +52,7 @@ public class GitFitMainPresenterTest {
         view = mock(GitFitMainView.class);
         userService = mock(IAsyncUserService.class);
         resources = mock(IResources.class);
+        when(resources.getString(R.string.EXTRA_ACCESS_GRANT)).thenReturn(GRANT_KEY);
         when(resources.getString(R.string.pref_access_grant)).thenReturn(GRANT_PREF_KEY);
         when(resources.getString(R.string.error_find_profile)).thenReturn(ERROR_FIND_PROFILE);
         nav = mock(IActivityNavigator.class);
@@ -128,4 +131,13 @@ public class GitFitMainPresenterTest {
         presenter.onClickShowTeams();
         verify(nav).openAuthentication(GitFitMainPresenter.AUTH);
     }
+
+    @Test
+    public void onActivityResultSavesGrantWhenFromAuthSuccess() {
+        Bundle data = mock(Bundle.class);
+        when(data.getParcelable(GRANT_KEY)).thenReturn(grant);
+        presenter.onActivityResult(GitFitMainPresenter.AUTH, Activity.RESULT_OK, data);
+        assertEquals(grant, presenter.getGrant());
+    }
+
 }
