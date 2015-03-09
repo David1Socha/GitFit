@@ -11,6 +11,7 @@ namespace HealthTrac.Migrations
         {
             AutomaticMigrationsEnabled = true;
             ContextKey = "HealthTrac.DataAccess.Entity.ApplicationDbContext";
+            AutomaticMigrationDataLossAllowed = true;
         }
 
         protected override void Seed(HealthTrac.DataAccess.Entity.ApplicationDbContext context)
