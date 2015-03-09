@@ -32,7 +32,7 @@ namespace HealthTrac.Models
         public Sex Sex { get; set; }
         public String Location { get; set; }
         public double Height { get; set; }
-        public double Width { get; set; }
+        public double Weight { get; set; }
         public DateTime? BirthDate { get; set; }
         public virtual ICollection<Membership> Memberships { get; set; }
     }

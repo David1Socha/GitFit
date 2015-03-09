@@ -70,7 +70,7 @@ namespace HealthTrac.Tests.Helpers
                 && userDto.PreferredName == user.PreferredName
                 && userDto.Sex == user.Sex
                 && userDto.UserName == user.UserName
-                && userDto.Width == user.Width
+                && userDto.Weight == user.Weight
                 && userDto.Location == user.Location;
             return equal;
         }

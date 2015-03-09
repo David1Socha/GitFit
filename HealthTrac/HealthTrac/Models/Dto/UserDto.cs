@@ -16,7 +16,7 @@ namespace HealthTrac.Models.Dto
         public String Email { get; set; }
         public Sex Sex { get; set; }
         public double Height { get; set; }
-        public double Width { get; set; }
+        public double Weight { get; set; }
         public DateTime? BirthDate { get; set; }
         public string Id { get; set; }
         public string UserName { get; set; }
@@ -33,7 +33,7 @@ namespace HealthTrac.Models.Dto
                 Email = u.Email,
                 Sex = u.Sex,
                 Height = u.Height,
-                Width = u.Width,
+                Weight = u.Weight,
                 BirthDate = u.BirthDate,
                 UserName = u.UserName,
                 Id = u.Id,

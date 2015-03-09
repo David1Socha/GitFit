@@ -110,7 +110,7 @@ namespace HealthTrac.Controllers.Api
                 LastName = userDto.LastName,
                 PreferredName = userDto.PreferredName,
                 Sex = userDto.Sex,
-                Width = userDto.Width,
+                Weight = userDto.Weight,
                 UserName = userDto.UserName
             };
             var loginInfo = GetUserLogin(credentials);
