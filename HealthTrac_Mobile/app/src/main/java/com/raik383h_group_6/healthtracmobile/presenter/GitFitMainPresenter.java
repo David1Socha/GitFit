@@ -14,6 +14,7 @@ import com.raik383h_group_6.healthtracmobile.model.AccessGrant;
 import com.raik383h_group_6.healthtracmobile.model.User;
 import com.raik383h_group_6.healthtracmobile.service.api.UserService;
 import com.raik383h_group_6.healthtracmobile.service.api.async.IAsyncUserService;
+import com.raik383h_group_6.healthtracmobile.service.json.JsonParser;
 import com.raik383h_group_6.healthtracmobile.view.GitFitMainView;
 
 import java.util.concurrent.ExecutionException;
@@ -26,11 +27,11 @@ public class GitFitMainPresenter {
     private GitFitMainView view;
     private IAsyncUserService userService;
     private User user;
-    private Gson gson;
+    private JsonParser json;
 
     @Inject
-    public GitFitMainPresenter(IAsyncUserService userService, Gson gson, @Assisted IResources resources, @Assisted IActivityNavigator nav, @Assisted GitFitMainView view) {
-        this.gson = gson;
+    public GitFitMainPresenter(IAsyncUserService userService, JsonParser json, @Assisted IResources resources, @Assisted IActivityNavigator nav, @Assisted GitFitMainView view) {
+        this.json = json;
         this.userService = userService;
         this.resources = resources;
         this.nav = nav;
@@ -53,7 +54,7 @@ public class GitFitMainPresenter {
     private void reconstructGrant() {
         String serializedGrant = view.getPref(resources.getString(R.string.pref_access_grant));
         if (serializedGrant != null) {
-            grant = gson.fromJson(serializedGrant,  AccessGrant.class);
+            grant = json.fromJson(serializedGrant,  AccessGrant.class);
         }
     }
 
@@ -62,7 +63,7 @@ public class GitFitMainPresenter {
     }
 
     private void saveGrant() {
-        String serializedGrant = gson.toJson(grant);
+        String serializedGrant = json.toJson(grant);
         view.setPref(resources.getString(R.string.pref_access_grant), serializedGrant);
     }
 

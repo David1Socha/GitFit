@@ -14,6 +14,7 @@ import com.raik383h_group_6.healthtracmobile.model.Team;
 import com.raik383h_group_6.healthtracmobile.model.User;
 import com.raik383h_group_6.healthtracmobile.service.api.async.IAsyncTeamService;
 import com.raik383h_group_6.healthtracmobile.service.api.async.IAsyncUserService;
+import com.raik383h_group_6.healthtracmobile.service.json.JsonParser;
 import com.raik383h_group_6.healthtracmobile.view.GitFitMainView;
 import com.raik383h_group_6.healthtracmobile.view.ListTeamsView;
 
@@ -37,7 +38,7 @@ public class GitFitMainPresenterTest {
     private IAsyncUserService userService;
     private IResources resources;
     private IActivityNavigator nav;
-    private Gson gson;
+    private JsonParser json;
     private AccessGrant grant;
     private User user;
 
@@ -51,14 +52,14 @@ public class GitFitMainPresenterTest {
         resources = mock(IResources.class);
         when(resources.getString(R.string.pref_access_grant)).thenReturn(GRANT_PREF_KEY);
         nav = mock(IActivityNavigator.class);
-        gson = mock(Gson.class);
-        presenter = new GitFitMainPresenter(userService, gson, resources, nav, view);
+        json = mock(JsonParser.class);
+        presenter = new GitFitMainPresenter(userService, json, resources, nav, view);
     }
 
     @Test
     public void onResumeLoadsGrantFromSharedPrefs() {
         when(view.getPref(GRANT_PREF_KEY)).thenReturn(FAKE_JSON);
-        when(gson.fromJson(FAKE_JSON, AccessGrant.class)).thenReturn(grant);
+        when(json.fromJson(FAKE_JSON, AccessGrant.class)).thenReturn(grant);
         presenter.onResume();
         assertEquals(grant, presenter.getGrant());
     }
