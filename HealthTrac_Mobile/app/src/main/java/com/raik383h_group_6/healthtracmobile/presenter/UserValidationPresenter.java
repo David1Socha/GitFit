@@ -73,7 +73,14 @@ public class UserValidationPresenter {
             allGood = false;
             view.setUsernameError(resources.getString(R.string.empty_field_error));
         }
-        //TODO validate username uniqueness once I can get that part of API deployed to azure
+        try {
+            if (!userService.isAvailable(username)) {
+                allGood = false;
+                view.setUsernameError("Username already exists");
+            }
+        } catch (Exception ignored) {
+            //If some error occurs, assume username is unique and let user continue (server validates later anyways)
+        }
         if (weight.equals("")) {
             allGood = false;
             view.setWeightError(resources.getString(R.string.empty_field_error));

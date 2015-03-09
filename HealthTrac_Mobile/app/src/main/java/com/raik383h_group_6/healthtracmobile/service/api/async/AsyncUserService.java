@@ -66,11 +66,11 @@ public class AsyncUserService implements IAsyncUserService{
     }
 
     @Override
-    public boolean isAvailable(final String username, final String token) throws Exception {
+    public boolean isAvailable(final String username) throws Exception {
         return new AsyncTask<Void, Void, Boolean>() {
             @Override
         protected Boolean doInBackground(Void... params) {
-                return service.isAvailable(username, token);
+                return service.isAvailable(username);
             }
         }.execute().get();
     }

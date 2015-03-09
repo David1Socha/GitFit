@@ -27,7 +27,7 @@ public interface UserService {
     String SERVICE_ENDPOINT = "https://se6.azurewebsites.net";
 
     @GET("/api/Users/Available")
-    boolean isAvailable(@Query("UserName") String userName, @Header("Authorization") String token);
+    boolean isAvailable(@Query("UserName") String userName);
 
     @GET("/api/Users/{id}")
     User getUser(@Path("id") String id, @Header("Authorization") String token);
