@@ -29,13 +29,13 @@ public class EditUserPresenter {
     private User ogUser;
 
     @Inject
-    public EditUserPresenter(IAsyncUserService userService, @Assisted Bundle extras, @Assisted IResources resources, @Assisted IActivityNavigator nav, @Assisted EditUserView view) {
+    public EditUserPresenter(IAsyncUserService userService, @Assisted UserValidationPresenter userValidationPresenter, @Assisted Bundle extras, @Assisted IResources resources, @Assisted IActivityNavigator nav, @Assisted EditUserView view) {
         this.userService = userService;
         this.extras = extras;
         this.nav = nav;
         this.resources = resources;
         this.view = view;
-        userValidationPresenter = new UserValidationPresenter(userService, view, resources);
+        this.userValidationPresenter = userValidationPresenter;
         this.grant = extras.getParcelable(resources.getString(R.string.EXTRA_ACCESS_GRANT));
         this.ogUser = extras.getParcelable(resources.getString(R.string.EXTRA_USER));
     }

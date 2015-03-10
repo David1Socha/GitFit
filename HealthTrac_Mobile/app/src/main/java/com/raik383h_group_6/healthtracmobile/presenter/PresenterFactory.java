@@ -14,6 +14,7 @@ import com.raik383h_group_6.healthtracmobile.view.EditUserView;
 import com.raik383h_group_6.healthtracmobile.view.GitFitMainView;
 import com.raik383h_group_6.healthtracmobile.view.ListTeamsView;
 import com.raik383h_group_6.healthtracmobile.view.ListUsersView;
+import com.raik383h_group_6.healthtracmobile.view.UserValidationView;
 import com.raik383h_group_6.healthtracmobile.view.ViewUserView;
 import com.raik383h_group_6.healthtracmobile.view.ViewTeamView;
 
@@ -25,7 +26,8 @@ public interface PresenterFactory {
     ListUsersPresenter create(Bundle extras, IResources resources, IActivityNavigator nav, ListUsersView view);
     ListTeamsPresenter create(Bundle extras, IResources resources, IActivityNavigator nav, ListTeamsView view);
     ViewUserPresenter create( Bundle extras, IResources resources, IActivityNavigator nav, ViewUserView view);
-    EditUserPresenter create( Bundle extras, IResources resources, IActivityNavigator nav, EditUserView view);
+    EditUserPresenter create( Bundle extras, UserValidationPresenter presenter, IResources resources, IActivityNavigator nav, EditUserView view);
     GitFitMainPresenter create(IResources resources, IActivityNavigator nav, GitFitMainView view);
     ViewTeamPresenter create(Bundle extras, IResources resources, IActivityNavigator nav, ViewTeamView view);
+    UserValidationPresenter create(UserValidationView view, IResources resources);
 }

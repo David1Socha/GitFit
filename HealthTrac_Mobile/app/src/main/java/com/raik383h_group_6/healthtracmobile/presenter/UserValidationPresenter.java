@@ -1,5 +1,7 @@
 package com.raik383h_group_6.healthtracmobile.presenter;
 
+import com.google.inject.Inject;
+import com.google.inject.assistedinject.Assisted;
 import com.raik383h_group_6.healthtracmobile.R;
 import com.raik383h_group_6.healthtracmobile.content.IResources;
 import com.raik383h_group_6.healthtracmobile.model.User;
@@ -16,7 +18,8 @@ public class UserValidationPresenter {
     private final IAsyncUserService userService;
     private final IResources resources;
 
-    public UserValidationPresenter(IAsyncUserService userService, UserValidationView view, IResources resources) {
+    @Inject
+    public UserValidationPresenter(IAsyncUserService userService, @Assisted UserValidationView view, @Assisted IResources resources) {
         this.view = view;
         this.userService = userService;
         this.resources = resources;

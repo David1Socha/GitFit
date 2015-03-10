@@ -17,6 +17,7 @@ import com.raik383h_group_6.healthtracmobile.model.User;
 import com.raik383h_group_6.healthtracmobile.application.ActivityNavigator;
 import com.raik383h_group_6.healthtracmobile.presenter.PresenterFactory;
 import com.raik383h_group_6.healthtracmobile.presenter.EditUserPresenter;
+import com.raik383h_group_6.healthtracmobile.presenter.UserValidationPresenter;
 import com.raik383h_group_6.healthtracmobile.service.api.UserService;
 import com.raik383h_group_6.healthtracmobile.view.EditUserView;
 
@@ -168,7 +169,8 @@ public class EditUserActivity extends RoboActionBarActivity implements EditUserV
         Bundle extras = getIntent().getExtras();
         IResources resources = new ResourcesAdapter(getResources());
         IActivityNavigator nav = new ActivityNavigator(this);
-        presenter = presenterFactory.create(extras, resources, nav, this);
+        UserValidationPresenter userValidationPresenter = presenterFactory.create(this, resources);
+        presenter = presenterFactory.create(extras, userValidationPresenter, resources, nav, this);
         presenter.onCreate();
     }
 
