@@ -13,7 +13,6 @@ namespace HealthTrac.DataAccess.Entity
     {
         public DbSet<Activity> Activities { get; set; }
         public DbSet<Membership> Memberships { get; set; }
-        public DbSet<Status> Statuses { get; set; }
         public DbSet<Team> Teams { get; set; }
 
         public ApplicationDbContext()
