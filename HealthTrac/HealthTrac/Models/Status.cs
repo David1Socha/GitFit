@@ -19,6 +19,5 @@ namespace HealthTrac.Models
         public String Message { get; set; }
         public Mood Mood { get; set; }
         public virtual User User { get; set; }
-        public virtual ExerciseSession ExerciseSession { get; set; }
     }
 }

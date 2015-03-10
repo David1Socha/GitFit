@@ -219,8 +219,6 @@
     <Compile Include="DataAccess\IMembershipAccessor.cs" />
     <Compile Include="DataAccess\IStatusAccessor.cs" />
     <Compile Include="DataAccess\IUserAccessor.cs" />
-    <Compile Include="DataAccess\ISessionAccessor.cs" />
-    <Compile Include="DataAccess\Entity\EntitySessionAccessor.cs" />
     <Compile Include="DataAccess\ITeamAccessor.cs" />
     <Compile Include="DataAccess\Entity\EntityStatusAccessor.cs" />
     <Compile Include="DataAccess\Entity\EntityTeamAccessor.cs" />
@@ -237,7 +235,6 @@
     <Compile Include="Models\Dto\UserDto.cs" />
     <Compile Include="Models\Dto\UserLoginDto.cs" />
     <Compile Include="Models\IDateTrackingModel.cs" />
-    <Compile Include="Models\ExerciseSession.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\Status.cs" />
     <Compile Include="Models\Membership.cs" />

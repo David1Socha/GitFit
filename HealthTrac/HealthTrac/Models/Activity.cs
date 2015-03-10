@@ -10,6 +10,5 @@ namespace HealthTrac.Models
         public long ID { get; set; }
         public String name { get; set; }
         public int UserID { get; set; }
-        public virtual ICollection<ExerciseSession> ExerciseSessions { get; set; }
     }
 }
