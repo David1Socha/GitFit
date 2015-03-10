@@ -15,6 +15,7 @@ import com.raik383h_group_6.healthtracmobile.model.UserLogin;
 import com.raik383h_group_6.healthtracmobile.service.api.AccountService;
 import com.raik383h_group_6.healthtracmobile.service.api.FacebookService;
 import com.raik383h_group_6.healthtracmobile.service.api.UserService;
+import com.raik383h_group_6.healthtracmobile.service.api.async.IAsyncAccountService;
 import com.raik383h_group_6.healthtracmobile.service.api.async.IAsyncFacebookService;
 import com.raik383h_group_6.healthtracmobile.service.api.async.IAsyncUserService;
 import com.raik383h_group_6.healthtracmobile.view.CreateUserView;
@@ -26,7 +27,7 @@ public class CreateUserPresenter {
     private IAsyncFacebookService facebookService;
     private FacebookUser facebookUser;
     private String accessToken, accessSecret, provider;
-    private AccountService accountService;
+    private IAsyncAccountService accountService;
     private IResources resources;
     private Bundle extras;
     private IActivityNavigator nav;
@@ -34,7 +35,7 @@ public class CreateUserPresenter {
     private UserValidationPresenter userValidationPresenter;
 
     @Inject
-    public CreateUserPresenter(IAsyncFacebookService facebookService, IAsyncUserService userService, AccountService accountService, @Assisted Bundle extras, @Assisted IResources resources, @Assisted IActivityNavigator nav, @Assisted CreateUserView view) {
+    public CreateUserPresenter(IAsyncFacebookService facebookService, IAsyncUserService userService, IAsyncAccountService accountService, @Assisted Bundle extras, @Assisted IResources resources, @Assisted IActivityNavigator nav, @Assisted CreateUserView view) {
         this.facebookService = facebookService;
         this.view = view;
         this.accountService = accountService;
@@ -103,10 +104,7 @@ public class CreateUserPresenter {
         Credentials credentials = new Credentials(accessToken, accessSecret, provider);
         UserLogin userLogin = new UserLogin(userToCreate, credentials);
         try {
-            Exception registerException = registerAccountAsync(userLogin);
-            if (registerException != null) {
-                throw registerException;
-            }
+            accountService.registerAccountAsync(userLogin);
             nav.finishCreateUserSuccess();
         } catch (Exception e) {
             view.displayMessage(resources.getString(R.string.account_not_made));
@@ -115,18 +113,4 @@ public class CreateUserPresenter {
 
     }
 
-    private Exception registerAccountAsync(UserLogin userLogin) throws ExecutionException, InterruptedException {
-            return new AsyncTask<UserLogin, Void, Exception>() {
-
-               @Override
-               protected Exception doInBackground(UserLogin... params){
-                   try {
-                       accountService.register(params[0]);
-                   } catch (Exception e) {
-                       return e;
-                   }
-                   return null;
-               }
-           }.execute(userLogin).get();
-    }
 }
