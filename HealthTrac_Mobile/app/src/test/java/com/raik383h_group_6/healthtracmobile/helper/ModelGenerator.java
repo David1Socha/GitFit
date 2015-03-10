@@ -3,6 +3,7 @@ package com.raik383h_group_6.healthtracmobile.helper;
 import com.raik383h_group_6.healthtracmobile.R;
 import com.raik383h_group_6.healthtracmobile.content.IResources;
 import com.raik383h_group_6.healthtracmobile.model.AccessGrant;
+import com.raik383h_group_6.healthtracmobile.model.FacebookUser;
 import com.raik383h_group_6.healthtracmobile.model.Membership;
 import com.raik383h_group_6.healthtracmobile.model.Team;
 import com.raik383h_group_6.healthtracmobile.model.Token;
@@ -80,5 +81,15 @@ public final class ModelGenerator {
         t.setSecret("secret");
         t.setToken("qwerty");
         return t;
+    }
+
+    public static FacebookUser genFacebookUser() {
+        FacebookUser u = new FacebookUser();
+        u.setName("John Smith");
+        u.setFirstName("John");
+        u.setLastName("Smith");
+        u.setEmail("john@smith.com");
+        u.setGender("male");
+        return u;
     }
 }

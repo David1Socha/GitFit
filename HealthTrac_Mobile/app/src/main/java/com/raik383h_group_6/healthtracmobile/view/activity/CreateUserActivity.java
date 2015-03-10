@@ -17,6 +17,7 @@ import com.raik383h_group_6.healthtracmobile.model.User;
 import com.raik383h_group_6.healthtracmobile.application.ActivityNavigator;
 import com.raik383h_group_6.healthtracmobile.presenter.PresenterFactory;
 import com.raik383h_group_6.healthtracmobile.presenter.CreateUserPresenter;
+import com.raik383h_group_6.healthtracmobile.presenter.UserValidationPresenter;
 import com.raik383h_group_6.healthtracmobile.service.api.AccountService;
 import com.raik383h_group_6.healthtracmobile.service.api.FacebookService;
 import com.raik383h_group_6.healthtracmobile.view.CreateUserView;
@@ -160,7 +161,8 @@ public class CreateUserActivity extends CustomRoboActionBarActivity implements C
         Bundle extras = getIntent().getExtras();
         IResources resources = new ResourcesAdapter(getResources());
         IActivityNavigator nav = new ActivityNavigator(this);
-        presenter= presenterFactory.create(extras, resources, nav, this);
+        UserValidationPresenter userValidationPresenter = presenterFactory.create(this, resources);
+        presenter= presenterFactory.create(userValidationPresenter, extras, resources, nav, this);
         presenter.onCreate();
     }
 

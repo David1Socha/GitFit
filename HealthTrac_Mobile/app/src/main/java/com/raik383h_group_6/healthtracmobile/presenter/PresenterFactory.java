@@ -22,7 +22,7 @@ public interface PresenterFactory {
     OAuthBrowserPresenter create(IAsyncOAuthService serviceAdapter, WebView web, Bundle extras, IResources resources, IActivityNavigator nav);
     AuthenticationPresenter create(AccountService accountService, IResources resources, IActivityNavigator nav, AuthenticationView view);
     OAuthPromptPresenter create(IResources resources, IActivityNavigator nav);
-    CreateUserPresenter create(Bundle extras, IResources resources, IActivityNavigator nav, CreateUserView view);
+    CreateUserPresenter create(UserValidationPresenter userValidationPresenter, Bundle extras, IResources resources, IActivityNavigator nav, CreateUserView view);
     ListUsersPresenter create(Bundle extras, IResources resources, IActivityNavigator nav, ListUsersView view);
     ListTeamsPresenter create(Bundle extras, IResources resources, IActivityNavigator nav, ListTeamsView view);
     ViewUserPresenter create( Bundle extras, IResources resources, IActivityNavigator nav, ViewUserView view);

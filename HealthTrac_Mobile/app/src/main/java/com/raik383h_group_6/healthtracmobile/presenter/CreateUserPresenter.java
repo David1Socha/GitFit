@@ -35,7 +35,7 @@ public class CreateUserPresenter {
     private UserValidationPresenter userValidationPresenter;
 
     @Inject
-    public CreateUserPresenter(IAsyncFacebookService facebookService, IAsyncUserService userService, IAsyncAccountService accountService, @Assisted Bundle extras, @Assisted IResources resources, @Assisted IActivityNavigator nav, @Assisted CreateUserView view) {
+    public CreateUserPresenter(IAsyncFacebookService facebookService, IAsyncUserService userService, IAsyncAccountService accountService, @Assisted UserValidationPresenter userValidationPresenter, @Assisted Bundle extras, @Assisted IResources resources, @Assisted IActivityNavigator nav, @Assisted CreateUserView view) {
         this.facebookService = facebookService;
         this.view = view;
         this.accountService = accountService;
@@ -43,19 +43,19 @@ public class CreateUserPresenter {
         this.resources = resources;
         this.userService = userService;
         this.nav = nav;
-    }
-
-    public void onCreate() {
-        this.userValidationPresenter = new UserValidationPresenter(userService, view, resources);
+        this.userValidationPresenter = userValidationPresenter;
         accessToken = extras.getString(resources.getString(R.string.EXTRA_ACCESS_TOKEN));
         accessSecret = extras.getString(resources.getString(R.string.EXTRA_ACCESS_SECRET));
         provider = extras.getString(resources.getString(R.string.EXTRA_PROVIDER));
+    }
+
+    public void onCreate() {
         getAndPopulateFacebookUser();
     }
 
     private void getAndPopulateFacebookUser() {
         facebookUser = null;
-        if (provider.equals(resources.getString(R.string.PROVIDER_FACEBOOK))) {
+        if (resources.getString(R.string.PROVIDER_FACEBOOK).equals(provider)) {
             try {
                 facebookUser = facebookService.getFacebookUserAsync(accessToken);
             } catch (InterruptedException | ExecutionException ignored) {
