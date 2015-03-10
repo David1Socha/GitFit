@@ -15,6 +15,7 @@ import com.raik383h_group_6.healthtracmobile.model.UserLogin;
 import com.raik383h_group_6.healthtracmobile.service.api.AccountService;
 import com.raik383h_group_6.healthtracmobile.service.api.FacebookService;
 import com.raik383h_group_6.healthtracmobile.service.api.UserService;
+import com.raik383h_group_6.healthtracmobile.service.api.async.IAsyncFacebookService;
 import com.raik383h_group_6.healthtracmobile.service.api.async.IAsyncUserService;
 import com.raik383h_group_6.healthtracmobile.view.CreateUserView;
 
@@ -22,7 +23,7 @@ import java.util.concurrent.ExecutionException;
 
 public class CreateUserPresenter {
     private CreateUserView view;
-    private FacebookService facebookService;
+    private IAsyncFacebookService facebookService;
     private FacebookUser facebookUser;
     private String accessToken, accessSecret, provider;
     private AccountService accountService;
@@ -33,7 +34,7 @@ public class CreateUserPresenter {
     private UserValidationPresenter userValidationPresenter;
 
     @Inject
-    public CreateUserPresenter(FacebookService facebookService, IAsyncUserService userService, AccountService accountService, @Assisted Bundle extras, @Assisted IResources resources, @Assisted IActivityNavigator nav, @Assisted CreateUserView view) {
+    public CreateUserPresenter(IAsyncFacebookService facebookService, IAsyncUserService userService, AccountService accountService, @Assisted Bundle extras, @Assisted IResources resources, @Assisted IActivityNavigator nav, @Assisted CreateUserView view) {
         this.facebookService = facebookService;
         this.view = view;
         this.accountService = accountService;
@@ -55,7 +56,7 @@ public class CreateUserPresenter {
         facebookUser = null;
         if (provider.equals(resources.getString(R.string.PROVIDER_FACEBOOK))) {
             try {
-                facebookUser = getFacebookUserAsync();
+                facebookUser = facebookService.getFacebookUserAsync(accessToken);
             } catch (InterruptedException | ExecutionException ignored) {
             }
             if (facebookUser != null) {
@@ -87,18 +88,6 @@ public class CreateUserPresenter {
             view.setLocation(location);
         }
         view.setSex(sex);
-    }
-
-    private FacebookUser getFacebookUserAsync() throws ExecutionException, InterruptedException {
-        return new AsyncTask<String, Void, FacebookUser>() {
-            @Override protected FacebookUser doInBackground(String... params) {
-                try {
-                    return facebookService.getUser(FacebookService.AUTH_PREFIX + accessToken);
-                } catch (Exception e) {
-                    return null;
-                }
-            }
-        }.execute(accessToken).get();
     }
 
     public void onClickCreateAccount() {
