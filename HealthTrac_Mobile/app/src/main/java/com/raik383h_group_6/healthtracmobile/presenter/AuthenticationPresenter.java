@@ -12,6 +12,7 @@ import com.raik383h_group_6.healthtracmobile.content.IResources;
 import com.raik383h_group_6.healthtracmobile.model.AccessGrant;
 import com.raik383h_group_6.healthtracmobile.model.Credentials;
 import com.raik383h_group_6.healthtracmobile.service.api.AccountService;
+import com.raik383h_group_6.healthtracmobile.service.api.async.IAsyncAccountService;
 import com.raik383h_group_6.healthtracmobile.view.AuthenticationView;
 
 import java.util.concurrent.ExecutionException;
@@ -21,13 +22,13 @@ public class AuthenticationPresenter {
             OAUTH_TO_SIGN_IN = 2,
             OAUTH_TO_CREATE_ACCOUNT = 3;
     private AuthenticationView view;
-    private AccountService accountService;
+    private IAsyncAccountService accountService;
     private String accessToken, accessSecret, provider;
     private IResources resources;
     private IActivityNavigator nav;
 
     @Inject
-    public AuthenticationPresenter(@Assisted AccountService accountService, @Assisted IResources resources, @Assisted IActivityNavigator nav, @Assisted AuthenticationView view) {
+    public AuthenticationPresenter(IAsyncAccountService accountService, @Assisted IResources resources, @Assisted IActivityNavigator nav, @Assisted AuthenticationView view) {
         this.resources = resources;
         this.nav = nav;
         this.accountService = accountService;
@@ -76,7 +77,7 @@ public class AuthenticationPresenter {
         Credentials credentials = new Credentials(accessToken, accessSecret, provider);
         AccessGrant grant = null;
         try {
-            grant = loginAsync(credentials);
+            grant = accountService.loginAsync(credentials);
         } catch (InterruptedException | ExecutionException ignored) {}
         if (grant == null) {
             view.displayMessage(resources.getString(R.string.sign_in_error));
@@ -84,21 +85,6 @@ public class AuthenticationPresenter {
             view.displayMessage(resources.getString(R.string.welcome_user, grant.getUserName()));
         }
         return grant;
-    }
-
-    private AccessGrant loginAsync(Credentials credentials) throws ExecutionException, InterruptedException {
-        return (new AsyncTask<Credentials, Void, AccessGrant>() {
-
-            @Override
-            protected AccessGrant doInBackground(Credentials... params) {
-                try {
-                    return accountService.logIn(params[0]);
-                } catch (Exception e) {
-                    return null;
-                }
-
-            }
-        }).execute(credentials).get();
     }
 
     public void onClickCreateAccount() {

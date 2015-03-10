@@ -24,15 +24,13 @@ public class AuthenticationActivity extends CustomRoboActionBarActivity implemen
     AuthenticationPresenter presenter;
     @Inject
     PresenterFactory presenterFactory;
-    @Inject
-    AccountService accountService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         IResources resources = new ResourcesAdapter(getResources());
         IActivityNavigator nav = new ActivityNavigator(this);
-        presenter = presenterFactory.create(accountService, resources, nav, this);
+        presenter = presenterFactory.create(resources, nav, this);
     }
 
     @Override
