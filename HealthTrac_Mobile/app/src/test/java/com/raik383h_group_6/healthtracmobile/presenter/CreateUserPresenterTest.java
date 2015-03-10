@@ -10,6 +10,7 @@ import com.raik383h_group_6.healthtracmobile.helper.ModelGenerator;
 import com.raik383h_group_6.healthtracmobile.model.AccessGrant;
 import com.raik383h_group_6.healthtracmobile.model.FacebookUser;
 import com.raik383h_group_6.healthtracmobile.model.User;
+import com.raik383h_group_6.healthtracmobile.model.UserLogin;
 import com.raik383h_group_6.healthtracmobile.service.FormatUtils;
 import com.raik383h_group_6.healthtracmobile.service.api.async.IAsyncAccountService;
 import com.raik383h_group_6.healthtracmobile.service.api.async.IAsyncFacebookService;
@@ -44,6 +45,7 @@ public class CreateUserPresenterTest {
     private CreateUserPresenter presenter;
     private FacebookUser fbUser;
     private UserValidationPresenter userValidationPresenter;
+    private User user;
 
     @Before
     public void setup() {
@@ -54,6 +56,7 @@ public class CreateUserPresenterTest {
         resources = ModelGenerator.genStubbedResources();
         nav = mock(IActivityNavigator.class);
         view = mock(CreateUserView.class);
+        user = ModelGenerator.genBasicUser();
         fbUser = ModelGenerator.genFacebookUser();
         userValidationPresenter = mock(UserValidationPresenter.class);
     }
@@ -70,5 +73,48 @@ public class CreateUserPresenterTest {
         verify(view).setPrefName(fbUser.getName());
         verify(view).setLastName(fbUser.getLastName());
         verify(view).setSex(User.Sex.MALE);
+    }
+
+    private void stubViewGetters() {
+        when(view.getBirthDate()).thenReturn(FormatUtils.format(user.getBirthDate()));
+        when(view.getEmail()).thenReturn(user.getEmail());
+        when(view.getFirstName()).thenReturn(user.getFirstName());
+        when(view.getHeight()).thenReturn(FormatUtils.format(user.getHeight()));
+        when(view.getLastName()).thenReturn(user.getLastName());
+        when(view.getLocation()).thenReturn(user.getLocation());
+        when(view.getPreferredName()).thenReturn(user.getPreferredName());
+        when(view.getSex()).thenReturn(user.getSex().name());
+        when(view.getUsername()).thenReturn(user.getUserName());
+        when(view.getWeight()).thenReturn(FormatUtils.format(user.getWeight()));
+    }
+
+    @Test
+    public void onClickCreateAccountDisplaysErrorWhenUserInvalid() {
+        stubViewGetters();
+        when(userValidationPresenter.validateUser(anyString(), anyString(), anyString(), anyString(), anyString(), anyString(), anyString(), anyString(), anyString(), anyString(), anyString())).thenReturn(null);
+        presenter = new CreateUserPresenter(facebookService, userService, accountService, userValidationPresenter, extras, resources, nav, view);
+        presenter.onClickCreateAccount();
+        verify(view).displayMessage(INVALID_FIELD_MSG);
+    }
+
+    @Test
+    public void onClickCreateAccountCreatesAccountAndFinishesWhenValid() throws Exception {
+        stubViewGetters();
+        when(userValidationPresenter.validateUser(anyString(), anyString(), anyString(), anyString(), anyString(), anyString(), anyString(), anyString(), anyString(), anyString(), anyString())).thenReturn(user);
+        presenter = new CreateUserPresenter(facebookService, userService, accountService, userValidationPresenter, extras, resources, nav, view);
+        presenter.onClickCreateAccount();
+        verify(accountService).registerAccountAsync(any(UserLogin.class));
+        verify(nav).finishCreateUserSuccess();
+    }
+
+    @Test
+    public void onClickCreateAccountFailsAndShowsErrorWhenServiceFails() throws Exception {
+        stubViewGetters();
+        when(userValidationPresenter.validateUser(anyString(), anyString(), anyString(), anyString(), anyString(), anyString(), anyString(), anyString(), anyString(), anyString(), anyString())).thenReturn(user);
+        presenter = new CreateUserPresenter(facebookService, userService, accountService, userValidationPresenter, extras, resources, nav, view);
+        doThrow(new Exception("Sample exception for api fail")).when(accountService).registerAccountAsync(any(UserLogin.class));
+        presenter.onClickCreateAccount();
+        verify(view).displayMessage(ACCOUNT_NOT_MADE);
+        verify(nav).finishCreateUserFailure();
     }
 }
