@@ -23,6 +23,9 @@ import java.util.concurrent.ExecutionException;
 
 import static com.raik383h_group_6.healthtracmobile.helper.TestConstants.*;
 import static org.junit.Assert.assertEquals;
+import static org.mockito.Matchers.anyBoolean;
+import static org.mockito.Matchers.anyString;
+import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -68,5 +71,54 @@ public class EditUserPresenterTest {
         verify(view).setSex(ogUser.getSex());
         verify(view).setUsername(ogUser.getUserName());
         verify(view).setWeight(FormatUtils.format(ogUser.getWeight()));
+    }
+
+    private void stubViewGetters() {
+        when(view.getBirthDate()).thenReturn(FormatUtils.format(ogUser.getBirthDate()));
+        when(view.getEmail()).thenReturn(ogUser.getEmail());
+        when(view.getFirstName()).thenReturn(ogUser.getFirstName());
+        when(view.getHeight()).thenReturn(FormatUtils.format(ogUser.getHeight()));
+        when(view.getLastName()).thenReturn(ogUser.getLastName());
+        when(view.getLocation()).thenReturn(ogUser.getLocation());
+        when(view.getPreferredName()).thenReturn(ogUser.getPreferredName());
+        when(view.getSex()).thenReturn(ogUser.getSex().name());
+        when(view.getUsername()).thenReturn(ogUser.getUserName());
+        when(view.getWeight()).thenReturn(FormatUtils.format(ogUser.getWeight()));
+    }
+
+    @Test
+    public void onClickUpdateUserDisplaysErrorWhenUserInvalid() {
+        stubViewGetters();
+        when(extras.getParcelable(GRANT_KEY)).thenReturn(grant);
+        when(userValidationPresenter.validateUser(anyString(), anyString(), anyString(), anyString(), anyString(), anyString(), anyString(), anyString(), anyString(), anyString(), anyString())).thenReturn(null);
+        presenter = new EditUserPresenter(userService, userValidationPresenter, extras, resources, nav, view);
+        presenter.onClickUpdateUser();
+        verify(view).displayMessage(INVALID_FIELD_MSG);
+    }
+
+    @Test
+    public void onClickUpdateUserUpdatesAndFinishesWhenUserValid() throws Exception {
+        stubViewGetters();
+        when(extras.getParcelable(GRANT_KEY)).thenReturn(grant);
+        when(extras.getParcelable(USER_KEY)).thenReturn(ogUser);
+        when(userValidationPresenter.validateUser(anyString(), anyString(), anyString(), anyString(), anyString(), anyString(), anyString(), anyString(), anyString(), anyString(), anyString())).thenReturn(ogUser);
+        presenter = new EditUserPresenter(userService, userValidationPresenter, extras, resources, nav, view);
+        presenter.onClickUpdateUser();
+        verify(userService).updateUserAsync(ogUser.getId(), ogUser, grant.getAuthHeader());
+        verify(view).displayMessage(USER_UPDATED_MSG);
+        verify(nav).finishEditUserSuccess(ogUser);
+    }
+
+    @Test
+    public void onClickUpdateUserFailsAndFinishesWhenServiceFails() throws Exception {
+        stubViewGetters();
+        when(extras.getParcelable(GRANT_KEY)).thenReturn(grant);
+        when(extras.getParcelable(USER_KEY)).thenReturn(ogUser);
+        when(userValidationPresenter.validateUser(anyString(), anyString(), anyString(), anyString(), anyString(), anyString(), anyString(), anyString(), anyString(), anyString(), anyString())).thenReturn(ogUser);
+        presenter = new EditUserPresenter(userService, userValidationPresenter, extras, resources, nav, view);
+        doThrow(new Exception("sample exception indicating service failure")).when(userService).updateUserAsync(ogUser.getId(), ogUser, grant.getAuthHeader());
+        presenter.onClickUpdateUser();
+        verify(view).displayMessage(USER_UPDATE_ERR);
+        verify(nav).finishEditUserFailure();
     }
 }
