@@ -1,6 +1,5 @@
 package com.raik383h_group_6.healthtracmobile.presenter;
 
-import android.graphics.AvoidXfermode;
 import android.os.Bundle;
 
 import com.raik383h_group_6.healthtracmobile.R;
