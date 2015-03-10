@@ -54,9 +54,7 @@ public class ViewTeamPresenterTest {
         view = mock(ViewTeamView.class);
         when(bundle.getParcelable(TEAM_KEY)).thenReturn(team);
         when(bundle.getParcelable(GRANT_KEY)).thenReturn(grant);
-        resources = mock(IResources.class);
-        when(resources.getString(R.string.EXTRA_TEAM)).thenReturn(TEAM_KEY);
-        when(resources.getString(R.string.EXTRA_ACCESS_GRANT)).thenReturn(GRANT_KEY);
+        resources = ModelGenerator.genStubbedResources();
         membershipService = mock(IAsyncMembershipService.class);
         presenter = new ViewTeamPresenter(membershipService, bundle, resources, nav, view);
     }

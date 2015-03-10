@@ -27,10 +27,7 @@ public class UserValidationPresenterTest {
     public void setup() {
         validUser = ModelGenerator.genBasicUser();
         view = mock(UserValidationView.class);
-        resources = mock(IResources.class);
-        when(resources.getString(R.string.male_label)).thenReturn(MALE);
-        when(resources.getString(R.string.empty_field_error)).thenReturn(EMPTY_FIELD_ERROR);
-        when(resources.getString(R.string.invalid_date_error)).thenReturn(INVALID_DATE_ERROR);
+        resources = ModelGenerator.genStubbedResources();
         userService = mock(IAsyncUserService.class);
         presenter = new UserValidationPresenter(userService, view, resources);
     }

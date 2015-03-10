@@ -29,12 +29,7 @@ public class OAuthPromptPresenterTest {
     @Before
     public void setup() {
         nav = mock(IActivityNavigator.class);
-        resources = mock(IResources.class);
-        when(resources.getString(R.string.PROVIDER_FACEBOOK)).thenReturn(FACEBOOK);
-        when(resources.getString(R.string.PROVIDER_TWITTER)).thenReturn(TWITTER);
-        when(resources.getString(R.string.EXTRA_ACCESS_TOKEN)).thenReturn(TOKEN_KEY);
-        when(resources.getString(R.string.EXTRA_ACCESS_SECRET)).thenReturn(SECRET_KEY);
-        when(resources.getString(R.string.EXTRA_PROVIDER)).thenReturn(PROVIDER_KEY);
+        resources = ModelGenerator.genStubbedResources();
         presenter = new OAuthPromptPresenter(resources, nav);
     }
 

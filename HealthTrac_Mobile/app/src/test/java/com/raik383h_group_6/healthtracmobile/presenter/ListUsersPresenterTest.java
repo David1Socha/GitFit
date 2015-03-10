@@ -43,8 +43,7 @@ public class ListUsersPresenterTest {
         users.add(user);
         view = mock(ListUsersView.class);
         grant = ModelGenerator.genBasicGrant();
-        resources = mock(IResources.class);
-        when(resources.getString(R.string.EXTRA_ACCESS_GRANT)).thenReturn(GRANT_KEY);
+        resources = ModelGenerator.genStubbedResources();
         nav = mock(IActivityNavigator.class);
         extras = mock(Bundle.class);
         userService = mock(IAsyncUserService.class);

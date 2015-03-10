@@ -51,10 +51,7 @@ public class GitFitMainPresenterTest {
 
         view = mock(GitFitMainView.class);
         userService = mock(IAsyncUserService.class);
-        resources = mock(IResources.class);
-        when(resources.getString(R.string.EXTRA_ACCESS_GRANT)).thenReturn(GRANT_KEY);
-        when(resources.getString(R.string.pref_access_grant)).thenReturn(GRANT_PREF_KEY);
-        when(resources.getString(R.string.error_find_profile)).thenReturn(ERROR_FIND_PROFILE);
+        resources = ModelGenerator.genStubbedResources();
         nav = mock(IActivityNavigator.class);
         json = mock(JsonParser.class);
         presenter = new GitFitMainPresenter(userService, json, resources, nav, view);

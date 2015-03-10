@@ -37,7 +37,7 @@ public class OAuthBrowserPresenterTest {
         service = mock(IAsyncOAuthService.class);
         extras = mock(Bundle.class);
         reqToken = ModelGenerator.genRequestToken();
-        resources = mock(IResources.class);
+        resources = ModelGenerator.genStubbedResources();
         webView = mock(WebView.class);
         nav = mock(IActivityNavigator.class);
         settings = mock(WebSettings.class);

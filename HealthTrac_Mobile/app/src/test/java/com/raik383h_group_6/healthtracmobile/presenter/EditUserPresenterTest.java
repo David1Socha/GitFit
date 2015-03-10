@@ -41,12 +41,7 @@ public class EditUserPresenterTest {
 
     @Before
     public void setup() {
-        resources = mock(IResources.class);
-        when(resources.getString(R.string.EXTRA_ACCESS_GRANT)).thenReturn(GRANT_KEY);
-        when(resources.getString(R.string.EXTRA_USER)).thenReturn(USER_KEY);
-        when(resources.getString(R.string.invalid_field_message)).thenReturn(INVALID_FIELD_MSG);
-        when(resources.getString(R.string.user_updated_message)).thenReturn(USER_UPDATED_MSG);
-        when(resources.getString(R.string.update_user_error)).thenReturn(USER_UPDATE_ERR);
+        resources = ModelGenerator.genStubbedResources();
         extras = mock(Bundle.class);
         userService = mock(IAsyncUserService.class);
         nav = mock(IActivityNavigator.class);

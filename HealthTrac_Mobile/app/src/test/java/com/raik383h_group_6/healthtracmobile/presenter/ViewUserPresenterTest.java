@@ -41,11 +41,7 @@ public class ViewUserPresenterTest {
         view = mock(ViewUserView.class);
         when(bundle.getParcelable(USER_KEY)).thenReturn(user);
         when(bundle.getParcelable(GRANT_KEY)).thenReturn(grant);
-        resources = mock(IResources.class);
-        when(resources.getString(R.string.EXTRA_USER)).thenReturn(USER_KEY);
-        when(resources.getString(R.string.EXTRA_ACCESS_GRANT)).thenReturn(GRANT_KEY);
-        when(resources.getString(R.string.male_label)).thenReturn(MALE);
-        when(resources.getString(R.string.label_female)).thenReturn(FEMALE);
+        resources = ModelGenerator.genStubbedResources();
         presenter = new ViewUserPresenter(bundle, resources, nav, view);
     }
 

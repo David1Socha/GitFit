@@ -47,8 +47,7 @@ public class ListTeamsPresenterTest {
 
         teamService = mock(IAsyncTeamService.class);
         extras = mock(Bundle.class);
-        resources = mock(IResources.class);
-        when(resources.getString(R.string.EXTRA_ACCESS_GRANT)).thenReturn(GRANT_KEY);
+        resources = ModelGenerator.genStubbedResources();
         nav = mock(IActivityNavigator.class);
         view = mock(ListTeamsView.class);
     }
