@@ -100,4 +100,14 @@ public class AuthenticationPresenterTest {
         presenter.onActivityResult(AuthenticationPresenter.CREATE_ACCOUNT, Activity.RESULT_OK, extras);
         verify(view).displayMessage(SIGNIN_ERR);
     }
+
+    @Test
+    public void onActivityResultForOAuthCreateAccountOpensCreateUser() {
+        Bundle extras = mock(Bundle.class);
+        when(extras.getString(PROVIDER_KEY)).thenReturn(FACEBOOK);
+        when(extras.getString(TOKEN_KEY)).thenReturn(SAMPLE_TOKEN);
+        when(extras.getString(SECRET_KEY)).thenReturn(SAMPLE_SECRET);
+        presenter.onActivityResult(AuthenticationPresenter.OAUTH_TO_CREATE_ACCOUNT, Activity.RESULT_OK, extras);
+        verify(nav).openCreateUser(SAMPLE_TOKEN, SAMPLE_SECRET, FACEBOOK, AuthenticationPresenter.CREATE_ACCOUNT);
+    }
 }
