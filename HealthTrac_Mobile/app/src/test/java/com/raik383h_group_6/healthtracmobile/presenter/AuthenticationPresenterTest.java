@@ -81,4 +81,23 @@ public class AuthenticationPresenterTest {
         presenter.onActivityResult(AuthenticationPresenter.CREATE_ACCOUNT, Activity.RESULT_OK, extras);
         verify(view).displayMessage(SIGNIN_ERR);
     }
+
+    @Test
+    public void onActivityResultForOAuthSignInSignsInAndFinishes() throws ExecutionException, InterruptedException {
+        Bundle extras = mock(Bundle.class);
+        when(accountService.loginAsync(any(Credentials.class))).thenReturn(grant);
+        presenter.onActivityResult(AuthenticationPresenter.OAUTH_TO_SIGN_IN, Activity.RESULT_OK, extras);
+        verify(extras).getString(PROVIDER_KEY);
+        verify(extras).getString(TOKEN_KEY);
+        verify(extras).getString(SECRET_KEY);
+        verify(nav).finishWithAccessGrant(grant);
+    }
+
+    @Test
+    public void onActivityResultForOAuthSignInDisplaysErrorWhenServiceFails() throws ExecutionException, InterruptedException {
+        Bundle extras = mock(Bundle.class);
+        when(accountService.loginAsync(any(Credentials.class))).thenThrow(new ExecutionException(new Exception("api failure")));
+        presenter.onActivityResult(AuthenticationPresenter.CREATE_ACCOUNT, Activity.RESULT_OK, extras);
+        verify(view).displayMessage(SIGNIN_ERR);
+    }
 }
