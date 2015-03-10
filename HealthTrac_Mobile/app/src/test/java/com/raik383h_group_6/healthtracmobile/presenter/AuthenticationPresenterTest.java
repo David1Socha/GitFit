@@ -1,5 +1,6 @@
 package com.raik383h_group_6.healthtracmobile.presenter;
 
+import android.app.Activity;
 import android.os.Bundle;
 
 import com.raik383h_group_6.healthtracmobile.R;
@@ -7,6 +8,7 @@ import com.raik383h_group_6.healthtracmobile.application.IActivityNavigator;
 import com.raik383h_group_6.healthtracmobile.content.IResources;
 import com.raik383h_group_6.healthtracmobile.helper.ModelGenerator;
 import com.raik383h_group_6.healthtracmobile.model.AccessGrant;
+import com.raik383h_group_6.healthtracmobile.model.Credentials;
 import com.raik383h_group_6.healthtracmobile.model.FacebookUser;
 import com.raik383h_group_6.healthtracmobile.model.User;
 import com.raik383h_group_6.healthtracmobile.model.UserLogin;
@@ -39,12 +41,14 @@ public class AuthenticationPresenterTest {
     private IResources resources;
     private IActivityNavigator nav;
     private AuthenticationView view;
+    private AccessGrant grant;
     private AuthenticationPresenter presenter;
 
     @Before
     public void setup() {
         resources = ModelGenerator.genStubbedResources();
         nav = mock(IActivityNavigator.class);
+        grant = ModelGenerator.genBasicGrant();
         view = mock(AuthenticationView.class);
         accountService = mock(IAsyncAccountService.class);
         presenter = new AuthenticationPresenter(accountService, resources, nav, view);
@@ -58,7 +62,23 @@ public class AuthenticationPresenterTest {
 
     @Test
     public void onClickCreateAccountOpensOAuthPrompt() {
-        presenter.onClickSignIn();
+        presenter.onClickCreateAccount();
         verify(nav).openOAuthPrompt(AuthenticationPresenter.OAUTH_TO_CREATE_ACCOUNT);
+    }
+
+    @Test
+    public void onActivityResultForCreateAccountSignsInAndFinishes() throws ExecutionException, InterruptedException {
+        Bundle extras = mock(Bundle.class);
+        when(accountService.loginAsync(any(Credentials.class))).thenReturn(grant);
+        presenter.onActivityResult(AuthenticationPresenter.CREATE_ACCOUNT, Activity.RESULT_OK, extras);
+        verify(nav).finishWithAccessGrant(grant);
+    }
+
+    @Test
+    public void onActivityResultForCreateAccountDisplaysErrorWhenServiceFails() throws ExecutionException, InterruptedException {
+        Bundle extras = mock(Bundle.class);
+        when(accountService.loginAsync(any(Credentials.class))).thenThrow(new ExecutionException(new Exception("api failure")));
+        presenter.onActivityResult(AuthenticationPresenter.CREATE_ACCOUNT, Activity.RESULT_OK, extras);
+        verify(view).displayMessage(SIGNIN_ERR);
     }
 }

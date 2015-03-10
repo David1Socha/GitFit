@@ -64,6 +64,7 @@ public final class ModelGenerator {
         when(resources.getString(R.string.EXTRA_TEAM)).thenReturn(TEAM_KEY);
         when(resources.getString(R.string.label_female)).thenReturn(FEMALE);
         when(resources.getString(R.string.account_not_made)).thenReturn(ACCOUNT_NOT_MADE);
+        when(resources.getString(R.string.sign_in_error)).thenReturn(SIGNIN_ERR);
         return resources;
     }
 
