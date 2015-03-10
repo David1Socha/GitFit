@@ -73,7 +73,7 @@ public class AuthenticationPresenter {
         }
     }
 
-    public AccessGrant signIn(String accessToken, String accessSecret, String provider) {
+    private AccessGrant signIn(String accessToken, String accessSecret, String provider) {
         Credentials credentials = new Credentials(accessToken, accessSecret, provider);
         AccessGrant grant = null;
         try {
@@ -91,7 +91,7 @@ public class AuthenticationPresenter {
         nav.openOAuthPrompt(OAUTH_TO_CREATE_ACCOUNT);
     }
 
-    public void createAccount(String accessToken, String accessSecret, String provider) {
+    private void createAccount(String accessToken, String accessSecret, String provider) {
         nav.openCreateUser(accessToken, accessSecret, provider, CREATE_ACCOUNT);
     }
 }
