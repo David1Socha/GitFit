@@ -16,7 +16,7 @@ import com.raik383h_group_6.healthtracmobile.view.AuthenticationView;
 
 import java.util.concurrent.ExecutionException;
 
-public class AuthenticationPresenter {
+public class AuthenticationPresenter extends BasePresenter{
     private AuthenticationView view;
     private IAsyncAccountService accountService;
     private String accessToken, accessSecret, provider;
@@ -89,5 +89,10 @@ public class AuthenticationPresenter {
 
     private void createAccount(String accessToken, String accessSecret, String provider) {
         nav.openCreateUser(accessToken, accessSecret, provider, RequestCodes.CREATE_ACCOUNT);
+    }
+
+    @Override
+    protected IActivityNavigator getNav() {
+        return nav;
     }
 }

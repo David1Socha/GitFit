@@ -17,7 +17,7 @@ import com.raik383h_group_6.healthtracmobile.view.EditUserView;
 
 import java.util.concurrent.ExecutionException;
 
-public class EditUserPresenter {
+public class EditUserPresenter extends BasePresenter{
 
     private final IAsyncUserService userService;
     private final Bundle extras;
@@ -80,4 +80,8 @@ public class EditUserPresenter {
         }
     }
 
+    @Override
+    protected IActivityNavigator getNav() {
+        return nav;
+    }
 }

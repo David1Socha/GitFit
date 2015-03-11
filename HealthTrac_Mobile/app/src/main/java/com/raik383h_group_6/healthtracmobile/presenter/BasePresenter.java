@@ -9,14 +9,14 @@ public abstract class BasePresenter {
     private BaseView view;
     protected abstract IActivityNavigator getNav();
 
-    public void onClickLogout() { // Any presenter that also stores access grant should override this to additionally wipe grant
+    public void onClickMenuLogout() {
         view.setLoginEnabled(true);
-        view.setLogoutEnabled(false);
         view.clearPrefs();
+        getNav().openMain();
     }
 
-    public void onClickLogin() {
-        view.setLogoutEnabled(true);
+    public void onClickMenuLogin() {
+        view.setLoginEnabled(false);
         getNav().openAuthentication(RequestCodes.AUTH);
     }
 }

@@ -22,7 +22,7 @@ import com.raik383h_group_6.healthtracmobile.view.CreateUserView;
 
 import java.util.concurrent.ExecutionException;
 
-public class CreateUserPresenter {
+public class CreateUserPresenter extends BasePresenter {
     private CreateUserView view;
     private IAsyncFacebookService facebookService;
     private FacebookUser facebookUser;
@@ -113,4 +113,8 @@ public class CreateUserPresenter {
 
     }
 
+    @Override
+    protected IActivityNavigator getNav() {
+        return nav;
+    }
 }

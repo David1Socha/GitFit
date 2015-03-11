@@ -9,7 +9,7 @@ import com.raik383h_group_6.healthtracmobile.application.IActivityNavigator;
 import com.raik383h_group_6.healthtracmobile.application.RequestCodes;
 import com.raik383h_group_6.healthtracmobile.content.IResources;
 
-public class OAuthPromptPresenter {
+public class OAuthPromptPresenter extends BasePresenter{
 
     private IResources resources;
     private IActivityNavigator nav;
@@ -39,4 +39,8 @@ public class OAuthPromptPresenter {
         nav.openOAuthBrowser(resources.getString(R.string.PROVIDER_FACEBOOK), RequestCodes.FB_LOGIN_REQ);
     }
 
+    @Override
+    protected IActivityNavigator getNav() {
+        return nav;
+    }
 }

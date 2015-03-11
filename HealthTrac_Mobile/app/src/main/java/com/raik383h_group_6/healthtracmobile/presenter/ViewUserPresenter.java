@@ -14,7 +14,7 @@ import com.raik383h_group_6.healthtracmobile.model.User;
 import com.raik383h_group_6.healthtracmobile.service.FormatUtils;
 import com.raik383h_group_6.healthtracmobile.view.ViewUserView;
 
-public class ViewUserPresenter {
+public class ViewUserPresenter extends BasePresenter{
     private final Bundle extras;
     private final IResources resources;
     private final IActivityNavigator nav;
@@ -66,5 +66,10 @@ public class ViewUserPresenter {
         view.setWeight(FormatUtils.format(user.getWeight()));
         boolean userViewingSelf = user.getId().equals(grant.getId());
         view.setShowEditUserButton(userViewingSelf);
+    }
+
+    @Override
+    protected IActivityNavigator getNav() {
+        return nav;
     }
 }

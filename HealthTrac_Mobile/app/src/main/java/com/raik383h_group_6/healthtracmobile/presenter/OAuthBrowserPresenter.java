@@ -20,7 +20,7 @@ import com.raik383h_group_6.healthtracmobile.service.oauth.IOAuthService;
 
 import java.util.concurrent.ExecutionException;
 
-public class OAuthBrowserPresenter {
+public class OAuthBrowserPresenter extends BasePresenter{
 
     private IAsyncOAuthService oAuthService;
     private Token requestToken;
@@ -82,6 +82,11 @@ public class OAuthBrowserPresenter {
         } catch (InterruptedException | ExecutionException ignored) {
         }
         return token;
+    }
+
+    @Override
+    protected IActivityNavigator getNav() {
+        return nav;
     }
 
     private class LoginWebViewClient extends WebViewClient {

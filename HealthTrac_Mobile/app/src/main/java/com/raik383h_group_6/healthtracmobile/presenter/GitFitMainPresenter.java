@@ -20,7 +20,7 @@ import com.raik383h_group_6.healthtracmobile.view.GitFitMainView;
 
 import java.util.concurrent.ExecutionException;
 
-public class GitFitMainPresenter {
+public class GitFitMainPresenter extends BasePresenter{
     private AccessGrant grant;
     private IResources resources;
     private IActivityNavigator nav;
@@ -117,4 +117,8 @@ public class GitFitMainPresenter {
         }
     }
 
+    @Override
+    protected IActivityNavigator getNav() {
+        return nav;
+    }
 }

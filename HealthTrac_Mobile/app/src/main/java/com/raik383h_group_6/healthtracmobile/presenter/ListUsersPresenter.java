@@ -22,7 +22,7 @@ import com.raik383h_group_6.healthtracmobile.view.activity.ListUsersActivity;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
-public class ListUsersPresenter {
+public class ListUsersPresenter extends BasePresenter{
 
     public static final int AUTH = 1;
 
@@ -70,5 +70,10 @@ public class ListUsersPresenter {
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         User u = (User) parent.getAdapter().getItem(position);
         nav.openViewUser(u, grant);
+    }
+
+    @Override
+    protected IActivityNavigator getNav() {
+        return nav;
     }
 }

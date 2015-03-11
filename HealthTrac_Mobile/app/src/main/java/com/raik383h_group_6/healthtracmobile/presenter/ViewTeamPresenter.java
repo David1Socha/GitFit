@@ -22,7 +22,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
-public class ViewTeamPresenter {
+public class ViewTeamPresenter extends BasePresenter{
     private final Bundle extras;
     private final IResources resources;
     private final IActivityNavigator nav;
@@ -175,5 +175,10 @@ public class ViewTeamPresenter {
                 view.setShowLeaveTeam(false);
                 break;
         }
+    }
+
+    @Override
+    protected IActivityNavigator getNav() {
+        return nav;
     }
 }

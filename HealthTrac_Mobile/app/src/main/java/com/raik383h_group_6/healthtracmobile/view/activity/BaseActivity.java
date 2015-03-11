@@ -19,14 +19,6 @@ public abstract class BaseActivity extends RoboActionBarActivity implements Base
 
     public abstract BasePresenter getPresenter();
 
-    public void onMenuLogout() {
-        getPresenter().onClickLogout();
-    }
-
-    public void onMenuLogin() {
-        getPresenter().onClickLogin();
-    }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.action_bar, menu);
@@ -43,13 +35,21 @@ public abstract class BaseActivity extends RoboActionBarActivity implements Base
                 onBackPressed();
                 return true;
             case R.id.logout:
-                onMenuLogout();
+                onClickMenuLogout();
                 return true;
             case R.id.login:
-                onMenuLogin();
+                onClickMenuLogin();
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    private void onClickMenuLogout() {
+        getPresenter().onClickMenuLogout();
+    }
+
+    private void onClickMenuLogin() {
+        getPresenter().onClickMenuLogin();
     }
 
     @Override

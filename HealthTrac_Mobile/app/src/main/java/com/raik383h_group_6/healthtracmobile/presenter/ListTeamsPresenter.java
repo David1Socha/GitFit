@@ -22,7 +22,7 @@ import com.raik383h_group_6.healthtracmobile.view.activity.ListTeamsActivity;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
-public class ListTeamsPresenter {
+public class ListTeamsPresenter extends BasePresenter{
 
     private static final int AUTH = 1;
 
@@ -69,5 +69,10 @@ public class ListTeamsPresenter {
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Team t = (Team) parent.getAdapter().getItem(position);
         nav.openViewTeam(t, grant);
+    }
+
+    @Override
+    protected IActivityNavigator getNav() {
+        return nav;
     }
 }
