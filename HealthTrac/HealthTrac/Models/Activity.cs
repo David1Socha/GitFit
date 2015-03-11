@@ -7,10 +7,12 @@ namespace HealthTrac.Models
 {
     public class Activity
     {
-        public enum Status
+        public enum Type
         {
-            HAPPY, SAD, TIRED, EXCITED, PROUD, LAZY, GREAT, COLD, HOT, FABULOUS, MOTIVATED, YOLO
+            WALKING, JOGGING, RUNNING, BIKING
         }
+        public String Location { get; set; }
+        public long Duration { get; set; }
         public long ID { get; set; }
         public String name { get; set; }
         public int UserID { get; set; }
