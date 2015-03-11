@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.widget.Adapter;
 import android.widget.AdapterView;
 
-import com.raik383h_group_6.healthtracmobile.R;
 import com.raik383h_group_6.healthtracmobile.application.IActivityNavigator;
 import com.raik383h_group_6.healthtracmobile.content.IResources;
 import com.raik383h_group_6.healthtracmobile.helper.ModelGenerator;

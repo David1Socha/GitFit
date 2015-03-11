@@ -21,13 +21,9 @@ import com.raik383h_group_6.healthtracmobile.view.ListTeamsView;
 import com.raik383h_group_6.healthtracmobile.view.activity.ListTeamsActivity;
 
 import java.util.List;
-import java.util.concurrent.ExecutionException;
 
 public class ListTeamsPresenter extends BasePresenter{
 
-    private static final int AUTH = 1;
-
-    private IResources resources;
     private IActivityNavigator nav;
     private ListTeamsView view;
     private IAsyncTeamService teamService;
@@ -35,13 +31,12 @@ public class ListTeamsPresenter extends BasePresenter{
     private Bundle extras;
 
     @Inject
-    public ListTeamsPresenter(IAsyncTeamService teamService, @Assisted Bundle extras, @Assisted IResources resources, @Assisted IActivityNavigator nav, @Assisted ListTeamsView view) {
-        this.resources = resources;
+    public ListTeamsPresenter(IAsyncTeamService teamService, @Assisted Bundle extras, @Assisted IActivityNavigator nav, @Assisted ListTeamsView view) {
         this.nav = nav;
         this.teamService = teamService;
         this.view = view;
         this.extras = extras;
-        this.grant = extras.getParcelable(resources.getString(R.string.EXTRA_ACCESS_GRANT));
+        this.grant = extras.getParcelable(view.getResource(R.string.EXTRA_ACCESS_GRANT));
     }
 
     public void onResume() {

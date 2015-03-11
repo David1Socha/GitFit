@@ -20,15 +20,15 @@ import com.raik383h_group_6.healthtracmobile.view.ViewUserView;
 import com.raik383h_group_6.healthtracmobile.view.ViewTeamView;
 
 public interface PresenterFactory {
-    OAuthBrowserPresenter create(IAsyncOAuthService serviceAdapter, WebView web, Bundle extras, IResources resources, IActivityNavigator nav, BaseView view);
-    AuthenticationPresenter create(IResources resources, IActivityNavigator nav, AuthenticationView view);
-    OAuthPromptPresenter create(IResources resources, IActivityNavigator nav, BaseView view);
-    CreateUserPresenter create(UserValidationPresenter userValidationPresenter, Bundle extras, IResources resources, IActivityNavigator nav, CreateUserView view);
-    ListUsersPresenter create(Bundle extras, IResources resources, IActivityNavigator nav, ListUsersView view);
-    ListTeamsPresenter create(Bundle extras, IResources resources, IActivityNavigator nav, ListTeamsView view);
-    ViewUserPresenter create( Bundle extras, IResources resources, IActivityNavigator nav, ViewUserView view);
-    EditUserPresenter create( Bundle extras, UserValidationPresenter presenter, IResources resources, IActivityNavigator nav, EditUserView view);
-    GitFitMainPresenter create(IResources resources, IActivityNavigator nav, GitFitMainView view);
-    ViewTeamPresenter create(Bundle extras, IResources resources, IActivityNavigator nav, ViewTeamView view);
-    UserValidationPresenter create(UserValidationView view, IResources resources);
+    OAuthBrowserPresenter create(IAsyncOAuthService serviceAdapter, WebView web, Bundle extras, IActivityNavigator nav, BaseView view);
+    AuthenticationPresenter create(IActivityNavigator nav, AuthenticationView view);
+    OAuthPromptPresenter create(IActivityNavigator nav, BaseView view);
+    CreateUserPresenter create(UserValidationPresenter userValidationPresenter, Bundle extras, IActivityNavigator nav, CreateUserView view);
+    ListUsersPresenter create(Bundle extras, IActivityNavigator nav, ListUsersView view);
+    ListTeamsPresenter create(Bundle extras, IActivityNavigator nav, ListTeamsView view);
+    ViewUserPresenter create( Bundle extras, IActivityNavigator nav, ViewUserView view);
+    EditUserPresenter create( Bundle extras, UserValidationPresenter presenter, IActivityNavigator nav, EditUserView view);
+    GitFitMainPresenter create(IActivityNavigator nav, GitFitMainView view);
+    ViewTeamPresenter create(Bundle extras, IActivityNavigator nav, ViewTeamView view);
+    UserValidationPresenter create(UserValidationView view);
 }

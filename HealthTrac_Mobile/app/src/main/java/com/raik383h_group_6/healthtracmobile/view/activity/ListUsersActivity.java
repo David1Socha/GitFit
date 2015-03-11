@@ -10,8 +10,6 @@ import com.google.inject.Inject;
 import com.raik383h_group_6.healthtracmobile.R;
 import com.raik383h_group_6.healthtracmobile.adapter.UserAdapter;
 import com.raik383h_group_6.healthtracmobile.application.IActivityNavigator;
-import com.raik383h_group_6.healthtracmobile.content.IResources;
-import com.raik383h_group_6.healthtracmobile.content.ResourcesAdapter;
 import com.raik383h_group_6.healthtracmobile.application.ActivityNavigator;
 import com.raik383h_group_6.healthtracmobile.model.User;
 import com.raik383h_group_6.healthtracmobile.presenter.BasePresenter;
@@ -37,7 +35,6 @@ public class ListUsersActivity extends BaseActivity implements ListUsersView {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        IResources resources = new ResourcesAdapter(getResources());
         IActivityNavigator nav = new ActivityNavigator(this);
         Bundle extras = getIntent().getExtras();
         userListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -46,7 +43,7 @@ public class ListUsersActivity extends BaseActivity implements ListUsersView {
                 presenter.onItemClick(parent, view, position, id);
             }
         });
-        presenter = presenterFactory.create(extras, resources, nav, this);
+        presenter = presenterFactory.create(extras, nav, this);
     }
 
     @Override

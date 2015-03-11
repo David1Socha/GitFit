@@ -2,32 +2,25 @@ package com.raik383h_group_6.healthtracmobile.presenter;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.widget.Adapter;
-import android.widget.AdapterView;
 
-import com.google.gson.Gson;
-import com.raik383h_group_6.healthtracmobile.R;
 import com.raik383h_group_6.healthtracmobile.application.IActivityNavigator;
 import com.raik383h_group_6.healthtracmobile.content.IResources;
 import com.raik383h_group_6.healthtracmobile.helper.ModelGenerator;
 import com.raik383h_group_6.healthtracmobile.model.AccessGrant;
-import com.raik383h_group_6.healthtracmobile.model.Team;
 import com.raik383h_group_6.healthtracmobile.model.User;
-import com.raik383h_group_6.healthtracmobile.service.api.async.IAsyncTeamService;
 import com.raik383h_group_6.healthtracmobile.service.api.async.IAsyncUserService;
 import com.raik383h_group_6.healthtracmobile.service.json.JsonParser;
 import com.raik383h_group_6.healthtracmobile.view.GitFitMainView;
-import com.raik383h_group_6.healthtracmobile.view.ListTeamsView;
 
-import org.apache.http.auth.AUTH;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.concurrent.ExecutionException;
 
-import static com.raik383h_group_6.healthtracmobile.helper.TestConstants.*;
+import static com.raik383h_group_6.healthtracmobile.helper.TestConstants.ERROR_FIND_PROFILE;
+import static com.raik383h_group_6.healthtracmobile.helper.TestConstants.FAKE_JSON;
+import static com.raik383h_group_6.healthtracmobile.helper.TestConstants.GRANT_KEY;
+import static com.raik383h_group_6.healthtracmobile.helper.TestConstants.GRANT_PREF_KEY;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;

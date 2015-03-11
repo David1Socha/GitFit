@@ -12,22 +12,20 @@ import com.raik383h_group_6.healthtracmobile.view.BaseView;
 
 public class OAuthPromptPresenter extends BasePresenter{
 
-    private IResources resources;
     private IActivityNavigator nav;
     private BaseView view;
 
     @Inject
-    public OAuthPromptPresenter( @Assisted IResources resources, @Assisted IActivityNavigator nav, @Assisted BaseView view) {
-        this.resources = resources;
+    public OAuthPromptPresenter( @Assisted IActivityNavigator nav, @Assisted BaseView view) {
         this.nav = nav;
         this.view = view;
     }
 
     public void onActivityResult(int requestCode, int resultCode, Bundle extras) {
         if (extras != null) {
-            String accessToken = extras.getString(resources.getString(R.string.EXTRA_ACCESS_TOKEN));
-            String accessSecret = extras.getString(resources.getString(R.string.EXTRA_ACCESS_SECRET));
-            String provider = extras.getString(resources.getString(R.string.EXTRA_PROVIDER));
+            String accessToken = extras.getString(view.getResource(R.string.EXTRA_ACCESS_TOKEN));
+            String accessSecret = extras.getString(view.getResource(R.string.EXTRA_ACCESS_SECRET));
+            String provider = extras.getString(view.getResource(R.string.EXTRA_PROVIDER));
             nav.finishOAuthPromptWithInfo(accessToken, accessSecret, provider);
         } else {
             nav.finishOAuthPromptInShame();
@@ -35,11 +33,11 @@ public class OAuthPromptPresenter extends BasePresenter{
     }
 
     public void onClickLoginTwitter() {
-        nav.openOAuthBrowser(resources.getString(R.string.PROVIDER_TWITTER), RequestCodes.TW_LOGIN_REQ);
+        nav.openOAuthBrowser(view.getResource(R.string.PROVIDER_TWITTER), RequestCodes.TW_LOGIN_REQ);
     }
 
     public void onClickLoginFacebook() {
-        nav.openOAuthBrowser(resources.getString(R.string.PROVIDER_FACEBOOK), RequestCodes.FB_LOGIN_REQ);
+        nav.openOAuthBrowser(view.getResource(R.string.PROVIDER_FACEBOOK), RequestCodes.FB_LOGIN_REQ);
     }
 
     @Override

@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.widget.Adapter;
 import android.widget.AdapterView;
 
-import com.raik383h_group_6.healthtracmobile.R;
 import com.raik383h_group_6.healthtracmobile.application.IActivityNavigator;
 import com.raik383h_group_6.healthtracmobile.content.IResources;
 import com.raik383h_group_6.healthtracmobile.helper.ModelGenerator;
@@ -20,9 +19,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
-import static org.mockito.Mockito.*;
-import static org.junit.Assert.*;
-import static com.raik383h_group_6.healthtracmobile.helper.TestConstants.*;
+import static com.raik383h_group_6.healthtracmobile.helper.TestConstants.GRANT_KEY;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 public class ListUsersPresenterTest {
 

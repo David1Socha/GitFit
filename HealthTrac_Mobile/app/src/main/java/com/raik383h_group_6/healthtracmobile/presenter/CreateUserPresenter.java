@@ -29,25 +29,23 @@ public class CreateUserPresenter extends BasePresenter {
     private FacebookUser facebookUser;
     private String accessToken, accessSecret, provider;
     private IAsyncAccountService accountService;
-    private IResources resources;
     private Bundle extras;
     private IActivityNavigator nav;
     private IAsyncUserService userService;
     private UserValidationPresenter userValidationPresenter;
 
     @Inject
-    public CreateUserPresenter(IAsyncFacebookService facebookService, IAsyncUserService userService, IAsyncAccountService accountService, @Assisted UserValidationPresenter userValidationPresenter, @Assisted Bundle extras, @Assisted IResources resources, @Assisted IActivityNavigator nav, @Assisted CreateUserView view) {
+    public CreateUserPresenter(IAsyncFacebookService facebookService, IAsyncUserService userService, IAsyncAccountService accountService, @Assisted UserValidationPresenter userValidationPresenter, @Assisted Bundle extras, @Assisted IActivityNavigator nav, @Assisted CreateUserView view) {
         this.facebookService = facebookService;
         this.view = view;
         this.accountService = accountService;
         this.extras = extras;
-        this.resources = resources;
         this.userService = userService;
         this.nav = nav;
         this.userValidationPresenter = userValidationPresenter;
-        accessToken = extras.getString(resources.getString(R.string.EXTRA_ACCESS_TOKEN));
-        accessSecret = extras.getString(resources.getString(R.string.EXTRA_ACCESS_SECRET));
-        provider = extras.getString(resources.getString(R.string.EXTRA_PROVIDER));
+        accessToken = extras.getString(view.getResource(R.string.EXTRA_ACCESS_TOKEN));
+        accessSecret = extras.getString(view.getResource(R.string.EXTRA_ACCESS_SECRET));
+        provider = extras.getString(view.getResource(R.string.EXTRA_PROVIDER));
     }
 
     public void onCreate() {
@@ -56,7 +54,7 @@ public class CreateUserPresenter extends BasePresenter {
 
     private void getAndPopulateFacebookUser() {
         facebookUser = null;
-        if (resources.getString(R.string.PROVIDER_FACEBOOK).equals(provider)) {
+        if (view.getResource(R.string.PROVIDER_FACEBOOK).equals(provider)) {
             try {
                 facebookUser = facebookService.getFacebookUserAsync(accessToken);
             } catch (InterruptedException | ExecutionException ignored) {
@@ -68,7 +66,7 @@ public class CreateUserPresenter extends BasePresenter {
     }
 
     private void populateFacebookFields(FacebookUser facebookUser) {
-        User.Sex sex = facebookUser.getGender().equals("male") ? User.Sex.MALE : User.Sex.FEMALE;
+        User.Sex sex = facebookUser.getGender().equals(view.getResource(R.string.male_label)) ? User.Sex.MALE : User.Sex.FEMALE;
         String email = facebookUser.getEmail();
         String firstName = facebookUser.getFirstName();
         String lastName = facebookUser.getLastName();
@@ -97,7 +95,7 @@ public class CreateUserPresenter extends BasePresenter {
         if (userToCreate != null) {
             createUser(userToCreate);
         } else {
-            view.displayMessage(resources.getString(R.string.invalid_field_message));
+            view.displayMessage(view.getResource(R.string.invalid_field_message));
         }
     }
 
@@ -108,7 +106,7 @@ public class CreateUserPresenter extends BasePresenter {
             accountService.registerAccountAsync(userLogin);
             nav.finishCreateUserSuccess();
         } catch (Exception e) {
-            view.displayMessage(resources.getString(R.string.account_not_made));
+            view.displayMessage(view.getResource(R.string.account_not_made));
             nav.finishCreateUserFailure();
         }
 

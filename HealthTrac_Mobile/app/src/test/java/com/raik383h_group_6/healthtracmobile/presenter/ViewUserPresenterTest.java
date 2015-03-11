@@ -2,26 +2,24 @@ package com.raik383h_group_6.healthtracmobile.presenter;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.view.View;
 
-import com.raik383h_group_6.healthtracmobile.R;
 import com.raik383h_group_6.healthtracmobile.application.IActivityNavigator;
 import com.raik383h_group_6.healthtracmobile.content.IResources;
+import com.raik383h_group_6.healthtracmobile.helper.ModelGenerator;
 import com.raik383h_group_6.healthtracmobile.model.AccessGrant;
 import com.raik383h_group_6.healthtracmobile.model.User;
 import com.raik383h_group_6.healthtracmobile.service.FormatUtils;
 import com.raik383h_group_6.healthtracmobile.view.ViewUserView;
-import com.raik383h_group_6.healthtracmobile.helper.ModelGenerator;
 
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.Date;
-
-import static org.mockito.Matchers.anyInt;
-import static org.mockito.Mockito.*;
-import static com.raik383h_group_6.healthtracmobile.helper.TestConstants.*;
+import static com.raik383h_group_6.healthtracmobile.helper.TestConstants.GRANT_KEY;
+import static com.raik383h_group_6.healthtracmobile.helper.TestConstants.USER_KEY;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 public class ViewUserPresenterTest {
     private ViewUserPresenter presenter;

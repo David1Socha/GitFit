@@ -6,8 +6,6 @@ import com.google.inject.Inject;
 import com.google.inject.name.Named;
 import com.raik383h_group_6.healthtracmobile.R;
 import com.raik383h_group_6.healthtracmobile.application.IActivityNavigator;
-import com.raik383h_group_6.healthtracmobile.content.IResources;
-import com.raik383h_group_6.healthtracmobile.content.ResourcesAdapter;
 import com.raik383h_group_6.healthtracmobile.application.ActivityNavigator;
 import com.raik383h_group_6.healthtracmobile.presenter.BasePresenter;
 import com.raik383h_group_6.healthtracmobile.presenter.OAuthBrowserPresenter;
@@ -33,7 +31,6 @@ public class OAuthBrowserActivity extends BaseActivity {
         webView = new WebView(this);
         setContentView(webView);
         Bundle extras = getIntent().getExtras();
-        IResources resources = new ResourcesAdapter(getResources());
         IAsyncOAuthService oAuthService;
         if (extras.getString(getString(R.string.EXTRA_PROVIDER)).equals(getString(R.string.PROVIDER_FACEBOOK))) {
             oAuthService = asyncFacebookOAuthService;
@@ -41,7 +38,7 @@ public class OAuthBrowserActivity extends BaseActivity {
             oAuthService = asyncTwitterOAuthService;
         }
         IActivityNavigator nav = new ActivityNavigator(this);
-        presenter = presenterFactory.create(oAuthService, webView, extras, resources, nav, this);
+        presenter = presenterFactory.create(oAuthService, webView, extras, nav, this);
         presenter.onCreate();
     }
 

@@ -23,7 +23,6 @@ import java.util.concurrent.ExecutionException;
 
 public class GitFitMainPresenter extends BasePresenter{
     private AccessGrant grant;
-    private IResources resources;
     private IActivityNavigator nav;
     private GitFitMainView view;
     private IAsyncUserService userService;
@@ -31,10 +30,9 @@ public class GitFitMainPresenter extends BasePresenter{
     private JsonParser json;
 
     @Inject
-    public GitFitMainPresenter(IAsyncUserService userService, JsonParser json, @Assisted IResources resources, @Assisted IActivityNavigator nav, @Assisted GitFitMainView view) {
+    public GitFitMainPresenter(IAsyncUserService userService, JsonParser json, @Assisted IActivityNavigator nav, @Assisted GitFitMainView view) {
         this.json = json;
         this.userService = userService;
-        this.resources = resources;
         this.nav = nav;
         this.view = view;
     }
@@ -50,7 +48,7 @@ public class GitFitMainPresenter extends BasePresenter{
     }
 
     private void reconstructGrant() {
-        String serializedGrant = view.getPref(resources.getString(R.string.pref_access_grant));
+        String serializedGrant = view.getPref(view.getResource(R.string.pref_access_grant));
         if (serializedGrant != null) {
             grant = json.fromJson(serializedGrant,  AccessGrant.class);
         }
@@ -62,7 +60,7 @@ public class GitFitMainPresenter extends BasePresenter{
 
     private void saveGrant() {
         String serializedGrant = json.toJson(grant);
-        view.setPref(resources.getString(R.string.pref_access_grant), serializedGrant);
+        view.setPref(view.getResource(R.string.pref_access_grant), serializedGrant);
     }
 
     public void onClickShowUsers() {
@@ -90,7 +88,7 @@ public class GitFitMainPresenter extends BasePresenter{
         } catch (Exception ignored) {
         }
         if (user == null) {
-            view.displayMessage(resources.getString(R.string.error_find_profile));
+            view.displayMessage(view.getResource(R.string.error_find_profile));
         }
     }
 
@@ -106,7 +104,7 @@ public class GitFitMainPresenter extends BasePresenter{
         if (resultCode == Activity.RESULT_OK) {
             switch (requestCode) {
                 case RequestCodes.AUTH:
-                    grant = (AccessGrant) data.getParcelable(resources.getString(R.string.EXTRA_ACCESS_GRANT));
+                    grant = (AccessGrant) data.getParcelable(view.getResource(R.string.EXTRA_ACCESS_GRANT));
                     break;
                 default:
                     break;

@@ -26,7 +26,6 @@ public class OAuthBrowserPresenter extends BasePresenter{
     private IAsyncOAuthService oAuthService;
     private Token requestToken;
     private WebView webView;
-    private IResources resources;
     private Bundle extras;
     private IActivityNavigator nav;
     private String authUrl;
@@ -43,11 +42,10 @@ public class OAuthBrowserPresenter extends BasePresenter{
     }
 
     @Inject
-    public OAuthBrowserPresenter(@Assisted IAsyncOAuthService service, @Assisted Bundle extras, @Assisted IResources resources, @Assisted WebView web, @Assisted IActivityNavigator nav, @Assisted BaseView view) {
+    public OAuthBrowserPresenter(@Assisted IAsyncOAuthService service, @Assisted Bundle extras, @Assisted WebView web, @Assisted IActivityNavigator nav, @Assisted BaseView view) {
         this.oAuthService = service;
         this.extras = extras;
         this.view = view;
-        this.resources = resources;
         this.nav = nav;
         this.webView = web;
     }
@@ -109,7 +107,7 @@ public class OAuthBrowserPresenter extends BasePresenter{
                     nav.finishOAuthBrowserInShame();
                 } else {
                     Token token = getToken(uri);
-                    nav.finishOAuthBrowserWithToken(token, extras.getString(resources.getString(R.string.EXTRA_PROVIDER)));
+                    nav.finishOAuthBrowserWithToken(token, extras.getString(view.getResource(R.string.EXTRA_PROVIDER)));
                 }
             } else {
                 super.onPageStarted(webView, url, favicon);

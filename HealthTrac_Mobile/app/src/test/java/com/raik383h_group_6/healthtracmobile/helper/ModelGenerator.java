@@ -9,11 +9,28 @@ import com.raik383h_group_6.healthtracmobile.model.Team;
 import com.raik383h_group_6.healthtracmobile.model.Token;
 import com.raik383h_group_6.healthtracmobile.model.User;
 
-import java.util.ArrayList;
 import java.util.Date;
 
+import static com.raik383h_group_6.healthtracmobile.helper.TestConstants.ACCOUNT_NOT_MADE;
+import static com.raik383h_group_6.healthtracmobile.helper.TestConstants.EMPTY_FIELD_ERROR;
+import static com.raik383h_group_6.healthtracmobile.helper.TestConstants.ERROR_FIND_PROFILE;
+import static com.raik383h_group_6.healthtracmobile.helper.TestConstants.FACEBOOK;
+import static com.raik383h_group_6.healthtracmobile.helper.TestConstants.FEMALE;
+import static com.raik383h_group_6.healthtracmobile.helper.TestConstants.GRANT_KEY;
+import static com.raik383h_group_6.healthtracmobile.helper.TestConstants.GRANT_PREF_KEY;
+import static com.raik383h_group_6.healthtracmobile.helper.TestConstants.INVALID_DATE_ERROR;
+import static com.raik383h_group_6.healthtracmobile.helper.TestConstants.INVALID_FIELD_MSG;
+import static com.raik383h_group_6.healthtracmobile.helper.TestConstants.MALE;
+import static com.raik383h_group_6.healthtracmobile.helper.TestConstants.PROVIDER_KEY;
+import static com.raik383h_group_6.healthtracmobile.helper.TestConstants.SECRET_KEY;
+import static com.raik383h_group_6.healthtracmobile.helper.TestConstants.SIGNIN_ERR;
+import static com.raik383h_group_6.healthtracmobile.helper.TestConstants.TEAM_KEY;
+import static com.raik383h_group_6.healthtracmobile.helper.TestConstants.TOKEN_KEY;
+import static com.raik383h_group_6.healthtracmobile.helper.TestConstants.TWITTER;
+import static com.raik383h_group_6.healthtracmobile.helper.TestConstants.USER_KEY;
+import static com.raik383h_group_6.healthtracmobile.helper.TestConstants.USER_UPDATED_MSG;
+import static com.raik383h_group_6.healthtracmobile.helper.TestConstants.USER_UPDATE_ERR;
 import static org.mockito.Mockito.mock;
-import static com.raik383h_group_6.healthtracmobile.helper.TestConstants.*;
 import static org.mockito.Mockito.when;
 
 public final class ModelGenerator {

@@ -43,6 +43,7 @@
     <string name="birthdate_label">Birth Date</string>
     <string name="sex_label">Sex</string>
     <string name="male_label">Male</string>
+    <string name="facebook_male_label">male</string>
     <string name="label_female">Female</string>
     <string name="empty_field_error">Field must not be empty</string>
     <string name="invalid_field_message">Some fields contained invalid input</string>

@@ -27,7 +27,6 @@ public class ListUsersPresenter extends BasePresenter{
 
     public static final int AUTH = 1;
 
-    private IResources resources;
     private IActivityNavigator nav;
     private ListUsersView view;
     private IAsyncUserService userService;
@@ -35,13 +34,12 @@ public class ListUsersPresenter extends BasePresenter{
     private Bundle extras;
 
     @Inject
-    public ListUsersPresenter(IAsyncUserService userService, @Assisted Bundle extras, @Assisted IResources resources, @Assisted IActivityNavigator nav, @Assisted ListUsersView view) {
-        this.resources = resources;
+    public ListUsersPresenter(IAsyncUserService userService, @Assisted Bundle extras, @Assisted IActivityNavigator nav, @Assisted ListUsersView view) {
         this.nav = nav;
         this.userService = userService;
         this.view = view;
         this.extras = extras;
-        this.grant = extras.getParcelable(resources.getString(R.string.EXTRA_ACCESS_GRANT));
+        this.grant = extras.getParcelable(view.getResource(R.string.EXTRA_ACCESS_GRANT));
     }
 
     public void onResume() {

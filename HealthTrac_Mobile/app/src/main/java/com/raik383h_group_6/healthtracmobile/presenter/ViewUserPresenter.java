@@ -17,20 +17,18 @@ import com.raik383h_group_6.healthtracmobile.view.ViewUserView;
 
 public class ViewUserPresenter extends BasePresenter{
     private final Bundle extras;
-    private final IResources resources;
     private final IActivityNavigator nav;
     private final ViewUserView view;
     private User user;
     private AccessGrant grant;
 
     @Inject
-    public ViewUserPresenter(@Assisted Bundle extras, @Assisted IResources resources, @Assisted IActivityNavigator nav, @Assisted ViewUserView view) {
+    public ViewUserPresenter(@Assisted Bundle extras, @Assisted IActivityNavigator nav, @Assisted ViewUserView view) {
         this.extras = extras;
-        this.resources = resources;
         this.nav = nav;
         this.view = view;
-        user = extras.getParcelable(resources.getString(R.string.EXTRA_USER));
-        grant = extras.getParcelable(resources.getString(R.string.EXTRA_ACCESS_GRANT));
+        user = extras.getParcelable(view.getResource(R.string.EXTRA_USER));
+        grant = extras.getParcelable(view.getResource(R.string.EXTRA_ACCESS_GRANT));
     }
 
     public void onClickEditUser() {
@@ -45,7 +43,7 @@ public class ViewUserPresenter extends BasePresenter{
         if (resultCode == Activity.RESULT_OK) {
             switch (requestCode) {
                 case RequestCodes.UPDATE_USER:
-                    user = extras.getParcelable(resources.getString(R.string.EXTRA_USER));
+                    user = extras.getParcelable(view.getResource(R.string.EXTRA_USER));
                     updateFields();
                     break;
                 default:
@@ -62,7 +60,7 @@ public class ViewUserPresenter extends BasePresenter{
         view.setLastName(user.getLastName());
         view.setLocation(user.getLocation());
         view.setPrefName(user.getPreferredName());
-        view.setSex(user.getSex()== User.Sex.MALE ? resources.getString(R.string.male_label): resources.getString(R.string.label_female));
+        view.setSex(user.getSex()== User.Sex.MALE ? view.getResource(R.string.male_label): view.getResource(R.string.label_female));
         view.setUserName(user.getUserName());
         view.setWeight(FormatUtils.format(user.getWeight()));
         boolean userViewingSelf = user.getId().equals(grant.getId());

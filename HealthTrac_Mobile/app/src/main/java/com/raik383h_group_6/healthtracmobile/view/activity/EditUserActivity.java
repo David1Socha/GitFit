@@ -11,8 +11,6 @@ import android.widget.Toast;
 import com.google.inject.Inject;
 import com.raik383h_group_6.healthtracmobile.R;
 import com.raik383h_group_6.healthtracmobile.application.IActivityNavigator;
-import com.raik383h_group_6.healthtracmobile.content.IResources;
-import com.raik383h_group_6.healthtracmobile.content.ResourcesAdapter;
 import com.raik383h_group_6.healthtracmobile.model.User;
 import com.raik383h_group_6.healthtracmobile.application.ActivityNavigator;
 import com.raik383h_group_6.healthtracmobile.presenter.BasePresenter;
@@ -167,10 +165,9 @@ public class EditUserActivity extends BaseActivity implements EditUserView {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Bundle extras = getIntent().getExtras();
-        IResources resources = new ResourcesAdapter(getResources());
         IActivityNavigator nav = new ActivityNavigator(this);
-        UserValidationPresenter userValidationPresenter = presenterFactory.create(this, resources);
-        presenter = presenterFactory.create(extras, userValidationPresenter, resources, nav, this);
+        UserValidationPresenter userValidationPresenter = presenterFactory.create(this);
+        presenter = presenterFactory.create(extras, userValidationPresenter, nav, this);
         presenter.onCreate();
     }
 

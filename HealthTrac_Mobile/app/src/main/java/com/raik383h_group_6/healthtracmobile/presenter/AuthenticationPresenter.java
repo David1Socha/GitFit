@@ -21,12 +21,10 @@ public class AuthenticationPresenter extends BasePresenter{
     private AuthenticationView view;
     private IAsyncAccountService accountService;
     private String accessToken, accessSecret, provider;
-    private IResources resources;
     private IActivityNavigator nav;
 
     @Inject
-    public AuthenticationPresenter(IAsyncAccountService accountService, @Assisted IResources resources, @Assisted IActivityNavigator nav, @Assisted AuthenticationView view) {
-        this.resources = resources;
+    public AuthenticationPresenter(IAsyncAccountService accountService, @Assisted IActivityNavigator nav, @Assisted AuthenticationView view) {
         this.nav = nav;
         this.accountService = accountService;
         this.view = view;
@@ -57,9 +55,9 @@ public class AuthenticationPresenter extends BasePresenter{
     }
 
     private void updateLoginInfo(Bundle extras) {
-        accessToken = extras.getString(resources.getString(R.string.EXTRA_ACCESS_TOKEN));
-        accessSecret = extras.getString(resources.getString(R.string.EXTRA_ACCESS_SECRET));
-        provider = extras.getString(resources.getString(R.string.EXTRA_PROVIDER));
+        accessToken = extras.getString(view.getResource(R.string.EXTRA_ACCESS_TOKEN));
+        accessSecret = extras.getString(view.getResource(R.string.EXTRA_ACCESS_SECRET));
+        provider = extras.getString(view.getResource(R.string.EXTRA_PROVIDER));
     }
 
     private void signInAndFinish(String accessToken, String accessSecret, String provider) {
@@ -77,9 +75,9 @@ public class AuthenticationPresenter extends BasePresenter{
             grant = accountService.loginAsync(credentials);
         } catch (InterruptedException | ExecutionException ignored) {}
         if (grant == null) {
-            view.displayMessage(resources.getString(R.string.sign_in_error));
+            view.displayMessage(view.getResource(R.string.sign_in_error));
         } else {
-            view.displayMessage(resources.getString(R.string.welcome_user, grant.getUserName()));
+            view.displayMessage(view.getResource(R.string.welcome_user, grant.getUserName()));
         }
         return grant;
     }
