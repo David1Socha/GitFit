@@ -1,7 +1,7 @@
 package com.raik383h_group_6.healthtracmobile.presenter;
 
-import com.raik383h_group_6.healthtracmobile.content.IResources;
 import com.raik383h_group_6.healthtracmobile.helper.ModelGenerator;
+import com.raik383h_group_6.healthtracmobile.helper.TestStubber;
 import com.raik383h_group_6.healthtracmobile.model.User;
 import com.raik383h_group_6.healthtracmobile.service.FormatUtils;
 import com.raik383h_group_6.healthtracmobile.service.api.async.IAsyncUserService;
@@ -25,16 +25,15 @@ public class UserValidationPresenterTest {
     private UserValidationPresenter presenter;
     private User validUser;
     private UserValidationView view;
-    private IResources resources;
     private IAsyncUserService userService;
 
     @Before
     public void setup() {
         validUser = ModelGenerator.genBasicUser();
         view = mock(UserValidationView.class);
-        resources = ModelGenerator.genStubbedResources();
+        TestStubber.stubViewForResources(view);
         userService = mock(IAsyncUserService.class);
-        presenter = new UserValidationPresenter(userService, view, resources);
+        presenter = new UserValidationPresenter(userService, view);
     }
 
     @Test

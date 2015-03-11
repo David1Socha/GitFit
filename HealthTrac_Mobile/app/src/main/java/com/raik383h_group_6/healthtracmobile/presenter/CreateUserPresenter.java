@@ -59,7 +59,7 @@ public class CreateUserPresenter extends BasePresenter {
     }
 
     private void populateFacebookFields(FacebookUser facebookUser) {
-        User.Sex sex = facebookUser.getGender().equals(view.getResource(R.string.male_label)) ? User.Sex.MALE : User.Sex.FEMALE;
+        User.Sex sex = facebookUser.getGender().equals(view.getResource(R.string.facebook_male_label)) ? User.Sex.MALE : User.Sex.FEMALE;
         String email = facebookUser.getEmail();
         String firstName = facebookUser.getFirstName();
         String lastName = facebookUser.getLastName();

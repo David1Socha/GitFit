@@ -4,8 +4,9 @@ import android.app.Activity;
 import android.os.Bundle;
 
 import com.raik383h_group_6.healthtracmobile.application.IActivityNavigator;
-import com.raik383h_group_6.healthtracmobile.content.IResources;
+import com.raik383h_group_6.healthtracmobile.application.RequestCodes;
 import com.raik383h_group_6.healthtracmobile.helper.ModelGenerator;
+import com.raik383h_group_6.healthtracmobile.helper.TestStubber;
 import com.raik383h_group_6.healthtracmobile.model.AccessGrant;
 import com.raik383h_group_6.healthtracmobile.model.Credentials;
 import com.raik383h_group_6.healthtracmobile.service.api.async.IAsyncAccountService;
@@ -31,7 +32,6 @@ import static org.mockito.Mockito.when;
 public class AuthenticationPresenterTest {
 
     private IAsyncAccountService accountService;
-    private IResources resources;
     private IActivityNavigator nav;
     private AuthenticationView view;
     private AccessGrant grant;
@@ -39,31 +39,31 @@ public class AuthenticationPresenterTest {
 
     @Before
     public void setup() {
-        resources = ModelGenerator.genStubbedResources();
         nav = mock(IActivityNavigator.class);
         grant = ModelGenerator.genBasicGrant();
         view = mock(AuthenticationView.class);
+        TestStubber.stubViewForResources(view);
         accountService = mock(IAsyncAccountService.class);
-        presenter = new AuthenticationPresenter(accountService, resources, nav, view);
+        presenter = new AuthenticationPresenter(accountService, nav, view);
     }
 
     @Test
     public void onClickSignInOpensOAuthPrompt() {
         presenter.onClickSignIn();
-        verify(nav).openOAuthPrompt(AuthenticationPresenter.OAUTH_TO_SIGN_IN);
+        verify(nav).openOAuthPrompt(RequestCodes.OAUTH_TO_SIGN_IN);
     }
 
     @Test
     public void onClickCreateAccountOpensOAuthPrompt() {
         presenter.onClickCreateAccount();
-        verify(nav).openOAuthPrompt(AuthenticationPresenter.OAUTH_TO_CREATE_ACCOUNT);
+        verify(nav).openOAuthPrompt(RequestCodes.OAUTH_TO_CREATE_ACCOUNT);
     }
 
     @Test
     public void onActivityResultForCreateAccountSignsInAndFinishes() throws ExecutionException, InterruptedException {
         Bundle extras = mock(Bundle.class);
         when(accountService.loginAsync(any(Credentials.class))).thenReturn(grant);
-        presenter.onActivityResult(AuthenticationPresenter.CREATE_ACCOUNT, Activity.RESULT_OK, extras);
+        presenter.onActivityResult(RequestCodes.CREATE_ACCOUNT, Activity.RESULT_OK, extras);
         verify(nav).finishWithAccessGrant(grant);
     }
 
@@ -71,7 +71,7 @@ public class AuthenticationPresenterTest {
     public void onActivityResultForCreateAccountDisplaysErrorWhenServiceFails() throws ExecutionException, InterruptedException {
         Bundle extras = mock(Bundle.class);
         when(accountService.loginAsync(any(Credentials.class))).thenThrow(new ExecutionException(new Exception("api failure")));
-        presenter.onActivityResult(AuthenticationPresenter.CREATE_ACCOUNT, Activity.RESULT_OK, extras);
+        presenter.onActivityResult(RequestCodes.CREATE_ACCOUNT, Activity.RESULT_OK, extras);
         verify(view).displayMessage(SIGNIN_ERR);
     }
 
@@ -79,7 +79,7 @@ public class AuthenticationPresenterTest {
     public void onActivityResultForOAuthSignInSignsInAndFinishes() throws ExecutionException, InterruptedException {
         Bundle extras = mock(Bundle.class);
         when(accountService.loginAsync(any(Credentials.class))).thenReturn(grant);
-        presenter.onActivityResult(AuthenticationPresenter.OAUTH_TO_SIGN_IN, Activity.RESULT_OK, extras);
+        presenter.onActivityResult(RequestCodes.OAUTH_TO_SIGN_IN, Activity.RESULT_OK, extras);
         verify(extras).getString(PROVIDER_KEY);
         verify(extras).getString(TOKEN_KEY);
         verify(extras).getString(SECRET_KEY);
@@ -90,7 +90,7 @@ public class AuthenticationPresenterTest {
     public void onActivityResultForOAuthSignInDisplaysErrorWhenServiceFails() throws ExecutionException, InterruptedException {
         Bundle extras = mock(Bundle.class);
         when(accountService.loginAsync(any(Credentials.class))).thenThrow(new ExecutionException(new Exception("api failure")));
-        presenter.onActivityResult(AuthenticationPresenter.CREATE_ACCOUNT, Activity.RESULT_OK, extras);
+        presenter.onActivityResult(RequestCodes.CREATE_ACCOUNT, Activity.RESULT_OK, extras);
         verify(view).displayMessage(SIGNIN_ERR);
     }
 
@@ -100,7 +100,7 @@ public class AuthenticationPresenterTest {
         when(extras.getString(PROVIDER_KEY)).thenReturn(FACEBOOK);
         when(extras.getString(TOKEN_KEY)).thenReturn(SAMPLE_TOKEN);
         when(extras.getString(SECRET_KEY)).thenReturn(SAMPLE_SECRET);
-        presenter.onActivityResult(AuthenticationPresenter.OAUTH_TO_CREATE_ACCOUNT, Activity.RESULT_OK, extras);
-        verify(nav).openCreateUser(SAMPLE_TOKEN, SAMPLE_SECRET, FACEBOOK, AuthenticationPresenter.CREATE_ACCOUNT);
+        presenter.onActivityResult(RequestCodes.OAUTH_TO_CREATE_ACCOUNT, Activity.RESULT_OK, extras);
+        verify(nav).openCreateUser(SAMPLE_TOKEN, SAMPLE_SECRET, FACEBOOK, RequestCodes.CREATE_ACCOUNT);
     }
 }

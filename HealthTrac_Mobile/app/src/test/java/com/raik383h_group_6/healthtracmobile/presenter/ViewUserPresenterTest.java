@@ -4,8 +4,9 @@ import android.app.Activity;
 import android.os.Bundle;
 
 import com.raik383h_group_6.healthtracmobile.application.IActivityNavigator;
-import com.raik383h_group_6.healthtracmobile.content.IResources;
+import com.raik383h_group_6.healthtracmobile.application.RequestCodes;
 import com.raik383h_group_6.healthtracmobile.helper.ModelGenerator;
+import com.raik383h_group_6.healthtracmobile.helper.TestStubber;
 import com.raik383h_group_6.healthtracmobile.model.AccessGrant;
 import com.raik383h_group_6.healthtracmobile.model.User;
 import com.raik383h_group_6.healthtracmobile.service.FormatUtils;
@@ -23,8 +24,6 @@ import static org.mockito.Mockito.when;
 
 public class ViewUserPresenterTest {
     private ViewUserPresenter presenter;
-    private Bundle bundle;
-    private IResources resources;
     private User user;
     private AccessGrant grant;
     private IActivityNavigator nav;
@@ -35,19 +34,18 @@ public class ViewUserPresenterTest {
         nav = mock(IActivityNavigator.class);
         user = ModelGenerator.genBasicUser();
         grant = ModelGenerator.genBasicGrant();
-        bundle = mock(Bundle.class);
         view = mock(ViewUserView.class);
-        when(bundle.getParcelable(USER_KEY)).thenReturn(user);
-        when(bundle.getParcelable(GRANT_KEY)).thenReturn(grant);
-        resources = ModelGenerator.genStubbedResources();
-        presenter = new ViewUserPresenter(bundle, resources, nav, view);
+        when(view.getParcelableExtra(USER_KEY)).thenReturn(user);
+        when(view.getParcelableExtra(GRANT_KEY)).thenReturn(grant);
+        TestStubber.stubViewForResources(view);
+        presenter = new ViewUserPresenter(nav, view);
     }
 
     @Test
     public void onClickEditUserCallsNavigator() {
 
         presenter.onClickEditUser();
-        verify(nav).openEditUser(grant, user, ViewUserPresenter.UPDATE);
+        verify(nav).openEditUser(grant, user, RequestCodes.UPDATE_USER);
         Assert.assertEquals(true, true);
     }
 
@@ -61,7 +59,7 @@ public class ViewUserPresenterTest {
     public void onActivityResultUpdatesFieldsOnSuccess() {
         Bundle extras = mock(Bundle.class);
         when(extras.getParcelable(USER_KEY)).thenReturn(user);
-        presenter.onActivityResult(ViewUserPresenter.UPDATE, Activity.RESULT_OK, extras);
+        presenter.onActivityResult(RequestCodes.UPDATE_USER, Activity.RESULT_OK, extras);
         assertCorrectlyUpdatesFields(view, user);
     }
 

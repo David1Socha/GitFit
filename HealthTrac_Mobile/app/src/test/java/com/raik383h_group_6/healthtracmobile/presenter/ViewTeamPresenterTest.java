@@ -4,8 +4,9 @@ import android.app.Activity;
 import android.os.Bundle;
 
 import com.raik383h_group_6.healthtracmobile.application.IActivityNavigator;
-import com.raik383h_group_6.healthtracmobile.content.IResources;
+import com.raik383h_group_6.healthtracmobile.application.RequestCodes;
 import com.raik383h_group_6.healthtracmobile.helper.ModelGenerator;
+import com.raik383h_group_6.healthtracmobile.helper.TestStubber;
 import com.raik383h_group_6.healthtracmobile.model.AccessGrant;
 import com.raik383h_group_6.healthtracmobile.model.Membership;
 import com.raik383h_group_6.healthtracmobile.model.Team;
@@ -32,8 +33,6 @@ import static org.mockito.Mockito.when;
 
 public class ViewTeamPresenterTest {
     private ViewTeamPresenter presenter;
-    private Bundle bundle;
-    private IResources resources;
     private Team team;
     private AccessGrant grant;
     private Membership memberMembership;
@@ -49,13 +48,12 @@ public class ViewTeamPresenterTest {
         grant = ModelGenerator.genBasicGrant();
         memberMembership = ModelGenerator.genMemberMembership();
         memberships = new ArrayList<Membership>();
-        bundle = mock(Bundle.class);
         view = mock(ViewTeamView.class);
-        when(bundle.getParcelable(TEAM_KEY)).thenReturn(team);
-        when(bundle.getParcelable(GRANT_KEY)).thenReturn(grant);
-        resources = ModelGenerator.genStubbedResources();
+        when(view.getParcelableExtra(TEAM_KEY)).thenReturn(team);
+        when(view.getParcelableExtra(GRANT_KEY)).thenReturn(grant);
+        TestStubber.stubViewForResources(view);
         membershipService = mock(IAsyncMembershipService.class);
-        presenter = new ViewTeamPresenter(membershipService, bundle, resources, nav, view);
+        presenter = new ViewTeamPresenter(membershipService, nav, view);
     }
 
     @Test
@@ -77,7 +75,7 @@ public class ViewTeamPresenterTest {
     public void onActivityResultUpdatesFieldsOnSuccess() {
         Bundle extras = mock(Bundle.class);
         when(extras.getParcelable(TEAM_KEY)).thenReturn(team);
-        presenter.onActivityResult(ViewUserPresenter.UPDATE, Activity.RESULT_OK, extras);
+        presenter.onActivityResult(RequestCodes.UPDATE_TEAM, Activity.RESULT_OK, extras);
         assertCorrectlyUpdatesFields(view, team);
     }
 

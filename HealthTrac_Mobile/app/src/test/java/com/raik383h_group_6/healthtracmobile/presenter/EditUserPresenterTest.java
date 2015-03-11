@@ -1,10 +1,8 @@
 package com.raik383h_group_6.healthtracmobile.presenter;
 
-import android.os.Bundle;
-
 import com.raik383h_group_6.healthtracmobile.application.IActivityNavigator;
-import com.raik383h_group_6.healthtracmobile.content.IResources;
 import com.raik383h_group_6.healthtracmobile.helper.ModelGenerator;
+import com.raik383h_group_6.healthtracmobile.helper.TestStubber;
 import com.raik383h_group_6.healthtracmobile.model.AccessGrant;
 import com.raik383h_group_6.healthtracmobile.model.User;
 import com.raik383h_group_6.healthtracmobile.service.FormatUtils;
@@ -31,19 +29,16 @@ public class EditUserPresenterTest {
     private EditUserPresenter presenter;
     private IActivityNavigator nav;
     private IAsyncUserService userService;
-    private Bundle extras;
-    private IResources resources;
     private User ogUser;
     private AccessGrant grant;
     private UserValidationPresenter userValidationPresenter;
 
     @Before
     public void setup() {
-        resources = ModelGenerator.genStubbedResources();
-        extras = mock(Bundle.class);
         userService = mock(IAsyncUserService.class);
         nav = mock(IActivityNavigator.class);
         view = mock(EditUserView.class);
+        TestStubber.stubViewForResources(view);
         userValidationPresenter = mock(UserValidationPresenter.class);
 
         ogUser = ModelGenerator.genBasicUser();
@@ -52,9 +47,9 @@ public class EditUserPresenterTest {
 
     @Test
     public void onCreatePopulatesFieldsWhenOriginalUserExists() {
-        when(extras.getParcelable(GRANT_KEY)).thenReturn(grant);
-        when(extras.getParcelable(USER_KEY)).thenReturn(ogUser);
-        presenter = new EditUserPresenter(userService, userValidationPresenter, extras, resources, nav, view);
+        when(view.getParcelableExtra(GRANT_KEY)).thenReturn(grant);
+        when(view.getParcelableExtra(USER_KEY)).thenReturn(ogUser);
+        presenter = new EditUserPresenter(userService, userValidationPresenter, nav, view);
         presenter.onCreate();
         verify(view).setBirthDate(FormatUtils.format(ogUser.getBirthDate()));
         verify(view).setEmail(ogUser.getEmail());
@@ -84,9 +79,9 @@ public class EditUserPresenterTest {
     @Test
     public void onClickUpdateUserDisplaysErrorWhenUserInvalid() {
         stubViewGetters();
-        when(extras.getParcelable(GRANT_KEY)).thenReturn(grant);
+        when(view.getParcelableExtra(GRANT_KEY)).thenReturn(grant);
         when(userValidationPresenter.validateUser(anyString(), anyString(), anyString(), anyString(), anyString(), anyString(), anyString(), anyString(), anyString(), anyString(), anyString())).thenReturn(null);
-        presenter = new EditUserPresenter(userService, userValidationPresenter, extras, resources, nav, view);
+        presenter = new EditUserPresenter(userService, userValidationPresenter, nav, view);
         presenter.onClickUpdateUser();
         verify(view).displayMessage(INVALID_FIELD_MSG);
     }
@@ -94,10 +89,10 @@ public class EditUserPresenterTest {
     @Test
     public void onClickUpdateUserUpdatesAndFinishesWhenUserValid() throws Exception {
         stubViewGetters();
-        when(extras.getParcelable(GRANT_KEY)).thenReturn(grant);
-        when(extras.getParcelable(USER_KEY)).thenReturn(ogUser);
+        when(view.getParcelableExtra(GRANT_KEY)).thenReturn(grant);
+        when(view.getParcelableExtra(USER_KEY)).thenReturn(ogUser);
         when(userValidationPresenter.validateUser(anyString(), anyString(), anyString(), anyString(), anyString(), anyString(), anyString(), anyString(), anyString(), anyString(), anyString())).thenReturn(ogUser);
-        presenter = new EditUserPresenter(userService, userValidationPresenter, extras, resources, nav, view);
+        presenter = new EditUserPresenter(userService, userValidationPresenter, nav, view);
         presenter.onClickUpdateUser();
         verify(userService).updateUserAsync(ogUser.getId(), ogUser, grant.getAuthHeader());
         verify(view).displayMessage(USER_UPDATED_MSG);
@@ -107,10 +102,10 @@ public class EditUserPresenterTest {
     @Test
     public void onClickUpdateUserFailsAndFinishesWhenServiceFails() throws Exception {
         stubViewGetters();
-        when(extras.getParcelable(GRANT_KEY)).thenReturn(grant);
-        when(extras.getParcelable(USER_KEY)).thenReturn(ogUser);
+        when(view.getParcelableExtra(GRANT_KEY)).thenReturn(grant);
+        when(view.getParcelableExtra(USER_KEY)).thenReturn(ogUser);
         when(userValidationPresenter.validateUser(anyString(), anyString(), anyString(), anyString(), anyString(), anyString(), anyString(), anyString(), anyString(), anyString(), anyString())).thenReturn(ogUser);
-        presenter = new EditUserPresenter(userService, userValidationPresenter, extras, resources, nav, view);
+        presenter = new EditUserPresenter(userService, userValidationPresenter, nav, view);
         doThrow(new Exception("sample exception indicating service failure")).when(userService).updateUserAsync(ogUser.getId(), ogUser, grant.getAuthHeader());
         presenter.onClickUpdateUser();
         verify(view).displayMessage(USER_UPDATE_ERR);

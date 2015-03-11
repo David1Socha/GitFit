@@ -6,10 +6,11 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
 import com.raik383h_group_6.healthtracmobile.application.IActivityNavigator;
-import com.raik383h_group_6.healthtracmobile.content.IResources;
 import com.raik383h_group_6.healthtracmobile.helper.ModelGenerator;
+import com.raik383h_group_6.healthtracmobile.helper.TestStubber;
 import com.raik383h_group_6.healthtracmobile.model.Token;
 import com.raik383h_group_6.healthtracmobile.service.oauth.IAsyncOAuthService;
+import com.raik383h_group_6.healthtracmobile.view.BaseView;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -26,9 +27,8 @@ public class OAuthBrowserPresenterTest {
 
     private OAuthBrowserPresenter presenter;
     private IAsyncOAuthService service;
-    private Bundle extras;
-    private IResources resources;
     private WebView webView;
+    private BaseView view;
     private IActivityNavigator nav;
     private WebSettings settings;
     private Token reqToken;
@@ -36,14 +36,14 @@ public class OAuthBrowserPresenterTest {
     @Before
     public void setup() {
         service = mock(IAsyncOAuthService.class);
-        extras = mock(Bundle.class);
         reqToken = ModelGenerator.genRequestToken();
-        resources = ModelGenerator.genStubbedResources();
         webView = mock(WebView.class);
+        view = mock(BaseView.class);
+        TestStubber.stubViewForResources(view);
         nav = mock(IActivityNavigator.class);
         settings = mock(WebSettings.class);
         when(webView.getSettings()).thenReturn(settings);
-        presenter = new OAuthBrowserPresenter(service, extras, resources, webView, nav);
+        presenter = new OAuthBrowserPresenter(service, webView, nav, view);
     }
 
     @Test

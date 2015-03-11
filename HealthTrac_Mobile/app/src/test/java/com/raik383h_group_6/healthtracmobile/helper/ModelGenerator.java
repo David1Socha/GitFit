@@ -1,13 +1,13 @@
 package com.raik383h_group_6.healthtracmobile.helper;
 
 import com.raik383h_group_6.healthtracmobile.R;
-import com.raik383h_group_6.healthtracmobile.content.IResources;
 import com.raik383h_group_6.healthtracmobile.model.AccessGrant;
 import com.raik383h_group_6.healthtracmobile.model.FacebookUser;
 import com.raik383h_group_6.healthtracmobile.model.Membership;
 import com.raik383h_group_6.healthtracmobile.model.Team;
 import com.raik383h_group_6.healthtracmobile.model.Token;
 import com.raik383h_group_6.healthtracmobile.model.User;
+import com.raik383h_group_6.healthtracmobile.view.BaseView;
 
 import java.util.Date;
 
@@ -60,31 +60,6 @@ public final class ModelGenerator {
         t.setName("teeeeeeem");
         return t;
     }
-
-    public static IResources genStubbedResources() {
-        IResources resources = mock(IResources.class);
-        when(resources.getString(R.string.EXTRA_ACCESS_GRANT)).thenReturn(GRANT_KEY);
-        when(resources.getString(R.string.EXTRA_USER)).thenReturn(USER_KEY);
-        when(resources.getString(R.string.invalid_field_message)).thenReturn(INVALID_FIELD_MSG);
-        when(resources.getString(R.string.user_updated_message)).thenReturn(USER_UPDATED_MSG);
-        when(resources.getString(R.string.update_user_error)).thenReturn(USER_UPDATE_ERR);
-        when(resources.getString(R.string.pref_access_grant)).thenReturn(GRANT_PREF_KEY);
-        when(resources.getString(R.string.error_find_profile)).thenReturn(ERROR_FIND_PROFILE);
-        when(resources.getString(R.string.PROVIDER_FACEBOOK)).thenReturn(FACEBOOK);
-        when(resources.getString(R.string.PROVIDER_TWITTER)).thenReturn(TWITTER);
-        when(resources.getString(R.string.EXTRA_ACCESS_TOKEN)).thenReturn(TOKEN_KEY);
-        when(resources.getString(R.string.EXTRA_ACCESS_SECRET)).thenReturn(SECRET_KEY);
-        when(resources.getString(R.string.EXTRA_PROVIDER)).thenReturn(PROVIDER_KEY);
-        when(resources.getString(R.string.male_label)).thenReturn(MALE);
-        when(resources.getString(R.string.empty_field_error)).thenReturn(EMPTY_FIELD_ERROR);
-        when(resources.getString(R.string.invalid_date_error)).thenReturn(INVALID_DATE_ERROR);
-        when(resources.getString(R.string.EXTRA_TEAM)).thenReturn(TEAM_KEY);
-        when(resources.getString(R.string.label_female)).thenReturn(FEMALE);
-        when(resources.getString(R.string.account_not_made)).thenReturn(ACCOUNT_NOT_MADE);
-        when(resources.getString(R.string.sign_in_error)).thenReturn(SIGNIN_ERR);
-        return resources;
-    }
-
 
     public static Membership genMemberMembership() {
         Membership m = new Membership();
