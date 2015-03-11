@@ -11,7 +11,6 @@ import com.google.inject.assistedinject.Assisted;
 import com.raik383h_group_6.healthtracmobile.R;
 import com.raik383h_group_6.healthtracmobile.adapter.TeamAdapter;
 import com.raik383h_group_6.healthtracmobile.application.IActivityNavigator;
-import com.raik383h_group_6.healthtracmobile.content.IResources;
 import com.raik383h_group_6.healthtracmobile.model.AccessGrant;
 import com.raik383h_group_6.healthtracmobile.model.Team;
 import com.raik383h_group_6.healthtracmobile.service.api.TeamService;
@@ -28,15 +27,13 @@ public class ListTeamsPresenter extends BasePresenter{
     private ListTeamsView view;
     private IAsyncTeamService teamService;
     private AccessGrant grant;
-    private Bundle extras;
 
     @Inject
-    public ListTeamsPresenter(IAsyncTeamService teamService, @Assisted Bundle extras, @Assisted IActivityNavigator nav, @Assisted ListTeamsView view) {
+    public ListTeamsPresenter(IAsyncTeamService teamService, @Assisted IActivityNavigator nav, @Assisted ListTeamsView view) {
         this.nav = nav;
         this.teamService = teamService;
         this.view = view;
-        this.extras = extras;
-        this.grant = extras.getParcelable(view.getResource(R.string.EXTRA_ACCESS_GRANT));
+        this.grant = (AccessGrant) view.getParcelableExtra(view.getResource(R.string.EXTRA_ACCESS_GRANT));
     }
 
     public void onResume() {

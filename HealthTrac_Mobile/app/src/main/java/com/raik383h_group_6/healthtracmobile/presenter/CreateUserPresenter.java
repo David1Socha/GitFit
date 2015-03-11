@@ -1,20 +1,15 @@
 package com.raik383h_group_6.healthtracmobile.presenter;
 
-import android.os.AsyncTask;
 import android.os.Bundle;
 
 import com.google.inject.Inject;
 import com.google.inject.assistedinject.Assisted;
 import com.raik383h_group_6.healthtracmobile.R;
 import com.raik383h_group_6.healthtracmobile.application.IActivityNavigator;
-import com.raik383h_group_6.healthtracmobile.content.IResources;
 import com.raik383h_group_6.healthtracmobile.model.Credentials;
 import com.raik383h_group_6.healthtracmobile.model.FacebookUser;
 import com.raik383h_group_6.healthtracmobile.model.User;
 import com.raik383h_group_6.healthtracmobile.model.UserLogin;
-import com.raik383h_group_6.healthtracmobile.service.api.AccountService;
-import com.raik383h_group_6.healthtracmobile.service.api.FacebookService;
-import com.raik383h_group_6.healthtracmobile.service.api.UserService;
 import com.raik383h_group_6.healthtracmobile.service.api.async.IAsyncAccountService;
 import com.raik383h_group_6.healthtracmobile.service.api.async.IAsyncFacebookService;
 import com.raik383h_group_6.healthtracmobile.service.api.async.IAsyncUserService;
@@ -29,23 +24,21 @@ public class CreateUserPresenter extends BasePresenter {
     private FacebookUser facebookUser;
     private String accessToken, accessSecret, provider;
     private IAsyncAccountService accountService;
-    private Bundle extras;
     private IActivityNavigator nav;
     private IAsyncUserService userService;
     private UserValidationPresenter userValidationPresenter;
 
     @Inject
-    public CreateUserPresenter(IAsyncFacebookService facebookService, IAsyncUserService userService, IAsyncAccountService accountService, @Assisted UserValidationPresenter userValidationPresenter, @Assisted Bundle extras, @Assisted IActivityNavigator nav, @Assisted CreateUserView view) {
+    public CreateUserPresenter(IAsyncFacebookService facebookService, IAsyncUserService userService, IAsyncAccountService accountService, @Assisted UserValidationPresenter userValidationPresenter, @Assisted IActivityNavigator nav, @Assisted CreateUserView view) {
         this.facebookService = facebookService;
         this.view = view;
         this.accountService = accountService;
-        this.extras = extras;
         this.userService = userService;
         this.nav = nav;
         this.userValidationPresenter = userValidationPresenter;
-        accessToken = extras.getString(view.getResource(R.string.EXTRA_ACCESS_TOKEN));
-        accessSecret = extras.getString(view.getResource(R.string.EXTRA_ACCESS_SECRET));
-        provider = extras.getString(view.getResource(R.string.EXTRA_PROVIDER));
+        accessToken = view.getStringExtra(view.getResource(R.string.EXTRA_ACCESS_TOKEN));
+        accessSecret = view.getStringExtra(view.getResource(R.string.EXTRA_ACCESS_SECRET));
+        provider = view.getStringExtra(view.getResource(R.string.EXTRA_PROVIDER));
     }
 
     public void onCreate() {

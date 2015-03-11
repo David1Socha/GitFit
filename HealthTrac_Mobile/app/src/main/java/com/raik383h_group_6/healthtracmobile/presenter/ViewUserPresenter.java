@@ -8,7 +8,6 @@ import com.google.inject.assistedinject.Assisted;
 import com.raik383h_group_6.healthtracmobile.R;
 import com.raik383h_group_6.healthtracmobile.application.IActivityNavigator;
 import com.raik383h_group_6.healthtracmobile.application.RequestCodes;
-import com.raik383h_group_6.healthtracmobile.content.IResources;
 import com.raik383h_group_6.healthtracmobile.model.AccessGrant;
 import com.raik383h_group_6.healthtracmobile.model.User;
 import com.raik383h_group_6.healthtracmobile.service.FormatUtils;
@@ -16,19 +15,17 @@ import com.raik383h_group_6.healthtracmobile.view.BaseView;
 import com.raik383h_group_6.healthtracmobile.view.ViewUserView;
 
 public class ViewUserPresenter extends BasePresenter{
-    private final Bundle extras;
     private final IActivityNavigator nav;
     private final ViewUserView view;
     private User user;
     private AccessGrant grant;
 
     @Inject
-    public ViewUserPresenter(@Assisted Bundle extras, @Assisted IActivityNavigator nav, @Assisted ViewUserView view) {
-        this.extras = extras;
+    public ViewUserPresenter(@Assisted IActivityNavigator nav, @Assisted ViewUserView view) {
         this.nav = nav;
         this.view = view;
-        user = extras.getParcelable(view.getResource(R.string.EXTRA_USER));
-        grant = extras.getParcelable(view.getResource(R.string.EXTRA_ACCESS_GRANT));
+        user = (User) view.getParcelableExtra(view.getResource(R.string.EXTRA_USER));
+        grant = (AccessGrant) view.getParcelableExtra(view.getResource(R.string.EXTRA_ACCESS_GRANT));
     }
 
     public void onClickEditUser() {

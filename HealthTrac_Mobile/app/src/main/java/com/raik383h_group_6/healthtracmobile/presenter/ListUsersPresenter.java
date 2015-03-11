@@ -11,7 +11,6 @@ import com.google.inject.assistedinject.Assisted;
 import com.raik383h_group_6.healthtracmobile.R;
 import com.raik383h_group_6.healthtracmobile.adapter.UserAdapter;
 import com.raik383h_group_6.healthtracmobile.application.IActivityNavigator;
-import com.raik383h_group_6.healthtracmobile.content.IResources;
 import com.raik383h_group_6.healthtracmobile.model.AccessGrant;
 import com.raik383h_group_6.healthtracmobile.model.User;
 import com.raik383h_group_6.healthtracmobile.service.api.UserService;
@@ -31,15 +30,13 @@ public class ListUsersPresenter extends BasePresenter{
     private ListUsersView view;
     private IAsyncUserService userService;
     private AccessGrant grant;
-    private Bundle extras;
 
     @Inject
-    public ListUsersPresenter(IAsyncUserService userService, @Assisted Bundle extras, @Assisted IActivityNavigator nav, @Assisted ListUsersView view) {
+    public ListUsersPresenter(IAsyncUserService userService, @Assisted IActivityNavigator nav, @Assisted ListUsersView view) {
         this.nav = nav;
         this.userService = userService;
         this.view = view;
-        this.extras = extras;
-        this.grant = extras.getParcelable(view.getResource(R.string.EXTRA_ACCESS_GRANT));
+        this.grant = (AccessGrant) view.getParcelableExtra(view.getResource(R.string.EXTRA_ACCESS_GRANT));
     }
 
     public void onResume() {

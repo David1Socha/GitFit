@@ -167,7 +167,7 @@ public class EditUserActivity extends BaseActivity implements EditUserView {
         Bundle extras = getIntent().getExtras();
         IActivityNavigator nav = new ActivityNavigator(this);
         UserValidationPresenter userValidationPresenter = presenterFactory.create(this);
-        presenter = presenterFactory.create(extras, userValidationPresenter, nav, this);
+        presenter = presenterFactory.create(userValidationPresenter, nav, this);
         presenter.onCreate();
     }
 

@@ -13,7 +13,6 @@ import com.google.inject.Inject;
 import com.google.inject.assistedinject.Assisted;
 import com.raik383h_group_6.healthtracmobile.R;
 import com.raik383h_group_6.healthtracmobile.application.IActivityNavigator;
-import com.raik383h_group_6.healthtracmobile.content.IResources;
 import com.raik383h_group_6.healthtracmobile.model.Token;
 import com.raik383h_group_6.healthtracmobile.service.oauth.IAsyncOAuthService;
 import com.raik383h_group_6.healthtracmobile.service.oauth.IOAuthService;
@@ -26,7 +25,6 @@ public class OAuthBrowserPresenter extends BasePresenter{
     private IAsyncOAuthService oAuthService;
     private Token requestToken;
     private WebView webView;
-    private Bundle extras;
     private IActivityNavigator nav;
     private String authUrl;
     private BaseView view;
@@ -42,9 +40,8 @@ public class OAuthBrowserPresenter extends BasePresenter{
     }
 
     @Inject
-    public OAuthBrowserPresenter(@Assisted IAsyncOAuthService service, @Assisted Bundle extras, @Assisted WebView web, @Assisted IActivityNavigator nav, @Assisted BaseView view) {
+    public OAuthBrowserPresenter(@Assisted IAsyncOAuthService service, @Assisted WebView web, @Assisted IActivityNavigator nav, @Assisted BaseView view) {
         this.oAuthService = service;
-        this.extras = extras;
         this.view = view;
         this.nav = nav;
         this.webView = web;
@@ -107,7 +104,7 @@ public class OAuthBrowserPresenter extends BasePresenter{
                     nav.finishOAuthBrowserInShame();
                 } else {
                     Token token = getToken(uri);
-                    nav.finishOAuthBrowserWithToken(token, extras.getString(view.getResource(R.string.EXTRA_PROVIDER)));
+                    nav.finishOAuthBrowserWithToken(token, view.getStringExtra(view.getResource(R.string.EXTRA_PROVIDER)));
                 }
             } else {
                 super.onPageStarted(webView, url, favicon);

@@ -7,7 +7,6 @@ import com.google.inject.Inject;
 import com.google.inject.assistedinject.Assisted;
 import com.raik383h_group_6.healthtracmobile.R;
 import com.raik383h_group_6.healthtracmobile.application.IActivityNavigator;
-import com.raik383h_group_6.healthtracmobile.content.IResources;
 import com.raik383h_group_6.healthtracmobile.model.AccessGrant;
 import com.raik383h_group_6.healthtracmobile.model.User;
 import com.raik383h_group_6.healthtracmobile.service.FormatUtils;
@@ -21,7 +20,6 @@ import java.util.concurrent.ExecutionException;
 public class EditUserPresenter extends BasePresenter{
 
     private final IAsyncUserService userService;
-    private final Bundle extras;
     private final EditUserView view;
     private final IActivityNavigator nav;
     private UserValidationPresenter userValidationPresenter;
@@ -29,14 +27,13 @@ public class EditUserPresenter extends BasePresenter{
     private User ogUser;
 
     @Inject
-    public EditUserPresenter(IAsyncUserService userService, @Assisted UserValidationPresenter userValidationPresenter, @Assisted Bundle extras, @Assisted IActivityNavigator nav, @Assisted EditUserView view) {
+    public EditUserPresenter(IAsyncUserService userService, @Assisted UserValidationPresenter userValidationPresenter, @Assisted IActivityNavigator nav, @Assisted EditUserView view) {
         this.userService = userService;
-        this.extras = extras;
         this.nav = nav;
         this.view = view;
         this.userValidationPresenter = userValidationPresenter;
-        this.grant = extras.getParcelable(view.getResource(R.string.EXTRA_ACCESS_GRANT));
-        this.ogUser = extras.getParcelable(view.getResource(R.string.EXTRA_USER));
+        this.grant = (AccessGrant) view.getParcelableExtra(view.getResource(R.string.EXTRA_ACCESS_GRANT));
+        this.ogUser = (User) view.getParcelableExtra(view.getResource(R.string.EXTRA_USER));
     }
 
     public void onCreate() {

@@ -160,7 +160,7 @@ public class CreateUserActivity extends BaseActivity implements CreateUserView {
         Bundle extras = getIntent().getExtras();
         IActivityNavigator nav = new ActivityNavigator(this);
         UserValidationPresenter userValidationPresenter = presenterFactory.create(this);
-        presenter= presenterFactory.create(userValidationPresenter, extras, nav, this);
+        presenter= presenterFactory.create(userValidationPresenter, nav, this);
         presenter.onCreate();
     }
 

@@ -38,7 +38,7 @@ public class OAuthBrowserActivity extends BaseActivity {
             oAuthService = asyncTwitterOAuthService;
         }
         IActivityNavigator nav = new ActivityNavigator(this);
-        presenter = presenterFactory.create(oAuthService, webView, extras, nav, this);
+        presenter = presenterFactory.create(oAuthService, webView, nav, this);
         presenter.onCreate();
     }
 

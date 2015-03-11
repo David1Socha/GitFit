@@ -37,8 +37,7 @@ public class ListTeamsActivity extends BaseActivity implements ListTeamsView {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         IActivityNavigator nav = new ActivityNavigator(this);
-        Bundle extras = getIntent().getExtras();
-        presenter = presenterFactory.create(extras, nav, this);
+        presenter = presenterFactory.create(nav, this);
         teamListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {

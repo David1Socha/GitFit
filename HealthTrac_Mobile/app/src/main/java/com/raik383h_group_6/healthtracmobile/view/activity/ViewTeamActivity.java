@@ -41,8 +41,7 @@ public class ViewTeamActivity extends BaseActivity implements ViewTeamView {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         IActivityNavigator nav = new ActivityNavigator(this);
-        Bundle extras = getIntent().getExtras();
-        presenter = presenterFactory.create(extras, nav, this);
+        presenter = presenterFactory.create(nav, this);
     }
 
     @Override
