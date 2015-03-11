@@ -22,6 +22,7 @@ public abstract class BaseActivity extends RoboActionBarActivity implements Base
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.action_bar, menu);
+        this.menu = menu;
         return true;
     }
 

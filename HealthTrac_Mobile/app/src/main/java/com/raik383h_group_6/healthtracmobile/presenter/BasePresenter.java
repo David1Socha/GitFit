@@ -10,13 +10,11 @@ public abstract class BasePresenter {
     protected abstract IActivityNavigator getNav();
 
     public void onClickMenuLogout() {
-        getView().setLoginEnabled(true);
         getView().clearPrefs();
         getNav().openMain();
     }
 
     public void onClickMenuLogin() {
-        getView().setLoginEnabled(false);
         getNav().openAuthentication(RequestCodes.AUTH);
     }
 }
