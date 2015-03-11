@@ -90,5 +90,7 @@
     <string name="access_grant_prefs">access_grant_prefs</string>
     <string name="shared_prefs">shared_prefs</string>
     <string name="pref_access_grant">access_grant</string>
+    <string name="logout">Log Out</string>
+    <string name="login">Log In</string>
 
 </resources>

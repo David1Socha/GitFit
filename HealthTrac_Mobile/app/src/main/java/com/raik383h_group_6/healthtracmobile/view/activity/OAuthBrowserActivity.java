@@ -46,4 +46,9 @@ public class OAuthBrowserActivity extends CustomRoboActionBarActivity {
         presenter = presenterFactory.create(oAuthService, webView, extras, resources, nav);
         presenter.onCreate();
     }
+
+    @Override
+    public void onMenuLogout() {
+
+    }
 }

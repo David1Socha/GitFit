@@ -26,7 +26,7 @@ import roboguice.inject.ContentView;
 import roboguice.inject.InjectView;
 
 @ContentView(R.layout.activity_update_user)
-public class EditUserActivity extends RoboActionBarActivity implements EditUserView {
+public class EditUserActivity extends CustomRoboActionBarActivity implements EditUserView {
     @Inject
     private PresenterFactory presenterFactory;
     private EditUserPresenter presenter;
@@ -226,5 +226,10 @@ public class EditUserActivity extends RoboActionBarActivity implements EditUserV
     @Override
     public void displayMessage(String msg) {
         Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onMenuLogout() {
+
     }
 }

@@ -1,6 +1,6 @@
 package com.raik383h_group_6.healthtracmobile.view;
 
-public interface ViewTeamView {
+public interface ViewTeamView  extends CustomMenuView{
     void setTeamName(String msg);
 
     void setDescription(String msg);

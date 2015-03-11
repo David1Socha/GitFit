@@ -219,4 +219,9 @@ public class CreateUserActivity extends CustomRoboActionBarActivity implements C
     public void displayMessage(String msg) {
         Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
     }
+
+    @Override
+    public void onMenuLogout() {
+
+    }
 }

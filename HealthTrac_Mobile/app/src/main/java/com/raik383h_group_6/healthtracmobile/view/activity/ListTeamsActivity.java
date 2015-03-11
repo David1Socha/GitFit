@@ -76,4 +76,8 @@ public class ListTeamsActivity extends CustomRoboActionBarActivity implements Li
         teamListView.setAdapter(adapter);
     }
 
+    @Override
+    public void onMenuLogout() {
+
+    }
 }

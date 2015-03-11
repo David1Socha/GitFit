@@ -52,4 +52,9 @@ public class AuthenticationActivity extends CustomRoboActionBarActivity implemen
     public void displayMessage(String message) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
+
+    @Override
+    public void onMenuLogout() {
+
+    }
 }

@@ -2,7 +2,7 @@ package com.raik383h_group_6.healthtracmobile.view;
 
 import android.view.View;
 
-public interface ViewUserView {
+public interface ViewUserView  extends CustomMenuView{
     void setBirthDate(String txt);
 
     void setEmail(String txt);

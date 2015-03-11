@@ -93,4 +93,9 @@ public class GitFitMainActivity extends CustomRoboActionBarActivity implements c
     public void displayMessage(String msg) {
         Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
     }
+
+    @Override
+    public void onMenuLogout() {
+
+    }
 }

@@ -72,4 +72,8 @@ public class ListUsersActivity extends CustomRoboActionBarActivity implements Li
         }
     }
 
+    @Override
+    public void onMenuLogout() {
+
+    }
 }

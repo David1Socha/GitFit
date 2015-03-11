@@ -118,4 +118,8 @@ public class ViewTeamActivity extends CustomRoboActionBarActivity implements Vie
         }
     }
 
+    @Override
+    public void onMenuLogout() {
+
+    }
 }

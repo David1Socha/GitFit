@@ -132,4 +132,9 @@ public class ViewUserActivity extends CustomRoboActionBarActivity implements Vie
             editUserButton.setVisibility(View.GONE);
         }
     }
+
+    @Override
+    public void onMenuLogout() {
+
+    }
 }

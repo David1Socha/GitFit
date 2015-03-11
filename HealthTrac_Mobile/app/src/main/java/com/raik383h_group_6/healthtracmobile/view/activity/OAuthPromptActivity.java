@@ -47,5 +47,8 @@ public class OAuthPromptActivity extends CustomRoboActionBarActivity {
     }
 
 
+    @Override
+    public void onMenuLogout() {
 
+    }
 }

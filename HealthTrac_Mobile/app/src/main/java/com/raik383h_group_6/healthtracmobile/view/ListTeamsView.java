@@ -6,7 +6,7 @@ import com.raik383h_group_6.healthtracmobile.model.Team;
 
 import java.util.List;
 
-public interface ListTeamsView {
+public interface ListTeamsView extends CustomMenuView {
     void setListAdapter(ListAdapter adapter);
 
     void setNoTeamsMessageDisplay(boolean enabled);
