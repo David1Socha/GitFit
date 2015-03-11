@@ -2,7 +2,7 @@ package com.raik383h_group_6.healthtracmobile.view;
 
 import com.raik383h_group_6.healthtracmobile.model.User;
 
-public interface UserValidationView  extends CustomMenuView{
+public interface UserValidationView  extends BaseView {
     void setLastName(String val);
 
     void setFirstName(String val);

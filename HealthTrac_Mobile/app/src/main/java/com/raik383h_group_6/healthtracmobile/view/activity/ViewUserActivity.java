@@ -16,12 +16,11 @@ import com.raik383h_group_6.healthtracmobile.presenter.PresenterFactory;
 import com.raik383h_group_6.healthtracmobile.presenter.ViewUserPresenter;
 import com.raik383h_group_6.healthtracmobile.view.ViewUserView;
 
-import roboguice.activity.RoboActionBarActivity;
 import roboguice.inject.ContentView;
 import roboguice.inject.InjectView;
 
 @ContentView(R.layout.activity_view_user)
-public class ViewUserActivity extends CustomRoboActionBarActivity implements ViewUserView {
+public class ViewUserActivity extends BaseActivity implements ViewUserView {
     @InjectView(R.id.birthdate_textview)
     TextView birthDateTextView;
     @InjectView(R.id.email_textview)

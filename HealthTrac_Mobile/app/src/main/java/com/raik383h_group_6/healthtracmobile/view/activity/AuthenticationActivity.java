@@ -13,13 +13,12 @@ import com.raik383h_group_6.healthtracmobile.content.ResourcesAdapter;
 import com.raik383h_group_6.healthtracmobile.presenter.AuthenticationPresenter;
 import com.raik383h_group_6.healthtracmobile.application.ActivityNavigator;
 import com.raik383h_group_6.healthtracmobile.presenter.PresenterFactory;
-import com.raik383h_group_6.healthtracmobile.service.api.AccountService;
 import com.raik383h_group_6.healthtracmobile.view.AuthenticationView;
 
 import roboguice.inject.ContentView;
 
 @ContentView(R.layout.activity_authentication)
-public class AuthenticationActivity extends CustomRoboActionBarActivity implements AuthenticationView {
+public class AuthenticationActivity extends BaseActivity implements AuthenticationView {
 
     AuthenticationPresenter presenter;
     @Inject

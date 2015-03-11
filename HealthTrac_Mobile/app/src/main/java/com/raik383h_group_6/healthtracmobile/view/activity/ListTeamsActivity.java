@@ -21,12 +21,11 @@ import com.raik383h_group_6.healthtracmobile.view.ListTeamsView;
 
 import java.util.List;
 
-import roboguice.activity.RoboActionBarActivity;
 import roboguice.inject.ContentView;
 import roboguice.inject.InjectView;
 
 @ContentView(R.layout.activity_list_teams)
-public class ListTeamsActivity extends CustomRoboActionBarActivity implements ListTeamsView {
+public class ListTeamsActivity extends BaseActivity implements ListTeamsView {
     @InjectView(R.id.team_list_view)
     ListView teamListView;
     @InjectView(R.id.no_teams_textview)

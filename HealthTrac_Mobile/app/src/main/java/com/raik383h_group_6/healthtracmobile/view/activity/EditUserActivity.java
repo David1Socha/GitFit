@@ -21,12 +21,11 @@ import com.raik383h_group_6.healthtracmobile.presenter.UserValidationPresenter;
 import com.raik383h_group_6.healthtracmobile.service.api.UserService;
 import com.raik383h_group_6.healthtracmobile.view.EditUserView;
 
-import roboguice.activity.RoboActionBarActivity;
 import roboguice.inject.ContentView;
 import roboguice.inject.InjectView;
 
 @ContentView(R.layout.activity_update_user)
-public class EditUserActivity extends CustomRoboActionBarActivity implements EditUserView {
+public class EditUserActivity extends BaseActivity implements EditUserView {
     @Inject
     private PresenterFactory presenterFactory;
     private EditUserPresenter presenter;

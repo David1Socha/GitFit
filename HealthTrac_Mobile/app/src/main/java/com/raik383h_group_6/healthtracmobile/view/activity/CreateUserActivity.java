@@ -26,7 +26,7 @@ import roboguice.inject.ContentView;
 import roboguice.inject.InjectView;
 
 @ContentView(R.layout.activity_register_user)
-public class CreateUserActivity extends CustomRoboActionBarActivity implements CreateUserView {
+public class CreateUserActivity extends BaseActivity implements CreateUserView {
     @Inject
     private PresenterFactory presenterFactory;
     private CreateUserPresenter presenter;

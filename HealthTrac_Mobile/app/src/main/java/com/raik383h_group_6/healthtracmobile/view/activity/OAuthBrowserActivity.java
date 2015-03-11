@@ -12,11 +12,8 @@ import com.raik383h_group_6.healthtracmobile.application.ActivityNavigator;
 import com.raik383h_group_6.healthtracmobile.presenter.OAuthBrowserPresenter;
 import com.raik383h_group_6.healthtracmobile.presenter.PresenterFactory;
 import com.raik383h_group_6.healthtracmobile.service.oauth.IAsyncOAuthService;
-import com.raik383h_group_6.healthtracmobile.service.oauth.IOAuthService;
 
-import roboguice.activity.RoboActionBarActivity;
-
-public class OAuthBrowserActivity extends CustomRoboActionBarActivity {
+public class OAuthBrowserActivity extends BaseActivity {
 
     private WebView webView;
     @Inject

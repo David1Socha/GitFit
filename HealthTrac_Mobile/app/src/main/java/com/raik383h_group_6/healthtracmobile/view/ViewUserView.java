@@ -1,8 +1,6 @@
 package com.raik383h_group_6.healthtracmobile.view;
 
-import android.view.View;
-
-public interface ViewUserView  extends CustomMenuView{
+public interface ViewUserView  extends BaseView {
     void setBirthDate(String txt);
 
     void setEmail(String txt);
