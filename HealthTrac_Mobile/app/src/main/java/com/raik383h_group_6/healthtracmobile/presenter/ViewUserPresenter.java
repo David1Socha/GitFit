@@ -7,6 +7,7 @@ import com.google.inject.Inject;
 import com.google.inject.assistedinject.Assisted;
 import com.raik383h_group_6.healthtracmobile.R;
 import com.raik383h_group_6.healthtracmobile.application.IActivityNavigator;
+import com.raik383h_group_6.healthtracmobile.application.RequestCodes;
 import com.raik383h_group_6.healthtracmobile.content.IResources;
 import com.raik383h_group_6.healthtracmobile.model.AccessGrant;
 import com.raik383h_group_6.healthtracmobile.model.User;
@@ -20,7 +21,6 @@ public class ViewUserPresenter {
     private final ViewUserView view;
     private User user;
     private AccessGrant grant;
-    public static final int UPDATE = 1;
 
     @Inject
     public ViewUserPresenter(@Assisted Bundle extras, @Assisted IResources resources, @Assisted IActivityNavigator nav, @Assisted ViewUserView view) {
@@ -33,7 +33,7 @@ public class ViewUserPresenter {
     }
 
     public void onClickEditUser() {
-        nav.openEditUser(grant, user, UPDATE);
+        nav.openEditUser(grant, user, RequestCodes.UPDATE_USER);
     }
 
     public void onResume() {
@@ -43,7 +43,7 @@ public class ViewUserPresenter {
     public void onActivityResult(int requestCode, int resultCode, Bundle extras) {
         if (resultCode == Activity.RESULT_OK) {
             switch (requestCode) {
-                case UPDATE:
+                case RequestCodes.UPDATE_USER:
                     user = extras.getParcelable(resources.getString(R.string.EXTRA_USER));
                     updateFields();
                     break;

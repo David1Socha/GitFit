@@ -9,6 +9,7 @@ import com.google.inject.Inject;
 import com.google.inject.assistedinject.Assisted;
 import com.raik383h_group_6.healthtracmobile.R;
 import com.raik383h_group_6.healthtracmobile.application.IActivityNavigator;
+import com.raik383h_group_6.healthtracmobile.application.RequestCodes;
 import com.raik383h_group_6.healthtracmobile.content.IResources;
 import com.raik383h_group_6.healthtracmobile.model.AccessGrant;
 import com.raik383h_group_6.healthtracmobile.model.User;
@@ -20,7 +21,6 @@ import com.raik383h_group_6.healthtracmobile.view.GitFitMainView;
 import java.util.concurrent.ExecutionException;
 
 public class GitFitMainPresenter {
-    public static final int AUTH = 1;
     private AccessGrant grant;
     private IResources resources;
     private IActivityNavigator nav;
@@ -47,7 +47,7 @@ public class GitFitMainPresenter {
             reconstructGrant();
         }
         if (grantBad()) {
-            nav.openAuthentication(AUTH);
+            nav.openAuthentication(RequestCodes.AUTH);
         }
     }
 
@@ -71,7 +71,7 @@ public class GitFitMainPresenter {
         if (!grantBad()) {
             nav.openListUsers(grant);
         } else {
-            nav.openAuthentication(AUTH);
+            nav.openAuthentication(RequestCodes.AUTH);
         }
     }
 
@@ -100,14 +100,14 @@ public class GitFitMainPresenter {
         if (!grantBad()) {
             nav.openListTeams(grant);
         } else {
-            nav.openAuthentication(AUTH);
+            nav.openAuthentication(RequestCodes.AUTH);
         }
     }
 
     public void onActivityResult(int requestCode, int resultCode, Bundle data) {
         if (resultCode == Activity.RESULT_OK) {
             switch (requestCode) {
-                case AUTH:
+                case RequestCodes.AUTH:
                     grant = (AccessGrant) data.getParcelable(resources.getString(R.string.EXTRA_ACCESS_GRANT));
                     break;
                 default:

@@ -6,11 +6,10 @@ import com.google.inject.Inject;
 import com.google.inject.assistedinject.Assisted;
 import com.raik383h_group_6.healthtracmobile.R;
 import com.raik383h_group_6.healthtracmobile.application.IActivityNavigator;
+import com.raik383h_group_6.healthtracmobile.application.RequestCodes;
 import com.raik383h_group_6.healthtracmobile.content.IResources;
 
 public class OAuthPromptPresenter {
-    public static final int FB_LOGIN_REQ = 1,
-            TW_LOGIN_REQ = 2;
 
     private IResources resources;
     private IActivityNavigator nav;
@@ -33,11 +32,11 @@ public class OAuthPromptPresenter {
     }
 
     public void onClickLoginTwitter() {
-        nav.openOAuthBrowser(resources.getString(R.string.PROVIDER_TWITTER), TW_LOGIN_REQ);
+        nav.openOAuthBrowser(resources.getString(R.string.PROVIDER_TWITTER), RequestCodes.TW_LOGIN_REQ);
     }
 
     public void onClickLoginFacebook() {
-        nav.openOAuthBrowser(resources.getString(R.string.PROVIDER_FACEBOOK), FB_LOGIN_REQ);
+        nav.openOAuthBrowser(resources.getString(R.string.PROVIDER_FACEBOOK), RequestCodes.FB_LOGIN_REQ);
     }
 
 }

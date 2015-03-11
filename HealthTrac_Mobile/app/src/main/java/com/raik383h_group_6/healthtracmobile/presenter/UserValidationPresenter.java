@@ -79,7 +79,7 @@ public class UserValidationPresenter {
         try {
             if ( (currUserName == null || !username.equals(currUserName) ) &&  !userService.isAvailable(username) ) {
                 allGood = false;
-                view.setUsernameError("Username already exists");
+                view.setUsernameError("Username already exists"); //TODO use xml nerd
             }
         } catch (Exception ignored) {
             //If some error occurs, assume username is unique and let user continue (server validates later anyways)

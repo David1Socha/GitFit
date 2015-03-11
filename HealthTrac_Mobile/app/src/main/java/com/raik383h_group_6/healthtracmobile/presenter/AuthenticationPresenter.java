@@ -1,26 +1,22 @@
 package com.raik383h_group_6.healthtracmobile.presenter;
 
 import android.app.Activity;
-import android.os.AsyncTask;
 import android.os.Bundle;
 
 import com.google.inject.Inject;
 import com.google.inject.assistedinject.Assisted;
 import com.raik383h_group_6.healthtracmobile.R;
 import com.raik383h_group_6.healthtracmobile.application.IActivityNavigator;
+import com.raik383h_group_6.healthtracmobile.application.RequestCodes;
 import com.raik383h_group_6.healthtracmobile.content.IResources;
 import com.raik383h_group_6.healthtracmobile.model.AccessGrant;
 import com.raik383h_group_6.healthtracmobile.model.Credentials;
-import com.raik383h_group_6.healthtracmobile.service.api.AccountService;
 import com.raik383h_group_6.healthtracmobile.service.api.async.IAsyncAccountService;
 import com.raik383h_group_6.healthtracmobile.view.AuthenticationView;
 
 import java.util.concurrent.ExecutionException;
 
 public class AuthenticationPresenter {
-    public static final int CREATE_ACCOUNT = 1,
-            OAUTH_TO_SIGN_IN = 2,
-            OAUTH_TO_CREATE_ACCOUNT = 3;
     private AuthenticationView view;
     private IAsyncAccountService accountService;
     private String accessToken, accessSecret, provider;
@@ -36,21 +32,21 @@ public class AuthenticationPresenter {
     }
 
     public void onClickSignIn() {
-        nav.openOAuthPrompt(OAUTH_TO_SIGN_IN);
+        nav.openOAuthPrompt(RequestCodes.OAUTH_TO_SIGN_IN);
     }
 
     public void onActivityResult(int requestCode, int resultCode, Bundle extras) {
         if (resultCode == Activity.RESULT_OK) {
             switch (requestCode) {
-                case OAUTH_TO_SIGN_IN:
+                case RequestCodes.OAUTH_TO_SIGN_IN:
                     updateLoginInfo(extras);
                     signInAndFinish(accessToken, accessSecret, provider);
                     break;
-                case OAUTH_TO_CREATE_ACCOUNT:
+                case RequestCodes.OAUTH_TO_CREATE_ACCOUNT:
                     updateLoginInfo(extras);
                     createAccount(accessToken, accessSecret, provider);
                     break;
-                case CREATE_ACCOUNT:
+                case RequestCodes.CREATE_ACCOUNT:
                     signInAndFinish(accessToken, accessSecret, provider);
                     break;
                 default:
@@ -88,10 +84,10 @@ public class AuthenticationPresenter {
     }
 
     public void onClickCreateAccount() {
-        nav.openOAuthPrompt(OAUTH_TO_CREATE_ACCOUNT);
+        nav.openOAuthPrompt(RequestCodes.OAUTH_TO_CREATE_ACCOUNT);
     }
 
     private void createAccount(String accessToken, String accessSecret, String provider) {
-        nav.openCreateUser(accessToken, accessSecret, provider, CREATE_ACCOUNT);
+        nav.openCreateUser(accessToken, accessSecret, provider, RequestCodes.CREATE_ACCOUNT);
     }
 }

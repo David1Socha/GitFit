@@ -8,6 +8,7 @@ import com.google.inject.Inject;
 import com.google.inject.assistedinject.Assisted;
 import com.raik383h_group_6.healthtracmobile.R;
 import com.raik383h_group_6.healthtracmobile.application.IActivityNavigator;
+import com.raik383h_group_6.healthtracmobile.application.RequestCodes;
 import com.raik383h_group_6.healthtracmobile.content.IResources;
 import com.raik383h_group_6.healthtracmobile.model.AccessGrant;
 import com.raik383h_group_6.healthtracmobile.model.Membership;
@@ -30,7 +31,6 @@ public class ViewTeamPresenter {
     private AccessGrant grant;
     private List<Membership> teamMemberships;
     private IAsyncMembershipService membershipService;
-    public static final int UPDATE = 1;
     private Membership userMembership;
 
     @Inject
@@ -107,7 +107,7 @@ public class ViewTeamPresenter {
     public void onActivityResult(int requestCode, int resultCode, Bundle extras) {
         if (resultCode == Activity.RESULT_OK) {
             switch (requestCode) {
-                case UPDATE:
+                case RequestCodes.UPDATE_TEAM:
                     team = extras.getParcelable(resources.getString(R.string.EXTRA_TEAM));
                     updateFields();
                     break;

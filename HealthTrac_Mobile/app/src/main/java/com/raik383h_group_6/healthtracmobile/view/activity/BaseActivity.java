@@ -8,6 +8,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 
 import com.raik383h_group_6.healthtracmobile.R;
+import com.raik383h_group_6.healthtracmobile.presenter.BasePresenter;
 import com.raik383h_group_6.healthtracmobile.view.BaseView;
 
 import roboguice.activity.RoboActionBarActivity;
@@ -16,9 +17,15 @@ public abstract class BaseActivity extends RoboActionBarActivity implements Base
 
     private Menu menu;
 
-    public abstract void onMenuLogout();
+    public abstract BasePresenter getPresenter();
 
-    public abstract void onMenuLogin();
+    public void onMenuLogout() {
+        getPresenter().onClickLogout();
+    }
+
+    public void onMenuLogin() {
+        getPresenter().onClickLogin();
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
