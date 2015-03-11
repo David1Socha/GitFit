@@ -52,7 +52,7 @@ public class TestStubber {
         when(view.getResource(R.string.label_female)).thenReturn(FEMALE);
         when(view.getResource(R.string.account_not_made)).thenReturn(ACCOUNT_NOT_MADE);
         when(view.getResource(R.string.sign_in_error)).thenReturn(SIGNIN_ERR);
-        when(view.getResource(R.string.facebook_male_label)).thenReturn(TestConstants.MALE);
+        when(view.getResource(R.string.facebook_male_label)).thenReturn(TestConstants.MALE_LOWER);
     }
 
     public static void stubUserViewGetters(UserValidationView view, User user) {
