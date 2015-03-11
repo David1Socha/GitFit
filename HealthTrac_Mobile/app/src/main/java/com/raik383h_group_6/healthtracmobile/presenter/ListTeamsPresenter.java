@@ -16,6 +16,7 @@ import com.raik383h_group_6.healthtracmobile.model.AccessGrant;
 import com.raik383h_group_6.healthtracmobile.model.Team;
 import com.raik383h_group_6.healthtracmobile.service.api.TeamService;
 import com.raik383h_group_6.healthtracmobile.service.api.async.IAsyncTeamService;
+import com.raik383h_group_6.healthtracmobile.view.BaseView;
 import com.raik383h_group_6.healthtracmobile.view.ListTeamsView;
 import com.raik383h_group_6.healthtracmobile.view.activity.ListTeamsActivity;
 
@@ -70,6 +71,12 @@ public class ListTeamsPresenter extends BasePresenter{
         Team t = (Team) parent.getAdapter().getItem(position);
         nav.openViewTeam(t, grant);
     }
+
+    @Override
+    protected BaseView getView() {
+        return view;
+    }
+
 
     @Override
     protected IActivityNavigator getNav() {

@@ -17,6 +17,7 @@ import com.raik383h_group_6.healthtracmobile.content.IResources;
 import com.raik383h_group_6.healthtracmobile.model.Token;
 import com.raik383h_group_6.healthtracmobile.service.oauth.IAsyncOAuthService;
 import com.raik383h_group_6.healthtracmobile.service.oauth.IOAuthService;
+import com.raik383h_group_6.healthtracmobile.view.BaseView;
 
 import java.util.concurrent.ExecutionException;
 
@@ -29,6 +30,7 @@ public class OAuthBrowserPresenter extends BasePresenter{
     private Bundle extras;
     private IActivityNavigator nav;
     private String authUrl;
+    private BaseView view;
 
     private void setUpWebView() {
         WebViewClient webViewClient = new LoginWebViewClient();
@@ -41,9 +43,10 @@ public class OAuthBrowserPresenter extends BasePresenter{
     }
 
     @Inject
-    public OAuthBrowserPresenter(@Assisted IAsyncOAuthService service, @Assisted Bundle extras, @Assisted IResources resources, @Assisted WebView web, @Assisted IActivityNavigator nav) {
+    public OAuthBrowserPresenter(@Assisted IAsyncOAuthService service, @Assisted Bundle extras, @Assisted IResources resources, @Assisted WebView web, @Assisted IActivityNavigator nav, @Assisted BaseView view) {
         this.oAuthService = service;
         this.extras = extras;
+        this.view = view;
         this.resources = resources;
         this.nav = nav;
         this.webView = web;
@@ -88,6 +91,12 @@ public class OAuthBrowserPresenter extends BasePresenter{
     protected IActivityNavigator getNav() {
         return nav;
     }
+
+    @Override
+    protected BaseView getView() {
+        return view;
+    }
+
 
     private class LoginWebViewClient extends WebViewClient {
         @Override

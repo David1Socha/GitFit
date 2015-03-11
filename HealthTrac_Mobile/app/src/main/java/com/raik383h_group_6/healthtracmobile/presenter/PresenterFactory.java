@@ -9,6 +9,7 @@ import com.raik383h_group_6.healthtracmobile.service.api.AccountService;
 import com.raik383h_group_6.healthtracmobile.service.oauth.IAsyncOAuthService;
 import com.raik383h_group_6.healthtracmobile.service.oauth.IOAuthService;
 import com.raik383h_group_6.healthtracmobile.view.AuthenticationView;
+import com.raik383h_group_6.healthtracmobile.view.BaseView;
 import com.raik383h_group_6.healthtracmobile.view.CreateUserView;
 import com.raik383h_group_6.healthtracmobile.view.EditUserView;
 import com.raik383h_group_6.healthtracmobile.view.GitFitMainView;
@@ -19,9 +20,9 @@ import com.raik383h_group_6.healthtracmobile.view.ViewUserView;
 import com.raik383h_group_6.healthtracmobile.view.ViewTeamView;
 
 public interface PresenterFactory {
-    OAuthBrowserPresenter create(IAsyncOAuthService serviceAdapter, WebView web, Bundle extras, IResources resources, IActivityNavigator nav);
+    OAuthBrowserPresenter create(IAsyncOAuthService serviceAdapter, WebView web, Bundle extras, IResources resources, IActivityNavigator nav, BaseView view);
     AuthenticationPresenter create(IResources resources, IActivityNavigator nav, AuthenticationView view);
-    OAuthPromptPresenter create(IResources resources, IActivityNavigator nav);
+    OAuthPromptPresenter create(IResources resources, IActivityNavigator nav, BaseView view);
     CreateUserPresenter create(UserValidationPresenter userValidationPresenter, Bundle extras, IResources resources, IActivityNavigator nav, CreateUserView view);
     ListUsersPresenter create(Bundle extras, IResources resources, IActivityNavigator nav, ListUsersView view);
     ListTeamsPresenter create(Bundle extras, IResources resources, IActivityNavigator nav, ListTeamsView view);

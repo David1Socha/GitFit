@@ -6,17 +6,17 @@ import com.raik383h_group_6.healthtracmobile.view.BaseView;
 
 public abstract class BasePresenter {
 
-    private BaseView view;
+    protected abstract BaseView getView();
     protected abstract IActivityNavigator getNav();
 
     public void onClickMenuLogout() {
-        view.setLoginEnabled(true);
-        view.clearPrefs();
+        getView().setLoginEnabled(true);
+        getView().clearPrefs();
         getNav().openMain();
     }
 
     public void onClickMenuLogin() {
-        view.setLoginEnabled(false);
+        getView().setLoginEnabled(false);
         getNav().openAuthentication(RequestCodes.AUTH);
     }
 }

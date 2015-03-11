@@ -13,6 +13,7 @@ import com.raik383h_group_6.healthtracmobile.application.IActivityNavigator;
 import com.raik383h_group_6.healthtracmobile.content.IResources;
 import com.raik383h_group_6.healthtracmobile.content.ResourcesAdapter;
 import com.raik383h_group_6.healthtracmobile.application.ActivityNavigator;
+import com.raik383h_group_6.healthtracmobile.presenter.BasePresenter;
 import com.raik383h_group_6.healthtracmobile.presenter.GitFitMainPresenter;
 import com.raik383h_group_6.healthtracmobile.presenter.PresenterFactory;
 
@@ -80,7 +81,7 @@ public class GitFitMainActivity extends BaseActivity implements com.raik383h_gro
     }
 
     @Override
-    public void onMenuLogout() {
-
+    public BasePresenter getPresenter() {
+        return presenter;
     }
 }

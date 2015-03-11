@@ -13,6 +13,7 @@ import com.raik383h_group_6.healthtracmobile.model.AccessGrant;
 import com.raik383h_group_6.healthtracmobile.model.Credentials;
 import com.raik383h_group_6.healthtracmobile.service.api.async.IAsyncAccountService;
 import com.raik383h_group_6.healthtracmobile.view.AuthenticationView;
+import com.raik383h_group_6.healthtracmobile.view.BaseView;
 
 import java.util.concurrent.ExecutionException;
 
@@ -89,6 +90,11 @@ public class AuthenticationPresenter extends BasePresenter{
 
     private void createAccount(String accessToken, String accessSecret, String provider) {
         nav.openCreateUser(accessToken, accessSecret, provider, RequestCodes.CREATE_ACCOUNT);
+    }
+
+    @Override
+    protected BaseView getView() {
+        return view;
     }
 
     @Override

@@ -16,6 +16,7 @@ import com.raik383h_group_6.healthtracmobile.model.User;
 import com.raik383h_group_6.healthtracmobile.service.api.UserService;
 import com.raik383h_group_6.healthtracmobile.service.api.async.IAsyncUserService;
 import com.raik383h_group_6.healthtracmobile.service.json.JsonParser;
+import com.raik383h_group_6.healthtracmobile.view.BaseView;
 import com.raik383h_group_6.healthtracmobile.view.GitFitMainView;
 
 import java.util.concurrent.ExecutionException;
@@ -115,6 +116,12 @@ public class GitFitMainPresenter extends BasePresenter{
             }
 
         }
+    }
+
+
+    @Override
+    protected BaseView getView() {
+        return view;
     }
 
     @Override

@@ -15,6 +15,7 @@ import com.raik383h_group_6.healthtracmobile.content.IResources;
 import com.raik383h_group_6.healthtracmobile.content.ResourcesAdapter;
 import com.raik383h_group_6.healthtracmobile.model.User;
 import com.raik383h_group_6.healthtracmobile.application.ActivityNavigator;
+import com.raik383h_group_6.healthtracmobile.presenter.BasePresenter;
 import com.raik383h_group_6.healthtracmobile.presenter.PresenterFactory;
 import com.raik383h_group_6.healthtracmobile.presenter.CreateUserPresenter;
 import com.raik383h_group_6.healthtracmobile.presenter.UserValidationPresenter;
@@ -221,7 +222,7 @@ public class CreateUserActivity extends BaseActivity implements CreateUserView {
     }
 
     @Override
-    public void onMenuLogout() {
-
+    public BasePresenter getPresenter() {
+        return presenter;
     }
 }

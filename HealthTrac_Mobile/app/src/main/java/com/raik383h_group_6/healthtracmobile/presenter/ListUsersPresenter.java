@@ -16,6 +16,7 @@ import com.raik383h_group_6.healthtracmobile.model.AccessGrant;
 import com.raik383h_group_6.healthtracmobile.model.User;
 import com.raik383h_group_6.healthtracmobile.service.api.UserService;
 import com.raik383h_group_6.healthtracmobile.service.api.async.IAsyncUserService;
+import com.raik383h_group_6.healthtracmobile.view.BaseView;
 import com.raik383h_group_6.healthtracmobile.view.ListUsersView;
 import com.raik383h_group_6.healthtracmobile.view.activity.ListUsersActivity;
 
@@ -70,6 +71,11 @@ public class ListUsersPresenter extends BasePresenter{
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         User u = (User) parent.getAdapter().getItem(position);
         nav.openViewUser(u, grant);
+    }
+
+    @Override
+    protected BaseView getView() {
+        return view;
     }
 
     @Override

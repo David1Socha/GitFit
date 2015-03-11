@@ -18,6 +18,7 @@ import com.raik383h_group_6.healthtracmobile.service.api.UserService;
 import com.raik383h_group_6.healthtracmobile.service.api.async.IAsyncAccountService;
 import com.raik383h_group_6.healthtracmobile.service.api.async.IAsyncFacebookService;
 import com.raik383h_group_6.healthtracmobile.service.api.async.IAsyncUserService;
+import com.raik383h_group_6.healthtracmobile.view.BaseView;
 import com.raik383h_group_6.healthtracmobile.view.CreateUserView;
 
 import java.util.concurrent.ExecutionException;
@@ -112,6 +113,11 @@ public class CreateUserPresenter extends BasePresenter {
         }
 
     }
+    @Override
+    protected BaseView getView() {
+        return view;
+    }
+
 
     @Override
     protected IActivityNavigator getNav() {

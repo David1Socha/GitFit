@@ -15,6 +15,7 @@ import com.raik383h_group_6.healthtracmobile.content.IResources;
 import com.raik383h_group_6.healthtracmobile.content.ResourcesAdapter;
 import com.raik383h_group_6.healthtracmobile.application.ActivityNavigator;
 import com.raik383h_group_6.healthtracmobile.model.Team;
+import com.raik383h_group_6.healthtracmobile.presenter.BasePresenter;
 import com.raik383h_group_6.healthtracmobile.presenter.ListTeamsPresenter;
 import com.raik383h_group_6.healthtracmobile.presenter.PresenterFactory;
 import com.raik383h_group_6.healthtracmobile.view.ListTeamsView;
@@ -76,7 +77,7 @@ public class ListTeamsActivity extends BaseActivity implements ListTeamsView {
     }
 
     @Override
-    public void onMenuLogout() {
-
+    public BasePresenter getPresenter() {
+        return presenter;
     }
 }

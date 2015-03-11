@@ -8,16 +8,19 @@ import com.raik383h_group_6.healthtracmobile.R;
 import com.raik383h_group_6.healthtracmobile.application.IActivityNavigator;
 import com.raik383h_group_6.healthtracmobile.application.RequestCodes;
 import com.raik383h_group_6.healthtracmobile.content.IResources;
+import com.raik383h_group_6.healthtracmobile.view.BaseView;
 
 public class OAuthPromptPresenter extends BasePresenter{
 
     private IResources resources;
     private IActivityNavigator nav;
+    private BaseView view;
 
     @Inject
-    public OAuthPromptPresenter( @Assisted IResources resources, @Assisted IActivityNavigator nav) {
+    public OAuthPromptPresenter( @Assisted IResources resources, @Assisted IActivityNavigator nav, @Assisted BaseView view) {
         this.resources = resources;
         this.nav = nav;
+        this.view = view;
     }
 
     public void onActivityResult(int requestCode, int resultCode, Bundle extras) {
@@ -43,4 +46,10 @@ public class OAuthPromptPresenter extends BasePresenter{
     protected IActivityNavigator getNav() {
         return nav;
     }
+
+    @Override
+    protected BaseView getView() {
+        return view;
+    }
+
 }

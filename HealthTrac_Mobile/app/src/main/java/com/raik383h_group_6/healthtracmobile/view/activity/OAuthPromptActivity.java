@@ -10,6 +10,7 @@ import com.raik383h_group_6.healthtracmobile.application.IActivityNavigator;
 import com.raik383h_group_6.healthtracmobile.content.IResources;
 import com.raik383h_group_6.healthtracmobile.content.ResourcesAdapter;
 import com.raik383h_group_6.healthtracmobile.application.ActivityNavigator;
+import com.raik383h_group_6.healthtracmobile.presenter.BasePresenter;
 import com.raik383h_group_6.healthtracmobile.presenter.OAuthPromptPresenter;
 import com.raik383h_group_6.healthtracmobile.presenter.PresenterFactory;
 
@@ -27,7 +28,7 @@ public class OAuthPromptActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         IResources resources = new ResourcesAdapter(getResources());
         IActivityNavigator nav = new ActivityNavigator(this);
-        presenter = presenterFactory.create(resources, nav);
+        presenter = presenterFactory.create(resources, nav, this);
     }
 
     @Override
@@ -47,7 +48,8 @@ public class OAuthPromptActivity extends BaseActivity {
 
 
     @Override
-    public void onMenuLogout() {
-
+    public BasePresenter getPresenter() {
+        return presenter;
     }
+
 }

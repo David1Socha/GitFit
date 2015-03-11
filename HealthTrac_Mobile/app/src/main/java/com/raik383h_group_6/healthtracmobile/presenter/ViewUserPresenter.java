@@ -12,6 +12,7 @@ import com.raik383h_group_6.healthtracmobile.content.IResources;
 import com.raik383h_group_6.healthtracmobile.model.AccessGrant;
 import com.raik383h_group_6.healthtracmobile.model.User;
 import com.raik383h_group_6.healthtracmobile.service.FormatUtils;
+import com.raik383h_group_6.healthtracmobile.view.BaseView;
 import com.raik383h_group_6.healthtracmobile.view.ViewUserView;
 
 public class ViewUserPresenter extends BasePresenter{
@@ -72,4 +73,10 @@ public class ViewUserPresenter extends BasePresenter{
     protected IActivityNavigator getNav() {
         return nav;
     }
+
+    @Override
+    protected BaseView getView() {
+        return view;
+    }
+
 }

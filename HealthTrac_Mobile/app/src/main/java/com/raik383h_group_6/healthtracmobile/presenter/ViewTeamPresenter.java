@@ -16,6 +16,7 @@ import com.raik383h_group_6.healthtracmobile.model.Team;
 import com.raik383h_group_6.healthtracmobile.service.FormatUtils;
 import com.raik383h_group_6.healthtracmobile.service.api.MembershipService;
 import com.raik383h_group_6.healthtracmobile.service.api.async.IAsyncMembershipService;
+import com.raik383h_group_6.healthtracmobile.view.BaseView;
 import com.raik383h_group_6.healthtracmobile.view.ViewTeamView;
 
 import java.util.Date;
@@ -181,4 +182,9 @@ public class ViewTeamPresenter extends BasePresenter{
     protected IActivityNavigator getNav() {
         return nav;
     }
+    @Override
+    protected BaseView getView() {
+        return view;
+    }
+
 }

@@ -13,6 +13,7 @@ import com.raik383h_group_6.healthtracmobile.model.User;
 import com.raik383h_group_6.healthtracmobile.service.FormatUtils;
 import com.raik383h_group_6.healthtracmobile.service.api.UserService;
 import com.raik383h_group_6.healthtracmobile.service.api.async.IAsyncUserService;
+import com.raik383h_group_6.healthtracmobile.view.BaseView;
 import com.raik383h_group_6.healthtracmobile.view.EditUserView;
 
 import java.util.concurrent.ExecutionException;
@@ -78,6 +79,12 @@ public class EditUserPresenter extends BasePresenter{
             view.displayMessage(resources.getString(R.string.update_user_error));
             nav.finishEditUserFailure();
         }
+    }
+
+
+    @Override
+    protected BaseView getView() {
+        return view;
     }
 
     @Override
