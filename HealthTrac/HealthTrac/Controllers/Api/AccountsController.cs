@@ -35,8 +35,10 @@ namespace HealthTrac.Controllers.Api
         private IFacebookService FacebookService { get; set; }
         private ITwitterService TwitterService { get; set; }
 
-        public AccountsController(UserManager<User> userManager, IAuthenticationManager auth)
+        public AccountsController(UserManager<User> userManager, IAuthenticationManager auth, IFacebookService facebookService, ITwitterService twitterService)
         {
+            FacebookService = facebookService;
+            TwitterService = twitterService;
             UserManager = userManager;
             Authentication = auth;
         }
@@ -147,14 +149,17 @@ namespace HealthTrac.Controllers.Api
             String provider = credentials.Provider;
             if (provider == CredentialsDto.FACEBOOK)
             {
-                FacebookVerifyResult res = FacebookService.VerifyCredentials(credentials.Token);
+                FacebookService.Token = credentials.Token;
+                FacebookVerifyResult res = FacebookService.VerifyCredentials();
                 string id = res.ID;
                 var loginInfo = id == null ? null : new UserLoginInfo(provider, id);
                 return loginInfo;
             }
             else if (provider == CredentialsDto.TWITTER)
             {
-                TwitterVerifyResult res = TwitterService.VerifyCredentials(credentials.Token, credentials.Secret);
+                TwitterService.Secret = credentials.Secret;
+                TwitterService.Token = credentials.Token;
+                TwitterVerifyResult res = TwitterService.VerifyCredentials();
                 string id = res.IdString;
                 var loginInfo = id == null ? null : new UserLoginInfo(provider, id);
                 return loginInfo;

@@ -9,6 +9,7 @@ namespace HealthTrac.Services
 {
     public interface IFacebookService
     {
-        FacebookVerifyResult VerifyCredentials(String token);
+        FacebookVerifyResult VerifyCredentials();
+        String Token { get; set; }
     }
 }

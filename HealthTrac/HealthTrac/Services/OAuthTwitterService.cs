@@ -23,12 +23,6 @@ namespace HealthTrac.Services
             TWITTER_CONSUMER_KEY = "fHG53L9zDOTltJ77JPjFGzxf8",
             TWITTER_CONSUMER_SECRET = "QbX7YXFiZb49HQP0jz0H72pKp5pBUEgJuJBswIroh29NjUrfXU";
 
-        public OAuthTwitterService(String token, String secret)
-        {
-            Token = token;
-            Secret = secret;
-        }
-
         public TwitterVerifyResult VerifyCredentials()
         {
             OAuthRequest oAuth = OAuthRequest.ForProtectedResource("GET", TWITTER_CONSUMER_KEY, TWITTER_CONSUMER_SECRET, Token, Secret);

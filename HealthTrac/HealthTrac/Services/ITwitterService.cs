@@ -9,6 +9,8 @@ namespace HealthTrac.Services
 {
     public interface ITwitterService
     {
-        TwitterVerifyResult VerifyCredentials(String token, string secret);
+        TwitterVerifyResult VerifyCredentials();
+        String Token { get; set; }
+        String Secret { get; set; }
     }
 }

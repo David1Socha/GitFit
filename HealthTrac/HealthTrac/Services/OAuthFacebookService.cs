@@ -16,9 +16,9 @@ namespace HealthTrac.Services
 
         public String Token { get; set; }
 
-        public FacebookVerifyResult OAuthFacebookService(String token)
+        public FacebookVerifyResult VerifyCredentials()
         {
-            var path = FACEBOOK_BASE_URL + token;
+            var path = FACEBOOK_BASE_URL + Token;
             var client = new HttpClient();
             var uri = new Uri(path);
             var response = client.GetAsync(uri).Result;
