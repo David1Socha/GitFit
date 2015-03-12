@@ -6,9 +6,11 @@ using System.Web;
 
 namespace HealthTrac.Models
 {
-    public class FacebookVerifyResult
+    public class FacebookVerifyResult : IProviderVerifyResult
     {
+        private static string PROFILE_BASE_URL = "http://graph.facebook.com/{0}/picture?type=square";
         [JsonProperty("id")]
-        public string ID { get; set; }
+        public string Id { get; set; }
+        public string ProfilePictureUrl { get { return String.Format(PROFILE_BASE_URL, Id); } }
     }
 }

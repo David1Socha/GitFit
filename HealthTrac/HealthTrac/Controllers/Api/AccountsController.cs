@@ -32,13 +32,14 @@ namespace HealthTrac.Controllers.Api
             set;
         }
 
+        private ILoginService LoginService { get; set; }
+
         private IFacebookService FacebookService { get; set; }
         private ITwitterService TwitterService { get; set; }
 
-        public AccountsController(UserManager<User> userManager, IAuthenticationManager auth, IFacebookService facebookService, ITwitterService twitterService)
+        public AccountsController(UserManager<User> userManager, IAuthenticationManager auth, ILoginService loginService)
         {
-            FacebookService = facebookService;
-            TwitterService = twitterService;
+            LoginService = loginService;
             UserManager = userManager;
             Authentication = auth;
         }
@@ -51,45 +52,19 @@ namespace HealthTrac.Controllers.Api
         [Route("api/Account/Login")]
         public IHttpActionResult Login(CredentialsDto credentials)
         {
-            var tokenExpirationTimeSpan = TimeSpan.FromDays(14);
-            var loginInfo = GetUserLogin(credentials);
-            if (loginInfo == null)
+            var verifyResult = LoginService.VerifyCredentials(credentials);
+            if (verifyResult.Id == null)
             {
                 return BadRequest("Invalid authentication information");
             }
+            UserLoginInfo loginInfo = new UserLoginInfo(credentials.Provider, verifyResult.Id);
             User user = UserManager.Find(loginInfo);
             if (user == null)
             {
-                return BadRequest();
+                return BadRequest("No user found with those credentials");
             }
-            var identity = new ClaimsIdentity(Startup.OAuthBearerOptions.AuthenticationType);
-            identity.AddClaim(new Claim(ClaimTypes.Name, user.Id, null, credentials.Provider));
-            identity.AddClaim(new Claim(ClaimTypes.NameIdentifier, user.Id, null, "LOCAL_AUTHORITY"));
-            AuthenticationTicket ticket = new AuthenticationTicket(identity, new AuthenticationProperties());
-            var currentUtc = new Microsoft.Owin.Infrastructure.SystemClock().UtcNow;
-            ticket.Properties.IssuedUtc = currentUtc;
-            ticket.Properties.ExpiresUtc = currentUtc.Add(tokenExpirationTimeSpan);
-            var accesstoken = Startup.OAuthBearerOptions.AccessTokenFormat.Protect(ticket);
-            Authentication.SignIn(identity);
-            AccessGrantDto grant = new AccessGrantDto
-            {
-                UserName = user.UserName,
-                AccessToken = accesstoken,
-                TokenType = "bearer",
-                ExpiresIn = tokenExpirationTimeSpan.Seconds.ToString(),
-                Issued = ticket.Properties.IssuedUtc.Value.DateTime,
-                Expires = ticket.Properties.ExpiresUtc.Value.DateTime,
-                ID = user.Id,
-            };
+            var grant = LoginService.GenerateAccessGrant(user, credentials);
             return Ok(grant);
-        }
-
-        [Route("api/Account/Logout")]
-        [HttpPost]
-        public IHttpActionResult Logout()
-        {
-            Authentication.SignOut(CookieAuthenticationDefaults.AuthenticationType);
-            return Ok();
         }
 
         //POST api/Account/Register
@@ -143,32 +118,5 @@ namespace HealthTrac.Controllers.Api
                 return BadRequest();
             }
         }
-
-        private UserLoginInfo GetUserLogin(CredentialsDto credentials)
-        {
-            String provider = credentials.Provider;
-            if (provider == CredentialsDto.FACEBOOK)
-            {
-                FacebookService.Token = credentials.Token;
-                FacebookVerifyResult res = FacebookService.VerifyCredentials();
-                string id = res.ID;
-                var loginInfo = id == null ? null : new UserLoginInfo(provider, id);
-                return loginInfo;
-            }
-            else if (provider == CredentialsDto.TWITTER)
-            {
-                TwitterService.Secret = credentials.Secret;
-                TwitterService.Token = credentials.Token;
-                TwitterVerifyResult res = TwitterService.VerifyCredentials();
-                string id = res.IdString;
-                var loginInfo = id == null ? null : new UserLoginInfo(provider, id);
-                return loginInfo;
-            }
-            else
-            {
-                return null;
-            }
-        }
-
     }
 }
