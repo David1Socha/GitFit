@@ -76,20 +76,9 @@ namespace HealthTrac.Controllers.Api
         {
             var userDto = userLoginDto.User;
             var credentials = userLoginDto.Credentials;
-            User user = new User()
-            {
-                BirthDate = userDto.BirthDate,
-                Email = userDto.Email,
-                FirstName = userDto.FirstName,
-                Height = userDto.Height,
-                Location = userDto.Location,
-                LastName = userDto.LastName,
-                PreferredName = userDto.PreferredName,
-                Sex = userDto.Sex,
-                Weight = userDto.Weight,
-                UserName = userDto.UserName
-            };
-            var loginInfo = GetUserLogin(credentials);
+            User user = userDto.ToUser();
+            IProviderVerifyResult res = LoginService.VerifyCredentials(credentials);
+            UserLoginInfo loginInfo = new UserLoginInfo(credentials.Provider, res.Id); //TODO add user prof picture to user once model supports that
             if (loginInfo == null)
             {
                 return BadRequest("Invalid authentication data");
@@ -99,19 +88,10 @@ namespace HealthTrac.Controllers.Api
             {
                 return BadRequest("You have already created an account!");
             }
-            var result = UserManager.Create(user);
-            if (result.Succeeded)
+            bool created = LoginService.CreateAccount(user, loginInfo);
+            if (created)
             {
-                result = UserManager.AddLogin(user.Id, loginInfo);
-                if (result.Succeeded)
-                {
-                    var identity = UserManager.CreateIdentity(user, DefaultAuthenticationTypes.ApplicationCookie);
-                    return Ok();
-                }
-                else
-                {
-                    return BadRequest();
-                }
+                return Ok();
             }
             else
             {

@@ -21,6 +21,23 @@ namespace HealthTrac.Models.Dto
         public string Id { get; set; }
         public string UserName { get; set; }
 
+        public User ToUser()
+        {
+            return new User()
+            {
+                BirthDate = BirthDate,
+                Email = Email,
+                FirstName = FirstName,
+                Height = Height,
+                Location = Location,
+                LastName = LastName,
+                PreferredName = PreferredName,
+                Sex = Sex,
+                Weight = Weight,
+                UserName = UserName
+            };
+        }
+
         public static UserDto FromUser(User u)
         {
             return new UserDto

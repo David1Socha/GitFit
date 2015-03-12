@@ -1,5 +1,6 @@
 ﻿using HealthTrac.Models;
 using HealthTrac.Models.Dto;
+using Microsoft.AspNet.Identity;
 using Microsoft.Owin.Security;
 using System;
 using System.Collections.Generic;
@@ -16,9 +17,11 @@ namespace HealthTrac.Services
         private ITwitterService TwitterService { get; set; }
         private IFacebookService FacebookService { get; set; }
         private IAuthenticationManager Authentication { get; set; }
+        private UserManager<User> UserManager { get; set; }
 
-        public LoginService(IFacebookService facebookService, ITwitterService twitterService, IAuthenticationManager authentication)
+        public LoginService(IFacebookService facebookService, ITwitterService twitterService, IAuthenticationManager authentication, UserManager<User> userManager)
         {
+            UserManager = userManager;
             Authentication = authentication;
             TwitterService = twitterService;
             FacebookService = facebookService;
@@ -65,6 +68,21 @@ namespace HealthTrac.Services
                 TokenType = TOKEN_TYPE
             };
             return grant;
+        }
+
+        public bool CreateAccount(User user, UserLoginInfo loginInfo)
+        {
+            var result = UserManager.Create(user);
+            if (result.Succeeded)
+            {
+                result = UserManager.AddLogin(user.Id, loginInfo);
+                if (result.Succeeded)
+                {
+                    UserManager.CreateIdentity(user, DefaultAuthenticationTypes.ApplicationCookie);
+                    return true;
+                }
+            }
+            return false;
         }
     }
 }

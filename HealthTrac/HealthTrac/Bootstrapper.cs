@@ -44,6 +44,7 @@ namespace HealthTrac
             container.RegisterType<IStatusAccessor, EntityStatusAccessor>(new HierarchicalLifetimeManager());
             container.RegisterType<IFacebookService, OAuthFacebookService>(new HierarchicalLifetimeManager());
             container.RegisterType<ITwitterService, OAuthTwitterService>(new HierarchicalLifetimeManager());
+            container.RegisterType<ILoginService, LoginService>(new HierarchicalLifetimeManager());
             container.RegisterType<IUserStore<User>, UserStore<User>>(new InjectionConstructor(new ApplicationDbContext()));
             container.RegisterType<IAuthenticationManager>(new InjectionFactory(c => HttpContext.Current.GetOwinContext().Authentication));
             return container;
