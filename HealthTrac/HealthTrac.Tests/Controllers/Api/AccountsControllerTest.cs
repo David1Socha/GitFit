@@ -14,6 +14,7 @@ using HealthTrac.Controllers.Api;
 using Moq;
 using System.Net.Http;
 using Moq.Linq;
+using HealthTrac.Services;
 using HealthTrac.Tests.Helpers;
 using Microsoft.Owin.Security;
 using Microsoft.AspNet.Identity;
@@ -24,25 +25,40 @@ namespace HealthTrac.Tests.Controllers.Api
     [TestClass]
     public class AccountsControllerTest
     {
-        private User _basicUser;
-        private IProviderVerifyResult _facebookResult;
+        private User _facebookUser, _twitterUser;
+        private IProviderVerifyResult _facebookResult, _twitterResult;
+        private AccessGrantDto _twitterGrant, _facebookGrant;
+        private CredentialsDto _facebookCredentials, _twitterCredentials;
 
         [TestInitialize]
         public void Initialize()
         {
-            _basicUser = UserGenerator.GenerateUser1();
+            _facebookUser = UserGenerator.GenerateUser1();
+            _twitterUser = UserGenerator.GenerateUser2();
             _facebookResult = ProviderVerifyResultGenerator.GenFacebookVerifyResult();
-            _grant = AccessGrantGenerator.GenBasicGrant();
+            _twitterResult = ProviderVerifyResultGenerator.GenTwitterVerifyResult();
+            _facebookGrant = AccessGrantGenerator.GenFacebookGrant();
+            _twitterGrant = AccessGrantGenerator.GenTwitterGrant();
+            _facebookCredentials = CredentialsDtoGenerator.GenFacebookCredentials();
+            _twitterCredentials = CredentialsDtoGenerator.GenTwitterCredentials();
         }
 
         [TestMethod]
         public void ApiLoginReturnsAccessGrantWhenLegitFacebookCredentials()
         {
-            var user = _basicUser;
-            var loginMock = new Mock<LoginService>();
-            loginMock.Setup(svc => svc.VerifyCredentials(It.IsAny<CredentialsDto>())).Returns(_facebookResult);
-            loginMock.Setup(svc => svc.GenerateAccessGrant(user, It.IsAny<CredentialsDto>())).Returns(_grant);
-            UserManager<User> userManager = Mock.Of<UserManager<User>>(man => man.Find(It.IsAny<UserLoginInfo>()) == user);
+            var grant = _facebookGrant;
+            var user = _facebookUser;
+            var credentials = _facebookCredentials;
+            var verifyResult = _facebookResult;
+            var loginMock = new Mock<ILoginService>();
+            loginMock.Setup(svc => svc.VerifyCredentials(credentials)).Returns(verifyResult);
+            loginMock.Setup(svc => svc.GenerateAccessGrant(user, credentials)).Returns(grant);
+            var userManager = Mock.Of<IUserManager>(man => man.Find(It.IsAny<UserLoginInfo>()) == user);
+            var con = new AccountsController(userManager, null, loginMock.Object);
+            var response = con.Login(credentials);
+            var result = response as OkNegotiatedContentResult<AccessGrantDto>;
+            var resultGrant = result.Content;
+            Assert.IsTrue(resultGrant.EqualValues(grant));
         }
 
     }

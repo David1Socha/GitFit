@@ -37,14 +37,14 @@ namespace HealthTrac.Controllers.Api
         private IFacebookService FacebookService { get; set; }
         private ITwitterService TwitterService { get; set; }
 
-        public AccountsController(UserManager<User> userManager, IAuthenticationManager auth, ILoginService loginService)
+        public AccountsController(IUserManager userManager, IAuthenticationManager auth, ILoginService loginService)
         {
             LoginService = loginService;
             UserManager = userManager;
             Authentication = auth;
         }
 
-        public UserManager<User> UserManager { get; private set; }
+        public IUserManager UserManager { get; private set; }
 
         //POST api/Account/Login
         [HttpPost]

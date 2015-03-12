@@ -9,18 +9,33 @@ namespace HealthTrac.Tests.Helpers
 {
     public static class AccessGrantGenerator
     {
-        AccessGrantDto genBasicGrant()
+        public static AccessGrantDto GenFacebookGrant()
         {
             return new AccessGrantDto
             {
                 AccessToken = "abc",
                 Expires = DateTime.Now,
                 ExpiresIn = "9001",
-                ID = "a2b4m6",
+                ID = "qwerty",
                 Issued = DateTime.Now,
                 TokenType = "bearer",
-                UserName = "shrek"
+                UserName = "xXxOgrelordxXx"
             };
         }
+
+        public static AccessGrantDto GenTwitterGrant()
+        {
+            return new AccessGrantDto
+            {
+                AccessToken = "ash2",
+                Expires = DateTime.Now,
+                ExpiresIn = "9001",
+                ID = "poiuy",
+                Issued = DateTime.Now,
+                TokenType = "bearer",
+                UserName = "John"
+            };
+        }
+
     }
 }

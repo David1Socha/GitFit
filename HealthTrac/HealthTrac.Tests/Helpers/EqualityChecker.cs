@@ -21,6 +21,18 @@ namespace HealthTrac.Tests.Helpers
             return equal;
         }
 
+        public static bool EqualValues(this AccessGrantDto self, AccessGrantDto other)
+        {
+            bool equal = self.AccessToken == other.AccessToken
+                && self.Expires == other.Expires
+                && self.ExpiresIn == other.ExpiresIn
+                && self.ID == other.ID
+                && self.Issued == other.Issued
+                && self.TokenType == other.TokenType
+                && self.UserName == other.UserName;
+            return equal;
+        }
+
         public static bool EqualValues(this IEnumerable<TeamDto> teamDtos, IEnumerable<Team> teams)
         {
             if (teamDtos.Count() != teams.Count())
