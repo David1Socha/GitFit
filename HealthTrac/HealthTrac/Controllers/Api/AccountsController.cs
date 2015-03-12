@@ -18,6 +18,7 @@ using Newtonsoft.Json.Linq;
 using OAuth;
 using System.Net.Http.Headers;
 using Microsoft.Owin.Security.Cookies;
+using HealthTrac.Services;
 
 namespace HealthTrac.Controllers.Api
 {
@@ -30,6 +31,9 @@ namespace HealthTrac.Controllers.Api
             get;
             set;
         }
+
+        private IFacebookService FacebookService { get; set; }
+        private ITwitterService TwitterService { get; set; }
 
         public AccountsController(UserManager<User> userManager, IAuthenticationManager auth)
         {
@@ -65,18 +69,17 @@ namespace HealthTrac.Controllers.Api
             ticket.Properties.ExpiresUtc = currentUtc.Add(tokenExpirationTimeSpan);
             var accesstoken = Startup.OAuthBearerOptions.AccessTokenFormat.Protect(ticket);
             Authentication.SignIn(identity);
-
-            JObject blob = new JObject(
-                new JProperty("userName", user.UserName),
-                new JProperty("access_token", accesstoken),
-                new JProperty("token_type", "bearer"),
-                new JProperty("expires_in", tokenExpirationTimeSpan.TotalSeconds.ToString()),
-                new JProperty(".issued", ticket.Properties.IssuedUtc.Value.DateTime),
-                new JProperty(".expires", ticket.Properties.ExpiresUtc.Value.DateTime),
-                new JProperty("id", user.Id)
-            );
-            var json = Newtonsoft.Json.JsonConvert.SerializeObject(blob);
-            return Ok(blob);
+            AccessGrantDto grant = new AccessGrantDto
+            {
+                UserName = user.UserName,
+                AccessToken = accesstoken,
+                TokenType = "bearer",
+                ExpiresIn = tokenExpirationTimeSpan.Seconds.ToString(),
+                Issued = ticket.Properties.IssuedUtc.Value.DateTime,
+                Expires = ticket.Properties.ExpiresUtc.Value.DateTime,
+                ID = user.Id,
+            };
+            return Ok(grant);
         }
 
         [Route("api/Account/Logout")]
@@ -144,13 +147,15 @@ namespace HealthTrac.Controllers.Api
             String provider = credentials.Provider;
             if (provider == CredentialsDto.FACEBOOK)
             {
-                string id = GetFacebookId(credentials.Token);
+                FacebookVerifyResult res = FacebookService.VerifyCredentials(credentials.Token);
+                string id = res.ID;
                 var loginInfo = id == null ? null : new UserLoginInfo(provider, id);
                 return loginInfo;
             }
             else if (provider == CredentialsDto.TWITTER)
             {
-                string id = GetTwitterId(credentials.Token, credentials.Secret);
+                TwitterVerifyResult res = TwitterService.VerifyCredentials(credentials.Token, credentials.Secret);
+                string id = res.IdString;
                 var loginInfo = id == null ? null : new UserLoginInfo(provider, id);
                 return loginInfo;
             }
