@@ -25,11 +25,6 @@ namespace HealthTrac.Controllers.Api
     public class AccountsController : ApiController
     {
 
-        private static readonly string FACEBOOK_BASE_URL = "https://graph.facebook.com/me?access_token=",
-            TWITTER_BASE_URL = "https://api.twitter.com/1.1/account/verify_credentials.json?",
-            TWITTER_CONSUMER_KEY = "fHG53L9zDOTltJ77JPjFGzxf8",
-            TWITTER_CONSUMER_SECRET = "QbX7YXFiZb49HQP0jz0H72pKp5pBUEgJuJBswIroh29NjUrfXU";
-
         private IAuthenticationManager Authentication
         {
             get;
@@ -163,22 +158,6 @@ namespace HealthTrac.Controllers.Api
             {
                 return null;
             }
-        }
-
-        private static string GetFacebookId(string token)
-        {
-
-            var path = FACEBOOK_BASE_URL + token;
-            var client = new HttpClient();
-            var uri = new Uri(path);
-            var response = client.GetAsync(uri).Result;
-            if (response.IsSuccessStatusCode)
-            {
-                var content = response.Content.ReadAsStringAsync().Result;
-                dynamic data = JObject.Parse(content);
-                return data.id;
-            }
-            return null;
         }
 
     }
