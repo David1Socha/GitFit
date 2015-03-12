@@ -50,6 +50,21 @@ namespace HealthTrac.Tests.Controllers.Api
             var user = _facebookUser;
             var credentials = _facebookCredentials;
             var verifyResult = _facebookResult;
+            assertApiLoginReturnsAccessGrantWhenLegitCredentials(grant, user, credentials, verifyResult);
+        }
+
+        [TestMethod]
+        public void ApiLoginReturnsAccessGrantWhenLegitTwitterCredentials()
+        {
+            var grant = _twitterGrant;
+            var user = _twitterUser;
+            var credentials = _twitterCredentials;
+            var verifyResult = _twitterResult;
+            assertApiLoginReturnsAccessGrantWhenLegitCredentials(grant, user, credentials, verifyResult);
+        }
+
+        private void assertApiLoginReturnsAccessGrantWhenLegitCredentials(AccessGrantDto grant, User user, CredentialsDto credentials, IProviderVerifyResult verifyResult)
+        {
             var loginMock = new Mock<ILoginService>();
             loginMock.Setup(svc => svc.VerifyCredentials(credentials)).Returns(verifyResult);
             loginMock.Setup(svc => svc.GenerateAccessGrant(user, credentials)).Returns(grant);
