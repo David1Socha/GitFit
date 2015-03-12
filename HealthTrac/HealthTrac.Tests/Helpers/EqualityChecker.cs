@@ -17,8 +17,7 @@ namespace HealthTrac.Tests.Helpers
                 && teamDto.DateModified == team.DateModified
                 && teamDto.Description == team.Description
                 && teamDto.ID == team.ID
-                && teamDto.Name == team.Name
-                && teamDto.Visibility == team.Visibility;
+                && teamDto.Name == team.Name;
             return equal;
         }
 
