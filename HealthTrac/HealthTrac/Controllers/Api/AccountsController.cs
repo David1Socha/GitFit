@@ -26,22 +26,15 @@ namespace HealthTrac.Controllers.Api
     public class AccountsController : ApiController
     {
 
-        private IAuthenticationManager Authentication
-        {
-            get;
-            set;
-        }
-
         private ILoginService LoginService { get; set; }
 
         private IFacebookService FacebookService { get; set; }
         private ITwitterService TwitterService { get; set; }
 
-        public AccountsController(IUserManager userManager, IAuthenticationManager auth, ILoginService loginService)
+        public AccountsController(IUserManager userManager, ILoginService loginService)
         {
             LoginService = loginService;
             UserManager = userManager;
-            Authentication = auth;
         }
 
         public IUserManager UserManager { get; private set; }

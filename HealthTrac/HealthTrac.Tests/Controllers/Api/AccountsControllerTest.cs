@@ -69,13 +69,33 @@ namespace HealthTrac.Tests.Controllers.Api
             loginMock.Setup(svc => svc.VerifyCredentials(credentials)).Returns(verifyResult);
             loginMock.Setup(svc => svc.GenerateAccessGrant(user, credentials)).Returns(grant);
             var userManager = Mock.Of<IUserManager>(man => man.Find(It.IsAny<UserLoginInfo>()) == user);
-            var con = new AccountsController(userManager, null, loginMock.Object);
+            var con = new AccountsController(userManager, loginMock.Object);
             var response = con.Login(credentials);
             var result = response as OkNegotiatedContentResult<AccessGrantDto>;
             var resultGrant = result.Content;
             Assert.IsTrue(resultGrant.EqualValues(grant));
         }
 
+        [TestMethod]
+        public void ApiRegisterCreatesAccountWhenValidInfoPosted()
+        {
+            var user = UserDto.FromUser(_facebookUser);
+            var credentials = _facebookCredentials;
+            var verifyResult = _facebookResult;
+            UserLoginDto login = new UserLoginDto
+            {
+                Credentials = credentials,
+                User = user
+            };
+            var userManagerMock = new Mock<IUserManager>();
+            userManagerMock.Setup(man => man.Find(It.Is<UserLoginInfo>(info => info.LoginProvider == credentials.Provider && info.ProviderKey == verifyResult.Id))).Returns<User>(null);
+            var loginMock = new Mock<ILoginService>();
+            loginMock.Setup(svc => svc.VerifyCredentials(credentials)).Returns(verifyResult);
+            loginMock.Setup(svc => svc.CreateAccount(It.IsAny<User>(), It.IsAny<UserLoginInfo>())).Returns(true);
+            var con = new AccountsController(userManagerMock.Object, loginMock.Object);
+            var response = con.Register(login);
+            Assert.IsInstanceOfType(response, typeof(OkResult));
+        }
     }
 
 }
