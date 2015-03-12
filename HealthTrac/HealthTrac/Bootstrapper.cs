@@ -13,6 +13,7 @@ using System.Data.Entity;
 using System.Web.Mvc;
 using System.Web.Http.Dependencies;
 using Microsoft.Owin.Security;
+using HealthTrac.Services;
 
 namespace HealthTrac
 {
@@ -41,7 +42,11 @@ namespace HealthTrac
             container.RegisterType<IActivityAccessor, EntityActivityAccessor>(new HierarchicalLifetimeManager());
             container.RegisterType<ISessionAccessor, EntitySessionAccessor>(new HierarchicalLifetimeManager());
             container.RegisterType<IStatusAccessor, EntityStatusAccessor>(new HierarchicalLifetimeManager());
+            container.RegisterType<IFacebookService, OAuthFacebookService>(new HierarchicalLifetimeManager());
+            container.RegisterType<ITwitterService, OAuthTwitterService>(new HierarchicalLifetimeManager());
+            container.RegisterType<ILoginService, LoginService>(new HierarchicalLifetimeManager());
             container.RegisterType<IUserStore<User>, UserStore<User>>(new InjectionConstructor(new ApplicationDbContext()));
+            container.RegisterType<IUserManager, UserManagerAdapter>(new HierarchicalLifetimeManager());
             container.RegisterType<IAuthenticationManager>(new InjectionFactory(c => HttpContext.Current.GetOwinContext().Authentication));
             return container;
         }

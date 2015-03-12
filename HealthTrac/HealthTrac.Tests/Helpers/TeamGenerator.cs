@@ -18,7 +18,6 @@ namespace HealthTrac.Tests.Helpers
                 DateModified = new DateTime(2005, 4, 20),
                 Name = "Fake team 9000",
                 Description = null,
-                Visibility = Visibility.PUBLIC
             };
         }
 
@@ -31,7 +30,6 @@ namespace HealthTrac.Tests.Helpers
                 DateModified = new DateTime(1111, 11, 11),
                 Description = "Enough said",
                 Name = "Team 6 is the best",
-                Visibility = Visibility.SECRET
             };
         }
 

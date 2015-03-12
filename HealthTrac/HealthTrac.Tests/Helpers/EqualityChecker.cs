@@ -17,8 +17,19 @@ namespace HealthTrac.Tests.Helpers
                 && teamDto.DateModified == team.DateModified
                 && teamDto.Description == team.Description
                 && teamDto.ID == team.ID
-                && teamDto.Name == team.Name
-                && teamDto.Visibility == team.Visibility;
+                && teamDto.Name == team.Name;
+            return equal;
+        }
+
+        public static bool EqualValues(this AccessGrantDto self, AccessGrantDto other)
+        {
+            bool equal = self.AccessToken == other.AccessToken
+                && self.Expires == other.Expires
+                && self.ExpiresIn == other.ExpiresIn
+                && self.ID == other.ID
+                && self.Issued == other.Issued
+                && self.TokenType == other.TokenType
+                && self.UserName == other.UserName;
             return equal;
         }
 
