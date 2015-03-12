@@ -165,23 +165,6 @@ namespace HealthTrac.Controllers.Api
             }
         }
 
-        private static string GetTwitterId(string token, string secret)
-        {
-            OAuthRequest oAuth = OAuthRequest.ForProtectedResource("GET", TWITTER_CONSUMER_KEY, TWITTER_CONSUMER_SECRET, token, secret);
-            oAuth.RequestUrl = TWITTER_BASE_URL;
-            var auth = oAuth.GetAuthorizationQuery();
-            var uri = new Uri(oAuth.RequestUrl + auth);
-            var client = new HttpClient();
-            var response = client.GetAsync(uri).Result;
-            if (response.IsSuccessStatusCode)
-            {
-                var content = response.Content.ReadAsStringAsync().Result;
-                dynamic data = JObject.Parse(content);
-                return data.id_str;
-            }
-            return null;
-        }
-
         private static string GetFacebookId(string token)
         {
 
