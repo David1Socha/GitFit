@@ -17,17 +17,32 @@ using Moq.Linq;
 using HealthTrac.Tests.Helpers;
 using Microsoft.Owin.Security;
 using Microsoft.AspNet.Identity;
+using HealthTrac.Services;
 
 namespace HealthTrac.Tests.Controllers.Api
 {
     [TestClass]
     public class AccountsControllerTest
     {
+        private User _basicUser;
+        private IProviderVerifyResult _facebookResult;
 
         [TestInitialize]
         public void Initialize()
         {
+            _basicUser = UserGenerator.GenerateUser1();
+            _facebookResult = ProviderVerifyResultGenerator.GenFacebookVerifyResult();
+            _grant = AccessGrantGenerator.GenBasicGrant();
+        }
 
+        [TestMethod]
+        public void ApiLoginReturnsAccessGrantWhenLegitFacebookCredentials()
+        {
+            var user = _basicUser;
+            var loginMock = new Mock<LoginService>();
+            loginMock.Setup(svc => svc.VerifyCredentials(It.IsAny<CredentialsDto>())).Returns(_facebookResult);
+            loginMock.Setup(svc => svc.GenerateAccessGrant(user, It.IsAny<CredentialsDto>())).Returns(_grant);
+            UserManager<User> userManager = Mock.Of<UserManager<User>>(man => man.Find(It.IsAny<UserLoginInfo>()) == user);
         }
 
     }
