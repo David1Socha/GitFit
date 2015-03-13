@@ -78,7 +78,7 @@ namespace HealthTrac.Services
                 result = UserManager.AddLogin(user.Id, loginInfo);
                 if (result.Succeeded)
                 {
-                    UserManager.CreateIdentity(user, DefaultAuthenticationTypes.ApplicationCookie);
+                    // UserManager.CreateIdentity(user, DefaultAuthenticationTypes.ApplicationCookie);
                     return true;
                 }
             }
