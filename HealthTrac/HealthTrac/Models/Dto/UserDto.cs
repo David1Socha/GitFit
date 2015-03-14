@@ -7,6 +7,7 @@ namespace HealthTrac.Models.Dto
 {
     public class UserDto
     {
+        public String ProfilePicture { get; set; }
         public DateTime DateCreated { get; set; }
         public DateTime DateModified { get; set; }
         public String FirstName { get; set; }
@@ -32,6 +33,7 @@ namespace HealthTrac.Models.Dto
                 Location = Location,
                 LastName = LastName,
                 PreferredName = PreferredName,
+                ProfilePicture = ProfilePicture,
                 Sex = Sex,
                 Weight = Weight,
                 UserName = UserName
