@@ -12,13 +12,12 @@
         android:textColor="@color/username"
         android:layout_marginLeft="10dp"
         android:textAppearance="?android:attr/textAppearanceMedium"/>
-    <TextView
+    <ImageView
+        android:id="@+id/profile_picture"
         android:layout_width="0dp"
         android:layout_weight="1"
-        android:layout_height="match_parent"
-        android:id="@+id/location"
-        android:layout_marginLeft="5dp"
-        android:textAppearance="?android:attr/textAppearanceSmall"/>
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/profile_picture_desc" />
     <TextView
         android:layout_width="0dp"
         android:layout_weight="1"

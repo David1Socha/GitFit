@@ -8,7 +8,7 @@ namespace HealthTrac.Models
 {
     public class FacebookVerifyResult : IProviderVerifyResult
     {
-        private static string PROFILE_BASE_URL = "http://graph.facebook.com/{0}/picture?type=square";
+        private static string PROFILE_BASE_URL = "https://graph.facebook.com/{0}/picture?type=square";
         [JsonProperty("id")]
         public string Id { get; set; }
         private string profilePictureUrl;

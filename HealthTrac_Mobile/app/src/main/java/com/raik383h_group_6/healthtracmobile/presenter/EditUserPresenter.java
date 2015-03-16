@@ -49,6 +49,7 @@ public class EditUserPresenter extends BasePresenter{
             view.setLastName(ogUser.getLastName());
             view.setLocation(ogUser.getLocation());
             view.setPrefName(ogUser.getPreferredName());
+            view.setProfilePicture(ogUser.getProfilePicture());
             view.setSex(ogUser.getSex());
             view.setUsername(ogUser.getUserName());
             view.setWeight(FormatUtils.format(ogUser.getWeight()));

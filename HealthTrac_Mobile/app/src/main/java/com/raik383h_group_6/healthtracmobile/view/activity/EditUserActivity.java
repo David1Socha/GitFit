@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
@@ -19,6 +20,7 @@ import com.raik383h_group_6.healthtracmobile.presenter.EditUserPresenter;
 import com.raik383h_group_6.healthtracmobile.presenter.UserValidationPresenter;
 import com.raik383h_group_6.healthtracmobile.service.api.UserService;
 import com.raik383h_group_6.healthtracmobile.view.EditUserView;
+import com.squareup.picasso.Picasso;
 
 import roboguice.inject.ContentView;
 import roboguice.inject.InjectView;
@@ -34,6 +36,8 @@ public class EditUserActivity extends BaseActivity implements EditUserView {
     Button updateUserButton;
     @InjectView(R.id.last_name_edittext)
     EditText lastNameEditText;
+    @InjectView(R.id.profile_picture)
+    ImageView profileImageView;
     @InjectView(R.id.first_name_edittext)
     EditText firstNameEditText;
     @InjectView(R.id.pref_name_edittext)
@@ -139,7 +143,7 @@ public class EditUserActivity extends BaseActivity implements EditUserView {
 
     @Override
     public String getSex() {
-        return ((RadioButton)findViewById(sexRadioGroup.getCheckedRadioButtonId())).getText().toString();
+        return ((RadioButton) findViewById(sexRadioGroup.getCheckedRadioButtonId())).getText().toString();
     }
 
     @Override
@@ -223,6 +227,16 @@ public class EditUserActivity extends BaseActivity implements EditUserView {
     @Override
     public void displayMessage(String msg) {
         Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void setProfilePicture(String profilePicture) {
+        Picasso.with(this)
+                .load(profilePicture)
+                .placeholder(R.drawable.default_profile_picture)
+                .resizeDimen(R.dimen.prof_pic_size, R.dimen.prof_pic_size)
+                .centerInside()
+                .into(profileImageView);
     }
 
     @Override
