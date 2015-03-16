@@ -57,6 +57,7 @@ public class ViewUserPresenter extends BasePresenter{
         view.setLastName(user.getLastName());
         view.setLocation(user.getLocation());
         view.setPrefName(user.getPreferredName());
+        view.setProfilePicture(user.getProfilePicture());
         view.setSex(user.getSex()== User.Sex.MALE ? view.getResource(R.string.male_label): view.getResource(R.string.label_female));
         view.setUserName(user.getUserName());
         view.setWeight(FormatUtils.format(user.getWeight()));

@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.inject.Inject;
@@ -14,6 +15,7 @@ import com.raik383h_group_6.healthtracmobile.presenter.BasePresenter;
 import com.raik383h_group_6.healthtracmobile.presenter.PresenterFactory;
 import com.raik383h_group_6.healthtracmobile.presenter.ViewUserPresenter;
 import com.raik383h_group_6.healthtracmobile.view.ViewUserView;
+import com.squareup.picasso.Picasso;
 
 import roboguice.inject.ContentView;
 import roboguice.inject.InjectView;
@@ -40,6 +42,8 @@ public class ViewUserActivity extends BaseActivity implements ViewUserView {
     TextView userNameTextView;
     @InjectView(R.id.weight_textview)
     TextView weightTextView;
+    @InjectView(R.id.profile_picture)
+    ImageView profileImageView;
     @InjectView(R.id.edit_user_button)
     private
     Button editUserButton;
@@ -127,6 +131,16 @@ public class ViewUserActivity extends BaseActivity implements ViewUserView {
         } else {
             editUserButton.setVisibility(View.GONE);
         }
+    }
+
+    @Override
+    public void setProfilePicture(String profilePicture) {
+        Picasso.with(this)
+            .load(profilePicture)
+            .placeholder(R.drawable.default_profile_picture)
+            .resizeDimen(R.dimen.prof_pic_size, R.dimen.prof_pic_size)
+            .centerInside()
+            .into(profileImageView);
     }
 
     @Override
