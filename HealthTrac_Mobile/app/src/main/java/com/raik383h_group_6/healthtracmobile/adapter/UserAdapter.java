@@ -2,6 +2,7 @@ package com.raik383h_group_6.healthtracmobile.adapter;
 
 import android.content.Context;
 import android.media.Image;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -61,6 +62,7 @@ public class UserAdapter extends BaseAdapter {
 
         User user = users.get(position);
         holder.preferredName.setText(user.getPreferredName());
+        Log.d("davidsocha", user.getProfilePicture());
         Picasso.with(context)
                 .load(user.getProfilePicture())
                 .placeholder(R.drawable.default_profile_picture)
