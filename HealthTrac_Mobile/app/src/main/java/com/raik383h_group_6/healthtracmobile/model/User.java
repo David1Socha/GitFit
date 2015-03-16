@@ -10,7 +10,7 @@ import java.util.Date;
 public class User implements Parcelable {
     private Date dateCreated, dateModified, birthDate;
     private String firstName, lastName, preferredName, email, userName, location;
-    private String id;
+    private String id, profilePicture;
     private double height, weight;
 
     public User(Date birthDate, Date dateCreated, Date dateModified, String email, String firstName, double height, String lastName, String location, String preferredName, User.Sex sex, String userName, double weight) {
@@ -23,6 +23,7 @@ public class User implements Parcelable {
         this.lastName = lastName;
         this.location = location;
         this.preferredName = preferredName;
+        this.profilePicture = profilePicture;
         this.sex = sex;
         this.userName = userName;
         this.weight = weight;
@@ -89,6 +90,10 @@ public class User implements Parcelable {
     public void setPreferredName(String preferredName) {
         this.preferredName = preferredName;
     }
+
+    public String getProfilePicture() { return profilePicture;}
+
+    public void setProfilePicture(String profilePicture) { this.profilePicture = profilePicture; }
 
     public String getEmail() {
         return email;
@@ -160,6 +165,7 @@ public class User implements Parcelable {
         dest.writeDouble(this.weight);
         dest.writeInt(this.sex == null ? -1 : this.sex.ordinal());
         dest.writeString(this.location);
+        dest.writeString(this.profilePicture);
     }
 
     public User() {
@@ -183,6 +189,7 @@ public class User implements Parcelable {
         int tmpSex = in.readInt();
         this.sex = tmpSex == -1 ? null : Sex.values()[tmpSex];
         this.location = in.readString();
+        this.profilePicture = in.readString();
     }
 
     public static final Parcelable.Creator<User> CREATOR = new Parcelable.Creator<User>() {
