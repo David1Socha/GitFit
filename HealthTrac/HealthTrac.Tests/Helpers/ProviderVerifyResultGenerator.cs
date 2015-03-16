@@ -13,7 +13,8 @@ namespace HealthTrac.Tests.Helpers
         {
             return new FacebookVerifyResult
             {
-                Id = "abc700"
+                Id = "abc700",
+                ProfilePictureUrl = "http://www.facebook.com/sample.jpg"
             };
         }
 

@@ -49,6 +49,7 @@ namespace HealthTrac.Models.Dto
                 FirstName = u.FirstName,
                 LastName = u.LastName,
                 PreferredName = u.PreferredName,
+                ProfilePicture = u.ProfilePicture,
                 Email = u.Email,
                 Sex = u.Sex,
                 Height = u.Height,
