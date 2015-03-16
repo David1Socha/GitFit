@@ -71,6 +71,7 @@ namespace HealthTrac.Controllers.Api
             var credentials = userLoginDto.Credentials;
             User user = userDto.ToUser();
             IProviderVerifyResult res = LoginService.VerifyCredentials(credentials);
+            user.ProfilePicture = res.ProfilePictureUrl;
             UserLoginInfo loginInfo = new UserLoginInfo(credentials.Provider, res.Id); //TODO add user prof picture to user once model supports that
             if (loginInfo == null)
             {
