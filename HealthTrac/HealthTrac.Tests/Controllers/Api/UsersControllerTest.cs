@@ -27,8 +27,8 @@ namespace HealthTrac.Tests.Controllers.Api
         [TestInitialize]
         public void Initialize()
         {
-            _user1 = UserGenerator.GenerateUser1();
-            _user2 = UserGenerator.GenerateUser2();
+            _user1 = UserGenerator.GenerateFacebookUser();
+            _user2 = UserGenerator.GenerateTwitterUser();
             _users = UserGenerator.GenerateUsers();
         }
 

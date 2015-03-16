@@ -79,6 +79,7 @@ namespace HealthTrac.Tests.Helpers
                 && userDto.Id == user.Id
                 && userDto.LastName == user.LastName
                 && userDto.PreferredName == user.PreferredName
+                && userDto.ProfilePicture == user.ProfilePicture
                 && userDto.Sex == user.Sex
                 && userDto.UserName == user.UserName
                 && userDto.Weight == user.Weight

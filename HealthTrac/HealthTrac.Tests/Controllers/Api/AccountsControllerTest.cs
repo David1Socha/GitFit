@@ -33,8 +33,8 @@ namespace HealthTrac.Tests.Controllers.Api
         [TestInitialize]
         public void Initialize()
         {
-            _facebookUser = UserGenerator.GenerateUser1();
-            _twitterUser = UserGenerator.GenerateUser2();
+            _facebookUser = UserGenerator.GenerateFacebookUser();
+            _twitterUser = UserGenerator.GenerateTwitterUser();
             _facebookResult = ProviderVerifyResultGenerator.GenFacebookVerifyResult();
             _twitterResult = ProviderVerifyResultGenerator.GenTwitterVerifyResult();
             _facebookGrant = AccessGrantGenerator.GenFacebookGrant();

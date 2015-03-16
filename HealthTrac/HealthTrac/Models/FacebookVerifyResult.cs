@@ -11,6 +11,7 @@ namespace HealthTrac.Models
         private static string PROFILE_BASE_URL = "http://graph.facebook.com/{0}/picture?type=square";
         [JsonProperty("id")]
         public string Id { get; set; }
-        public string ProfilePictureUrl { get { return String.Format(PROFILE_BASE_URL, Id); } }
+        private string profilePictureUrl;
+        public string ProfilePictureUrl { get { return profilePictureUrl ?? String.Format(PROFILE_BASE_URL, Id); } set { profilePictureUrl = value; } }
     }
 }
