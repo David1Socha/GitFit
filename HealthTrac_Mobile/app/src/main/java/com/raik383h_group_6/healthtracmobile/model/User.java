@@ -23,7 +23,6 @@ public class User implements Parcelable {
         this.lastName = lastName;
         this.location = location;
         this.preferredName = preferredName;
-        this.profilePicture = profilePicture;
         this.sex = sex;
         this.userName = userName;
         this.weight = weight;

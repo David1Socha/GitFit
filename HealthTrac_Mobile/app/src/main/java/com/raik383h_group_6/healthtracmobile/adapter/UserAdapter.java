@@ -1,10 +1,12 @@
 package com.raik383h_group_6.healthtracmobile.adapter;
 
 import android.content.Context;
+import android.media.Image;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.raik383h_group_6.healthtracmobile.R;
@@ -47,7 +49,7 @@ public class UserAdapter extends BaseAdapter {
             holder = new ViewHolder();
             holder.preferredName = (TextView)view.findViewById(R.id.preferred_name);
             holder.userName = (TextView) view.findViewById(R.id.user_name);
-            holder.location = (TextView) view.findViewById(R.id.location);
+            holder.profilePicture = (ImageView) view.findViewById(R.id.profile_picture);
             view.setTag(holder);
         } else {
             view = convertView;
@@ -56,13 +58,14 @@ public class UserAdapter extends BaseAdapter {
 
         User user = users.get(position);
         holder.preferredName.setText(user.getPreferredName());
-        holder.location.setText(user.getLocation());
+        
         holder.userName.setText(user.getUserName());
 
         return view;
     }
 
     public class ViewHolder {
-        public TextView preferredName, userName, location;
+        public TextView preferredName, userName;
+        public ImageView profilePicture;
     }
 }
