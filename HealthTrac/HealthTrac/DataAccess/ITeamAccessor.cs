@@ -1,7 +1,7 @@
 ﻿using System;
 namespace HealthTrac.DataAccess
 {
-    public interface ITeamAccessor
+    public interface ITeamAccessor : IDisposable
     {
         HealthTrac.Models.Team GetTeam(long ID);
         System.Collections.Generic.IEnumerable<HealthTrac.Models.Team> SearchTeams(string name);

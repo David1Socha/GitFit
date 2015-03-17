@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 namespace HealthTrac.DataAccess
 {
-    public interface IUserAccessor
+    public interface IUserAccessor : IDisposable
     {
         HealthTrac.Models.User FindUser(string ID);
         IEnumerable<HealthTrac.Models.User> SearchUsers(string name);

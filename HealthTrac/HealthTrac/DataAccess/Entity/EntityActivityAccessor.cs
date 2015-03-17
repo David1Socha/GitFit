@@ -9,83 +9,57 @@ namespace HealthTrac.DataAccess.Entity
 {
     public class EntityActivityAccessor : IActivityAccessor
     {
+        private ApplicationDbContext db;
+
+        public EntityActivityAccessor(ApplicationDbContext db)
+        {
+            this.db = db;
+        }
+
         public Activity GetActivity(long ID)
         {
-            using (var db = new ApplicationDbContext())
-            {
-                Activity activity = db.Activities
-                    .Where(a => a.ID == ID)
-                    .FirstOrDefault();
-                return activity;
-            }
+            Activity activity = db.Activities
+                .Where(a => a.ID == ID)
+                .FirstOrDefault();
+            return activity;
         }
         public IEnumerable<Activity> GetActivities(string userId)
         {
-            using (var db = new ApplicationDbContext())
-            {
-                IEnumerable<Activity> activities = db.Activities
-                    .Where(a => a.UserID.Equals(userId));
-                return activities;
-            }
+            IEnumerable<Activity> activities = db.Activities
+                .Where(a => a.UserID.Equals(userId));
+            return activities;
         }
-        public bool CreateActivity(Activity activity)
+        public void CreateActivity(Activity activity)
         {
-            using (var db = new ApplicationDbContext())
-            {
-                db.Activities.Add(activity);
-                int objectsWritten = db.SaveChanges();
-                return objectsWritten == 1;
-            }
+            db.Activities.Add(activity);
         }
-        public bool DeleteActivity(long ID)
+        public void DeleteActivity(long ID)
         {
-            using (var db = new ApplicationDbContext())
+            Activity activity = db.Activities
+                .Where(a => a.ID == ID)
+                .FirstOrDefault();
+            if (activity != null)
             {
-                Activity activity = db.Activities
-                    .Where(a => a.ID == ID)
-                    .FirstOrDefault();
-                if (activity == null)
-                {
-                    return false;
-                }
-                else
-                {
-                    db.Activities.Remove(activity);
-                    try
-                    {
-                        int changes = db.SaveChanges();
-                        return changes == 1;
-                    }
-                    catch (DbUpdateConcurrencyException ex)
-                    {
-                        throw new ConcurrentUpdateException("The Activity you are trying to delete has been modified externally", ex);
-                    }
-
-                }
-            }
-        }
-
-
-        public bool DeleteActivity(Activity activity)
-        {
-            using (var db = new ApplicationDbContext())
-            {
-                if (activity == null)
-                {
-                    return false;
-                }
                 db.Activities.Remove(activity);
-                try
-                {
-                    int changes = db.SaveChanges();
-                    return changes == 1;
-                }
-                catch (DbUpdateConcurrencyException ex)
-                {
-                    throw new ConcurrentUpdateException("The Activity you are trying to delete has been modified externally", ex);
-                }
-
             }
         }
+
+        public void Save()
+        {
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                throw new ConcurrentUpdateException();
+            }
+        }
+
+        public void Dispose()
+        {
+            db.Dispose();
+        }
+
     }
 }

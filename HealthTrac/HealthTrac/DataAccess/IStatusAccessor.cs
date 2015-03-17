@@ -7,7 +7,7 @@ using HealthTrac.Models;
 
 namespace HealthTrac.DataAccess
 {
-    public interface IStatusAccessor
+    public interface IStatusAccessor : IDisposable
     {
         bool CreateStatus(Status s);
 

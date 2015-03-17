@@ -7,7 +7,7 @@ using HealthTrac.Models;
 
 namespace HealthTrac.DataAccess
 {
-    public interface IMembershipAccessor
+    public interface IMembershipAccessor : IDisposable
     {
         Membership GetMembership(long id);
         Membership GetMembership(long teamId, string userId);
