@@ -69,22 +69,5 @@ namespace HealthTrac.DataAccess.Entity
             return m;
         }
 
-        public void Save()
-        {
-            try
-            {
-                db.SaveChanges();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                throw new ConcurrentUpdateException();
-            }
-
-        }
-
-        public void Dispose()
-        {
-            db.Dispose();
-        }
     }
 }

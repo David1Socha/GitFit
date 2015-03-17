@@ -1,7 +1,7 @@
 ﻿using System;
 namespace HealthTrac.DataAccess
 {
-    public interface ITeamAccessor : IDisposable
+    public interface ITeamAccessor
     {
         HealthTrac.Models.Team GetTeam(long ID);
         System.Collections.Generic.IEnumerable<HealthTrac.Models.Team> SearchTeams(string name);
@@ -10,6 +10,5 @@ namespace HealthTrac.DataAccess
         HealthTrac.Models.Team CreateTeam(HealthTrac.Models.Team team);
         HealthTrac.Models.Team UpdateTeam(HealthTrac.Models.Team team);
         HealthTrac.Models.Team DeleteTeam(HealthTrac.Models.Team team);
-        void Save();
     }
 }

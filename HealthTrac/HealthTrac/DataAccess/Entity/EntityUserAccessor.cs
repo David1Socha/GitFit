@@ -64,22 +64,5 @@ namespace HealthTrac.DataAccess.Entity
             return db.Users.Where(u => u.UserName == userName).FirstOrDefault();
         }
 
-
-        public void Save()
-        {
-            try
-            {
-                db.SaveChanges();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                throw new ConcurrentUpdateException();
-            }
-        }
-
-        public void Dispose()
-        {
-            db.Dispose();
-        }
     }
 }

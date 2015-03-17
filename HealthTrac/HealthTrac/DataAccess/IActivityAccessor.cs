@@ -6,7 +6,7 @@ using HealthTrac.Models;
 
 namespace HealthTrac.DataAccess
 {
-    public interface IActivityAccessor : IDisposable
+    public interface IActivityAccessor
     {
         Activity GetActivity(long id);
 
@@ -15,8 +15,6 @@ namespace HealthTrac.DataAccess
         void CreateActivity(Activity activity);
 
         void DeleteActivity(long ID);
-
-        void Save();
 
     }
 }

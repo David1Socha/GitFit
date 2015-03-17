@@ -69,14 +69,5 @@ namespace HealthTrac.DataAccess.Entity
             return UpdateTeam(team);
         }
 
-        public void Save()
-        {
-            db.SaveChanges();
-        }
-
-        public void Dispose()
-        {
-            db.Dispose();
-        }
     }
 }
