@@ -16,6 +16,7 @@ namespace HealthTrac.DataAccess
         IEnumerable<Membership> GetMemberships(string userId);
         Membership UpdateMembership(Membership m);
         Membership CreateMembership(Membership m);
+        void Save();
 
     }
 }
