@@ -49,7 +49,7 @@ namespace HealthTrac.Tests.Controllers.Api
             var acc = Mock.Of<ITeamAccessor>(a => a.GetTeams(sampleUserId) == _manyTeams);
             var uow = Mock.Of<IUnitOfWork>(u => u.TeamAccessor == acc);
             TeamsController controller = new TeamsController(uow);
-            var teams = con.GetTeams(sampleUserId);
+            var teams = controller.GetTeams(sampleUserId);
             Assert.IsTrue(teams.EqualValues(_manyTeams));
         }
 
@@ -60,7 +60,7 @@ namespace HealthTrac.Tests.Controllers.Api
             var acc = Mock.Of<ITeamAccessor>(a => a.GetTeam(id) == _sampleTeam1);
             var uow = Mock.Of<IUnitOfWork>(u => u.TeamAccessor == acc);
             TeamsController controller = new TeamsController(uow);
-            var response = con.GetTeam(id);
+            var response = controller.GetTeam(id);
             var result = response as OkNegotiatedContentResult<TeamDto>;
             var team = result.Content;
             Assert.IsTrue(team.EqualValues(_sampleTeam1));
