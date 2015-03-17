@@ -11,56 +11,43 @@ namespace HealthTrac.DataAccess.Entity
 {
     public class EntityUserAccessor : IUserAccessor
     {
+
+        private ApplicationDbContext db;
+
+        public EntityUserAccessor(ApplicationDbContext db)
+        {
+            this.db = db;
+        }
+
         public User FindUser(string ID)
         {
-            using (var db = new ApplicationDbContext())
-            {
-                var user = db.Users.Include("Memberships").Include("Memberships.Team")
-                                .Where(u => u.Id == ID && u.Enabled).FirstOrDefault();
-                return user;
-            }
+            var user = db.Users.Include("Memberships").Include("Memberships.Team")
+                            .Where(u => u.Id == ID && u.Enabled).FirstOrDefault();
+            return user;
         }
 
         public IEnumerable<User> SearchUsers(string name)
         {
-            using (var db = new ApplicationDbContext())
+            String[] names = name.Split(' ');
+            List<User> users = new List<User>();
+            foreach (string tempName in names)
             {
-                String[] names = name.Split(' ');
-                List<User> users = new List<User>();
-                foreach (string tempName in names)
-                {
-                    var tempUsers = db.Users
-                                    .Where(U => U.FirstName.Contains(tempName) || U.LastName.Contains(tempName) || U.UserName.Contains(tempName)).ToList();
-                    users.AddRange(tempUsers);
-                }
-                return users;
+                var tempUsers = db.Users
+                                .Where(U => U.FirstName.Contains(tempName) || U.LastName.Contains(tempName) || U.UserName.Contains(tempName)).ToList();
+                users.AddRange(tempUsers);
             }
+            return users;
         }
 
         public User UpdateUser(User user)
         {
-            using (var db = new ApplicationDbContext())
-            {
-                db.Entry(user).State = System.Data.Entity.EntityState.Modified;
-                try
-                {
-                    db.SaveChanges();
-                }
-                catch (DbUpdateConcurrencyException ex)
-                {
-                    throw new ConcurrentUpdateException("The User you are attempting to update has been externally modified.", ex);
-                }
-
-            }
+            db.Entry(user).State = System.Data.Entity.EntityState.Modified;
             return user;
         }
 
         public IEnumerable<User> GetUsers()
         {
-            using (var db = new ApplicationDbContext())
-            {
-                return db.Users.Where(u => u.Enabled).ToList();
-            }
+            return db.Users.Where(u => u.Enabled).ToList();
         }
 
         public User DeleteUser(User user)
@@ -74,10 +61,8 @@ namespace HealthTrac.DataAccess.Entity
 
         public User GetAnyUserWithUserName(String userName)
         {
-            using (var db = new ApplicationDbContext())
-            {
-                return db.Users.Where(u => u.UserName == userName).FirstOrDefault();
-            }
+            return db.Users.Where(u => u.UserName == userName).FirstOrDefault();
         }
+
     }
 }

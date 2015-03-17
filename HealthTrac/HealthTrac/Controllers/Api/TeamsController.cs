@@ -16,10 +16,12 @@ namespace HealthTrac.Controllers.Api
     public class TeamsController : ApiController
     {
         private ITeamAccessor acc;
+        private IUnitOfWork uow;
 
-        public TeamsController(ITeamAccessor acc)
+        public TeamsController(IUnitOfWork uow)
         {
-            this.acc = acc;
+            this.uow = uow;
+            this.acc = uow.TeamAccessor;
         }
         // GET: api/Teams
         public IEnumerable<TeamDto> GetTeams()
@@ -64,9 +66,10 @@ namespace HealthTrac.Controllers.Api
                 return BadRequest();
             }
 
+            acc.UpdateTeam(team);
             try
             {
-                acc.UpdateTeam(team);
+                uow.Save();
             }
             catch (ConcurrentUpdateException)
             {
@@ -93,6 +96,7 @@ namespace HealthTrac.Controllers.Api
             }
 
             acc.CreateTeam(team);
+            uow.Save();
 
             return CreatedAtRoute("DefaultApi", new { id = team.ID }, TeamDto.FromTeam(team));
         }
@@ -103,12 +107,19 @@ namespace HealthTrac.Controllers.Api
         {
             Team teamToDelete = acc.GetTeam(id);
             acc.DeleteTeam(teamToDelete);
+            uow.Save();
             return Ok();
         }
 
         private bool TeamExists(long id)
         {
             return acc.GetTeams().Count(e => e.ID == id) > 0;
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            uow.Dispose();
+            base.Dispose(disposing);
         }
     }
 }

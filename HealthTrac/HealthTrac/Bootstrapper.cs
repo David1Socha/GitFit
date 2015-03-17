@@ -40,8 +40,7 @@ namespace HealthTrac
             container.RegisterType<ITeamAccessor, EntityTeamAccessor>(new HierarchicalLifetimeManager());
             container.RegisterType<IMembershipAccessor, EntityMembershipAccessor>(new HierarchicalLifetimeManager());
             container.RegisterType<IActivityAccessor, EntityActivityAccessor>(new HierarchicalLifetimeManager());
-            container.RegisterType<ISessionAccessor, EntitySessionAccessor>(new HierarchicalLifetimeManager());
-            container.RegisterType<IStatusAccessor, EntityStatusAccessor>(new HierarchicalLifetimeManager());
+            container.RegisterType<IUnitOfWork, EntityUnitOfWork>(new HierarchicalLifetimeManager());
             container.RegisterType<IFacebookService, OAuthFacebookService>(new HierarchicalLifetimeManager());
             container.RegisterType<ITwitterService, OAuthTwitterService>(new HierarchicalLifetimeManager());
             container.RegisterType<ILoginService, LoginService>(new HierarchicalLifetimeManager());

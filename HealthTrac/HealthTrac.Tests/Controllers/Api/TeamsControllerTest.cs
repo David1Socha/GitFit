@@ -36,7 +36,8 @@ namespace HealthTrac.Tests.Controllers.Api
         public void ApiGetTeams()
         {
             var acc = Mock.Of<ITeamAccessor>(a => a.GetTeams() == _manyTeams);
-            TeamsController controller = new TeamsController(acc);
+            var uow = Mock.Of<IUnitOfWork>(u => u.TeamAccessor == acc);
+            TeamsController controller = new TeamsController(uow);
             var teams = controller.GetTeams();
             Assert.IsTrue(teams.EqualValues(_manyTeams));
         }
@@ -46,8 +47,9 @@ namespace HealthTrac.Tests.Controllers.Api
         {
             var sampleUserId = "xyz";
             var acc = Mock.Of<ITeamAccessor>(a => a.GetTeams(sampleUserId) == _manyTeams);
-            TeamsController con = new TeamsController(acc);
-            var teams = con.GetTeams(sampleUserId);
+            var uow = Mock.Of<IUnitOfWork>(u => u.TeamAccessor == acc);
+            TeamsController controller = new TeamsController(uow);
+            var teams = controller.GetTeams(sampleUserId);
             Assert.IsTrue(teams.EqualValues(_manyTeams));
         }
 
@@ -56,8 +58,9 @@ namespace HealthTrac.Tests.Controllers.Api
         {
             long id = 12;
             var acc = Mock.Of<ITeamAccessor>(a => a.GetTeam(id) == _sampleTeam1);
-            TeamsController con = new TeamsController(acc);
-            var response = con.GetTeam(id);
+            var uow = Mock.Of<IUnitOfWork>(u => u.TeamAccessor == acc);
+            TeamsController controller = new TeamsController(uow);
+            var response = controller.GetTeam(id);
             var result = response as OkNegotiatedContentResult<TeamDto>;
             var team = result.Content;
             Assert.IsTrue(team.EqualValues(_sampleTeam1));
@@ -71,9 +74,13 @@ namespace HealthTrac.Tests.Controllers.Api
             var mock = new Mock<ITeamAccessor>();
             mock.Setup(acc => acc.UpdateTeam(team))
                 .Returns(team);
-            var con = new TeamsController(mock.Object);
+            var uowMock = new Mock<IUnitOfWork>();
+            uowMock.Setup(u => u.TeamAccessor)
+                .Returns(mock.Object);
+            var con = new TeamsController(uowMock.Object);
             con.PutTeam(id, team);
             mock.Verify(acc => acc.UpdateTeam(team));
+            uowMock.Verify(u => u.Save());
         }
 
         [TestMethod]
@@ -83,12 +90,16 @@ namespace HealthTrac.Tests.Controllers.Api
             var mock = new Mock<ITeamAccessor>();
             mock.Setup(acc => acc.CreateTeam(team))
                 .Returns(team);
-            var con = new TeamsController(mock.Object);
+            var uowMock = new Mock<IUnitOfWork>();
+            uowMock.Setup(u => u.TeamAccessor)
+                .Returns(mock.Object);
+            var con = new TeamsController(uowMock.Object);
             var response = con.PostTeam(team);
             var result = response as CreatedAtRouteNegotiatedContentResult<TeamDto>;
             var resultTeam = result.Content;
             Assert.IsTrue(resultTeam.EqualValues(team));
             mock.Verify(acc => acc.CreateTeam(team));
+            uowMock.Verify(u => u.Save());
         }
 
         [TestMethod]
@@ -100,11 +111,15 @@ namespace HealthTrac.Tests.Controllers.Api
             mock.Setup(acc => acc.DeleteTeam(It.IsAny<Team>()));
             mock.Setup(acc => acc.GetTeam(id))
                 .Returns(team);
-            var con = new TeamsController(mock.Object);
+            var uowMock = new Mock<IUnitOfWork>();
+            uowMock.Setup(u => u.TeamAccessor)
+                .Returns(mock.Object);
+            var con = new TeamsController(uowMock.Object);
             var response = con.DeleteTeam(id);
             Assert.IsInstanceOfType(response, typeof(OkResult));
             mock.Verify(acc => acc.GetTeam(id));
             mock.Verify(acc => acc.DeleteTeam(team));
+            uowMock.Verify(u => u.Save());
         }
     }
 }

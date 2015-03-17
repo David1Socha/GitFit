@@ -18,11 +18,13 @@ namespace HealthTrac.Controllers.Api
     public class MembershipsController : ApiController
     {
 
+        private IUnitOfWork uow;
         private IMembershipAccessor acc;
 
-        public MembershipsController(IMembershipAccessor acc)
+        public MembershipsController(IUnitOfWork uow)
         {
-            this.acc = acc;
+            this.uow = uow;
+            this.acc = uow.MembershipAccessor;
         }
         // GET: api/Memberships
         public IEnumerable<MembershipDto> GetMemberships()
@@ -83,10 +85,10 @@ namespace HealthTrac.Controllers.Api
             {
                 return BadRequest();
             }
-
+            acc.UpdateMembership(membership);
             try
             {
-                acc.UpdateMembership(membership);
+                uow.Save();
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -113,6 +115,7 @@ namespace HealthTrac.Controllers.Api
             }
 
             acc.CreateMembership(membership);
+            uow.Save();
 
             return CreatedAtRoute("DefaultApi", new { id = membership.ID }, MembershipDto.FromMembership(membership));
         }
@@ -120,6 +123,12 @@ namespace HealthTrac.Controllers.Api
         private bool MembershipExists(long id)
         {
             return acc.GetMemberships().Count(e => e.ID == id) > 0;
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            uow.Dispose();
+            base.Dispose(disposing);
         }
     }
 }

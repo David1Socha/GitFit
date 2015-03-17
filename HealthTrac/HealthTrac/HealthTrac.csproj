@@ -206,23 +206,19 @@
     <Compile Include="Controllers\Api\AccountsController.cs" />
     <Compile Include="Controllers\Api\MembershipsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\TeamController.cs" />
     <Compile Include="Controllers\Api\TeamsController.cs" />
     <Compile Include="Controllers\Api\UsersController.cs" />
-    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="DataAccess\ConcurrentUpdateException.cs" />
     <Compile Include="DataAccess\Entity\ApplicationDbContext.cs" />
     <Compile Include="DataAccess\Entity\EntityActivityAccessor.cs" />
     <Compile Include="DataAccess\Entity\EntityMembershipAccessor.cs" />
     <Compile Include="DataAccess\Entity\EntityUserAccessor.cs" />
+    <Compile Include="DataAccess\Entity\EntityUnitOfWork.cs" />
     <Compile Include="DataAccess\IActivityAccessor.cs" />
     <Compile Include="DataAccess\IMembershipAccessor.cs" />
-    <Compile Include="DataAccess\IStatusAccessor.cs" />
+    <Compile Include="DataAccess\IUnitOfWork.cs" />
     <Compile Include="DataAccess\IUserAccessor.cs" />
-    <Compile Include="DataAccess\ISessionAccessor.cs" />
-    <Compile Include="DataAccess\Entity\EntitySessionAccessor.cs" />
     <Compile Include="DataAccess\ITeamAccessor.cs" />
-    <Compile Include="DataAccess\Entity\EntityStatusAccessor.cs" />
     <Compile Include="DataAccess\Entity\EntityTeamAccessor.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
