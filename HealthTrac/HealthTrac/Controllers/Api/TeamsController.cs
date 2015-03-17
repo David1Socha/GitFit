@@ -115,5 +115,11 @@ namespace HealthTrac.Controllers.Api
         {
             return acc.GetTeams().Count(e => e.ID == id) > 0;
         }
+
+        protected override void Dispose(bool disposing)
+        {
+            uow.Dispose();
+            base.Dispose(disposing);
+        }
     }
 }

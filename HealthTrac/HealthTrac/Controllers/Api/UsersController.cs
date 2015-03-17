@@ -94,5 +94,11 @@ namespace HealthTrac.Controllers.Api
         {
             return accessor.GetUsers().Count(e => e.Id == id) > 0;
         }
+
+        protected override void Dispose(bool disposing)
+        {
+            uow.Dispose();
+            base.Dispose(disposing);
+        }
     }
 }
