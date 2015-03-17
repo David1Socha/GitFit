@@ -11,5 +11,6 @@ namespace HealthTrac.DataAccess
         HealthTrac.Models.User DeleteUser(HealthTrac.Models.User user);
         //Any in method name indicates that "deleted" models where Enabled field is false will be included
         HealthTrac.Models.User GetAnyUserWithUserName(String userName);
+        void Save();
     }
 }
