@@ -101,15 +101,45 @@ namespace HealthTrac.Tests.Controllers.Api
         {
             long id = 3;
             var membership = _bannedMembership;
-            var mock = new Mock<IMembershipAccessor>();
-            mock.Setup(acc => acc.UpdateMembership(membership))
+            var memMock = new Mock<IMembershipAccessor>();
+            memMock.Setup(acc => acc.UpdateMembership(membership))
                 .Returns(membership);
+            var remainingMemberships = new Membership[] { _memberMembership };
+            memMock.Setup(acc => acc.GetActiveMemberships(membership.TeamID))
+                .Returns(remainingMemberships);
+            var teamMock = new Mock<ITeamAccessor>();
             var uowMock = new Mock<IUnitOfWork>();
             uowMock.Setup(u => u.MembershipAccessor)
-                .Returns(mock.Object);
+                .Returns(memMock.Object);
+            uowMock.Setup(u => u.TeamAccessor)
+                .Returns(teamMock.Object);
             var con = new MembershipsController(uowMock.Object);
             con.PutMembership(id, membership);
-            mock.Verify(acc => acc.UpdateMembership(membership));
+            memMock.Verify(acc => acc.UpdateMembership(membership));
+            uowMock.Verify(u => u.Save());
+        }
+
+        [TestMethod]
+        public void PutMembershipDeletesTeamWhenLastMembershipMadeNonActive()
+        {
+            long id = 3;
+            var membership = _bannedMembership;
+            var memMock = new Mock<IMembershipAccessor>();
+            memMock.Setup(acc => acc.UpdateMembership(membership))
+                .Returns(membership);
+            var remainingMemberships = new Membership[] { };
+            memMock.Setup(acc => acc.GetActiveMemberships(membership.TeamID))
+                .Returns(remainingMemberships);
+            var teamMock = new Mock<ITeamAccessor>();
+            var uowMock = new Mock<IUnitOfWork>();
+            uowMock.Setup(u => u.MembershipAccessor)
+                .Returns(memMock.Object);
+            uowMock.Setup(u => u.TeamAccessor)
+                .Returns(teamMock.Object);
+            var con = new MembershipsController(uowMock.Object);
+            con.PutMembership(id, membership);
+            memMock.Verify(acc => acc.UpdateMembership(membership));
+            teamMock.Verify(acc => acc.DeleteTeam(membership.TeamID));
             uowMock.Verify(u => u.Save());
         }
 

@@ -26,6 +26,14 @@ namespace HealthTrac.DataAccess.Entity
             return membership;
         }
 
+        public IEnumerable<Models.Membership> GetActiveMemberships(long teamId)
+        {
+            var memberships = db.Memberships.
+                Where(m => m.TeamID == teamId && (m.MembershipStatus == MembershipStatus.ADMIN || m.MembershipStatus == MembershipStatus.MEMBER)).
+                ToList();
+            return memberships;
+        }
+
         public Models.Membership GetMembership(long teamId, string userId)
         {
             Membership membership = db.Memberships
