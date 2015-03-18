@@ -90,7 +90,7 @@ namespace HealthTrac.Controllers.Api
             memAcc.UpdateMembership(membership);
             if (membership.MembershipStatus != MembershipStatus.MEMBER && membership.MembershipStatus != MembershipStatus.ADMIN) //if this member is active then we know the team is active without querying all memberships
             {
-                int membersLeft = memAcc.GetActiveMemberships(membership.TeamID).Count();
+                int membersLeft = memAcc.GetActiveMemberships(membership.TeamID).Where(m => m.ID != membership.ID).Count();
                 if (membersLeft == 0)
                 {
                     teamAcc.DeleteTeam(membership.TeamID);

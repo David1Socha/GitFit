@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Data.Entity.Infrastructure;
+using System.Data.Entity;
 
 namespace HealthTrac.DataAccess.Entity
 {
@@ -72,7 +73,7 @@ namespace HealthTrac.DataAccess.Entity
 
         public Team DeleteTeam(long teamId)
         {
-            var team = db.Teams.Find(teamId);
+            var team = db.Teams.Include(t => t.Memberships).Single(t => t.ID == teamId);
             return DeleteTeam(team);
         }
 
