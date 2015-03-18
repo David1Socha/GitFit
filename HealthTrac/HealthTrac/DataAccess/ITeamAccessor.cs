@@ -10,5 +10,7 @@ namespace HealthTrac.DataAccess
         HealthTrac.Models.Team CreateTeam(HealthTrac.Models.Team team);
         HealthTrac.Models.Team UpdateTeam(HealthTrac.Models.Team team);
         HealthTrac.Models.Team DeleteTeam(HealthTrac.Models.Team team);
+        HealthTrac.Models.Team DeleteTeam(long teamId);
+        HealthTrac.Models.Team UpdateTeam(long teamId);
     }
 }
