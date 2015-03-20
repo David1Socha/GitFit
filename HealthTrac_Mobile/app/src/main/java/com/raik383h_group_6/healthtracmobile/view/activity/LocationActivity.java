@@ -44,7 +44,7 @@ public class LocationActivity extends ActionBarActivity implements
     /**
      * The desired interval for location updates. Inexact. Updates may be more or less frequent.
      */
-    public static final long UPDATE_INTERVAL_IN_MILLISECONDS = 10000;
+    public static final long UPDATE_INTERVAL_IN_MILLISECONDS = 60000;
 
     /**
      * The fastest rate for active location updates. Exact. Updates will never be more frequent
@@ -79,6 +79,7 @@ public class LocationActivity extends ActionBarActivity implements
     protected TextView mLastUpdateTimeTextView;
     protected TextView mLatitudeTextView;
     protected TextView mLongitudeTextView;
+    protected double totalDist;
 
     /**
      * Tracks the status of the location updates request. Value changes when the user presses the
@@ -96,6 +97,7 @@ public class LocationActivity extends ActionBarActivity implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.location_activity);
 
+        totalDist = 0;
         // Locate the UI widgets.
         mStartUpdatesButton = (Button) findViewById(R.id.start_updates_button);
         mStopUpdatesButton = (Button) findViewById(R.id.stop_updates_button);
@@ -331,10 +333,12 @@ public class LocationActivity extends ActionBarActivity implements
      */
     @Override
     public void onLocationChanged(Location location) {
+        double metersSinceLast = location.distanceTo(mCurrentLocation);
+        totalDist += metersSinceLast;
         mCurrentLocation = location;
         mLastUpdateTime = DateFormat.getTimeInstance().format(new Date());
         updateUI();
-        Toast.makeText(this, getResources().getString(R.string.location_updated_message),
+        Toast.makeText(this, "interval distance is: " + String.valueOf(metersSinceLast) + "\ntotal distance is : " + String.valueOf(totalDist),
                 Toast.LENGTH_SHORT).show();
     }
 
