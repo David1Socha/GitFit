@@ -73,8 +73,7 @@ public class GitFitMainActivity extends BaseActivity implements com.raik383h_gro
     }
 
     public void onClickLocationDemo(View view) {
-        IActivityNavigator nav = new ActivityNavigator(this);
-        nav.openLocation(null);
+        presenter.onClickLocation();
     }
 
     @Override

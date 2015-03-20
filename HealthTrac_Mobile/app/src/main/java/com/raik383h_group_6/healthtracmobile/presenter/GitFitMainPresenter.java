@@ -112,6 +112,10 @@ public class GitFitMainPresenter extends BasePresenter{
         }
     }
 
+    public void onClickLocation() {
+        nav.openLocation(grant);
+    }
+
 
     @Override
     protected BaseView getView() {
