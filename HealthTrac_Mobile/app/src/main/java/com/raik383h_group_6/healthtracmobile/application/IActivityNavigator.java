@@ -51,4 +51,6 @@ public interface IActivityNavigator {
     void finishEditUserSuccess(User user);
 
     void finishEditUserFailure();
+
+    void openLocation(AccessGrant g);
 }
