@@ -33,4 +33,14 @@
         android:text="@string/show_teams"
         android:onClick="onClickShowTeams"/>
 
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:id="@+id/location_demo_button"
+        android:text="Location Demo"
+        android:onClick="onClickLocationDemo"/>
+
 </LinearLayout>

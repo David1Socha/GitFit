@@ -29,6 +29,14 @@
                 android:value=".view.activity.GitFitMainActivity" />
         </activity>
         <activity
+            android:name=".view.activity.LocationActivity"
+            android:launchMode="singleTop"
+            android:label="Location Demo">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".view.activity.GitFitMainActivity" />
+        </activity>
+        <activity
             android:name=".view.activity.GitFitMainActivity"
             android:launchMode="singleTop"
             android:label="@string/git_fit">
