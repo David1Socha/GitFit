@@ -9,13 +9,15 @@ namespace HealthTrac.Models
     {
         public enum Type
         {
-            WALKING, JOGGING, RUNNING, BIKING
+            WALKING, JOGGING, RUNNING, BIKING, UNDETERMINED
         }
         public String Location { get; set; }
-        public long Duration { get; set; }
+        public double Duration { get; set; }
+        public long Steps { get; set; }
+        public double Distance { get; set; }
         public long ID { get; set; }
-        public String name { get; set; }
-        public int UserID { get; set; }
+        public String UserID { get; set; }
+        public virtual User User { get; set; }
         public virtual ICollection<Point> Points { get; set; }
     }
 }
