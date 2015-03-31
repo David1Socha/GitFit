@@ -10,6 +10,6 @@ namespace HealthTrac.Models
         public long ID { get; set; }
         public String Name { get; set; }
         public String Description { get; set; }
-        public virtual ICollection<UserBadge> UserBadges { get; set; }
+        public virtual ICollection<UserBadge> UserBadges { get; set }
     }
 }
