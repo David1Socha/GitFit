@@ -100,5 +100,7 @@
     <string name="longitude_label">Longitude: </string>
     <string name="last_update_time_label">Last location update time:</string>
     <string name="location_updated_message">Location updated</string>
+    <string name="pedometer">Pedometer</string>
+    <string name="steps">Steps</string>
 
 </resources>
