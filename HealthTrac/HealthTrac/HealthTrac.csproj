@@ -206,17 +206,17 @@
     <Compile Include="Controllers\Api\AccountsController.cs" />
     <Compile Include="Controllers\Api\MembershipsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\TeamController.cs" />
     <Compile Include="Controllers\Api\TeamsController.cs" />
     <Compile Include="Controllers\Api\UsersController.cs" />
-    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="DataAccess\ConcurrentUpdateException.cs" />
     <Compile Include="DataAccess\Entity\ApplicationDbContext.cs" />
     <Compile Include="DataAccess\Entity\EntityActivityAccessor.cs" />
     <Compile Include="DataAccess\Entity\EntityMembershipAccessor.cs" />
     <Compile Include="DataAccess\Entity\EntityUserAccessor.cs" />
+    <Compile Include="DataAccess\Entity\EntityUnitOfWork.cs" />
     <Compile Include="DataAccess\IActivityAccessor.cs" />
     <Compile Include="DataAccess\IMembershipAccessor.cs" />
+    <Compile Include="DataAccess\IUnitOfWork.cs" />
     <Compile Include="DataAccess\IUserAccessor.cs" />
     <Compile Include="DataAccess\ITeamAccessor.cs" />
     <Compile Include="DataAccess\Entity\EntityTeamAccessor.cs" />
@@ -224,6 +224,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\Dto\AccessGrantDto.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Activity.cs" />
     <Compile Include="Models\Badge.cs" />
@@ -238,6 +239,11 @@
     <Compile Include="Models\IDateTrackingModel.cs" />
     <Compile Include="Models\Meal.cs" />
     <Compile Include="Models\Point.cs" />
+    <Compile Include="Models\FacebookVerifyResult.cs" />
+    <Compile Include="Models\IDateTrackingModel.cs" />
+    <Compile Include="Models\ExerciseSession.cs" />
+    <Compile Include="Models\IProviderVerifyResult.cs" />
+    <Compile Include="Models\TwitterVerifyResult.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\Membership.cs" />
     <Compile Include="Models\Team.cs" />
@@ -245,6 +251,14 @@
     <Compile Include="Models\UserGoal.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\ApplicationOAuthProvider.cs" />
+    <Compile Include="Services\IFacebookService.cs" />
+    <Compile Include="Services\ILoginService.cs" />
+    <Compile Include="Services\ITwitterService.cs" />
+    <Compile Include="Services\IUserManager.cs" />
+    <Compile Include="Services\LoginService.cs" />
+    <Compile Include="Services\OAuthFacebookService.cs" />
+    <Compile Include="Services\OAuthTwitterService.cs" />
+    <Compile Include="Services\UserManagerAdapter.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>

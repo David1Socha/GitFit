@@ -10,7 +10,7 @@ import java.util.Date;
 public class User implements Parcelable {
     private Date dateCreated, dateModified, birthDate;
     private String firstName, lastName, preferredName, email, userName, location;
-    private String id;
+    private String id, profilePicture;
     private double height, weight, lifetimeDuration, lifetimeDistance;
     private long lifetimeSteps;
 
@@ -118,6 +118,10 @@ public class User implements Parcelable {
         this.preferredName = preferredName;
     }
 
+    public String getProfilePicture() { return profilePicture;}
+
+    public void setProfilePicture(String profilePicture) { this.profilePicture = profilePicture; }
+
     public String getEmail() {
         return email;
     }
@@ -191,6 +195,7 @@ public class User implements Parcelable {
         dest.writeDouble(this.lifetimeDistance);
         dest.writeDouble(this.lifetimeDuration);
         dest.writeLong(this.lifetimeSteps);
+        dest.writeString(this.profilePicture);
     }
 
     public User() {
@@ -217,6 +222,7 @@ public class User implements Parcelable {
         this.lifetimeDistance = in.readDouble();
         this.lifetimeDuration = in.readDouble();
         this.lifetimeSteps = in.readLong();
+        this.profilePicture = in.readString();
     }
 
     public static final Parcelable.Creator<User> CREATOR = new Parcelable.Creator<User>() {

@@ -7,6 +7,7 @@ namespace HealthTrac.Models.Dto
 {
     public class UserDto
     {
+        public String ProfilePicture { get; set; }
         public DateTime DateCreated { get; set; }
         public DateTime DateModified { get; set; }
         public String FirstName { get; set; }
@@ -21,6 +22,24 @@ namespace HealthTrac.Models.Dto
         public string Id { get; set; }
         public string UserName { get; set; }
 
+        public User ToUser()
+        {
+            return new User()
+            {
+                BirthDate = BirthDate,
+                Email = Email,
+                FirstName = FirstName,
+                Height = Height,
+                Location = Location,
+                LastName = LastName,
+                PreferredName = PreferredName,
+                ProfilePicture = ProfilePicture,
+                Sex = Sex,
+                Weight = Weight,
+                UserName = UserName
+            };
+        }
+
         public static UserDto FromUser(User u)
         {
             return new UserDto
@@ -30,6 +49,7 @@ namespace HealthTrac.Models.Dto
                 FirstName = u.FirstName,
                 LastName = u.LastName,
                 PreferredName = u.PreferredName,
+                ProfilePicture = u.ProfilePicture,
                 Email = u.Email,
                 Sex = u.Sex,
                 Height = u.Height,

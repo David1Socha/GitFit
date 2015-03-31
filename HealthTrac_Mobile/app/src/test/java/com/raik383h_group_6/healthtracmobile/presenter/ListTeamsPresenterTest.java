@@ -5,10 +5,9 @@ import android.os.Bundle;
 import android.widget.Adapter;
 import android.widget.AdapterView;
 
-import com.raik383h_group_6.healthtracmobile.R;
 import com.raik383h_group_6.healthtracmobile.application.IActivityNavigator;
-import com.raik383h_group_6.healthtracmobile.content.IResources;
 import com.raik383h_group_6.healthtracmobile.helper.ModelGenerator;
+import com.raik383h_group_6.healthtracmobile.helper.TestStubber;
 import com.raik383h_group_6.healthtracmobile.model.AccessGrant;
 import com.raik383h_group_6.healthtracmobile.model.Team;
 import com.raik383h_group_6.healthtracmobile.service.api.async.IAsyncTeamService;
@@ -30,8 +29,6 @@ public class ListTeamsPresenterTest {
 
     private ListTeamsPresenter presenter;
     private IAsyncTeamService teamService;
-    private Bundle extras;
-    private IResources resources;
     private IActivityNavigator nav;
     private ListTeamsView view;
     private Team team;
@@ -46,16 +43,15 @@ public class ListTeamsPresenterTest {
         teams.add(team);
 
         teamService = mock(IAsyncTeamService.class);
-        extras = mock(Bundle.class);
-        resources = ModelGenerator.genStubbedResources();
         nav = mock(IActivityNavigator.class);
         view = mock(ListTeamsView.class);
+        TestStubber.stubViewForResources(view);
     }
 
     @Test
     public void onItemClickOpensViewTeamWithTeam() {
-        when(extras.getParcelable(GRANT_KEY)).thenReturn(grant);
-        presenter = new ListTeamsPresenter(teamService, extras, resources, nav, view);
+        when(view.getParcelableExtra(GRANT_KEY)).thenReturn(grant);
+        presenter = new ListTeamsPresenter(teamService, nav, view);
         AdapterView<?> parent = mock(AdapterView.class);
         Adapter adapter = mock(Adapter.class);
         when(parent.getAdapter()).thenReturn(adapter);
@@ -66,8 +62,8 @@ public class ListTeamsPresenterTest {
 
     @Test
     public void onResumeShowsNoTeamMessageWhenNoTeamsFound() throws ExecutionException, InterruptedException {
-        when(extras.getParcelable(GRANT_KEY)).thenReturn(grant);
-        presenter = new ListTeamsPresenter(teamService, extras, resources, nav, view);
+        when(view.getParcelableExtra(GRANT_KEY)).thenReturn(grant);
+        presenter = new ListTeamsPresenter(teamService, nav, view);
         when(teamService.getTeamsAsync(grant.getAuthHeader())).thenReturn(null);
         presenter.onResume();
         verify(view).setNoTeamsMessageDisplay(true);
@@ -75,15 +71,15 @@ public class ListTeamsPresenterTest {
 
     @Test
     public void onResumeShowsNoTeamMessageWhenNoAccessGrant() {
-        presenter = new ListTeamsPresenter(teamService, extras, resources, nav, view);
+        presenter = new ListTeamsPresenter(teamService, nav, view);
         presenter.onResume();
         verify(view).setNoTeamsMessageDisplay(true);
     }
 
     @Test
     public void onResumeShowsTeamsWhenTeamsFound() throws ExecutionException, InterruptedException {
-        when(extras.getParcelable(GRANT_KEY)).thenReturn(grant);
-        presenter = new ListTeamsPresenter(teamService, extras, resources, nav, view);
+        when(view.getParcelableExtra(GRANT_KEY)).thenReturn(grant);
+        presenter = new ListTeamsPresenter(teamService, nav, view);
         when(teamService.getTeamsAsync(grant.getAuthHeader())).thenReturn(teams);
         presenter.onResume();
         verify(view).setNoTeamsMessageDisplay(false);

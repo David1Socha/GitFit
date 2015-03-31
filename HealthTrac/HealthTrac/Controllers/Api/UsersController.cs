@@ -16,10 +16,12 @@ namespace HealthTrac.Controllers.Api
     public class UsersController : ApiController
     {
         private IUserAccessor accessor;
+        private IUnitOfWork uow;
 
-        public UsersController(IUserAccessor acc)
+        public UsersController(IUnitOfWork uow)
         {
-            this.accessor = acc;
+            this.uow = uow;
+            this.accessor = uow.UserAccessor;
         }
 
         // GET: api/Users
@@ -68,9 +70,10 @@ namespace HealthTrac.Controllers.Api
             {
                 return BadRequest();
             }
+            accessor.UpdateUser(user);
             try
             {
-                accessor.UpdateUser(user);
+                uow.Save();
             }
             catch (ConcurrentUpdateException)
             {
@@ -90,6 +93,12 @@ namespace HealthTrac.Controllers.Api
         private bool UserExists(string id)
         {
             return accessor.GetUsers().Count(e => e.Id == id) > 0;
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            uow.Dispose();
+            base.Dispose(disposing);
         }
     }
 }

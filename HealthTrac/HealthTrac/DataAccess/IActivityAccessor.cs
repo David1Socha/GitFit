@@ -12,9 +12,9 @@ namespace HealthTrac.DataAccess
 
         IEnumerable<Activity> GetActivities(String userId);
 
-        bool CreateActivity(Activity activity);
+        void CreateActivity(Activity activity);
 
-        bool DeleteActivity(Activity activity);
+        void DeleteActivity(long ID);
 
     }
 }

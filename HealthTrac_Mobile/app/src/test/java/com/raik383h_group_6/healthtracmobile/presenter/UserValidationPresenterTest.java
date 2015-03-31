@@ -1,8 +1,7 @@
 package com.raik383h_group_6.healthtracmobile.presenter;
 
-import com.raik383h_group_6.healthtracmobile.R;
-import com.raik383h_group_6.healthtracmobile.content.IResources;
 import com.raik383h_group_6.healthtracmobile.helper.ModelGenerator;
+import com.raik383h_group_6.healthtracmobile.helper.TestStubber;
 import com.raik383h_group_6.healthtracmobile.model.User;
 import com.raik383h_group_6.healthtracmobile.service.FormatUtils;
 import com.raik383h_group_6.healthtracmobile.service.api.async.IAsyncUserService;
@@ -11,25 +10,30 @@ import com.raik383h_group_6.healthtracmobile.view.UserValidationView;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.mockito.Mockito.*;
-import static org.junit.Assert.*;
-import static com.raik383h_group_6.healthtracmobile.helper.TestConstants.*;
+import static com.raik383h_group_6.healthtracmobile.helper.TestConstants.EMPTY_FIELD_ERROR;
+import static com.raik383h_group_6.healthtracmobile.helper.TestConstants.FEMALE;
+import static com.raik383h_group_6.healthtracmobile.helper.TestConstants.INVALID_DATE_ERROR;
+import static com.raik383h_group_6.healthtracmobile.helper.TestConstants.MALE;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 public class UserValidationPresenterTest {
 
     private UserValidationPresenter presenter;
     private User validUser;
     private UserValidationView view;
-    private IResources resources;
     private IAsyncUserService userService;
 
     @Before
     public void setup() {
         validUser = ModelGenerator.genBasicUser();
         view = mock(UserValidationView.class);
-        resources = ModelGenerator.genStubbedResources();
+        TestStubber.stubViewForResources(view);
         userService = mock(IAsyncUserService.class);
-        presenter = new UserValidationPresenter(userService, view, resources);
+        presenter = new UserValidationPresenter(userService, view);
     }
 
     @Test

@@ -11,10 +11,9 @@ import android.widget.Toast;
 import com.google.inject.Inject;
 import com.raik383h_group_6.healthtracmobile.R;
 import com.raik383h_group_6.healthtracmobile.application.IActivityNavigator;
-import com.raik383h_group_6.healthtracmobile.content.IResources;
-import com.raik383h_group_6.healthtracmobile.content.ResourcesAdapter;
 import com.raik383h_group_6.healthtracmobile.model.User;
 import com.raik383h_group_6.healthtracmobile.application.ActivityNavigator;
+import com.raik383h_group_6.healthtracmobile.presenter.BasePresenter;
 import com.raik383h_group_6.healthtracmobile.presenter.PresenterFactory;
 import com.raik383h_group_6.healthtracmobile.presenter.CreateUserPresenter;
 import com.raik383h_group_6.healthtracmobile.presenter.UserValidationPresenter;
@@ -26,7 +25,7 @@ import roboguice.inject.ContentView;
 import roboguice.inject.InjectView;
 
 @ContentView(R.layout.activity_register_user)
-public class CreateUserActivity extends CustomRoboActionBarActivity implements CreateUserView {
+public class CreateUserActivity extends BaseActivity implements CreateUserView {
     @Inject
     private PresenterFactory presenterFactory;
     private CreateUserPresenter presenter;
@@ -159,10 +158,9 @@ public class CreateUserActivity extends CustomRoboActionBarActivity implements C
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Bundle extras = getIntent().getExtras();
-        IResources resources = new ResourcesAdapter(getResources());
         IActivityNavigator nav = new ActivityNavigator(this);
-        UserValidationPresenter userValidationPresenter = presenterFactory.create(this, resources);
-        presenter= presenterFactory.create(userValidationPresenter, extras, resources, nav, this);
+        UserValidationPresenter userValidationPresenter = presenterFactory.create(this);
+        presenter= presenterFactory.create(userValidationPresenter, nav, this);
         presenter.onCreate();
     }
 
@@ -218,5 +216,10 @@ public class CreateUserActivity extends CustomRoboActionBarActivity implements C
     @Override
     public void displayMessage(String msg) {
         Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public BasePresenter getPresenter() {
+        return presenter;
     }
 }

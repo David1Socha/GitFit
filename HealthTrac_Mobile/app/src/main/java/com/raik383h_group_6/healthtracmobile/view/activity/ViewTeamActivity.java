@@ -11,8 +11,7 @@ import com.google.inject.Inject;
 import com.raik383h_group_6.healthtracmobile.R;
 import com.raik383h_group_6.healthtracmobile.application.ActivityNavigator;
 import com.raik383h_group_6.healthtracmobile.application.IActivityNavigator;
-import com.raik383h_group_6.healthtracmobile.content.IResources;
-import com.raik383h_group_6.healthtracmobile.content.ResourcesAdapter;
+import com.raik383h_group_6.healthtracmobile.presenter.BasePresenter;
 import com.raik383h_group_6.healthtracmobile.presenter.PresenterFactory;
 import com.raik383h_group_6.healthtracmobile.presenter.ViewTeamPresenter;
 import com.raik383h_group_6.healthtracmobile.view.ViewTeamView;
@@ -21,7 +20,7 @@ import roboguice.inject.ContentView;
 import roboguice.inject.InjectView;
 
 @ContentView(R.layout.activity_view_team)
-public class ViewTeamActivity extends CustomRoboActionBarActivity implements ViewTeamView {
+public class ViewTeamActivity extends BaseActivity implements ViewTeamView {
     @InjectView(R.id.team_name_textview)
     TextView teamNameTextView;
     @InjectView(R.id.description_textview)
@@ -41,10 +40,8 @@ public class ViewTeamActivity extends CustomRoboActionBarActivity implements Vie
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        IResources resources = new ResourcesAdapter(getResources());
         IActivityNavigator nav = new ActivityNavigator(this);
-        Bundle extras = getIntent().getExtras();
-        presenter = presenterFactory.create(extras, resources, nav, this);
+        presenter = presenterFactory.create(nav, this);
     }
 
     @Override
@@ -118,4 +115,8 @@ public class ViewTeamActivity extends CustomRoboActionBarActivity implements Vie
         }
     }
 
+    @Override
+    public BasePresenter getPresenter() {
+        return presenter;
+    }
 }

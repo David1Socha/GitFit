@@ -1,6 +1,9 @@
 package com.raik383h_group_6.healthtracmobile.application;
 
 import android.app.Activity;
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 
 import com.raik383h_group_6.healthtracmobile.R;
@@ -9,6 +12,7 @@ import com.raik383h_group_6.healthtracmobile.model.Team;
 import com.raik383h_group_6.healthtracmobile.model.Token;
 import com.raik383h_group_6.healthtracmobile.model.User;
 import com.raik383h_group_6.healthtracmobile.view.activity.AuthenticationActivity;
+import com.raik383h_group_6.healthtracmobile.view.activity.GitFitMainActivity;
 import com.raik383h_group_6.healthtracmobile.view.activity.ListTeamsActivity;
 import com.raik383h_group_6.healthtracmobile.view.activity.ListUsersActivity;
 import com.raik383h_group_6.healthtracmobile.view.activity.OAuthBrowserActivity;
@@ -30,6 +34,18 @@ public class ActivityNavigator implements IActivityNavigator {
         Intent intent = new Intent(activity, OAuthBrowserActivity.class);
         intent.putExtra(activity.getString(R.string.EXTRA_PROVIDER), provider);
         activity.startActivityForResult(intent, reqCode);
+    }
+
+    @Override
+    public void openMain() {
+        Intent restartIntent = activity.getPackageManager()
+                .getLaunchIntentForPackage(activity.getPackageName() );
+        PendingIntent intent = PendingIntent.getActivity(
+                activity, 0,
+                restartIntent, PendingIntent.FLAG_CANCEL_CURRENT);
+        AlarmManager manager = (AlarmManager) activity.getSystemService(Context.ALARM_SERVICE);
+        manager.set(AlarmManager.RTC, System.currentTimeMillis() + 100, intent);
+        System.exit(0);
     }
 
     @Override

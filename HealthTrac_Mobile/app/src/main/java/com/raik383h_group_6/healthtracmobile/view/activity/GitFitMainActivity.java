@@ -10,18 +10,16 @@ import android.widget.Toast;
 import com.google.inject.Inject;
 import com.raik383h_group_6.healthtracmobile.R;
 import com.raik383h_group_6.healthtracmobile.application.IActivityNavigator;
-import com.raik383h_group_6.healthtracmobile.content.IResources;
-import com.raik383h_group_6.healthtracmobile.content.ResourcesAdapter;
 import com.raik383h_group_6.healthtracmobile.application.ActivityNavigator;
+import com.raik383h_group_6.healthtracmobile.presenter.BasePresenter;
 import com.raik383h_group_6.healthtracmobile.presenter.GitFitMainPresenter;
 import com.raik383h_group_6.healthtracmobile.presenter.PresenterFactory;
 
-import roboguice.activity.RoboActionBarActivity;
 import roboguice.inject.ContentView;
 import roboguice.inject.InjectView;
 
 @ContentView(R.layout.git_fit_main_layout)
-public class GitFitMainActivity extends CustomRoboActionBarActivity implements com.raik383h_group_6.healthtracmobile.view.GitFitMainView {
+public class GitFitMainActivity extends BaseActivity implements com.raik383h_group_6.healthtracmobile.view.GitFitMainView {
 
     @InjectView(R.id.show_users_button)
     Button showUsersButton;
@@ -31,28 +29,13 @@ public class GitFitMainActivity extends CustomRoboActionBarActivity implements c
     Button showProfileButton;
     @Inject
     PresenterFactory presenterFactory;
-    private SharedPreferences prefs;
     private GitFitMainPresenter presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        IResources resources = new ResourcesAdapter(getResources());
         IActivityNavigator nav = new ActivityNavigator(this);
-        prefs = getSharedPreferences(getString(R.string.shared_prefs), MODE_PRIVATE);
-        presenter = presenterFactory.create(resources, nav, this);
-    }
-
-    @Override
-    public String getPref(String key) {
-        return prefs.getString(key, null);
-    }
-
-    @Override
-    public void setPref(String key, String val) {
-        SharedPreferences.Editor editor = prefs.edit();
-        editor.putString(key, val);
-        editor.apply();
+        presenter = presenterFactory.create(nav, this);
     }
 
     @Override
@@ -92,5 +75,10 @@ public class GitFitMainActivity extends CustomRoboActionBarActivity implements c
     @Override
     public void displayMessage(String msg) {
         Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public BasePresenter getPresenter() {
+        return presenter;
     }
 }

@@ -6,17 +6,13 @@ import com.google.inject.Inject;
 import com.google.inject.name.Named;
 import com.raik383h_group_6.healthtracmobile.R;
 import com.raik383h_group_6.healthtracmobile.application.IActivityNavigator;
-import com.raik383h_group_6.healthtracmobile.content.IResources;
-import com.raik383h_group_6.healthtracmobile.content.ResourcesAdapter;
 import com.raik383h_group_6.healthtracmobile.application.ActivityNavigator;
+import com.raik383h_group_6.healthtracmobile.presenter.BasePresenter;
 import com.raik383h_group_6.healthtracmobile.presenter.OAuthBrowserPresenter;
 import com.raik383h_group_6.healthtracmobile.presenter.PresenterFactory;
 import com.raik383h_group_6.healthtracmobile.service.oauth.IAsyncOAuthService;
-import com.raik383h_group_6.healthtracmobile.service.oauth.IOAuthService;
 
-import roboguice.activity.RoboActionBarActivity;
-
-public class OAuthBrowserActivity extends CustomRoboActionBarActivity {
+public class OAuthBrowserActivity extends BaseActivity {
 
     private WebView webView;
     @Inject
@@ -35,7 +31,6 @@ public class OAuthBrowserActivity extends CustomRoboActionBarActivity {
         webView = new WebView(this);
         setContentView(webView);
         Bundle extras = getIntent().getExtras();
-        IResources resources = new ResourcesAdapter(getResources());
         IAsyncOAuthService oAuthService;
         if (extras.getString(getString(R.string.EXTRA_PROVIDER)).equals(getString(R.string.PROVIDER_FACEBOOK))) {
             oAuthService = asyncFacebookOAuthService;
@@ -43,7 +38,12 @@ public class OAuthBrowserActivity extends CustomRoboActionBarActivity {
             oAuthService = asyncTwitterOAuthService;
         }
         IActivityNavigator nav = new ActivityNavigator(this);
-        presenter = presenterFactory.create(oAuthService, webView, extras, resources, nav);
+        presenter = presenterFactory.create(oAuthService, webView, nav, this);
         presenter.onCreate();
+    }
+
+    @Override
+    public BasePresenter getPresenter() {
+        return presenter;
     }
 }

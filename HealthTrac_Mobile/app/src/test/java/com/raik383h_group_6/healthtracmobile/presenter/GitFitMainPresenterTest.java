@@ -2,32 +2,26 @@ package com.raik383h_group_6.healthtracmobile.presenter;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.widget.Adapter;
-import android.widget.AdapterView;
 
-import com.google.gson.Gson;
-import com.raik383h_group_6.healthtracmobile.R;
 import com.raik383h_group_6.healthtracmobile.application.IActivityNavigator;
-import com.raik383h_group_6.healthtracmobile.content.IResources;
+import com.raik383h_group_6.healthtracmobile.application.RequestCodes;
 import com.raik383h_group_6.healthtracmobile.helper.ModelGenerator;
+import com.raik383h_group_6.healthtracmobile.helper.TestStubber;
 import com.raik383h_group_6.healthtracmobile.model.AccessGrant;
-import com.raik383h_group_6.healthtracmobile.model.Team;
 import com.raik383h_group_6.healthtracmobile.model.User;
-import com.raik383h_group_6.healthtracmobile.service.api.async.IAsyncTeamService;
 import com.raik383h_group_6.healthtracmobile.service.api.async.IAsyncUserService;
 import com.raik383h_group_6.healthtracmobile.service.json.JsonParser;
 import com.raik383h_group_6.healthtracmobile.view.GitFitMainView;
-import com.raik383h_group_6.healthtracmobile.view.ListTeamsView;
 
-import org.apache.http.auth.AUTH;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.concurrent.ExecutionException;
 
-import static com.raik383h_group_6.healthtracmobile.helper.TestConstants.*;
+import static com.raik383h_group_6.healthtracmobile.helper.TestConstants.ERROR_FIND_PROFILE;
+import static com.raik383h_group_6.healthtracmobile.helper.TestConstants.FAKE_JSON;
+import static com.raik383h_group_6.healthtracmobile.helper.TestConstants.GRANT_KEY;
+import static com.raik383h_group_6.healthtracmobile.helper.TestConstants.GRANT_PREF_KEY;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
@@ -38,7 +32,6 @@ public class GitFitMainPresenterTest {
     private GitFitMainView view;
     private GitFitMainPresenter presenter;
     private IAsyncUserService userService;
-    private IResources resources;
     private IActivityNavigator nav;
     private JsonParser json;
     private AccessGrant grant;
@@ -50,11 +43,11 @@ public class GitFitMainPresenterTest {
         user = ModelGenerator.genBasicUser();
 
         view = mock(GitFitMainView.class);
+        TestStubber.stubViewForResources(view);
         userService = mock(IAsyncUserService.class);
-        resources = ModelGenerator.genStubbedResources();
         nav = mock(IActivityNavigator.class);
         json = mock(JsonParser.class);
-        presenter = new GitFitMainPresenter(userService, json, resources, nav, view);
+        presenter = new GitFitMainPresenter(userService, json, nav, view);
     }
 
     @Test
@@ -63,13 +56,6 @@ public class GitFitMainPresenterTest {
         when(json.fromJson(FAKE_JSON, AccessGrant.class)).thenReturn(grant);
         presenter.onResume();
         assertEquals(grant, presenter.getGrant());
-    }
-
-    @Test
-    public void onResumeOpensAuthenticationWhenNoGrantInSharedPrefs() {
-        when(view.getPref(GRANT_PREF_KEY)).thenReturn(null);
-        presenter.onResume();
-        verify(nav).openAuthentication(GitFitMainPresenter.AUTH);
     }
 
     @Test
@@ -82,7 +68,7 @@ public class GitFitMainPresenterTest {
     @Test
     public void onClickShowUsersOpensAuthenticationWhenGrantBad() {
         presenter.onClickShowUsers();
-        verify(nav).openAuthentication(GitFitMainPresenter.AUTH);
+        verify(nav).openAuthentication(RequestCodes.AUTH);
     }
 
     @Test
@@ -126,14 +112,14 @@ public class GitFitMainPresenterTest {
     @Test
     public void onClickShowTeamsOpensAuthenticationWhenGrantBad() {
         presenter.onClickShowTeams();
-        verify(nav).openAuthentication(GitFitMainPresenter.AUTH);
+        verify(nav).openAuthentication(RequestCodes.AUTH);
     }
 
     @Test
     public void onActivityResultSavesGrantWhenFromAuthSuccess() {
         Bundle data = mock(Bundle.class);
         when(data.getParcelable(GRANT_KEY)).thenReturn(grant);
-        presenter.onActivityResult(GitFitMainPresenter.AUTH, Activity.RESULT_OK, data);
+        presenter.onActivityResult(RequestCodes.AUTH, Activity.RESULT_OK, data);
         assertEquals(grant, presenter.getGrant());
     }
 
