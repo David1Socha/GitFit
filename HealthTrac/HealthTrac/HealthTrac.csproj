@@ -240,8 +240,6 @@
     <Compile Include="Models\Meal.cs" />
     <Compile Include="Models\Point.cs" />
     <Compile Include="Models\FacebookVerifyResult.cs" />
-    <Compile Include="Models\IDateTrackingModel.cs" />
-    <Compile Include="Models\ExerciseSession.cs" />
     <Compile Include="Models\IProviderVerifyResult.cs" />
     <Compile Include="Models\TwitterVerifyResult.cs" />
     <Compile Include="Models\User.cs" />
