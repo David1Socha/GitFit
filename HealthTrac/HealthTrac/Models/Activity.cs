@@ -9,7 +9,7 @@ namespace HealthTrac.Models
     {
         public enum Type
         {
-            WALKING, JOGGING, RUNNING, BIKING, UNDETERMINED
+            WALKING, JOGGING, RUNNING, BIKING
         }
         public String Location { get; set; }
         public double Duration { get; set; }

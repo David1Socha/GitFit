@@ -33,6 +33,9 @@ namespace HealthTrac.Models
         public String Location { get; set; }
         public double Height { get; set; }
         public double Weight { get; set; }
+        public long LifetimeSteps { get; set; }
+        public double LifetimeDuration { get; set; }
+        public double LifetimeDistance { get; set; }
         public DateTime? BirthDate { get; set; }
         public virtual ICollection<Membership> Memberships { get; set; }
     }
