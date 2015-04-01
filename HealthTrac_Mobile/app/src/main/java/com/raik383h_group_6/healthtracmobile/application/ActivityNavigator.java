@@ -20,6 +20,7 @@ import com.raik383h_group_6.healthtracmobile.view.activity.OAuthBrowserActivity;
 import com.raik383h_group_6.healthtracmobile.view.activity.OAuthPromptActivity;
 import com.raik383h_group_6.healthtracmobile.view.activity.CreateUserActivity;
 import com.raik383h_group_6.healthtracmobile.view.activity.EditUserActivity;
+import com.raik383h_group_6.healthtracmobile.view.activity.PedometerActivity;
 import com.raik383h_group_6.healthtracmobile.view.activity.ViewTeamActivity;
 import com.raik383h_group_6.healthtracmobile.view.activity.ViewUserActivity;
 
@@ -204,4 +205,12 @@ public class ActivityNavigator implements IActivityNavigator {
         i.putExtra(activity.getString(R.string.EXTRA_ACCESS_GRANT), g);
         activity.startActivity(i);
     }
+
+    @Override
+    public void openPedometer(AccessGrant g) {
+        Intent i = new Intent(activity, PedometerActivity.class);
+        i.putExtra(activity.getString(R.string.EXTRA_ACCESS_GRANT), g);
+        activity.startActivity(i);
+    }
+
 }

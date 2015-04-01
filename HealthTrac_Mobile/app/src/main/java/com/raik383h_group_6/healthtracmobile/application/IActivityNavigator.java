@@ -53,4 +53,6 @@ public interface IActivityNavigator {
     void finishEditUserFailure();
 
     void openLocation(AccessGrant g);
+
+    void openPedometer(AccessGrant g);
 }

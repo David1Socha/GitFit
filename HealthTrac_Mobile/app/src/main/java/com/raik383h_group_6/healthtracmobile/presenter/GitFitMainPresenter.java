@@ -116,6 +116,8 @@ public class GitFitMainPresenter extends BasePresenter{
         nav.openLocation(grant);
     }
 
+    public void onClickPedometer() { nav.openPedometer(grant); }
+
 
     @Override
     protected BaseView getView() {

@@ -43,4 +43,14 @@
         android:text="Location Demo"
         android:onClick="onClickLocationDemo"/>
 
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:id="@+id/pedometer_demo_button"
+        android:text="Pedometer Demo"
+        android:onClick="onClickPedometerDemo"/>
+
 </LinearLayout>

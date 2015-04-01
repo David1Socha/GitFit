@@ -76,6 +76,8 @@ public class GitFitMainActivity extends BaseActivity implements com.raik383h_gro
         presenter.onClickLocation();
     }
 
+    public void onClickPedometerDemo(View view) { presenter.onClickPedometer(); }
+
     @Override
     public void displayMessage(String msg) {
         Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();

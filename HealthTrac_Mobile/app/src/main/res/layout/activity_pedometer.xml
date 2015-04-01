@@ -15,9 +15,9 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="5"
+        android:text="0"
         android:textSize="100dp"
-        android:id="@+id/pedometer_steps_count"
+        android:id="@+id/stepcount_textview"
         android:layout_gravity="center_horizontal" />
 
     <TextView
@@ -25,7 +25,18 @@
         android:layout_height="wrap_content"
         android:text="@string/steps"
         android:textSize="30dp"
-        android:id="@+id/pedometer_steps_textview"
+        android:id="@+id/steps_textview"
+        android:layout_gravity="center_horizontal" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="20dp"
+        android:layout_marginTop="10dp"
+        android:text="Reset"
+        android:textSize="30dp"
+        android:onClick="onClickStepReset"
+        android:id="@+id/step_reset_button"
         android:layout_gravity="center_horizontal" />
 
 </LinearLayout>
