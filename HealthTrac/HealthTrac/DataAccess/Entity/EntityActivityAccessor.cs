@@ -26,7 +26,8 @@ namespace HealthTrac.DataAccess.Entity
         public IEnumerable<Activity> GetActivities(string userId)
         {
             IEnumerable<Activity> activities = db.Activities
-                .Where(a => a.UserID.Equals(userId));
+                .Where(a => a.UserID.Equals(userId))
+                .ToList();
             return activities;
         }
         public void CreateActivity(Activity activity)
