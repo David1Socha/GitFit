@@ -5,11 +5,6 @@ using System.Web;
 
 namespace HealthTrac.Models
 {
-    public enum Field
-    {
-        STEPS, DISTANCE, DURATION
-    }
-
     public class Goal
     {
         public long ID { get; set; }
