@@ -14,10 +14,80 @@ namespace HealthTrac.DataAccess.Entity
         private IMembershipAccessor membership;
         private ITeamAccessor team;
         private IUserAccessor user;
+        private IBadgeAccessor badge;
+        private IEnergyLevelAccessor energyLevel;
+        private IGoalAccessor goal;
+        private IMealAccessor meal;
+        private IPointAccessor point;
+        private IUserBadgeAccessor userBadge;
+        private IUserGoalAccessor userGoal;
 
         public EntityUnitOfWork(ApplicationDbContext db)
         {
             this.db = db;
+        }
+
+        public IUserGoalAccessor UserGoalAccessor
+        {
+            get
+            {
+                userGoal = userGoal ?? new EntityUserGoalAccessor(db);
+                return userGoal;
+            }
+        }
+
+        public IUserBadgeAccessor UserBadgeAccessor
+        {
+            get
+            {
+                userBadge = userBadge ?? new EntityUserBadgeAccessor(db);
+                return userBadge;
+            }
+        }
+
+        public IPointAccessor PointAccessor
+        {
+            get
+            {
+                point = point ?? new EntityPointAccessor(db);
+                return point;
+            }
+        }
+
+        public IMealAccessor MealAccessor
+        {
+            get
+            {
+                meal = meal ?? new EntityMealAccessor(db);
+                return meal;
+            }
+        }
+
+        public IGoalAccessor GoalAccessor
+        {
+            get
+            {
+                goal = goal ?? new EntityGoalAccessor(db);
+                return goal;
+            }
+        }
+
+        public IEnergyLevelAccessor EnergyLevelAccessor
+        {
+            get
+            {
+                energyLevel = energyLevel ?? new EntityEnergyLevelAccessor(db);
+                return energyLevel;
+            }
+        }
+
+        public IBadgeAccessor BadgeAccessor
+        {
+            get
+            {
+                badge = badge ?? new EntityBadgeAccessor(db);
+                return badge;
+            }
         }
 
         public IActivityAccessor ActivityAccessor

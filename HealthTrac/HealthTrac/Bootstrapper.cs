@@ -36,10 +36,6 @@ namespace HealthTrac
         private static IUnityContainer BuildUnityContainer()
         {
             var container = new UnityContainer();
-            container.RegisterType<IUserAccessor, EntityUserAccessor>(new HierarchicalLifetimeManager());
-            container.RegisterType<ITeamAccessor, EntityTeamAccessor>(new HierarchicalLifetimeManager());
-            container.RegisterType<IMembershipAccessor, EntityMembershipAccessor>(new HierarchicalLifetimeManager());
-            container.RegisterType<IActivityAccessor, EntityActivityAccessor>(new HierarchicalLifetimeManager());
             container.RegisterType<IUnitOfWork, EntityUnitOfWork>(new HierarchicalLifetimeManager());
             container.RegisterType<IFacebookService, OAuthFacebookService>(new HierarchicalLifetimeManager());
             container.RegisterType<ITwitterService, OAuthTwitterService>(new HierarchicalLifetimeManager());
