@@ -27,13 +27,13 @@ namespace HealthTrac.Controllers.Api
             this.actAcc = uow.ActivityAccessor;
         }
         // GET: api/Activities?userId=xyz
-        public IEnumerable<Activity> GetActivities(String userId)
+        public IEnumerable<ActivityDto> GetActivities(String userId)
         {
-            return actAcc.GetActivities(userId);
+            return actAcc.GetActivities(userId).Select(a => ActivityDto.FromActivity(a));
         }
 
         // GET: api/Activities/5
-        [ResponseType(typeof(Activity))]
+        [ResponseType(typeof(ActivityDto))]
         public IHttpActionResult GetActivity(long id)
         {
             var a = actAcc.GetActivity(id);
@@ -41,7 +41,7 @@ namespace HealthTrac.Controllers.Api
             {
                 return NotFound();
             }
-            return Ok(a);
+            return Ok(ActivityDto.FromActivity(a));
         }
 
         // PUT: api/Activities/5
@@ -78,7 +78,7 @@ namespace HealthTrac.Controllers.Api
         }
 
         // POST: api/Activities
-        [ResponseType(typeof(Activity))]
+        [ResponseType(typeof(ActivityDto))]
         public IHttpActionResult PostActivity(Activity activity)
         {
             if (!ModelState.IsValid)
@@ -89,12 +89,12 @@ namespace HealthTrac.Controllers.Api
             actAcc.CreateActivity(activity);
             uow.Save();
 
-            return CreatedAtRoute("DefaultApi", new { id = activity.ID }, activity);
+            return CreatedAtRoute("DefaultApi", new { id = activity.ID }, ActivityDto.FromActivity(activity));
         }
 
         // DELETE: api/Activities/5
         [ResponseType(typeof(void))]
-        public IHttpActionResult DeleteTeam(long id)
+        public IHttpActionResult DeleteActivity(long id)
         {
             actAcc.DeleteActivity(id);
             uow.Save();
