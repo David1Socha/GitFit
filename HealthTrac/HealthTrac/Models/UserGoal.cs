@@ -9,7 +9,7 @@ namespace HealthTrac.Models
     {
         public long ID { get; set; }
         public long GoalID { get; set; }
-        public long UserID { get; set; }
+        public String UserID { get; set; }
         public virtual Goal Goal { get; set; }
         public virtual User User { get; set; }
         public DateTime DateAssigned { get; set; }

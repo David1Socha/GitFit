@@ -70,17 +70,10 @@ namespace HealthTrac.DataAccess.Entity
             return UpdateTeam(team);
         }
 
-
         public Team DeleteTeam(long teamId)
         {
             var team = db.Teams.Include(t => t.Memberships).Single(t => t.ID == teamId);
             return DeleteTeam(team);
-        }
-
-        public Team UpdateTeam(long teamId)
-        {
-            var team = db.Teams.Find(teamId);
-            return UpdateTeam(team);
         }
     }
 }
