@@ -9,7 +9,8 @@ namespace HealthTrac.Models
     {
         public long ID { get; set; }
         public String Name { get; set; }
-        public String Description { get; set; }
+        public double Threshold { get; set; }
+        public Field Field { get; set; }
         public virtual ICollection<UserBadge> UserBadges { get; set; }
     }
 }
