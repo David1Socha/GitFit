@@ -30,9 +30,10 @@ namespace HealthTrac.DataAccess.Entity
                 .ToList();
             return activities;
         }
-        public void CreateActivity(Activity activity)
+        public Activity CreateActivity(Activity activity)
         {
             db.Activities.Add(activity);
+            return activity;
         }
         public void DeleteActivity(long ID)
         {
@@ -43,6 +44,12 @@ namespace HealthTrac.DataAccess.Entity
             {
                 db.Activities.Remove(activity);
             }
+        }
+
+        public Activity UpdateActivity(Activity activity)
+        {
+            db.Entry(activity).State = System.Data.Entity.EntityState.Modified;
+            return activity;
         }
 
     }

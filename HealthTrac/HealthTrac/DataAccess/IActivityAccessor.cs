@@ -12,7 +12,8 @@ namespace HealthTrac.DataAccess
 
         IEnumerable<Activity> GetActivities(String userId);
 
-        void CreateActivity(Activity activity);
+        Activity CreateActivity(Activity activity);
+        Activity UpdateActivity(Activity activity);
 
         void DeleteActivity(long ID);
 
