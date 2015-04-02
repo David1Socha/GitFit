@@ -11,7 +11,6 @@ namespace HealthTrac.Models
         {
             WALKING, JOGGING, RUNNING, BIKING
         }
-        public String Location { get; set; }
         public double Duration { get; set; }
         public long Steps { get; set; }
         public double Distance { get; set; }
