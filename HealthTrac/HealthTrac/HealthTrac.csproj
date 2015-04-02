@@ -246,6 +246,7 @@
     <Compile Include="Models\DateTrackingModel.cs" />
     <Compile Include="Models\Dto\CredentialsDto.cs" />
     <Compile Include="Models\Dto\MembershipDto.cs" />
+    <Compile Include="Models\Dto\ActivityDto.cs" />
     <Compile Include="Models\Dto\TeamDto.cs" />
     <Compile Include="Models\Dto\UserDto.cs" />
     <Compile Include="Models\Dto\UserLoginDto.cs" />
