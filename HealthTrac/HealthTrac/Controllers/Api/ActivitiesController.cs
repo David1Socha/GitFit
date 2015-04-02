@@ -46,7 +46,7 @@ namespace HealthTrac.Controllers.Api
 
         // PUT: api/Activities/5
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutMembership(long id, Activity activity)
+        public IHttpActionResult PutActivity(long id, Activity activity)
         {
             if (!ModelState.IsValid)
             {
