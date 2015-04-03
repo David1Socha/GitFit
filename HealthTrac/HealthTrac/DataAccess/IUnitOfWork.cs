@@ -9,17 +9,17 @@ namespace HealthTrac.DataAccess
 {
     public interface IUnitOfWork : IDisposable
     {
-        IActivityAccessor ActivityAccessor { get; }
+        IActivityService ActivityService { get; }
         IMembershipService MembershipService { get; }
         ITeamService TeamService { get; }
         IUserService UserService { get; }
         IBadgeService BadgeService { get; }
-        IEnergyLevelAccessor EnergyLevelAccessor { get; }
-        IGoalAccessor GoalAccessor { get; }
-        IMealAccessor MealAccessor { get; }
-        IPointAccessor PointAccessor { get; }
-        IUserBadgeAccessor UserBadgeAccessor { get; }
-        IUserGoalAccessor UserGoalAccessor { get; }
+        IEnergyLevelService EnergyLevelService { get; }
+        IGoalService GoalService { get; }
+        IMealService MealService { get; }
+        IPointService PointService { get; }
+        IUserBadgeService UserBadgeService { get; }
+        IUserGoalService UserGoalService { get; }
         void Save();
 
     }

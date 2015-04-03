@@ -19,24 +19,24 @@ namespace HealthTrac.Controllers.Api
     {
 
         private IUnitOfWork uow;
-        private IActivityAccessor actAcc;
+        private IActivityService actSvc;
 
         public ActivitiesController(IUnitOfWork uow)
         {
             this.uow = uow;
-            this.actAcc = uow.ActivityAccessor;
+            this.actSvc = uow.ActivityService;
         }
         // GET: api/Activities?userId=xyz
         public IEnumerable<ActivityDto> GetActivities(String userId)
         {
-            return actAcc.GetActivities(userId).Select(a => ActivityDto.FromActivity(a));
+            return actSvc.GetActivities(userId).Select(a => ActivityDto.FromActivity(a));
         }
 
         // GET: api/Activities/5
         [ResponseType(typeof(ActivityDto))]
         public IHttpActionResult GetActivity(long id)
         {
-            var a = actAcc.GetActivity(id);
+            var a = actSvc.GetActivity(id);
             if (a == null)
             {
                 return NotFound();
@@ -57,7 +57,7 @@ namespace HealthTrac.Controllers.Api
             {
                 return BadRequest();
             }
-            actAcc.UpdateActivity(activity);
+            actSvc.UpdateActivity(activity);
             try
             {
                 uow.Save();
@@ -86,7 +86,7 @@ namespace HealthTrac.Controllers.Api
                 return BadRequest(ModelState);
             }
 
-            actAcc.CreateActivity(activity);
+            actSvc.CreateActivity(activity);
             uow.Save();
 
             return CreatedAtRoute("DefaultApi", new { id = activity.ID }, ActivityDto.FromActivity(activity));
@@ -96,14 +96,14 @@ namespace HealthTrac.Controllers.Api
         [ResponseType(typeof(void))]
         public IHttpActionResult DeleteActivity(long id)
         {
-            actAcc.DeleteActivity(id);
+            actSvc.DeleteActivity(id);
             uow.Save();
             return Ok();
         }
 
         private bool ActivityExists(long id)
         {
-            return actAcc.GetActivity(id) != null;
+            return actSvc.GetActivity(id) != null;
         }
 
         protected override void Dispose(bool disposing)

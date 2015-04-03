@@ -11,73 +11,73 @@ namespace HealthTrac.DataAccess.Entity
     {
 
         private ApplicationDbContext db;
-        private IActivityAccessor activity;
+        private IActivityService activity;
         private IMembershipService membership;
         private ITeamService team;
         private IUserService user;
         private IBadgeService badge;
-        private IEnergyLevelAccessor energyLevel;
-        private IGoalAccessor goal;
-        private IMealAccessor meal;
-        private IPointAccessor point;
-        private IUserBadgeAccessor userBadge;
-        private IUserGoalAccessor userGoal;
+        private IEnergyLevelService energyLevel;
+        private IGoalService goal;
+        private IMealService meal;
+        private IPointService point;
+        private IUserBadgeService userBadge;
+        private IUserGoalService userGoal;
 
         public EntityUnitOfWork(ApplicationDbContext db)
         {
             this.db = db;
         }
 
-        public IUserGoalAccessor UserGoalAccessor
+        public IUserGoalService UserGoalService
         {
             get
             {
-                userGoal = userGoal ?? new EntityUserGoalAccessor(db);
+                userGoal = userGoal ?? new UserGoalService(new EntityUserGoalAccessor(db));
                 return userGoal;
             }
         }
 
-        public IUserBadgeAccessor UserBadgeAccessor
+        public IUserBadgeService UserBadgeService
         {
             get
             {
-                userBadge = userBadge ?? new EntityUserBadgeAccessor(db);
+                userBadge = userBadge ?? new UserBadgeService(new EntityUserBadgeAccessor(db));
                 return userBadge;
             }
         }
 
-        public IPointAccessor PointAccessor
+        public IPointService PointService
         {
             get
             {
-                point = point ?? new EntityPointAccessor(db);
+                point = point ?? new PointService(new EntityPointAccessor(db));
                 return point;
             }
         }
 
-        public IMealAccessor MealAccessor
+        public IMealService MealService
         {
             get
             {
-                meal = meal ?? new EntityMealAccessor(db);
+                meal = meal ?? new MealService(new EntityMealAccessor(db));
                 return meal;
             }
         }
 
-        public IGoalAccessor GoalAccessor
+        public IGoalService GoalService
         {
             get
             {
-                goal = goal ?? new EntityGoalAccessor(db);
+                goal = goal ?? new GoalService(new EntityGoalAccessor(db));
                 return goal;
             }
         }
 
-        public IEnergyLevelAccessor EnergyLevelAccessor
+        public IEnergyLevelService EnergyLevelService
         {
             get
             {
-                energyLevel = energyLevel ?? new EntityEnergyLevelAccessor(db);
+                energyLevel = energyLevel ?? new EnergyLevelService(new EntityEnergyLevelAccessor(db));
                 return energyLevel;
             }
         }
@@ -91,11 +91,11 @@ namespace HealthTrac.DataAccess.Entity
             }
         }
 
-        public IActivityAccessor ActivityAccessor
+        public IActivityService ActivityService
         {
             get
             {
-                activity = activity ?? new EntityActivityAccessor(db);
+                activity = activity ?? new ActivityService(new EntityActivityAccessor(db));
                 return activity;
             }
         }
