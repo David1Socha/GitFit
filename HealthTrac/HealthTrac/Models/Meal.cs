@@ -5,8 +5,9 @@ using System.Web;
 
 namespace HealthTrac.Models
 {
-    public class Meal : DateTrackingModel
+    public class Meal
     {
+        public DateTime DateCreated { get; set; }
         public long ID { get; set; }
         public String UserID { get; set; }
         public int Calories { get; set; }
