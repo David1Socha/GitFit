@@ -1,5 +1,6 @@
 namespace HealthTrac.Migrations
 {
+    using HealthTrac.Models;
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
@@ -16,6 +17,25 @@ namespace HealthTrac.Migrations
 
         protected override void Seed(HealthTrac.DataAccess.Entity.ApplicationDbContext context)
         {
+            context.Badges.AddOrUpdate(new Badge
+            {
+                Field = Field.DISTANCE,
+                Name = "10000 Feet",
+                Threshold = 10000,
+            },
+            new Badge
+            {
+                Field = Field.DURATION,
+                Name = "Hour of exercise",
+                Threshold = 3600,
+            },
+            new Badge
+            {
+                Field = Field.STEPS,
+                Name = "One thousand steps ahead",
+                Threshold = 1000,
+            }
+            );
             //  This method will be called after migrating to the latest version.
 
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
