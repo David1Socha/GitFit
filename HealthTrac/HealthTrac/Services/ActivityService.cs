@@ -40,7 +40,7 @@ namespace HealthTrac.Services
         public Models.Activity CreateActivity(Models.Activity activity, String uid)
         {
             var createdActivity = _acc.CreateActivity(activity);
-
+            _UpdateUserAchievements(activity, uid);
             return createdActivity;
         }
 
