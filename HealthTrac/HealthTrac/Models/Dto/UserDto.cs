@@ -21,7 +21,9 @@ namespace HealthTrac.Models.Dto
         public DateTime? BirthDate { get; set; }
         public string Id { get; set; }
         public string UserName { get; set; }
-
+        public long LifetimeSteps { get; set; }
+        public double LifetimeDuration { get; set; }
+        public double LifetimeDistance { get; set; }
         public User ToUser()
         {
             return new User()
@@ -32,6 +34,9 @@ namespace HealthTrac.Models.Dto
                 Height = Height,
                 Location = Location,
                 LastName = LastName,
+                LifetimeDistance = LifetimeDistance,
+                LifetimeDuration = LifetimeDuration,
+                LifetimeSteps = LifetimeSteps,
                 PreferredName = PreferredName,
                 ProfilePicture = ProfilePicture,
                 Sex = Sex,
@@ -58,6 +63,9 @@ namespace HealthTrac.Models.Dto
                 UserName = u.UserName,
                 Id = u.Id,
                 Location = u.Location,
+                LifetimeDistance = u.LifetimeDistance,
+                LifetimeDuration = u.LifetimeDuration,
+                LifetimeSteps = u.LifetimeSteps,
             };
         }
     }
