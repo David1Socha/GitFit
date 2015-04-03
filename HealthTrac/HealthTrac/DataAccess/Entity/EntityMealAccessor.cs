@@ -36,5 +36,14 @@ namespace HealthTrac.DataAccess.Entity
             db.Meals.Add(m);
             return m;
         }
+
+
+        public IEnumerable<Meal> GetMeals(string uid)
+        {
+            var meals = db.Meals
+                .Where(m => m.UserID == uid)
+                .ToList();
+            return meals;
+        }
     }
 }

@@ -34,6 +34,12 @@ namespace HealthTrac.Controllers.Api
             return msvc.GetMeals().Select(b => MealDto.FromMeal(b));
         }
 
+        // GET: api/Meals?userId=xyz
+        public IEnumerable<MealDto> GetMeals(String userId)
+        {
+            return msvc.GetMeals(userId).Select(b => MealDto.FromMeal(b));
+        }
+
         // GET: api/Meals/5
         [ResponseType(typeof(MealDto))]
         public IHttpActionResult GetMeal(long id)

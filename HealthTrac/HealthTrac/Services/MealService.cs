@@ -29,5 +29,10 @@ namespace HealthTrac.Services
         {
             return _acc.CreateMeal(m);
         }
+
+        public IEnumerable<Models.Meal> GetMeals(string uid)
+        {
+            return _acc.GetMeals(uid);
+        }
     }
 }

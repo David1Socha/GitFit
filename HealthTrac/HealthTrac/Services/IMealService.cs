@@ -12,5 +12,6 @@ namespace HealthTrac.Services
         Meal GetMeal(long id);
         IEnumerable<Meal> GetMeals();
         Meal CreateMeal(Meal m);
+        IEnumerable<Meal> GetMeals(String uid);
     }
 }

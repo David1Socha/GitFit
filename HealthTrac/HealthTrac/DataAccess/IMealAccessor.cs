@@ -10,6 +10,7 @@ namespace HealthTrac.DataAccess
     {
         Meal GetMeal(long id);
         IEnumerable<Meal> GetMeals();
+        IEnumerable<Meal> GetMeals(String uid);
         Meal CreateMeal(Meal m);
 
     }
