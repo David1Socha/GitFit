@@ -21,13 +21,11 @@ namespace HealthTrac.Controllers.Api
 
         private IUnitOfWork uow;
         private IMembershipService memSvc;
-        private ITeamService teamSvc;
 
         public MembershipsController(IUnitOfWork uow)
         {
             this.uow = uow;
             this.memSvc = uow.MembershipService;
-            this.teamSvc = uow.TeamService;
         }
         // GET: api/Memberships
         public IEnumerable<MembershipDto> GetMemberships()
