@@ -204,6 +204,7 @@
     <Compile Include="Bootstrapper.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\Api\AccountsController.cs" />
+    <Compile Include="Controllers\Api\PointsController.cs" />
     <Compile Include="Controllers\Api\MealsController.cs" />
     <Compile Include="Controllers\Api\EnergyLevelsController.cs" />
     <Compile Include="Controllers\Api\GoalsController.cs" />
