@@ -11,6 +11,7 @@ using System.Web.Http.Description;
 using HealthTrac.Models;
 using HealthTrac.DataAccess;
 using HealthTrac.Models.Dto;
+using HealthTrac.Services;
 
 namespace HealthTrac.Controllers.Api
 {
