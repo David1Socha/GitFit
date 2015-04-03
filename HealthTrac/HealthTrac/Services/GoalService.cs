@@ -1,4 +1,5 @@
 ﻿using HealthTrac.DataAccess;
+using HealthTrac.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,9 +11,11 @@ namespace HealthTrac.Services
     {
 
         private IGoalAccessor _acc;
+        private IUserGoalAccessor _ugAcc;
 
-        public GoalService(IGoalAccessor acc)
+        public GoalService(IGoalAccessor acc, IUserGoalAccessor ugAcc)
         {
+            _ugAcc = ugAcc;
             _acc = acc;
         }
         public Models.Goal GetGoal(long id)
@@ -25,9 +28,17 @@ namespace HealthTrac.Services
             return _acc.GetGoals();
         }
 
-        public Models.Goal CreateGoal(Models.Goal g)
+        public Models.Goal CreateGoal(Models.Goal g, String uid)
         {
-            return _acc.CreateGoal(g);
+            var createdGoal = _acc.CreateGoal(g);
+            var ug = new UserGoal
+            {
+                GoalID = createdGoal.ID,
+                DateAssigned = DateTime.Now,
+                UserID = uid,
+            };
+            _ugAcc.CreateUserGoal(ug);
+            return createdGoal;
         }
     }
 }

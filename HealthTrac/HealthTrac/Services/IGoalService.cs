@@ -11,6 +11,6 @@ namespace HealthTrac.Services
     {
         Goal GetGoal(long id);
         IEnumerable<Goal> GetGoals();
-        Goal CreateGoal(Goal g);
+        Goal CreateGoal(Goal g, String uid);
     }
 }

@@ -68,7 +68,7 @@ namespace HealthTrac.DataAccess.Entity
         {
             get
             {
-                goal = goal ?? new GoalService(new EntityGoalAccessor(db));
+                goal = goal ?? new GoalService(new EntityGoalAccessor(db), new EntityUserGoalAccessor(db));
                 return goal;
             }
         }
