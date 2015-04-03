@@ -15,6 +15,7 @@ using Moq;
 using System.Net.Http;
 using Moq.Linq;
 using HealthTrac.Tests.Helpers;
+using HealthTrac.Services;
 
 namespace HealthTrac.Tests.Controllers.Api
 {
@@ -36,8 +37,8 @@ namespace HealthTrac.Tests.Controllers.Api
         [TestMethod]
         public void ApiGetMemberships()
         {
-            var acc = Mock.Of<IMembershipAccessor>(a => a.GetMemberships() == _activeMemberships);
-            var uow = Mock.Of<IUnitOfWork>(u => u.MembershipAccessor == acc);
+            var acc = Mock.Of<IMembershipService>(a => a.GetMemberships() == _activeMemberships);
+            var uow = Mock.Of<IUnitOfWork>(u => u.MembershipService == acc);
             var controller = new MembershipsController(uow);
             var memberships = controller.GetMemberships();
             Assert.IsTrue(memberships.EqualValues(_activeMemberships));
@@ -47,8 +48,8 @@ namespace HealthTrac.Tests.Controllers.Api
         public void ApiGetMembershipsByUser()
         {
             var userId = "abc";
-            var acc = Mock.Of<IMembershipAccessor>(a => a.GetMemberships(userId) == _activeMemberships);
-            var uow = Mock.Of<IUnitOfWork>(u => u.MembershipAccessor == acc);
+            var acc = Mock.Of<IMembershipService>(a => a.GetMemberships(userId) == _activeMemberships);
+            var uow = Mock.Of<IUnitOfWork>(u => u.MembershipService == acc);
             var controller = new MembershipsController(uow);
             var memberships = controller.GetMemberships(userId);
             Assert.IsTrue(memberships.EqualValues(_activeMemberships));
@@ -60,8 +61,8 @@ namespace HealthTrac.Tests.Controllers.Api
             long teamId = 14;
             var membership = _memberMembership;
             var userMemberships = new Membership[] { membership };
-            var acc = Mock.Of<IMembershipAccessor>(a => a.GetMemberships(teamId) == userMemberships);
-            var uow = Mock.Of<IUnitOfWork>(u => u.MembershipAccessor == acc);
+            var acc = Mock.Of<IMembershipService>(a => a.GetMemberships(teamId) == userMemberships);
+            var uow = Mock.Of<IUnitOfWork>(u => u.MembershipService == acc);
             var controller = new MembershipsController(uow);
             var memberships = controller.GetMemberships(teamId);
             Assert.IsTrue(memberships.EqualValues(userMemberships));
@@ -72,8 +73,8 @@ namespace HealthTrac.Tests.Controllers.Api
         {
             long id = 1;
             var membership = _adminMembership;
-            var acc = Mock.Of<IMembershipAccessor>(a => a.GetMembership(id) == membership);
-            var uow = Mock.Of<IUnitOfWork>(u => u.MembershipAccessor == acc);
+            var acc = Mock.Of<IMembershipService>(a => a.GetMembership(id) == membership);
+            var uow = Mock.Of<IUnitOfWork>(u => u.MembershipService == acc);
             var controller = new MembershipsController(uow);
             var response = controller.GetMembership(id);
             var result = response as OkNegotiatedContentResult<MembershipDto>;
@@ -87,8 +88,8 @@ namespace HealthTrac.Tests.Controllers.Api
             long teamId = 14;
             string userId = "abc";
             var membership = _memberMembership;
-            var acc = Mock.Of<IMembershipAccessor>(a => a.GetMembership(teamId, userId) == membership);
-            var uow = Mock.Of<IUnitOfWork>(u => u.MembershipAccessor == acc);
+            var acc = Mock.Of<IMembershipService>(a => a.GetMembership(teamId, userId) == membership);
+            var uow = Mock.Of<IUnitOfWork>(u => u.MembershipService == acc);
             var controller = new MembershipsController(uow);
             var response = controller.GetMembership(userId, teamId);
             var result = response as OkNegotiatedContentResult<MembershipDto>;
@@ -101,18 +102,13 @@ namespace HealthTrac.Tests.Controllers.Api
         {
             long id = 3;
             var membership = _bannedMembership;
-            var memMock = new Mock<IMembershipAccessor>();
+            var memMock = new Mock<IMembershipService>();
             memMock.Setup(acc => acc.UpdateMembership(membership))
                 .Returns(membership);
             var remainingMemberships = new Membership[] { _memberMembership };
-            memMock.Setup(acc => acc.GetActiveMemberships(membership.TeamID))
-                .Returns(remainingMemberships);
-            var teamMock = new Mock<ITeamAccessor>();
             var uowMock = new Mock<IUnitOfWork>();
-            uowMock.Setup(u => u.MembershipAccessor)
+            uowMock.Setup(u => u.MembershipService)
                 .Returns(memMock.Object);
-            uowMock.Setup(u => u.TeamAccessor)
-                .Returns(teamMock.Object);
             var con = new MembershipsController(uowMock.Object);
             con.PutMembership(id, membership);
             memMock.Verify(acc => acc.UpdateMembership(membership));
@@ -124,22 +120,16 @@ namespace HealthTrac.Tests.Controllers.Api
         {
             long id = 3;
             var membership = _bannedMembership;
-            var memMock = new Mock<IMembershipAccessor>();
+            var memMock = new Mock<IMembershipService>();
             memMock.Setup(acc => acc.UpdateMembership(membership))
                 .Returns(membership);
             var remainingMemberships = new Membership[] { };
-            memMock.Setup(acc => acc.GetActiveMemberships(membership.TeamID))
-                .Returns(remainingMemberships);
-            var teamMock = new Mock<ITeamAccessor>();
             var uowMock = new Mock<IUnitOfWork>();
-            uowMock.Setup(u => u.MembershipAccessor)
+            uowMock.Setup(u => u.MembershipService)
                 .Returns(memMock.Object);
-            uowMock.Setup(u => u.TeamAccessor)
-                .Returns(teamMock.Object);
             var con = new MembershipsController(uowMock.Object);
             con.PutMembership(id, membership);
             memMock.Verify(acc => acc.UpdateMembership(membership));
-            teamMock.Verify(acc => acc.DeleteTeam(membership.TeamID));
             uowMock.Verify(u => u.Save());
         }
 
@@ -147,11 +137,11 @@ namespace HealthTrac.Tests.Controllers.Api
         public void ApiPostMembership()
         {
             var membership = _memberMembership;
-            var mock = new Mock<IMembershipAccessor>();
+            var mock = new Mock<IMembershipService>();
             mock.Setup(acc => acc.CreateMembership(membership))
                 .Returns(membership);
             var uowMock = new Mock<IUnitOfWork>();
-            uowMock.Setup(u => u.MembershipAccessor)
+            uowMock.Setup(u => u.MembershipService)
                 .Returns(mock.Object);
             var con = new MembershipsController(uowMock.Object);
             con.PostMembership(membership);

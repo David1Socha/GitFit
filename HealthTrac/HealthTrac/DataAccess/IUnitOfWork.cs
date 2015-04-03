@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HealthTrac.Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,17 +9,17 @@ namespace HealthTrac.DataAccess
 {
     public interface IUnitOfWork : IDisposable
     {
-        IActivityAccessor ActivityAccessor { get; }
-        IMembershipAccessor MembershipAccessor { get; }
-        ITeamAccessor TeamAccessor { get; }
-        IUserAccessor UserAccessor { get; }
-        IBadgeAccessor BadgeAccessor { get; }
-        IEnergyLevelAccessor EnergyLevelAccessor { get; }
-        IGoalAccessor GoalAccessor { get; }
-        IMealAccessor MealAccessor { get; }
-        IPointAccessor PointAccessor { get; }
-        IUserBadgeAccessor UserBadgeAccessor { get; }
-        IUserGoalAccessor UserGoalAccessor { get; }
+        IActivityService ActivityService { get; }
+        IMembershipService MembershipService { get; }
+        ITeamService TeamService { get; }
+        IUserService UserService { get; }
+        IBadgeService BadgeService { get; }
+        IEnergyLevelService EnergyLevelService { get; }
+        IGoalService GoalService { get; }
+        IMealService MealService { get; }
+        IPointService PointService { get; }
+        IUserBadgeService UserBadgeService { get; }
+        IUserGoalService UserGoalService { get; }
         void Save();
 
     }

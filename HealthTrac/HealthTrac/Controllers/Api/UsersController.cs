@@ -9,25 +9,26 @@ using System.Web.Http.Description;
 using HealthTrac.Models;
 using HealthTrac.Models.Dto;
 using HealthTrac.DataAccess;
+using HealthTrac.Services;
 
 namespace HealthTrac.Controllers.Api
 {
     [Authorize]
     public class UsersController : ApiController
     {
-        private IUserAccessor accessor;
+        private IUserService userService;
         private IUnitOfWork uow;
 
         public UsersController(IUnitOfWork uow)
         {
             this.uow = uow;
-            this.accessor = uow.UserAccessor;
+            this.userService = uow.UserService;
         }
 
         // GET: api/Users
         public IEnumerable<UserDto> GetUsers()
         {
-            var users = accessor.GetUsers();
+            var users = userService.GetUsers();
             return users.Select(u => UserDto.FromUser(u));
         }
 
@@ -37,7 +38,7 @@ namespace HealthTrac.Controllers.Api
         [AllowAnonymous]
         public IHttpActionResult IsAvailable(String userName)
         {
-            User u = accessor.GetAnyUserWithUserName(userName);
+            User u = userService.GetAnyUserWithUserName(userName);
             bool available = u == null;
             return Ok(available);
         }
@@ -46,7 +47,7 @@ namespace HealthTrac.Controllers.Api
         [ResponseType(typeof(UserDto))]
         public IHttpActionResult GetUser(string id)
         {
-            User u = accessor.FindUser(id);
+            User u = userService.FindUser(id);
             if (u == null)
             {
                 return NotFound();
@@ -70,7 +71,7 @@ namespace HealthTrac.Controllers.Api
             {
                 return BadRequest();
             }
-            accessor.UpdateUser(user);
+            userService.UpdateUser(user);
             try
             {
                 uow.Save();
@@ -92,7 +93,7 @@ namespace HealthTrac.Controllers.Api
 
         private bool UserExists(string id)
         {
-            return accessor.GetUsers().Count(e => e.Id == id) > 0;
+            return userService.GetUsers().Count(e => e.Id == id) > 0;
         }
 
         protected override void Dispose(bool disposing)
