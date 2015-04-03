@@ -30,7 +30,7 @@ namespace HealthTrac.Controllers.Api
         // GET: api/Activities?userId=xyz
         public IEnumerable<ActivityDto> GetActivities(String userId)
         {
-            return actSvc.GetActivities(userId).Select(a => ActivityDto.FromActivity(a));
+            return badgeSvc.GetBadges()
         }
 
         // GET: api/Activities/5
