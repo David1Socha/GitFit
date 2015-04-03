@@ -211,6 +211,7 @@
     <Compile Include="Controllers\Api\BadgesController.cs" />
     <Compile Include="Controllers\Api\ActivitiesController.cs" />
     <Compile Include="Controllers\Api\MembershipsController.cs" />
+    <Compile Include="Controllers\Api\UserGoalsController.cs" />
     <Compile Include="Controllers\Api\UserBadgesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\Api\TeamsController.cs" />
