@@ -27,84 +27,23 @@ namespace HealthTrac.Controllers.Api
             this.uow = uow;
             this.badgeSvc = uow.BadgeService;
         }
-        // GET: api/Activities?userId=xyz
-        public IEnumerable<ActivityDto> GetActivities(String userId)
+
+        // GET: api/Badges
+        public IEnumerable<BadgeDto> GetBadges()
         {
-            return badgeSvc.GetBadges()
+            return badgeSvc.GetBadges().Select(b => BadgeDto.FromBadge(b));
         }
 
-        // GET: api/Activities/5
-        [ResponseType(typeof(ActivityDto))]
-        public IHttpActionResult GetActivity(long id)
+        // GET: api/Badges/5
+        [ResponseType(typeof(BadgeDto))]
+        public IHttpActionResult GetBadge(long id)
         {
-            var a = actSvc.GetActivity(id);
-            if (a == null)
+            var b = badgeSvc.GetBadge(id);
+            if (b == null)
             {
                 return NotFound();
             }
-            return Ok(ActivityDto.FromActivity(a));
-        }
-
-        // PUT: api/Activities/5
-        [ResponseType(typeof(void))]
-        public IHttpActionResult PutActivity(long id, Activity activity)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            if (id != activity.ID)
-            {
-                return BadRequest();
-            }
-            actSvc.UpdateActivity(activity);
-            try
-            {
-                uow.Save();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!ActivityExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return StatusCode(HttpStatusCode.NoContent);
-        }
-
-        // POST: api/Activities
-        [ResponseType(typeof(ActivityDto))]
-        public IHttpActionResult PostActivity(Activity activity)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            actSvc.CreateActivity(activity);
-            uow.Save();
-
-            return CreatedAtRoute("DefaultApi", new { id = activity.ID }, ActivityDto.FromActivity(activity));
-        }
-
-        // DELETE: api/Activities/5
-        [ResponseType(typeof(void))]
-        public IHttpActionResult DeleteActivity(long id)
-        {
-            actSvc.DeleteActivity(id);
-            uow.Save();
-            return Ok();
-        }
-
-        private bool ActivityExists(long id)
-        {
-            return actSvc.GetActivity(id) != null;
+            return Ok(BadgeDto.FromBadge(b));
         }
 
         protected override void Dispose(bool disposing)

@@ -204,6 +204,7 @@
     <Compile Include="Bootstrapper.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\Api\AccountsController.cs" />
+    <Compile Include="Controllers\Api\BadgesController.cs" />
     <Compile Include="Controllers\Api\ActivitiesController.cs" />
     <Compile Include="Controllers\Api\MembershipsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -244,11 +245,18 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Activity.cs" />
     <Compile Include="Models\DateTrackingModel.cs" />
+    <Compile Include="Models\Dto\BadgeDto.cs" />
     <Compile Include="Models\Dto\CredentialsDto.cs" />
+    <Compile Include="Models\Dto\EnergyLevelDto.cs" />
+    <Compile Include="Models\Dto\GoalDto.cs" />
+    <Compile Include="Models\Dto\MealDto.cs" />
     <Compile Include="Models\Dto\MembershipDto.cs" />
     <Compile Include="Models\Dto\ActivityDto.cs" />
+    <Compile Include="Models\Dto\PointDto.cs" />
     <Compile Include="Models\Dto\TeamDto.cs" />
+    <Compile Include="Models\Dto\UserBadgeDto.cs" />
     <Compile Include="Models\Dto\UserDto.cs" />
+    <Compile Include="Models\Dto\UserGoalDto.cs" />
     <Compile Include="Models\Dto\UserLoginDto.cs" />
     <Compile Include="Models\EnergyLevel.cs" />
     <Compile Include="Models\Field.cs" />
