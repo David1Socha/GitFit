@@ -113,7 +113,7 @@ namespace HealthTrac.DataAccess.Entity
         {
             get
             {
-                team = team ?? new TeamService(new EntityTeamAccessor(db));
+                team = team ?? new TeamService(new EntityTeamAccessor(db), new EntityMembershipAccessor(db));
                 return team;
             }
         }

@@ -10,6 +10,7 @@ using HealthTrac.DataAccess;
 using HealthTrac.Models;
 using HealthTrac.Models.Dto;
 using HealthTrac.Services;
+using Microsoft.AspNet.Identity;
 
 namespace HealthTrac.Controllers.Api
 {
@@ -91,12 +92,13 @@ namespace HealthTrac.Controllers.Api
         [ResponseType(typeof(TeamDto))]
         public IHttpActionResult PostTeam(Team team)
         {
+            var uid = User.Identity.GetUserId();
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            teamService.CreateTeam(team);
+            teamService.CreateTeam(team, uid);
             uow.Save();
 
             return CreatedAtRoute("DefaultApi", new { id = team.ID }, TeamDto.FromTeam(team));

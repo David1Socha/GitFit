@@ -16,6 +16,8 @@ using System.Net.Http;
 using Moq.Linq;
 using HealthTrac.Tests.Helpers;
 using HealthTrac.Services;
+using System.Security.Claims;
+using System.Security.Principal;
 
 namespace HealthTrac.Tests.Controllers.Api
 {
@@ -89,17 +91,19 @@ namespace HealthTrac.Tests.Controllers.Api
         {
             var team = _sampleTeam1;
             var mock = new Mock<ITeamService>();
-            mock.Setup(acc => acc.CreateTeam(team))
+            mock.Setup(acc => acc.CreateTeam(team, null))
                 .Returns(team);
             var uowMock = new Mock<IUnitOfWork>();
             uowMock.Setup(u => u.TeamService)
                 .Returns(mock.Object);
             var con = new TeamsController(uowMock.Object);
+            con.User = new ClaimsPrincipal(
+  new GenericPrincipal(new GenericIdentity(""), null));
             var response = con.PostTeam(team);
             var result = response as CreatedAtRouteNegotiatedContentResult<TeamDto>;
             var resultTeam = result.Content;
             Assert.IsTrue(resultTeam.EqualValues(team));
-            mock.Verify(acc => acc.CreateTeam(team));
+            mock.Verify(acc => acc.CreateTeam(team, null));
             uowMock.Verify(u => u.Save());
         }
 

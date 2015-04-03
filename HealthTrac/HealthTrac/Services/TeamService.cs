@@ -1,4 +1,5 @@
 ﻿using HealthTrac.DataAccess;
+using HealthTrac.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,10 +10,12 @@ namespace HealthTrac.Services
     public class TeamService : ITeamService
     {
         private ITeamAccessor _acc;
+        private IMembershipAccessor _memAcc;
 
-        public TeamService(ITeamAccessor acc)
+        public TeamService(ITeamAccessor acc, IMembershipAccessor memAcc)
         {
             _acc = acc;
+            _memAcc = memAcc;
         }
 
         public Models.Team GetTeam(long ID)
@@ -35,9 +38,17 @@ namespace HealthTrac.Services
             return _acc.GetTeams();
         }
 
-        public Models.Team CreateTeam(Models.Team team)
+        public Models.Team CreateTeam(Models.Team team, String uid)
         {
-            return _acc.CreateTeam(team);
+            var createdTeam = _acc.CreateTeam(team);
+            var creatorsAdminMembership = new Membership
+            {
+                MembershipStatus = Models.MembershipStatus.ADMIN,
+                TeamID = createdTeam.ID,
+                UserID = uid,
+            };
+            _memAcc.CreateMembership(creatorsAdminMembership);
+            return createdTeam;
         }
 
         public Models.Team UpdateTeam(Models.Team team)
