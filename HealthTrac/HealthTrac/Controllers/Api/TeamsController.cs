@@ -9,24 +9,25 @@ using System.Web.Http.Description;
 using HealthTrac.DataAccess;
 using HealthTrac.Models;
 using HealthTrac.Models.Dto;
+using HealthTrac.Services;
 
 namespace HealthTrac.Controllers.Api
 {
     [Authorize]
     public class TeamsController : ApiController
     {
-        private ITeamAccessor acc;
+        private ITeamService teamService;
         private IUnitOfWork uow;
 
         public TeamsController(IUnitOfWork uow)
         {
             this.uow = uow;
-            this.acc = uow.TeamAccessor;
+            this.teamService = uow.TeamService;
         }
         // GET: api/Teams
         public IEnumerable<TeamDto> GetTeams()
         {
-            var teams = acc.GetTeams();
+            var teams = teamService.GetTeams();
             var teamDtos = teams.Select(t => TeamDto.FromTeam(t));
             return teamDtos;
         }
@@ -35,7 +36,7 @@ namespace HealthTrac.Controllers.Api
         [ResponseType(typeof(TeamDto))]
         public IHttpActionResult GetTeam(long id)
         {
-            Team team = acc.GetTeam(id);
+            Team team = teamService.GetTeam(id);
             if (team == null)
             {
                 return NotFound();
@@ -47,7 +48,7 @@ namespace HealthTrac.Controllers.Api
         //GET: api/Teams?userId=xxx
         public IEnumerable<TeamDto> GetTeams(string userId)
         {
-            var teams = acc.GetTeams(userId);
+            var teams = teamService.GetTeams(userId);
             var teamDtos = teams.Select(t => TeamDto.FromTeam(t));
             return teamDtos;
         }
@@ -66,7 +67,7 @@ namespace HealthTrac.Controllers.Api
                 return BadRequest();
             }
 
-            acc.UpdateTeam(team);
+            teamService.UpdateTeam(team);
             try
             {
                 uow.Save();
@@ -95,7 +96,7 @@ namespace HealthTrac.Controllers.Api
                 return BadRequest(ModelState);
             }
 
-            acc.CreateTeam(team);
+            teamService.CreateTeam(team);
             uow.Save();
 
             return CreatedAtRoute("DefaultApi", new { id = team.ID }, TeamDto.FromTeam(team));
@@ -105,15 +106,15 @@ namespace HealthTrac.Controllers.Api
         [ResponseType(typeof(void))]
         public IHttpActionResult DeleteTeam(long id)
         {
-            Team teamToDelete = acc.GetTeam(id);
-            acc.DeleteTeam(teamToDelete);
+            Team teamToDelete = teamService.GetTeam(id);
+            teamService.DeleteTeam(teamToDelete);
             uow.Save();
             return Ok();
         }
 
         private bool TeamExists(long id)
         {
-            return acc.GetTeams().Count(e => e.ID == id) > 0;
+            return teamService.GetTeams().Count(e => e.ID == id) > 0;
         }
 
         protected override void Dispose(bool disposing)

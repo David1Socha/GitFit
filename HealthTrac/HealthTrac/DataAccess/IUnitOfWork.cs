@@ -11,7 +11,7 @@ namespace HealthTrac.DataAccess
     {
         IActivityAccessor ActivityAccessor { get; }
         IMembershipAccessor MembershipAccessor { get; }
-        ITeamAccessor TeamAccessor { get; }
+        ITeamService TeamService { get; }
         IUserService UserService { get; }
         IBadgeAccessor BadgeAccessor { get; }
         IEnergyLevelAccessor EnergyLevelAccessor { get; }

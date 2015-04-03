@@ -111,7 +111,7 @@ namespace HealthTrac.Tests.Controllers.Api
             var uowMock = new Mock<IUnitOfWork>();
             uowMock.Setup(u => u.MembershipAccessor)
                 .Returns(memMock.Object);
-            uowMock.Setup(u => u.TeamAccessor)
+            uowMock.Setup(u => u.TeamService)
                 .Returns(teamMock.Object);
             var con = new MembershipsController(uowMock.Object);
             con.PutMembership(id, membership);
@@ -134,7 +134,7 @@ namespace HealthTrac.Tests.Controllers.Api
             var uowMock = new Mock<IUnitOfWork>();
             uowMock.Setup(u => u.MembershipAccessor)
                 .Returns(memMock.Object);
-            uowMock.Setup(u => u.TeamAccessor)
+            uowMock.Setup(u => u.TeamService)
                 .Returns(teamMock.Object);
             var con = new MembershipsController(uowMock.Object);
             con.PutMembership(id, membership);

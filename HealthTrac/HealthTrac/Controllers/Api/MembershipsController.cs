@@ -11,6 +11,7 @@ using System.Web.Http.Description;
 using HealthTrac.Models;
 using HealthTrac.DataAccess;
 using HealthTrac.Models.Dto;
+using HealthTrac.Services;
 
 namespace HealthTrac.Controllers.Api
 {
@@ -20,13 +21,13 @@ namespace HealthTrac.Controllers.Api
 
         private IUnitOfWork uow;
         private IMembershipAccessor memAcc;
-        private ITeamAccessor teamAcc;
+        private ITeamService teamSvc;
 
         public MembershipsController(IUnitOfWork uow)
         {
             this.uow = uow;
             this.memAcc = uow.MembershipAccessor;
-            this.teamAcc = uow.TeamAccessor;
+            this.teamSvc = uow.TeamService;
         }
         // GET: api/Memberships
         public IEnumerable<MembershipDto> GetMemberships()
@@ -93,7 +94,7 @@ namespace HealthTrac.Controllers.Api
                 int membersLeft = memAcc.GetActiveMemberships(membership.TeamID).Where(m => m.ID != membership.ID).Count();
                 if (membersLeft == 0)
                 {
-                    teamAcc.DeleteTeam(membership.TeamID);
+                    teamSvc.DeleteTeam(membership.TeamID);
                 }
             }
             try

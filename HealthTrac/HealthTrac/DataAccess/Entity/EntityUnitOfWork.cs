@@ -13,7 +13,7 @@ namespace HealthTrac.DataAccess.Entity
         private ApplicationDbContext db;
         private IActivityAccessor activity;
         private IMembershipAccessor membership;
-        private ITeamAccessor team;
+        private ITeamService team;
         private IUserService user;
         private IBadgeAccessor badge;
         private IEnergyLevelAccessor energyLevel;
@@ -109,11 +109,11 @@ namespace HealthTrac.DataAccess.Entity
             }
         }
 
-        public ITeamAccessor TeamAccessor
+        public ITeamService TeamService
         {
             get
             {
-                team = team ?? new EntityTeamAccessor(db);
+                team = team ?? new TeamService(new EntityTeamAccessor(db));
                 return team;
             }
         }
