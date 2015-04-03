@@ -11,7 +11,7 @@ namespace HealthTrac.Services
     {
         Activity GetActivity(long id);
         IEnumerable<Activity> GetActivities(String userId);
-        Activity CreateActivity(Activity activity);
+        Activity CreateActivity(Activity activity, String userId);
         Activity UpdateActivity(Activity activity);
 
         void DeleteActivity(long ID);

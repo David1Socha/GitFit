@@ -1,4 +1,5 @@
 ﻿using HealthTrac.DataAccess;
+using HealthTrac.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,10 +11,20 @@ namespace HealthTrac.Services
     {
 
         private IActivityAccessor _acc;
+        private IUserAccessor _uAcc;
+        private IUserBadgeAccessor _ubAcc;
+        private IUserGoalAccessor _ugAcc;
+        private IBadgeAccessor _bAcc;
+        private IGoalAccessor _gAcc;
 
-        public ActivityService(IActivityAccessor acc)
+        public ActivityService(IActivityAccessor acc, IUserAccessor uAcc, IUserBadgeAccessor ubAcc, IUserGoalAccessor ugAcc, IBadgeAccessor bAcc, IGoalAccessor gAcc)
         {
             _acc = acc;
+            _uAcc = uAcc;
+            _ubAcc = ubAcc;
+            _ugAcc = ugAcc;
+            _bAcc = bAcc;
+            _gAcc = gAcc;
         }
 
         public Models.Activity GetActivity(long id)
@@ -26,9 +37,78 @@ namespace HealthTrac.Services
             return _acc.GetActivities(userId);
         }
 
-        public Models.Activity CreateActivity(Models.Activity activity)
+        public Models.Activity CreateActivity(Models.Activity activity, String uid)
         {
-            return _acc.CreateActivity(activity);
+            var createdActivity = _acc.CreateActivity(activity);
+
+            return createdActivity;
+        }
+
+        private void _UpdateUserAchievements(Activity activity, String uid)
+        {
+            var user = _uAcc.FindUser(uid);
+            var oldDistance = user.LifetimeDistance;
+            var oldDuration = user.LifetimeDuration;
+            var oldSteps = user.LifetimeSteps;
+            var newDistance = oldDistance + activity.Distance;
+            var newDuration = oldDuration + activity.Duration;
+            var newSteps = oldSteps + activity.Steps;
+            user.LifetimeDistance = newDistance;
+            user.LifetimeDuration = newDuration;
+            user.LifetimeSteps = newSteps;
+            _uAcc.UpdateUser(user);
+
+            foreach (Badge b in _bAcc.GetBadges())
+            {
+                bool justEarned = false;
+                switch (b.Field)
+                {
+                    case Field.DISTANCE:
+                        justEarned = (oldDistance < b.Threshold && newDistance >= b.Threshold);
+                        break;
+                    case Field.DURATION:
+                        justEarned = oldDuration < b.Threshold && newDuration >= b.Threshold;
+                        break;
+                    case Field.STEPS:
+                        justEarned = oldSteps < b.Threshold && newSteps >= b.Threshold;
+                        break;
+                }
+                if (justEarned)
+                {
+                    _ubAcc.CreateUserBadge(new UserBadge()
+                    {
+                        BadgeID = b.ID,
+                        DateCompleted = DateTime.Now,
+                        UserID = user.Id,
+                    });
+                }
+            }
+
+            foreach (Goal b in _gAcc.GetGoals()) // TODO The duplication here feels bad; is there some clean way to give goals and badges the same interface/prevent this?
+            {
+                bool justEarned = false;
+                switch (b.Field)
+                {
+                    case Field.DISTANCE:
+                        justEarned = (oldDistance < b.Threshold && newDistance >= b.Threshold);
+                        break;
+                    case Field.DURATION:
+                        justEarned = oldDuration < b.Threshold && newDuration >= b.Threshold;
+                        break;
+                    case Field.STEPS:
+                        justEarned = oldSteps < b.Threshold && newSteps >= b.Threshold;
+                        break;
+                }
+                if (justEarned)
+                {
+                    _ugAcc.CreateUserGoal(new UserGoal()
+                    {
+                        GoalID = b.ID,
+                        DateCompleted = DateTime.Now,
+                        UserID = user.Id,
+                    });
+                }
+            }
         }
 
         public Models.Activity UpdateActivity(Models.Activity activity)

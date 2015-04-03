@@ -12,6 +12,7 @@ using HealthTrac.Models;
 using HealthTrac.DataAccess;
 using HealthTrac.Models.Dto;
 using HealthTrac.Services;
+using Microsoft.AspNet.Identity;
 
 namespace HealthTrac.Controllers.Api
 {
@@ -87,7 +88,8 @@ namespace HealthTrac.Controllers.Api
                 return BadRequest(ModelState);
             }
 
-            actSvc.CreateActivity(activity);
+            String uid = User.Identity.GetUserId();
+            actSvc.CreateActivity(activity, uid);
             uow.Save();
 
             return CreatedAtRoute("DefaultApi", new { id = activity.ID }, ActivityDto.FromActivity(activity));
