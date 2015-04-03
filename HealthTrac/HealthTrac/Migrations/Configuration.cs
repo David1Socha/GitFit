@@ -19,18 +19,21 @@ namespace HealthTrac.Migrations
         {
             context.Badges.AddOrUpdate(new Badge
             {
+                ID = 1,
                 Field = Field.DISTANCE,
                 Name = "10000 Feet",
                 Threshold = 10000,
             },
             new Badge
             {
+                ID = 2,
                 Field = Field.DURATION,
                 Name = "Hour of exercise",
                 Threshold = 3600,
             },
             new Badge
             {
+                ID = 3,
                 Field = Field.STEPS,
                 Name = "One thousand steps ahead",
                 Threshold = 1000,
