@@ -15,6 +15,7 @@ using Moq;
 using System.Net.Http;
 using Moq.Linq;
 using HealthTrac.Tests.Helpers;
+using HealthTrac.Services;
 
 namespace HealthTrac.Tests.Controllers.Api
 {
@@ -36,8 +37,8 @@ namespace HealthTrac.Tests.Controllers.Api
         public void ApiGetUsers()
         {
             var users = _users;
-            var accessor = Mock.Of<IUserAccessor>(acc => acc.GetUsers() == _users);
-            var uow = Mock.Of<IUnitOfWork>(u => u.UserAccessor == accessor);
+            var serv = Mock.Of<IUserService>(acc => acc.GetUsers() == _users);
+            var uow = Mock.Of<IUnitOfWork>(u => u.UserService == serv);
             var con = new UsersController(uow);
             var resultUsers = con.GetUsers();
             Assert.IsTrue(resultUsers.EqualValues(users));
@@ -48,8 +49,8 @@ namespace HealthTrac.Tests.Controllers.Api
         {
             string id = "qwerty";
             var user = _user1;
-            var acc = Mock.Of<IUserAccessor>(a => a.FindUser(id) == user);
-            var uow = Mock.Of<IUnitOfWork>(u => u.UserAccessor == acc);
+            var sv = Mock.Of<IUserService>(a => a.FindUser(id) == user);
+            var uow = Mock.Of<IUnitOfWork>(u => u.UserService == sv);
             var con = new UsersController(uow);
             var response = con.GetUser(id);
             var result = response as OkNegotiatedContentResult<UserDto>;
@@ -62,13 +63,13 @@ namespace HealthTrac.Tests.Controllers.Api
         {
             string id = "poiuy";
             var user = _user2;
-            var mock = new Mock<IUserAccessor>();
+            var mock = new Mock<IUserService>();
             mock.Setup(a => a.UpdateUser(user))
                 .Returns(user);
-            var acc = mock.Object;
+            var sv = mock.Object;
             var uowMock = new Mock<IUnitOfWork>();
-            uowMock.Setup(u => u.UserAccessor)
-                .Returns(acc);
+            uowMock.Setup(u => u.UserService)
+                .Returns(sv);
             var con = new UsersController(uowMock.Object);
             con.PutUser(id, user);
             mock.Verify(a => a.UpdateUser(user));
@@ -79,11 +80,11 @@ namespace HealthTrac.Tests.Controllers.Api
         public void ApiUserIsAvailableWhenAvailable()
         {
             var userName = "Sarah";
-            var mock = new Mock<IUserAccessor>();
+            var mock = new Mock<IUserService>();
             mock.Setup(a => a.GetAnyUserWithUserName(userName))
                 .Returns<User>(null);
-            var acc = mock.Object;
-            var uow = Mock.Of<IUnitOfWork>(u => u.UserAccessor == acc);
+            var sv = mock.Object;
+            var uow = Mock.Of<IUnitOfWork>(u => u.UserService == sv);
             var con = new UsersController(uow);
             var response = con.IsAvailable(userName);
             var result = response as OkNegotiatedContentResult<bool>;
@@ -96,11 +97,11 @@ namespace HealthTrac.Tests.Controllers.Api
         {
             var user = _user1;
             var userName = "Susan";
-            var mock = new Mock<IUserAccessor>();
+            var mock = new Mock<IUserService>();
             mock.Setup(a => a.GetAnyUserWithUserName(userName))
                 .Returns(user);
-            var acc = mock.Object;
-            var uow = Mock.Of<IUnitOfWork>(u => u.UserAccessor == acc);
+            var sv = mock.Object;
+            var uow = Mock.Of<IUnitOfWork>(u => u.UserService == sv);
             var con = new UsersController(uow);
             var response = con.IsAvailable(userName);
             var result = response as OkNegotiatedContentResult<bool>;
