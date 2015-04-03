@@ -15,6 +15,7 @@ using Moq;
 using System.Net.Http;
 using Moq.Linq;
 using HealthTrac.Tests.Helpers;
+using HealthTrac.Services;
 
 namespace HealthTrac.Tests.Controllers.Api
 {
@@ -35,7 +36,7 @@ namespace HealthTrac.Tests.Controllers.Api
         [TestMethod]
         public void ApiGetTeams()
         {
-            var acc = Mock.Of<ITeamAccessor>(a => a.GetTeams() == _manyTeams);
+            var acc = Mock.Of<ITeamService>(a => a.GetTeams() == _manyTeams);
             var uow = Mock.Of<IUnitOfWork>(u => u.TeamService == acc);
             TeamsController controller = new TeamsController(uow);
             var teams = controller.GetTeams();
@@ -46,7 +47,7 @@ namespace HealthTrac.Tests.Controllers.Api
         public void ApiGetTeamsByUser()
         {
             var sampleUserId = "xyz";
-            var acc = Mock.Of<ITeamAccessor>(a => a.GetTeams(sampleUserId) == _manyTeams);
+            var acc = Mock.Of<ITeamService>(a => a.GetTeams(sampleUserId) == _manyTeams);
             var uow = Mock.Of<IUnitOfWork>(u => u.TeamService == acc);
             TeamsController controller = new TeamsController(uow);
             var teams = controller.GetTeams(sampleUserId);
@@ -57,7 +58,7 @@ namespace HealthTrac.Tests.Controllers.Api
         public void ApiGetTeamById()
         {
             long id = 12;
-            var acc = Mock.Of<ITeamAccessor>(a => a.GetTeam(id) == _sampleTeam1);
+            var acc = Mock.Of<ITeamService>(a => a.GetTeam(id) == _sampleTeam1);
             var uow = Mock.Of<IUnitOfWork>(u => u.TeamService == acc);
             TeamsController controller = new TeamsController(uow);
             var response = controller.GetTeam(id);
@@ -71,7 +72,7 @@ namespace HealthTrac.Tests.Controllers.Api
         {
             long id = 14;
             var team = _sampleTeam2;
-            var mock = new Mock<ITeamAccessor>();
+            var mock = new Mock<ITeamService>();
             mock.Setup(acc => acc.UpdateTeam(team))
                 .Returns(team);
             var uowMock = new Mock<IUnitOfWork>();
@@ -87,7 +88,7 @@ namespace HealthTrac.Tests.Controllers.Api
         public void ApiPostTeam()
         {
             var team = _sampleTeam1;
-            var mock = new Mock<ITeamAccessor>();
+            var mock = new Mock<ITeamService>();
             mock.Setup(acc => acc.CreateTeam(team))
                 .Returns(team);
             var uowMock = new Mock<IUnitOfWork>();
@@ -107,7 +108,7 @@ namespace HealthTrac.Tests.Controllers.Api
         {
             long id = 14;
             var team = _sampleTeam2;
-            var mock = new Mock<ITeamAccessor>();
+            var mock = new Mock<ITeamService>();
             mock.Setup(acc => acc.DeleteTeam(It.IsAny<Team>()));
             mock.Setup(acc => acc.GetTeam(id))
                 .Returns(team);

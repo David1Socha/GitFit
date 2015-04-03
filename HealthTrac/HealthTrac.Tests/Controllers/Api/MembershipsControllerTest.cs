@@ -15,6 +15,7 @@ using Moq;
 using System.Net.Http;
 using Moq.Linq;
 using HealthTrac.Tests.Helpers;
+using HealthTrac.Services;
 
 namespace HealthTrac.Tests.Controllers.Api
 {
@@ -107,7 +108,7 @@ namespace HealthTrac.Tests.Controllers.Api
             var remainingMemberships = new Membership[] { _memberMembership };
             memMock.Setup(acc => acc.GetActiveMemberships(membership.TeamID))
                 .Returns(remainingMemberships);
-            var teamMock = new Mock<ITeamAccessor>();
+            var teamMock = new Mock<ITeamService>();
             var uowMock = new Mock<IUnitOfWork>();
             uowMock.Setup(u => u.MembershipAccessor)
                 .Returns(memMock.Object);
@@ -130,7 +131,7 @@ namespace HealthTrac.Tests.Controllers.Api
             var remainingMemberships = new Membership[] { };
             memMock.Setup(acc => acc.GetActiveMemberships(membership.TeamID))
                 .Returns(remainingMemberships);
-            var teamMock = new Mock<ITeamAccessor>();
+            var teamMock = new Mock<ITeamService>();
             var uowMock = new Mock<IUnitOfWork>();
             uowMock.Setup(u => u.MembershipAccessor)
                 .Returns(memMock.Object);
