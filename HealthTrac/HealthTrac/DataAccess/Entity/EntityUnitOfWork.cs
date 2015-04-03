@@ -15,7 +15,7 @@ namespace HealthTrac.DataAccess.Entity
         private IMembershipService membership;
         private ITeamService team;
         private IUserService user;
-        private IBadgeAccessor badge;
+        private IBadgeService badge;
         private IEnergyLevelAccessor energyLevel;
         private IGoalAccessor goal;
         private IMealAccessor meal;
@@ -82,11 +82,11 @@ namespace HealthTrac.DataAccess.Entity
             }
         }
 
-        public IBadgeAccessor BadgeAccessor
+        public IBadgeService BadgeService
         {
             get
             {
-                badge = badge ?? new EntityBadgeAccessor(db);
+                badge = badge ?? new BadgeService(new EntityBadgeAccessor(db));
                 return badge;
             }
         }
