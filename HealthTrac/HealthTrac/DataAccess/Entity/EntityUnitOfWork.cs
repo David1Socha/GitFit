@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HealthTrac.Services;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
@@ -13,7 +14,7 @@ namespace HealthTrac.DataAccess.Entity
         private IActivityAccessor activity;
         private IMembershipAccessor membership;
         private ITeamAccessor team;
-        private IUserAccessor user;
+        private IUserService user;
         private IBadgeAccessor badge;
         private IEnergyLevelAccessor energyLevel;
         private IGoalAccessor goal;
@@ -117,11 +118,11 @@ namespace HealthTrac.DataAccess.Entity
             }
         }
 
-        public IUserAccessor UserAccessor
+        public IUserService UserService
         {
             get
             {
-                user = user ?? new EntityUserAccessor(db);
+                user = user ?? new UserService(new EntityUserAccessor(db));
                 return user;
             }
         }

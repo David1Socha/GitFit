@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HealthTrac.Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,7 +12,7 @@ namespace HealthTrac.DataAccess
         IActivityAccessor ActivityAccessor { get; }
         IMembershipAccessor MembershipAccessor { get; }
         ITeamAccessor TeamAccessor { get; }
-        IUserAccessor UserAccessor { get; }
+        IUserService UserService { get; }
         IBadgeAccessor BadgeAccessor { get; }
         IEnergyLevelAccessor EnergyLevelAccessor { get; }
         IGoalAccessor GoalAccessor { get; }
