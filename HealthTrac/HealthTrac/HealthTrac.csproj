@@ -42,6 +42,12 @@
     <MvcBuildViews>true</MvcBuildViews>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Charon">
+      <HintPath>..\packages\Charon.0.1.0\lib\Charon.dll</HintPath>
+    </Reference>
+    <Reference Include="CsvHelper">
+      <HintPath>..\packages\CsvHelper.2.11.1.1\lib\net40-client\CsvHelper.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\EntityFramework.6.1.2\lib\net45\EntityFramework.dll</HintPath>
@@ -272,6 +278,7 @@
     <Compile Include="Models\Point.cs" />
     <Compile Include="Models\FacebookVerifyResult.cs" />
     <Compile Include="Models\IProviderVerifyResult.cs" />
+    <Compile Include="Models\SampleActivity.cs" />
     <Compile Include="Models\TwitterVerifyResult.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\Membership.cs" />

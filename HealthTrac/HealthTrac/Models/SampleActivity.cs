@@ -17,5 +17,21 @@ namespace HealthTrac.Models
         public double Distance { get; set; }
         public long Steps { get; set; }
         public String Type { get; set; }
+
+        public Activity ToActivity(long id)
+        {
+            return new Activity()
+            {
+                Distance = Distance,
+                Duration = Duration,
+                ID = id,
+                Steps = Steps,
+                Type = Type == "W" ? ActivityType.WALKING :
+                       Type == "B" ? ActivityType.BIKING :
+                       Type == "J" ? ActivityType.JOGGING :
+                                     ActivityType.RUNNING,
+                StartDate = new DateTime(),
+            };
+        }
     }
 }
