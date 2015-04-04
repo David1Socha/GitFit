@@ -1,5 +1,7 @@
-﻿using HealthTrac.DataAccess.Entity;
+﻿using HealthTrac.DataAccess;
+using HealthTrac.DataAccess.Entity;
 using HealthTrac.Migrations;
+using HealthTrac.Models;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -31,6 +33,8 @@ namespace HealthTrac
                 Newtonsoft.Json.PreserveReferencesHandling.None;
             GlobalConfiguration.Configuration.Formatters.Add(json);
             DependencyResolver.SetResolver(Bootstrapper.GetMvcResolver());
+            var activities = DependencyResolver.Current.GetService<IActivityAccessor>().GetActivities();
+            //Charon.Learning.forest<Activity,Activity>(Charon.Learning.DefaultSettings)
             GlobalConfiguration.Configuration.DependencyResolver = Bootstrapper.GetApiResolver();
         }
     }
