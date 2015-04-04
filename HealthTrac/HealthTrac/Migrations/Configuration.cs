@@ -45,7 +45,7 @@ namespace HealthTrac.Migrations
             }
             );
 
-            using (var textReader = new StreamReader(baseDir + "\\1000.csv"))
+            using (var textReader = new StreamReader(baseDir + "\\Data\\1000.csv"))
             {
                 using (var csv = new CsvReader(textReader))
                 {

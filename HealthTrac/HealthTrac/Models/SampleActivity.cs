@@ -30,7 +30,7 @@ namespace HealthTrac.Models
                        Type == "B" ? ActivityType.BIKING :
                        Type == "J" ? ActivityType.JOGGING :
                                      ActivityType.RUNNING,
-                StartDate = new DateTime(),
+                StartDate = DateTime.Now,
             };
         }
     }
