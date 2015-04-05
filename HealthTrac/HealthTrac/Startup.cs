@@ -1,5 +1,7 @@
 ﻿using Microsoft.Owin;
 using Owin;
+using Hangfire;
+using Hangfire.SqlServer;
 
 [assembly: OwinStartupAttribute(typeof(HealthTrac.Startup))]
 namespace HealthTrac
@@ -9,6 +11,11 @@ namespace HealthTrac
         public void Configuration(IAppBuilder app)
         {
             ConfigureAuth(app);
+            app.UseHangfire(config =>
+            {
+                config.UseSqlServerStorage("DefaultConnection");
+                config.UseServer();
+            });
         }
     }
 }
