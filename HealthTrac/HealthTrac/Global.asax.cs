@@ -55,5 +55,10 @@ namespace HealthTrac
             var activities = ((IActivityService)GlobalConfiguration.Configuration.DependencyResolver.GetService(typeof(IActivityService))).GetActivities();
             ((ActivityForestBuilder)GlobalConfiguration.Configuration.DependencyResolver.GetService(typeof(ActivityForestBuilder))).BuildForest(activities);
         }
+
+        protected void Application_End()
+        {
+            _server.Stop();
+        }
     }
 }
