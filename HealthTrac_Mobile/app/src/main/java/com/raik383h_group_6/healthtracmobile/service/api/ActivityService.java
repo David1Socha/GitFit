@@ -21,7 +21,7 @@ import retrofit.http.Query;
 
 import static com.google.gson.FieldNamingPolicy.UPPER_CAMEL_CASE;
 
-public interface ActivitiesService {
+public interface ActivityService {
     Gson GSON = new GsonBuilder()
             .setFieldNamingPolicy(UPPER_CAMEL_CASE).setDateFormat(ApiConstants.ASPNET_DATE_FORMAT)
             .create();
