@@ -52,7 +52,7 @@ public class User implements Parcelable {
       return lifetimeSteps;
     }
 
-    public void setLifetimeSteps(double lifetimeSteps) {
+    public void setLifetimeSteps(long lifetimeSteps) {
       this.lifetimeSteps = lifetimeSteps;
     }
 
