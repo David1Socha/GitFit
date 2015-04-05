@@ -60,4 +60,18 @@ public class AsyncPointService implements IAsyncPointService {
             }
         }.execute().get();
     }
+
+    @Override
+    public List<Point> createPoints(final List<Point> points, final String token) throws ExecutionException, InterruptedException {
+        return new AsyncTask<Void, Void, List<Point>>() {
+            @Override
+            protected List<Point> doInBackground(Void... params) {
+                try {
+                    return service.createPoints(points, token);
+                } catch (Exception e) {
+                    return null;
+                }
+            }
+        }.execute().get();
+    }
 }

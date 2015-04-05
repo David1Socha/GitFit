@@ -66,6 +66,16 @@ namespace HealthTrac.Controllers.Api
             return CreatedAtRoute("DefaultApi", new { id = m.ID }, PointDto.FromPoint(m));
         }
 
+        //POST: api/CreatePoints
+        [Route("api/CreatePoints")]
+        [HttpPost]
+        public IEnumerable<PointDto> CreatePoints(Point[] points)
+        {
+            psvc.CreatePoints(points);
+            uow.Save();
+            return points.Select(p => PointDto.FromPoint(p));
+        }
+
         protected override void Dispose(bool disposing)
         {
             uow.Dispose();

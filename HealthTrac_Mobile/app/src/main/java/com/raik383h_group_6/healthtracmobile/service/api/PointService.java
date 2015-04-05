@@ -38,4 +38,7 @@ public interface PointService {
     @POST("/api/Points")
     Point createPoint(@Body Point point, @Header("Authorization") String token);
 
+    @POST("/api/CreatePoints")
+    List<Point> createPoints(@Body List<Point> points, @Header("Authorization") String token); //TODO if erroring out, might need to change from list to array for deserialization
+
 }
