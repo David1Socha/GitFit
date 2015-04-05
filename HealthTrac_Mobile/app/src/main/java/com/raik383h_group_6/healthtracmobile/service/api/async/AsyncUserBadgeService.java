@@ -33,12 +33,12 @@ public class AsyncUserBadgeService implements IAsyncUserBadgeService {
     }
 
     @Override
-    public UserBadge getUserBadge(final long activityId, final String userId, final String token) throws InterruptedException, ExecutionException {
+    public UserBadge getUserBadge(final long badgeId, final String userId, final String token) throws InterruptedException, ExecutionException {
         return new AsyncTask<Void, Void, UserBadge>() {
             @Override
             protected UserBadge doInBackground(Void... params) {
                 try {
-                    return service.getUserBadge(userId, activityId, token);
+                    return service.getUserBadge(userId, badgeId, token);
                 } catch (Exception e) {
                     return null;
                 }
@@ -61,12 +61,12 @@ public class AsyncUserBadgeService implements IAsyncUserBadgeService {
     }
 
     @Override
-    public List<UserBadge> getUserBadges(final long activityId, final String token) throws InterruptedException, ExecutionException {
+    public List<UserBadge> getUserBadges(final long badgeId, final String token) throws InterruptedException, ExecutionException {
         return new AsyncTask<Void, Void, List<UserBadge>>() {
             @Override
             protected List<UserBadge> doInBackground(Void... params) {
                 try {
-                    return service.getUserBadges(activityId, token);
+                    return service.getUserBadges(badgeId, token);
                 } catch (Exception e) {
                     return null;
                 }
