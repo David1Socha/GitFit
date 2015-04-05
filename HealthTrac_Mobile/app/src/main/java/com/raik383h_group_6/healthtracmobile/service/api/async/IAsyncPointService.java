@@ -9,4 +9,5 @@ public interface IAsyncPointService {
     Point getPoint(long id, String token) throws ExecutionException, InterruptedException;
     List<Point> getPoints(long activityId, String token) throws ExecutionException, InterruptedException;
     Point createPoint(Point point, String token) throws ExecutionException, InterruptedException;
+    List<Point> createPoints(List<Point> points, String token) throws ExecutionException, InterruptedException;
 }
