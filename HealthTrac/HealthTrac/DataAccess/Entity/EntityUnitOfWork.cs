@@ -22,9 +22,11 @@ namespace HealthTrac.DataAccess.Entity
         private IPointService point;
         private IUserBadgeService userBadge;
         private IUserGoalService userGoal;
+        private IActivityForest _forest;
 
-        public EntityUnitOfWork(ApplicationDbContext db)
+        public EntityUnitOfWork(ApplicationDbContext db, IActivityForest forest)
         {
+            _forest = forest;
             this.db = db;
         }
 
@@ -95,7 +97,7 @@ namespace HealthTrac.DataAccess.Entity
         {
             get
             {
-                activity = activity ?? new ActivityService(new EntityActivityAccessor(db), new EntityUserAccessor(db), new EntityUserBadgeAccessor(db), new EntityUserGoalAccessor(db), new EntityBadgeAccessor(db), new EntityGoalAccessor(db));
+                activity = activity ?? new ActivityService(new EntityActivityAccessor(db), new EntityUserAccessor(db), new EntityUserBadgeAccessor(db), new EntityUserGoalAccessor(db), new EntityBadgeAccessor(db), new EntityGoalAccessor(db), _forest);
                 return activity;
             }
         }

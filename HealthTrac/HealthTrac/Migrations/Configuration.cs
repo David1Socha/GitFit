@@ -22,23 +22,20 @@ namespace HealthTrac.Migrations
             var baseDir = AppDomain.CurrentDomain
                                .BaseDirectory
                                .Replace("\\bin", string.Empty);
-            context.Badges.AddOrUpdate(new Badge
+            context.Badges.AddOrUpdate(b => b.Name, new Badge
             {
-                ID = 1,
                 Field = Field.DISTANCE,
                 Name = "10000 Feet",
                 Threshold = 10000,
             },
             new Badge
             {
-                ID = 2,
                 Field = Field.DURATION,
-                Name = "Hour of exercise",
+                Name = "Hour of Exercise",
                 Threshold = 3600,
             },
             new Badge
             {
-                ID = 3,
                 Field = Field.STEPS,
                 Name = "One thousand steps ahead",
                 Threshold = 1000,

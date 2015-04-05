@@ -38,8 +38,7 @@ namespace HealthTrac
             GlobalConfiguration.Configuration.Formatters.Add(json);
             DependencyResolver.SetResolver(Bootstrapper.GetMvcResolver());
             var activities = DependencyResolver.Current.GetService<IActivityAccessor>().GetActivities();
-            var forest = ActivityForestBuilder.BuildForest(activities);
-            var type = forest.PredictType(activities.First());
+            Application["forest"] = ActivityForestBuilder.BuildForest(activities);
             GlobalConfiguration.Configuration.DependencyResolver = Bootstrapper.GetApiResolver();
         }
     }
