@@ -3,10 +3,13 @@ package com.raik383h_group_6.healthtracmobile.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.google.gson.annotations.SerializedName;
+
 public class Badge implements Parcelable {
+    @SerializedName("ID")
     private long id;
     private String name;
-    private double Threshold;
+    private double threshold;
 
     public Field getField() {
         return field;
@@ -33,11 +36,11 @@ public class Badge implements Parcelable {
     }
 
     public double getThreshold() {
-        return Threshold;
+        return threshold;
     }
 
     public void setThreshold(double threshold) {
-        Threshold = threshold;
+        this.threshold = threshold;
     }
 
     private Field field;
@@ -51,7 +54,7 @@ public class Badge implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeLong(this.id);
         dest.writeString(this.name);
-        dest.writeDouble(this.Threshold);
+        dest.writeDouble(this.threshold);
         dest.writeInt(this.field == null ? -1 : this.field.ordinal());
     }
 
@@ -61,7 +64,7 @@ public class Badge implements Parcelable {
     private Badge(Parcel in) {
         this.id = in.readLong();
         this.name = in.readString();
-        this.Threshold = in.readDouble();
+        this.threshold = in.readDouble();
         int tmpField = in.readInt();
         this.field = tmpField == -1 ? null : Field.values()[tmpField];
     }

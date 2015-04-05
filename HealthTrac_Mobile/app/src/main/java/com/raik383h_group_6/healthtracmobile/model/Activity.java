@@ -9,7 +9,9 @@ import java.util.Date;
 
 public class Activity implements Parcelable {
     private double duration, distance;
-    private long steps, id;
+    private long steps;
+    @SerializedName("ID")
+    private long id;
     private Date startDate;
 
     public double getDuration() {
@@ -53,11 +55,11 @@ public class Activity implements Parcelable {
     }
 
     public String getUserId() {
-        return userId;
+        return userID;
     }
 
     public void setUserId(String userId) {
-        this.userId = userId;
+        this.userID = userId;
     }
 
     public ActivityType getType() {
@@ -68,7 +70,7 @@ public class Activity implements Parcelable {
         this.type = type;
     }
 
-    private String userId;
+    private String userID;
     private ActivityType type;
     public enum ActivityType {
         @SerializedName("0")
@@ -93,7 +95,7 @@ public class Activity implements Parcelable {
         dest.writeLong(this.steps);
         dest.writeLong(this.id);
         dest.writeLong(startDate != null ? startDate.getTime() : -1);
-        dest.writeString(this.userId);
+        dest.writeString(this.userID);
         dest.writeInt(this.type == null ? -1 : this.type.ordinal());
     }
 
@@ -107,7 +109,7 @@ public class Activity implements Parcelable {
         this.id = in.readLong();
         long tmpStartDate = in.readLong();
         this.startDate = tmpStartDate == -1 ? null : new Date(tmpStartDate);
-        this.userId = in.readString();
+        this.userID = in.readString();
         int tmpType = in.readInt();
         this.type = tmpType == -1 ? null : ActivityType.values()[tmpType];
     }
