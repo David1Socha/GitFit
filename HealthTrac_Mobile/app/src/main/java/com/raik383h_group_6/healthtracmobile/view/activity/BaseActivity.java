@@ -38,8 +38,6 @@ public abstract class BaseActivity extends RoboActionBarActivity implements Base
             case R.id.logout:
                 onClickMenuLogout();
                 return true;
-            case R.id.login:
-                onClickMenuLogin();
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -47,22 +45,6 @@ public abstract class BaseActivity extends RoboActionBarActivity implements Base
 
     private void onClickMenuLogout() {
         getPresenter().onClickMenuLogout();
-    }
-
-    private void onClickMenuLogin() {
-        getPresenter().onClickMenuLogin();
-    }
-
-    @Override
-    public void setLogoutEnabled(boolean enabled) {
-        MenuItem logout = menu.findItem(R.id.logout);
-        logout.setVisible(enabled);
-    }
-
-    @Override
-    public void setLoginEnabled(boolean enabled) {
-        MenuItem login = menu.findItem(R.id.login);
-        login.setVisible(enabled);
     }
 
     @Override

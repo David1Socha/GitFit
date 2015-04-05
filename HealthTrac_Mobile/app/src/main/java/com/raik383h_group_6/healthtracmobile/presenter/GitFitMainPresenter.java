@@ -44,6 +44,9 @@ public class GitFitMainPresenter extends BasePresenter{
         if (grant == null) {
             reconstructGrant();
         }
+        if (grant == null) {
+            nav.openAuthentication(RequestCodes.AUTH);
+        }
     }
 
     private void reconstructGrant() {

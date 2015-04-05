@@ -13,8 +13,4 @@ public abstract class BasePresenter {
         getView().clearPrefs();
         getNav().openMain();
     }
-
-    public void onClickMenuLogin() {
-        getNav().openAuthentication(RequestCodes.AUTH);
-    }
 }
