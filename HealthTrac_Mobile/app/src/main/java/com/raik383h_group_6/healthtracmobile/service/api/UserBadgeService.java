@@ -32,7 +32,7 @@ public interface UserBadgeService {
     UserBadge getUserBadge(@Path("id") long id, @Header("Authorization") String token);
 
     @GET("/api/UserBadges")
-    UserBadge GetUserBadge(@Query("userId") String userId, @Query("badgeId") long badgeId, @Header("Authorization") String token);
+    UserBadge getUserBadge(@Query("userId") String userId, @Query("badgeId") long badgeId, @Header("Authorization") String token);
 
     @GET("/api/UserBadges")
     List<UserBadge> getUserBadges(@Header("Authorization") String token);
