@@ -3,6 +3,8 @@ package com.raik383h_group_6.healthtracmobile.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.Date;
 
 public class Activity implements Parcelable {
@@ -69,7 +71,14 @@ public class Activity implements Parcelable {
     private String userId;
     private ActivityType type;
     public enum ActivityType {
-        WALKING, JOGGING, RUNNING, BIKING
+        @SerializedName("0")
+        WALKING,
+        @SerializedName("1")
+        JOGGING,
+        @SerializedName("2")
+        RUNNING,
+        @SerializedName("3")
+        BIKING
     }
 
     @Override
