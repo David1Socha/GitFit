@@ -62,7 +62,6 @@ public class UserAdapter extends BaseAdapter {
 
         User user = users.get(position);
         holder.preferredName.setText(user.getPreferredName());
-        Log.d("davidsocha", user.getProfilePicture());
         Picasso.with(context)
                 .load(user.getProfilePicture())
                 .placeholder(R.drawable.default_profile_picture)
