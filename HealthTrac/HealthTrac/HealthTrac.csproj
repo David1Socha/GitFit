@@ -213,6 +213,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_Start\ActivityForestBuilder.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
@@ -300,8 +301,10 @@
     <Compile Include="Providers\ApplicationOAuthProvider.cs" />
     <Compile Include="Services\ActivityService.cs" />
     <Compile Include="Services\BadgeService.cs" />
+    <Compile Include="Services\CharonActivityForestAdapter.cs" />
     <Compile Include="Services\EnergyLevelService.cs" />
     <Compile Include="Services\GoalService.cs" />
+    <Compile Include="Services\IActivityForest.cs" />
     <Compile Include="Services\IActivityService.cs" />
     <Compile Include="Services\IBadgeService.cs" />
     <Compile Include="Services\IEnergyLevelService.cs" />
