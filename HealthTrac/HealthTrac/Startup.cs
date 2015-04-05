@@ -11,11 +11,6 @@ namespace HealthTrac
         public void Configuration(IAppBuilder app)
         {
             ConfigureAuth(app);
-            app.UseHangfire(config =>
-            {
-                config.UseSqlServerStorage("DefaultConnection");
-                config.UseServer();
-            });
         }
     }
 }

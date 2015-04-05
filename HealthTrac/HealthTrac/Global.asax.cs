@@ -15,12 +15,17 @@ using System.Web.Routing;
 using Microsoft.FSharp;
 using Microsoft.FSharp.Collections;
 using Microsoft.FSharp.Core;
-using HealthTrac.App_Start;
+using Hangfire;
+using Hangfire.SqlServer;
+using HealthTrac.Services;
 
 namespace HealthTrac
 {
     public class MvcApplication : System.Web.HttpApplication
     {
+
+        private BackgroundJobServer _server;
+
         protected void Application_Start()
         {
             Database.SetInitializer(new MigrateDatabaseToLatestVersion<ApplicationDbContext, Configuration>());
@@ -37,9 +42,18 @@ namespace HealthTrac
                 Newtonsoft.Json.PreserveReferencesHandling.None;
             GlobalConfiguration.Configuration.Formatters.Add(json);
             DependencyResolver.SetResolver(Bootstrapper.GetMvcResolver());
-            var activities = DependencyResolver.Current.GetService<IActivityAccessor>().GetActivities();
-            Application["forest"] = ActivityForestBuilder.BuildForest(activities);
             GlobalConfiguration.Configuration.DependencyResolver = Bootstrapper.GetApiResolver();
+            JobStorage.Current =
+                new SqlServerStorage("DefaultConnection");
+            _server = new BackgroundJobServer();
+            _server.Start();
+            BuildForest();
+            RecurringJob.AddOrUpdate(() => BuildForest(), Cron.Minutely);
+        }
+        public void BuildForest()
+        {
+            var activities = ((IActivityService)GlobalConfiguration.Configuration.DependencyResolver.GetService(typeof(IActivityService))).GetActivities();
+            ((ActivityForestBuilder)GlobalConfiguration.Configuration.DependencyResolver.GetService(typeof(ActivityForestBuilder))).BuildForest(activities);
         }
     }
 }

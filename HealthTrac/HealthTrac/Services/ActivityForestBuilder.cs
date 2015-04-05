@@ -7,11 +7,19 @@ using Microsoft.FSharp.Core;
 using Microsoft.FSharp.Collections;
 using HealthTrac.Services;
 
-namespace HealthTrac.App_Start
+namespace HealthTrac.Services
 {
-    public static class ActivityForestBuilder
+    public class ActivityForestBuilder
     {
-        public static IActivityForest BuildForest(IEnumerable<Activity> activities)
+
+        private IActivityForest _forest;
+
+        public ActivityForestBuilder()
+        {
+            ;
+        }
+
+        public void BuildForest(IEnumerable<Activity> activities)
         {
             var data = activities.Select(a => new Tuple<Activity, Activity>(a, a));
             Converter<Activity, FSharpOption<ActivityType>> labelConverter = a => new FSharpOption<ActivityType>(a.Type);
@@ -27,7 +35,12 @@ namespace HealthTrac.App_Start
                     FSharpList<Tuple<String, Charon.Featurization.Feature<Activity>>>.Cons(dur,
                         FSharpList<Tuple<String, Charon.Featurization.Feature<Activity>>>.Empty))); // equivalent to let features = [step; dis; dur] :(
             var forest = Charon.Learning.forest<Activity, Activity>(data, label, features, Charon.Learning.DefaultSettings);
-            return new CharonActivityForestAdapter(forest);
+            _forest = new CharonActivityForestAdapter(forest);
+        }
+
+        public IActivityForest GetForest()
+        {
+            return _forest;
         }
     }
 }

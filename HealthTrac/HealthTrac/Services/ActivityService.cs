@@ -29,6 +29,11 @@ namespace HealthTrac.Services
             _gAcc = gAcc;
         }
 
+        public IEnumerable<Activity> GetActivities()
+        {
+            return _acc.GetActivities();
+        }
+
         public Models.Activity GetActivity(long id)
         {
             return _acc.GetActivity(id);
