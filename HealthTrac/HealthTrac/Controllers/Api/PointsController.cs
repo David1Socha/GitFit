@@ -69,7 +69,7 @@ namespace HealthTrac.Controllers.Api
         //POST: api/CreatePoints
         [Route("api/CreatePoints")]
         [HttpPost]
-        public IEnumerable<PointDto> CreatePoints(IEnumerable<Point> points)
+        public IEnumerable<PointDto> CreatePoints(Point[] points)
         {
             psvc.CreatePoints(points);
             uow.Save();
