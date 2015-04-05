@@ -3,8 +3,11 @@ package com.raik383h_group_6.healthtracmobile.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.google.gson.annotations.SerializedName;
+
 public class Point implements Parcelable {
-    private long id, activityId;
+    @SerializedName("ID")
+    private long id, activityID;
     private double lng;
 
     public Point() {
@@ -33,11 +36,11 @@ public class Point implements Parcelable {
     }
 
     public long getActivityId() {
-        return activityId;
+        return activityID;
     }
 
     public void setActivityId(long activityId) {
-        this.activityId = activityId;
+        this.activityID = activityId;
     }
 
     public double getLng() {
@@ -58,14 +61,14 @@ public class Point implements Parcelable {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeLong(this.id);
-        dest.writeLong(this.activityId);
+        dest.writeLong(this.activityID);
         dest.writeDouble(this.lng);
         dest.writeDouble(this.lat);
     }
 
     private Point(Parcel in) {
         this.id = in.readLong();
-        this.activityId = in.readLong();
+        this.activityID = in.readLong();
         this.lng = in.readDouble();
         this.lat = in.readDouble();
     }
