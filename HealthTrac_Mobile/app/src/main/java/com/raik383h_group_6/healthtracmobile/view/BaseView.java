@@ -3,8 +3,6 @@ package com.raik383h_group_6.healthtracmobile.view;
 import android.os.Parcelable;
 
 public interface BaseView {
-    void setLoginEnabled(boolean enabled);
-    void setLogoutEnabled(boolean enabled);
 
     String getResource(int id);
 
