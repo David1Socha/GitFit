@@ -17,5 +17,6 @@ namespace HealthTrac.DataAccess
 
         void DeleteActivity(long ID);
 
+        IEnumerable<Activity> GetActivities();
     }
 }

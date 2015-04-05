@@ -16,15 +16,22 @@ namespace HealthTrac.Services
         private IUserGoalAccessor _ugAcc;
         private IBadgeAccessor _bAcc;
         private IGoalAccessor _gAcc;
+        private IActivityForest _forest;
 
-        public ActivityService(IActivityAccessor acc, IUserAccessor uAcc, IUserBadgeAccessor ubAcc, IUserGoalAccessor ugAcc, IBadgeAccessor bAcc, IGoalAccessor gAcc)
+        public ActivityService(IActivityAccessor acc, IUserAccessor uAcc, IUserBadgeAccessor ubAcc, IUserGoalAccessor ugAcc, IBadgeAccessor bAcc, IGoalAccessor gAcc, IActivityForest forest)
         {
+            _forest = forest;
             _acc = acc;
             _uAcc = uAcc;
             _ubAcc = ubAcc;
             _ugAcc = ugAcc;
             _bAcc = bAcc;
             _gAcc = gAcc;
+        }
+
+        public IEnumerable<Activity> GetActivities()
+        {
+            return _acc.GetActivities();
         }
 
         public Models.Activity GetActivity(long id)
@@ -39,9 +46,16 @@ namespace HealthTrac.Services
 
         public Models.Activity CreateActivity(Models.Activity activity, String uid)
         {
+            _PredictType(activity);
             var createdActivity = _acc.CreateActivity(activity);
             _UpdateUserAchievements(activity, uid);
             return createdActivity;
+        }
+
+        private void _PredictType(Activity activity)
+        {
+            var type = _forest.PredictType(activity);
+            activity.Type = type;
         }
 
         private void _UpdateUserAchievements(Activity activity, String uid)
@@ -101,12 +115,12 @@ namespace HealthTrac.Services
                 }
                 if (justEarned)
                 {
-                    _ugAcc.CreateUserGoal(new UserGoal()
+                    var ug = _ugAcc.GetUserGoal(b.ID, uid);
+                    if (ug != null)
                     {
-                        GoalID = b.ID,
-                        DateCompleted = DateTime.Now,
-                        UserID = user.Id,
-                    });
+                        ug.DateCompleted = DateTime.Now;
+                        _ugAcc.UpdateUserGoal(ug);
+                    }
                 }
             }
         }

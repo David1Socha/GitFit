@@ -52,5 +52,12 @@ namespace HealthTrac.DataAccess.Entity
             return activity;
         }
 
+
+        public IEnumerable<Activity> GetActivities()
+        {
+            IEnumerable<Activity> activities = db.Activities
+                .ToList();
+            return activities;
+        }
     }
 }

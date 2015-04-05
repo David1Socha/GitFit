@@ -42,6 +42,9 @@ namespace HealthTrac
             container.RegisterType<ILoginService, LoginService>(new HierarchicalLifetimeManager());
             container.RegisterType<IUserStore<User>, UserStore<User>>(new InjectionConstructor(new ApplicationDbContext()));
             container.RegisterType<IUserManager, UserManagerAdapter>(new HierarchicalLifetimeManager());
+            container.RegisterType<IActivityService>(new InjectionFactory(c => c.Resolve<IUnitOfWork>().ActivityService));
+            container.RegisterInstance<ActivityForestBuilder>(new ActivityForestBuilder());
+            container.RegisterType<IActivityForest>(new InjectionFactory(c => c.Resolve<ActivityForestBuilder>().GetForest()));
             container.RegisterType<IAuthenticationManager>(new InjectionFactory(c => HttpContext.Current.GetOwinContext().Authentication));
             return container;
         }
