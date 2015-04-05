@@ -110,12 +110,12 @@ namespace HealthTrac.Services
                 }
                 if (justEarned)
                 {
-                    _ugAcc.CreateUserGoal(new UserGoal()
+                    var ug = _ugAcc.GetUserGoal(b.ID, uid);
+                    if (ug != null)
                     {
-                        GoalID = b.ID,
-                        DateCompleted = DateTime.Now,
-                        UserID = user.Id,
-                    });
+                        ug.DateCompleted = DateTime.Now;
+                        _ugAcc.UpdateUserGoal(ug);
+                    }
                 }
             }
         }
