@@ -7,16 +7,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/pedometer"
-        android:textSize="50dp"
-        android:id="@+id/pedometer_textview"
-        android:layout_gravity="center_horizontal" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="0"
-        android:textSize="100dp"
+        android:textSize="100sp"
         android:id="@+id/stepcount_textview"
         android:layout_gravity="center_horizontal" />
 
@@ -24,7 +15,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/steps"
-        android:textSize="30dp"
+        android:textSize="30sp"
         android:id="@+id/steps_textview"
         android:layout_gravity="center_horizontal" />
 
@@ -33,8 +24,8 @@
         android:layout_height="wrap_content"
         android:padding="20dp"
         android:layout_marginTop="10dp"
-        android:text="Reset"
-        android:textSize="30dp"
+        android:text="@string/finish_activity"
+        android:textSize="30sp"
         android:onClick="onClickStepReset"
         android:id="@+id/step_reset_button"
         android:layout_gravity="center_horizontal" />
