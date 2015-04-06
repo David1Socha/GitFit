@@ -1,24 +1,20 @@
 package com.raik383h_group_6.healthtracmobile.presenter;
 
 
-import android.os.Handler;
-import android.os.Message;
-
-
 import com.google.inject.Inject;
 import com.google.inject.assistedinject.Assisted;
 import com.raik383h_group_6.healthtracmobile.application.IActivityNavigator;
 import com.raik383h_group_6.healthtracmobile.view.BaseView;
-import com.raik383h_group_6.healthtracmobile.view.PedometerView;
+import com.raik383h_group_6.healthtracmobile.view.ActivityView;
 
-public class PedometerPresenter extends BasePresenter{
+public class ActivityPresenter extends BasePresenter{
     private final IActivityNavigator nav;
-    private final PedometerView view;
+    private final ActivityView view;
     private int steps;
 
 
     @Inject
-    public PedometerPresenter( @Assisted IActivityNavigator nav, @Assisted PedometerView view) {
+    public ActivityPresenter(@Assisted IActivityNavigator nav, @Assisted ActivityView view) {
         this.nav = nav;
         this.view = view;
         this.steps = 0;

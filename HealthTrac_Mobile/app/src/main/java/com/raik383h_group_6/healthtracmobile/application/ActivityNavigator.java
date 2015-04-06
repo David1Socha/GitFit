@@ -12,7 +12,6 @@ import com.raik383h_group_6.healthtracmobile.model.Team;
 import com.raik383h_group_6.healthtracmobile.model.Token;
 import com.raik383h_group_6.healthtracmobile.model.User;
 import com.raik383h_group_6.healthtracmobile.view.activity.AuthenticationActivity;
-import com.raik383h_group_6.healthtracmobile.view.activity.GitFitMainActivity;
 import com.raik383h_group_6.healthtracmobile.view.activity.ListTeamsActivity;
 import com.raik383h_group_6.healthtracmobile.view.activity.ListUsersActivity;
 import com.raik383h_group_6.healthtracmobile.view.activity.LocationActivity;
@@ -20,7 +19,7 @@ import com.raik383h_group_6.healthtracmobile.view.activity.OAuthBrowserActivity;
 import com.raik383h_group_6.healthtracmobile.view.activity.OAuthPromptActivity;
 import com.raik383h_group_6.healthtracmobile.view.activity.CreateUserActivity;
 import com.raik383h_group_6.healthtracmobile.view.activity.EditUserActivity;
-import com.raik383h_group_6.healthtracmobile.view.activity.PedometerActivity;
+import com.raik383h_group_6.healthtracmobile.view.activity.ActivityActivity;
 import com.raik383h_group_6.healthtracmobile.view.activity.ViewTeamActivity;
 import com.raik383h_group_6.healthtracmobile.view.activity.ViewUserActivity;
 
@@ -208,7 +207,7 @@ public class ActivityNavigator implements IActivityNavigator {
 
     @Override
     public void openPedometer(AccessGrant g) {
-        Intent i = new Intent(activity, PedometerActivity.class);
+        Intent i = new Intent(activity, ActivityActivity.class);
         i.putExtra(activity.getString(R.string.EXTRA_ACCESS_GRANT), g);
         activity.startActivity(i);
     }

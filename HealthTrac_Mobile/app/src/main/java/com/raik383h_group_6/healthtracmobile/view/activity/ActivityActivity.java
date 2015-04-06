@@ -17,19 +17,18 @@ import com.google.android.gms.location.LocationServices;
 import com.raik383h_group_6.healthtracmobile.R;
 import com.raik383h_group_6.healthtracmobile.application.ActivityNavigator;
 import com.raik383h_group_6.healthtracmobile.application.IActivityNavigator;
-import com.raik383h_group_6.healthtracmobile.model.FacebookUser;
 import com.raik383h_group_6.healthtracmobile.presenter.BasePresenter;
-import com.raik383h_group_6.healthtracmobile.presenter.PedometerPresenter;
+import com.raik383h_group_6.healthtracmobile.presenter.ActivityPresenter;
 import com.raik383h_group_6.healthtracmobile.presenter.PresenterFactory;
 import com.raik383h_group_6.healthtracmobile.service.StepListener;
-import com.raik383h_group_6.healthtracmobile.view.PedometerView;
+import com.raik383h_group_6.healthtracmobile.view.ActivityView;
 
 import roboguice.inject.ContentView;
 import roboguice.inject.InjectView;
 import com.google.inject.Inject;
 
 @ContentView(R.layout.activity_pedometer)
-public class PedometerActivity extends BaseActivity implements PedometerView, GoogleApiClient.OnConnectionFailedListener, GoogleApiClient.ConnectionCallbacks, LocationListener{
+public class ActivityActivity extends BaseActivity implements ActivityView, GoogleApiClient.OnConnectionFailedListener, GoogleApiClient.ConnectionCallbacks, LocationListener{
     private Sensor sensor;
     private SensorManager sensorManager;
     private StepListener stepListener;
@@ -55,7 +54,7 @@ public class PedometerActivity extends BaseActivity implements PedometerView, Go
 
     @Inject
     PresenterFactory presenterFactory;
-    private PedometerPresenter presenter;
+    private ActivityPresenter presenter;
 
 
     @Override

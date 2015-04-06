@@ -1,11 +1,9 @@
 package com.raik383h_group_6.healthtracmobile.presenter;
 
-import android.os.Bundle;
 import android.webkit.WebView;
 
 import com.raik383h_group_6.healthtracmobile.application.IActivityNavigator;
 import com.raik383h_group_6.healthtracmobile.service.oauth.IAsyncOAuthService;
-import com.raik383h_group_6.healthtracmobile.service.oauth.IOAuthService;
 import com.raik383h_group_6.healthtracmobile.view.AuthenticationView;
 import com.raik383h_group_6.healthtracmobile.view.BaseView;
 import com.raik383h_group_6.healthtracmobile.view.CreateUserView;
@@ -13,7 +11,7 @@ import com.raik383h_group_6.healthtracmobile.view.EditUserView;
 import com.raik383h_group_6.healthtracmobile.view.GitFitMainView;
 import com.raik383h_group_6.healthtracmobile.view.ListTeamsView;
 import com.raik383h_group_6.healthtracmobile.view.ListUsersView;
-import com.raik383h_group_6.healthtracmobile.view.PedometerView;
+import com.raik383h_group_6.healthtracmobile.view.ActivityView;
 import com.raik383h_group_6.healthtracmobile.view.UserValidationView;
 import com.raik383h_group_6.healthtracmobile.view.ViewUserView;
 import com.raik383h_group_6.healthtracmobile.view.ViewTeamView;
@@ -29,6 +27,6 @@ public interface PresenterFactory {
     EditUserPresenter create(UserValidationPresenter presenter, IActivityNavigator nav, EditUserView view);
     GitFitMainPresenter create(IActivityNavigator nav, GitFitMainView view);
     ViewTeamPresenter create(IActivityNavigator nav, ViewTeamView view);
-    PedometerPresenter create(IActivityNavigator nav, PedometerView view);
+    ActivityPresenter create(IActivityNavigator nav, ActivityView view);
     UserValidationPresenter create(UserValidationView view);
 }

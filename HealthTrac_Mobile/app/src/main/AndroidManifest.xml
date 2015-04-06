@@ -37,7 +37,7 @@
                 android:value=".view.activity.GitFitMainActivity" />
         </activity>
         <activity
-            android:name=".view.activity.PedometerActivity"
+            android:name=".view.activity.ActivityActivity"
             android:launchMode="singleTop"
             android:label="Pedometer Demo">
             <meta-data

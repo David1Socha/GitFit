@@ -1,7 +1,7 @@
 package com.raik383h_group_6.healthtracmobile.view;
 
 
-public interface PedometerView extends BaseView{
+public interface ActivityView extends BaseView{
 
     void setPedometer(String txt);
 
