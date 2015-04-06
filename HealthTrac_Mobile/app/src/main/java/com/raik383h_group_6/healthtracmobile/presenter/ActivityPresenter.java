@@ -9,6 +9,7 @@ import com.google.inject.assistedinject.Assisted;
 import com.raik383h_group_6.healthtracmobile.R;
 import com.raik383h_group_6.healthtracmobile.application.IActivityNavigator;
 import com.raik383h_group_6.healthtracmobile.model.AccessGrant;
+import com.raik383h_group_6.healthtracmobile.model.Activity;
 import com.raik383h_group_6.healthtracmobile.model.FacebookUser;
 import com.raik383h_group_6.healthtracmobile.model.Point;
 import com.raik383h_group_6.healthtracmobile.service.api.async.IAsyncActivityService;
@@ -19,6 +20,7 @@ import com.raik383h_group_6.healthtracmobile.view.ActivityView;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 public class ActivityPresenter extends BasePresenter{
     private final IActivityNavigator nav;
@@ -28,6 +30,7 @@ public class ActivityPresenter extends BasePresenter{
     private double distance;
     private List<Point> pts;
     private GoogleApiClient gClient;
+    private long duration;
     private Location lastLocation;
     private AccessGrant grant;
     private IAsyncActivityService activityService;
@@ -84,9 +87,31 @@ public class ActivityPresenter extends BasePresenter{
 
     public void onClickFinishActivity() {
         Date endDate = new Date();
-        long durationMs = endDate.getTime() - startDate.getTime();
-        view.showMessage(String.valueOf(durationMs) + "  " + String.valueOf(pts.size()));
+        duration = endDate.getTime() - startDate.getTime();
+        postActivityPoints();
         nav.finishActivity();
+    }
+
+    private void postActivityPoints() {
+        Activity activity = new Activity();
+        activity.setDistance(distance);
+        activity.setDuration(duration);
+        activity.setStartDate(startDate);
+        activity.setSteps(steps);
+        activity.setUserId(grant.getId());
+        try {
+            activity = activityService.createActivityAsync(activity, grant.getAuthHeader());
+            if (activity != null) {
+                for (Point p : pts) {
+                    p.setActivityId(activity.getId());
+                }
+                pointService.createPoints(pts, grant.getAuthHeader());
+            } else {
+                view.showMessage(view.getResource(R.string.error_create_activity));
+            }
+        } catch (ExecutionException | InterruptedException e) {
+            view.showMessage(view.getResource(R.string.error_create_activity));
+        }
     }
 
     @Override
