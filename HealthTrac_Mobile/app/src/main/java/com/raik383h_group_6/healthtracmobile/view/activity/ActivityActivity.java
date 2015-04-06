@@ -43,8 +43,6 @@ public class ActivityActivity extends BaseActivity implements ActivityView, Goog
     };
     private GoogleApiClient gClient;
 
-    @InjectView(R.id.pedometer_textview)
-    TextView pedometer;
     @InjectView(R.id.stepcount_textview)
     TextView stepcount;
     @InjectView(R.id.steps_textview)
@@ -84,13 +82,7 @@ public class ActivityActivity extends BaseActivity implements ActivityView, Goog
     public void onClickStepReset(View view) { presenter.resetSteps(); }
 
     @Override
-    public void setPedometer(String txt) {  pedometer.setText(txt); }
-
-    @Override
     public void setStepCount(String txt) {  stepcount.setText(txt); }
-
-    @Override
-    public void setSteps(String txt) {  steps.setText(txt);}
 
     @Override
     public BasePresenter getPresenter() {
