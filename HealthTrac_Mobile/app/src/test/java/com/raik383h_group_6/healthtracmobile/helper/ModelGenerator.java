@@ -1,13 +1,37 @@
 package com.raik383h_group_6.healthtracmobile.helper;
 
+import com.raik383h_group_6.healthtracmobile.R;
 import com.raik383h_group_6.healthtracmobile.model.AccessGrant;
+import com.raik383h_group_6.healthtracmobile.model.FacebookUser;
 import com.raik383h_group_6.healthtracmobile.model.Membership;
 import com.raik383h_group_6.healthtracmobile.model.Team;
 import com.raik383h_group_6.healthtracmobile.model.Token;
 import com.raik383h_group_6.healthtracmobile.model.User;
+import com.raik383h_group_6.healthtracmobile.view.BaseView;
 
-import java.util.ArrayList;
 import java.util.Date;
+
+import static com.raik383h_group_6.healthtracmobile.helper.TestConstants.ACCOUNT_NOT_MADE;
+import static com.raik383h_group_6.healthtracmobile.helper.TestConstants.EMPTY_FIELD_ERROR;
+import static com.raik383h_group_6.healthtracmobile.helper.TestConstants.ERROR_FIND_PROFILE;
+import static com.raik383h_group_6.healthtracmobile.helper.TestConstants.FACEBOOK;
+import static com.raik383h_group_6.healthtracmobile.helper.TestConstants.FEMALE;
+import static com.raik383h_group_6.healthtracmobile.helper.TestConstants.GRANT_KEY;
+import static com.raik383h_group_6.healthtracmobile.helper.TestConstants.GRANT_PREF_KEY;
+import static com.raik383h_group_6.healthtracmobile.helper.TestConstants.INVALID_DATE_ERROR;
+import static com.raik383h_group_6.healthtracmobile.helper.TestConstants.INVALID_FIELD_MSG;
+import static com.raik383h_group_6.healthtracmobile.helper.TestConstants.MALE;
+import static com.raik383h_group_6.healthtracmobile.helper.TestConstants.PROVIDER_KEY;
+import static com.raik383h_group_6.healthtracmobile.helper.TestConstants.SECRET_KEY;
+import static com.raik383h_group_6.healthtracmobile.helper.TestConstants.SIGNIN_ERR;
+import static com.raik383h_group_6.healthtracmobile.helper.TestConstants.TEAM_KEY;
+import static com.raik383h_group_6.healthtracmobile.helper.TestConstants.TOKEN_KEY;
+import static com.raik383h_group_6.healthtracmobile.helper.TestConstants.TWITTER;
+import static com.raik383h_group_6.healthtracmobile.helper.TestConstants.USER_KEY;
+import static com.raik383h_group_6.healthtracmobile.helper.TestConstants.USER_UPDATED_MSG;
+import static com.raik383h_group_6.healthtracmobile.helper.TestConstants.USER_UPDATE_ERR;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 public final class ModelGenerator {
 
@@ -37,7 +61,6 @@ public final class ModelGenerator {
         return t;
     }
 
-
     public static Membership genMemberMembership() {
         Membership m = new Membership();
         m.setId(0);
@@ -52,5 +75,15 @@ public final class ModelGenerator {
         t.setSecret("secret");
         t.setToken("qwerty");
         return t;
+    }
+
+    public static FacebookUser genFacebookUser() {
+        FacebookUser u = new FacebookUser();
+        u.setName("John Smith");
+        u.setFirstName("John");
+        u.setLastName("Smith");
+        u.setEmail("john@smith.com");
+        u.setGender("male");
+        return u;
     }
 }

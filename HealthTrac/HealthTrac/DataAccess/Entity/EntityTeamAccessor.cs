@@ -5,81 +5,62 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Data.Entity.Infrastructure;
+using System.Data.Entity;
 
 namespace HealthTrac.DataAccess.Entity
 {
     public class EntityTeamAccessor : ITeamAccessor
     {
+
+        private ApplicationDbContext db;
+
+        public EntityTeamAccessor(ApplicationDbContext db)
+        {
+            this.db = db;
+        }
+
         public Team GetTeam(long ID)
         {
-            using (var db = new ApplicationDbContext())
-            {
-                var team = db.Teams.Include("Memberships").Include("Memberships.User")
-                                .Where(t => t.ID == ID && t.Enabled).FirstOrDefault();
-                return team;
-            }
+            var team = db.Teams.Include("Memberships").Include("Memberships.User")
+                            .Where(t => t.ID == ID && t.Enabled).FirstOrDefault();
+            return team;
         }
 
         public IEnumerable<Team> SearchTeams(string name)
         {
-            using (var db = new ApplicationDbContext())
-            {
-                var teams = db.Teams
-                                .Where(t => t.Name.Contains(name)).ToList();
-                return teams;
-            }
+            var teams = db.Teams
+                            .Where(t => t.Name.Contains(name)).ToList();
+            return teams;
         }
 
         public IEnumerable<Team> GetTeams()
         {
-            using (var db = new ApplicationDbContext())
-            {
-                var teams = db.Teams.Where(t => t.Enabled).ToList();
-                return teams;
-            }
+            var teams = db.Teams.Where(t => t.Enabled).ToList();
+            return teams;
         }
         public IEnumerable<Team> GetTeams(string userID)
         {
-            using (var db = new ApplicationDbContext())
+            var memberships = db.Memberships.Where(m => m.UserID == userID &&
+                (m.MembershipStatus == MembershipStatus.ADMIN
+                || m.MembershipStatus == MembershipStatus.MEMBER)).Select(m => new
             {
-                var memberships = db.Memberships.Where(m => m.UserID == userID &&
-                    (m.MembershipStatus == MembershipStatus.ADMIN
-                    || m.MembershipStatus == MembershipStatus.MEMBER)).Select(m => new
-                {
-                    m.TeamID,
-                });
-                IEnumerable<long> teamIdsWhereUserMember = memberships.Select(m => m.TeamID);
-                var teams = db.Teams.Where(t => teamIdsWhereUserMember.Contains(t.ID) && t.Enabled);
+                m.TeamID,
+            });
+            IEnumerable<long> teamIdsWhereUserMember = memberships.Select(m => m.TeamID);
+            var teams = db.Teams.Where(t => teamIdsWhereUserMember.Contains(t.ID) && t.Enabled);
 
-                return teams.ToList();
-            }
+            return teams.ToList();
         }
 
         public Team UpdateTeam(Team team)
         {
-            using (var db = new ApplicationDbContext())
-            {
-                db.Entry(team).State = System.Data.Entity.EntityState.Modified;
-                try
-                {
-                    db.SaveChanges();
-                }
-                catch (DbUpdateConcurrencyException ex)
-                {
-                    throw new ConcurrentUpdateException("The team you are trying to update has been modified externally", ex);
-                }
-                return team;
-            }
+            db.Entry(team).State = System.Data.Entity.EntityState.Modified;
+            return team;
         }
 
         public Team CreateTeam(Team team)
         {
-            using (var db = new ApplicationDbContext())
-            {
-                db.Teams.Add(team);
-                db.SaveChanges();
-
-            }
+            db.Teams.Add(team);
             return team;
         }
 
@@ -89,5 +70,10 @@ namespace HealthTrac.DataAccess.Entity
             return UpdateTeam(team);
         }
 
+        public Team DeleteTeam(long teamId)
+        {
+            var team = db.Teams.Include(t => t.Memberships).Single(t => t.ID == teamId);
+            return DeleteTeam(team);
+        }
     }
 }

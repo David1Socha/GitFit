@@ -4,24 +4,24 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.inject.Inject;
 import com.raik383h_group_6.healthtracmobile.R;
 import com.raik383h_group_6.healthtracmobile.application.IActivityNavigator;
-import com.raik383h_group_6.healthtracmobile.content.IResources;
-import com.raik383h_group_6.healthtracmobile.content.ResourcesAdapter;
 import com.raik383h_group_6.healthtracmobile.application.ActivityNavigator;
+import com.raik383h_group_6.healthtracmobile.presenter.BasePresenter;
 import com.raik383h_group_6.healthtracmobile.presenter.PresenterFactory;
 import com.raik383h_group_6.healthtracmobile.presenter.ViewUserPresenter;
 import com.raik383h_group_6.healthtracmobile.view.ViewUserView;
+import com.squareup.picasso.Picasso;
 
-import roboguice.activity.RoboActionBarActivity;
 import roboguice.inject.ContentView;
 import roboguice.inject.InjectView;
 
 @ContentView(R.layout.activity_view_user)
-public class ViewUserActivity extends CustomRoboActionBarActivity implements ViewUserView {
+public class ViewUserActivity extends BaseActivity implements ViewUserView {
     @InjectView(R.id.birthdate_textview)
     TextView birthDateTextView;
     @InjectView(R.id.email_textview)
@@ -42,6 +42,8 @@ public class ViewUserActivity extends CustomRoboActionBarActivity implements Vie
     TextView userNameTextView;
     @InjectView(R.id.weight_textview)
     TextView weightTextView;
+    @InjectView(R.id.profile_picture)
+    ImageView profileImageView;
     @InjectView(R.id.edit_user_button)
     private
     Button editUserButton;
@@ -52,10 +54,8 @@ public class ViewUserActivity extends CustomRoboActionBarActivity implements Vie
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        IResources resources = new ResourcesAdapter(getResources());
         IActivityNavigator nav = new ActivityNavigator(this);
-        Bundle extras = getIntent().getExtras();
-        presenter = presenterFactory.create(extras, resources, nav, this);
+        presenter = presenterFactory.create(nav, this);
     }
 
     @Override
@@ -131,5 +131,20 @@ public class ViewUserActivity extends CustomRoboActionBarActivity implements Vie
         } else {
             editUserButton.setVisibility(View.GONE);
         }
+    }
+
+    @Override
+    public void setProfilePicture(String profilePicture) {
+        Picasso.with(this)
+            .load(profilePicture)
+            .placeholder(R.drawable.default_profile_picture)
+            .resizeDimen(R.dimen.prof_pic_size, R.dimen.prof_pic_size)
+            .centerInside()
+            .into(profileImageView);
+    }
+
+    @Override
+    public BasePresenter getPresenter() {
+        return presenter;
     }
 }

@@ -12,10 +12,15 @@ namespace HealthTrac.DataAccess.Entity
     public class ApplicationDbContext : IdentityDbContext<User>
     {
         public DbSet<Activity> Activities { get; set; }
-        public DbSet<ExerciseSession> ExerciseSessions { get; set; }
         public DbSet<Membership> Memberships { get; set; }
-        public DbSet<Status> Statuses { get; set; }
         public DbSet<Team> Teams { get; set; }
+        public DbSet<Badge> Badges { get; set; }
+        public DbSet<EnergyLevel> EnergyLevels { get; set; }
+        public DbSet<Goal> Goals { get; set; }
+        public DbSet<Meal> Meals { get; set; }
+        public DbSet<Point> Points { get; set; }
+        public DbSet<UserBadge> UserBadges { get; set; }
+        public DbSet<UserGoal> UserGoals { get; set; }
 
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)

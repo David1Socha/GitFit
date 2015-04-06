@@ -7,33 +7,29 @@ import com.google.inject.Inject;
 import com.google.inject.assistedinject.Assisted;
 import com.raik383h_group_6.healthtracmobile.R;
 import com.raik383h_group_6.healthtracmobile.application.IActivityNavigator;
-import com.raik383h_group_6.healthtracmobile.content.IResources;
+import com.raik383h_group_6.healthtracmobile.application.RequestCodes;
 import com.raik383h_group_6.healthtracmobile.model.AccessGrant;
 import com.raik383h_group_6.healthtracmobile.model.User;
 import com.raik383h_group_6.healthtracmobile.service.FormatUtils;
+import com.raik383h_group_6.healthtracmobile.view.BaseView;
 import com.raik383h_group_6.healthtracmobile.view.ViewUserView;
 
-public class ViewUserPresenter {
-    private final Bundle extras;
-    private final IResources resources;
+public class ViewUserPresenter extends BasePresenter{
     private final IActivityNavigator nav;
     private final ViewUserView view;
     private User user;
     private AccessGrant grant;
-    public static final int UPDATE = 1;
 
     @Inject
-    public ViewUserPresenter(@Assisted Bundle extras, @Assisted IResources resources, @Assisted IActivityNavigator nav, @Assisted ViewUserView view) {
-        this.extras = extras;
-        this.resources = resources;
+    public ViewUserPresenter(@Assisted IActivityNavigator nav, @Assisted ViewUserView view) {
         this.nav = nav;
         this.view = view;
-        user = extras.getParcelable(resources.getString(R.string.EXTRA_USER));
-        grant = extras.getParcelable(resources.getString(R.string.EXTRA_ACCESS_GRANT));
+        user = (User) view.getParcelableExtra(view.getResource(R.string.EXTRA_USER));
+        grant = (AccessGrant) view.getParcelableExtra(view.getResource(R.string.EXTRA_ACCESS_GRANT));
     }
 
     public void onClickEditUser() {
-        nav.openEditUser(grant, user, UPDATE);
+        nav.openEditUser(grant, user, RequestCodes.UPDATE_USER);
     }
 
     public void onResume() {
@@ -43,8 +39,8 @@ public class ViewUserPresenter {
     public void onActivityResult(int requestCode, int resultCode, Bundle extras) {
         if (resultCode == Activity.RESULT_OK) {
             switch (requestCode) {
-                case UPDATE:
-                    user = extras.getParcelable(resources.getString(R.string.EXTRA_USER));
+                case RequestCodes.UPDATE_USER:
+                    user = extras.getParcelable(view.getResource(R.string.EXTRA_USER));
                     updateFields();
                     break;
                 default:
@@ -61,10 +57,22 @@ public class ViewUserPresenter {
         view.setLastName(user.getLastName());
         view.setLocation(user.getLocation());
         view.setPrefName(user.getPreferredName());
-        view.setSex(user.getSex()== User.Sex.MALE ? resources.getString(R.string.male_label): resources.getString(R.string.label_female));
+        view.setProfilePicture(user.getProfilePicture());
+        view.setSex(user.getSex()== User.Sex.MALE ? view.getResource(R.string.male_label): view.getResource(R.string.label_female));
         view.setUserName(user.getUserName());
         view.setWeight(FormatUtils.format(user.getWeight()));
         boolean userViewingSelf = user.getId().equals(grant.getId());
         view.setShowEditUserButton(userViewingSelf);
     }
+
+    @Override
+    protected IActivityNavigator getNav() {
+        return nav;
+    }
+
+    @Override
+    protected BaseView getView() {
+        return view;
+    }
+
 }

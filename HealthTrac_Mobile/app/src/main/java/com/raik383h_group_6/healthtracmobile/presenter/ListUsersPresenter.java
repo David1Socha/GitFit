@@ -11,45 +11,32 @@ import com.google.inject.assistedinject.Assisted;
 import com.raik383h_group_6.healthtracmobile.R;
 import com.raik383h_group_6.healthtracmobile.adapter.UserAdapter;
 import com.raik383h_group_6.healthtracmobile.application.IActivityNavigator;
-import com.raik383h_group_6.healthtracmobile.content.IResources;
 import com.raik383h_group_6.healthtracmobile.model.AccessGrant;
 import com.raik383h_group_6.healthtracmobile.model.User;
 import com.raik383h_group_6.healthtracmobile.service.api.UserService;
+import com.raik383h_group_6.healthtracmobile.service.api.async.IAsyncUserService;
+import com.raik383h_group_6.healthtracmobile.view.BaseView;
 import com.raik383h_group_6.healthtracmobile.view.ListUsersView;
 import com.raik383h_group_6.healthtracmobile.view.activity.ListUsersActivity;
 
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
-public class ListUsersPresenter {
+public class ListUsersPresenter extends BasePresenter{
 
-    private static final int AUTH = 1;
+    public static final int AUTH = 1;
 
-    private IResources resources;
     private IActivityNavigator nav;
     private ListUsersView view;
-    private UserService userService;
+    private IAsyncUserService userService;
     private AccessGrant grant;
-    private Bundle extras;
 
     @Inject
-    public ListUsersPresenter(UserService userService, @Assisted Bundle extras, @Assisted IResources resources, @Assisted IActivityNavigator nav, @Assisted ListUsersView view) {
-        this.resources = resources;
+    public ListUsersPresenter(IAsyncUserService userService, @Assisted IActivityNavigator nav, @Assisted ListUsersView view) {
         this.nav = nav;
         this.userService = userService;
         this.view = view;
-        this.extras = extras;
-    }
-
-    public void onCreate(Bundle savedInstanceState) {
-        this.grant = extras.getParcelable(resources.getString(R.string.EXTRA_ACCESS_GRANT));
-        if (savedInstanceState != null) {
-            this.grant = savedInstanceState.getParcelable(resources.getString(R.string.EXTRA_ACCESS_GRANT));
-        }
-    }
-
-    public void onSaveInstanceState(Bundle outState) {
-        outState.putParcelable(resources.getString(R.string.EXTRA_ACCESS_GRANT), grant);
+        this.grant = (AccessGrant) view.getParcelableExtra(view.getResource(R.string.EXTRA_ACCESS_GRANT));
     }
 
     public void onResume() {
@@ -63,7 +50,7 @@ public class ListUsersPresenter {
                 view.setNoUsersMessageDisplay(true);
                 return;
             }
-            users = getUsersAsync(grant.getAuthHeader());
+            users = userService.getUsersAsync(grant.getAuthHeader());
             if (users != null) {
                 view.setNoUsersMessageDisplay(false);
                 view.setUsers(users);
@@ -76,21 +63,18 @@ public class ListUsersPresenter {
         }
     }
 
-    private List<User> getUsersAsync(String authHeader) throws ExecutionException, InterruptedException {
-        return new AsyncTask<String, Void, List<User>>() {
-            @Override
-            protected List<User> doInBackground(String... params) {
-                try {
-                    return userService.getUsers(params[0]);
-                } catch (Exception e) {
-                    return null;
-                }
-            }
-        }.execute(authHeader).get();
-    }
-
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         User u = (User) parent.getAdapter().getItem(position);
         nav.openViewUser(u, grant);
+    }
+
+    @Override
+    protected BaseView getView() {
+        return view;
+    }
+
+    @Override
+    protected IActivityNavigator getNav() {
+        return nav;
     }
 }

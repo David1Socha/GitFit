@@ -8,6 +8,8 @@ import com.raik383h_group_6.healthtracmobile.model.User;
 public interface IActivityNavigator {
     void openOAuthBrowser(String provider, int reqCode);
 
+    void openMain();
+
     void finishOAuthPromptInShame();
 
     void finishOAuthPromptWithInfo(String accessToken, String accessSecret, String provider);
@@ -49,4 +51,8 @@ public interface IActivityNavigator {
     void finishEditUserSuccess(User user);
 
     void finishEditUserFailure();
+
+    void openActivity(AccessGrant g);
+
+    void finishActivity();
 }

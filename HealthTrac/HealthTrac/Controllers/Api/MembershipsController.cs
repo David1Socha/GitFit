@@ -11,6 +11,7 @@ using System.Web.Http.Description;
 using HealthTrac.Models;
 using HealthTrac.DataAccess;
 using HealthTrac.Models.Dto;
+using HealthTrac.Services;
 
 namespace HealthTrac.Controllers.Api
 {
@@ -18,23 +19,25 @@ namespace HealthTrac.Controllers.Api
     public class MembershipsController : ApiController
     {
 
-        private IMembershipAccessor acc;
+        private IUnitOfWork uow;
+        private IMembershipService memSvc;
 
-        public MembershipsController(IMembershipAccessor acc)
+        public MembershipsController(IUnitOfWork uow)
         {
-            this.acc = acc;
+            this.uow = uow;
+            this.memSvc = uow.MembershipService;
         }
         // GET: api/Memberships
         public IEnumerable<MembershipDto> GetMemberships()
         {
-            return acc.GetMemberships().Select(m => MembershipDto.FromMembership(m));
+            return memSvc.GetMemberships().Select(m => MembershipDto.FromMembership(m));
         }
 
         // GET: api/Memberships?userId=xyz&teamId=5
         [ResponseType(typeof(MembershipDto))]
         public IHttpActionResult GetMembership(string userId, long teamId)
         {
-            var membership = acc.GetMembership(teamId, userId);
+            var membership = memSvc.GetMembership(teamId, userId);
             if (membership == null)
             {
                 return NotFound();
@@ -46,7 +49,7 @@ namespace HealthTrac.Controllers.Api
         [ResponseType(typeof(MembershipDto))]
         public IHttpActionResult GetMembership(long id)
         {
-            Membership membership = acc.GetMembership(id);
+            Membership membership = memSvc.GetMembership(id);
             if (membership == null)
             {
                 return NotFound();
@@ -58,14 +61,14 @@ namespace HealthTrac.Controllers.Api
         // GET: api/Memberships?userId=xyz
         public IEnumerable<MembershipDto> GetMemberships(string userId)
         {
-            return acc.GetMemberships(userId).
+            return memSvc.GetMemberships(userId).
                 Select(m => MembershipDto.FromMembership(m));
         }
 
         // GET: api/Memberships?teamId=5
         public IEnumerable<MembershipDto> GetMemberships(long teamId)
         {
-            return acc.GetMemberships(teamId).
+            return memSvc.GetMemberships(teamId).
                 Select(m => MembershipDto.FromMembership(m));
         }
 
@@ -83,10 +86,10 @@ namespace HealthTrac.Controllers.Api
             {
                 return BadRequest();
             }
-
+            memSvc.UpdateMembership(membership);
             try
             {
-                acc.UpdateMembership(membership);
+                uow.Save();
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -112,14 +115,21 @@ namespace HealthTrac.Controllers.Api
                 return BadRequest(ModelState);
             }
 
-            acc.CreateMembership(membership);
+            memSvc.CreateMembership(membership);
+            uow.Save();
 
             return CreatedAtRoute("DefaultApi", new { id = membership.ID }, MembershipDto.FromMembership(membership));
         }
 
         private bool MembershipExists(long id)
         {
-            return acc.GetMemberships().Count(e => e.ID == id) > 0;
+            return memSvc.GetMemberships().Count(e => e.ID == id) > 0;
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            uow.Dispose();
+            base.Dispose(disposing);
         }
     }
 }

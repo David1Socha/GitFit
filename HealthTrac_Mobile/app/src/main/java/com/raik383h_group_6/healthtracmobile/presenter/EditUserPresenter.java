@@ -7,21 +7,19 @@ import com.google.inject.Inject;
 import com.google.inject.assistedinject.Assisted;
 import com.raik383h_group_6.healthtracmobile.R;
 import com.raik383h_group_6.healthtracmobile.application.IActivityNavigator;
-import com.raik383h_group_6.healthtracmobile.content.IResources;
 import com.raik383h_group_6.healthtracmobile.model.AccessGrant;
 import com.raik383h_group_6.healthtracmobile.model.User;
 import com.raik383h_group_6.healthtracmobile.service.FormatUtils;
 import com.raik383h_group_6.healthtracmobile.service.api.UserService;
 import com.raik383h_group_6.healthtracmobile.service.api.async.IAsyncUserService;
+import com.raik383h_group_6.healthtracmobile.view.BaseView;
 import com.raik383h_group_6.healthtracmobile.view.EditUserView;
 
 import java.util.concurrent.ExecutionException;
 
-public class EditUserPresenter {
+public class EditUserPresenter extends BasePresenter{
 
     private final IAsyncUserService userService;
-    private final Bundle extras;
-    private final IResources resources;
     private final EditUserView view;
     private final IActivityNavigator nav;
     private UserValidationPresenter userValidationPresenter;
@@ -29,18 +27,16 @@ public class EditUserPresenter {
     private User ogUser;
 
     @Inject
-    public EditUserPresenter(IAsyncUserService userService, @Assisted Bundle extras, @Assisted IResources resources, @Assisted IActivityNavigator nav, @Assisted EditUserView view) {
+    public EditUserPresenter(IAsyncUserService userService, @Assisted UserValidationPresenter userValidationPresenter, @Assisted IActivityNavigator nav, @Assisted EditUserView view) {
         this.userService = userService;
-        this.extras = extras;
         this.nav = nav;
-        this.resources = resources;
         this.view = view;
+        this.userValidationPresenter = userValidationPresenter;
+        this.grant = (AccessGrant) view.getParcelableExtra(view.getResource(R.string.EXTRA_ACCESS_GRANT));
+        this.ogUser = (User) view.getParcelableExtra(view.getResource(R.string.EXTRA_USER));
     }
 
     public void onCreate() {
-        userValidationPresenter = new UserValidationPresenter(userService, view, resources);
-        this.grant = extras.getParcelable(resources.getString(R.string.EXTRA_ACCESS_GRANT));
-        this.ogUser = extras.getParcelable(resources.getString(R.string.EXTRA_USER));
         populateFields();
     }
 
@@ -53,6 +49,7 @@ public class EditUserPresenter {
             view.setLastName(ogUser.getLastName());
             view.setLocation(ogUser.getLocation());
             view.setPrefName(ogUser.getPreferredName());
+            view.setProfilePicture(ogUser.getProfilePicture());
             view.setSex(ogUser.getSex());
             view.setUsername(ogUser.getUserName());
             view.setWeight(FormatUtils.format(ogUser.getWeight()));
@@ -65,19 +62,29 @@ public class EditUserPresenter {
             userToUpdate.setId(ogUser.getId());
             updateUser(userToUpdate);
         } else {
-            view.displayMessage(resources.getString(R.string.invalid_field_message));
+            view.displayMessage(view.getResource(R.string.invalid_field_message));
         }
     }
 
     private void updateUser(User u) {
         try {
             userService.updateUserAsync(u.getId(), u, grant.getAuthHeader());
-            view.displayMessage(resources.getString(R.string.user_updated_message));
+            view.displayMessage(view.getResource(R.string.user_updated_message));
             nav.finishEditUserSuccess(u);
         } catch (Exception e) {
-            view.displayMessage(resources.getString(R.string.update_user_error));
+            view.displayMessage(view.getResource(R.string.update_user_error));
             nav.finishEditUserFailure();
         }
     }
 
+
+    @Override
+    protected BaseView getView() {
+        return view;
+    }
+
+    @Override
+    protected IActivityNavigator getNav() {
+        return nav;
+    }
 }

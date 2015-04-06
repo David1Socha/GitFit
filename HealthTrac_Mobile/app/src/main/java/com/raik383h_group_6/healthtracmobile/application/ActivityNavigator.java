@@ -1,6 +1,9 @@
 package com.raik383h_group_6.healthtracmobile.application;
 
 import android.app.Activity;
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 
 import com.raik383h_group_6.healthtracmobile.R;
@@ -15,6 +18,7 @@ import com.raik383h_group_6.healthtracmobile.view.activity.OAuthBrowserActivity;
 import com.raik383h_group_6.healthtracmobile.view.activity.OAuthPromptActivity;
 import com.raik383h_group_6.healthtracmobile.view.activity.CreateUserActivity;
 import com.raik383h_group_6.healthtracmobile.view.activity.EditUserActivity;
+import com.raik383h_group_6.healthtracmobile.view.activity.ActivityActivity;
 import com.raik383h_group_6.healthtracmobile.view.activity.ViewTeamActivity;
 import com.raik383h_group_6.healthtracmobile.view.activity.ViewUserActivity;
 
@@ -30,6 +34,18 @@ public class ActivityNavigator implements IActivityNavigator {
         Intent intent = new Intent(activity, OAuthBrowserActivity.class);
         intent.putExtra(activity.getString(R.string.EXTRA_PROVIDER), provider);
         activity.startActivityForResult(intent, reqCode);
+    }
+
+    @Override
+    public void openMain() {
+        Intent restartIntent = activity.getPackageManager()
+                .getLaunchIntentForPackage(activity.getPackageName() );
+        PendingIntent intent = PendingIntent.getActivity(
+                activity, 0,
+                restartIntent, PendingIntent.FLAG_CANCEL_CURRENT);
+        AlarmManager manager = (AlarmManager) activity.getSystemService(Context.ALARM_SERVICE);
+        manager.set(AlarmManager.RTC, System.currentTimeMillis() + 100, intent);
+        System.exit(0);
     }
 
     @Override
@@ -180,4 +196,17 @@ public class ActivityNavigator implements IActivityNavigator {
         activity.setResult(Activity.RESULT_CANCELED);
         activity.finish();
     }
+
+    @Override
+    public void openActivity(AccessGrant g) {
+        Intent i = new Intent(activity, ActivityActivity.class);
+        i.putExtra(activity.getString(R.string.EXTRA_ACCESS_GRANT), g);
+        activity.startActivity(i);
+    }
+
+    @Override
+    public void finishActivity() {
+        genericFinishOk();
+    }
+
 }

@@ -13,6 +13,7 @@ namespace HealthTrac.DataAccess
         Membership GetMembership(long teamId, string userId);
         IEnumerable<Membership> GetMemberships();
         IEnumerable<Membership> GetMemberships(long teamId);
+        IEnumerable<Membership> GetActiveMemberships(long teamId);
         IEnumerable<Membership> GetMemberships(string userId);
         Membership UpdateMembership(Membership m);
         Membership CreateMembership(Membership m);

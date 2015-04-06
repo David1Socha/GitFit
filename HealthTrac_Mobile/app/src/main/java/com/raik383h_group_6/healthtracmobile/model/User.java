@@ -10,8 +10,9 @@ import java.util.Date;
 public class User implements Parcelable {
     private Date dateCreated, dateModified, birthDate;
     private String firstName, lastName, preferredName, email, userName, location;
-    private String id;
-    private double height, weight;
+    private String id, profilePicture;
+    private double height, weight, lifetimeDuration, lifetimeDistance;
+    private long lifetimeSteps;
 
     public User(Date birthDate, Date dateCreated, Date dateModified, String email, String firstName, double height, String lastName, String location, String preferredName, User.Sex sex, String userName, double weight) {
         this.birthDate = birthDate;
@@ -26,6 +27,33 @@ public class User implements Parcelable {
         this.sex = sex;
         this.userName = userName;
         this.weight = weight;
+        this.lifetimeDuration = 0;
+        this.lifetimeDistance = 0;
+        this.lifetimeSteps = 0;
+    }
+
+    public double getLifetimeDuration() {
+      return lifetimeDuration;
+    }
+
+    public void setLifetimeDuration(double lifetimeDuration) {
+      this.lifetimeDuration = lifetimeDuration;
+    }
+
+    public double getLifetimeDistance() {
+      return lifetimeDistance;
+    }
+
+    public void setLifetimeDistance(double lifetimeDistance) {
+      this.lifetimeDistance = lifetimeDistance;
+    }
+
+    public double getLifetimeSteps() {
+      return lifetimeSteps;
+    }
+
+    public void setLifetimeSteps(long lifetimeSteps) {
+      this.lifetimeSteps = lifetimeSteps;
     }
 
     public String getLocation() {return  location;}
@@ -89,6 +117,10 @@ public class User implements Parcelable {
     public void setPreferredName(String preferredName) {
         this.preferredName = preferredName;
     }
+
+    public String getProfilePicture() { return profilePicture;}
+
+    public void setProfilePicture(String profilePicture) { this.profilePicture = profilePicture; }
 
     public String getEmail() {
         return email;
@@ -160,6 +192,10 @@ public class User implements Parcelable {
         dest.writeDouble(this.weight);
         dest.writeInt(this.sex == null ? -1 : this.sex.ordinal());
         dest.writeString(this.location);
+        dest.writeDouble(this.lifetimeDistance);
+        dest.writeDouble(this.lifetimeDuration);
+        dest.writeLong(this.lifetimeSteps);
+        dest.writeString(this.profilePicture);
     }
 
     public User() {
@@ -183,6 +219,10 @@ public class User implements Parcelable {
         int tmpSex = in.readInt();
         this.sex = tmpSex == -1 ? null : Sex.values()[tmpSex];
         this.location = in.readString();
+        this.lifetimeDistance = in.readDouble();
+        this.lifetimeDuration = in.readDouble();
+        this.lifetimeSteps = in.readLong();
+        this.profilePicture = in.readString();
     }
 
     public static final Parcelable.Creator<User> CREATOR = new Parcelable.Creator<User>() {

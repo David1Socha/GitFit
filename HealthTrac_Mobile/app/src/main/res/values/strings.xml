@@ -43,6 +43,7 @@
     <string name="birthdate_label">Birth Date</string>
     <string name="sex_label">Sex</string>
     <string name="male_label">Male</string>
+    <string name="facebook_male_label">male</string>
     <string name="label_female">Female</string>
     <string name="empty_field_error">Field must not be empty</string>
     <string name="invalid_field_message">Some fields contained invalid input</string>
@@ -90,5 +91,20 @@
     <string name="access_grant_prefs">access_grant_prefs</string>
     <string name="shared_prefs">shared_prefs</string>
     <string name="pref_access_grant">access_grant</string>
+    <string name="logout">Log Out</string>
+    <string name="login">Log In</string>
+    <string name="profile_picture_desc">Profile Picture</string>
+    <string name="start_updates">Start updates</string>
+    <string name="stop_updates">Stop Updates</string>
+    <string name="latitude_label">Latitude: </string>
+    <string name="longitude_label">Longitude: </string>
+    <string name="last_update_time_label">Last location update time:</string>
+    <string name="location_updated_message">Location updated</string>
+    <string name="pedometer">Pedometer</string>
+    <string name="steps">Steps</string>
+    <string name="finish_activity">Finish Activity</string>
+    <string name="start_activity">Start Activity</string>
+    <string name="default_stepcount">0</string>
+    <string name="error_create_activity">Error creating activity</string>
 
 </resources>

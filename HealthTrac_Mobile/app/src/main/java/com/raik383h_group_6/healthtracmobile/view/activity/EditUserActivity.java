@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
@@ -11,21 +12,21 @@ import android.widget.Toast;
 import com.google.inject.Inject;
 import com.raik383h_group_6.healthtracmobile.R;
 import com.raik383h_group_6.healthtracmobile.application.IActivityNavigator;
-import com.raik383h_group_6.healthtracmobile.content.IResources;
-import com.raik383h_group_6.healthtracmobile.content.ResourcesAdapter;
 import com.raik383h_group_6.healthtracmobile.model.User;
 import com.raik383h_group_6.healthtracmobile.application.ActivityNavigator;
+import com.raik383h_group_6.healthtracmobile.presenter.BasePresenter;
 import com.raik383h_group_6.healthtracmobile.presenter.PresenterFactory;
 import com.raik383h_group_6.healthtracmobile.presenter.EditUserPresenter;
+import com.raik383h_group_6.healthtracmobile.presenter.UserValidationPresenter;
 import com.raik383h_group_6.healthtracmobile.service.api.UserService;
 import com.raik383h_group_6.healthtracmobile.view.EditUserView;
+import com.squareup.picasso.Picasso;
 
-import roboguice.activity.RoboActionBarActivity;
 import roboguice.inject.ContentView;
 import roboguice.inject.InjectView;
 
 @ContentView(R.layout.activity_update_user)
-public class EditUserActivity extends RoboActionBarActivity implements EditUserView {
+public class EditUserActivity extends BaseActivity implements EditUserView {
     @Inject
     private PresenterFactory presenterFactory;
     private EditUserPresenter presenter;
@@ -35,6 +36,8 @@ public class EditUserActivity extends RoboActionBarActivity implements EditUserV
     Button updateUserButton;
     @InjectView(R.id.last_name_edittext)
     EditText lastNameEditText;
+    @InjectView(R.id.profile_picture)
+    ImageView profileImageView;
     @InjectView(R.id.first_name_edittext)
     EditText firstNameEditText;
     @InjectView(R.id.pref_name_edittext)
@@ -140,7 +143,7 @@ public class EditUserActivity extends RoboActionBarActivity implements EditUserV
 
     @Override
     public String getSex() {
-        return ((RadioButton)findViewById(sexRadioGroup.getCheckedRadioButtonId())).getText().toString();
+        return ((RadioButton) findViewById(sexRadioGroup.getCheckedRadioButtonId())).getText().toString();
     }
 
     @Override
@@ -166,9 +169,9 @@ public class EditUserActivity extends RoboActionBarActivity implements EditUserV
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Bundle extras = getIntent().getExtras();
-        IResources resources = new ResourcesAdapter(getResources());
         IActivityNavigator nav = new ActivityNavigator(this);
-        presenter = presenterFactory.create(extras, resources, nav, this);
+        UserValidationPresenter userValidationPresenter = presenterFactory.create(this);
+        presenter = presenterFactory.create(userValidationPresenter, nav, this);
         presenter.onCreate();
     }
 
@@ -224,5 +227,20 @@ public class EditUserActivity extends RoboActionBarActivity implements EditUserV
     @Override
     public void displayMessage(String msg) {
         Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void setProfilePicture(String profilePicture) {
+        Picasso.with(this)
+                .load(profilePicture)
+                .placeholder(R.drawable.default_profile_picture)
+                .resizeDimen(R.dimen.prof_pic_size, R.dimen.prof_pic_size)
+                .centerInside()
+                .into(profileImageView);
+    }
+
+    @Override
+    public BasePresenter getPresenter() {
+        return presenter;
     }
 }

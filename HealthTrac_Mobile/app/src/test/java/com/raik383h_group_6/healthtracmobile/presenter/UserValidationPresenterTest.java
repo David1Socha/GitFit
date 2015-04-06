@@ -1,8 +1,7 @@
 package com.raik383h_group_6.healthtracmobile.presenter;
 
-import com.raik383h_group_6.healthtracmobile.R;
-import com.raik383h_group_6.healthtracmobile.content.IResources;
 import com.raik383h_group_6.healthtracmobile.helper.ModelGenerator;
+import com.raik383h_group_6.healthtracmobile.helper.TestStubber;
 import com.raik383h_group_6.healthtracmobile.model.User;
 import com.raik383h_group_6.healthtracmobile.service.FormatUtils;
 import com.raik383h_group_6.healthtracmobile.service.api.async.IAsyncUserService;
@@ -11,41 +10,51 @@ import com.raik383h_group_6.healthtracmobile.view.UserValidationView;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.mockito.Mockito.*;
-import static org.junit.Assert.*;
-import static com.raik383h_group_6.healthtracmobile.helper.TestConstants.*;
+import static com.raik383h_group_6.healthtracmobile.helper.TestConstants.EMPTY_FIELD_ERROR;
+import static com.raik383h_group_6.healthtracmobile.helper.TestConstants.FEMALE;
+import static com.raik383h_group_6.healthtracmobile.helper.TestConstants.INVALID_DATE_ERROR;
+import static com.raik383h_group_6.healthtracmobile.helper.TestConstants.MALE;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 public class UserValidationPresenterTest {
 
     private UserValidationPresenter presenter;
     private User validUser;
     private UserValidationView view;
-    private IResources resources;
     private IAsyncUserService userService;
 
     @Before
     public void setup() {
         validUser = ModelGenerator.genBasicUser();
         view = mock(UserValidationView.class);
-        resources = mock(IResources.class);
-        when(resources.getString(R.string.male_label)).thenReturn(MALE);
-        when(resources.getString(R.string.empty_field_error)).thenReturn(EMPTY_FIELD_ERROR);
-        when(resources.getString(R.string.invalid_date_error)).thenReturn(INVALID_DATE_ERROR);
+        TestStubber.stubViewForResources(view);
         userService = mock(IAsyncUserService.class);
-        presenter = new UserValidationPresenter(userService, view, resources);
+        presenter = new UserValidationPresenter(userService, view);
     }
 
     @Test
     public void validateUserReturnsUserToCreateWhenValid() {
         String sexStr = getSexStr(validUser);
-        User userToCreate = presenter.validateUser(FormatUtils.format(validUser.getBirthDate()), validUser.getEmail(), validUser.getFirstName(), FormatUtils.format(validUser.getHeight()), validUser.getLastName(), validUser.getLocation(), validUser.getPreferredName(), sexStr, validUser.getUserName(), FormatUtils.format(validUser.getWeight()));
+        User userToCreate = presenter.validateUser(FormatUtils.format(validUser.getBirthDate()), validUser.getEmail(), validUser.getFirstName(), FormatUtils.format(validUser.getHeight()), validUser.getLastName(), validUser.getLocation(), validUser.getPreferredName(), sexStr, validUser.getUserName(), FormatUtils.format(validUser.getWeight()), validUser.getUserName());
         assertSameSignificantValues(userToCreate, validUser);
     }
 
     @Test
     public void validateUserReturnsNullWhenInvalid() {
         String sexStr = getSexStr(validUser);
-        User userToCreate = presenter.validateUser(FormatUtils.format(validUser.getBirthDate()), validUser.getEmail(), validUser.getFirstName(), FormatUtils.format(validUser.getHeight()), validUser.getLastName(), "", validUser.getPreferredName(), sexStr, validUser.getUserName(), FormatUtils.format(validUser.getWeight()));
+        User userToCreate = presenter.validateUser(FormatUtils.format(validUser.getBirthDate()), validUser.getEmail(), validUser.getFirstName(), FormatUtils.format(validUser.getHeight()), validUser.getLastName(), "", validUser.getPreferredName(), sexStr, validUser.getUserName(), FormatUtils.format(validUser.getWeight()), validUser.getUserName());
+        assertNull(userToCreate);
+    }
+
+    @Test
+    public void validateUserFailsWhenUserNameUnavailable() throws Exception {
+        when(userService.isAvailable(validUser.getUserName())).thenReturn(false);
+        String sexStr = getSexStr(validUser);
+        User userToCreate = presenter.validateUser(FormatUtils.format(validUser.getBirthDate()), validUser.getEmail(), validUser.getFirstName(), FormatUtils.format(validUser.getHeight()), validUser.getLastName(), "", validUser.getPreferredName(), sexStr, validUser.getUserName(), FormatUtils.format(validUser.getWeight()), null);
         assertNull(userToCreate);
     }
 
@@ -61,7 +70,7 @@ public class UserValidationPresenterTest {
         String userName = "";
         String sexStr = "Male";
         String widthStr = "";
-        presenter.validateUser(birthDateStr, email, firstName, heightStr, lastName, location, prefName, sexStr, userName, widthStr);
+        presenter.validateUser(birthDateStr, email, firstName, heightStr, lastName, location, prefName, sexStr, userName, widthStr, null);
         verify(view).setBirthDateError(INVALID_DATE_ERROR);
         verify(view).setEmailError(EMPTY_FIELD_ERROR);
         verify(view).setFirstNameError(EMPTY_FIELD_ERROR);
@@ -89,7 +98,7 @@ public class UserValidationPresenterTest {
         assertEquals(u1.getSex(), u2.getSex());
         assertEquals(u1.getUserName(), u2.getUserName());
         assertEquals(u1.getWeight(), u2.getWeight(), 0);
-        //TODO assertEquals(u1.getLocation(), u2.getLocation());
+        assertEquals(u1.getLocation(), u2.getLocation());
     }
 
 }

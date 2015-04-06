@@ -9,6 +9,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
+        <ImageView
+            android:layout_marginTop="10dp"
+            android:id="@+id/profile_picture"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/profile_picture_desc" />
+
         <TextView
             android:layout_marginTop="10dp"
             android:layout_width="match_parent"

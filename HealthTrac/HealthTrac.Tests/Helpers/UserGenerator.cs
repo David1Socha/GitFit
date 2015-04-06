@@ -9,7 +9,7 @@ namespace HealthTrac.Tests.Helpers
 {
     public static class UserGenerator
     {
-        public static User GenerateUser1()
+        public static User GenerateFacebookUser()
         {
             return new User
             {
@@ -22,13 +22,14 @@ namespace HealthTrac.Tests.Helpers
                 LastName = "TheOgre",
                 Location = "Omaha",
                 PreferredName = "xXxOgrelordxXx",
+                ProfilePicture = "http://www.facebook.com/sample.jpg",
                 Sex = Sex.MALE,
                 UserName = "xXxOgrelordxXx",
                 Weight = 999
             };
         }
 
-        public static User GenerateUser2()
+        public static User GenerateTwitterUser()
         {
             return new User
             {
@@ -41,6 +42,7 @@ namespace HealthTrac.Tests.Helpers
                 LastName = "John",
                 Location = "South Dakota",
                 PreferredName = "John",
+                ProfilePicture = "http://www.twitter.com/hi.jpg",
                 Sex = Sex.MALE,
                 UserName = "John",
                 Weight = 200
@@ -50,8 +52,8 @@ namespace HealthTrac.Tests.Helpers
         public static User[] GenerateUsers()
         {
             return new User[] {
-                GenerateUser1(),
-                GenerateUser2()
+                GenerateFacebookUser(),
+                GenerateTwitterUser()
             };
         }
     }

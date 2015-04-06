@@ -13,6 +13,7 @@ using System.Data.Entity;
 using System.Web.Mvc;
 using System.Web.Http.Dependencies;
 using Microsoft.Owin.Security;
+using HealthTrac.Services;
 
 namespace HealthTrac
 {
@@ -35,13 +36,15 @@ namespace HealthTrac
         private static IUnityContainer BuildUnityContainer()
         {
             var container = new UnityContainer();
-            container.RegisterType<IUserAccessor, EntityUserAccessor>(new HierarchicalLifetimeManager());
-            container.RegisterType<ITeamAccessor, EntityTeamAccessor>(new HierarchicalLifetimeManager());
-            container.RegisterType<IMembershipAccessor, EntityMembershipAccessor>(new HierarchicalLifetimeManager());
-            container.RegisterType<IActivityAccessor, EntityActivityAccessor>(new HierarchicalLifetimeManager());
-            container.RegisterType<ISessionAccessor, EntitySessionAccessor>(new HierarchicalLifetimeManager());
-            container.RegisterType<IStatusAccessor, EntityStatusAccessor>(new HierarchicalLifetimeManager());
+            container.RegisterType<IUnitOfWork, EntityUnitOfWork>(new HierarchicalLifetimeManager());
+            container.RegisterType<IFacebookService, OAuthFacebookService>(new HierarchicalLifetimeManager());
+            container.RegisterType<ITwitterService, OAuthTwitterService>(new HierarchicalLifetimeManager());
+            container.RegisterType<ILoginService, LoginService>(new HierarchicalLifetimeManager());
             container.RegisterType<IUserStore<User>, UserStore<User>>(new InjectionConstructor(new ApplicationDbContext()));
+            container.RegisterType<IUserManager, UserManagerAdapter>(new HierarchicalLifetimeManager());
+            container.RegisterType<IActivityService>(new InjectionFactory(c => c.Resolve<IUnitOfWork>().ActivityService));
+            container.RegisterInstance<ActivityForestBuilder>(new ActivityForestBuilder());
+            container.RegisterType<IActivityForest>(new InjectionFactory(c => c.Resolve<ActivityForestBuilder>().GetForest()));
             container.RegisterType<IAuthenticationManager>(new InjectionFactory(c => HttpContext.Current.GetOwinContext().Authentication));
             return container;
         }

@@ -8,31 +8,26 @@ import android.widget.Toast;
 import com.google.inject.Inject;
 import com.raik383h_group_6.healthtracmobile.R;
 import com.raik383h_group_6.healthtracmobile.application.IActivityNavigator;
-import com.raik383h_group_6.healthtracmobile.content.IResources;
-import com.raik383h_group_6.healthtracmobile.content.ResourcesAdapter;
 import com.raik383h_group_6.healthtracmobile.presenter.AuthenticationPresenter;
 import com.raik383h_group_6.healthtracmobile.application.ActivityNavigator;
+import com.raik383h_group_6.healthtracmobile.presenter.BasePresenter;
 import com.raik383h_group_6.healthtracmobile.presenter.PresenterFactory;
-import com.raik383h_group_6.healthtracmobile.service.api.AccountService;
 import com.raik383h_group_6.healthtracmobile.view.AuthenticationView;
 
 import roboguice.inject.ContentView;
 
 @ContentView(R.layout.activity_authentication)
-public class AuthenticationActivity extends CustomRoboActionBarActivity implements AuthenticationView {
+public class AuthenticationActivity extends BaseActivity implements AuthenticationView {
 
     AuthenticationPresenter presenter;
     @Inject
     PresenterFactory presenterFactory;
-    @Inject
-    AccountService accountService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        IResources resources = new ResourcesAdapter(getResources());
         IActivityNavigator nav = new ActivityNavigator(this);
-        presenter = presenterFactory.create(accountService, resources, nav, this);
+        presenter = presenterFactory.create(nav, this);
     }
 
     @Override
@@ -53,5 +48,10 @@ public class AuthenticationActivity extends CustomRoboActionBarActivity implemen
     @Override
     public void displayMessage(String message) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public BasePresenter getPresenter() {
+        return presenter;
     }
 }

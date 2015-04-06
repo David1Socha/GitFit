@@ -1,8 +1,6 @@
 package com.raik383h_group_6.healthtracmobile.view;
 
-import android.view.View;
-
-public interface ViewUserView {
+public interface ViewUserView  extends BaseView {
     void setBirthDate(String txt);
 
     void setEmail(String txt);
@@ -24,4 +22,6 @@ public interface ViewUserView {
     void setWeight(String txt);
 
     void setShowEditUserButton(boolean enabled);
+
+    void setProfilePicture(String profilePicture);
 }
