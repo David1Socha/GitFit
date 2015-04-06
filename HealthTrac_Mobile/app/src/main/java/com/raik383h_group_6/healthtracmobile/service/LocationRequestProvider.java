@@ -4,7 +4,7 @@ import com.google.android.gms.location.LocationRequest;
 import com.google.inject.Provider;
 
 public class LocationRequestProvider implements Provider<LocationRequest> {
-    public static final long UPDATE_INTERVAL = 5000;
+    public static final long UPDATE_INTERVAL = 30000;
     public static final long MAX_UPDATE_INTERVAL =
             UPDATE_INTERVAL;
 

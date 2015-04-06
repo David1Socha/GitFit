@@ -7,7 +7,8 @@ import com.google.gson.annotations.SerializedName;
 
 public class Point implements Parcelable {
     @SerializedName("ID")
-    private long id, activityID;
+    private long id;
+    private long activityID;
     private double lng;
 
     public Point() {
