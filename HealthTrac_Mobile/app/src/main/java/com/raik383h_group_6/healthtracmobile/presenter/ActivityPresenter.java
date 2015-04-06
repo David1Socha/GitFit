@@ -8,13 +8,20 @@ import com.google.inject.Inject;
 import com.google.inject.assistedinject.Assisted;
 import com.raik383h_group_6.healthtracmobile.application.IActivityNavigator;
 import com.raik383h_group_6.healthtracmobile.model.FacebookUser;
+import com.raik383h_group_6.healthtracmobile.model.Point;
 import com.raik383h_group_6.healthtracmobile.view.BaseView;
 import com.raik383h_group_6.healthtracmobile.view.ActivityView;
+
+import java.util.Date;
+import java.util.List;
 
 public class ActivityPresenter extends BasePresenter{
     private final IActivityNavigator nav;
     private final ActivityView view;
     private int steps;
+    private Date startDate, endDate;
+    private double distance;
+    private List<Point> pts;
     private GoogleApiClient gClient;
     private Location lastLocation;
 
@@ -28,10 +35,13 @@ public class ActivityPresenter extends BasePresenter{
 
     public void onCreate() {
         gClient.connect();
+        startDate = new Date();
     }
 
     public void onPause() {
         view.stopLocationUpdates();
+        endDate = new Date();
+        view.showMessage(String.valueOf(endDate.getTime() - startDate.getTime()));
     }
 
     public void onConnected(Location loc) {
@@ -48,7 +58,10 @@ public class ActivityPresenter extends BasePresenter{
     }
 
     public void onLocationChanged(Location location) {
-        view.showMessage(String.valueOf(location.distanceTo(lastLocation)));
+        if (lastLocation != null) {
+            distance += location.distanceTo(lastLocation);
+            view.showMessage(String.valueOf(distance));
+        }
         lastLocation = location;
     }
 

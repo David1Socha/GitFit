@@ -78,6 +78,7 @@ public class ActivityActivity extends BaseActivity implements ActivityView, Goog
     protected void onPause() {
         super.onPause();
         presenter.onPause();
+        sensorManager.unregisterListener(stepListener);
     }
 
     public void onClickStepReset(View view) { presenter.resetSteps(); }

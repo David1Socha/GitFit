@@ -47,6 +47,7 @@ public class StepListener implements SensorEventListener{
                         boolean isValid = lastMatch != 1-ext;
 
                         if(isLarge && isLastLarge && isValid) {
+                            Log.d("HI", "STEP");
                             Message m = Message.obtain();
                             m.what = 1;
                             handler.sendMessage(m);
