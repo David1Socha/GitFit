@@ -365,7 +365,8 @@
     <Content Include="Scripts\angular.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <Content Include="Data\1000.csv" />
+    <Content Include="DataAccess\Data\1000.csv" />
+    <Content Include="WebApp\app.js" />
     <None Include="Properties\PublishProfiles\gitfit - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\gitfit - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\se6 - FTP.pubxml" />
@@ -1167,6 +1168,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="WebApp\Controllers\" />
+    <Folder Include="WebApp\Views\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
