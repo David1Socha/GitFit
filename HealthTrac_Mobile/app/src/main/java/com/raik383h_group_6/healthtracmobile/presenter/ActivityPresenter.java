@@ -26,6 +26,14 @@ public class ActivityPresenter extends BasePresenter{
         this.gClient = gClient;
     }
 
+    public void onCreate() {
+        gClient.connect();
+    }
+
+    public void onPause() {
+        view.stopLocationUpdates();
+    }
+
     public void onConnected(Location loc) {
         lastLocation = loc;
         view.startLocationUpdates();

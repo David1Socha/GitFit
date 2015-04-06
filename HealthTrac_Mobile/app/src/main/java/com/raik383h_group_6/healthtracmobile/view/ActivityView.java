@@ -12,4 +12,6 @@ public interface ActivityView extends BaseView{
     void showMessage(String msg);
 
     void startLocationUpdates();
+
+    void stopLocationUpdates();
 }

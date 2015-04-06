@@ -71,7 +71,13 @@ public class ActivityActivity extends BaseActivity implements ActivityView, Goog
         sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
         sensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
         sensorManager.registerListener(stepListener,sensor, SensorManager.SENSOR_DELAY_FASTEST);
+        presenter.onCreate();
+    }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        presenter.onPause();
     }
 
     public void onClickStepReset(View view) { presenter.resetSteps(); }
@@ -105,6 +111,11 @@ public class ActivityActivity extends BaseActivity implements ActivityView, Goog
     public void startLocationUpdates() {
         LocationServices.FusedLocationApi.requestLocationUpdates(
                 gClient, locRequest, this);
+    }
+
+    @Override
+    public void stopLocationUpdates() {
+        LocationServices.FusedLocationApi.removeLocationUpdates(gClient, this);
     }
 
     @Override
