@@ -13,4 +13,10 @@
         android:visibility="visible"
         android:id="@+id/no_teams_textview"
         android:layout_marginLeft="20dp"/>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Create Team"
+        android:id="@+id/create_team_button"
+        android:onClick="onClickCreateTeam"/>
 </LinearLayout>
