@@ -27,10 +27,9 @@ public class ActivityPresenter extends BasePresenter{
     private final ActivityView view;
     private int steps;
     private Date startDate;
-    private double distance;
+    private double distance, duration;
     private List<Point> pts;
     private GoogleApiClient gClient;
-    private long duration;
     private Location lastLocation;
     private AccessGrant grant;
     private IAsyncActivityService activityService;
@@ -75,7 +74,6 @@ public class ActivityPresenter extends BasePresenter{
         if (lastLocation != null) {
             distance += location.distanceTo(lastLocation);
             pts.add(new Point(location.getLongitude(), location.getLatitude()));
-            view.showMessage(String.valueOf(distance));
         }
         lastLocation = location;
     }
@@ -87,7 +85,7 @@ public class ActivityPresenter extends BasePresenter{
 
     public void onClickFinishActivity() {
         Date endDate = new Date();
-        duration = endDate.getTime() - startDate.getTime();
+        duration = (endDate.getTime() - startDate.getTime()) / 1000.0;
         postActivityPoints();
         nav.finishActivity();
     }

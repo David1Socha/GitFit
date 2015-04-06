@@ -45,8 +45,6 @@ public class ActivityActivity extends BaseActivity implements ActivityView, Goog
 
     @InjectView(R.id.stepcount_textview)
     TextView stepcount;
-    @InjectView(R.id.steps_textview)
-    TextView steps;
     @Inject
     LocationRequest
     locRequest;
