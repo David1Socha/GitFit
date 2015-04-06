@@ -1,10 +1,13 @@
 package com.raik383h_group_6.healthtracmobile.application;
 
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.LocationRequest;
 import com.google.gson.Gson;
 import com.google.inject.AbstractModule;
 import com.google.inject.assistedinject.FactoryModuleBuilder;
 import com.google.inject.name.Names;
 import com.raik383h_group_6.healthtracmobile.presenter.PresenterFactory;
+import com.raik383h_group_6.healthtracmobile.service.LocationRequestProvider;
 import com.raik383h_group_6.healthtracmobile.service.api.AccountService;
 import com.raik383h_group_6.healthtracmobile.service.api.ActivityService;
 import com.raik383h_group_6.healthtracmobile.service.api.BadgeService;
@@ -68,6 +71,7 @@ public class ApplicationModule extends AbstractModule {
 
     @Override
     protected void configure() {
+        bind(LocationRequest.class).toProvider(LocationRequestProvider.class);
         bind(IOAuthService.class).annotatedWith(Names.named("Facebook")).to(FacebookScribeOAuthServiceAdapter.class);
         bind(IOAuthService.class).annotatedWith(Names.named("Twitter")).to(TwitterScribeOAuthServiceAdapter.class);
         bind(AccountService.class).toProvider(RetrofitAccountServiceProvider.class);
