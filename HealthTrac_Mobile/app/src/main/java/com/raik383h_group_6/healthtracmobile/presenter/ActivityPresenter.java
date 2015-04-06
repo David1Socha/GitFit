@@ -51,6 +51,7 @@ public class ActivityPresenter extends BasePresenter{
 
     public void onConnectionSuspended(int cause) {
         view.showMessage("Connection suspended");
+        gClient.connect();
     }
 
     public void onConnectionFailed() {
@@ -60,6 +61,7 @@ public class ActivityPresenter extends BasePresenter{
     public void onLocationChanged(Location location) {
         if (lastLocation != null) {
             distance += location.distanceTo(lastLocation);
+            pts.add(new Point(location.getLongitude(), location.getLatitude()));
             view.showMessage(String.valueOf(distance));
         }
         lastLocation = location;

@@ -72,10 +72,6 @@ public class GitFitMainActivity extends BaseActivity implements com.raik383h_gro
         presenter.onClickShowTeams();
     }
 
-    public void onClickLocationDemo(View view) {
-        presenter.onClickLocation();
-    }
-
     public void onClickPedometerDemo(View view) { presenter.onClickPedometer(); }
 
     @Override

@@ -115,10 +115,6 @@ public class GitFitMainPresenter extends BasePresenter{
         }
     }
 
-    public void onClickLocation() {
-        nav.openLocation(grant);
-    }
-
     public void onClickPedometer() { nav.openPedometer(grant); }
 
 

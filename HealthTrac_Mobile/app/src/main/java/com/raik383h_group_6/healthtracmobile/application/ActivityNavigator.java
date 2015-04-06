@@ -14,7 +14,6 @@ import com.raik383h_group_6.healthtracmobile.model.User;
 import com.raik383h_group_6.healthtracmobile.view.activity.AuthenticationActivity;
 import com.raik383h_group_6.healthtracmobile.view.activity.ListTeamsActivity;
 import com.raik383h_group_6.healthtracmobile.view.activity.ListUsersActivity;
-import com.raik383h_group_6.healthtracmobile.view.activity.LocationActivity;
 import com.raik383h_group_6.healthtracmobile.view.activity.OAuthBrowserActivity;
 import com.raik383h_group_6.healthtracmobile.view.activity.OAuthPromptActivity;
 import com.raik383h_group_6.healthtracmobile.view.activity.CreateUserActivity;
@@ -196,13 +195,6 @@ public class ActivityNavigator implements IActivityNavigator {
     public void finishEditUserFailure() {
         activity.setResult(Activity.RESULT_CANCELED);
         activity.finish();
-    }
-
-    @Override
-    public void openLocation(AccessGrant g) {
-        Intent i = new Intent(activity, LocationActivity.class);
-        i.putExtra(activity.getString(R.string.EXTRA_ACCESS_GRANT), g);
-        activity.startActivity(i);
     }
 
     @Override
