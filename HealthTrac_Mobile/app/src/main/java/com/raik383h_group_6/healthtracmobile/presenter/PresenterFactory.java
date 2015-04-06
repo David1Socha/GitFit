@@ -2,6 +2,7 @@ package com.raik383h_group_6.healthtracmobile.presenter;
 
 import android.webkit.WebView;
 
+import com.google.android.gms.common.api.GoogleApiClient;
 import com.raik383h_group_6.healthtracmobile.application.IActivityNavigator;
 import com.raik383h_group_6.healthtracmobile.service.oauth.IAsyncOAuthService;
 import com.raik383h_group_6.healthtracmobile.view.AuthenticationView;
@@ -27,6 +28,6 @@ public interface PresenterFactory {
     EditUserPresenter create(UserValidationPresenter presenter, IActivityNavigator nav, EditUserView view);
     GitFitMainPresenter create(IActivityNavigator nav, GitFitMainView view);
     ViewTeamPresenter create(IActivityNavigator nav, ViewTeamView view);
-    ActivityPresenter create(IActivityNavigator nav, ActivityView view);
+    ActivityPresenter create(IActivityNavigator nav, GoogleApiClient gClient, ActivityView view);
     UserValidationPresenter create(UserValidationView view);
 }

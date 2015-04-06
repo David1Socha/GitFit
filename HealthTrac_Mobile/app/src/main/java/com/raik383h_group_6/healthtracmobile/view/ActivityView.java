@@ -8,4 +8,8 @@ public interface ActivityView extends BaseView{
     void setStepCount(String txt);
 
     void setSteps(String txt);
+
+    void showMessage(String msg);
+
+    void startLocationUpdates();
 }
