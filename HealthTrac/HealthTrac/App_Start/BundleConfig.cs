@@ -26,6 +26,17 @@ namespace HealthTrac
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/site.css"));
+            bundles.Add(new ScriptBundle("~/bumdles/angularjs").Include(
+                "~/Scripts/angular.js",
+                "~/Scripts/angular-route.js",
+                "~/Scripts/angular-resource.js",
+                "~/Scripts/angular-animate.js",
+                "~/Scripts/angular-cookies.js",
+                "~/Scripts/angular-file-upload.js"));
+            bundles.Add(new ScriptBundle("~/bundles/WebApp").Include(
+                "~/WebApp/app.js",
+                
+                "~/WebApp/controllers/*.js"));
         }
     }
 }
