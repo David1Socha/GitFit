@@ -26,8 +26,8 @@
         android:layout_marginTop="10dp"
         android:text="@string/finish_activity"
         android:textSize="30sp"
-        android:onClick="onClickStepReset"
-        android:id="@+id/step_reset_button"
+        android:onClick="onClickFinishActivity"
+        android:id="@+id/finish_activity_button"
         android:layout_gravity="center_horizontal" />
 
 </LinearLayout>

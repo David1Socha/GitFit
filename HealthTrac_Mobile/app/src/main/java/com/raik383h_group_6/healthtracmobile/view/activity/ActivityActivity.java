@@ -79,7 +79,7 @@ public class ActivityActivity extends BaseActivity implements ActivityView, Goog
         sensorManager.unregisterListener(stepListener);
     }
 
-    public void onClickStepReset(View view) { presenter.resetSteps(); }
+    public void onClickFinishActivity(View view) { presenter.onClickFinishActivity(); }
 
     @Override
     public void setStepCount(String txt) {  stepcount.setText(txt); }

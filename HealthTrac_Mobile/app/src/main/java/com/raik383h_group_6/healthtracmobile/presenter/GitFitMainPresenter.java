@@ -115,7 +115,7 @@ public class GitFitMainPresenter extends BasePresenter{
         }
     }
 
-    public void onClickPedometer() { nav.openPedometer(grant); }
+    public void onClickPedometer() { nav.openActivity(grant); }
 
 
     @Override

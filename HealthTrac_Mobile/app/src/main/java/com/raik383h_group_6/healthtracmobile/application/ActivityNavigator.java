@@ -198,10 +198,15 @@ public class ActivityNavigator implements IActivityNavigator {
     }
 
     @Override
-    public void openPedometer(AccessGrant g) {
+    public void openActivity(AccessGrant g) {
         Intent i = new Intent(activity, ActivityActivity.class);
         i.putExtra(activity.getString(R.string.EXTRA_ACCESS_GRANT), g);
         activity.startActivity(i);
+    }
+
+    @Override
+    public void finishActivity() {
+        genericFinishOk();
     }
 
 }

@@ -12,6 +12,7 @@ import com.raik383h_group_6.healthtracmobile.model.Point;
 import com.raik383h_group_6.healthtracmobile.view.BaseView;
 import com.raik383h_group_6.healthtracmobile.view.ActivityView;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -19,7 +20,7 @@ public class ActivityPresenter extends BasePresenter{
     private final IActivityNavigator nav;
     private final ActivityView view;
     private int steps;
-    private Date startDate, endDate;
+    private Date startDate;
     private double distance;
     private List<Point> pts;
     private GoogleApiClient gClient;
@@ -31,6 +32,7 @@ public class ActivityPresenter extends BasePresenter{
         this.view = view;
         this.steps = 0;
         this.gClient = gClient;
+        pts = new ArrayList<Point>();
     }
 
     public void onCreate() {
@@ -40,8 +42,6 @@ public class ActivityPresenter extends BasePresenter{
 
     public void onPause() {
         view.stopLocationUpdates();
-        endDate = new Date();
-        view.showMessage(String.valueOf(endDate.getTime() - startDate.getTime()));
     }
 
     public void onConnected(Location loc) {
@@ -72,9 +72,11 @@ public class ActivityPresenter extends BasePresenter{
         view.setStepCount(Integer.toString(steps));
     }
 
-    public void resetSteps() {
-        steps = 0;
-        view.setStepCount(Integer.toString(steps));
+    public void onClickFinishActivity() {
+        Date endDate = new Date();
+        long durationMs = endDate.getTime() - startDate.getTime();
+        view.showMessage(String.valueOf(durationMs) + "  " + String.valueOf(pts.size()));
+        nav.finishActivity();
     }
 
     @Override
