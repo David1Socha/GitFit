@@ -6,9 +6,13 @@ import android.location.Location;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.inject.Inject;
 import com.google.inject.assistedinject.Assisted;
+import com.raik383h_group_6.healthtracmobile.R;
 import com.raik383h_group_6.healthtracmobile.application.IActivityNavigator;
+import com.raik383h_group_6.healthtracmobile.model.AccessGrant;
 import com.raik383h_group_6.healthtracmobile.model.FacebookUser;
 import com.raik383h_group_6.healthtracmobile.model.Point;
+import com.raik383h_group_6.healthtracmobile.service.api.async.IAsyncActivityService;
+import com.raik383h_group_6.healthtracmobile.service.api.async.IAsyncPointService;
 import com.raik383h_group_6.healthtracmobile.view.BaseView;
 import com.raik383h_group_6.healthtracmobile.view.ActivityView;
 
@@ -25,12 +29,18 @@ public class ActivityPresenter extends BasePresenter{
     private List<Point> pts;
     private GoogleApiClient gClient;
     private Location lastLocation;
+    private AccessGrant grant;
+    private IAsyncActivityService activityService;
+    private IAsyncPointService pointService;
 
     @Inject
-    public ActivityPresenter(@Assisted IActivityNavigator nav, @Assisted GoogleApiClient gClient, @Assisted ActivityView view) {
+    public ActivityPresenter(@Assisted IActivityNavigator nav, @Assisted GoogleApiClient gClient, @Assisted ActivityView view, IAsyncActivityService activityService, IAsyncPointService pointService) {
         this.nav = nav;
         this.view = view;
         this.steps = 0;
+        this.grant = (AccessGrant) view.getParcelableExtra(view.getResource(R.string.EXTRA_ACCESS_GRANT));
+        this.activityService = activityService;
+        this.pointService = pointService;
         this.gClient = gClient;
         pts = new ArrayList<Point>();
     }

@@ -104,5 +104,6 @@
     <string name="steps">Steps</string>
     <string name="finish_activity">Finish Activity</string>
     <string name="start_activity">Start Activity</string>
+    <string name="default_stepcount">0</string>
 
 </resources>
