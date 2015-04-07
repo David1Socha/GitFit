@@ -20,7 +20,7 @@
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:text="Create"
-        android:id="@+id/create_team_button"
+        android:id="@+id/button_create_team"
         android:onClick="onClickCreateTeam"
         android:layout_gravity="center_horizontal" />
 

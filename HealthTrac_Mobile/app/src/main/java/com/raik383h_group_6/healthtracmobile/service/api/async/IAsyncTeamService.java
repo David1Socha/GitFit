@@ -10,4 +10,6 @@ public interface IAsyncTeamService {
 
     Team createTeamAsync(Team team, String authHeader) throws ExecutionException, InterruptedException;
 
+    void updateTeamAsync(long id, Team team, String token) throws Exception;
+
 }

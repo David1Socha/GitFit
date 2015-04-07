@@ -25,7 +25,7 @@ public class CreateTeamActivity extends BaseActivity implements CreateTeamView {
     private PresenterFactory presenterFactory;
     private CreateTeamPresenter presenter;
 
-    @InjectView(R.id.create_team_button)
+    @InjectView(R.id.button_create_team)
     Button createTeamButton;
     @InjectView(R.id.team_name_edittext)
     EditText nameEditText;

@@ -9,6 +9,7 @@ import com.raik383h_group_6.healthtracmobile.view.AuthenticationView;
 import com.raik383h_group_6.healthtracmobile.view.BaseView;
 import com.raik383h_group_6.healthtracmobile.view.CreateTeamView;
 import com.raik383h_group_6.healthtracmobile.view.CreateUserView;
+import com.raik383h_group_6.healthtracmobile.view.EditTeamView;
 import com.raik383h_group_6.healthtracmobile.view.EditUserView;
 import com.raik383h_group_6.healthtracmobile.view.GitFitMainView;
 import com.raik383h_group_6.healthtracmobile.view.ListTeamsView;
@@ -29,6 +30,7 @@ public interface PresenterFactory {
     ListTeamsPresenter create(IActivityNavigator nav, ListTeamsView view);
     ViewUserPresenter create(IActivityNavigator nav, ViewUserView view);
     EditUserPresenter create(UserValidationPresenter presenter, IActivityNavigator nav, EditUserView view);
+    EditTeamPresenter create(TeamValidationPresenter presenter, IActivityNavigator nav, EditTeamView view);
     GitFitMainPresenter create(IActivityNavigator nav, GitFitMainView view);
     ViewTeamPresenter create(IActivityNavigator nav, ViewTeamView view);
     ActivityPresenter create(IActivityNavigator nav, GoogleApiClient gClient, ActivityView view);

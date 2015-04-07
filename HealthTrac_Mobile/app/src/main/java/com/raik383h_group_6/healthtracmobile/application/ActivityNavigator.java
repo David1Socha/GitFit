@@ -13,6 +13,7 @@ import com.raik383h_group_6.healthtracmobile.model.Token;
 import com.raik383h_group_6.healthtracmobile.model.User;
 import com.raik383h_group_6.healthtracmobile.view.activity.AuthenticationActivity;
 import com.raik383h_group_6.healthtracmobile.view.activity.CreateTeamActivity;
+import com.raik383h_group_6.healthtracmobile.view.activity.EditTeamActivity;
 import com.raik383h_group_6.healthtracmobile.view.activity.ListTeamsActivity;
 import com.raik383h_group_6.healthtracmobile.view.activity.ListUsersActivity;
 import com.raik383h_group_6.healthtracmobile.view.activity.OAuthBrowserActivity;
@@ -202,6 +203,14 @@ public class ActivityNavigator implements IActivityNavigator {
     }
 
     @Override
+    public void openEditTeam(AccessGrant grant, Team team, int reqCode) {
+        Intent intent = new Intent(activity, EditTeamActivity.class);
+        intent.putExtra(activity.getString(R.string.EXTRA_ACCESS_GRANT), grant);
+        intent.putExtra(activity.getString(R.string.EXTRA_TEAM), team);
+        activity.startActivityForResult(intent, reqCode);
+    }
+
+    @Override
     public void finishEditUserSuccess(User user) {
         Intent data = new Intent();
         data.putExtra(activity.getString(R.string.EXTRA_USER), user);
@@ -211,6 +220,20 @@ public class ActivityNavigator implements IActivityNavigator {
 
     @Override
     public void finishEditUserFailure() {
+        activity.setResult(Activity.RESULT_CANCELED);
+        activity.finish();
+    }
+
+    @Override
+    public void finishEditTeamSuccess(Team team) {
+        Intent data = new Intent();
+        data.putExtra(activity.getString(R.string.EXTRA_TEAM), team);
+        activity.setResult(Activity.RESULT_OK, data);
+        activity.finish();
+    }
+
+    @Override
+    public void finishEditTeamFailure() {
         activity.setResult(Activity.RESULT_CANCELED);
         activity.finish();
     }

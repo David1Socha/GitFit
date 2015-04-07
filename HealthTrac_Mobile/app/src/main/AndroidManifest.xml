@@ -107,6 +107,14 @@
                 android:value=".view.activity.ViewUserActivity" />
         </activity>
 
+        <activity
+            android:name=".view.activity.EditTeamActivity"
+            android:label="@string/title_activity_update_team">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".view.activity.ViewTeamActivity" />
+        </activity>
+
         <meta-data
             android:name="roboguice.annotations.packages"
             android:value="com.raik383h_group_6.healthtracmobile" />

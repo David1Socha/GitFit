@@ -109,5 +109,8 @@
     <string name="new_team">Create Team</string>
     <string name="team_not_made">Team could not be created</string>
     <string name="title_activity_create_team">Create Team</string>
+    <string name="team_updated_message">Team successfully updated</string>
+    <string name="update_team_error">Could not update team</string>
+    <string name="title_activity_update_team">Update Team</string>
 
 </resources>

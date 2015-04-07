@@ -45,7 +45,7 @@ public class ViewTeamPresenter extends BasePresenter{
     }
 
     public void onClickEditTeam() {
-        //nav.openUpdateTeam(team) TODO
+        nav.openEditTeam(grant, team, RequestCodes.UPDATE_TEAM);
     }
 
     public void onClickLeaveTeam() {
