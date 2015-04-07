@@ -1,26 +1,32 @@
 ﻿@{
     ViewBag.Title = "Home Page";
 }
-
-<div class="jumbotron">
-    <h1>HealthTrac</h1>
-    <p class="lead">HealthTrac is a free fitness tracking app that helps you reach your fitness goals.</p>
-</div>
-
-<div class="row">
-    <div class="col-md-4">
-        <h2>Coming Soon</h2>
-        <p>
-            Your awesome fitness data.
-        </p>
+<body ng-app="gitFit" ng-controller="RootController">
+    <div class="jumbotron">
+        <h1>HealthTrac</h1>
+        <p class="lead">HealthTrac is a free fitness tracking app that helps you reach your fitness goals.</p>
     </div>
-    <div class="col-md-4">
-        <h2>Coming Soon</h2>
-        <p>Even more of your awesome fitness data</p>
-    </div>
-    <div class="col-md-4">
-        <h2>Coming Soon</h2>
-        <p>Ruby Code</p>
 
+    <div class="row">
+        <div class="col-md-4">
+            <h2>Coming Soon</h2>
+            <p>
+                Your awesome fitness data.
+            </p>
+        </div>
+        <div class="col-md-4">
+            <h2>Coming Soon</h2>
+            <p>Even more of your awesome fitness data</p>
+        </div>
+        <div class="col-md-4">
+            <h2>Coming Soon</h2>
+            <p>Ruby Code</p>
+
+        </div>
     </div>
-</div>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/angularjs")
+    @Scripts.Render("~/bundles/WebApp")
+    @RenderSection("scripts", required: false)
+</body>
