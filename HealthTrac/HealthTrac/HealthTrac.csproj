@@ -367,7 +367,7 @@
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="DataAccess\Data\1000.csv" />
     <Content Include="WebApp\app.js" />
-    <None Include="WebApp\Directives\gitfit-Header\gitfit-Header.cshtml" />
+    <Content Include="WebApp\Directives\gitfit-Header\gitfit-Header.html" />
     <Content Include="WebApp\Controllers\root.js" />
     <Content Include="WebApp\Directives\gitfit-Header\gitfit-header.js" />
     <None Include="Properties\PublishProfiles\gitfit - FTP.pubxml" />
@@ -1171,6 +1171,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="WebApp\Services\" />
     <Folder Include="WebApp\Views\" />
   </ItemGroup>
   <ItemGroup>
