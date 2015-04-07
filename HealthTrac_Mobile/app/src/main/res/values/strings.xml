@@ -106,5 +106,8 @@
     <string name="start_activity">Start Activity</string>
     <string name="default_stepcount">0</string>
     <string name="error_create_activity">Error creating activity</string>
+    <string name="new_team">Create Team</string>
+    <string name="team_not_made">Team could not be created</string>
+    <string name="title_activity_create_team">Create Team</string>
 
 </resources>

@@ -12,6 +12,7 @@ import com.raik383h_group_6.healthtracmobile.model.Team;
 import com.raik383h_group_6.healthtracmobile.model.Token;
 import com.raik383h_group_6.healthtracmobile.model.User;
 import com.raik383h_group_6.healthtracmobile.view.activity.AuthenticationActivity;
+import com.raik383h_group_6.healthtracmobile.view.activity.CreateTeamActivity;
 import com.raik383h_group_6.healthtracmobile.view.activity.ListTeamsActivity;
 import com.raik383h_group_6.healthtracmobile.view.activity.ListUsersActivity;
 import com.raik383h_group_6.healthtracmobile.view.activity.OAuthBrowserActivity;
@@ -89,12 +90,29 @@ public class ActivityNavigator implements IActivityNavigator {
     }
 
     @Override
+    public void finishCreateTeamSuccess() {
+        genericFinishOk();
+    }
+
+    @Override
+    public void finishCreateTeamFailure() {
+        genericFinishCancelled();
+    }
+
+    @Override
     public void openCreateUser(String token, String secret, String provider, int reqCode) {
             Intent intent = new Intent(activity, CreateUserActivity.class);
             intent.putExtra(activity.getString(R.string.EXTRA_ACCESS_TOKEN), token);
             intent.putExtra(activity.getString(R.string.EXTRA_ACCESS_SECRET), secret);
             intent.putExtra(activity.getString(R.string.EXTRA_PROVIDER), provider);
             activity.startActivityForResult(intent, reqCode);
+    }
+
+    @Override
+    public void openCreateTeam(AccessGrant g) {
+        Intent intent = new Intent(activity, CreateTeamActivity.class);
+        intent.putExtra(activity.getString(R.string.EXTRA_ACCESS_GRANT), g);
+        activity.startActivity(intent);
     }
 
     @Override

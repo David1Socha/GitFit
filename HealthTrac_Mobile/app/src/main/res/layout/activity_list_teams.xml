@@ -16,7 +16,8 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Create Team"
-        android:id="@+id/create_team_button"
-        android:onClick="onClickCreateTeam"/>
+        android:text="@string/new_team"
+        android:id="@+id/new_team_button"
+        android:layout_gravity="center_horizontal"
+        android:onClick="onClickNewTeam"/>
 </LinearLayout>

@@ -22,6 +22,10 @@ public interface IActivityNavigator {
 
     void finishCreateUserFailure();
 
+    void finishCreateTeamSuccess();
+
+    void finishCreateTeamFailure();
+
     void openCreateUser(String token, String secret, String provider, int reqCode);
 
     void openOAuthPrompt(int reqCode);
@@ -39,6 +43,8 @@ public interface IActivityNavigator {
     void finishListUsers();
 
     void finishListTeams();
+
+    void openCreateTeam(AccessGrant g);
 
     void openListTeams(AccessGrant g);
 

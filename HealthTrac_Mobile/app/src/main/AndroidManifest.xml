@@ -91,6 +91,15 @@
         </activity>
 
         <activity
+            android:name=".view.activity.CreateTeamActivity"
+            android:label="@string/title_activity_create_team"
+            android:launchMode="singleTop">
+            <meta-data
+                android:value=".view.activity.GitFitMainActivity"
+                android:name="android.support.PARENT_ACTIVITY" />
+        </activity>
+
+        <activity
             android:name=".view.activity.EditUserActivity"
             android:label="@string/title_activity_update_user">
             <meta-data

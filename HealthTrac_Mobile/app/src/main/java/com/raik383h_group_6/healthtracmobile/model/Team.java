@@ -13,6 +13,13 @@ public class Team implements Parcelable {
     @SerializedName("ID") private long id;
     private String name, description;
 
+    public Team(String name, String description, Date dateCreated, Date dateModified) {
+        this.name = name;
+        this.description = description;
+        this.dateCreated = dateCreated;
+        this.dateModified = dateModified;
+    }
+
     public Date getDateCreated() {
         return dateCreated;
     }
