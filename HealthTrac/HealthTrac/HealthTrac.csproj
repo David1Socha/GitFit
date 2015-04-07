@@ -367,6 +367,8 @@
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="DataAccess\Data\1000.csv" />
     <Content Include="WebApp\app.js" />
+    <None Include="WebApp\Directives\gitfit-Header\gitfit-Header.cshtml" />
+    <Content Include="WebApp\Directives\gitfit-Header\gitfit-header.js" />
     <None Include="Properties\PublishProfiles\gitfit - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\gitfit - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\se6 - FTP.pubxml" />
