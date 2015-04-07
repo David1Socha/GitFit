@@ -120,5 +120,8 @@
     <string name="threshold_hint">count, seconds, or feet</string>
     <string name="name_label">Goal Name</string>
     <string name="name_hint">Name</string>
+    <string name="create_meal">Create Meal</string>
+    <string name="calorie_label">Calories</string>
+    <string name="hint_calorie">calories</string>
 
 </resources>
