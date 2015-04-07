@@ -19,7 +19,7 @@ import com.raik383h_group_6.healthtracmobile.view.CreateTeamView;
 import roboguice.inject.ContentView;
 import roboguice.inject.InjectView;
 
-@ContentView(R.layout.activity_create_team)
+@ContentView(R.layout.activity_register_team)
 public class CreateTeamActivity extends BaseActivity implements CreateTeamView {
     @Inject
     private PresenterFactory presenterFactory;
