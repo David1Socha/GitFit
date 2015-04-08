@@ -213,6 +213,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\Api\ActivityReportsController.cs" />
+    <Compile Include="DataAccess\Entity\EntityActivityReportAccessor.cs" />
+    <Compile Include="DataAccess\IActivityReportAccessor.cs" />
+    <Compile Include="Models\ActivityReport.cs" />
+    <Compile Include="Models\Dto\ActivityReportDto.cs" />
     <Compile Include="Services\ActivityForestBuilder.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
@@ -299,12 +304,14 @@
     <Compile Include="Models\UserGoal.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\ApplicationOAuthProvider.cs" />
+    <Compile Include="Services\ActivityReportService.cs" />
     <Compile Include="Services\ActivityService.cs" />
     <Compile Include="Services\BadgeService.cs" />
     <Compile Include="Services\CharonActivityForestAdapter.cs" />
     <Compile Include="Services\EnergyLevelService.cs" />
     <Compile Include="Services\GoalService.cs" />
     <Compile Include="Services\IActivityForest.cs" />
+    <Compile Include="Services\IActivityReportService.cs" />
     <Compile Include="Services\IActivityService.cs" />
     <Compile Include="Services\IBadgeService.cs" />
     <Compile Include="Services\IEnergyLevelService.cs" />
