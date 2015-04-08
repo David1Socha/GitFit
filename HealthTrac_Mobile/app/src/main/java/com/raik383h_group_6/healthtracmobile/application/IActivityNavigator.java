@@ -59,4 +59,8 @@ public interface IActivityNavigator {
     void finishCreateGoal();
 
     void openCreateGoal(AccessGrant grant);
+
+    void finishCreateEnergyLevel();
+
+    void openCreateEnergyLevel(AccessGrant grant);
 }
