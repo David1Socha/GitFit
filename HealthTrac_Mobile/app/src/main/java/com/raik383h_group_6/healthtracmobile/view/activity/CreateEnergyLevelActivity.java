@@ -11,11 +11,14 @@ import com.raik383h_group_6.healthtracmobile.R;
 import com.raik383h_group_6.healthtracmobile.application.ActivityNavigator;
 import com.raik383h_group_6.healthtracmobile.application.IActivityNavigator;
 import com.raik383h_group_6.healthtracmobile.presenter.BasePresenter;
+import com.raik383h_group_6.healthtracmobile.presenter.CreateEnergyLevelPresenter;
 import com.raik383h_group_6.healthtracmobile.presenter.PresenterFactory;
 import com.raik383h_group_6.healthtracmobile.view.CreateEnergyLevelView;
 
+import roboguice.inject.ContentView;
 import roboguice.inject.InjectView;
 
+@ContentView(R.layout.activity_create_energy_level)
 public class CreateEnergyLevelActivity extends BaseActivity implements CreateEnergyLevelView {
 
     @InjectView(R.id.radio_mood)
