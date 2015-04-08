@@ -17,6 +17,7 @@ import com.raik383h_group_6.healthtracmobile.view.activity.EditTeamActivity;
 import com.raik383h_group_6.healthtracmobile.view.activity.CreateEnergyLevelActivity;
 import com.raik383h_group_6.healthtracmobile.view.activity.CreateGoalActivity;
 import com.raik383h_group_6.healthtracmobile.view.activity.CreateMealActivity;
+import com.raik383h_group_6.healthtracmobile.view.activity.FeedActivity;
 import com.raik383h_group_6.healthtracmobile.view.activity.ListTeamsActivity;
 import com.raik383h_group_6.healthtracmobile.view.activity.ListUsersActivity;
 import com.raik383h_group_6.healthtracmobile.view.activity.OAuthBrowserActivity;
@@ -286,6 +287,22 @@ public class ActivityNavigator implements IActivityNavigator {
     public void openCreateMeal(AccessGrant g) {
         Intent i = new Intent(activity, CreateMealActivity.class);
         i.putExtra(activity.getString(R.string.EXTRA_ACCESS_GRANT), g);
+        activity.startActivity(i);
+    }
+
+    @Override
+    public void openFeed(String uid, AccessGrant grant) {
+        Intent i = new Intent(activity, FeedActivity.class);
+        i.putExtra(activity.getString(R.string.EXTRA_ACCESS_GRANT), grant);
+        i.putExtra(activity.getString(R.string.EXTRA_USER_ID), uid);
+        activity.startActivity(i);
+    }
+
+    @Override
+    public void openFeed(long teamId, AccessGrant grant) {
+        Intent i = new Intent(activity, FeedActivity.class);
+        i.putExtra(activity.getString(R.string.EXTRA_ACCESS_GRANT), grant);
+        i.putExtra(activity.getString(R.string.EXTRA_TEAM_ID), teamId);
         activity.startActivity(i);
     }
 }

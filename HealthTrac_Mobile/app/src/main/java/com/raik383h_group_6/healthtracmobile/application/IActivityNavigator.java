@@ -79,4 +79,8 @@ public interface IActivityNavigator {
     void finishCreateMeal();
 
     void openCreateMeal(AccessGrant grant);
+
+    void openFeed(String uid, AccessGrant grant);
+
+    void openFeed(long teamId, AccessGrant grant);
 }
