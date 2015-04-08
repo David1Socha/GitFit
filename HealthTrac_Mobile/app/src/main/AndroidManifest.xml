@@ -29,14 +29,6 @@
                 android:value=".view.activity.GitFitMainActivity" />
         </activity>
         <activity
-            android:name=".view.activity.LocationActivity"
-            android:launchMode="singleTop"
-            android:label="Location Demo">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".view.activity.GitFitMainActivity" />
-        </activity>
-        <activity
             android:name=".view.activity.ActivityActivity"
             android:launchMode="singleTop"
             android:label="Pedometer Demo">
@@ -135,6 +127,18 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".view.activity.ListTeamsActivity" />
+        </activity>
+        <activity
+            android:name=".view.activity.CreateGoalActivity"
+            android:label="@string/title_activity_create_goal">
+        </activity>
+        <activity
+            android:name=".view.activity.CreateEnergyLevelActivity"
+            android:label="@string/title_activity_create_energy_level">
+        </activity>
+        <activity
+            android:name=".view.activity.CreateMealActivity"
+            android:label="@string/title_activity_create_meal">
         </activity>
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"

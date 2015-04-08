@@ -8,6 +8,9 @@ import com.raik383h_group_6.healthtracmobile.service.oauth.IAsyncOAuthService;
 import com.raik383h_group_6.healthtracmobile.view.AuthenticationView;
 import com.raik383h_group_6.healthtracmobile.view.BaseView;
 import com.raik383h_group_6.healthtracmobile.view.CreateTeamView;
+import com.raik383h_group_6.healthtracmobile.view.CreateEnergyLevelView;
+import com.raik383h_group_6.healthtracmobile.view.CreateGoalView;
+import com.raik383h_group_6.healthtracmobile.view.CreateMealView;
 import com.raik383h_group_6.healthtracmobile.view.CreateUserView;
 import com.raik383h_group_6.healthtracmobile.view.EditTeamView;
 import com.raik383h_group_6.healthtracmobile.view.EditUserView;
@@ -36,4 +39,7 @@ public interface PresenterFactory {
     ActivityPresenter create(IActivityNavigator nav, GoogleApiClient gClient, ActivityView view);
     UserValidationPresenter create(UserValidationView view);
     TeamValidationPresenter create(TeamValidationView view);
+    CreateGoalPresenter create(IActivityNavigator nav, CreateGoalView view);
+    CreateEnergyLevelPresenter create(IActivityNavigator nav, CreateEnergyLevelView view);
+    CreateMealPresenter create(IActivityNavigator nav, CreateMealView view);
 }

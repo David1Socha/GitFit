@@ -36,6 +36,11 @@ public class ViewUserPresenter extends BasePresenter{
         updateFields();
     }
 
+    @Override
+    protected AccessGrant getGrant() {
+        return grant;
+    }
+
     public void onActivityResult(int requestCode, int resultCode, Bundle extras) {
         if (resultCode == Activity.RESULT_OK) {
             switch (requestCode) {

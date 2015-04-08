@@ -29,6 +29,11 @@ public class AuthenticationPresenter extends BasePresenter{
         this.view = view;
     }
 
+    @Override
+    protected AccessGrant getGrant() {
+        return null;
+    }
+
     public void onClickSignIn() {
         nav.openOAuthPrompt(RequestCodes.OAUTH_TO_SIGN_IN);
     }

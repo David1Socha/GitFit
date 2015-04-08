@@ -29,6 +29,11 @@ public class EditTeamPresenter extends BasePresenter{
         this.team = (Team) view.getParcelableExtra(view.getResource(R.string.EXTRA_TEAM));
     }
 
+    @Override
+    protected AccessGrant getGrant() {
+        return grant;
+    }
+
     public void onCreate() {
         populateFields();
     }

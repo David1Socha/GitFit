@@ -36,7 +36,8 @@ public class GitFitMainPresenter extends BasePresenter{
         this.view = view;
     }
 
-    public AccessGrant getGrant() {
+    @Override
+    protected AccessGrant getGrant() {
         return grant;
     }
 
@@ -48,6 +49,8 @@ public class GitFitMainPresenter extends BasePresenter{
             nav.openAuthentication(RequestCodes.AUTH);
         }
     }
+
+
 
     private void reconstructGrant() {
         String serializedGrant = view.getPref(view.getResource(R.string.pref_access_grant));

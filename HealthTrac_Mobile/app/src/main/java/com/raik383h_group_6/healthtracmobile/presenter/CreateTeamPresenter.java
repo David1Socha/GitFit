@@ -37,6 +37,11 @@ public class CreateTeamPresenter extends BasePresenter {
         }
     }
 
+    @Override
+    protected AccessGrant getGrant() {
+        return grant;
+    }
+
     public void createTeam(Team team) {
         try {
             teamService.createTeamAsync(team, grant.getAuthHeader());

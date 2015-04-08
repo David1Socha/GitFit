@@ -13,6 +13,7 @@ import com.google.inject.Inject;
 import com.google.inject.assistedinject.Assisted;
 import com.raik383h_group_6.healthtracmobile.R;
 import com.raik383h_group_6.healthtracmobile.application.IActivityNavigator;
+import com.raik383h_group_6.healthtracmobile.model.AccessGrant;
 import com.raik383h_group_6.healthtracmobile.model.Token;
 import com.raik383h_group_6.healthtracmobile.service.oauth.IAsyncOAuthService;
 import com.raik383h_group_6.healthtracmobile.service.oauth.IOAuthService;
@@ -37,6 +38,11 @@ public class OAuthBrowserPresenter extends BasePresenter{
         settings.setDisplayZoomControls(false);
         settings.setJavaScriptEnabled(true);
         webView.setWebViewClient(webViewClient);
+    }
+
+    @Override
+    protected AccessGrant getGrant() {
+        return null;
     }
 
     @Inject

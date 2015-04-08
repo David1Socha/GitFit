@@ -112,5 +112,29 @@
     <string name="team_updated_message">Team successfully updated</string>
     <string name="update_team_error">Could not update team</string>
     <string name="title_activity_update_team">Update Team</string>
+    <string name="create_energy_level">Create Energy Level</string>
+    <string name="mood_label">What\'s your mood?</string>
+    <string name="excited_label">EXCITED</string>
+    <string name="tired_label">TIRED</string>
+    <string name="proud_label">PROUD</string>
+    <string name="create_goal">Create Goal</string>
+    <string name="field_label">Field to measure goal against</string>
+    <string name="steps_label">STEPS</string>
+    <string name="distance_label">DISTANCE</string>
+    <string name="duration_label">DURATION</string>
+    <string name="threshold_label">Threshold</string>
+    <string name="threshold_hint">count, seconds, or feet</string>
+    <string name="name_label">Goal Name</string>
+    <string name="name_hint">Name</string>
+    <string name="create_meal">Create Meal</string>
+    <string name="calorie_label">Calories</string>
+    <string name="hint_calorie">calories</string>
+    <string name="error_create_goal">Error creating goal</string>
+    <string name="no_grant_message">Grant invalid or expired. Please sign in</string>
+    <string name="error_create_meal">Error creating meal</string>
+    <string name="error_create_energy_level">Error creating energy level</string>
+    <string name="title_activity_create_goal">Create Goal</string>
+    <string name="title_activity_create_energy_level">Create Energy Level</string>
+    <string name="title_activity_create_meal">Create Meal</string>
 
 </resources>
