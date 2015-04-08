@@ -87,7 +87,7 @@ public abstract class FeedGenerator {
             badges = bsvc.getBadgesAsync(grant.getAuthHeader());
         } catch (Exception e) {
             Log.d("davidsocha", "api failure in feed generation");
-            throw new Exception("Could not find users- api failure", e);
+            throw new Exception("api failure in feed construction", e);
         }
     }
 

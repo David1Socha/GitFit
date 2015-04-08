@@ -23,6 +23,7 @@ import com.raik383h_group_6.healthtracmobile.service.api.async.IAsyncUserBadgeSe
 import com.raik383h_group_6.healthtracmobile.service.api.async.IAsyncUserGoalService;
 import com.raik383h_group_6.healthtracmobile.service.api.async.IAsyncUserService;
 import com.raik383h_group_6.healthtracmobile.service.feed.FeedGenerator;
+import com.raik383h_group_6.healthtracmobile.service.feed.TeamFeedGenerator;
 import com.raik383h_group_6.healthtracmobile.service.feed.UserFeedGenerator;
 import com.raik383h_group_6.healthtracmobile.view.BaseView;
 
