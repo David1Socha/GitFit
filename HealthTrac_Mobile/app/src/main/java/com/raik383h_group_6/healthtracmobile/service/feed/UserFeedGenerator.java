@@ -32,10 +32,12 @@ import java.util.concurrent.ExecutionException;
 public class UserFeedGenerator extends FeedGenerator {
 
     private String uid;
+    private String username;
 
     public UserFeedGenerator(String username, IAsyncUserService usvc, IAsyncActivityService asvc, IAsyncBadgeService bsvc, IAsyncEnergyLevelService esvc, IAsyncGoalService gsvc, IAsyncMealService mlsvc, IAsyncMembershipService mbsvc, IAsyncTeamService tsvc, IAsyncUserBadgeService ubsvc, IAsyncUserGoalService ugsvc, Resources res, AccessGrant grant, IActivityNavigator nav, String uid) throws Exception {
-        super(username, usvc, asvc, bsvc, esvc, gsvc, mlsvc, mbsvc, tsvc, ubsvc, ugsvc, res, grant, nav);
+        super(usvc, asvc, bsvc, esvc, gsvc, mlsvc, mbsvc, tsvc, ubsvc, ugsvc, res, grant, nav);
         this.uid = uid;
+        this.username = username;
     }
 
 

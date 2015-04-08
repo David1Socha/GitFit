@@ -10,6 +10,7 @@ import java.util.Date;
 public class UserGoal implements Parcelable {
     @SerializedName("ID")
     private long id;
+    private Date dateAssigned;
 
     public long getId() {
         return id;
@@ -27,12 +28,12 @@ public class UserGoal implements Parcelable {
         this.userID = userID;
     }
 
-    public long getBadgeID() {
-        return badgeID;
+    public long getGoalID() {
+        return goalID;
     }
 
-    public void setBadgeID(long badgeID) {
-        this.badgeID = badgeID;
+    public void setGoalID(long badgeID) {
+        this.goalID = badgeID;
     }
 
     public Date getDateCompleted() {
@@ -44,7 +45,7 @@ public class UserGoal implements Parcelable {
     }
 
     private String userID;
-    private long badgeID;
+    private long goalID;
     private Date dateCompleted;
 
     @Override
@@ -56,8 +57,9 @@ public class UserGoal implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeLong(this.id);
         dest.writeString(this.userID);
-        dest.writeLong(this.badgeID);
+        dest.writeLong(this.goalID);
         dest.writeLong(dateCompleted != null ? dateCompleted.getTime() : -1);
+        dest.writeLong(dateAssigned != null ? dateAssigned.getTime() : -1);
     }
 
     public UserGoal() {
@@ -66,9 +68,11 @@ public class UserGoal implements Parcelable {
     private UserGoal(Parcel in) {
         this.id = in.readLong();
         this.userID = in.readString();
-        this.badgeID = in.readLong();
+        this.goalID = in.readLong();
         long tmpDateCompleted = in.readLong();
         this.dateCompleted = tmpDateCompleted == -1 ? null : new Date(tmpDateCompleted);
+        long tmpDateAssigned = in.readLong();
+        this.dateAssigned = tmpDateAssigned == -1 ? null : new Date(tmpDateAssigned);
     }
 
     public static final Parcelable.Creator<UserGoal> CREATOR = new Parcelable.Creator<UserGoal>() {
@@ -80,4 +84,12 @@ public class UserGoal implements Parcelable {
             return new UserGoal[size];
         }
     };
+
+    public Date getDateAssigned() {
+        return dateAssigned;
+    }
+
+    public void setDateAssigned(Date dateAssigned) {
+        this.dateAssigned = dateAssigned;
+    }
 }

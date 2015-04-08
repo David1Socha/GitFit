@@ -54,14 +54,13 @@ public abstract class FeedGenerator {
     protected IAsyncUserGoalService ugsvc;
     protected Resources res;
     protected IActivityNavigator nav;
-    protected String username;
     protected IAsyncUserService usvc;
     protected List<User> users;
     protected List<Team> teams;
     protected List<Badge> badges;
     protected List<Goal> goals;
 
-    public FeedGenerator(String username, IAsyncUserService usvc, IAsyncActivityService asvc, IAsyncBadgeService bsvc, IAsyncEnergyLevelService esvc, IAsyncGoalService gsvc, IAsyncMealService mlsvc, IAsyncMembershipService mbsvc, IAsyncTeamService tsvc, IAsyncUserBadgeService ubsvc, IAsyncUserGoalService ugsvc, Resources res, AccessGrant grant, IActivityNavigator nav) throws Exception {
+    public FeedGenerator(IAsyncUserService usvc, IAsyncActivityService asvc, IAsyncBadgeService bsvc, IAsyncEnergyLevelService esvc, IAsyncGoalService gsvc, IAsyncMealService mlsvc, IAsyncMembershipService mbsvc, IAsyncTeamService tsvc, IAsyncUserBadgeService ubsvc, IAsyncUserGoalService ugsvc, Resources res, AccessGrant grant, IActivityNavigator nav) throws Exception {
         this.asvc = asvc;
         this.bsvc = bsvc;
         this.esvc = esvc;
@@ -75,7 +74,6 @@ public abstract class FeedGenerator {
         this.res = res;
         this.grant = grant;
         this.nav = nav;
-        this.username = username;
         try {
             users = usvc.getUsersAsync(grant.getAuthHeader());
             teams = tsvc.getTeamsAsync(grant.getAuthHeader());
@@ -105,6 +103,7 @@ public abstract class FeedGenerator {
     protected List<FeedActivity> mapToFeedActivities(List<Activity> activities) {
         List<FeedActivity> fas = new ArrayList<>();
         for (Activity a : activities) {
+            String username = getCorrespondingUserName(a.getUserId());
             FeedActivity fa = new FeedActivity(res.getString(R.string.feed_activity, username, a.getType().name().toLowerCase(), a.getSteps()), a.getStartDate(), nav, a);
             fas.add(fa);
         }
@@ -114,6 +113,7 @@ public abstract class FeedGenerator {
     protected List<FeedEnergyLevel> mapToFeedEnergyLevels(List<EnergyLevel> els) {
         List<FeedEnergyLevel> fels = new ArrayList<>();
         for (EnergyLevel el : els) {
+            String username = getCorrespondingUserName(el.getUserID());
             FeedEnergyLevel fel = new FeedEnergyLevel(res.getString(R.string.feed_energy_level, username, el.getMood().name().toLowerCase()), el.getDateCreated(), nav, el);
             fels.add(fel);
         }
@@ -123,6 +123,7 @@ public abstract class FeedGenerator {
     protected List<FeedMeal> mapToFeedMeals(List<Meal> ms) {
         List<FeedMeal> fms = new ArrayList<>();
         for (Meal m : ms) {
+            String username = getCorrespondingUserName(m.getUserID());
             FeedMeal fm = new FeedMeal(res.getString(R.string.feed_meal, username, m.getCalories()), m.getDateCreated(), nav, m);
             fms.add(fm);
         }
@@ -155,6 +156,7 @@ public abstract class FeedGenerator {
         List<FeedMembership> fms = new ArrayList<>();
         for (Membership m : ms) {
             String correspondingTeamName = getCorrespondingTeamName(m.getTeamID());
+            String username = getCorrespondingUserName(m.getUserID());
             FeedMembership fm = new FeedMembership(res.getString(R.string.feed_membership, username, m.getMembershipStatus().name().toLowerCase(), correspondingTeamName), m.getDateCreated(), nav, m);
             fms.add(fm);
         }
@@ -162,13 +164,51 @@ public abstract class FeedGenerator {
     }
 
     protected List<FeedUserBadge> mapToFeedUserBadges(List<UserBadge> us) {
-        List<FeedMembership> fms = new ArrayList<>();
-        for (Membership m : ms) {
-            String correspondingTeamName = getCorrespondingTeamName(m.getTeamID());
-            FeedMembership fm = new FeedMembership(res.getString(R.string.feed_membership, username, m.getMembershipStatus().name().toLowerCase(), correspondingTeamName), m.getDateCreated(), nav, m);
-            fms.add(fm);
+        List<FeedUserBadge> fus = new ArrayList<>();
+        for (UserBadge u : us) {
+            String username = getCorrespondingUserName(u.getUserID());
+            String badgeName = getCorrespondingBadgeName(u.getBadgeID());
+            FeedUserBadge fu = new FeedUserBadge(res.getString(R.string.feed_userbadge, username, badgeName), u.getDateCompleted(), nav, u);
+            fus.add(fu);
         }
-        return fms;
+        return fus;
+    }
+
+    protected List<FeedUserGoal> mapToFeedUserGoals(List<UserGoal> us) {
+        List<FeedUserGoal> fus = new ArrayList<>();
+        for (UserGoal u : us) {
+            String username = getCorrespondingUserName(u.getUserID());
+            String goalName = getCorrespondingGoalName(u.getGoalID());
+            FeedUserGoal fu = new FeedUserGoal(res.getString(R.string.feed_usergoal_start, username, goalName), u.getDateAssigned(), nav, u);
+            if (u.getDateCompleted() != null) {
+                FeedUserGoal fu2 = new FeedUserGoal(res.getString(R.string.feed_usergoal_end, username, goalName), u.getDateCompleted(), nav, u);
+                fus.add(fu2);
+            }
+            fus.add(fu);
+        }
+        return fus;
+    }
+
+    private String getCorrespondingBadgeName(long badgeID) {
+        String cor = "";
+        for (Badge b : badges) {
+            if (b.getId() == badgeID) {
+                cor = b.getName();
+                break;
+            }
+        }
+        return cor;
+    }
+
+    private String getCorrespondingGoalName(long gid) {
+        String cor = "";
+        for (Goal g : goals) {
+            if (g.getId() == gid) {
+                cor = g.getName();
+                break;
+            }
+        }
+        return cor;
     }
 
     protected abstract List<FeedActivity> getActivities();
