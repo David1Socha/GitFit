@@ -34,6 +34,12 @@ namespace HealthTrac.Controllers.Api
             return actSvc.GetActivities(userId).Select(a => ActivityDto.FromActivity(a));
         }
 
+        //GET: api/Activities
+        public IEnumerable<ActivityDto> GetActivities()
+        {
+            return actSvc.GetActivities().Select(a => ActivityDto.FromActivity(a));
+        }
+
         // GET: api/Activities/5
         [ResponseType(typeof(ActivityDto))]
         public IHttpActionResult GetActivity(long id)
