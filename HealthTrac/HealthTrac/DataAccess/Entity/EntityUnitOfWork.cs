@@ -98,7 +98,7 @@ namespace HealthTrac.DataAccess.Entity
         {
             get
             {
-                activity = activity ?? new ActivityService(new EntityActivityAccessor(db), new EntityUserAccessor(db), new EntityUserBadgeAccessor(db), new EntityUserGoalAccessor(db), new EntityBadgeAccessor(db), new EntityGoalAccessor(db), _forest);
+                activity = activity ?? new ActivityService(new EntityActivityAccessor(db), new EntityUserAccessor(db), new EntityUserBadgeAccessor(db), new EntityUserGoalAccessor(db), new EntityBadgeAccessor(db), new EntityGoalAccessor(db), _forest, new EntityActivityReportAccessor(db));
                 return activity;
             }
         }
