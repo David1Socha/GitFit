@@ -26,6 +26,7 @@ import com.raik383h_group_6.healthtracmobile.service.feed.FeedGenerator;
 import com.raik383h_group_6.healthtracmobile.service.feed.TeamFeedGenerator;
 import com.raik383h_group_6.healthtracmobile.service.feed.UserFeedGenerator;
 import com.raik383h_group_6.healthtracmobile.view.BaseView;
+import com.raik383h_group_6.healthtracmobile.view.FeedView;
 
 import java.util.List;
 
@@ -53,7 +54,7 @@ public class FeedPresenter extends BasePresenter {
         this.nav = nav;
         String uid = view.getStringExtra(view.getResource(R.string.EXTRA_USER_ID));
         long teamId = view.getLongExtra(view.getResource(R.string.EXTRA_TEAM_ID));
-        this.grant = view.getParcelableExtra(view.getResource(R.string.EXTRA_ACCESS_GRANT));
+        this.grant = (AccessGrant) view.getParcelableExtra(view.getResource(R.string.EXTRA_ACCESS_GRANT));
         this.asvc = asvc;
         this.arsvc = arsvc;
         this.bsvc = bsvc;
@@ -65,11 +66,15 @@ public class FeedPresenter extends BasePresenter {
         this.usvc = usvc;
         this.ubsvc = ubsvc;
         this.ugsvc = ugsvc;
-        if (uid != null) {
-            gen = new UserFeedGenerator(arsvc, usvc, asvc, bsvc, esvc, gsvc, mlsvc, mbsvc, tsvc, ubsvc, ugsvc, view.getResources(), grant, nav, uid);
-        } else {
-            gen = new TeamFeedGenerator(arsvc, usvc, asvc, bsvc, esvc, gsvc, mlsvc, mbsvc, tsvc, ubsvc, ugsvc, view.getResources(), grant, nav, teamId);
+        try {
+            if (uid != null) {
+                gen = new UserFeedGenerator(arsvc, usvc, asvc, bsvc, esvc, gsvc, mlsvc, mbsvc, tsvc, ubsvc, ugsvc, view.getResources(), grant, nav, uid);
+            } else {
+                gen = new TeamFeedGenerator(arsvc, usvc, asvc, bsvc, esvc, gsvc, mlsvc, mbsvc, tsvc, ubsvc, ugsvc, view.getResources(), grant, nav, teamId);
+            }
+        } catch (Exception ignored) {
         }
+
     }
 
     public void onResume() {
@@ -88,6 +93,7 @@ public class FeedPresenter extends BasePresenter {
             }
         } catch (Exception e) {
             view.setEmptyFeedDisplay(true);
+            view.displayMessage("Error generating feed");
         }
     }
 
