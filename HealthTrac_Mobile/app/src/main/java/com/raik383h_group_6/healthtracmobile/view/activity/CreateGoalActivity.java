@@ -38,6 +38,7 @@ public class CreateGoalActivity extends BaseActivity implements CreateGoalView {
         Bundle extras = getIntent().getExtras();
         IActivityNavigator nav = new ActivityNavigator(this);
         presenter= presenterFactory.create(nav, this);
+        presenter.onCreate();
     }
 
     @Override

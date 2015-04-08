@@ -27,6 +27,13 @@ public class CreateGoalPresenter extends BasePresenter {
         this.grant = (AccessGrant) view.getParcelableExtra(view.getResource(R.string.EXTRA_ACCESS_GRANT));
     }
 
+    public void onCreate() {
+        if (grant == null || grant.isExpired()) {
+            view.displayMessage(view.getResource(R.string.no_grant_message));
+            nav.finishActivity();
+        }
+    }
+
     @Override
     protected BaseView getView() {
         return view;
