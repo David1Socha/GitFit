@@ -7,12 +7,14 @@ import com.raik383h_group_6.healthtracmobile.R;
 import com.raik383h_group_6.healthtracmobile.application.IActivityNavigator;
 import com.raik383h_group_6.healthtracmobile.model.AccessGrant;
 import com.raik383h_group_6.healthtracmobile.model.Activity;
+import com.raik383h_group_6.healthtracmobile.model.ActivityReport;
 import com.raik383h_group_6.healthtracmobile.model.EnergyLevel;
 import com.raik383h_group_6.healthtracmobile.model.Meal;
 import com.raik383h_group_6.healthtracmobile.model.Membership;
 import com.raik383h_group_6.healthtracmobile.model.UserBadge;
 import com.raik383h_group_6.healthtracmobile.model.UserGoal;
 import com.raik383h_group_6.healthtracmobile.model.feed.FeedActivity;
+import com.raik383h_group_6.healthtracmobile.model.feed.FeedActivityReport;
 import com.raik383h_group_6.healthtracmobile.model.feed.FeedEnergyLevel;
 import com.raik383h_group_6.healthtracmobile.model.feed.FeedMeal;
 import com.raik383h_group_6.healthtracmobile.model.feed.FeedMembership;
@@ -38,12 +40,10 @@ import java.util.concurrent.ExecutionException;
 public class UserFeedGenerator extends FeedGenerator {
 
     private String uid;
-    private String username;
 
-    public UserFeedGenerator(String username, IAsyncActivityReportService arsvc, IAsyncUserService usvc, IAsyncActivityService asvc, IAsyncBadgeService bsvc, IAsyncEnergyLevelService esvc, IAsyncGoalService gsvc, IAsyncMealService mlsvc, IAsyncMembershipService mbsvc, IAsyncTeamService tsvc, IAsyncUserBadgeService ubsvc, IAsyncUserGoalService ugsvc, Resources res, AccessGrant grant, IActivityNavigator nav, String uid) throws Exception {
+    public UserFeedGenerator(IAsyncActivityReportService arsvc, IAsyncUserService usvc, IAsyncActivityService asvc, IAsyncBadgeService bsvc, IAsyncEnergyLevelService esvc, IAsyncGoalService gsvc, IAsyncMealService mlsvc, IAsyncMembershipService mbsvc, IAsyncTeamService tsvc, IAsyncUserBadgeService ubsvc, IAsyncUserGoalService ugsvc, Resources res, AccessGrant grant, IActivityNavigator nav, String uid) throws Exception {
         super(arsvc, usvc, asvc, bsvc, esvc, gsvc, mlsvc, mbsvc, tsvc, ubsvc, ugsvc, res, grant, nav);
         this.uid = uid;
-        this.username = username;
     }
 
 
@@ -108,6 +108,17 @@ public class UserFeedGenerator extends FeedGenerator {
             List<UserGoal> us = ugsvc.getUserGoals(uid, grant.getAuthHeader());
             return mapToFeedUserGoals(us);
         } catch (Exception e) {
+            Log.d("davidsocha", "api failure in feed generation");
+            return null;
+        }
+    }
+
+    @Override
+    protected List<FeedActivityReport> getActivityReports() {
+        try {
+            List<ActivityReport> as = arsvc.getActivityReportsAsync(uid, grant.getAuthHeader());
+            return mapToFeedActivityReports(as);
+        } catch(Exception e) {
             Log.d("davidsocha", "api failure in feed generation");
             return null;
         }
