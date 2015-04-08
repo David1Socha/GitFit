@@ -3,6 +3,7 @@ package com.raik383h_group_6.healthtracmobile.service.api;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.raik383h_group_6.healthtracmobile.model.Activity;
+import com.raik383h_group_6.healthtracmobile.model.ActivityReport;
 import com.raik383h_group_6.healthtracmobile.model.Badge;
 
 import java.util.List;
