@@ -7,6 +7,7 @@ import com.raik383h_group_6.healthtracmobile.R;
 import com.raik383h_group_6.healthtracmobile.application.IActivityNavigator;
 import com.raik383h_group_6.healthtracmobile.model.AccessGrant;
 import com.raik383h_group_6.healthtracmobile.model.Activity;
+import com.raik383h_group_6.healthtracmobile.model.ActivityReport;
 import com.raik383h_group_6.healthtracmobile.model.Badge;
 import com.raik383h_group_6.healthtracmobile.model.EnergyLevel;
 import com.raik383h_group_6.healthtracmobile.model.Goal;
@@ -17,12 +18,14 @@ import com.raik383h_group_6.healthtracmobile.model.User;
 import com.raik383h_group_6.healthtracmobile.model.UserBadge;
 import com.raik383h_group_6.healthtracmobile.model.UserGoal;
 import com.raik383h_group_6.healthtracmobile.model.feed.FeedActivity;
+import com.raik383h_group_6.healthtracmobile.model.feed.FeedActivityReport;
 import com.raik383h_group_6.healthtracmobile.model.feed.FeedEnergyLevel;
 import com.raik383h_group_6.healthtracmobile.model.feed.FeedMeal;
 import com.raik383h_group_6.healthtracmobile.model.feed.FeedMembership;
 import com.raik383h_group_6.healthtracmobile.model.feed.FeedModel;
 import com.raik383h_group_6.healthtracmobile.model.feed.FeedUserBadge;
 import com.raik383h_group_6.healthtracmobile.model.feed.FeedUserGoal;
+import com.raik383h_group_6.healthtracmobile.service.api.async.IAsyncActivityReportService;
 import com.raik383h_group_6.healthtracmobile.service.api.async.IAsyncActivityService;
 import com.raik383h_group_6.healthtracmobile.service.api.async.IAsyncBadgeService;
 import com.raik383h_group_6.healthtracmobile.service.api.async.IAsyncEnergyLevelService;
@@ -59,9 +62,11 @@ public abstract class FeedGenerator {
     protected List<Team> teams;
     protected List<Badge> badges;
     protected List<Goal> goals;
+    protected IAsyncActivityReportService arsvc;
 
-    public FeedGenerator(IAsyncUserService usvc, IAsyncActivityService asvc, IAsyncBadgeService bsvc, IAsyncEnergyLevelService esvc, IAsyncGoalService gsvc, IAsyncMealService mlsvc, IAsyncMembershipService mbsvc, IAsyncTeamService tsvc, IAsyncUserBadgeService ubsvc, IAsyncUserGoalService ugsvc, Resources res, AccessGrant grant, IActivityNavigator nav) throws Exception {
+    public FeedGenerator(IAsyncActivityReportService arsvc, IAsyncUserService usvc, IAsyncActivityService asvc, IAsyncBadgeService bsvc, IAsyncEnergyLevelService esvc, IAsyncGoalService gsvc, IAsyncMealService mlsvc, IAsyncMembershipService mbsvc, IAsyncTeamService tsvc, IAsyncUserBadgeService ubsvc, IAsyncUserGoalService ugsvc, Resources res, AccessGrant grant, IActivityNavigator nav) throws Exception {
         this.asvc = asvc;
+        this.arsvc = arsvc;
         this.bsvc = bsvc;
         this.esvc = esvc;
         this.gsvc = gsvc;
@@ -94,6 +99,7 @@ public abstract class FeedGenerator {
             els.addAll(getMemberships());
             els.addAll(getUserBadges());
             els.addAll(getUserGoals());
+            els.addAll(getActivityReports());
 
             //TODO end of day summary
 
@@ -193,6 +199,16 @@ public abstract class FeedGenerator {
         return fus;
     }
 
+    protected List<FeedActivityReport> mapToFeedActivityReports(List<ActivityReport> as) {
+        List<FeedActivityReport> fas = new ArrayList<>();
+        for (ActivityReport a : as) {
+            String username = getCorrespondingUserName(a.getUserID());
+            FeedActivityReport fa = new FeedActivityReport(res.getString(R.string.feed_activity_report, username, a.getSteps()), a.getDate(), nav, a);
+            fas.add(fa);
+        }
+        return fas;
+    }
+
     private String getCorrespondingBadgeName(long badgeID) {
         String cor = "";
         for (Badge b : badges) {
@@ -221,4 +237,5 @@ public abstract class FeedGenerator {
     protected abstract List<FeedMembership> getMemberships();
     protected abstract List<FeedUserBadge> getUserBadges();
     protected abstract List<FeedUserGoal> getUserGoals();
+    protected abstract List<FeedActivityReport> getActivityReports();
 }

@@ -19,6 +19,7 @@ import com.raik383h_group_6.healthtracmobile.model.feed.FeedMembership;
 import com.raik383h_group_6.healthtracmobile.model.feed.FeedModel;
 import com.raik383h_group_6.healthtracmobile.model.feed.FeedUserBadge;
 import com.raik383h_group_6.healthtracmobile.model.feed.FeedUserGoal;
+import com.raik383h_group_6.healthtracmobile.service.api.async.IAsyncActivityReportService;
 import com.raik383h_group_6.healthtracmobile.service.api.async.IAsyncActivityService;
 import com.raik383h_group_6.healthtracmobile.service.api.async.IAsyncBadgeService;
 import com.raik383h_group_6.healthtracmobile.service.api.async.IAsyncEnergyLevelService;
@@ -39,8 +40,8 @@ public class UserFeedGenerator extends FeedGenerator {
     private String uid;
     private String username;
 
-    public UserFeedGenerator(String username, IAsyncUserService usvc, IAsyncActivityService asvc, IAsyncBadgeService bsvc, IAsyncEnergyLevelService esvc, IAsyncGoalService gsvc, IAsyncMealService mlsvc, IAsyncMembershipService mbsvc, IAsyncTeamService tsvc, IAsyncUserBadgeService ubsvc, IAsyncUserGoalService ugsvc, Resources res, AccessGrant grant, IActivityNavigator nav, String uid) throws Exception {
-        super(usvc, asvc, bsvc, esvc, gsvc, mlsvc, mbsvc, tsvc, ubsvc, ugsvc, res, grant, nav);
+    public UserFeedGenerator(String username, IAsyncActivityReportService arsvc, IAsyncUserService usvc, IAsyncActivityService asvc, IAsyncBadgeService bsvc, IAsyncEnergyLevelService esvc, IAsyncGoalService gsvc, IAsyncMealService mlsvc, IAsyncMembershipService mbsvc, IAsyncTeamService tsvc, IAsyncUserBadgeService ubsvc, IAsyncUserGoalService ugsvc, Resources res, AccessGrant grant, IActivityNavigator nav, String uid) throws Exception {
+        super(arsvc, usvc, asvc, bsvc, esvc, gsvc, mlsvc, mbsvc, tsvc, ubsvc, ugsvc, res, grant, nav);
         this.uid = uid;
         this.username = username;
     }

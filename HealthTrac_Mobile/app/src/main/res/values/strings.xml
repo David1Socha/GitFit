@@ -147,5 +147,6 @@
     <string name="feed_usergoal_end">1$s met the goal 2$s.</string>
     <string name="EXTRA_USER_ID">com.raik383h_group_6.healthtracmobile.USER_ID</string>
     <string name="EXTRA_TEAM_ID">com.raik383h_group_6.healthtracmobile.TEAM_ID</string>
+    <string name="feed_activity_report">1$s took 2$d steps for the day.</string>
 
 </resources>
