@@ -48,7 +48,7 @@ public class CreateMealPresenter extends BasePresenter {
         return nav;
     }
 
-    public void onClickCreateEnergyLevel() {
+    public void onClickCreateMeal() {
         String calsStr = view.getCalories();
         if (validateFields(calsStr)) {
             int calories = FormatUtils.parseInt(calsStr);
