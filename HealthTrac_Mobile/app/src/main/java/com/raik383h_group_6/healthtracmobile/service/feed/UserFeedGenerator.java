@@ -53,7 +53,7 @@ public class UserFeedGenerator extends FeedGenerator {
             List<Activity> activities = asvc.getActivitiesAsync(uid, grant.getAuthHeader());
             return mapToFeedActivities(activities);
         } catch (Exception e) {
-            Log.d("davidsocha", "api failure in feed generation");
+            Log.d("davidsocha", "api failure in feed generation (activity)");
             return null;
         }
     }
@@ -64,7 +64,7 @@ public class UserFeedGenerator extends FeedGenerator {
             List<EnergyLevel> els = esvc.getEnergyLevelsAsync(uid, grant.getAuthHeader());
             return mapToFeedEnergyLevels(els);
         } catch (Exception e) {
-            Log.d("davidsocha", "api failure in feed generation");
+            Log.d("davidsocha", "api failure in feed generation (energy level)");
             return null;
         }
     }
@@ -75,7 +75,7 @@ public class UserFeedGenerator extends FeedGenerator {
             List<Meal> ms = mlsvc.getMeals(uid, grant.getAuthHeader());
             return mapToFeedMeals(ms);
         } catch (Exception e) {
-            Log.d("davidsocha", "api failure in feed generation");
+            Log.d("davidsocha", "api failure in feed generation (meal)");
             return null;
         }
     }
@@ -86,7 +86,7 @@ public class UserFeedGenerator extends FeedGenerator {
             List<Membership> ms = mbsvc.getMembershipsAsync(uid, grant.getAuthHeader());
             return mapToFeedMemberships(ms);
         } catch (Exception e) {
-            Log.d("davidsocha", "api failure in feed generation");
+            Log.d("davidsocha", "api failure in feed generation (membership)");
             return null;
         }
     }
@@ -97,7 +97,7 @@ public class UserFeedGenerator extends FeedGenerator {
             List<UserBadge> us = ubsvc.getUserBadges(uid, grant.getAuthHeader());
             return mapToFeedUserBadges(us);
         } catch (Exception e) {
-            Log.d("davidsocha", "api failure in feed generation");
+            Log.d("davidsocha", "api failure in feed generation (userbadge)");
             return null;
         }
     }
@@ -108,7 +108,7 @@ public class UserFeedGenerator extends FeedGenerator {
             List<UserGoal> us = ugsvc.getUserGoals(uid, grant.getAuthHeader());
             return mapToFeedUserGoals(us);
         } catch (Exception e) {
-            Log.d("davidsocha", "api failure in feed generation");
+            Log.d("davidsocha", "api failure in feed generation (usergoal)");
             return null;
         }
     }
@@ -119,7 +119,7 @@ public class UserFeedGenerator extends FeedGenerator {
             List<ActivityReport> as = arsvc.getActivityReportsAsync(uid, grant.getAuthHeader());
             return mapToFeedActivityReports(as);
         } catch(Exception e) {
-            Log.d("davidsocha", "api failure in feed generation");
+            Log.d("davidsocha", "api failure in feed generation (activity report)");
             return null;
         }
     }

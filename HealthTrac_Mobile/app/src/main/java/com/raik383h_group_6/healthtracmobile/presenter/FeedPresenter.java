@@ -1,5 +1,6 @@
 package com.raik383h_group_6.healthtracmobile.presenter;
 
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 
@@ -90,6 +91,7 @@ public class FeedPresenter extends BasePresenter {
                 view.setEmptyFeedDisplay(false);
             } else {
                 view.setEmptyFeedDisplay(true);
+                Log.d("davidsocha", "just empty");
             }
         } catch (Exception e) {
             view.setEmptyFeedDisplay(true);

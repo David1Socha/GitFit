@@ -66,7 +66,7 @@ public class TeamFeedGenerator extends FeedGenerator {
             }
             return mapToFeedActivities(activities);
         } catch (Exception e) {
-            Log.d("davidsocha", "api failure in feed generation");
+            Log.d("davidsocha", "api failure in feed generation (activity)");
             return null;
         }
     }
@@ -83,7 +83,7 @@ public class TeamFeedGenerator extends FeedGenerator {
             }
             return mapToFeedEnergyLevels(els);
         } catch (Exception e) {
-            Log.d("davidsocha", "api failure in feed generation");
+            Log.d("davidsocha", "api failure in feed generation (energy level)");
             return null;
         }
     }
@@ -100,7 +100,7 @@ public class TeamFeedGenerator extends FeedGenerator {
             }
             return mapToFeedMeals(ms);
         } catch (Exception e) {
-            Log.d("davidsocha", "api failure in feed generation");
+            Log.d("davidsocha", "api failure in feed generation (meal)");
             return null;
         }
     }
@@ -111,7 +111,7 @@ public class TeamFeedGenerator extends FeedGenerator {
             List<Membership> ms = mbsvc.getMembershipsAsync(teamId, grant.getAuthHeader());
             return mapToFeedMemberships(ms);
         } catch (Exception e) {
-            Log.d("davidsocha", "api failure in feed generation");
+            Log.d("davidsocha", "api failure in feed generation (membership)");
             return null;
         }
     }
@@ -128,7 +128,7 @@ public class TeamFeedGenerator extends FeedGenerator {
             }
             return mapToFeedUserBadges(ubs);
         } catch (Exception e) {
-            Log.d("davidsocha", "api failure in feed generation");
+            Log.d("davidsocha", "api failure in feed generation (userbadge)");
             return null;
         }
     }
@@ -145,7 +145,7 @@ public class TeamFeedGenerator extends FeedGenerator {
             }
             return mapToFeedUserGoals(ugs);
         } catch (Exception e) {
-            Log.d("davidsocha", "api failure in feed generation");
+            Log.d("davidsocha", "api failure in feed generation (usergoal)");
             return null;
         }
     }
@@ -162,7 +162,7 @@ public class TeamFeedGenerator extends FeedGenerator {
             }
             return mapToFeedActivityReports(as);
         } catch (Exception e) {
-            Log.d("davidsocha", "api failure in feed generation");
+            Log.d("davidsocha", "api failure in feed generation (activity report)");
             return null;
         }
     }
