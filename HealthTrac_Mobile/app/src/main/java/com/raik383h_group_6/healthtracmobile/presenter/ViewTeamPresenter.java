@@ -40,6 +40,11 @@ public class ViewTeamPresenter extends BasePresenter{
         grant = (AccessGrant) view.getParcelableExtra(view.getResource(R.string.EXTRA_ACCESS_GRANT));
     }
 
+    @Override
+    protected AccessGrant getGrant() {
+        return grant;
+    }
+
     public Membership getUserMembership() {
         return userMembership;
     }

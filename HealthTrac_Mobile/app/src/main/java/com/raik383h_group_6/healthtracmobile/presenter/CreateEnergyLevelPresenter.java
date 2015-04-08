@@ -68,4 +68,9 @@ public class CreateEnergyLevelPresenter extends BasePresenter {
         nav.finishCreateEnergyLevel();
     }
 
+    @Override
+    protected AccessGrant getGrant() {
+        return grant;
+    }
+
 }

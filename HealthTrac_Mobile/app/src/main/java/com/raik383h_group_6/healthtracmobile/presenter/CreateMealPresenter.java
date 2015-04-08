@@ -31,6 +31,11 @@ public class CreateMealPresenter extends BasePresenter {
         this.grant = (AccessGrant) view.getParcelableExtra(view.getResource(R.string.EXTRA_ACCESS_GRANT));
     }
 
+    @Override
+    protected AccessGrant getGrant() {
+        return grant;
+    }
+
     public void onCreate() {
         if (grant == null || grant.isExpired()) {
             view.displayMessage(view.getResource(R.string.no_grant_message));

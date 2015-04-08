@@ -69,6 +69,11 @@ public class CreateGoalPresenter extends BasePresenter {
         }
     }
 
+    @Override
+    protected AccessGrant getGrant() {
+        return grant;
+    }
+
     private boolean validateFields(String name, String threshold) {
         boolean valid = true;
         if (name.equals("")) {

@@ -47,6 +47,11 @@ public class ActivityPresenter extends BasePresenter{
         pts = new ArrayList<Point>();
     }
 
+    @Override
+    protected AccessGrant getGrant() {
+        return grant;
+    }
+
     public void onCreate() {
         gClient.connect();
         startDate = new Date();
