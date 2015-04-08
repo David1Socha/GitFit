@@ -21,4 +21,9 @@ public class FeedActivity extends FeedModel {
     public void onClick() {
         //nav.openActivityDetail(activity, grant);
     }
+
+    @Override
+    public Date getDateReal() {
+        return date;
+    }
 }

@@ -5,7 +5,7 @@ import com.raik383h_group_6.healthtracmobile.service.FormatUtils;
 
 import java.util.Date;
 
-public abstract class FeedModel {
+public abstract class FeedModel implements Comparable<FeedModel> {
 
     protected String msg;
     protected Date date;
@@ -25,5 +25,12 @@ public abstract class FeedModel {
         return FormatUtils.format(date);
     }
 
+    public abstract Date getDateReal();
+
     public abstract void onClick();
+
+    @Override
+    public int compareTo(FeedModel o) {
+        return date.compareTo(o.getDateReal());
+    }
 }

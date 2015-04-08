@@ -22,4 +22,9 @@ public class FeedMeal extends FeedModel {
     public void onClick() {
         //nav.openMealDetail(meal, grant);
     }
+
+    @Override
+    public Date getDateReal() {
+        return date;
+    }
 }

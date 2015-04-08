@@ -20,6 +20,11 @@ public class FeedUserBadge extends FeedModel {
     }
 
     @Override
+    public Date getDateReal() {
+        return date;
+    }
+
+    @Override
     public void onClick() {
         //nav.openViewBadge(badge, grant);
     }

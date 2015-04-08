@@ -23,4 +23,9 @@ public class FeedUserGoal extends FeedModel {
     public void onClick() {
         //nav.openGoal(goal, grant);
     }
+
+    @Override
+    public Date getDateReal() {
+        return date;
+    }
 }

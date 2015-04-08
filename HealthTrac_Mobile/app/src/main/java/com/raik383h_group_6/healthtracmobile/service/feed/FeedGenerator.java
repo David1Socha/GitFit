@@ -101,8 +101,6 @@ public abstract class FeedGenerator {
             els.addAll(getUserGoals());
             els.addAll(getActivityReports());
 
-            //TODO end of day summary
-
             //Sort els by date
         } catch (NullPointerException e) {
             return new ArrayList<>();

@@ -23,4 +23,9 @@ public class FeedActivityReport extends FeedModel {
     public void onClick() {
         //nav.openActivityReportDetail(rep, grant);
     }
+
+    @Override
+    public Date getDateReal() {
+        return date;
+    }
 }

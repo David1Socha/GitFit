@@ -22,4 +22,9 @@ public class FeedEnergyLevel extends FeedModel {
     public void onClick() {
         //nav.openEnergyLevelDetail(energyLevel, grant);
     }
+
+    @Override
+    public Date getDateReal() {
+        return date;
+    }
 }

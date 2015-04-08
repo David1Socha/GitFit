@@ -23,4 +23,9 @@ public class FeedMembership extends FeedModel {
     public void onClick() {
         nav.openViewTeam(team, grant);
     }
+
+    @Override
+    public Date getDateReal() {
+        return date;
+    }
 }
