@@ -103,7 +103,7 @@ public abstract class FeedGenerator {
             els.addAll(getActivityReports());
 
             Collections.sort(els);
-            
+
         } catch (NullPointerException e) {
             return new ArrayList<>();
         }
