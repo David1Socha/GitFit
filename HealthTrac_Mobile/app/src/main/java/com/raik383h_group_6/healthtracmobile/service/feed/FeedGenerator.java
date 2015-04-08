@@ -114,7 +114,7 @@ public abstract class FeedGenerator {
         List<FeedActivity> fas = new ArrayList<>();
         for (Activity a : activities) {
             String username = getCorrespondingUserName(a.getUserId());
-            FeedActivity fa = new FeedActivity(res.getString(R.string.feed_activity, username, a.getType().name().toLowerCase(), a.getSteps()), a.getStartDate(), nav, a);
+            FeedActivity fa = new FeedActivity(res.getString(R.string.feed_activity, username, a.getType().name().toLowerCase(), a.getSteps()), a.getStartDate(), nav, a, grant);
             fas.add(fa);
         }
         return fas;
@@ -124,7 +124,7 @@ public abstract class FeedGenerator {
         List<FeedEnergyLevel> fels = new ArrayList<>();
         for (EnergyLevel el : els) {
             String username = getCorrespondingUserName(el.getUserID());
-            FeedEnergyLevel fel = new FeedEnergyLevel(res.getString(R.string.feed_energy_level, username, el.getMood().name().toLowerCase()), el.getDateCreated(), nav, el);
+            FeedEnergyLevel fel = new FeedEnergyLevel(res.getString(R.string.feed_energy_level, username, el.getMood().name().toLowerCase()), el.getDateCreated(), nav, el, grant);
             fels.add(fel);
         }
         return fels;
@@ -134,7 +134,7 @@ public abstract class FeedGenerator {
         List<FeedMeal> fms = new ArrayList<>();
         for (Meal m : ms) {
             String username = getCorrespondingUserName(m.getUserID());
-            FeedMeal fm = new FeedMeal(res.getString(R.string.feed_meal, username, m.getCalories()), m.getDateCreated(), nav, m);
+            FeedMeal fm = new FeedMeal(res.getString(R.string.feed_meal, username, m.getCalories()), m.getDateCreated(), nav, m, grant);
             fms.add(fm);
         }
         return fms;
@@ -151,23 +151,23 @@ public abstract class FeedGenerator {
         return name;
     }
 
-    private String getCorrespondingTeamName(long tid) {
-        String correspondingTeamName = "";
+    private Team getCorrespondingTeam(long tid) {
+        Team cor = null;
         for (Team t : teams) {
             if (t.getId() == tid) {
-                correspondingTeamName = t.getName();
+                cor = t;
                 break;
             }
         }
-        return correspondingTeamName;
+        return cor;
     }
 
     protected List<FeedMembership> mapToFeedMemberships(List<Membership> ms) {
         List<FeedMembership> fms = new ArrayList<>();
         for (Membership m : ms) {
-            String correspondingTeamName = getCorrespondingTeamName(m.getTeamID());
+            Team team = getCorrespondingTeam(m.getTeamID());
             String username = getCorrespondingUserName(m.getUserID());
-            FeedMembership fm = new FeedMembership(res.getString(R.string.feed_membership, username, m.getMembershipStatus().name().toLowerCase(), correspondingTeamName), m.getDateCreated(), nav, m);
+            FeedMembership fm = new FeedMembership(res.getString(R.string.feed_membership, username, m.getMembershipStatus().name().toLowerCase(), team.getName()), m.getDateCreated(), nav, team, grant);
             fms.add(fm);
         }
         return fms;
@@ -177,8 +177,8 @@ public abstract class FeedGenerator {
         List<FeedUserBadge> fus = new ArrayList<>();
         for (UserBadge u : us) {
             String username = getCorrespondingUserName(u.getUserID());
-            String badgeName = getCorrespondingBadgeName(u.getBadgeID());
-            FeedUserBadge fu = new FeedUserBadge(res.getString(R.string.feed_userbadge, username, badgeName), u.getDateCompleted(), nav, u);
+            Badge badge = getCorrespondingBadge(u.getBadgeID());
+            FeedUserBadge fu = new FeedUserBadge(res.getString(R.string.feed_userbadge, username, badge.getName()), u.getDateCompleted(), nav, badge, grant);
             fus.add(fu);
         }
         return fus;
@@ -188,10 +188,10 @@ public abstract class FeedGenerator {
         List<FeedUserGoal> fus = new ArrayList<>();
         for (UserGoal u : us) {
             String username = getCorrespondingUserName(u.getUserID());
-            String goalName = getCorrespondingGoalName(u.getGoalID());
-            FeedUserGoal fu = new FeedUserGoal(res.getString(R.string.feed_usergoal_start, username, goalName), u.getDateAssigned(), nav, u);
+            Goal goal = getCorrespondingGoal(u.getGoalID());
+            FeedUserGoal fu = new FeedUserGoal(res.getString(R.string.feed_usergoal_start, username, goal.getName()), u.getDateAssigned(), nav, goal, grant);
             if (u.getDateCompleted() != null) {
-                FeedUserGoal fu2 = new FeedUserGoal(res.getString(R.string.feed_usergoal_end, username, goalName), u.getDateCompleted(), nav, u);
+                FeedUserGoal fu2 = new FeedUserGoal(res.getString(R.string.feed_usergoal_end, username, goal.getName()), u.getDateCompleted(), nav, goal, grant);
                 fus.add(fu2);
             }
             fus.add(fu);
@@ -203,28 +203,28 @@ public abstract class FeedGenerator {
         List<FeedActivityReport> fas = new ArrayList<>();
         for (ActivityReport a : as) {
             String username = getCorrespondingUserName(a.getUserID());
-            FeedActivityReport fa = new FeedActivityReport(res.getString(R.string.feed_activity_report, username, a.getSteps()), a.getDate(), nav, a);
+            FeedActivityReport fa = new FeedActivityReport(res.getString(R.string.feed_activity_report, username, a.getSteps()), a.getDate(), nav, a, grant);
             fas.add(fa);
         }
         return fas;
     }
 
-    private String getCorrespondingBadgeName(long badgeID) {
-        String cor = "";
+    private Badge getCorrespondingBadge(long badgeID) {
+        Badge cor = null;
         for (Badge b : badges) {
             if (b.getId() == badgeID) {
-                cor = b.getName();
+                cor = b;
                 break;
             }
         }
         return cor;
     }
 
-    private String getCorrespondingGoalName(long gid) {
-        String cor = "";
+    private Goal getCorrespondingGoal(long gid) {
+        Goal cor = null;
         for (Goal g : goals) {
             if (g.getId() == gid) {
-                cor = g.getName();
+                cor = g;
                 break;
             }
         }
