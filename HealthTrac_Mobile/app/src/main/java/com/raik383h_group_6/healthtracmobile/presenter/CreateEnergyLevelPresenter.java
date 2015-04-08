@@ -55,6 +55,7 @@ public class CreateEnergyLevelPresenter extends BasePresenter {
         el.setMood(mood);
         Date curr = new Date();
         el.setDateCreated(curr);
+        el.setUserID(grant.getId());
         el.setDateModified(curr);
         createEnergyLevel(el);
     }

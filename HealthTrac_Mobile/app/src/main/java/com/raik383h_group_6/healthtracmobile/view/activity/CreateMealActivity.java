@@ -21,7 +21,7 @@ import com.raik383h_group_6.healthtracmobile.view.CreateMealView;
 import roboguice.inject.ContentView;
 import roboguice.inject.InjectView;
 
-@ContentView(R.layout.activity_create_goal)
+@ContentView(R.layout.activity_create_meal)
 public class CreateMealActivity extends BaseActivity implements CreateMealView {
     @InjectView(R.id.calorie_edittext)
     EditText calEditText;

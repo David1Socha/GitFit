@@ -127,5 +127,8 @@
     <string name="no_grant_message">Grant invalid or expired. Please sign in</string>
     <string name="error_create_meal">Error creating meal</string>
     <string name="error_create_energy_level">Error creating energy level</string>
+    <string name="title_activity_create_goal">Create Goal</string>
+    <string name="title_activity_create_energy_level">Create Energy Level</string>
+    <string name="title_activity_create_meal">Create Meal</string>
 
 </resources>
