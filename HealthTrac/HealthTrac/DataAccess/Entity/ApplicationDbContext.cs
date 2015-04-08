@@ -21,6 +21,7 @@ namespace HealthTrac.DataAccess.Entity
         public DbSet<Point> Points { get; set; }
         public DbSet<UserBadge> UserBadges { get; set; }
         public DbSet<UserGoal> UserGoals { get; set; }
+        public DbSet<ActivityReport> ActivityReports { get; set; }
 
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
