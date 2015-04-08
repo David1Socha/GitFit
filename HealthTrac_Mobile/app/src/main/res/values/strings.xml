@@ -125,5 +125,7 @@
     <string name="hint_calorie">calories</string>
     <string name="error_create_goal">Error creating goal</string>
     <string name="no_grant_message">Grant invalid or expired. Please sign in</string>
+    <string name="error_create_meal">Error creating meal</string>
+    <string name="error_create_energy_level">Error creating energy level</string>
 
 </resources>

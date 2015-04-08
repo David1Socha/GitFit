@@ -6,27 +6,25 @@ import com.raik383h_group_6.healthtracmobile.R;
 import com.raik383h_group_6.healthtracmobile.application.IActivityNavigator;
 import com.raik383h_group_6.healthtracmobile.model.AccessGrant;
 import com.raik383h_group_6.healthtracmobile.model.EnergyLevel;
-import com.raik383h_group_6.healthtracmobile.model.Field;
-import com.raik383h_group_6.healthtracmobile.model.Goal;
+import com.raik383h_group_6.healthtracmobile.model.Meal;
 import com.raik383h_group_6.healthtracmobile.service.FormatUtils;
 import com.raik383h_group_6.healthtracmobile.service.api.async.IAsyncEnergyLevelService;
-import com.raik383h_group_6.healthtracmobile.service.api.async.IAsyncGoalService;
+import com.raik383h_group_6.healthtracmobile.service.api.async.IAsyncMealService;
 import com.raik383h_group_6.healthtracmobile.view.BaseView;
 import com.raik383h_group_6.healthtracmobile.view.CreateEnergyLevelView;
-import com.raik383h_group_6.healthtracmobile.view.CreateGoalView;
 
 import java.util.Date;
 
-public class CreateEnergyLevelPresenter extends BasePresenter {
+public class CreateMealPresenter extends BasePresenter {
 
-    private IAsyncEnergyLevelService eSvc;
+    private IAsyncMealService ms;
     private IActivityNavigator nav;
-    private CreateEnergyLevelView view;
+    private CreateMealView view;
     private AccessGrant grant;
 
     @Inject
-    public CreateEnergyLevelPresenter(IAsyncEnergyLevelService eSvc, @Assisted IActivityNavigator nav, @Assisted CreateEnergyLevelView view) {
-        this.eSvc = eSvc;
+    public CreateMealPresenter(IAsyncMealService ms, @Assisted IActivityNavigator nav, @Assisted CreateMealView view) {
+        this.ms = ms;
         this.nav = nav;
         this.view = view;
         this.grant = (AccessGrant) view.getParcelableExtra(view.getResource(R.string.EXTRA_ACCESS_GRANT));
@@ -50,22 +48,33 @@ public class CreateEnergyLevelPresenter extends BasePresenter {
     }
 
     public void onClickCreateEnergyLevel() {
-        EnergyLevel.Mood mood = EnergyLevel.Mood.valueOf(view.getMood());
-        EnergyLevel el = new EnergyLevel();
-        el.setMood(mood);
-        Date curr = new Date();
-        el.setDateCreated(curr);
-        el.setDateModified(curr);
-        createEnergyLevel(el);
+        String calsStr = view.getCalories();
+        if (validateFields(calsStr)) {
+            int calories = FormatUtils.parseInt(calsStr);
+            Meal m = new Meal();
+            m.setCalories(calories);
+            m.setDateCreated(new Date());
+            m.setUserID(grant.getId());
+            createMeal(m);
+        }
     }
 
-    private void createEnergyLevel(EnergyLevel el) {
+    private void createMeal(Meal m) {
         try {
-            eSvc.createEnergyLevelAsync(el, grant.getAuthHeader());
+            ms.createMeal(m, grant.getAuthHeader());
+
         } catch (Exception e) {
-            view.displayMessage(view.getResource(R.string.error_create_energy_level));
+            view.displayMessage(view.getResource(R.string.error_create_meal));
         }
-        nav.finishCreateEnergyLevel();
+    }
+
+    private boolean validateFields(String caloriesStr) {
+        boolean valid = !caloriesStr.equals("");
+        if(!valid) {
+            view.setCaloriesError(view.getResource(R.string.empty_field_error));
+            view.displayMessage(view.getResource(R.string.invalid_field_message));
+        }
+        return valid;
     }
 
 }

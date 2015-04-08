@@ -40,4 +40,10 @@ public final class FormatUtils {
         return String.valueOf(d);
     }
 
+    public static String format(int i) { return String.valueOf(i);}
+
+    public static int parseInt(String intStr) {
+        return Integer.parseInt(intStr);
+    }
+
 }
