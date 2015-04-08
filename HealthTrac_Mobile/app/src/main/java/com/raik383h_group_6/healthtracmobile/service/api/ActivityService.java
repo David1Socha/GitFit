@@ -35,6 +35,9 @@ public interface ActivityService {
     @GET("/api/Activities")
     List<Activity> getActivities(@Query("userId") String userId, @Header("Authorization") String token);
 
+    @GET("/api/Activities")
+    List<Activity> getActivities(@Header("Authorization") String token);
+
     @PUT("/api/Activities/{id}")
     Response updateActivity(@Path("id") long id, @Body Activity activity, @Header("Authorization") String token);
 
