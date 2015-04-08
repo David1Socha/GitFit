@@ -123,4 +123,5 @@ public class Activity implements Parcelable {
             return new Activity[size];
         }
     };
+
 }
