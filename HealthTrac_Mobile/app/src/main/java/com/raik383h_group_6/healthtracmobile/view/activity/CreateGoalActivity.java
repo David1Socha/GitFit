@@ -14,12 +14,13 @@ import com.raik383h_group_6.healthtracmobile.application.IActivityNavigator;
 import com.raik383h_group_6.healthtracmobile.presenter.BasePresenter;
 import com.raik383h_group_6.healthtracmobile.presenter.PresenterFactory;
 import com.raik383h_group_6.healthtracmobile.presenter.UserValidationPresenter;
+import com.raik383h_group_6.healthtracmobile.view.CreateGoalView;
 
 import roboguice.inject.ContentView;
 import roboguice.inject.InjectView;
 
 @ContentView(R.layout.activity_create_goal)
-public class CreateGoalActivity extends BaseActivity {
+public class CreateGoalActivity extends BaseActivity implements CreateGoalView {
     @InjectView(R.id.name_edittext)
     EditText nameEditText;
     @InjectView(R.id.radio_field)
@@ -44,6 +45,7 @@ public class CreateGoalActivity extends BaseActivity {
     public BasePresenter getPresenter() {
         return presenter;
     }
+
 
     public void onClickCreateGoal(View v) {
         presenter.onClickCreateGoal();
