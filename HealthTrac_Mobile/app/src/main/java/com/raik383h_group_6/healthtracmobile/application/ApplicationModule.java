@@ -10,6 +10,7 @@ import com.raik383h_group_6.healthtracmobile.presenter.PresenterFactory;
 import com.raik383h_group_6.healthtracmobile.service.LocationRequestProvider;
 import com.raik383h_group_6.healthtracmobile.service.api.AccountService;
 import com.raik383h_group_6.healthtracmobile.service.api.ActivityService;
+import com.raik383h_group_6.healthtracmobile.service.api.AsyncMealService;
 import com.raik383h_group_6.healthtracmobile.service.api.BadgeService;
 import com.raik383h_group_6.healthtracmobile.service.api.EnergyLevelService;
 import com.raik383h_group_6.healthtracmobile.service.api.FacebookService;
@@ -38,6 +39,7 @@ import com.raik383h_group_6.healthtracmobile.service.api.async.IAsyncBadgeServic
 import com.raik383h_group_6.healthtracmobile.service.api.async.IAsyncEnergyLevelService;
 import com.raik383h_group_6.healthtracmobile.service.api.async.IAsyncFacebookService;
 import com.raik383h_group_6.healthtracmobile.service.api.async.IAsyncGoalService;
+import com.raik383h_group_6.healthtracmobile.service.api.async.IAsyncMealService;
 import com.raik383h_group_6.healthtracmobile.service.api.async.IAsyncMembershipService;
 import com.raik383h_group_6.healthtracmobile.service.api.async.IAsyncPointService;
 import com.raik383h_group_6.healthtracmobile.service.api.async.IAsyncTeamService;
@@ -98,6 +100,7 @@ public class ApplicationModule extends AbstractModule {
         bind(IAsyncActivityService.class).to(AsyncActivityService.class);
         bind(IAsyncBadgeService.class).to(AsyncBadgeService.class);
         bind(IAsyncEnergyLevelService.class).to(AsyncEnergyLevelService.class);
+        bind(IAsyncMealService.class).to(AsyncMealService.class);
         bind(IAsyncGoalService.class).to(AsyncGoalService.class);
         bind(IAsyncPointService.class).to(AsyncPointService.class);
         bind(IAsyncUserBadgeService.class).to(AsyncUserBadgeService.class);

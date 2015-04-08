@@ -107,7 +107,7 @@
     <string name="default_stepcount">0</string>
     <string name="error_create_activity">Error creating activity</string>
     <string name="create_energy_level">Create Energy Level</string>
-    <string name="mood_label">What's your mood?</string>
+    <string name="mood_label">What\'s your mood?</string>
     <string name="excited_label">EXCITED</string>
     <string name="tired_label">TIRED</string>
     <string name="proud_label">PROUD</string>
