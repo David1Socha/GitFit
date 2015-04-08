@@ -15,6 +15,7 @@ import com.raik383h_group_6.healthtracmobile.view.CreateEnergyLevelView;
 import com.raik383h_group_6.healthtracmobile.view.activity.AuthenticationActivity;
 import com.raik383h_group_6.healthtracmobile.view.activity.CreateEnergyLevelActivity;
 import com.raik383h_group_6.healthtracmobile.view.activity.CreateGoalActivity;
+import com.raik383h_group_6.healthtracmobile.view.activity.CreateMealActivity;
 import com.raik383h_group_6.healthtracmobile.view.activity.ListTeamsActivity;
 import com.raik383h_group_6.healthtracmobile.view.activity.ListUsersActivity;
 import com.raik383h_group_6.healthtracmobile.view.activity.OAuthBrowserActivity;
@@ -232,6 +233,18 @@ public class ActivityNavigator implements IActivityNavigator {
     @Override
     public void openCreateEnergyLevel(AccessGrant g) {
         Intent i = new Intent(activity, CreateEnergyLevelActivity.class);
+        i.putExtra(activity.getString(R.string.EXTRA_ACCESS_GRANT), g);
+        activity.startActivity(i);
+    }
+
+    @Override
+    public void finishCreateMeal() {
+        genericFinishOk();
+    }
+
+    @Override
+    public void openCreateMeal(AccessGrant g) {
+        Intent i = new Intent(activity, CreateMealActivity.class);
         i.putExtra(activity.getString(R.string.EXTRA_ACCESS_GRANT), g);
         activity.startActivity(i);
     }

@@ -63,4 +63,8 @@ public interface IActivityNavigator {
     void finishCreateEnergyLevel();
 
     void openCreateEnergyLevel(AccessGrant grant);
+
+    void finishCreateMeal();
+
+    void openCreateMeal(AccessGrant grant);
 }

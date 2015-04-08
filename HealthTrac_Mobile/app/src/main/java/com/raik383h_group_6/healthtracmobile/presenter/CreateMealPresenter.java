@@ -63,10 +63,10 @@ public class CreateMealPresenter extends BasePresenter {
     private void createMeal(Meal m) {
         try {
             ms.createMeal(m, grant.getAuthHeader());
-
         } catch (Exception e) {
             view.displayMessage(view.getResource(R.string.error_create_meal));
         }
+         nav.finishCreateMeal();
     }
 
     private boolean validateFields(String caloriesStr) {
