@@ -7,6 +7,11 @@ import com.raik383h_group_6.healthtracmobile.R;
 import com.raik383h_group_6.healthtracmobile.application.IActivityNavigator;
 import com.raik383h_group_6.healthtracmobile.model.AccessGrant;
 import com.raik383h_group_6.healthtracmobile.model.Activity;
+import com.raik383h_group_6.healthtracmobile.model.EnergyLevel;
+import com.raik383h_group_6.healthtracmobile.model.Meal;
+import com.raik383h_group_6.healthtracmobile.model.Membership;
+import com.raik383h_group_6.healthtracmobile.model.UserBadge;
+import com.raik383h_group_6.healthtracmobile.model.UserGoal;
 import com.raik383h_group_6.healthtracmobile.model.feed.FeedActivity;
 import com.raik383h_group_6.healthtracmobile.model.feed.FeedEnergyLevel;
 import com.raik383h_group_6.healthtracmobile.model.feed.FeedMeal;
@@ -46,7 +51,7 @@ public class UserFeedGenerator extends FeedGenerator {
         try {
             List<Activity> activities = asvc.getActivitiesAsync(uid, grant.getAuthHeader());
             return mapToFeedActivities(activities);
-        } catch (InterruptedException | ExecutionException e) {
+        } catch (Exception e) {
             Log.d("davidsocha", "api failure in feed generation");
             return null;
         }
@@ -54,26 +59,56 @@ public class UserFeedGenerator extends FeedGenerator {
 
     @Override
     protected List<FeedEnergyLevel> getEnergyLevels() {
-        return null;
+        try {
+            List<EnergyLevel> els = esvc.getEnergyLevelsAsync(uid, grant.getAuthHeader());
+            return mapToFeedEnergyLevels(els);
+        } catch (Exception e) {
+            Log.d("davidsocha", "api failure in feed generation");
+            return null;
+        }
     }
 
     @Override
     protected List<FeedMeal> getMeals() {
-        return null;
+        try {
+            List<Meal> ms = mlsvc.getMeals(uid, grant.getAuthHeader());
+            return mapToFeedMeals(ms);
+        } catch (Exception e) {
+            Log.d("davidsocha", "api failure in feed generation");
+            return null;
+        }
     }
 
     @Override
     protected List<FeedMembership> getMemberships() {
-        return null;
+        try {
+            List<Membership> ms = mbsvc.getMembershipsAsync(uid, grant.getAuthHeader());
+            return mapToFeedMemberships(ms);
+        } catch (Exception e) {
+            Log.d("davidsocha", "api failure in feed generation");
+            return null;
+        }
     }
 
     @Override
     protected List<FeedUserBadge> getUserBadges() {
-        return null;
+        try {
+            List<UserBadge> us = ubsvc.getUserBadges(uid, grant.getAuthHeader());
+            return mapToFeedUserBadges(us);
+        } catch (Exception e) {
+            Log.d("davidsocha", "api failure in feed generation");
+            return null;
+        }
     }
 
     @Override
     protected List<FeedUserGoal> getUserGoals() {
-        return null;
+        try {
+            List<UserGoal> us = ugsvc.getUserGoals(uid, grant.getAuthHeader());
+            return mapToFeedUserGoals(us);
+        } catch (Exception e) {
+            Log.d("davidsocha", "api failure in feed generation");
+            return null;
+        }
     }
 }

@@ -94,6 +94,10 @@ public abstract class FeedGenerator {
             els.addAll(getMemberships());
             els.addAll(getUserBadges());
             els.addAll(getUserGoals());
+
+            //TODO end of day summary
+
+            //Sort els by date
         } catch (NullPointerException e) {
             return new ArrayList<>();
         }
