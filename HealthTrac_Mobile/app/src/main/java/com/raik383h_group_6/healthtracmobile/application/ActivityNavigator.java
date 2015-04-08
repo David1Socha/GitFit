@@ -12,6 +12,7 @@ import com.raik383h_group_6.healthtracmobile.model.Team;
 import com.raik383h_group_6.healthtracmobile.model.Token;
 import com.raik383h_group_6.healthtracmobile.model.User;
 import com.raik383h_group_6.healthtracmobile.view.activity.AuthenticationActivity;
+import com.raik383h_group_6.healthtracmobile.view.activity.CreateGoalActivity;
 import com.raik383h_group_6.healthtracmobile.view.activity.ListTeamsActivity;
 import com.raik383h_group_6.healthtracmobile.view.activity.ListUsersActivity;
 import com.raik383h_group_6.healthtracmobile.view.activity.OAuthBrowserActivity;
@@ -209,4 +210,15 @@ public class ActivityNavigator implements IActivityNavigator {
         genericFinishOk();
     }
 
+    @Override
+    public void finishCreateGoal() {
+        genericFinishOk();
+    }
+
+    @Override
+    public void openCreateGoal(AccessGrant g) {
+        Intent i = new Intent(activity, CreateGoalActivity.class);
+        i.putExtra(activity.getString(R.string.EXTRA_ACCESS_GRANT), g);
+        activity.startActivity(i);
+    }
 }

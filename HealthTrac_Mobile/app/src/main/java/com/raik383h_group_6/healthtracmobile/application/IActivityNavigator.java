@@ -55,4 +55,8 @@ public interface IActivityNavigator {
     void openActivity(AccessGrant g);
 
     void finishActivity();
+
+    void finishCreateGoal();
+
+    void openCreateGoal(AccessGrant grant);
 }
