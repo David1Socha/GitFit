@@ -145,5 +145,7 @@
     <string name="feed_userbadge">1$s earned the badge 2$s.</string>
     <string name="feed_usergoal_start">1$s started the goal 2$s.</string>
     <string name="feed_usergoal_end">1$s met the goal 2$s.</string>
+    <string name="EXTRA_USER_ID">com.raik383h_group_6.healthtracmobile.USER_ID</string>
+    <string name="EXTRA_TEAM_ID">com.raik383h_group_6.healthtracmobile.TEAM_ID</string>
 
 </resources>

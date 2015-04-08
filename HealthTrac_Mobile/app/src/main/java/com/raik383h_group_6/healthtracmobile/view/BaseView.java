@@ -10,6 +10,8 @@ public interface BaseView {
 
     String getStringExtra(String key);
 
+    long getLongExtra(String key);
+
     Parcelable getParcelableExtra(String key);
 
     String getPref(String key);
