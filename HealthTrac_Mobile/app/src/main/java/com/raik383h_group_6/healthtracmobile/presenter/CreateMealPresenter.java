@@ -12,6 +12,7 @@ import com.raik383h_group_6.healthtracmobile.service.api.async.IAsyncEnergyLevel
 import com.raik383h_group_6.healthtracmobile.service.api.async.IAsyncMealService;
 import com.raik383h_group_6.healthtracmobile.view.BaseView;
 import com.raik383h_group_6.healthtracmobile.view.CreateEnergyLevelView;
+import com.raik383h_group_6.healthtracmobile.view.CreateMealView;
 
 import java.util.Date;
 
