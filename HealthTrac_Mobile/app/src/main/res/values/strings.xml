@@ -123,5 +123,6 @@
     <string name="create_meal">Create Meal</string>
     <string name="calorie_label">Calories</string>
     <string name="hint_calorie">calories</string>
+    <string name="error_create_goal">Error creating goal</string>
 
 </resources>

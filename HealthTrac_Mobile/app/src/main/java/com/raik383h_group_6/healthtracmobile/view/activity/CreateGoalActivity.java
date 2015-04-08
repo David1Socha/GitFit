@@ -12,6 +12,7 @@ import com.raik383h_group_6.healthtracmobile.R;
 import com.raik383h_group_6.healthtracmobile.application.ActivityNavigator;
 import com.raik383h_group_6.healthtracmobile.application.IActivityNavigator;
 import com.raik383h_group_6.healthtracmobile.presenter.BasePresenter;
+import com.raik383h_group_6.healthtracmobile.presenter.CreateGoalPresenter;
 import com.raik383h_group_6.healthtracmobile.presenter.PresenterFactory;
 import com.raik383h_group_6.healthtracmobile.presenter.UserValidationPresenter;
 import com.raik383h_group_6.healthtracmobile.view.CreateGoalView;
@@ -36,16 +37,13 @@ public class CreateGoalActivity extends BaseActivity implements CreateGoalView {
         super.onCreate(savedInstance);
         Bundle extras = getIntent().getExtras();
         IActivityNavigator nav = new ActivityNavigator(this);
-        UserValidationPresenter userValidationPresenter = presenterFactory.create(this);
-        presenter= presenterFactory.create(userValidationPresenter, nav, this);
-        presenter.onCreate();
+        presenter= presenterFactory.create(nav, this);
     }
 
     @Override
     public BasePresenter getPresenter() {
         return presenter;
     }
-
 
     public void onClickCreateGoal(View v) {
         presenter.onClickCreateGoal();
@@ -69,6 +67,11 @@ public class CreateGoalActivity extends BaseActivity implements CreateGoalView {
     @Override
     public void setNameError(String msg) {
         nameEditText.setError(msg);
+    }
+
+    @Override
+    public void setThresholdError(String msg) {
+        thresholdEditText.setError(msg);
     }
 
     @Override
