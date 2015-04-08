@@ -28,7 +28,7 @@ namespace HealthTrac.DataAccess.Entity
         public ActivityReport AddOrUpdate(Models.ActivityReport ar)
         {
             var existing = db.ActivityReports
-                .Where(a => a.Date.Date == ar.Date.Date && ar.UserID == a.UserID)
+                .Where(a => a.Date.Day == ar.Date.Day && a.Date.Year == ar.Date.Year && a.Date.Month == ar.Date.Month && ar.UserID == a.UserID)
                 .FirstOrDefault();
             if (existing != null)
             {
