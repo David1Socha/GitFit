@@ -140,6 +140,10 @@
             android:name=".view.activity.CreateMealActivity"
             android:label="@string/title_activity_create_meal">
         </activity>
+        <activity
+            android:name=".view.activity.FeedActivity"
+            android:label="@string/title_activity_feed">
+        </activity>
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
             android:value="AIzaSyCUrT4XKqTZUKpQ_-p7AStAOdijIerGa-U"/>
