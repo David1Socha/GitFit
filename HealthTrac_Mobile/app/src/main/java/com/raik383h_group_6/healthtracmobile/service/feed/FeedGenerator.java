@@ -40,6 +40,7 @@ import com.raik383h_group_6.healthtracmobile.service.api.async.IAsyncUserService
 import org.apache.commons.lang3.ObjectUtils;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
@@ -101,7 +102,8 @@ public abstract class FeedGenerator {
             els.addAll(getUserGoals());
             els.addAll(getActivityReports());
 
-            //Sort els by date
+            Collections.sort(els);
+            
         } catch (NullPointerException e) {
             return new ArrayList<>();
         }
