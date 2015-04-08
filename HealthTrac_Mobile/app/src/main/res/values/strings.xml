@@ -149,5 +149,6 @@
     <string name="EXTRA_TEAM_ID">com.raik383h_group_6.healthtracmobile.TEAM_ID</string>
     <string name="feed_activity_report">1$s took 2$d steps for the day.</string>
     <string name="no_feed_message">No feeds found. Are you signed in?</string>
+    <string name="user_feed">View your feed</string>
 
 </resources>

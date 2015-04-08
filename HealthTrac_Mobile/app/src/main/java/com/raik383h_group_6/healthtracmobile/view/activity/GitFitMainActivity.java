@@ -21,12 +21,6 @@ import roboguice.inject.InjectView;
 @ContentView(R.layout.git_fit_main_layout)
 public class GitFitMainActivity extends BaseActivity implements com.raik383h_group_6.healthtracmobile.view.GitFitMainView {
 
-    @InjectView(R.id.show_users_button)
-    Button showUsersButton;
-    @InjectView(R.id.show_teams_button)
-    Button showTeamsButton;
-    @InjectView(R.id.show_profile_button)
-    Button showProfileButton;
     @Inject
     PresenterFactory presenterFactory;
     private GitFitMainPresenter presenter;
@@ -73,6 +67,10 @@ public class GitFitMainActivity extends BaseActivity implements com.raik383h_gro
     }
 
     public void onClickPedometerDemo(View view) { presenter.onClickPedometer(); }
+
+    public void onClickUserFeed(View view) {
+        presenter.onClickUserFeed();
+    }
 
     @Override
     public void displayMessage(String msg) {

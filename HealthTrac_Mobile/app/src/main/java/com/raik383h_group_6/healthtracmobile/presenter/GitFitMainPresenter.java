@@ -130,4 +130,12 @@ public class GitFitMainPresenter extends BasePresenter{
     protected IActivityNavigator getNav() {
         return nav;
     }
+
+    public void onClickUserFeed() {
+        if (!grantBad()) {
+            nav.openFeed(grant.getId(), grant);
+        } else {
+            nav.openAuthentication(RequestCodes.AUTH);
+        }
+    }
 }
