@@ -9,6 +9,7 @@ import com.google.inject.name.Names;
 import com.raik383h_group_6.healthtracmobile.presenter.PresenterFactory;
 import com.raik383h_group_6.healthtracmobile.service.LocationRequestProvider;
 import com.raik383h_group_6.healthtracmobile.service.api.AccountService;
+import com.raik383h_group_6.healthtracmobile.service.api.ActivityReportService;
 import com.raik383h_group_6.healthtracmobile.service.api.ActivityService;
 import com.raik383h_group_6.healthtracmobile.service.api.AsyncMealService;
 import com.raik383h_group_6.healthtracmobile.service.api.BadgeService;
@@ -22,6 +23,7 @@ import com.raik383h_group_6.healthtracmobile.service.api.TeamService;
 import com.raik383h_group_6.healthtracmobile.service.api.UserBadgeService;
 import com.raik383h_group_6.healthtracmobile.service.api.UserGoalService;
 import com.raik383h_group_6.healthtracmobile.service.api.async.AsyncAccountService;
+import com.raik383h_group_6.healthtracmobile.service.api.async.AsyncActivityReportService;
 import com.raik383h_group_6.healthtracmobile.service.api.async.AsyncActivityService;
 import com.raik383h_group_6.healthtracmobile.service.api.async.AsyncBadgeService;
 import com.raik383h_group_6.healthtracmobile.service.api.async.AsyncEnergyLevelService;
@@ -34,6 +36,7 @@ import com.raik383h_group_6.healthtracmobile.service.api.async.AsyncUserBadgeSer
 import com.raik383h_group_6.healthtracmobile.service.api.async.AsyncUserGoalService;
 import com.raik383h_group_6.healthtracmobile.service.api.async.AsyncUserService;
 import com.raik383h_group_6.healthtracmobile.service.api.async.IAsyncAccountService;
+import com.raik383h_group_6.healthtracmobile.service.api.async.IAsyncActivityReportService;
 import com.raik383h_group_6.healthtracmobile.service.api.async.IAsyncActivityService;
 import com.raik383h_group_6.healthtracmobile.service.api.async.IAsyncBadgeService;
 import com.raik383h_group_6.healthtracmobile.service.api.async.IAsyncEnergyLevelService;
@@ -46,6 +49,7 @@ import com.raik383h_group_6.healthtracmobile.service.api.async.IAsyncTeamService
 import com.raik383h_group_6.healthtracmobile.service.api.async.IAsyncUserBadgeService;
 import com.raik383h_group_6.healthtracmobile.service.api.async.IAsyncUserGoalService;
 import com.raik383h_group_6.healthtracmobile.service.api.async.IAsyncUserService;
+import com.raik383h_group_6.healthtracmobile.service.api.provider.RetrofitActivityReportServiceProvider;
 import com.raik383h_group_6.healthtracmobile.service.api.provider.RetrofitActivityServiceProvider;
 import com.raik383h_group_6.healthtracmobile.service.api.provider.RetrofitBadgeServiceProvider;
 import com.raik383h_group_6.healthtracmobile.service.api.provider.RetrofitEnergyLevelServiceProvider;
@@ -105,6 +109,8 @@ public class ApplicationModule extends AbstractModule {
         bind(IAsyncPointService.class).to(AsyncPointService.class);
         bind(IAsyncUserBadgeService.class).to(AsyncUserBadgeService.class);
         bind(IAsyncUserGoalService.class).to(AsyncUserGoalService.class);
+        bind(IAsyncActivityReportService.class).to(AsyncActivityReportService.class);
+        bind(ActivityReportService.class).toProvider(RetrofitActivityReportServiceProvider.class);
         install(new FactoryModuleBuilder().build(PresenterFactory.class));
     }
 }
