@@ -261,7 +261,7 @@
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:onClick="onClickUserFeed"
-            android:text="@string/user_feed"/>
+            android:text="@string/user_feed_generic"/>
     </LinearLayout>
 
 </ScrollView>

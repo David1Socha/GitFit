@@ -148,7 +148,7 @@
     <string name="EXTRA_USER_ID">com.raik383h_group_6.healthtracmobile.USER_ID</string>
     <string name="EXTRA_TEAM_ID">com.raik383h_group_6.healthtracmobile.TEAM_ID</string>
     <string name="feed_activity_report">%1$s took %2$d steps for the day.</string>
-    <string name="no_feed_message">No feeds found. Are you signed in?</string>
+    <string name="no_feed_message">No feeds found.</string>
     <string name="user_feed">View your feed</string>
     <string name="user_feed_generic">View user feed</string>
     <string name="title_activity_feed">View Feed</string>
