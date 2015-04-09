@@ -7,6 +7,7 @@ import com.raik383h_group_6.healthtracmobile.application.IActivityNavigator;
 import com.raik383h_group_6.healthtracmobile.service.oauth.IAsyncOAuthService;
 import com.raik383h_group_6.healthtracmobile.view.AuthenticationView;
 import com.raik383h_group_6.healthtracmobile.view.BaseView;
+import com.raik383h_group_6.healthtracmobile.view.CreateActivityView;
 import com.raik383h_group_6.healthtracmobile.view.CreateTeamView;
 import com.raik383h_group_6.healthtracmobile.view.CreateEnergyLevelView;
 import com.raik383h_group_6.healthtracmobile.view.CreateGoalView;
@@ -58,4 +59,5 @@ public interface PresenterFactory {
     ViewGoalPresenter create(IActivityNavigator nav, ViewGoalView view);
     ViewActivityPresenter create(IActivityNavigator nav, ViewActivityView view);
     ViewBadgePresenter create(IActivityNavigator nav, ViewBadgeView view);
+    CreateActivityPresenter create(IActivityNavigator nav, CreateActivityView view);
 }

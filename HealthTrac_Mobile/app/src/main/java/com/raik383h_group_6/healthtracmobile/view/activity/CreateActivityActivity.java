@@ -4,12 +4,14 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.inject.Inject;
 import com.raik383h_group_6.healthtracmobile.R;
 import com.raik383h_group_6.healthtracmobile.application.ActivityNavigator;
 import com.raik383h_group_6.healthtracmobile.application.IActivityNavigator;
 import com.raik383h_group_6.healthtracmobile.presenter.BasePresenter;
+import com.raik383h_group_6.healthtracmobile.presenter.CreateActivityPresenter;
 import com.raik383h_group_6.healthtracmobile.presenter.PresenterFactory;
 import com.raik383h_group_6.healthtracmobile.view.CreateActivityView;
 
@@ -30,6 +32,26 @@ public class CreateActivityActivity extends BaseActivity implements CreateActivi
     @Inject
     PresenterFactory presenterFactory;
     private CreateActivityPresenter presenter;
+
+    @Override
+    public void displayMessage(String msg) {
+        Toast.makeText(this, msg, Toast.LENGTH_LONG);
+    }
+
+    @Override
+    public void setDurationErr(String e) {
+        duration.setError(e);
+    }
+
+    @Override
+    public void setDistanceErr(String e) {
+        distance.setError(e);
+    }
+
+    @Override
+    public void setStepErr(String e) {
+        steps.setError(e);
+    }
 
     protected void onCreate(Bundle s) {
         super.onCreate(s);

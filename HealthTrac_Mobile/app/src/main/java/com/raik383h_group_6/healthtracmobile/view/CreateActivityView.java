@@ -8,4 +8,12 @@ public interface CreateActivityView extends BaseView {
     String getDistance();
 
     String getSteps();
+
+    void displayMessage(String msg);
+
+    void setDurationErr(String e);
+
+    void setDistanceErr(String e);
+
+    void setStepErr(String e);
 }
