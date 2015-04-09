@@ -9,18 +9,24 @@ import com.raik383h_group_6.healthtracmobile.application.ActivityNavigator;
 import com.raik383h_group_6.healthtracmobile.application.IActivityNavigator;
 import com.raik383h_group_6.healthtracmobile.presenter.BasePresenter;
 import com.raik383h_group_6.healthtracmobile.presenter.PresenterFactory;
+import com.raik383h_group_6.healthtracmobile.presenter.ViewActivityReportPresenter;
+import com.raik383h_group_6.healthtracmobile.view.ViewActivityReportView;
 
 import org.w3c.dom.Text;
 
+import roboguice.inject.ContentView;
 import roboguice.inject.InjectView;
 
-public class ViewActivityReportActivity extends BaseActivity {
+@ContentView(R.layout.activity_view_activity_report)
+public class ViewActivityReportActivity extends BaseActivity implements ViewActivityReportView {
     @InjectView(R.id.distance_textview)
     TextView distance;
     @InjectView(R.id.duration_textview)
     TextView duration;
     @InjectView(R.id.steps_textview)
     TextView steps;
+    @InjectView(R.id.title_textview)
+    TextView title;
     private ViewActivityReportPresenter presenter;
     @Inject
     private PresenterFactory presenterFactory;
@@ -45,6 +51,11 @@ public class ViewActivityReportActivity extends BaseActivity {
     @Override
     public void setSteps(String msg) {
         steps.setText(msg);
+    }
+
+    @Override
+    public void setTitle(String s) {
+        title.setText(s);
     }
 
     @Override

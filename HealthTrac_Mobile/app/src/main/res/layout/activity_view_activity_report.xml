@@ -17,7 +17,7 @@
             android:gravity="center_horizontal"
             android:layout_height="wrap_content"
             android:textSize="30sp"
-            android:id="@+id/team_name_textview"
+            android:id="@+id/title_textview"
             android:textColor="@color/activity_report"/>
 
         <LinearLayout

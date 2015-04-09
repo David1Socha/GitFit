@@ -21,6 +21,7 @@ import com.raik383h_group_6.healthtracmobile.view.ListUsersView;
 import com.raik383h_group_6.healthtracmobile.view.ActivityView;
 import com.raik383h_group_6.healthtracmobile.view.TeamValidationView;
 import com.raik383h_group_6.healthtracmobile.view.UserValidationView;
+import com.raik383h_group_6.healthtracmobile.view.ViewActivityReportView;
 import com.raik383h_group_6.healthtracmobile.view.ViewUserView;
 import com.raik383h_group_6.healthtracmobile.view.ViewTeamView;
 
@@ -44,4 +45,5 @@ public interface PresenterFactory {
     CreateEnergyLevelPresenter create(IActivityNavigator nav, CreateEnergyLevelView view);
     CreateMealPresenter create(IActivityNavigator nav, CreateMealView view);
     FeedPresenter create(IActivityNavigator nav, FeedView view);
+    ViewActivityReportPresenter create(IActivityNavigator nav, ViewActivityReportView view);
 }

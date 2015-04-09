@@ -5,4 +5,5 @@ public interface ViewActivityReportView extends BaseView {
     void setDistance(String d);
     void setDuration(String d);
     void setSteps(String s);
+    void setTitle(String s);
 }
