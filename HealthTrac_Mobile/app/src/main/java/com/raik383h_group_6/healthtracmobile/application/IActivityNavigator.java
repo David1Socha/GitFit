@@ -2,6 +2,7 @@ package com.raik383h_group_6.healthtracmobile.application;
 
 import com.raik383h_group_6.healthtracmobile.model.AccessGrant;
 import com.raik383h_group_6.healthtracmobile.model.ActivityReport;
+import com.raik383h_group_6.healthtracmobile.model.Badge;
 import com.raik383h_group_6.healthtracmobile.model.EnergyLevel;
 import com.raik383h_group_6.healthtracmobile.model.Goal;
 import com.raik383h_group_6.healthtracmobile.model.Meal;
@@ -94,4 +95,5 @@ public interface IActivityNavigator {
     void openViewEnergyLevel(EnergyLevel el, String username, AccessGrant grant);
     void openViewMeal(Meal m, String username, AccessGrant grant);
     void openViewGoal(Goal g, AccessGrant grant);
+    void openViewBadge(Badge b, AccessGrant grant);
 }
