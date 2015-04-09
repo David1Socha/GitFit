@@ -91,4 +91,17 @@ public class CreateActivityPresenter extends BasePresenter {
         }
         return valid;
     }
+
+    public void onClickUpdateType() {
+        Activity.ActivityType[] types = Activity.ActivityType.values();
+        String[] typeStrs = new String[types.length];
+        for (int i = 0; i < types.length; i++) {
+            typeStrs[i] = types[i].name();
+        }
+        view.promptUserType(typeStrs);
+    }
+
+    public void onChooseType(String type) {
+        this.type = Activity.ActivityType.valueOf(type);
+    }
 }

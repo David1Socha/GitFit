@@ -16,4 +16,6 @@ public interface CreateActivityView extends BaseView {
     void setDistanceErr(String e);
 
     void setStepErr(String e);
+
+    void promptUserType(String[] typeStrs);
 }

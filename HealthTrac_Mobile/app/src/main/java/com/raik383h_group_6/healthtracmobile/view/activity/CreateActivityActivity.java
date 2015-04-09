@@ -1,5 +1,7 @@
 package com.raik383h_group_6.healthtracmobile.view.activity;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -71,6 +73,23 @@ public class CreateActivityActivity extends BaseActivity implements CreateActivi
     @Override
     public String getDuration() {
         return duration.getText().toString();
+    }
+
+    public void onClickUpdateType(View v) {
+        presenter.onClickUpdateType();
+    }
+
+    @Override
+    public void promptUserType(final String[] types) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(getString(R.string.prompt_type));
+        builder.setItems(types, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int item) {
+                presenter.onChooseType(types[item]);
+            }
+        });
+        AlertDialog alert = builder.create();
+        alert.show();
     }
 
     @Override
