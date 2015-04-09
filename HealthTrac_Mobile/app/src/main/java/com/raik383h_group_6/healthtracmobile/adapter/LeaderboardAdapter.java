@@ -48,7 +48,7 @@ public class LeaderboardAdapter extends BaseAdapter {
         if(convertView == null) {
             view = mInflater.inflate(R.layout.leaderboard_row_layout, parent, false);
             holder = new ViewHolder();
-            holder.preferredName = (TextView)view.findViewById(R.id.leaderboard_preferred_name);
+            holder.userName = (TextView)view.findViewById(R.id.leaderboard_name);
             holder.profilePicture = (ImageView)view.findViewById(R.id.leaderboard_picture);
             holder.rank = (TextView) view.findViewById(R.id.leaderboard_rank);
             holder.steps = (TextView) view.findViewById(R.id.leaderboard_num_steps);
@@ -59,7 +59,7 @@ public class LeaderboardAdapter extends BaseAdapter {
         }
 
         User user = users.get(position);
-        holder.preferredName.setText(user.getPreferredName());
+        holder.userName.setText(user.getUserName());
         Picasso.with(context)
                 .load(user.getProfilePicture())
                 .placeholder(R.drawable.default_profile_picture)
@@ -75,7 +75,7 @@ public class LeaderboardAdapter extends BaseAdapter {
     }
 
     public class ViewHolder {
-        public TextView preferredName, rank, steps;
+        public TextView userName, rank, steps;
         public ImageView profilePicture;
     }
 }

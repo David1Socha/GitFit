@@ -82,7 +82,10 @@ public class TeamLeaderboardPresenter extends BasePresenter{
         }
         List<String> userIds = new ArrayList<String>();
         for (Membership membership: teamMembership) {
-            userIds.add(membership.getUserID());
+            Membership.MembershipStatus status = membership.getMembershipStatus();
+            if(status.equals(Membership.MembershipStatus.ADMIN) || status.equals(Membership.MembershipStatus.MEMBER)) {
+                userIds.add(membership.getUserID());
+            }
         }
         for (User user: allUsers) {
             if(userIds.contains(user.getId())) {

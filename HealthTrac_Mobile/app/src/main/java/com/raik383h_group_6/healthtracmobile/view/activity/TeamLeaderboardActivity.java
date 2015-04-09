@@ -2,6 +2,7 @@ package com.raik383h_group_6.healthtracmobile.view.activity;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -35,6 +36,12 @@ public class TeamLeaderboardActivity extends BaseActivity implements TeamLeaderb
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         IActivityNavigator nav = new ActivityNavigator(this);
+        leaderboardListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                presenter.onItemClick(parent, view, position, id);
+            }
+        });
         presenter = presenterFactory.create(nav, this);
     }
 
