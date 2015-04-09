@@ -10,9 +10,12 @@ import com.raik383h_group_6.healthtracmobile.R;
 import com.raik383h_group_6.healthtracmobile.application.IActivityNavigator;
 import com.raik383h_group_6.healthtracmobile.model.AccessGrant;
 import com.raik383h_group_6.healthtracmobile.model.ActivityReport;
+import com.raik383h_group_6.healthtracmobile.model.Goal;
 import com.raik383h_group_6.healthtracmobile.model.Team;
 import com.raik383h_group_6.healthtracmobile.model.User;
+import com.raik383h_group_6.healthtracmobile.model.UserGoal;
 import com.raik383h_group_6.healthtracmobile.model.feed.FeedModel;
+import com.raik383h_group_6.healthtracmobile.model.feed.GoalProgress;
 import com.raik383h_group_6.healthtracmobile.service.FormatUtils;
 import com.raik383h_group_6.healthtracmobile.service.api.async.IAsyncActivityReportService;
 import com.raik383h_group_6.healthtracmobile.service.api.async.IAsyncActivityService;
@@ -32,6 +35,7 @@ import com.raik383h_group_6.healthtracmobile.service.feed.UserFeedGenerator;
 import com.raik383h_group_6.healthtracmobile.view.BaseView;
 import com.raik383h_group_6.healthtracmobile.view.FeedView;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
@@ -92,6 +96,7 @@ public class FeedPresenter extends BasePresenter {
     private void populateFeed() {
         if (uid != null) {
             setupHeader();
+            addGoals();
         } else {
             view.setFeedHeaderDisplay(false);
         }
@@ -108,6 +113,30 @@ public class FeedPresenter extends BasePresenter {
             view.setEmptyFeedDisplay(true);
             view.displayMessage("Error generating feed");
         }
+    }
+
+    private void addGoals() {
+        try {
+            User u = usvc.getUserAsync(uid, grant.getAuthHeader());
+            List<UserGoal> ugs = ugsvc.getUserGoals(u.getId(), grant.getAuthHeader());
+            List<Goal> goals = gsvc.getGoals(grant.getAuthHeader());
+            List<GoalProgress> goalsInProgress = new ArrayList<>();
+            for (Goal g : goals) {
+                UserGoal cor = getCorrespondingUserGoal(g, ugs);
+            }
+        } catch (ExecutionException | InterruptedException e) {
+
+        }
+        //TODO
+    }
+
+    private UserGoal getCorrespondingUserGoal(Goal g, List<UserGoal> ugs) {
+        for (UserGoal ug : ugs) {
+            if (ug.getGoalID() == g.getId()) {
+                return ug;
+            }
+        }
+        return null;
     }
 
     private void setupHeader() {
