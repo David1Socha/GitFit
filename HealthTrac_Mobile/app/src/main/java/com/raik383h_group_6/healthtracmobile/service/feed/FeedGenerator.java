@@ -114,7 +114,7 @@ public abstract class FeedGenerator {
         List<FeedActivity> fas = new ArrayList<>();
         for (Activity a : activities) {
             String username = getCorrespondingUserName(a.getUserId());
-            FeedActivity fa = new FeedActivity(res.getString(R.string.feed_activity, username, a.getType().name().toLowerCase(), a.getSteps()), a.getStartDate(), nav, a, grant);
+            FeedActivity fa = new FeedActivity(res.getString(R.string.feed_activity, username, a.getType().name().toLowerCase(), a.getSteps()), a.getStartDate(), nav, a, grant, username);
             fas.add(fa);
         }
         return fas;

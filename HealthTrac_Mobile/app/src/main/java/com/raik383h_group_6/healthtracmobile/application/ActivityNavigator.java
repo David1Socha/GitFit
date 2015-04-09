@@ -32,6 +32,7 @@ import com.raik383h_group_6.healthtracmobile.view.activity.CreateUserActivity;
 import com.raik383h_group_6.healthtracmobile.view.activity.EditUserActivity;
 import com.raik383h_group_6.healthtracmobile.view.activity.ActivityActivity;
 import com.raik383h_group_6.healthtracmobile.view.activity.TeamLeaderboardActivity;
+import com.raik383h_group_6.healthtracmobile.view.activity.ViewActivityActivity;
 import com.raik383h_group_6.healthtracmobile.view.activity.ViewActivityReportActivity;
 import com.raik383h_group_6.healthtracmobile.view.activity.ViewBadgeActivity;
 import com.raik383h_group_6.healthtracmobile.view.activity.ViewEnergyLevelActivity;
@@ -366,6 +367,15 @@ public class ActivityNavigator implements IActivityNavigator {
         Intent i = new Intent(activity, ViewBadgeActivity.class);
         i.putExtra(activity.getString(R.string.EXTRA_ACCESS_GRANT), grant);
         i.putExtra(activity.getString(R.string.EXTRA_BADGE), b);
+        activity.startActivity(i);
+    }
+
+    @Override
+    public void openViewActivity(com.raik383h_group_6.healthtracmobile.model.Activity a, String u, AccessGrant g) {
+        Intent i = new Intent(activity, ViewActivityActivity.class);
+        i.putExtra(activity.getString(R.string.EXTRA_ACCESS_GRANT), g);
+        i.putExtra(activity.getString(R.string.EXTRA_ACTIVITY), a);
+        i.putExtra(activity.getString(R.string.EXTRA_USERNAME), u);
         activity.startActivity(i);
     }
 }
