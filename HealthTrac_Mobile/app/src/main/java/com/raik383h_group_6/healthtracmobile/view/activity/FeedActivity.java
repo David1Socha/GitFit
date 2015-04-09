@@ -59,7 +59,14 @@ public class FeedActivity extends BaseActivity implements FeedView{
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                presenter.onItemClick(parent, view, position, id);
+                presenter.onFeedItemClick(parent, view, position, id);
+            }
+        });
+        goalListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                presenter.onGoalItemClick(parent, view, position, id);
             }
         });
     }

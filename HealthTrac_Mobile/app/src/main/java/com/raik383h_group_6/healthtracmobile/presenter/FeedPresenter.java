@@ -193,9 +193,14 @@ public class FeedPresenter extends BasePresenter {
         return todaysAr;
     }
 
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+    public void onFeedItemClick(AdapterView<?> parent, View view, int position, long id) {
         FeedModel fm = (FeedModel) parent.getAdapter().getItem(position);
         fm.onClick();
+    }
+
+    public void onGoalItemClick(AdapterView<?> parent, View view, int position, long id) {
+        GoalProgress g = (GoalProgress) parent.getAdapter().getItem(position);
+        //nav.openViewGoal(g.getGoal(), grant);
     }
 
     @Override
