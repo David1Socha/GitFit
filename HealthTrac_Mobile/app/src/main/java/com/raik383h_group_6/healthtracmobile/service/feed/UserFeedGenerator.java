@@ -34,6 +34,7 @@ import com.raik383h_group_6.healthtracmobile.service.api.async.IAsyncUserGoalSer
 import com.raik383h_group_6.healthtracmobile.service.api.async.IAsyncUserService;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 

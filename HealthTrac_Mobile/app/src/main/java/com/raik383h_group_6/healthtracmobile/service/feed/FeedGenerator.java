@@ -167,8 +167,10 @@ public abstract class FeedGenerator {
         for (Membership m : ms) {
             Team team = getCorrespondingTeam(m.getTeamID());
             String username = getCorrespondingUserName(m.getUserID());
-            FeedMembership fm = new FeedMembership(res.getString(R.string.feed_membership, username, m.getMembershipStatus().name().toLowerCase(), team.getName()), m.getDateCreated(), nav, team, grant);
-            fms.add(fm);
+            if (team != null) {
+                FeedMembership fm = new FeedMembership(res.getString(R.string.feed_membership, username, m.getMembershipStatus().name().toLowerCase(), team.getName()), m.getDateCreated(), nav, team, grant);
+                fms.add(fm);
+            }
         }
         return fms;
     }
