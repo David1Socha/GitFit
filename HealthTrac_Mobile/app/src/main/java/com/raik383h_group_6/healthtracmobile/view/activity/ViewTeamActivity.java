@@ -92,6 +92,10 @@ public class ViewTeamActivity extends BaseActivity implements ViewTeamView {
         Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
     }
 
+    public void onClickTeamFeed(View v) {
+        presenter.onClickTeamFeed();
+    }
+
     @Override
     public void setShowEditTeam(boolean enabled) {
         if (enabled) {

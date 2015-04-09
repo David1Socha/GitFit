@@ -70,6 +70,10 @@ public class ViewUserPresenter extends BasePresenter{
         view.setShowEditUserButton(userViewingSelf);
     }
 
+    public void onClickUserFeed() {
+        nav.openFeed(user.getId(), grant);
+    }
+
     @Override
     protected IActivityNavigator getNav() {
         return nav;

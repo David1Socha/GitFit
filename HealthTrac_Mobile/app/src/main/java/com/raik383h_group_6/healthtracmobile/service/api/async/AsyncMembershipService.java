@@ -22,23 +22,59 @@ public class AsyncMembershipService implements IAsyncMembershipService {
     }
 
     @Override
-    public Membership getMembershipAsync(long id, String token) {
-        throw new UnsupportedOperationException();
+    public Membership getMembershipAsync(final long id, final String token) throws ExecutionException, InterruptedException {
+        return new AsyncTask<Void, Void, Membership>() {
+            @Override
+            protected Membership doInBackground(Void... params) {
+                try {
+                    return service.getMembership(id, token);
+                } catch (Exception e) {
+                    return null;
+                }
+            }
+        }.execute().get();
     }
 
     @Override
-    public Membership getMembershipAsync(String userId, long teamId, String token) {
-        throw new UnsupportedOperationException();
+    public Membership getMembershipAsync(final String userId, final long teamId, final String token) throws ExecutionException, InterruptedException {
+        return new AsyncTask<Void, Void, Membership>() {
+            @Override
+            protected Membership doInBackground(Void... params) {
+                try {
+                    return service.getMembership(userId, teamId, token);
+                } catch (Exception e) {
+                    return null;
+                }
+            }
+        }.execute().get();
     }
 
     @Override
-    public List<Membership> getMembershipsAsync(String token) {
-        throw new UnsupportedOperationException();
+    public List<Membership> getMembershipsAsync(final String token) throws ExecutionException, InterruptedException {
+        return new AsyncTask<Void, Void, List<Membership>>() {
+            @Override
+            protected List<Membership> doInBackground(Void... params) {
+                try {
+                    return service.getMemberships(token);
+                } catch (Exception e) {
+                    return null;
+                }
+            }
+        }.execute().get();
     }
 
     @Override
-    public List<Membership> getMembershipsAsync(String userId, String token) {
-        throw new UnsupportedOperationException();
+    public List<Membership> getMembershipsAsync(final String userId, final String token) throws ExecutionException, InterruptedException {
+        return new AsyncTask<Void, Void, List<Membership>>() {
+            @Override
+            protected List<Membership> doInBackground(Void... params) {
+                try {
+                    return service.getMemberships(userId, token);
+                } catch (Exception e) {
+                    return null;
+                }
+            }
+        }.execute().get();
     }
 
     @Override

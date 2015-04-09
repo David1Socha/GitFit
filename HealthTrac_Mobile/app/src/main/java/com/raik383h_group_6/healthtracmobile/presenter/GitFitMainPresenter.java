@@ -130,4 +130,5 @@ public class GitFitMainPresenter extends BasePresenter{
     protected IActivityNavigator getNav() {
         return nav;
     }
+
 }

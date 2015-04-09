@@ -138,5 +138,36 @@
     <string name="title_activity_create_meal">Create Meal</string>
     <string name="view_leaderboard">View Leaderboard</string>
     <string name="title_activity_team_leaderboard">Team Leaderboard</string>
+    <string name="joined">joined</string>
+    <string name="left">left</string>
+    <string name="feed_activity">%1$s went %2$s for %3$d steps.</string>
+    <string name="feed_energy_level">%1$s changed energy level to %2$s.</string>
+    <string name="feed_meal">%1$s ate %2$d calories.</string>
+    <string name="feed_membership">%1$s became %2$s in team %3$s.</string>
+    <string name="feed_userbadge">%1$s earned the badge %2$s.</string>
+    <string name="feed_usergoal_start">%1$s started the goal %2$s.</string>
+    <string name="feed_usergoal_end">%1$s met the goal %2$s.</string>
+    <string name="EXTRA_USER_ID">com.raik383h_group_6.healthtracmobile.USER_ID</string>
+    <string name="EXTRA_TEAM_ID">com.raik383h_group_6.healthtracmobile.TEAM_ID</string>
+    <string name="feed_activity_report">%1$s took %2$d steps for the day.</string>
+    <string name="no_feed_message">No feeds found.</string>
+    <string name="user_feed">View your feed</string>
+    <string name="user_feed_generic">View user feed</string>
+    <string name="title_activity_feed">View Feed</string>
+    <string name="team_feed">View Team Feed</string>
+    <string name="distance_label_ar">Distance</string>
+    <string name="duration_label_ar">Duration</string>
+    <string name="steps_label_ar">Steps</string>
+    <string name="EXTRA_ACTIVITY_REPORT">com.raik383h_group_6.healthtracmobile.ACTIVITY_REPORT</string>
+    <string name="EXTRA_USERNAME">com.raik383h_group_6.healthtracmobile.USERNAME</string>
+    <string name="activity_report_title">%1$s activity report for %2$s</string>
+    <string name="title_activity_activity_report">View Activity Report</string>
+    <string name="mood_label_el">Mood</string>
+    <string name="EXTRA_ENERGY_LEVEL">com.raik383h_group_6.healthtracmobile.ENERGY_LEVEL</string>
+    <string name="energy_level_title">%1$s\'s energy level</string>
+    <string name="title_activity_energy_level">View Energy Level</string>
+    <string name="EXTRA_MEAL">com.raik383h_group_6.healthtracmobile.MEAL</string>
+    <string name="meal_title">%1$s\'s meal</string>
+    <string name="title_activity_meal">View meal</string>
 
 </resources>

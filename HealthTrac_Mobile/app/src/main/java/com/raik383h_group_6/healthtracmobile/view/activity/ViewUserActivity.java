@@ -133,6 +133,10 @@ public class ViewUserActivity extends BaseActivity implements ViewUserView {
         }
     }
 
+    public void onClickUserFeed(View v) {
+        presenter.onClickUserFeed();
+    }
+
     @Override
     public void setProfilePicture(String profilePicture) {
         Picasso.with(this)

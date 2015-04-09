@@ -8,15 +8,20 @@ import android.content.Intent;
 
 import com.raik383h_group_6.healthtracmobile.R;
 import com.raik383h_group_6.healthtracmobile.model.AccessGrant;
+import com.raik383h_group_6.healthtracmobile.model.ActivityReport;
+import com.raik383h_group_6.healthtracmobile.model.EnergyLevel;
+import com.raik383h_group_6.healthtracmobile.model.Meal;
 import com.raik383h_group_6.healthtracmobile.model.Team;
 import com.raik383h_group_6.healthtracmobile.model.Token;
 import com.raik383h_group_6.healthtracmobile.model.User;
+import com.raik383h_group_6.healthtracmobile.view.ViewEnergyLevelView;
 import com.raik383h_group_6.healthtracmobile.view.activity.AuthenticationActivity;
 import com.raik383h_group_6.healthtracmobile.view.activity.CreateTeamActivity;
 import com.raik383h_group_6.healthtracmobile.view.activity.EditTeamActivity;
 import com.raik383h_group_6.healthtracmobile.view.activity.CreateEnergyLevelActivity;
 import com.raik383h_group_6.healthtracmobile.view.activity.CreateGoalActivity;
 import com.raik383h_group_6.healthtracmobile.view.activity.CreateMealActivity;
+import com.raik383h_group_6.healthtracmobile.view.activity.FeedActivity;
 import com.raik383h_group_6.healthtracmobile.view.activity.ListTeamsActivity;
 import com.raik383h_group_6.healthtracmobile.view.activity.ListUsersActivity;
 import com.raik383h_group_6.healthtracmobile.view.activity.OAuthBrowserActivity;
@@ -25,6 +30,9 @@ import com.raik383h_group_6.healthtracmobile.view.activity.CreateUserActivity;
 import com.raik383h_group_6.healthtracmobile.view.activity.EditUserActivity;
 import com.raik383h_group_6.healthtracmobile.view.activity.ActivityActivity;
 import com.raik383h_group_6.healthtracmobile.view.activity.TeamLeaderboardActivity;
+import com.raik383h_group_6.healthtracmobile.view.activity.ViewActivityReportActivity;
+import com.raik383h_group_6.healthtracmobile.view.activity.ViewEnergyLevelActivity;
+import com.raik383h_group_6.healthtracmobile.view.activity.ViewMealActivity;
 import com.raik383h_group_6.healthtracmobile.view.activity.ViewTeamActivity;
 import com.raik383h_group_6.healthtracmobile.view.activity.ViewUserActivity;
 
@@ -295,6 +303,49 @@ public class ActivityNavigator implements IActivityNavigator {
     public void openCreateMeal(AccessGrant g) {
         Intent i = new Intent(activity, CreateMealActivity.class);
         i.putExtra(activity.getString(R.string.EXTRA_ACCESS_GRANT), g);
+        activity.startActivity(i);
+    }
+
+    @Override
+    public void openFeed(String uid, AccessGrant grant) {
+        Intent i = new Intent(activity, FeedActivity.class);
+        i.putExtra(activity.getString(R.string.EXTRA_ACCESS_GRANT), grant);
+        i.putExtra(activity.getString(R.string.EXTRA_USER_ID), uid);
+        activity.startActivity(i);
+    }
+
+    @Override
+    public void openFeed(long teamId, AccessGrant grant) {
+        Intent i = new Intent(activity, FeedActivity.class);
+        i.putExtra(activity.getString(R.string.EXTRA_ACCESS_GRANT), grant);
+        i.putExtra(activity.getString(R.string.EXTRA_TEAM_ID), teamId);
+        activity.startActivity(i);
+    }
+
+    @Override
+    public void openActivityReport(ActivityReport ar, String username, AccessGrant grant) {
+        Intent i = new Intent(activity, ViewActivityReportActivity.class);
+        i.putExtra(activity.getString(R.string.EXTRA_ACCESS_GRANT), grant);
+        i.putExtra(activity.getString(R.string.EXTRA_USERNAME), username);
+        i.putExtra(activity.getString(R.string.EXTRA_ACTIVITY_REPORT), ar);
+        activity.startActivity(i);
+    }
+
+    @Override
+    public void openViewEnergyLevel(EnergyLevel el, String username, AccessGrant grant) {
+        Intent i = new Intent(activity, ViewEnergyLevelActivity.class);
+        i.putExtra(activity.getString(R.string.EXTRA_ACCESS_GRANT), grant);
+        i.putExtra(activity.getString(R.string.EXTRA_USERNAME), username);
+        i.putExtra(activity.getString(R.string.EXTRA_ENERGY_LEVEL), el);
+        activity.startActivity(i);
+    }
+
+    @Override
+    public void openViewMeal(Meal m, String username, AccessGrant grant) {
+        Intent i = new Intent(activity, ViewMealActivity.class);
+        i.putExtra(activity.getString(R.string.EXTRA_ACCESS_GRANT), grant);
+        i.putExtra(activity.getString(R.string.EXTRA_USERNAME), username);
+        i.putExtra(activity.getString(R.string.EXTRA_MEAL), m);
         activity.startActivity(i);
     }
 }

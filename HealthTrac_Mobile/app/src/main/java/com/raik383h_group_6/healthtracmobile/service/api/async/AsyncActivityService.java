@@ -49,6 +49,20 @@ public class AsyncActivityService implements IAsyncActivityService {
     }
 
     @Override
+    public List<Activity> getActivitiesAsync(final String token) throws ExecutionException, InterruptedException {
+        return new AsyncTask<Void, Void, List<Activity>>() {
+            @Override
+            protected List<Activity> doInBackground(Void... params) {
+                try {
+                    return service.getActivities(token);
+                } catch (Exception e) {
+                    return null;
+                }
+            }
+        }.execute().get();
+    }
+
+    @Override
     public void updateActivityAsync(final long id, final Activity activity, final String token) throws Exception {
         final Exception[] errs = new Exception[1];
         new AsyncTask<Void, Void, Void>() {

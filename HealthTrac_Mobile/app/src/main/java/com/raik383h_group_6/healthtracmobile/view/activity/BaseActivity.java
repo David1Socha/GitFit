@@ -83,6 +83,11 @@ public abstract class BaseActivity extends RoboActionBarActivity implements Base
     }
 
     @Override
+    public long getLongExtra(String key) {
+        return getIntent().getLongExtra(key, -1l);
+    }
+
+    @Override
     public Parcelable getParcelableExtra(String key) {
         return getIntent().getParcelableExtra(key);
     }
