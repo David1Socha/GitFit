@@ -11,10 +11,12 @@ import android.widget.Toast;
 import com.google.inject.Inject;
 import com.raik383h_group_6.healthtracmobile.R;
 import com.raik383h_group_6.healthtracmobile.adapter.FeedModelAdapter;
+import com.raik383h_group_6.healthtracmobile.adapter.GoalProgressAdapter;
 import com.raik383h_group_6.healthtracmobile.adapter.TeamAdapter;
 import com.raik383h_group_6.healthtracmobile.application.ActivityNavigator;
 import com.raik383h_group_6.healthtracmobile.application.IActivityNavigator;
 import com.raik383h_group_6.healthtracmobile.model.feed.FeedModel;
+import com.raik383h_group_6.healthtracmobile.model.feed.GoalProgress;
 import com.raik383h_group_6.healthtracmobile.presenter.BasePresenter;
 import com.raik383h_group_6.healthtracmobile.presenter.FeedPresenter;
 import com.raik383h_group_6.healthtracmobile.presenter.ListTeamsPresenter;
@@ -29,6 +31,8 @@ import roboguice.inject.InjectView;
 @ContentView(R.layout.activity_feed)
 public class FeedActivity extends BaseActivity implements FeedView{
 
+    @InjectView(R.id.goal_listview)
+    ListView goalListView;
     @InjectView(R.id.feed_listview)
     ListView listView;
     @InjectView(R.id.no_feeds_textview)
@@ -41,6 +45,8 @@ public class FeedActivity extends BaseActivity implements FeedView{
     TextView distance;
     @InjectView(R.id.feed_header)
     LinearLayout header;
+    @InjectView(R.id.goal_header)
+    LinearLayout goalHeader;
     @Inject
     PresenterFactory presenterFactory;
     private FeedPresenter presenter;
@@ -111,5 +117,20 @@ public class FeedActivity extends BaseActivity implements FeedView{
     @Override
     public void setSteps(String s) {
         steps.setText(s);
+    }
+
+    @Override
+    public void setGoalHeaderDisplay(boolean enabled) {
+        if (enabled) {
+            goalHeader.setVisibility(View.VISIBLE);
+        } else {
+            goalHeader.setVisibility(View.GONE);
+        }
+    }
+
+    @Override
+    public void setGoalsInProgress(List<GoalProgress> gps) {
+        GoalProgressAdapter adapter = new GoalProgressAdapter(this, gps);
+        goalListView.setAdapter(adapter);
     }
 }
