@@ -98,4 +98,5 @@ public interface IActivityNavigator {
     void openViewGoal(Goal g, AccessGrant grant);
     void openViewBadge(Badge b, AccessGrant grant);
     void openViewActivity(Activity a, String username, AccessGrant grant);
+    void openCreateActivity(AccessGrant grant);
 }
