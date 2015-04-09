@@ -56,6 +56,8 @@ public class CreateActivityPresenter extends BasePresenter {
                 a.setDuration(duration);
                 a.setDistance(distance);
                 a.setSteps(steps);
+                asvc.createActivityAsync(a, grant.getAuthHeader());
+                nav.finishActivity();
             } catch (Exception e) {
                 view.displayMessage(view.getResource(R.string.error_create_activity));
             }
