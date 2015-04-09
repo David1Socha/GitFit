@@ -52,5 +52,6 @@ public class ViewActivityPresenter extends BasePresenter {
         view.setSteps(FormatUtils.format(activity.getSteps()));
         view.setType(activity.getType().name().toLowerCase());
         view.setTitle(view.getResource(R.string.activity_title, username));
+        view.setDate(FormatUtils.format(activity.getStartDate()));
     }
 }

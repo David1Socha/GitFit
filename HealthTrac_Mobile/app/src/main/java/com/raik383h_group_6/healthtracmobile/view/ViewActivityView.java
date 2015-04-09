@@ -9,5 +9,8 @@ public interface ViewActivityView extends BaseView {
     void setDistance(String d);
 
     void setSteps(String s);
+
+    void setDate(String d);
+
     void setTitle(String t);
 }

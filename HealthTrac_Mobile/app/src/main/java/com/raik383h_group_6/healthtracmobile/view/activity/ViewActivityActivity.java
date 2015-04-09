@@ -28,6 +28,8 @@ public class ViewActivityActivity extends BaseActivity implements ViewActivityVi
     private TextView distance;
     @InjectView(R.id.steps_textview)
     private TextView steps;
+    @InjectView(R.id.startdate_textview)
+    private TextView startDate;
     @Inject
     private PresenterFactory presenterFactory;
     private ViewActivityPresenter presenter;
@@ -44,6 +46,11 @@ public class ViewActivityActivity extends BaseActivity implements ViewActivityVi
     }
 
     @Override
+    public void setDate(String d) {
+        startDate.setText(d);
+    }
+
+    @Override
     public void setTitle(String t) {
         title.setText(t);
     }
@@ -55,17 +62,17 @@ public class ViewActivityActivity extends BaseActivity implements ViewActivityVi
 
     @Override
     public void setDuration(String d) {
-        type.setText(d);
+        duration.setText(d);
     }
 
     @Override
     public void setDistance(String d) {
-        type.setText(d);
+        distance.setText(d);
     }
 
     @Override
     public void setSteps(String s) {
-        type.setText(s);
+        steps.setText(s);
     }
 
     @Override

@@ -11,7 +11,7 @@ public class RetrofitActivityReportServiceProvider implements Provider<ActivityR
     @Override
     public ActivityReportService get() {
         RestAdapter adapter = new RestAdapter.Builder()
-                .setConverter(ActivityReportService.DATA_CONVERTER)
+                .setConverter(ActivityReportService.DATA_CONVERTER).setLogLevel(RestAdapter.LogLevel.FULL)
                 .setEndpoint(ActivityReportService.SERVICE_ENDPOINT)
                 .build();
         return adapter.create(ActivityReportService.class);
