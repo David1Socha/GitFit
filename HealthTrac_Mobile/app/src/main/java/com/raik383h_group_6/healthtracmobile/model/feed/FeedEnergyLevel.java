@@ -11,16 +11,18 @@ public class FeedEnergyLevel extends FeedModel {
 
     private EnergyLevel energyLevel;
     private AccessGrant grant;
+    private String username;
 
-    public FeedEnergyLevel(String msg, Date date, IActivityNavigator nav, EnergyLevel energyLevel, AccessGrant  grant) {
+    public FeedEnergyLevel(String msg, Date date, IActivityNavigator nav, EnergyLevel energyLevel, String username, AccessGrant  grant) {
         super(msg, date, nav);
         this.energyLevel = energyLevel;
         this.grant = grant;
+        this.username = username;
     }
 
     @Override
     public void onClick() {
-        //nav.openEnergyLevelDetail(energyLevel, grant);
+        nav.openViewEnergyLevel(energyLevel, username, grant);
     }
 
     @Override

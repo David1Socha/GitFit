@@ -124,7 +124,7 @@ public abstract class FeedGenerator {
         List<FeedEnergyLevel> fels = new ArrayList<>();
         for (EnergyLevel el : els) {
             String username = getCorrespondingUserName(el.getUserID());
-            FeedEnergyLevel fel = new FeedEnergyLevel(res.getString(R.string.feed_energy_level, username, el.getMood().name().toLowerCase()), el.getDateCreated(), nav, el, grant);
+            FeedEnergyLevel fel = new FeedEnergyLevel(res.getString(R.string.feed_energy_level, username, el.getMood().name().toLowerCase()), el.getDateCreated(), nav, el, username, grant);
             fels.add(fel);
         }
         return fels;
