@@ -44,22 +44,22 @@ public class GoalProgressAdapter extends BaseAdapter {
         View view;
         ViewHolder holder;
         if(convertView == null) {
-            view = mInflater.inflate(R.layout.team_row_layout, parent, false);
+            view = mInflater.inflate(R.layout.goal_progress_row_layout, parent, false);
             holder = new ViewHolder();
-            holder.name = (TextView) view.findViewById(R.id.team_name);
-            holder.description = (TextView) view.findViewById(R.id.team_description);
+            holder.name = (TextView) view.findViewById(R.id.goal_name);
+            holder.progress = (TextView) view.findViewById(R.id.progress);
             view.setTag(holder);
         } else {
             view = convertView;
             holder = (ViewHolder) view.getTag();
         }
-        Team team = teams.get(position);
-        holder.name.setText(team.getName());
-        holder.description.setText(team.getDescription());
+        GoalProgress p = progresses.get(position);
+        holder.name.setText(p.getGoalName());
+        holder.progress.setText(p.getProgress());
         return view;
     }
 
     public class ViewHolder {
-        public TextView name, description;
+        public TextView name, progress;
     }
 }
