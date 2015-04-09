@@ -170,7 +170,7 @@
     <string name="meal_title">%1$s\'s meal</string>
     <string name="title_activity_meal">View meal</string>
     <string name="today">Today:</string>
-    <string name="steps_header">%1$d steps of lifetime total %2$d</string>
+    <string name="steps_header">%1$d steps of lifetime total %2$f</string>
     <string name="duration_header">%1$.2f seconds of lifetime total %2$.2f</string>
     <string name="distance_header">%1$.2f feet of lifetime total %2$.2f</string>
     <string name="goal_title">Goal Progress</string>

@@ -170,8 +170,8 @@ public class FeedPresenter extends BasePresenter {
                 view.setDistance(view.getResource(R.string.distance_header, ar.getDistance(), u.getLifetimeDistance()));
             } else {
                 view.setSteps(view.getResource(R.string.steps_header, 0, u.getLifetimeSteps()));
-                view.setDuration(view.getResource(R.string.duration_header, 0, u.getLifetimeDuration()));
-                view.setDistance(view.getResource(R.string.distance_header, 0, u.getLifetimeDistance()));
+                view.setDuration(view.getResource(R.string.duration_header, 0.0, u.getLifetimeDuration()));
+                view.setDistance(view.getResource(R.string.distance_header, 0.0, u.getLifetimeDistance()));
             }
             view.setFeedHeaderDisplay(true);
         } catch (ExecutionException | InterruptedException e) {
