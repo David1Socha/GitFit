@@ -8,6 +8,7 @@ import android.content.Intent;
 
 import com.raik383h_group_6.healthtracmobile.R;
 import com.raik383h_group_6.healthtracmobile.model.AccessGrant;
+import com.raik383h_group_6.healthtracmobile.model.ActivityReport;
 import com.raik383h_group_6.healthtracmobile.model.Team;
 import com.raik383h_group_6.healthtracmobile.model.Token;
 import com.raik383h_group_6.healthtracmobile.model.User;
@@ -25,6 +26,7 @@ import com.raik383h_group_6.healthtracmobile.view.activity.OAuthPromptActivity;
 import com.raik383h_group_6.healthtracmobile.view.activity.CreateUserActivity;
 import com.raik383h_group_6.healthtracmobile.view.activity.EditUserActivity;
 import com.raik383h_group_6.healthtracmobile.view.activity.ActivityActivity;
+import com.raik383h_group_6.healthtracmobile.view.activity.ViewActivityReportActivity;
 import com.raik383h_group_6.healthtracmobile.view.activity.ViewTeamActivity;
 import com.raik383h_group_6.healthtracmobile.view.activity.ViewUserActivity;
 
@@ -303,6 +305,15 @@ public class ActivityNavigator implements IActivityNavigator {
         Intent i = new Intent(activity, FeedActivity.class);
         i.putExtra(activity.getString(R.string.EXTRA_ACCESS_GRANT), grant);
         i.putExtra(activity.getString(R.string.EXTRA_TEAM_ID), teamId);
+        activity.startActivity(i);
+    }
+
+    @Override
+    public void openActivityReport(ActivityReport ar, String username, AccessGrant grant) {
+        Intent i = new Intent(activity, ViewActivityReportActivity.class);
+        i.putExtra(activity.getString(R.string.EXTRA_ACCESS_GRANT), grant);
+        i.putExtra(activity.getString(R.string.EXTRA_USERNAME), username);
+        i.putExtra(activity.getString(R.string.EXTRA_ACTIVITY_REPORT), ar);
         activity.startActivity(i);
     }
 }
