@@ -200,7 +200,7 @@ public class FeedPresenter extends BasePresenter {
 
     public void onGoalItemClick(AdapterView<?> parent, View view, int position, long id) {
         GoalProgress g = (GoalProgress) parent.getAdapter().getItem(position);
-        //nav.openViewGoal(g.getGoal(), grant);
+        nav.openViewGoal(g.getGoal(), grant);
     }
 
     @Override
