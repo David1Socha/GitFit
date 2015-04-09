@@ -9,8 +9,11 @@ import com.google.inject.assistedinject.Assisted;
 import com.raik383h_group_6.healthtracmobile.R;
 import com.raik383h_group_6.healthtracmobile.application.IActivityNavigator;
 import com.raik383h_group_6.healthtracmobile.model.AccessGrant;
+import com.raik383h_group_6.healthtracmobile.model.ActivityReport;
 import com.raik383h_group_6.healthtracmobile.model.Team;
+import com.raik383h_group_6.healthtracmobile.model.User;
 import com.raik383h_group_6.healthtracmobile.model.feed.FeedModel;
+import com.raik383h_group_6.healthtracmobile.service.FormatUtils;
 import com.raik383h_group_6.healthtracmobile.service.api.async.IAsyncActivityReportService;
 import com.raik383h_group_6.healthtracmobile.service.api.async.IAsyncActivityService;
 import com.raik383h_group_6.healthtracmobile.service.api.async.IAsyncBadgeService;
@@ -29,7 +32,9 @@ import com.raik383h_group_6.healthtracmobile.service.feed.UserFeedGenerator;
 import com.raik383h_group_6.healthtracmobile.view.BaseView;
 import com.raik383h_group_6.healthtracmobile.view.FeedView;
 
+import java.util.Date;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 public class FeedPresenter extends BasePresenter {
 
@@ -48,12 +53,13 @@ public class FeedPresenter extends BasePresenter {
     private IAsyncUserBadgeService ubsvc;
     private IAsyncUserGoalService ugsvc;
     private IAsyncUserService usvc;
+    private String uid;
 
     @Inject
     public FeedPresenter(IAsyncActivityService asvc, IAsyncUserService usvc, IAsyncActivityReportService arsvc, IAsyncBadgeService bsvc, IAsyncEnergyLevelService esvc, IAsyncGoalService gsvc, IAsyncMealService mlsvc, IAsyncMembershipService mbsvc, IAsyncTeamService tsvc, IAsyncUserBadgeService ubsvc, IAsyncUserGoalService ugsvc, @Assisted IActivityNavigator nav, @Assisted FeedView view) {
         this.view = view;
         this.nav = nav;
-        String uid = view.getStringExtra(view.getResource(R.string.EXTRA_USER_ID));
+        this.uid = view.getStringExtra(view.getResource(R.string.EXTRA_USER_ID));
         long teamId = view.getLongExtra(view.getResource(R.string.EXTRA_TEAM_ID));
         this.grant = (AccessGrant) view.getParcelableExtra(view.getResource(R.string.EXTRA_ACCESS_GRANT));
         this.asvc = asvc;
@@ -70,6 +76,7 @@ public class FeedPresenter extends BasePresenter {
         try {
             if (uid != null) {
                 gen = new UserFeedGenerator(arsvc, usvc, asvc, bsvc, esvc, gsvc, mlsvc, mbsvc, tsvc, ubsvc, ugsvc, view.getResources(), grant, nav, uid);
+
             } else {
                 gen = new TeamFeedGenerator(arsvc, usvc, asvc, bsvc, esvc, gsvc, mlsvc, mbsvc, tsvc, ubsvc, ugsvc, view.getResources(), grant, nav, teamId);
             }
@@ -83,6 +90,9 @@ public class FeedPresenter extends BasePresenter {
     }
 
     private void populateFeed() {
+        if (uid != null) {
+            setupHeader();
+        }
         List<FeedModel> fms = null;
         try {
             fms = gen.getFeedElements();
@@ -91,12 +101,37 @@ public class FeedPresenter extends BasePresenter {
                 view.setEmptyFeedDisplay(false);
             } else {
                 view.setEmptyFeedDisplay(true);
-                Log.d("davidsocha", "just empty");
             }
         } catch (Exception e) {
             view.setEmptyFeedDisplay(true);
             view.displayMessage("Error generating feed");
         }
+    }
+
+    private void setupHeader() {
+        try {
+            ActivityReport ar = getTodaysActivityReport();
+            User u = usvc.getUserAsync(uid, grant.getAuthHeader());
+            view.setSteps(view.getResource(R.string.steps_header, ar.getSteps(), u.getLifetimeSteps()));
+            view.setDuration(view.getResource(R.string.duration_header, ar.getDuration(), u.getLifetimeDuration()));
+            view.setDistance(view.getResource(R.string.distance_header, ar.getDistance(), u.getLifetimeDistance()));
+            view.setFeedHeaderDisplay(true);
+        } catch (ExecutionException | InterruptedException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    private ActivityReport getTodaysActivityReport() throws InterruptedException, ExecutionException{
+        List<ActivityReport> ars = arsvc.getActivityReportsAsync(uid, grant.getAuthHeader());
+        ActivityReport todaysAr = null;
+        for (ActivityReport ar : ars) {
+            if (FormatUtils.format(ar.getDate()).equals(FormatUtils.format(new Date()))) {
+                todaysAr = ar;
+                break;
+            }
+        }
+        return todaysAr;
     }
 
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
