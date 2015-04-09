@@ -68,10 +68,6 @@ public class GitFitMainActivity extends BaseActivity implements com.raik383h_gro
 
     public void onClickPedometerDemo(View view) { presenter.onClickPedometer(); }
 
-    public void onClickUserFeed(View view) {
-        presenter.onClickUserFeed();
-    }
-
     @Override
     public void displayMessage(String msg) {
         Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();

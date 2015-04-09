@@ -131,11 +131,4 @@ public class GitFitMainPresenter extends BasePresenter{
         return nav;
     }
 
-    public void onClickUserFeed() {
-        if (!grantBad()) {
-            nav.openFeed(grant.getId(), grant);
-        } else {
-            nav.openAuthentication(RequestCodes.AUTH);
-        }
-    }
 }

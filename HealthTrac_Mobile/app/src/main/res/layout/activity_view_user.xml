@@ -252,6 +252,16 @@
             android:onClick="onClickEditUser"
             android:id="@+id/edit_user_button"
             android:text="@string/edit_user"/>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:onClick="onClickUserFeed"
+            android:text="@string/user_feed"/>
     </LinearLayout>
 
 </ScrollView>
