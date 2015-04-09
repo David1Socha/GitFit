@@ -46,4 +46,7 @@ public final class FormatUtils {
         return Integer.parseInt(intStr);
     }
 
+    public static String format(long steps) {
+        return String.valueOf(steps);
+    }
 }
