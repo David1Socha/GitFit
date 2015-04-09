@@ -158,5 +158,6 @@
     <string name="EXTRA_ACTIVITY_REPORT">com.raik383h_group_6.healthtracmobile.ACTIVITY_REPORT</string>
     <string name="EXTRA_USERNAME">com.raik383h_group_6.healthtracmobile.USERNAME</string>
     <string name="activity_report_title">%1$s activity report for %2$s</string>
+    <string name="title_activity_activity_report">View Activity Report</string>
 
 </resources>
