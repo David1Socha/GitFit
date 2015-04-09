@@ -192,5 +192,10 @@
     <string name="update_type">Update type</string>
     <string name="prompt_type">Choose activity type</string>
     <string name="error_update_type">Error updating type</string>
+    <string name="default_type">WALKING</string>
+    <string name="duration_hint">(seconds)</string>
+    <string name="distance_hint">(feet)</string>
+    <string name="steps_hint">(steps)</string>
+    <string name="create_activity">Create Activity</string>
 
 </resources>
