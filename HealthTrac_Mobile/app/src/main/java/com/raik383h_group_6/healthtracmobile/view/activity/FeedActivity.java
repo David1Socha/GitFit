@@ -3,6 +3,7 @@ package com.raik383h_group_6.healthtracmobile.view.activity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -32,6 +33,14 @@ public class FeedActivity extends BaseActivity implements FeedView{
     ListView listView;
     @InjectView(R.id.no_feeds_textview)
     TextView noFeedsText;
+    @InjectView(R.id.steps_textview)
+    TextView steps;
+    @InjectView(R.id.duration_textview)
+    TextView duration;
+    @InjectView(R.id.distance_textview)
+    TextView distance;
+    @InjectView(R.id.feed_header)
+    LinearLayout header;
     @Inject
     PresenterFactory presenterFactory;
     private FeedPresenter presenter;
@@ -78,5 +87,29 @@ public class FeedActivity extends BaseActivity implements FeedView{
     @Override
     public void displayMessage(String msg) {
         Toast.makeText(this, msg, Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void setFeedHeaderDisplay(boolean enabled) {
+        if (enabled) {
+            header.setVisibility(View.VISIBLE);
+        } else {
+
+        }
+    }
+
+    @Override
+    public void setDuration(String d) {
+
+    }
+
+    @Override
+    public void setDistance(String d) {
+
+    }
+
+    @Override
+    public void setSteps(String s) {
+
     }
 }

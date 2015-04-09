@@ -8,6 +8,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:visibility="gone"
+        android:id="@+id/feed_header"
         android:background="@color/feed_header_bg">
         <TextView
             android:layout_width="match_parent"

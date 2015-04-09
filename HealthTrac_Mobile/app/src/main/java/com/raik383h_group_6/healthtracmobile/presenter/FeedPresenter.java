@@ -92,6 +92,8 @@ public class FeedPresenter extends BasePresenter {
     private void populateFeed() {
         if (uid != null) {
             setupHeader();
+        } else {
+            view.setFeedHeaderDisplay(false);
         }
         List<FeedModel> fms = null;
         try {
@@ -112,12 +114,18 @@ public class FeedPresenter extends BasePresenter {
         try {
             ActivityReport ar = getTodaysActivityReport();
             User u = usvc.getUserAsync(uid, grant.getAuthHeader());
-            view.setSteps(view.getResource(R.string.steps_header, ar.getSteps(), u.getLifetimeSteps()));
-            view.setDuration(view.getResource(R.string.duration_header, ar.getDuration(), u.getLifetimeDuration()));
-            view.setDistance(view.getResource(R.string.distance_header, ar.getDistance(), u.getLifetimeDistance()));
+            if (ar != null) {
+                view.setSteps(view.getResource(R.string.steps_header, ar.getSteps(), u.getLifetimeSteps()));
+                view.setDuration(view.getResource(R.string.duration_header, ar.getDuration(), u.getLifetimeDuration()));
+                view.setDistance(view.getResource(R.string.distance_header, ar.getDistance(), u.getLifetimeDistance()));
+            } else {
+                view.setSteps(view.getResource(R.string.steps_header, 0, u.getLifetimeSteps()));
+                view.setDuration(view.getResource(R.string.duration_header, 0, u.getLifetimeDuration()));
+                view.setDistance(view.getResource(R.string.distance_header, 0, u.getLifetimeDistance()));
+            }
             view.setFeedHeaderDisplay(true);
         } catch (ExecutionException | InterruptedException e) {
-            e.printStackTrace();
+            view.setFeedHeaderDisplay(false);
         }
 
     }
