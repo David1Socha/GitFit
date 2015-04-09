@@ -103,5 +103,6 @@ public class CreateActivityPresenter extends BasePresenter {
 
     public void onChooseType(String type) {
         this.type = Activity.ActivityType.valueOf(type);
+        view.setType(type);
     }
 }

@@ -18,4 +18,6 @@ public interface CreateActivityView extends BaseView {
     void setStepErr(String e);
 
     void promptUserType(String[] typeStrs);
+
+    void setType(String type);
 }

@@ -93,6 +93,11 @@ public class CreateActivityActivity extends BaseActivity implements CreateActivi
     }
 
     @Override
+    public void setType(String type) {
+        this.type.setText(type);
+    }
+
+    @Override
     public String getDistance() {
         return distance.getText().toString();
     }
