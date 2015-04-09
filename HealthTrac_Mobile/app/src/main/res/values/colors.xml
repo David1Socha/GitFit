@@ -6,4 +6,5 @@
     <color name="energy_level">@color/username</color>
     <color name="meal">@color/username</color>
     <color name="feed_header_bg">#FF0066</color>
+    <color name="goal_header_bg">#66FFFF</color>
 </resources>
