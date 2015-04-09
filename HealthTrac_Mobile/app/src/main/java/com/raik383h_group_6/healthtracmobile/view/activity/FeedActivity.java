@@ -94,22 +94,22 @@ public class FeedActivity extends BaseActivity implements FeedView{
         if (enabled) {
             header.setVisibility(View.VISIBLE);
         } else {
-
+            header.setVisibility(View.GONE);
         }
     }
 
     @Override
     public void setDuration(String d) {
-
+        duration.setText(d);
     }
 
     @Override
     public void setDistance(String d) {
-
+        distance.setText(d);
     }
 
     @Override
     public void setSteps(String s) {
-
+        steps.setText(s);
     }
 }
