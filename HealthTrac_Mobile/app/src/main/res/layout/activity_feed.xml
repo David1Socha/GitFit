@@ -4,29 +4,35 @@
 
     <LinearLayout
         android:orientation="vertical"
-        android:layout_margin="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="10dp"
         android:visibility="gone"
         android:id="@+id/feed_header"
         android:background="@color/feed_header_bg">
         <TextView
+            android:layout_marginLeft="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/today"
             android:id="@+id/today"/>
         <TextView
             android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/steps_textview"/>
         <TextView
             android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/duration_textview"/>
         <TextView
             android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/distance_textview"/>
@@ -34,9 +40,11 @@
 
     <LinearLayout
         android:orientation="vertical"
-        android:layout_margin="10dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="180dp"
         android:visibility="gone"
         android:id="@+id/goal_header"
         android:background="@color/goal_header_bg">
@@ -44,14 +52,15 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:layout_marginLeft="20dp"
+            android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="@string/goal_title"/>
 
         <ListView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="5dp"
             android:id="@+id/goal_listview"/>
 
     </LinearLayout>
@@ -60,7 +69,7 @@
         android:id="@+id/feed_listview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"/>
+        android:layout_marginTop="5dp"/>
 
     <TextView
         android:layout_width="wrap_content"
