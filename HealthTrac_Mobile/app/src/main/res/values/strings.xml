@@ -188,5 +188,6 @@
     <string name="startdate_label">Start date</string>
     <string name="EXTRA_ACTIVITY">com.raik383h_group_6.healthtracmobile.ACTIVITY</string>
     <string name="activity_title">%1$s\'s Activity</string>
+    <string name="title_activity_activity">View Activity</string>
 
 </resources>
