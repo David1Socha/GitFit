@@ -1,6 +1,7 @@
 package com.raik383h_group_6.healthtracmobile.service.api.async;
 
 import android.os.AsyncTask;
+import android.util.Log;
 
 import com.google.inject.Inject;
 import com.raik383h_group_6.healthtracmobile.model.Membership;

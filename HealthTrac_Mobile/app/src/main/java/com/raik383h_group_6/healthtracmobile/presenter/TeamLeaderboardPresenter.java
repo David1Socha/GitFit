@@ -78,11 +78,6 @@ public class TeamLeaderboardPresenter extends BasePresenter{
         List<Membership> teamMembership = membershipService.getMembershipsAsync(team.getId(), grant.getAuthHeader());
         List<User> allUsers = userService.getUsersAsync(grant.getAuthHeader());
         if(teamMembership == null || allUsers == null) {
-            Log.i("Team Membership", "IS NULL");
-            Log.i("Team ID", team.getId() + "");
-            Log.i("Token", grant.getAuthHeader());
-            Log.i("Membership Service", membershipService.toString());
-
             return null;
         }
         List<String> userIds = new ArrayList<String>();
