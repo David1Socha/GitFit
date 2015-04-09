@@ -50,6 +50,10 @@ public class ViewTeamActivity extends BaseActivity implements ViewTeamView {
         presenter.onResume();
     }
 
+    public void onClickViewLeaderboard(View v) {
+        presenter.onClickViewLeaderboard();
+    }
+
     public void onClickEditTeam(View v) {
         presenter.onClickEditTeam();
     }

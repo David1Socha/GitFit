@@ -56,6 +56,8 @@ public interface IActivityNavigator {
 
     void openEditTeam(AccessGrant grant, Team team, int reqCode);
 
+    void openTeamLeaderboard(AccessGrant grant, Team team);
+
     void finishEditUserSuccess(User user);
 
     void finishEditUserFailure();

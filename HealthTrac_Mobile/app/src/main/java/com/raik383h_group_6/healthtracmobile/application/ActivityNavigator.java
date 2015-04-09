@@ -24,6 +24,7 @@ import com.raik383h_group_6.healthtracmobile.view.activity.OAuthPromptActivity;
 import com.raik383h_group_6.healthtracmobile.view.activity.CreateUserActivity;
 import com.raik383h_group_6.healthtracmobile.view.activity.EditUserActivity;
 import com.raik383h_group_6.healthtracmobile.view.activity.ActivityActivity;
+import com.raik383h_group_6.healthtracmobile.view.activity.TeamLeaderboardActivity;
 import com.raik383h_group_6.healthtracmobile.view.activity.ViewTeamActivity;
 import com.raik383h_group_6.healthtracmobile.view.activity.ViewUserActivity;
 
@@ -211,6 +212,14 @@ public class ActivityNavigator implements IActivityNavigator {
         intent.putExtra(activity.getString(R.string.EXTRA_ACCESS_GRANT), grant);
         intent.putExtra(activity.getString(R.string.EXTRA_TEAM), team);
         activity.startActivityForResult(intent, reqCode);
+    }
+
+    @Override
+    public void openTeamLeaderboard(AccessGrant grant, Team team) {
+        Intent intent = new Intent(activity, TeamLeaderboardActivity.class);
+        intent.putExtra(activity.getString(R.string.EXTRA_ACCESS_GRANT), grant);
+        intent.putExtra(activity.getString(R.string.EXTRA_TEAM), team);
+        activity.startActivity(intent);
     }
 
     @Override

@@ -49,6 +49,10 @@ public class ViewTeamPresenter extends BasePresenter{
         return userMembership;
     }
 
+    public void onClickViewLeaderboard() {
+        nav.openTeamLeaderboard(grant, team);
+    }
+
     public void onClickEditTeam() {
         nav.openEditTeam(grant, team, RequestCodes.UPDATE_TEAM);
     }

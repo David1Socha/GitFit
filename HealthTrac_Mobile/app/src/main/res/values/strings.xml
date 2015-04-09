@@ -136,5 +136,7 @@
     <string name="title_activity_create_goal">Create Goal</string>
     <string name="title_activity_create_energy_level">Create Energy Level</string>
     <string name="title_activity_create_meal">Create Meal</string>
+    <string name="view_leaderboard">View Leaderboard</string>
+    <string name="title_activity_team_leaderboard">Team Leaderboard</string>
 
 </resources>
