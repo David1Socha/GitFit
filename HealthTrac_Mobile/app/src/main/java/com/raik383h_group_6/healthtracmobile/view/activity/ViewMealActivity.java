@@ -10,6 +10,7 @@ import com.raik383h_group_6.healthtracmobile.application.IActivityNavigator;
 import com.raik383h_group_6.healthtracmobile.presenter.BasePresenter;
 import com.raik383h_group_6.healthtracmobile.presenter.PresenterFactory;
 import com.raik383h_group_6.healthtracmobile.presenter.ViewEnergyLevelPresenter;
+import com.raik383h_group_6.healthtracmobile.presenter.ViewMealPresenter;
 import com.raik383h_group_6.healthtracmobile.view.ViewEnergyLevelView;
 import com.raik383h_group_6.healthtracmobile.view.ViewMealView;
 
