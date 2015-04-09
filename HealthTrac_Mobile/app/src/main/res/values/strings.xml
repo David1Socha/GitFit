@@ -152,5 +152,8 @@
     <string name="user_feed">View your feed</string>
     <string name="title_activity_feed">View Feed</string>
     <string name="team_feed">View Team Feed</string>
+    <string name="distance_label_ar">Distance</string>
+    <string name="duration_label_ar">Duration</string>
+    <string name="steps_label_ar">Steps</string>
 
 </resources>

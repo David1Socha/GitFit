@@ -12,10 +12,12 @@ public class FeedActivityReport extends FeedModel {
 
     private ActivityReport rep;
     private AccessGrant grant;
+    private String username;
 
-    public FeedActivityReport(String msg, Date date, IActivityNavigator nav, ActivityReport rep, AccessGrant grant) {
+    public FeedActivityReport(String msg, Date date, IActivityNavigator nav, ActivityReport rep, AccessGrant grant, String username) {
         super(msg, date, nav);
         this.rep = rep;
+        this.username = username;
         this.grant = grant;
     }
 

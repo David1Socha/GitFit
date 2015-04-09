@@ -2,4 +2,5 @@
 <resources>
     <item name="username" type="color">#0066FF</item>
     <color name="team_name">#990099</color>
+    <color name="activity_report">@color/username</color>
 </resources>

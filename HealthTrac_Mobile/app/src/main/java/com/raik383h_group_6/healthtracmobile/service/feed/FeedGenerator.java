@@ -205,7 +205,7 @@ public abstract class FeedGenerator {
         List<FeedActivityReport> fas = new ArrayList<>();
         for (ActivityReport a : as) {
             String username = getCorrespondingUserName(a.getUserID());
-            FeedActivityReport fa = new FeedActivityReport(res.getString(R.string.feed_activity_report, username, a.getSteps()), a.getDate(), nav, a, grant);
+            FeedActivityReport fa = new FeedActivityReport(res.getString(R.string.feed_activity_report, username, a.getSteps()), a.getDate(), nav, a, grant, username);
             fas.add(fa);
         }
         return fas;
