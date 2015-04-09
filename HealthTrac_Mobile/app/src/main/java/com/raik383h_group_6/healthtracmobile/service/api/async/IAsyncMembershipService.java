@@ -12,13 +12,13 @@ import retrofit.http.Path;
 import retrofit.http.Query;
 
 public interface IAsyncMembershipService {
-    Membership getMembershipAsync( long id, String token);
+    Membership getMembershipAsync( long id, String token) throws ExecutionException, InterruptedException;
 
-    Membership getMembershipAsync( String userId,  long teamId, String token);
+    Membership getMembershipAsync( String userId,  long teamId, String token) throws ExecutionException, InterruptedException;
 
-    List<Membership> getMembershipsAsync( String token);
+    List<Membership> getMembershipsAsync( String token) throws ExecutionException, InterruptedException;
 
-    List<Membership> getMembershipsAsync(String userId, String token);
+    List<Membership> getMembershipsAsync(String userId, String token) throws ExecutionException, InterruptedException;
 
     List<Membership> getMembershipsAsync( long teamId,  String token) throws ExecutionException, InterruptedException;
 
