@@ -3,6 +3,7 @@ package com.raik383h_group_6.healthtracmobile.application;
 import com.raik383h_group_6.healthtracmobile.model.AccessGrant;
 import com.raik383h_group_6.healthtracmobile.model.ActivityReport;
 import com.raik383h_group_6.healthtracmobile.model.EnergyLevel;
+import com.raik383h_group_6.healthtracmobile.model.Meal;
 import com.raik383h_group_6.healthtracmobile.model.Team;
 import com.raik383h_group_6.healthtracmobile.model.Token;
 import com.raik383h_group_6.healthtracmobile.model.User;
@@ -88,4 +89,5 @@ public interface IActivityNavigator {
 
     void openActivityReport(ActivityReport ar, String username, AccessGrant grant);
     void openViewEnergyLevel(EnergyLevel el, String username, AccessGrant grant);
+    void openViewMeal(Meal m, String username, AccessGrant grant);
 }
