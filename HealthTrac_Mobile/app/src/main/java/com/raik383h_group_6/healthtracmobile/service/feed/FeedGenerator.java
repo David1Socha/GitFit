@@ -134,7 +134,7 @@ public abstract class FeedGenerator {
         List<FeedMeal> fms = new ArrayList<>();
         for (Meal m : ms) {
             String username = getCorrespondingUserName(m.getUserID());
-            FeedMeal fm = new FeedMeal(res.getString(R.string.feed_meal, username, m.getCalories()), m.getDateCreated(), nav, m, grant);
+            FeedMeal fm = new FeedMeal(res.getString(R.string.feed_meal, username, m.getCalories()), m.getDateCreated(), nav, m, grant, username);
             fms.add(fm);
         }
         return fms;

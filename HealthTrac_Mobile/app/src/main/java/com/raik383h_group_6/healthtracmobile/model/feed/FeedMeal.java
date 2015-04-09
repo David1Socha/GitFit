@@ -10,17 +10,19 @@ import java.util.Date;
 public class FeedMeal extends FeedModel {
 
     private Meal meal;
+    private String username;
     private AccessGrant grant;
 
-    public FeedMeal(String msg, Date date, IActivityNavigator nav, Meal meal, AccessGrant grant) {
+    public FeedMeal(String msg, Date date, IActivityNavigator nav, Meal meal, AccessGrant grant, String username) {
         super(msg, date, nav);
         this.meal = meal;
+        this.username = username;
         this.grant = grant;
     }
 
     @Override
     public void onClick() {
-        //nav.openMealDetail(meal, grant);
+        nav.openViewMeal(meal, username, grant);
     }
 
     @Override
