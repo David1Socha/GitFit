@@ -204,6 +204,14 @@
                 android:value=".view.activity.FeedActivity"
                 android:name="android.support.PARENT_ACTIVITY" />
         </activity>
+        <activity
+            android:name=".view.activity.ViewBadgeActivity"
+            android:label="@string/title_activity_badge"
+            android:launchMode="singleTop">
+            <meta-data
+                android:value=".view.activity.FeedActivity"
+                android:name="android.support.PARENT_ACTIVITY" />
+        </activity>
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
             android:value="AIzaSyCUrT4XKqTZUKpQ_-p7AStAOdijIerGa-U"/>

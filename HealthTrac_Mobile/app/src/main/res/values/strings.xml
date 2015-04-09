@@ -183,5 +183,6 @@
     <string name="title_activity_goal">View Goal</string>
     <string name="badge_holders">Users with badge:</string>
     <string name="EXTRA_BADGE">com.raik383h_group_6.healthtracmobile.BADGE</string>
+    <string name="title_activity_badge">View Badge</string>
 
 </resources>
