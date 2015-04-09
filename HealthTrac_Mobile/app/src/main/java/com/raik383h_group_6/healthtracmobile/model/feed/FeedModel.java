@@ -31,6 +31,6 @@ public abstract class FeedModel implements Comparable<FeedModel> {
 
     @Override
     public int compareTo(FeedModel o) {
-        return date.compareTo(o.getDateReal());
+        return -date.compareTo(o.getDateReal());
     }
 }
