@@ -23,7 +23,7 @@ public class FeedActivityReport extends FeedModel {
 
     @Override
     public void onClick() {
-        //nav.openActivityReportDetail(rep, grant);
+        nav.openActivityReport(rep, username, grant);
     }
 
     @Override

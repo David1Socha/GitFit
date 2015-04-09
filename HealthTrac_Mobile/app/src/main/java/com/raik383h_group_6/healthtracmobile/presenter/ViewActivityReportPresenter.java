@@ -1,5 +1,6 @@
 package com.raik383h_group_6.healthtracmobile.presenter;
 
+import com.google.inject.Inject;
 import com.google.inject.assistedinject.Assisted;
 import com.raik383h_group_6.healthtracmobile.R;
 import com.raik383h_group_6.healthtracmobile.application.IActivityNavigator;
@@ -17,6 +18,7 @@ public class ViewActivityReportPresenter extends BasePresenter {
     private ActivityReport ar;
     private String username;
 
+    @Inject
     public ViewActivityReportPresenter(@Assisted IActivityNavigator nav, @Assisted ViewActivityReportView view) {
         this.nav = nav;
         this.view = view;
