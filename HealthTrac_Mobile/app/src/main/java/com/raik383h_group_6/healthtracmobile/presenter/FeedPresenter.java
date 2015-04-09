@@ -146,6 +146,7 @@ public class FeedPresenter extends BasePresenter {
                 }
             }
             view.setGoalsInProgress(goalsInProgress);
+            view.setGoalHeaderDisplay(true);
         } catch (ExecutionException | InterruptedException e) {
             view.setGoalHeaderDisplay(false);
         }
