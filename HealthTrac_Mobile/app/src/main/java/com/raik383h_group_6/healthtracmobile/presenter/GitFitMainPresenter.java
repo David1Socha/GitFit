@@ -109,17 +109,19 @@ public class GitFitMainPresenter extends BasePresenter{
         if (resultCode == Activity.RESULT_OK) {
             switch (requestCode) {
                 case RequestCodes.AUTH:
-                    grant = (AccessGrant) data.getParcelable(view.getResource(R.string.EXTRA_ACCESS_GRANT));
+                    grant = data.getParcelable(view.getResource(R.string.EXTRA_ACCESS_GRANT));
                     break;
                 default:
                     break;
             }
-
         }
     }
 
-    public void onClickPedometer() { nav.openActivity(grant); }
+    public void onClickStartActivity() { nav.openActivity(grant); }
 
+    public void onClickCreateActivityManual() {
+        nav.openCreateActivity(grant);
+    }
 
     @Override
     protected BaseView getView() {
