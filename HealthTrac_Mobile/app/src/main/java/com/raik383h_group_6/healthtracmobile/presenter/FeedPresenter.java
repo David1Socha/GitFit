@@ -10,6 +10,7 @@ import com.raik383h_group_6.healthtracmobile.R;
 import com.raik383h_group_6.healthtracmobile.application.IActivityNavigator;
 import com.raik383h_group_6.healthtracmobile.model.AccessGrant;
 import com.raik383h_group_6.healthtracmobile.model.ActivityReport;
+import com.raik383h_group_6.healthtracmobile.model.Field;
 import com.raik383h_group_6.healthtracmobile.model.Goal;
 import com.raik383h_group_6.healthtracmobile.model.Team;
 import com.raik383h_group_6.healthtracmobile.model.User;
@@ -39,6 +40,10 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
+
+import static com.raik383h_group_6.healthtracmobile.model.Field.DISTANCE;
+import static com.raik383h_group_6.healthtracmobile.model.Field.DURATION;
+import static com.raik383h_group_6.healthtracmobile.model.Field.STEPS;
 
 public class FeedPresenter extends BasePresenter {
 
@@ -99,6 +104,7 @@ public class FeedPresenter extends BasePresenter {
             addGoals();
         } else {
             view.setFeedHeaderDisplay(false);
+            view.setGoalHeaderDisplay(false);
         }
         List<FeedModel> fms = null;
         try {
@@ -123,11 +129,26 @@ public class FeedPresenter extends BasePresenter {
             List<GoalProgress> goalsInProgress = new ArrayList<>();
             for (Goal g : goals) {
                 UserGoal cor = getCorrespondingUserGoal(g, ugs);
+                if (cor != null) {
+                    GoalProgress progress = null;
+                    switch (g.getField()) {
+                        case DISTANCE:
+                            progress = new GoalProgress(g, view.getResource(R.string.goal_progress_distance, u.getLifetimeDistance(), g.getThreshold()));
+                            break;
+                        case DURATION:
+                            progress = new GoalProgress(g, view.getResource(R.string.goal_progress_duration, u.getLifetimeDuration(), g.getThreshold()));
+                            break;
+                        case STEPS:
+                            progress = new GoalProgress(g, view.getResource(R.string.goal_progress_step, u.getLifetimeSteps(), g.getThreshold()));
+                            break;
+                    }
+                    goalsInProgress.add(progress);
+                }
             }
+            view.setGoalsInProgress(goalsInProgress);
         } catch (ExecutionException | InterruptedException e) {
-
+            view.setGoalHeaderDisplay(false);
         }
-        //TODO
     }
 
     private UserGoal getCorrespondingUserGoal(Goal g, List<UserGoal> ugs) {

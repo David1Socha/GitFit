@@ -174,5 +174,8 @@
     <string name="duration_header">%1$.2f seconds of lifetime total %2$.2f</string>
     <string name="distance_header">%1$.2f feet of lifetime total %2$.2f</string>
     <string name="goal_title">Goal Progress</string>
+    <string name="goal_progress_step">%1$.0f / %2$.0f steps</string>
+    <string name="goal_progress_distance">%1$.2f / %2$.2f feet</string>
+    <string name="goal_progress_duration">%1$.2f / %2$.2f seconds</string>
 
 </resources>
