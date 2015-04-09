@@ -169,5 +169,6 @@
     <string name="EXTRA_MEAL">com.raik383h_group_6.healthtracmobile.MEAL</string>
     <string name="meal_title">%1$s\'s meal</string>
     <string name="title_activity_meal">View meal</string>
+    <string name="leaderboard_title">Lifetime Steps</string>
 
 </resources>
