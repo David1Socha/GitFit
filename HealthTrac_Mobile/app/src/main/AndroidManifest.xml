@@ -198,7 +198,7 @@
         </activity>
         <activity
             android:name=".view.activity.ViewGoalActivity"
-            android:label="@string/title_activity_meal"
+            android:label="@string/title_activity_goal"
             android:launchMode="singleTop">
             <meta-data
                 android:value=".view.activity.FeedActivity"

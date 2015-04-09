@@ -1,5 +1,6 @@
 package com.raik383h_group_6.healthtracmobile.presenter;
 
+import com.google.inject.Inject;
 import com.google.inject.assistedinject.Assisted;
 import com.raik383h_group_6.healthtracmobile.R;
 import com.raik383h_group_6.healthtracmobile.application.IActivityNavigator;
@@ -16,6 +17,7 @@ public class ViewGoalPresenter extends BasePresenter {
     private IActivityNavigator nav;
     private Goal goal;
 
+    @Inject
     public ViewGoalPresenter(@Assisted IActivityNavigator nav, @Assisted ViewGoalView view) {
         this.view = view;
         this.nav = nav;
