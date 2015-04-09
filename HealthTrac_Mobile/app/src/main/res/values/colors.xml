@@ -4,4 +4,5 @@
     <color name="team_name">#990099</color>
     <color name="activity_report">@color/username</color>
     <color name="energy_level">@color/username</color>
+    <color name="meal">@color/username</color>
 </resources>
