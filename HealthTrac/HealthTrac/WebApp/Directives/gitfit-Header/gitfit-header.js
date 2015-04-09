@@ -1,6 +1,6 @@
 ﻿'use strict';
 
-gitFit.directive('gitfit-Header', function () {
+gitFit.directive('gitfitHeader', function () {
     return {
         restrict: 'E',
         templateUrl: '../WebApp/Directives/gitfit-Header/gitfit-Header.html',

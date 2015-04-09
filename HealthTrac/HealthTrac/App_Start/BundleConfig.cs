@@ -37,7 +37,10 @@ namespace HealthTrac
             bundles.Add(new ScriptBundle("~/bundles/WebApp").Include(
                 "~/WebApp/app.js",
                 
-                "~/WebApp/controllers/*.js"));
+                "~/WebApp/controllers/*.js",
+                
+                "~/WebApp/Directives/*.js",
+                "~/WebApp/Directives/gitfit-Header/gitfit-header.js"));
         }
     }
 }
