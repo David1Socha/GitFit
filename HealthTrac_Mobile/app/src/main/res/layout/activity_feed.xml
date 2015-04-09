@@ -14,7 +14,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/today"
-            android:id="@+id/steps_textview"/>
+            android:id="@+id/today"/>
         <TextView
             android:layout_marginTop="10dp"
             android:layout_width="match_parent"

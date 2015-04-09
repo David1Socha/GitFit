@@ -115,7 +115,7 @@ public class FeedPresenter extends BasePresenter {
             ActivityReport ar = getTodaysActivityReport();
             User u = usvc.getUserAsync(uid, grant.getAuthHeader());
             if (ar != null) {
-                view.setSteps(view.getResource(R.string.steps_header, ar.getSteps(), u.getLifetimeSteps()));
+                view.setSteps(view.getResource(R.string.steps_header, ar.getSteps(), (long) u.getLifetimeSteps()));
                 view.setDuration(view.getResource(R.string.duration_header, ar.getDuration(), u.getLifetimeDuration()));
                 view.setDistance(view.getResource(R.string.distance_header, ar.getDistance(), u.getLifetimeDistance()));
             } else {
