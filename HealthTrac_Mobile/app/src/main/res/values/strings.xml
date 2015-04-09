@@ -198,5 +198,6 @@
     <string name="steps_hint">(steps)</string>
     <string name="create_activity">Create Activity</string>
     <string name="title_activity_create_activity">Create Activity</string>
+    <string name="create_activity_manual">Create Activity Manually</string>
 
 </resources>

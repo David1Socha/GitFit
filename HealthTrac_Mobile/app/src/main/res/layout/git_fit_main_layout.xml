@@ -41,6 +41,15 @@
         android:layout_marginRight="20dp"
         android:id="@+id/pedometer_demo_button"
         android:text="@string/start_activity"
-        android:onClick="onClickPedometerDemo"/>
+        android:onClick="onClickStartActivity"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:text="@string/create_activity_manual"
+        android:onClick="onClickCreateActivityManual"/>
 
 </LinearLayout>
