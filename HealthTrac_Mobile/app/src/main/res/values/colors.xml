@@ -9,4 +9,5 @@
     <color name="feed_header_bg">#FF0066</color>
     <color name="goal_header_bg">#66FFFF</color>
     <color name="badge">@color/goal</color>
+    <color name="activity">@color/username</color>
 </resources>
