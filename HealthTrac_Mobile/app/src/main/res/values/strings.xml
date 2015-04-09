@@ -189,5 +189,8 @@
     <string name="EXTRA_ACTIVITY">com.raik383h_group_6.healthtracmobile.ACTIVITY</string>
     <string name="activity_title">%1$s\'s Activity</string>
     <string name="title_activity_activity">View Activity</string>
+    <string name="update_type">Update type</string>
+    <string name="prompt_type">Choose activity type</string>
+    <string name="error_update_type">Error updating type</string>
 
 </resources>

@@ -33,6 +33,13 @@
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="@string/type_label" />
 
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="onClickUpdateType"
+                android:text="@string/update_type"/>
+
             <TextView
                 android:layout_width="0dp"
                 android:layout_weight="1"

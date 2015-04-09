@@ -13,4 +13,8 @@ public interface ViewActivityView extends BaseView {
     void setDate(String d);
 
     void setTitle(String t);
+
+    void displayMessage(String msg);
+
+    void promptUserType(String[] options);
 }
