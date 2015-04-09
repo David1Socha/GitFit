@@ -9,6 +9,7 @@ import com.raik383h_group_6.healthtracmobile.application.ActivityNavigator;
 import com.raik383h_group_6.healthtracmobile.application.IActivityNavigator;
 import com.raik383h_group_6.healthtracmobile.presenter.BasePresenter;
 import com.raik383h_group_6.healthtracmobile.presenter.PresenterFactory;
+import com.raik383h_group_6.healthtracmobile.presenter.ViewGoalPresenter;
 import com.raik383h_group_6.healthtracmobile.view.ViewGoalView;
 
 import roboguice.inject.ContentView;

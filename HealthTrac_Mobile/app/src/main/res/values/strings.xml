@@ -171,5 +171,6 @@
     <string name="title_activity_meal">View meal</string>
     <string name="field_label_el">Field</string>
     <string name="threshold_label_el">Threshold</string>
+    <string name="EXTRA_GOAL">com.raik383h_group_6.healthtracmobile.GOAL</string>
 
 </resources>
