@@ -160,5 +160,7 @@
     <string name="activity_report_title">%1$s activity report for %2$s</string>
     <string name="title_activity_activity_report">View Activity Report</string>
     <string name="mood_label_el">Mood</string>
+    <string name="EXTRA_ENERGY_LEVEL">com.raik383h_group_6.healthtracmobile.ENERGY_LEVEL</string>
+    <string name="energy_level_title">%1$s\\\'s energy level status</string>
 
 </resources>
