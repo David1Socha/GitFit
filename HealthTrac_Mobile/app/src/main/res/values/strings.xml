@@ -182,5 +182,6 @@
     <string name="goal_progress_duration">%1$.2f / %2$.2f seconds</string>
     <string name="title_activity_goal">View Goal</string>
     <string name="badge_holders">Users with badge:</string>
+    <string name="EXTRA_BADGE">com.raik383h_group_6.healthtracmobile.BADGE</string>
 
 </resources>

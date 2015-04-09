@@ -23,6 +23,7 @@ import com.raik383h_group_6.healthtracmobile.view.TeamLeaderboardView;
 import com.raik383h_group_6.healthtracmobile.view.TeamValidationView;
 import com.raik383h_group_6.healthtracmobile.view.UserValidationView;
 import com.raik383h_group_6.healthtracmobile.view.ViewActivityReportView;
+import com.raik383h_group_6.healthtracmobile.view.ViewBadgeView;
 import com.raik383h_group_6.healthtracmobile.view.ViewEnergyLevelView;
 import com.raik383h_group_6.healthtracmobile.view.ViewGoalView;
 import com.raik383h_group_6.healthtracmobile.view.ViewMealView;
@@ -54,4 +55,5 @@ public interface PresenterFactory {
     ViewEnergyLevelPresenter create(IActivityNavigator nav, ViewEnergyLevelView view);
     ViewMealPresenter create(IActivityNavigator nav, ViewMealView view);
     ViewGoalPresenter create(IActivityNavigator nav, ViewGoalView view);
+    ViewBadgePresenter create(IActivityNavigator nav, ViewBadgeView view);
 }

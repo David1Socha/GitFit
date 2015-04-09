@@ -14,6 +14,7 @@ import com.raik383h_group_6.healthtracmobile.application.IActivityNavigator;
 import com.raik383h_group_6.healthtracmobile.model.User;
 import com.raik383h_group_6.healthtracmobile.presenter.BasePresenter;
 import com.raik383h_group_6.healthtracmobile.presenter.PresenterFactory;
+import com.raik383h_group_6.healthtracmobile.presenter.ViewBadgePresenter;
 import com.raik383h_group_6.healthtracmobile.presenter.ViewGoalPresenter;
 import com.raik383h_group_6.healthtracmobile.view.ViewBadgeView;
 import com.raik383h_group_6.healthtracmobile.view.ViewGoalView;
@@ -49,7 +50,6 @@ public class ViewBadgeActivity extends BaseActivity implements ViewBadgeView {
             }
         });
     }
-
 
     @Override
     public BasePresenter getPresenter() {
