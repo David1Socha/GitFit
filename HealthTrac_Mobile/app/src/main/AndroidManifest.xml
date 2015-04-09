@@ -93,7 +93,8 @@
 
         <activity
             android:name=".view.activity.EditUserActivity"
-            android:label="@string/title_activity_update_user">
+            android:label="@string/title_activity_update_user"
+            android:launchMode="singleTop">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".view.activity.ViewUserActivity" />
@@ -101,7 +102,8 @@
 
         <activity
             android:name=".view.activity.EditTeamActivity"
-            android:label="@string/title_activity_update_team">
+            android:label="@string/title_activity_update_team"
+            android:launchMode="singleTop">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".view.activity.ViewTeamActivity" />
@@ -116,33 +118,51 @@
 
         <activity
             android:name=".view.activity.ViewUserActivity"
-            android:label="@string/title_activity_view_user">
+            android:label="@string/title_activity_view_user"
+            android:launchMode="singleTop">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".view.activity.ListUsersActivity" />
         </activity>
         <activity
             android:name=".view.activity.ViewTeamActivity"
-            android:label="@string/title_activity_view_team">
+            android:label="@string/title_activity_view_team"
+            android:launchMode="singleTop">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".view.activity.ListTeamsActivity" />
         </activity>
         <activity
             android:name=".view.activity.CreateGoalActivity"
-            android:label="@string/title_activity_create_goal">
+            android:label="@string/title_activity_create_goal"
+            android:launchMode="singleTop">
+            <meta-data
+                android:value=".view.activity.GitFitMainActivity"
+                android:name="android.support.PARENT_ACTIVITY" />
         </activity>
         <activity
             android:name=".view.activity.CreateEnergyLevelActivity"
-            android:label="@string/title_activity_create_energy_level">
+            android:label="@string/title_activity_create_energy_level"
+            android:launchMode="singleTop">
+            <meta-data
+                android:value=".view.activity.GitFitMainActivity"
+                android:name="android.support.PARENT_ACTIVITY" />
         </activity>
         <activity
             android:name=".view.activity.CreateMealActivity"
-            android:label="@string/title_activity_create_meal">
+            android:label="@string/title_activity_create_meal"
+            android:launchMode="singleTop">
+            <meta-data
+                android:value=".view.activity.GitFitMainActivity"
+                android:name="android.support.PARENT_ACTIVITY" />
         </activity>
         <activity
             android:name=".view.activity.FeedActivity"
-            android:label="@string/title_activity_feed">
+            android:label="@string/title_activity_feed"
+            android:launchMode="singleTop">
+            <meta-data
+                android:value=".view.activity.GitFitMainActivity"
+                android:name="android.support.PARENT_ACTIVITY" />
         </activity>
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
