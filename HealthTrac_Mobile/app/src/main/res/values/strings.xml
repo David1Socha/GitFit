@@ -165,5 +165,6 @@
     <string name="title_activity_energy_level">View Energy Level</string>
     <string name="EXTRA_MEAL">com.raik383h_group_6.healthtracmobile.MEAL</string>
     <string name="meal_title">%1$s\'s meal</string>
+    <string name="title_activity_meal">View meal</string>
 
 </resources>
