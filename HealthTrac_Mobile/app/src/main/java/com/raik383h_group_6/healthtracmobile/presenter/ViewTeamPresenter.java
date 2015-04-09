@@ -69,6 +69,10 @@ public class ViewTeamPresenter extends BasePresenter{
         userMembership.setMembershipStatus(Membership.MembershipStatus.MEMBER);
     }
 
+    public void onClickTeamFeed() {
+        nav.openFeed(team.getId(), grant);
+    }
+
     public void onClickJoinTeam() {
 
         if (userMembership == null) {

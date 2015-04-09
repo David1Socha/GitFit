@@ -151,5 +151,6 @@
     <string name="no_feed_message">No feeds found. Are you signed in?</string>
     <string name="user_feed">View your feed</string>
     <string name="title_activity_feed">View Feed</string>
+    <string name="team_feed">View Team Feed</string>
 
 </resources>
