@@ -17,7 +17,7 @@ import com.raik383h_group_6.healthtracmobile.view.ViewEnergyLevelView;
 import roboguice.inject.ContentView;
 import roboguice.inject.InjectView;
 
-@ContentView(R.layout.activity_view_activity_report)
+@ContentView(R.layout.activity_view_energy_level)
 public class ViewEnergyLevelActivity extends BaseActivity implements ViewEnergyLevelView {
     @InjectView(R.id.mood_textview)
     TextView mood;
