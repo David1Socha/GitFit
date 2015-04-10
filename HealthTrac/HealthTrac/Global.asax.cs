@@ -47,8 +47,8 @@ namespace HealthTrac
                 new SqlServerStorage("DefaultConnection");
             _server = new BackgroundJobServer();
             _server.Start();
-            BuildForest();
-            RecurringJob.AddOrUpdate(() => BuildForest(), Cron.Minutely);
+            //BuildForest();
+            //RecurringJob.AddOrUpdate(() => BuildForest(), Cron.Minutely);
         }
         public void BuildForest()
         {
