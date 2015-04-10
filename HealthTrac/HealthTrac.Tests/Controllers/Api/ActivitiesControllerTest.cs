@@ -107,25 +107,20 @@ namespace HealthTrac.Tests.Controllers.Api
             uowMock.Verify(u => u.Save());
         }
 
-        // TODO: Fix this. The test doesn't work...
-        /*[TestMethod]
+        [TestMethod]
         public void ApiDeleteActivity()
         {
             long id = 17;
             var activity = _sampleActivity2;
             var mock = new Mock<IActivityService>();
-            mock.Setup(acc => acc.DeleteActivity(It.IsAny<Activity>().ID));
-            mock.Setup(acc => acc.GetActivity(id))
-                .Returns(activity);
             var uowMock = new Mock<IUnitOfWork>();
             uowMock.Setup(u => u.ActivityService)
                 .Returns(mock.Object);
             var con = new ActivitiesController(uowMock.Object);
             var response = con.DeleteActivity(id);
             Assert.IsInstanceOfType(response, typeof(OkResult));
-            mock.Verify(acc => acc.GetActivity(id));
-            mock.Verify(acc => acc.DeleteActivity(activity.ID));
+            mock.Verify(s => s.DeleteActivity(activity.ID));
             uowMock.Verify(u => u.Save());
-        }*/
+        }
     }
 }
