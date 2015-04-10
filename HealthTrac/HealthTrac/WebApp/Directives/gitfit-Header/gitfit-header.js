@@ -7,8 +7,8 @@ gitFit.directive('gitfitHeader', function () {
         controller: ['$scope', '$rootScope', '$location', '$route', function ($scope, $rootScope, $location, $route) {
             $scope.headerTabs = [
                 { route: '/', label: 'Dashboard' },
-                { route: '/User', label: 'Users' },
-                { route: 'Teams', label: 'Teams' },
+                { route: '/Users', label: 'Users' },
+                { route: '/Teams', label: 'Teams' },
             ];
         }]
     }
