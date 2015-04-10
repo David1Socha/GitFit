@@ -1,13 +1,16 @@
-﻿@{
-    ViewBag.Title = "Home Page";
-}
+﻿<!DOCTYPE html>
+<html>
 <head>
-    <base href="/"/>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <base href="/" />
     <title>GitFit</title>
 </head>
 <body ng-app="gitFit" ng-controller="RootController">
     <div id="mainContainer">
-        <gitfit-Header></gitfit-Header>
+        <gitfit-header></gitfit-header>
         <ng-view></ng-view>
         <div class="jumbotron">
             <h1>HealthTrac</h1>
@@ -34,7 +37,8 @@
     </div>
     @Scripts.Render("~/bundles/angularjs")
     @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")   
+    @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/bundles/WebApp")
     @*@RenderSection("scripts", required: false)*@
 </body>
+</html>

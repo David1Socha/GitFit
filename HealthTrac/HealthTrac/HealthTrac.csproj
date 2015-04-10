@@ -371,9 +371,13 @@
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="DataAccess\Data\1000.csv" />
     <Content Include="WebApp\app.js" />
+    <Content Include="WebApp\Controllers\user-profile.js" />
+    <Content Include="WebApp\Controllers\users.js" />
     <Content Include="WebApp\Directives\gitfit-Header\gitfit-Header.html" />
     <Content Include="WebApp\Controllers\root.js" />
     <Content Include="WebApp\Directives\gitfit-Header\gitfit-header.js" />
+    <Content Include="WebApp\Views\user-profile.html" />
+    <Content Include="WebApp\Views\users.html" />
     <None Include="Properties\PublishProfiles\gitfit - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\gitfit - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\se6 - FTP.pubxml" />
@@ -1152,7 +1156,6 @@
       <DependentUpon>Web.config</DependentUpon>
     </Content>
     <Content Include="Views\Web.config" />
-    <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
@@ -1176,7 +1179,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="WebApp\Services\" />
-    <Folder Include="WebApp\Views\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
