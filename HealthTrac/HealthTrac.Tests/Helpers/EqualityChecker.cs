@@ -21,6 +21,18 @@ namespace HealthTrac.Tests.Helpers
             return equal;
         }
 
+        public static bool EqualValues(this ActivityDto activityDto, Activity activity)
+        {
+            bool equal = activityDto.Distance == activity.Distance &&
+                activityDto.Duration == activity.Duration &&
+                activityDto.Steps == activity.Steps &&
+                activityDto.StartDate == activity.StartDate &&
+                activityDto.ID == activity.ID &&
+                activityDto.UserID == activity.UserID &&
+                activityDto.Type == activity.Type;
+            return equal;
+        }
+
         public static bool EqualValues(this AccessGrantDto self, AccessGrantDto other)
         {
             bool equal = self.AccessToken == other.AccessToken
@@ -42,6 +54,18 @@ namespace HealthTrac.Tests.Helpers
             bool equal = teamDtos
                 .Zip(teams, (dto, t) => new Tuple<TeamDto, Team>(dto, t))
                 .All(t => t.Item1.EqualValues(t.Item2));
+            return equal;
+        }
+
+        public static bool EqualValues(this IEnumerable<ActivityDto> activityDtos, IEnumerable<Activity> activities)
+        {
+            if (activityDtos.Count() != activities.Count())
+            {
+                return false;
+            }
+            bool equal = activityDtos
+                .Zip(activities, (dto, a) => new Tuple<ActivityDto, Activity>(dto, a))
+                .All(a => a.Item1.EqualValues(a.Item2));
             return equal;
         }
 

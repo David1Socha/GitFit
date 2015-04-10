@@ -121,6 +121,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\Api\AccountsControllerTest.cs" />
+    <Compile Include="Controllers\Api\ActivitiesControllerTest.cs" />
     <Compile Include="Controllers\Api\UsersControllerTest.cs" />
     <Compile Include="Controllers\Api\MembershipsControllerTest.cs" />
     <Compile Include="Controllers\Api\TeamsControllerTest.cs" />
@@ -129,6 +130,7 @@
     <Compile Include="Helpers\EqualityChecker.cs" />
     <Compile Include="Helpers\MembershipGenerator.cs" />
     <Compile Include="Helpers\ProviderVerifyResultGenerator.cs" />
+    <Compile Include="Helpers\ActivityGenerator.cs" />
     <Compile Include="Helpers\TeamGenerator.cs" />
     <Compile Include="Helpers\UserGenerator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
