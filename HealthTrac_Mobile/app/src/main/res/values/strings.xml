@@ -169,13 +169,11 @@
     <string name="EXTRA_MEAL">com.raik383h_group_6.healthtracmobile.MEAL</string>
     <string name="meal_title">%1$s\'s meal</string>
     <string name="title_activity_meal">View meal</string>
-<<<<<<< HEAD
     <string name="leaderboard_title">Lifetime Steps</string>
     <string name="invite_member">invite</string>
     <string name="invited_member">invited</string>
     <string name="invite_members">Invite Members</string>
     <string name="title_activity_invite_members">Invite Members</string>
-=======
     <string name="field_label_el">Field</string>
     <string name="threshold_label_el">Threshold</string>
     <string name="EXTRA_GOAL">com.raik383h_group_6.healthtracmobile.GOAL</string>
