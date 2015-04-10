@@ -16,6 +16,14 @@ gitFit.config(['$httpProvider', '$routeProvider', '$locationProvider', function 
             templateUrl: '/WebApp/Views/user-profile.html',
             controller: 'UserProfileController'
         })
+        .when('/Teams', {
+            templateUrl: '/WebApp/Views/teams.html',
+            controller: 'TeamsController'
+        })
+        .when('/Team-Profile', {
+            templateUrl: '/WebApp/Views/team-profile.html',
+            controller: 'TeamProfileController'
+        })
         .otherwise({ redirectTo: '/' });
 
     $locationProvider.html5Mode(true);
