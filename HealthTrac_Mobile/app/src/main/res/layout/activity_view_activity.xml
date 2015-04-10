@@ -140,6 +140,17 @@
                 android:id="@+id/steps_textview"/>
         </LinearLayout>
 
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/view_path"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:onClick="onClickViewPath"
+            android:visibility="gone"
+            android:id="@+id/view_path_button"/>
+
     </LinearLayout>
 
 </ScrollView>

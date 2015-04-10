@@ -101,6 +101,4 @@ public interface IActivityNavigator {
     void openViewBadge(Badge b, AccessGrant grant);
     void openViewActivity(Activity a, String username, AccessGrant grant);
     void openCreateActivity(AccessGrant grant);
-
-    void openChallengeUsers(AccessGrant grant, Goal goal);
 }

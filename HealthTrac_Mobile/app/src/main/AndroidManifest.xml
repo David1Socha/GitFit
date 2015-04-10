@@ -244,6 +244,14 @@
                 android:value=".view.activity.GitFitMainActivity"
                 android:name="android.support.PARENT_ACTIVITY" />
         </activity>
+        <activity
+            android:name=".view.activity.ViewPathActivity"
+            android:label="@string/title_activity_view_path"
+            android:launchMode="singleTop">
+            <meta-data
+                android:value=".view.activity.ViewActivityActivity"
+                android:name="android.support.PARENT_ACTIVITY" />
+        </activity>
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
             android:value="AIzaSyCUrT4XKqTZUKpQ_-p7AStAOdijIerGa-U"/>

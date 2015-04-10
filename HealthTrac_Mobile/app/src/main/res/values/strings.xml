@@ -204,10 +204,6 @@
     <string name="create_activity">Create Activity</string>
     <string name="title_activity_create_activity">Create Activity</string>
     <string name="create_activity_manual">Create Activity Manually</string>
-    <string name="challenge_goal">Challenge Users</string>
-    <string name="challenge_user">challenge</string>
-    <string name="challenged_user">challenged</string>
-    <string name="title_activity_challenge_users">Challenge Users</string>
-    >>>>>>> origin/master
+>>>>>>> origin/master
 
 </resources>

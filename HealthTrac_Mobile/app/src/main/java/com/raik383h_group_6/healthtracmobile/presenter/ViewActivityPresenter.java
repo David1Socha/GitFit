@@ -6,10 +6,15 @@ import com.raik383h_group_6.healthtracmobile.R;
 import com.raik383h_group_6.healthtracmobile.application.IActivityNavigator;
 import com.raik383h_group_6.healthtracmobile.model.AccessGrant;
 import com.raik383h_group_6.healthtracmobile.model.Activity;
+import com.raik383h_group_6.healthtracmobile.model.Point;
 import com.raik383h_group_6.healthtracmobile.service.FormatUtils;
 import com.raik383h_group_6.healthtracmobile.service.api.async.IAsyncActivityService;
+import com.raik383h_group_6.healthtracmobile.service.api.async.IAsyncPointService;
 import com.raik383h_group_6.healthtracmobile.view.BaseView;
 import com.raik383h_group_6.healthtracmobile.view.ViewActivityView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ViewActivityPresenter extends BasePresenter {
 
@@ -19,15 +24,21 @@ public class ViewActivityPresenter extends BasePresenter {
     private Activity activity;
     private String username;
     private IAsyncActivityService asvc;
+    private ArrayList<Point> pts;
+    private IAsyncPointService psvc;
 
     @Inject
-    public ViewActivityPresenter(IAsyncActivityService asvc, @Assisted IActivityNavigator nav, @Assisted ViewActivityView view) {
+    public ViewActivityPresenter(IAsyncPointService psvc, IAsyncActivityService asvc, @Assisted IActivityNavigator nav, @Assisted ViewActivityView view) {
         this.nav = nav;
         this.view = view;
         this.asvc = asvc;
         this.grant = (AccessGrant) view.getParcelableExtra(view.getResource(R.string.EXTRA_ACCESS_GRANT));
         this.activity = (Activity) view.getParcelableExtra(view.getResource(R.string.EXTRA_ACTIVITY));
         this.username = view.getStringExtra(view.getResource(R.string.EXTRA_USERNAME));
+        try {
+           pts = new ArrayList<>(psvc.getPoints(activity.getId(), grant.getAuthHeader()));
+        } catch (Exception ignored) {
+        }
     }
 
     @Override
@@ -47,6 +58,11 @@ public class ViewActivityPresenter extends BasePresenter {
 
     public void onResume() {
         populateFields();
+        if (pts != null && !pts.isEmpty()) {
+            view.setViewPathEnabled(true);
+        } else {
+            view.setViewPathEnabled(false);
+        }
     }
 
     private void populateFields() {
@@ -75,5 +91,9 @@ public class ViewActivityPresenter extends BasePresenter {
         } catch (Exception e) {
             view.displayMessage(view.getResource(R.string.error_update_type));
         }
+    }
+
+    public void onClickViewPath() {
+        nav.openViewPath(pts, grant);
     }
 }
