@@ -43,4 +43,10 @@ public class ActivityPresenterTest {
         presenter.onCreate();
         verify(gClient).connect();
     }
+
+    @Test
+    public void onPauseStopsLocationUpdates() {
+        presenter.onPause();
+        verify(view).stopLocationUpdates();
+    }
 }
