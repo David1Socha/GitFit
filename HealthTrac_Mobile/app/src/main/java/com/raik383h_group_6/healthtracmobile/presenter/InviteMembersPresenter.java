@@ -62,7 +62,6 @@ public class InviteMembersPresenter extends BasePresenter{
             if (users != null) {
                 view.setNoUsersMessageDisplay(false);
                 view.setUsers(users);
-                Log.i("Users", String.valueOf(users.size()));
             } else {
                 view.setNoUsersMessageDisplay(true);
             }
@@ -106,7 +105,6 @@ public class InviteMembersPresenter extends BasePresenter{
         try {
             membershipService.createMembershipAsync(newMember, grant.getAuthHeader());
         } catch (Exception e) {
-            Log.i("Exception", e.getMessage());
         }
     }
 
