@@ -9,7 +9,7 @@ public final class PointLatLngMap {
         //unused
     }
 
-    public static LatLng FromPoint(Point p) {
+    public static LatLng fromPoint(Point p) {
         return new LatLng(p.getLat(), p.getLng());
     }
 }
