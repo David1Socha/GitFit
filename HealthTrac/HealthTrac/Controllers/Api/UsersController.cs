@@ -32,6 +32,15 @@ namespace HealthTrac.Controllers.Api
             return users.Select(u => UserDto.FromUser(u));
         }
 
+        [Route("api/Users/Search/{name}")]
+        [HttpGet]
+        public IEnumerable<User> SearchUsers(string name)
+        {
+            IEnumerable<User> users = userService.SearchUsers(name);
+            return users;
+        }
+
+
         [Route("api/Users/Available")]
         [ResponseType(typeof(bool))]
         [HttpGet]

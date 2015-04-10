@@ -46,6 +46,14 @@ namespace HealthTrac.Controllers.Api
             return Ok(teamDto);
         }
 
+        [Route("api/Teams/Search/{name}")]
+        [HttpGet]
+        public IEnumerable<Team> SearchTeams(string name)
+        {
+            IEnumerable<Team> teams = teamService.SearchTeams(name);
+            return teams;
+        }
+
         //GET: api/Teams?userId=xxx
         public IEnumerable<TeamDto> GetTeams(string userId)
         {
