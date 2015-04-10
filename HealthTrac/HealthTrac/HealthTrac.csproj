@@ -378,6 +378,8 @@
     <Content Include="WebApp\Directives\gitfit-Header\gitfit-Header.html" />
     <Content Include="WebApp\Controllers\root.js" />
     <Content Include="WebApp\Directives\gitfit-Header\gitfit-header.js" />
+    <Content Include="WebApp\Services\team-api.js" />
+    <Content Include="WebApp\Services\user-api.js" />
     <Content Include="WebApp\Views\team-profile.html" />
     <Content Include="WebApp\Views\teams.html" />
     <Content Include="WebApp\Views\user-profile.html" />
@@ -1182,7 +1184,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="WebApp\Services\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
