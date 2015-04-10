@@ -47,6 +47,10 @@ public class ActivityPresenter extends BasePresenter{
         pts = new ArrayList<Point>();
     }
 
+    public void setPts(List<Point> pts) {
+        this.pts = pts;
+    }
+
     public List<Point> getPts() {
         return pts;
     }

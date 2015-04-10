@@ -21,6 +21,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
@@ -89,10 +90,20 @@ public class ActivityPresenterTest {
     }
 
     @Test
-    public void onClickFinishActivityPostsActivityPts() throws ExecutionException, InterruptedException {
+    public void onClickFinishActivityPostsActivity() throws ExecutionException, InterruptedException {
         presenter.onCreate();
         presenter.onClickFinishActivity();
         verify(asvc).createActivityAsync(any(Activity.class), anyString());
-        verify(psvc).createPoints(anyListOf(Point.class), anyString());
+    }
+
+    @Test
+    public void onClickFinishActivityPostsPtsWhenPts() throws ExecutionException, InterruptedException {
+        presenter.onCreate();
+        List<Point> pts = new ArrayList<Point>();
+        pts.add(ModelGenerator.genBasicPt());
+        presenter.setPts(pts);
+        when(asvc.createActivityAsync(any(Activity.class), anyString())).thenReturn(ModelGenerator.genBasicActivity());
+        presenter.onClickFinishActivity();
+        verify(psvc).createPoints(pts, grant.getAuthHeader());
     }
 }

@@ -4,8 +4,10 @@ import android.location.Location;
 
 import com.raik383h_group_6.healthtracmobile.R;
 import com.raik383h_group_6.healthtracmobile.model.AccessGrant;
+import com.raik383h_group_6.healthtracmobile.model.Activity;
 import com.raik383h_group_6.healthtracmobile.model.FacebookUser;
 import com.raik383h_group_6.healthtracmobile.model.Membership;
+import com.raik383h_group_6.healthtracmobile.model.Point;
 import com.raik383h_group_6.healthtracmobile.model.Team;
 import com.raik383h_group_6.healthtracmobile.model.Token;
 import com.raik383h_group_6.healthtracmobile.model.User;
@@ -54,6 +56,13 @@ public final class ModelGenerator {
         return u;
     }
 
+    public static Point genBasicPt() {
+        Point p = new Point();
+        p.setLat(100);
+        p.setLng(200.5);
+        return p;
+    }
+
     public static Location genBasicLocation() {
         Location loc = mock(Location.class);
         when(loc.getLatitude()).thenReturn(10.0);
@@ -94,5 +103,13 @@ public final class ModelGenerator {
         u.setEmail("john@smith.com");
         u.setGender("male");
         return u;
+    }
+
+    public static Activity genBasicActivity() {
+        Activity a = new Activity();
+        a.setSteps(100);
+        a.setDistance(400);
+        a.setDuration(90);
+        return a;
     }
 }
