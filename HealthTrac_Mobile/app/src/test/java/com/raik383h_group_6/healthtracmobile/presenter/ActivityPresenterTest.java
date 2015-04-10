@@ -49,4 +49,10 @@ public class ActivityPresenterTest {
         presenter.onPause();
         verify(view).stopLocationUpdates();
     }
+
+    @Test
+    public void onConnectedStartsUpdates() {
+        presenter.onConnected(null);
+        verify(view).startLocationUpdates();
+    }
 }
