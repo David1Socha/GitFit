@@ -1,5 +1,7 @@
 package com.raik383h_group_6.healthtracmobile.helper;
 
+import android.location.Location;
+
 import com.raik383h_group_6.healthtracmobile.R;
 import com.raik383h_group_6.healthtracmobile.model.AccessGrant;
 import com.raik383h_group_6.healthtracmobile.model.FacebookUser;
@@ -50,6 +52,13 @@ public final class ModelGenerator {
         User u = new User(new Date(), new Date(), new Date(), "yahoo@gmail.com", "david", 22, "socha", "omaha", "david socha", User.Sex.MALE, "david1socha", 20);
         u.setId("123");
         return u;
+    }
+
+    public static Location genBasicLocation() {
+        Location loc = mock(Location.class);
+        when(loc.getLatitude()).thenReturn(10.0);
+        when(loc.getLongitude()).thenReturn(14.2);
+        return loc;
     }
 
     public static Team genBasicTeam() {
