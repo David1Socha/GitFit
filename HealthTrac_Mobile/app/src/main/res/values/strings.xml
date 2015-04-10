@@ -212,6 +212,9 @@
     <string name="path_error">Error getting path from server</string>
     <string name="EXTRA_POINTS">com.raik383h_group_6.healthtracmobile.POINTS</string>
     <string name="title_activity_view_path">View Path</string>
->>>>>>> origin/master
+    <string name="ban_member">ban</string>
+    <string name="banned_member">banned</string>
+    <string name="ban_members">Ban Members</string>
+    <string name="title_activity_ban_members">Ban Members</string>
 
 </resources>

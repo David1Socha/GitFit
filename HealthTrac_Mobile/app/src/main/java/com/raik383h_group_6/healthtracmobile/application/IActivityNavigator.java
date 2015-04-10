@@ -69,6 +69,8 @@ public interface IActivityNavigator {
 
     void openInviteMembers(AccessGrant grant, Team team);
 
+    void openBanMembers(AccessGrant grant, Team team);
+
     void openChallengeUsers(AccessGrant grant, Goal goal);
 
     void finishEditUserSuccess(User user);
@@ -107,4 +109,6 @@ public interface IActivityNavigator {
     void openViewActivity(Activity a, String username, AccessGrant grant);
     void openCreateActivity(AccessGrant grant);
     void openViewPath(ArrayList<Point> pts, AccessGrant grant);
+
+
 }

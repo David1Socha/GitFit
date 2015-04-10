@@ -53,6 +53,8 @@ public class ViewTeamPresenter extends BasePresenter{
 
     public void onClickInviteMembers() { nav.openInviteMembers(grant, team); }
 
+    public void onClickBanMembers() { nav.openBanMembers(grant, team); }
+
     public void onClickEditTeam() {
         nav.openEditTeam(grant, team, RequestCodes.UPDATE_TEAM);
     }
@@ -164,18 +166,21 @@ public class ViewTeamPresenter extends BasePresenter{
         switch (status) {
             case MEMBER:
                 view.setShowInviteMembers(true);
+                view.setShowBanMembers(false);
                 view.setShowEditTeam(false);
                 view.setShowJoinTeam(false);
                 view.setShowLeaveTeam(true);
                 break;
             case INACTIVE:
                 view.setShowInviteMembers(false);
+                view.setShowBanMembers(false);
                 view.setShowEditTeam(false);
                 view.setShowJoinTeam(true);
                 view.setShowLeaveTeam(false);
                 break;
             case ADMIN:
                 view.setShowInviteMembers(true);
+                view.setShowBanMembers(true);
                 view.setShowEditTeam(true);
                 view.setShowJoinTeam(false);
                 view.setShowLeaveTeam(true);
@@ -183,6 +188,7 @@ public class ViewTeamPresenter extends BasePresenter{
             case BANNED:
             default:
                 view.setShowInviteMembers(false);
+                view.setShowBanMembers(false);
                 view.setShowEditTeam(false);
                 view.setShowJoinTeam(false);
                 view.setShowLeaveTeam(false);

@@ -126,6 +126,14 @@
         </activity>
 
         <activity
+            android:name=".view.activity.BanMembersActivity"
+            android:label="@string/title_activity_ban_members">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".view.activity.ViewTeamActivity" />
+        </activity>
+
+        <activity
             android:name=".view.activity.ChallengeUsersActivity"
             android:label="@string/title_activity_challenge_users">
             <meta-data

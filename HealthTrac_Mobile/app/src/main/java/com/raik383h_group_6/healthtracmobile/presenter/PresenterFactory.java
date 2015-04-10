@@ -6,6 +6,7 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.raik383h_group_6.healthtracmobile.application.IActivityNavigator;
 import com.raik383h_group_6.healthtracmobile.service.oauth.IAsyncOAuthService;
 import com.raik383h_group_6.healthtracmobile.view.AuthenticationView;
+import com.raik383h_group_6.healthtracmobile.view.BanMembersView;
 import com.raik383h_group_6.healthtracmobile.view.BaseView;
 import com.raik383h_group_6.healthtracmobile.view.ChallengeUsersView;
 import com.raik383h_group_6.healthtracmobile.view.CreateActivityView;
@@ -44,6 +45,7 @@ public interface PresenterFactory {
     ListTeamsPresenter create(IActivityNavigator nav, ListTeamsView view);
     TeamLeaderboardPresenter create(IActivityNavigator nav, TeamLeaderboardView view);
     InviteMembersPresenter create(IActivityNavigator nav, InviteMembersView view);
+    BanMembersPresenter create(IActivityNavigator nav, BanMembersView view);
     ChallengeUsersPresenter create(IActivityNavigator nav, ChallengeUsersView view);
     ViewUserPresenter create(IActivityNavigator nav, ViewUserView view);
     EditUserPresenter create(UserValidationPresenter presenter, IActivityNavigator nav, EditUserView view);
