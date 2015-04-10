@@ -11,6 +11,18 @@ namespace HealthTrac.Tests.Helpers
 {
     public static class EqualityChecker
     {
+        public static bool EqualValues(this AccessGrantDto self, AccessGrantDto other)
+        {
+            bool equal = self.AccessToken == other.AccessToken
+                && self.Expires == other.Expires
+                && self.ExpiresIn == other.ExpiresIn
+                && self.ID == other.ID
+                && self.Issued == other.Issued
+                && self.TokenType == other.TokenType
+                && self.UserName == other.UserName;
+            return equal;
+        }
+
         public static bool EqualValues(this TeamDto teamDto, Team team)
         {
             bool equal = teamDto.DateCreated == team.DateCreated
@@ -62,15 +74,12 @@ namespace HealthTrac.Tests.Helpers
             return equal;
         }
 
-        public static bool EqualValues(this AccessGrantDto self, AccessGrantDto other)
+        public static bool EqualValues(this GoalDto goalDto, Goal goal)
         {
-            bool equal = self.AccessToken == other.AccessToken
-                && self.Expires == other.Expires
-                && self.ExpiresIn == other.ExpiresIn
-                && self.ID == other.ID
-                && self.Issued == other.Issued
-                && self.TokenType == other.TokenType
-                && self.UserName == other.UserName;
+            bool equal = goalDto.ID == goal.ID &&
+                goalDto.Field == goal.Field &&
+                goalDto.Name == goal.Name &&
+                goalDto.Threshold == goal.Threshold;
             return equal;
         }
 
@@ -131,6 +140,18 @@ namespace HealthTrac.Tests.Helpers
             bool equal = energyLevelDtos
                 .Zip(energyLevels, (dto, el) => new Tuple<EnergyLevelDto, EnergyLevel>(dto, el))
                 .All(el => el.Item1.EqualValues(el.Item2));
+            return equal;
+        }
+
+        public static bool EqualValues(this IEnumerable<GoalDto> goalDtos, IEnumerable<Goal> goals)
+        {
+            if (goalDtos.Count() != goals.Count())
+            {
+                return false;
+            }
+            bool equal = goalDtos
+                .Zip(goals, (dto, g) => new Tuple<GoalDto, Goal>(dto, g))
+                .All(g => g.Item1.EqualValues(g.Item2));
             return equal;
         }
 
