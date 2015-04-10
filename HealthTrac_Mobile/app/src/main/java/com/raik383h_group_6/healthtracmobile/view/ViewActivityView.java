@@ -17,4 +17,6 @@ public interface ViewActivityView extends BaseView {
     void displayMessage(String msg);
 
     void promptUserType(String[] options);
+
+    void setViewPathEnabled(boolean enabled);
 }

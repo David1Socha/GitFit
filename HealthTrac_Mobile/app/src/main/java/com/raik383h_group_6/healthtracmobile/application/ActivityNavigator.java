@@ -14,6 +14,7 @@ import com.raik383h_group_6.healthtracmobile.model.Badge;
 import com.raik383h_group_6.healthtracmobile.model.EnergyLevel;
 import com.raik383h_group_6.healthtracmobile.model.Goal;
 import com.raik383h_group_6.healthtracmobile.model.Meal;
+import com.raik383h_group_6.healthtracmobile.model.Point;
 import com.raik383h_group_6.healthtracmobile.model.Team;
 import com.raik383h_group_6.healthtracmobile.model.Token;
 import com.raik383h_group_6.healthtracmobile.model.User;
@@ -40,8 +41,12 @@ import com.raik383h_group_6.healthtracmobile.view.activity.ViewBadgeActivity;
 import com.raik383h_group_6.healthtracmobile.view.activity.ViewEnergyLevelActivity;
 import com.raik383h_group_6.healthtracmobile.view.activity.ViewGoalActivity;
 import com.raik383h_group_6.healthtracmobile.view.activity.ViewMealActivity;
+import com.raik383h_group_6.healthtracmobile.view.activity.ViewPathActivity;
 import com.raik383h_group_6.healthtracmobile.view.activity.ViewTeamActivity;
 import com.raik383h_group_6.healthtracmobile.view.activity.ViewUserActivity;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ActivityNavigator implements IActivityNavigator {
     private final Activity activity;
@@ -392,6 +397,14 @@ public class ActivityNavigator implements IActivityNavigator {
     @Override
     public void openCreateActivity(AccessGrant grant) {
         Intent i = new Intent(activity, CreateActivityActivity.class);
+        i.putExtra(activity.getString(R.string.EXTRA_ACCESS_GRANT), grant);
+        activity.startActivity(i);
+    }
+
+    @Override
+    public void openViewPath(ArrayList<Point> pts, AccessGrant grant) {
+        Intent i = new Intent(activity, ViewPathActivity.class);
+        i.putParcelableArrayListExtra(activity.getString(R.string.EXTRA_POINTS), pts);
         i.putExtra(activity.getString(R.string.EXTRA_ACCESS_GRANT), grant);
         activity.startActivity(i);
     }
