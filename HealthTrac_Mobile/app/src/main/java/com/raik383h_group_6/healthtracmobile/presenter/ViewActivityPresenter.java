@@ -13,6 +13,7 @@ import com.raik383h_group_6.healthtracmobile.service.api.async.IAsyncPointServic
 import com.raik383h_group_6.healthtracmobile.view.BaseView;
 import com.raik383h_group_6.healthtracmobile.view.ViewActivityView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ViewActivityPresenter extends BasePresenter {
@@ -85,7 +86,7 @@ public class ViewActivityPresenter extends BasePresenter {
     public void onClickViewPath() {
         try {
             List<Point> points = psvc.getPoints(activity.getId(), grant.getAuthHeader());
-            nav.openViewPath(points, grant);
+            nav.openViewPath(new ArrayList<>(points), grant);
         } catch (Exception e) {
             view.displayMessage(view.getResource(R.string.path_error));
         }
