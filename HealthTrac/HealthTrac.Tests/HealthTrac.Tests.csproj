@@ -121,14 +121,32 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\Api\AccountsControllerTest.cs" />
+    <Compile Include="Controllers\Api\MealsControllerTest.cs" />
+    <Compile Include="Controllers\Api\GoalsControllerTest.cs" />
+    <Compile Include="Controllers\Api\EnergyLevelsControllerTest.cs" />
+    <Compile Include="Controllers\Api\BadgesControllerTest.cs" />
+    <Compile Include="Controllers\Api\ActivityReportsControllerTest.cs" />
+    <Compile Include="Controllers\Api\ActivitiesControllerTest.cs" />
+    <Compile Include="Controllers\Api\UserGoalsControllerTest.cs" />
+    <Compile Include="Controllers\Api\UserBadgesControllerTest.cs" />
+    <Compile Include="Controllers\Api\PointsControllerTest.cs" />
     <Compile Include="Controllers\Api\UsersControllerTest.cs" />
     <Compile Include="Controllers\Api\MembershipsControllerTest.cs" />
     <Compile Include="Controllers\Api\TeamsControllerTest.cs" />
     <Compile Include="Helpers\AccessGrantGenerator.cs" />
+    <Compile Include="Helpers\MealGenerator.cs" />
+    <Compile Include="Helpers\GoalGenerator.cs" />
+    <Compile Include="Helpers\EnergyLevelGenerator.cs" />
+    <Compile Include="Helpers\BadgeGenerator.cs" />
+    <Compile Include="Helpers\ActivityReportGenerator.cs" />
     <Compile Include="Helpers\CredentialsDtoGenerator.cs" />
     <Compile Include="Helpers\EqualityChecker.cs" />
     <Compile Include="Helpers\MembershipGenerator.cs" />
+    <Compile Include="Helpers\UserGoalGenerator.cs" />
+    <Compile Include="Helpers\UserBadgeGenerator.cs" />
     <Compile Include="Helpers\ProviderVerifyResultGenerator.cs" />
+    <Compile Include="Helpers\ActivityGenerator.cs" />
+    <Compile Include="Helpers\PointGenerator.cs" />
     <Compile Include="Helpers\TeamGenerator.cs" />
     <Compile Include="Helpers\UserGenerator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
