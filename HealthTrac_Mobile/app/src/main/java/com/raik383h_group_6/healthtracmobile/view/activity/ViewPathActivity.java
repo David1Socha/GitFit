@@ -7,8 +7,9 @@ import com.raik383h_group_6.healthtracmobile.R;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 
-public class ViewPathActivity extends Activity implements OnMapReadyCallback {
+public class ViewPathActivity extends ActionBarActivity implements OnMapReadyCallback {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
