@@ -22,7 +22,7 @@ using System.Security.Principal;
 namespace HealthTrac.Tests.Controllers.Api
 {
     [TestClass]
-    public class ActivityReportsReportsControllerTest
+    public class ActivityReportsControllerTest
     {
         private ActivityReport _sampleActivityReport1, _sampleActivityReport2;
         private ActivityReport[] _manyActivityReports;
@@ -41,8 +41,8 @@ namespace HealthTrac.Tests.Controllers.Api
             var acc = Mock.Of<IActivityReportService>(a => a.GetActivityReports() == _manyActivityReports);
             var uow = Mock.Of<IUnitOfWork>(u => u.ActivityReportService == acc);
             ActivityReportsController controller = new ActivityReportsController(uow);
-            var activities = controller.GetActivityReports();
-            Assert.IsTrue(activities.EqualValues(_manyActivityReports));
+            var activityReports = controller.GetActivityReports();
+            Assert.IsTrue(activityReports.EqualValues(_manyActivityReports));
         }
 
         [TestMethod]
@@ -52,8 +52,8 @@ namespace HealthTrac.Tests.Controllers.Api
             var acc = Mock.Of<IActivityReportService>(a => a.GetActivityReports(sampleUserId) == _manyActivityReports);
             var uow = Mock.Of<IUnitOfWork>(u => u.ActivityReportService == acc);
             ActivityReportsController controller = new ActivityReportsController(uow);
-            var activities = controller.GetActivityReports(sampleUserId);
-            Assert.IsTrue(activities.EqualValues(_manyActivityReports));
+            var activityReports = controller.GetActivityReports(sampleUserId);
+            Assert.IsTrue(activityReports.EqualValues(_manyActivityReports));
         }
 
         [TestMethod]
@@ -65,8 +65,8 @@ namespace HealthTrac.Tests.Controllers.Api
             ActivityReportsController controller = new ActivityReportsController(uow);
             var response = controller.GetActivityReport(id);
             var result = response as OkNegotiatedContentResult<ActivityReportDto>;
-            var activity = result.Content;
-            Assert.IsTrue(activity.EqualValues(_sampleActivityReport1));
+            var activityReport = result.Content;
+            Assert.IsTrue(activityReport.EqualValues(_sampleActivityReport1));
         }
     }
 }

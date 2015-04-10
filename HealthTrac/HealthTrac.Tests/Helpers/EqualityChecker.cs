@@ -44,6 +44,15 @@ namespace HealthTrac.Tests.Helpers
             return equal;
         }
 
+        public static bool EqualValues(this BadgeDto badgeDto, Badge badge)
+        {
+            bool equal = badgeDto.Field == badge.Field &&
+                badgeDto.ID == badge.ID &&
+                badgeDto.Name == badge.Name &&
+                badgeDto.Threshold == badge.Threshold;
+            return equal;
+        }
+
         public static bool EqualValues(this AccessGrantDto self, AccessGrantDto other)
         {
             bool equal = self.AccessToken == other.AccessToken
@@ -89,6 +98,18 @@ namespace HealthTrac.Tests.Helpers
             bool equal = activityReportDtos
                 .Zip(activityReports, (dto, a) => new Tuple<ActivityReportDto, ActivityReport>(dto, a))
                 .All(a => a.Item1.EqualValues(a.Item2));
+            return equal;
+        }
+
+        public static bool EqualValues(this IEnumerable<BadgeDto> badgeDtos, IEnumerable<Badge> badges)
+        {
+            if (badgeDtos.Count() != badges.Count())
+            {
+                return false;
+            }
+            bool equal = badgeDtos
+                .Zip(badges, (dto, b) => new Tuple<BadgeDto, Badge>(dto, b))
+                .All(b => b.Item1.EqualValues(b.Item2));
             return equal;
         }
 
