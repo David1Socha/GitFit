@@ -6,6 +6,7 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 
+
 import com.raik383h_group_6.healthtracmobile.R;
 import com.raik383h_group_6.healthtracmobile.model.AccessGrant;
 import com.raik383h_group_6.healthtracmobile.model.ActivityReport;
@@ -14,7 +15,6 @@ import com.raik383h_group_6.healthtracmobile.model.Meal;
 import com.raik383h_group_6.healthtracmobile.model.Team;
 import com.raik383h_group_6.healthtracmobile.model.Token;
 import com.raik383h_group_6.healthtracmobile.model.User;
-import com.raik383h_group_6.healthtracmobile.view.ViewEnergyLevelView;
 import com.raik383h_group_6.healthtracmobile.view.activity.AuthenticationActivity;
 import com.raik383h_group_6.healthtracmobile.view.activity.CreateTeamActivity;
 import com.raik383h_group_6.healthtracmobile.view.activity.EditTeamActivity;
@@ -22,6 +22,7 @@ import com.raik383h_group_6.healthtracmobile.view.activity.CreateEnergyLevelActi
 import com.raik383h_group_6.healthtracmobile.view.activity.CreateGoalActivity;
 import com.raik383h_group_6.healthtracmobile.view.activity.CreateMealActivity;
 import com.raik383h_group_6.healthtracmobile.view.activity.FeedActivity;
+import com.raik383h_group_6.healthtracmobile.view.activity.InviteMembersActivity;
 import com.raik383h_group_6.healthtracmobile.view.activity.ListTeamsActivity;
 import com.raik383h_group_6.healthtracmobile.view.activity.ListUsersActivity;
 import com.raik383h_group_6.healthtracmobile.view.activity.OAuthBrowserActivity;
@@ -225,6 +226,14 @@ public class ActivityNavigator implements IActivityNavigator {
     @Override
     public void openTeamLeaderboard(AccessGrant grant, Team team) {
         Intent intent = new Intent(activity, TeamLeaderboardActivity.class);
+        intent.putExtra(activity.getString(R.string.EXTRA_ACCESS_GRANT), grant);
+        intent.putExtra(activity.getString(R.string.EXTRA_TEAM), team);
+        activity.startActivity(intent);
+    }
+
+    @Override
+    public void openInviteMembers(AccessGrant grant, Team team) {
+        Intent intent = new Intent(activity, InviteMembersActivity.class);
         intent.putExtra(activity.getString(R.string.EXTRA_ACCESS_GRANT), grant);
         intent.putExtra(activity.getString(R.string.EXTRA_TEAM), team);
         activity.startActivity(intent);

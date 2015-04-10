@@ -170,5 +170,9 @@
     <string name="meal_title">%1$s\'s meal</string>
     <string name="title_activity_meal">View meal</string>
     <string name="leaderboard_title">Lifetime Steps</string>
+    <string name="invite_member">invite</string>
+    <string name="invited_member">invited</string>
+    <string name="invite_members">Invite Members</string>
+    <string name="title_activity_invite_members">Invite Members</string>
 
 </resources>

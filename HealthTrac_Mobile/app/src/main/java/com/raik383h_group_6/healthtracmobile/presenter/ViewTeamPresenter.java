@@ -1,7 +1,6 @@
 package com.raik383h_group_6.healthtracmobile.presenter;
 
 import android.app.Activity;
-import android.os.AsyncTask;
 import android.os.Bundle;
 
 import com.google.inject.Inject;
@@ -13,7 +12,6 @@ import com.raik383h_group_6.healthtracmobile.model.AccessGrant;
 import com.raik383h_group_6.healthtracmobile.model.Membership;
 import com.raik383h_group_6.healthtracmobile.model.Team;
 import com.raik383h_group_6.healthtracmobile.service.FormatUtils;
-import com.raik383h_group_6.healthtracmobile.service.api.MembershipService;
 import com.raik383h_group_6.healthtracmobile.service.api.async.IAsyncMembershipService;
 import com.raik383h_group_6.healthtracmobile.view.BaseView;
 import com.raik383h_group_6.healthtracmobile.view.ViewTeamView;
@@ -52,6 +50,8 @@ public class ViewTeamPresenter extends BasePresenter{
     public void onClickViewLeaderboard() {
         nav.openTeamLeaderboard(grant, team);
     }
+
+    public void onClickInviteMembers() { nav.openInviteMembers(grant, team); }
 
     public void onClickEditTeam() {
         nav.openEditTeam(grant, team, RequestCodes.UPDATE_TEAM);
@@ -163,22 +163,26 @@ public class ViewTeamPresenter extends BasePresenter{
         Membership.MembershipStatus status = userMembership == null ? Membership.MembershipStatus.INACTIVE : userMembership.getMembershipStatus();
         switch (status) {
             case MEMBER:
+                view.setShowInviteMembers(true);
                 view.setShowEditTeam(false);
                 view.setShowJoinTeam(false);
                 view.setShowLeaveTeam(true);
                 break;
             case INACTIVE:
+                view.setShowInviteMembers(false);
                 view.setShowEditTeam(false);
                 view.setShowJoinTeam(true);
                 view.setShowLeaveTeam(false);
                 break;
             case ADMIN:
+                view.setShowInviteMembers(true);
                 view.setShowEditTeam(true);
                 view.setShowJoinTeam(false);
                 view.setShowLeaveTeam(true);
                 break;
             case BANNED:
             default:
+                view.setShowInviteMembers(false);
                 view.setShowEditTeam(false);
                 view.setShowJoinTeam(false);
                 view.setShowLeaveTeam(false);

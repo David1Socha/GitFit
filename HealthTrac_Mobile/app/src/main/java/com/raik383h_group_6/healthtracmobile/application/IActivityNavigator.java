@@ -61,6 +61,8 @@ public interface IActivityNavigator {
 
     void openTeamLeaderboard(AccessGrant grant, Team team);
 
+    void openInviteMembers(AccessGrant grant, Team team);
+
     void finishEditUserSuccess(User user);
 
     void finishEditUserFailure();

@@ -27,6 +27,8 @@ public class ViewTeamActivity extends BaseActivity implements ViewTeamView {
     TextView descriptionTextView;
     @InjectView(R.id.date_created_textview)
     TextView dateCreatedTextView;
+    @InjectView(R.id.invite_members_button)
+    Button inviteMembersButton;
     @InjectView(R.id.edit_team_button)
     Button editTeamButton;
     @InjectView(R.id.join_team_button)
@@ -53,6 +55,8 @@ public class ViewTeamActivity extends BaseActivity implements ViewTeamView {
     public void onClickViewLeaderboard(View v) {
         presenter.onClickViewLeaderboard();
     }
+
+    public void onClickInviteMembers(View v) { presenter.onClickInviteMembers(); }
 
     public void onClickEditTeam(View v) {
         presenter.onClickEditTeam();
@@ -94,6 +98,15 @@ public class ViewTeamActivity extends BaseActivity implements ViewTeamView {
 
     public void onClickTeamFeed(View v) {
         presenter.onClickTeamFeed();
+    }
+
+    @Override
+    public void setShowInviteMembers(boolean enabled) {
+        if (enabled) {
+            inviteMembersButton.setVisibility(View.VISIBLE);
+        } else {
+            inviteMembersButton.setVisibility(View.GONE);
+        }
     }
 
     @Override

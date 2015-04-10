@@ -104,6 +104,17 @@
             android:layout_marginStart="20dp"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
+            android:visibility="gone"
+            android:onClick="onClickInviteMembers"
+            android:id="@+id/invite_members_button"
+            android:text="@string/invite_members"/>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
             android:onClick="onClickJoinTeam"
             android:id="@+id/join_team_button"
             android:text="@string/join_team"/>
