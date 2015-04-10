@@ -53,6 +53,15 @@ namespace HealthTrac.Tests.Helpers
             return equal;
         }
 
+        public static bool EqualValues(this EnergyLevelDto energyLevelDto, EnergyLevel energyLevel)
+        {
+            bool equal = energyLevelDto.ID == energyLevel.ID &&
+                energyLevelDto.Mood == energyLevel.Mood &&
+                energyLevelDto.UserID == energyLevel.UserID &&
+                energyLevelDto.DateCreated == energyLevel.DateCreated;
+            return equal;
+        }
+
         public static bool EqualValues(this AccessGrantDto self, AccessGrantDto other)
         {
             bool equal = self.AccessToken == other.AccessToken
@@ -110,6 +119,18 @@ namespace HealthTrac.Tests.Helpers
             bool equal = badgeDtos
                 .Zip(badges, (dto, b) => new Tuple<BadgeDto, Badge>(dto, b))
                 .All(b => b.Item1.EqualValues(b.Item2));
+            return equal;
+        }
+
+        public static bool EqualValues(this IEnumerable<EnergyLevelDto> energyLevelDtos, IEnumerable<EnergyLevel> energyLevels)
+        {
+            if (energyLevelDtos.Count() != energyLevels.Count())
+            {
+                return false;
+            }
+            bool equal = energyLevelDtos
+                .Zip(energyLevels, (dto, el) => new Tuple<EnergyLevelDto, EnergyLevel>(dto, el))
+                .All(el => el.Item1.EqualValues(el.Item2));
             return equal;
         }
 

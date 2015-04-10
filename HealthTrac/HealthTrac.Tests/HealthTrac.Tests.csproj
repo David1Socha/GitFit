@@ -121,6 +121,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\Api\AccountsControllerTest.cs" />
+    <Compile Include="Controllers\Api\EnergyLevelsControllerTest.cs" />
     <Compile Include="Controllers\Api\BadgesControllerTest.cs" />
     <Compile Include="Controllers\Api\ActivityReportsControllerTest.cs" />
     <Compile Include="Controllers\Api\ActivitiesControllerTest.cs" />
@@ -128,6 +129,7 @@
     <Compile Include="Controllers\Api\MembershipsControllerTest.cs" />
     <Compile Include="Controllers\Api\TeamsControllerTest.cs" />
     <Compile Include="Helpers\AccessGrantGenerator.cs" />
+    <Compile Include="Helpers\EnergyLevelGenerator.cs" />
     <Compile Include="Helpers\BadgeGenerator.cs" />
     <Compile Include="Helpers\ActivityReportGenerator.cs" />
     <Compile Include="Helpers\CredentialsDtoGenerator.cs" />
