@@ -48,7 +48,7 @@ namespace HealthTrac.Tests.Controllers.Api
         [TestMethod]
         public void ApiGetUserBadgesByUser()
         {
-            var sampleUserId = 17;
+            var sampleUserId = "xyz";
             var acc = Mock.Of<IUserBadgeService>(a => a.GetUserBadges(sampleUserId) == _manyUserBadges);
             var uow = Mock.Of<IUnitOfWork>(u => u.UserBadgeService == acc);
             UserBadgesController controller = new UserBadgesController(uow);
