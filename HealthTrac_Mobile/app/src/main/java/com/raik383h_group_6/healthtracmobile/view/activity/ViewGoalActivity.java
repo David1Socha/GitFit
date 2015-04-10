@@ -1,6 +1,7 @@
 package com.raik383h_group_6.healthtracmobile.view.activity;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
 
 import com.google.inject.Inject;
@@ -34,6 +35,9 @@ public class ViewGoalActivity extends BaseActivity implements ViewGoalView {
         presenter = presenterFactory.create(nav, this);
     }
 
+    public void onClickChallengeUsers(View view) {
+        presenter.onClickChallengeUsers();
+    }
 
     @Override
     public BasePresenter getPresenter() {

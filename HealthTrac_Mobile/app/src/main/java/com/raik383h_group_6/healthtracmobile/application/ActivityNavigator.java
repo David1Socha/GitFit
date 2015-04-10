@@ -18,6 +18,7 @@ import com.raik383h_group_6.healthtracmobile.model.Team;
 import com.raik383h_group_6.healthtracmobile.model.Token;
 import com.raik383h_group_6.healthtracmobile.model.User;
 import com.raik383h_group_6.healthtracmobile.view.activity.AuthenticationActivity;
+import com.raik383h_group_6.healthtracmobile.view.activity.ChallengeUsersActivity;
 import com.raik383h_group_6.healthtracmobile.view.activity.CreateActivityActivity;
 import com.raik383h_group_6.healthtracmobile.view.activity.CreateTeamActivity;
 import com.raik383h_group_6.healthtracmobile.view.activity.EditTeamActivity;
@@ -242,6 +243,13 @@ public class ActivityNavigator implements IActivityNavigator {
         Intent intent = new Intent(activity, InviteMembersActivity.class);
         intent.putExtra(activity.getString(R.string.EXTRA_ACCESS_GRANT), grant);
         intent.putExtra(activity.getString(R.string.EXTRA_TEAM), team);
+        activity.startActivity(intent);
+    }
+
+    public void openChallengeUsers(AccessGrant grant, Goal goal) {
+        Intent intent = new Intent(activity, ChallengeUsersActivity.class);
+        intent.putExtra(activity.getString(R.string.EXTRA_ACCESS_GRANT), grant);
+        intent.putExtra(activity.getString(R.string.EXTRA_GOAL), goal);
         activity.startActivity(intent);
     }
 

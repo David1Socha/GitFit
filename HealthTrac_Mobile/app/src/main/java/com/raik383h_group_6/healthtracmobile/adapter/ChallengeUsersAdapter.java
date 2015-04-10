@@ -1,6 +1,5 @@
 package com.raik383h_group_6.healthtracmobile.adapter;
 
-
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,18 +11,18 @@ import android.widget.TextView;
 
 import com.raik383h_group_6.healthtracmobile.R;
 import com.raik383h_group_6.healthtracmobile.model.User;
-import com.raik383h_group_6.healthtracmobile.presenter.InviteMembersPresenter;
+import com.raik383h_group_6.healthtracmobile.presenter.ChallengeUsersPresenter;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-public class InviteMembersAdapter extends BaseAdapter {
+public class ChallengeUsersAdapter extends BaseAdapter{
     private LayoutInflater mInflater;
     private List<User> users;
     private Context context;
-    private InviteMembersPresenter presenter;
+    private ChallengeUsersPresenter presenter;
 
-    public InviteMembersAdapter(Context context, List<User> users, InviteMembersPresenter presenter) {
+    public ChallengeUsersAdapter(Context context, List<User> users, ChallengeUsersPresenter presenter) {
         this.presenter = presenter;
         this.context = context;
         mInflater = LayoutInflater.from(context);
@@ -69,13 +68,13 @@ public class InviteMembersAdapter extends BaseAdapter {
                 .tag(context)
                 .centerInside()
                 .into(holder.profilePicture);
-        holder.invite.setText(R.string.invite_member);
+        holder.invite.setText(R.string.challenge_user);
         holder.invite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(!holder.invite.getText().equals(R.string.invite_member)) {
-                    presenter.onClickInviteMember(user);
-                    holder.invite.setText(R.string.invited_member);
+                if(!holder.invite.getText().equals(R.string.challenge_user)) {
+                    presenter.onClickChallengeUser(user);
+                    holder.invite.setText(R.string.challenged_user);
                 }
             }
         });

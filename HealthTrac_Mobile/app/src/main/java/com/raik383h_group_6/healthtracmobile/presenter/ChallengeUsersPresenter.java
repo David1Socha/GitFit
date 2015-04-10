@@ -9,35 +9,35 @@ import com.google.inject.assistedinject.Assisted;
 import com.raik383h_group_6.healthtracmobile.R;
 import com.raik383h_group_6.healthtracmobile.application.IActivityNavigator;
 import com.raik383h_group_6.healthtracmobile.model.AccessGrant;
-import com.raik383h_group_6.healthtracmobile.model.Membership;
-import com.raik383h_group_6.healthtracmobile.model.Team;
+import com.raik383h_group_6.healthtracmobile.model.Goal;
 import com.raik383h_group_6.healthtracmobile.model.User;
-import com.raik383h_group_6.healthtracmobile.service.api.async.IAsyncMembershipService;
+import com.raik383h_group_6.healthtracmobile.model.UserGoal;
+import com.raik383h_group_6.healthtracmobile.service.api.async.IAsyncUserGoalService;
 import com.raik383h_group_6.healthtracmobile.service.api.async.IAsyncUserService;
 import com.raik383h_group_6.healthtracmobile.view.BaseView;
-import com.raik383h_group_6.healthtracmobile.view.InviteMembersView;
+import com.raik383h_group_6.healthtracmobile.view.ChallengeUsersView;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
-public class InviteMembersPresenter extends BasePresenter{
+public class ChallengeUsersPresenter extends BasePresenter {
 
     private IActivityNavigator nav;
-    private InviteMembersView view;
+    private ChallengeUsersView view;
     private IAsyncUserService userService;
-    private IAsyncMembershipService membershipService;
+    private IAsyncUserGoalService userGoalService;
     private AccessGrant grant;
-    private Team team;
+    private Goal goal;
 
     @Inject
-    public InviteMembersPresenter(IAsyncUserService userService, IAsyncMembershipService membershipService, @Assisted IActivityNavigator nav, @Assisted InviteMembersView view) {
+    public ChallengeUsersPresenter(IAsyncUserService userService, IAsyncUserGoalService userGoalService, @Assisted IActivityNavigator nav, @Assisted ChallengeUsersView view) {
         this.nav = nav;
         this.userService = userService;
-        this.membershipService = membershipService;
+        this.userGoalService = userGoalService;
         this.view = view;
-        team = (Team) view.getParcelableExtra(view.getResource(R.string.EXTRA_TEAM));
+        goal = (Goal) view.getParcelableExtra(view.getResource(R.string.EXTRA_GOAL));
         grant = (AccessGrant) view.getParcelableExtra(view.getResource(R.string.EXTRA_ACCESS_GRANT));
     }
 
@@ -57,7 +57,7 @@ public class InviteMembersPresenter extends BasePresenter{
                 view.setNoUsersMessageDisplay(true);
                 return;
             }
-            users = getUsersNotOnTeam();
+            users = getUsersNotOnGoal();
             if (users != null) {
                 view.setNoUsersMessageDisplay(false);
                 view.setUsers(users);
@@ -70,16 +70,16 @@ public class InviteMembersPresenter extends BasePresenter{
         }
     }
 
-    private List<User> getUsersNotOnTeam() throws ExecutionException, InterruptedException{
+    private List<User> getUsersNotOnGoal() throws ExecutionException, InterruptedException{
         List<User> users = new ArrayList<User>();
-        List<Membership> teamMembership = membershipService.getMembershipsAsync(team.getId(), grant.getAuthHeader());
+        List<UserGoal> goalMembership = userGoalService.getUserGoals(goal.getId(), grant.getAuthHeader());
         List<User> allUsers = userService.getUsersAsync(grant.getAuthHeader());
-        if(teamMembership == null || allUsers == null) {
+        if(goalMembership == null || allUsers == null) {
             return null;
         }
         List<String> userIds = new ArrayList<String>();
-        for (Membership membership: teamMembership) {
-            userIds.add(membership.getUserID());
+        for (UserGoal userGoal: goalMembership) {
+            userIds.add(userGoal.getUserID());
         }
         for (User user: allUsers) {
             if(!userIds.contains(user.getId())) {
@@ -94,15 +94,15 @@ public class InviteMembersPresenter extends BasePresenter{
         nav.openViewUser(u, grant);
     }
 
-    public void onClickInviteMember(User user) {
-        Membership newMember = new Membership();
-        newMember.setDateCreated(new Date());
-        newMember.setDateModified(new Date());
-        newMember.setTeamID(team.getId());
-        newMember.setUserID(user.getId());
-        newMember.setMembershipStatus(Membership.MembershipStatus.MEMBER);
+    public void onClickChallengeUser(User user) {
+        UserGoal challenge = new UserGoal();
+        challenge.setDateAssigned(new Date());
+        challenge.setDateCompleted(new Date());
+        challenge.setGoalID(goal.getId());
+        challenge.setUserID(user.getId());
+
         try {
-            membershipService.createMembershipAsync(newMember, grant.getAuthHeader());
+            userGoalService.createUserGoal(challenge, grant.getAuthHeader());
         } catch (Exception e) {
         }
     }

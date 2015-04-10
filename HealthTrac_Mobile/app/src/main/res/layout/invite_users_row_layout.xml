@@ -21,7 +21,6 @@
         android:layout_width="0dp"
         android:layout_weight="1"
         android:layout_height="wrap_content"
-        android:text="@string/invite_member"
         android:id="@+id/button_invite_member"
         android:focusable="false"
         android:textAppearance="?android:attr/textAppearanceButton"/>

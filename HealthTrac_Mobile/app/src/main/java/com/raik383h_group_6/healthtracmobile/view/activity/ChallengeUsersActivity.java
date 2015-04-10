@@ -9,35 +9,35 @@ import android.widget.TextView;
 
 import com.google.inject.Inject;
 import com.raik383h_group_6.healthtracmobile.R;
-import com.raik383h_group_6.healthtracmobile.adapter.InviteMembersAdapter;
+import com.raik383h_group_6.healthtracmobile.adapter.ChallengeUsersAdapter;
 import com.raik383h_group_6.healthtracmobile.application.ActivityNavigator;
 import com.raik383h_group_6.healthtracmobile.application.IActivityNavigator;
 import com.raik383h_group_6.healthtracmobile.model.User;
 import com.raik383h_group_6.healthtracmobile.presenter.BasePresenter;
-import com.raik383h_group_6.healthtracmobile.presenter.InviteMembersPresenter;
+import com.raik383h_group_6.healthtracmobile.presenter.ChallengeUsersPresenter;
 import com.raik383h_group_6.healthtracmobile.presenter.PresenterFactory;
-import com.raik383h_group_6.healthtracmobile.view.InviteMembersView;
+import com.raik383h_group_6.healthtracmobile.view.ChallengeUsersView;
 
 import java.util.List;
 
 import roboguice.inject.ContentView;
 import roboguice.inject.InjectView;
 
-@ContentView(R.layout.activity_invite_members)
-public class InviteMembersActivity extends BaseActivity implements InviteMembersView {
-    @InjectView(R.id.invite_members_list_view)
-    ListView inviteMembersListView;
-    @InjectView(R.id.empty_invite_members_textview)
+@ContentView(R.layout.activity_challenge_users)
+public class ChallengeUsersActivity extends BaseActivity implements ChallengeUsersView {
+    @InjectView(R.id.challenge_users_list_view)
+    ListView challengeUsersListView;
+    @InjectView(R.id.empty_challenge_users_textview)
     TextView noUsersTextView;
     @Inject
     PresenterFactory presenterFactory;
-    private InviteMembersPresenter presenter;
+    private ChallengeUsersPresenter presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         IActivityNavigator nav = new ActivityNavigator(this);
-        inviteMembersListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        challengeUsersListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 presenter.onItemClick(parent, view, position, id);
@@ -45,8 +45,6 @@ public class InviteMembersActivity extends BaseActivity implements InviteMembers
         });
         presenter = presenterFactory.create(nav, this);
     }
-
-
 
     @Override
     protected void onResume() {
@@ -56,8 +54,8 @@ public class InviteMembersActivity extends BaseActivity implements InviteMembers
 
     @Override
     public void setUsers(List<User> users) {
-        InviteMembersAdapter adapter = new InviteMembersAdapter(this, users, presenter);
-        inviteMembersListView.setAdapter(adapter);
+        ChallengeUsersAdapter adapter = new ChallengeUsersAdapter(this, users, presenter);
+        challengeUsersListView.setAdapter(adapter);
     }
 
     @Override

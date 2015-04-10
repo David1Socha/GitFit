@@ -125,6 +125,14 @@
                 android:value=".view.activity.ViewTeamActivity" />
         </activity>
 
+        <activity
+            android:name=".view.activity.ChallengeUsersActivity"
+            android:label="@string/title_activity_challenge_users">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".view.activity.ViewGoalActivity" />
+        </activity>
+
         <meta-data
             android:name="roboguice.annotations.packages"
             android:value="com.raik383h_group_6.healthtracmobile" />

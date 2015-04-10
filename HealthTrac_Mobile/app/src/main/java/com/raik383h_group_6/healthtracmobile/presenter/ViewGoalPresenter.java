@@ -35,6 +35,10 @@ public class ViewGoalPresenter extends BasePresenter {
         view.setGoalName(goal.getName());
     }
 
+    public void onClickChallengeUsers() {
+        nav.openChallengeUsers(grant, goal);
+    }
+
     @Override
     protected BaseView getView() {
         return view;

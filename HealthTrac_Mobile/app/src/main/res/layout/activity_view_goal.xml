@@ -68,6 +68,16 @@
                 android:id="@+id/threshold_textview"/>
         </LinearLayout>
 
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:onClick="onClickChallengeUsers"
+            android:id="@+id/challenge_users_button"
+            android:text="@string/challenge_goal"/>
+
     </LinearLayout>
 
 </ScrollView>
