@@ -205,6 +205,7 @@
     <string name="title_activity_create_activity">Create Activity</string>
     <string name="create_activity_manual">Create Activity Manually</string>
     <string name="view_path">View Path</string>
+    <string name="path_error">Error getting path from server</string>
     >>>>>>> origin/master
 
 </resources>

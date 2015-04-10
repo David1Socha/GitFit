@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -36,6 +37,8 @@ public class ViewActivityActivity extends BaseActivity implements ViewActivityVi
     private TextView steps;
     @InjectView(R.id.startdate_textview)
     private TextView startDate;
+    @InjectView(R.id.view_path_button)
+    private Button viewPathButton;
     @Inject
     private PresenterFactory presenterFactory;
     private ViewActivityPresenter presenter;
@@ -101,6 +104,19 @@ public class ViewActivityActivity extends BaseActivity implements ViewActivityVi
         });
         AlertDialog alert = builder.create();
         alert.show();
+    }
+
+    @Override
+    public void setViewPathEnabled(boolean enabled) {
+        if (enabled) {
+            viewPathButton.setVisibility(View.VISIBLE);
+        } else {
+            viewPathButton.setVisibility(View.GONE);
+        }
+    }
+
+    public void onClickViewPath(View v) {
+        presenter.onClickViewPath();
     }
 
     @Override
