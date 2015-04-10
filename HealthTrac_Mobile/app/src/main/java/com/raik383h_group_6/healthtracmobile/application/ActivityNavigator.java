@@ -404,5 +404,7 @@ public class ActivityNavigator implements IActivityNavigator {
     public void openViewPath(ArrayList<Point> pts, AccessGrant grant) {
         Intent i = new Intent(activity, ViewPathActivity.class);
         i.putParcelableArrayListExtra(activity.getString(R.string.EXTRA_POINTS), pts);
+        i.putExtra(activity.getString(R.string.EXTRA_ACCESS_GRANT), grant);
+        activity.startActivity(i);
     }
 }

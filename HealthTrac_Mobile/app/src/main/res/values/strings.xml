@@ -207,6 +207,7 @@
     <string name="view_path">View Path</string>
     <string name="path_error">Error getting path from server</string>
     <string name="EXTRA_POINTS">com.raik383h_group_6.healthtracmobile.POINTS</string>
+    <string name="title_activity_view_path">View Path</string>
     >>>>>>> origin/master
 
 </resources>
