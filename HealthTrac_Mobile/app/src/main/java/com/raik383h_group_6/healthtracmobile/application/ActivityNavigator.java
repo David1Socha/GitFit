@@ -41,6 +41,7 @@ import com.raik383h_group_6.healthtracmobile.view.activity.ViewBadgeActivity;
 import com.raik383h_group_6.healthtracmobile.view.activity.ViewEnergyLevelActivity;
 import com.raik383h_group_6.healthtracmobile.view.activity.ViewGoalActivity;
 import com.raik383h_group_6.healthtracmobile.view.activity.ViewMealActivity;
+import com.raik383h_group_6.healthtracmobile.view.activity.ViewPathActivity;
 import com.raik383h_group_6.healthtracmobile.view.activity.ViewTeamActivity;
 import com.raik383h_group_6.healthtracmobile.view.activity.ViewUserActivity;
 
