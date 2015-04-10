@@ -55,4 +55,10 @@ public class ActivityPresenterTest {
         presenter.onConnected(null);
         verify(view).startLocationUpdates();
     }
+
+    @Test
+    public void onConnectionSuspendedReconnects() {
+        presenter.onConnectionSuspended(0);
+        verify(gClient).connect();
+    }
 }
