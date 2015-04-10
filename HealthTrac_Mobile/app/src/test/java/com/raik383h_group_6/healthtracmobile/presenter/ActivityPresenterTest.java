@@ -69,6 +69,7 @@ public class ActivityPresenterTest {
     @Test
     public void onLocationChangedAddsPoint() {
         Location loc = ModelGenerator.genBasicLocation();
+        presenter.onConnected(loc);
         presenter.onLocationChanged(loc);
         Point addedPt = presenter.getPts().get(0);
         Assert.assertEquals(addedPt.getLat(), loc.getLatitude(), 0.000001);
