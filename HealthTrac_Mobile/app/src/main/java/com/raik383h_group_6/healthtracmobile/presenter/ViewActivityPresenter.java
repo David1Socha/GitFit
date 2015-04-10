@@ -24,6 +24,7 @@ public class ViewActivityPresenter extends BasePresenter {
     private Activity activity;
     private String username;
     private IAsyncActivityService asvc;
+    private ArrayList<Point> pts;
     private IAsyncPointService psvc;
 
     @Inject
@@ -34,6 +35,10 @@ public class ViewActivityPresenter extends BasePresenter {
         this.grant = (AccessGrant) view.getParcelableExtra(view.getResource(R.string.EXTRA_ACCESS_GRANT));
         this.activity = (Activity) view.getParcelableExtra(view.getResource(R.string.EXTRA_ACTIVITY));
         this.username = view.getStringExtra(view.getResource(R.string.EXTRA_USERNAME));
+        try {
+           pts = new ArrayList<>(psvc.getPoints(activity.getId(), grant.getAuthHeader()));
+        } catch (Exception ignored) {
+        }
     }
 
     @Override
@@ -53,6 +58,11 @@ public class ViewActivityPresenter extends BasePresenter {
 
     public void onResume() {
         populateFields();
+        if (pts != null && !pts.isEmpty()) {
+            view.setViewPathEnabled(true);
+        } else {
+            view.setViewPathEnabled(false);
+        }
     }
 
     private void populateFields() {
@@ -84,11 +94,6 @@ public class ViewActivityPresenter extends BasePresenter {
     }
 
     public void onClickViewPath() {
-        try {
-            List<Point> points = psvc.getPoints(activity.getId(), grant.getAuthHeader());
-            nav.openViewPath(new ArrayList<>(points), grant);
-        } catch (Exception e) {
-            view.displayMessage(view.getResource(R.string.path_error));
-        }
+        nav.openViewPath(pts, grant);
     }
 }
