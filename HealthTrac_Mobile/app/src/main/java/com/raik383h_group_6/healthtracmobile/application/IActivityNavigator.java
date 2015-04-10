@@ -7,9 +7,12 @@ import com.raik383h_group_6.healthtracmobile.model.Badge;
 import com.raik383h_group_6.healthtracmobile.model.EnergyLevel;
 import com.raik383h_group_6.healthtracmobile.model.Goal;
 import com.raik383h_group_6.healthtracmobile.model.Meal;
+import com.raik383h_group_6.healthtracmobile.model.Point;
 import com.raik383h_group_6.healthtracmobile.model.Team;
 import com.raik383h_group_6.healthtracmobile.model.Token;
 import com.raik383h_group_6.healthtracmobile.model.User;
+
+import java.util.ArrayList;
 
 public interface IActivityNavigator {
     void openOAuthBrowser(String provider, int reqCode);
@@ -66,6 +69,8 @@ public interface IActivityNavigator {
 
     void openInviteMembers(AccessGrant grant, Team team);
 
+    void openChallengeUsers(AccessGrant grant, Goal goal);
+
     void finishEditUserSuccess(User user);
 
     void finishEditUserFailure();
@@ -101,4 +106,5 @@ public interface IActivityNavigator {
     void openViewBadge(Badge b, AccessGrant grant);
     void openViewActivity(Activity a, String username, AccessGrant grant);
     void openCreateActivity(AccessGrant grant);
+    void openViewPath(ArrayList<Point> pts, AccessGrant grant);
 }
