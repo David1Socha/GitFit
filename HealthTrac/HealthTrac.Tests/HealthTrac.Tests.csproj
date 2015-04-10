@@ -127,6 +127,7 @@
     <Compile Include="Controllers\Api\BadgesControllerTest.cs" />
     <Compile Include="Controllers\Api\ActivityReportsControllerTest.cs" />
     <Compile Include="Controllers\Api\ActivitiesControllerTest.cs" />
+    <Compile Include="Controllers\Api\UserBadgesControllerTest.cs" />
     <Compile Include="Controllers\Api\PointsControllerTest.cs" />
     <Compile Include="Controllers\Api\UsersControllerTest.cs" />
     <Compile Include="Controllers\Api\MembershipsControllerTest.cs" />
@@ -140,6 +141,7 @@
     <Compile Include="Helpers\CredentialsDtoGenerator.cs" />
     <Compile Include="Helpers\EqualityChecker.cs" />
     <Compile Include="Helpers\MembershipGenerator.cs" />
+    <Compile Include="Helpers\UserBadgeGenerator.cs" />
     <Compile Include="Helpers\ProviderVerifyResultGenerator.cs" />
     <Compile Include="Helpers\ActivityGenerator.cs" />
     <Compile Include="Helpers\PointGenerator.cs" />

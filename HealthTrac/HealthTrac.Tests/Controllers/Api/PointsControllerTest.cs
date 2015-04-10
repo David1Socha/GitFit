@@ -93,7 +93,7 @@ namespace HealthTrac.Tests.Controllers.Api
         [TestMethod]
         public void ApiCreatePoints()
         {
-            var acc = Mock.Of<IPointService>(a => a.GetPoints() == _manyPoints);
+            var acc = Mock.Of<IPointService>(a => a.CreatePoints(_manyPoints) == _manyPoints);
             var uow = Mock.Of<IUnitOfWork>(u => u.PointService == acc);
             PointsController controller = new PointsController(uow);
             var points = controller.CreatePoints(_manyPoints);
