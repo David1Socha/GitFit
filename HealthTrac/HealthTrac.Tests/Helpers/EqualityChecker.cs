@@ -83,6 +83,15 @@ namespace HealthTrac.Tests.Helpers
             return equal;
         }
 
+        public static bool EqualValues(this MealDto mealDto, Meal meal)
+        {
+            bool equal = mealDto.ID == meal.ID &&
+                mealDto.Calories == meal.Calories &&
+                mealDto.UserID == meal.UserID &&
+                mealDto.DateCreated == meal.DateCreated;
+            return equal;
+        }
+
         public static bool EqualValues(this IEnumerable<TeamDto> teamDtos, IEnumerable<Team> teams)
         {
             if (teamDtos.Count() != teams.Count())
@@ -152,6 +161,18 @@ namespace HealthTrac.Tests.Helpers
             bool equal = goalDtos
                 .Zip(goals, (dto, g) => new Tuple<GoalDto, Goal>(dto, g))
                 .All(g => g.Item1.EqualValues(g.Item2));
+            return equal;
+        }
+
+        public static bool EqualValues(this IEnumerable<MealDto> mealDtos, IEnumerable<Meal> meals)
+        {
+            if (mealDtos.Count() != meals.Count())
+            {
+                return false;
+            }
+            bool equal = mealDtos
+                .Zip(meals, (dto, m) => new Tuple<MealDto, Meal>(dto, m))
+                .All(m => m.Item1.EqualValues(m.Item2));
             return equal;
         }
 
