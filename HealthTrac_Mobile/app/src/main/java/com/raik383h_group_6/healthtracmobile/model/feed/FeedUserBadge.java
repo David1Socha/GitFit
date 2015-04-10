@@ -26,6 +26,6 @@ public class FeedUserBadge extends FeedModel {
 
     @Override
     public void onClick() {
-        //nav.openViewBadge(badge, grant);
+        nav.openViewBadge(badge, grant);
     }
 }

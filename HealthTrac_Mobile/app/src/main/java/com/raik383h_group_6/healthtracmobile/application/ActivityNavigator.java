@@ -10,12 +10,15 @@ import android.content.Intent;
 import com.raik383h_group_6.healthtracmobile.R;
 import com.raik383h_group_6.healthtracmobile.model.AccessGrant;
 import com.raik383h_group_6.healthtracmobile.model.ActivityReport;
+import com.raik383h_group_6.healthtracmobile.model.Badge;
 import com.raik383h_group_6.healthtracmobile.model.EnergyLevel;
+import com.raik383h_group_6.healthtracmobile.model.Goal;
 import com.raik383h_group_6.healthtracmobile.model.Meal;
 import com.raik383h_group_6.healthtracmobile.model.Team;
 import com.raik383h_group_6.healthtracmobile.model.Token;
 import com.raik383h_group_6.healthtracmobile.model.User;
 import com.raik383h_group_6.healthtracmobile.view.activity.AuthenticationActivity;
+import com.raik383h_group_6.healthtracmobile.view.activity.CreateActivityActivity;
 import com.raik383h_group_6.healthtracmobile.view.activity.CreateTeamActivity;
 import com.raik383h_group_6.healthtracmobile.view.activity.EditTeamActivity;
 import com.raik383h_group_6.healthtracmobile.view.activity.CreateEnergyLevelActivity;
@@ -31,8 +34,11 @@ import com.raik383h_group_6.healthtracmobile.view.activity.CreateUserActivity;
 import com.raik383h_group_6.healthtracmobile.view.activity.EditUserActivity;
 import com.raik383h_group_6.healthtracmobile.view.activity.ActivityActivity;
 import com.raik383h_group_6.healthtracmobile.view.activity.TeamLeaderboardActivity;
+import com.raik383h_group_6.healthtracmobile.view.activity.ViewActivityActivity;
 import com.raik383h_group_6.healthtracmobile.view.activity.ViewActivityReportActivity;
+import com.raik383h_group_6.healthtracmobile.view.activity.ViewBadgeActivity;
 import com.raik383h_group_6.healthtracmobile.view.activity.ViewEnergyLevelActivity;
+import com.raik383h_group_6.healthtracmobile.view.activity.ViewGoalActivity;
 import com.raik383h_group_6.healthtracmobile.view.activity.ViewMealActivity;
 import com.raik383h_group_6.healthtracmobile.view.activity.ViewTeamActivity;
 import com.raik383h_group_6.healthtracmobile.view.activity.ViewUserActivity;
@@ -355,6 +361,38 @@ public class ActivityNavigator implements IActivityNavigator {
         i.putExtra(activity.getString(R.string.EXTRA_ACCESS_GRANT), grant);
         i.putExtra(activity.getString(R.string.EXTRA_USERNAME), username);
         i.putExtra(activity.getString(R.string.EXTRA_MEAL), m);
+        activity.startActivity(i);
+    }
+
+    @Override
+    public void openViewGoal(Goal g, AccessGrant grant) {
+        Intent i = new Intent(activity, ViewGoalActivity.class);
+        i.putExtra(activity.getString(R.string.EXTRA_GOAL), g);
+        i.putExtra(activity.getString(R.string.EXTRA_ACCESS_GRANT), grant);
+        activity.startActivity(i);
+    }
+
+    @Override
+    public void openViewBadge(Badge b, AccessGrant grant) {
+        Intent i = new Intent(activity, ViewBadgeActivity.class);
+        i.putExtra(activity.getString(R.string.EXTRA_ACCESS_GRANT), grant);
+        i.putExtra(activity.getString(R.string.EXTRA_BADGE), b);
+        activity.startActivity(i);
+    }
+
+    @Override
+    public void openViewActivity(com.raik383h_group_6.healthtracmobile.model.Activity a, String u, AccessGrant g) {
+        Intent i = new Intent(activity, ViewActivityActivity.class);
+        i.putExtra(activity.getString(R.string.EXTRA_ACCESS_GRANT), g);
+        i.putExtra(activity.getString(R.string.EXTRA_ACTIVITY), a);
+        i.putExtra(activity.getString(R.string.EXTRA_USERNAME), u);
+        activity.startActivity(i);
+    }
+
+    @Override
+    public void openCreateActivity(AccessGrant grant) {
+        Intent i = new Intent(activity, CreateActivityActivity.class);
+        i.putExtra(activity.getString(R.string.EXTRA_ACCESS_GRANT), grant);
         activity.startActivity(i);
     }
 }

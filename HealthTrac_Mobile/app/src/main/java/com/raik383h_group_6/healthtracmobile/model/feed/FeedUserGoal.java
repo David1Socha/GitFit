@@ -21,7 +21,7 @@ public class FeedUserGoal extends FeedModel {
 
     @Override
     public void onClick() {
-        //nav.openGoal(goal, grant);
+        nav.openViewGoal(goal, grant);
     }
 
     @Override

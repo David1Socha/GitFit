@@ -10,16 +10,18 @@ public class FeedActivity extends FeedModel {
 
     private Activity activity;
     private AccessGrant grant;
+    private String username;
 
-    public FeedActivity(String msg, Date date, IActivityNavigator nav, Activity activity, AccessGrant grant) {
+    public FeedActivity(String msg, Date date, IActivityNavigator nav, Activity activity, AccessGrant grant, String username) {
         super(msg, date, nav);
         this.grant = grant;
         this.activity = activity;
+        this.username = username;
     }
 
     @Override
     public void onClick() {
-        //nav.openActivityDetail(activity, grant);
+        nav.openViewActivity(activity, username, grant);
     }
 
     @Override
