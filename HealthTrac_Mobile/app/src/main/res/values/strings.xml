@@ -216,5 +216,7 @@
     <string name="banned_member">banned</string>
     <string name="ban_members">Ban Members</string>
     <string name="title_activity_ban_members">Ban Members</string>
+    <string name="title_activity_navigation_drawer">NavigationDrawer</string>
+    <string name="action_example">Example action</string>
 
 </resources>
