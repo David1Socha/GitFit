@@ -39,6 +39,8 @@ namespace HealthTrac
                 
                 "~/WebApp/controllers/*.js",
                 
+                "~/WebApp/services/*.js",
+
                 "~/WebApp/Directives/*.js",
                 "~/WebApp/Directives/gitfit-Header/gitfit-header.js"));
         }
