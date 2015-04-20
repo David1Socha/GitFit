@@ -2,4 +2,19 @@
 <div>
     <input type="text" class="form-control" ng-model="name" name="name" />
     <button class="btn btn-default" ng-click="searchUsers(name)">Search Users</button>
+
+    <table>
+        <tr>
+            <th>User Name</th>
+            <th>Created</th>
+        </tr>
+        <tr ng-repeat="user in users">
+            <td>
+                {{user.Id}}
+            </td>
+            <td>
+                {{user.DateCreated}}
+            </td>
+        </tr>
+    </table>
 </div>

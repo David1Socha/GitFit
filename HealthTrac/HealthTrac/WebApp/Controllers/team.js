@@ -1,5 +1,8 @@
 ﻿gitFit.controller('TeamsController', ['$scope', 'TeamApi', function ($scope, TeamApi) {
+
+    $scope.teams = []
+
     $scope.searchTeams = function (name) {
-        TeamApi.SearchTeams({ name: name });
+        $scope.teams = TeamApi.SearchTeams({ name: name });
     }
 }]);
