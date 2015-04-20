@@ -12,7 +12,7 @@ gitFit.config(['$httpProvider', '$routeProvider', '$locationProvider', function 
             templateUrl: '/WebApp/Views/users.html',
             controller: 'UsersController'
         })
-        .when('/User-Profile', {
+        .when('/User-Profile/:userId', {
             templateUrl: '/WebApp/Views/user-profile.html',
             controller: 'UserProfileController'
         })
@@ -20,7 +20,7 @@ gitFit.config(['$httpProvider', '$routeProvider', '$locationProvider', function 
             templateUrl: '/WebApp/Views/teams.html',
             controller: 'TeamsController'
         })
-        .when('/Team-Profile', {
+        .when('/Team-Profile/:teamId', {
             templateUrl: '/WebApp/Views/team-profile.html',
             controller: 'TeamProfileController'
         })
