@@ -3,6 +3,8 @@
 var gitFit = angular.module('gitFit', ['ngRoute', 'ngResource', 'ui.bootstrap', 'ngCookies']);
 
 gitFit.config(['$httpProvider', '$routeProvider', '$locationProvider', function ($httpProvider, $routeProvider, $locationProvider) {
+    $locationProvider.html5Mode(true);
+    $locationProvider.hashPrefix('!');
 
     $routeProvider
         .when('/Account/Login', {
@@ -25,7 +27,5 @@ gitFit.config(['$httpProvider', '$routeProvider', '$locationProvider', function 
             controller: 'TeamProfileController'
         })
         .otherwise({ redirectTo: '/' });
-
-    $locationProvider.html5Mode(true);
-    $locationProvider.hashPrefix('!');
+    
 }]);
