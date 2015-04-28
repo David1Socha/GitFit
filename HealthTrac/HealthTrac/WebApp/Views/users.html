@@ -8,13 +8,15 @@
             <th>User Name</th>
             <th>Created</th>
         </tr>
-        <tr ng-repeat="user in users">
+        <tr ng-repeat="user in users" ng-click="viewProfile(user.Id)">
+
             <td>
-                {{user.Id}}
+                {{user.UserName}}
             </td>
             <td>
                 {{user.DateCreated}}
             </td>
-        </tr>
+
+        </tr>  
     </table>
 </div>
