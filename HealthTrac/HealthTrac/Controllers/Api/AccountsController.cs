@@ -25,7 +25,7 @@ namespace HealthTrac.Controllers.Api
     [Authorize]
     public class AccountsController : ApiController
     {
-
+        
         private ILoginService LoginService { get; set; }
 
         private IFacebookService FacebookService { get; set; }

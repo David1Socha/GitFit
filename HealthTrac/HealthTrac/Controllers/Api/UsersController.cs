@@ -10,6 +10,7 @@ using HealthTrac.Models;
 using HealthTrac.Models.Dto;
 using HealthTrac.DataAccess;
 using HealthTrac.Services;
+using Microsoft.AspNet.Identity;
 
 namespace HealthTrac.Controllers.Api
 {
@@ -25,6 +26,12 @@ namespace HealthTrac.Controllers.Api
             this.userService = uow.UserService;
         }
 
+        [Route("api/Users/Current")]
+        [HttpGet]
+        public User GetCurrentUser()
+        {
+            return userService.FindUser(User.Identity.GetUserId());
+        }
         // GET: api/Users
         public IEnumerable<UserDto> GetUsers()
         {
@@ -56,6 +63,10 @@ namespace HealthTrac.Controllers.Api
         [ResponseType(typeof(UserDto))]
         public IHttpActionResult GetUser(string id)
         {
+            if (id == "current")
+            {
+                id = User.Identity.GetUserId();
+            }
             User u = userService.FindUser(id);
             if (u == null)
             {
@@ -110,5 +121,6 @@ namespace HealthTrac.Controllers.Api
             uow.Dispose();
             base.Dispose(disposing);
         }
+
     }
 }
