@@ -2,7 +2,7 @@
     $scope.userId = $routeParams.userId;
 
     $scope.getUser = function (userId) {
-        var userResource = UUserApi.GetUser({ userId: $scope.userId });
+        var userResource = UserApi.GetUser({ userId: $scope.userId });
         userResource.$promise.then(function (user) {
             $scope.user = user;
         })
