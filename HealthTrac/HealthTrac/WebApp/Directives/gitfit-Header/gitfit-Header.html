@@ -2,6 +2,6 @@
 <!-- Nav tabs -->
     <ul class ="nav nav-tabs">
         <li ng-repeat="tab in headerTabs" ng-class="getClass(tab.route)"><a ng-href="{{tab.route}}" data-toggle="tab">{{tab.label}}</a></li>
-        <li class="navbar-right"><a ng-href="/Account/Login">Log in</a></li>
+        <li class="navbar-right"><a href="/Account/Login">{{currentUserName}}</a></li>
     </ul>
 </div>
