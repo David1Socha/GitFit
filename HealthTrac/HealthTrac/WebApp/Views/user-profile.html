@@ -1,1 +1,32 @@
-﻿{{user.UserName}}
+﻿<div>
+    <div class="row" style="padding-left: 30px">
+        <h1>{{user.FirstName}} {{user.LastName}} ({{user.UserName}})</h1>
+    </div>
+    <div class="row" >
+        <div class="col-sm-3" style="padding-left: 30px">
+            <img src="{{user.ProfilePicture}}" width="300" height="300" />
+        </div>
+        <div class="user-info col-sm-9">
+            <div class="col-sm-6">
+                <h2 class="user-info-label">User Since: {{user.DateCreated}}</h2>
+                <h2 class="user-info-label">Lifetime Steps: {{user.LifetimeSteps}}</h2>
+                <h2 class="user-info-label">Lifetime Duration: {{user.LifetimeDuration}}</h2>
+                <h2 class="user-info-label">Lifetime Distance: {{user.LifetimeDistance}}</h2>
+            </div>
+            <div class="col-sm-6">
+                <h2 class="user-info-label">Height: {{user.Height}}</h2>
+                <h2 class="user-info-label">Weight: {{user.Weight}}</h2>
+                <h2 class="user-info-label">Birthday: {{user.BirthDate}}</h2>
+                <h2 class="user-info-label">Sex: {{user.Sex}}</h2>
+            </div>
+        </div>
+    </div>
+    <div class="row" >
+        <div id="listContainer" ng-hide="noTeams">
+            <div class="row list-entry" ng-repeat="team in teams">
+                {{team.Name}}
+            </div>
+        </div>
+        <h3 ng-hide="!noTeams" style="text-align: center"> This user is not a member of any teams</h3>
+    </div>
+</div>
