@@ -26,6 +26,10 @@ gitFit.config(['$httpProvider', '$routeProvider', '$locationProvider', function 
             templateUrl: '/WebApp/Views/team-profile.html',
             controller: 'TeamProfileController'
         })
+        .when('/', {
+            templateUrl: '/WebApp/Views/dashboard.html',
+            controller: 'DashboardController'
+        })
         .otherwise({ redirectTo: '/' });
     
 }]);
