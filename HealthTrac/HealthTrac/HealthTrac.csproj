@@ -369,6 +369,7 @@
     <Content Include="Scripts\angular.min.js" />
     <Content Include="DataAccess\Data\1000.csv" />
     <Content Include="WebApp\app.js" />
+    <Content Include="WebApp\Controllers\dashboard.js" />
     <Content Include="WebApp\Controllers\team-profile.js" />
     <Content Include="WebApp\Controllers\team.js" />
     <Content Include="WebApp\Controllers\user-profile.js" />
@@ -376,8 +377,10 @@
     <Content Include="WebApp\Directives\gitfit-Header\gitfit-Header.html" />
     <Content Include="WebApp\Controllers\root.js" />
     <Content Include="WebApp\Directives\gitfit-Header\gitfit-header.js" />
+    <Content Include="WebApp\Services\account-api.js" />
     <Content Include="WebApp\Services\team-api.js" />
     <Content Include="WebApp\Services\user-api.js" />
+    <Content Include="WebApp\Views\dashboard.html" />
     <Content Include="WebApp\Views\team-profile.html" />
     <Content Include="WebApp\Views\teams.html" />
     <Content Include="WebApp\Views\user-profile.html" />
