@@ -6,6 +6,60 @@
     color: silver;
 }
 
+th{
+    border-bottom: 5px solid;
+    padding: 20px;
+    padding-bottom: 5px;
+}
+td {
+    padding-left: 20px;
+    padding-right: 20px;
+}
+tr {
+    padding-bottom: 10px;
+    border-bottom: 10px solid;
+    border-bottom-color: #1B4D3A;
+}
+
+.clickable-bubble{
+    border-color: #1B4D3A;
+    border-radius: 10px;
+    cursor: pointer;
+    background-color: rgb(20, 92, 98);
+}
+.clickable-bubble:hover{
+    background-color: rgb(109, 203, 139);
+    color: black;
+}
+.user-info-label {
+    font-size: 28px;
+}
+.search-box {
+    padding: 10px;
+    text-align: center;
+    margin: auto;
+    width: 300px;
+    padding-bottom: 30px;
+}
+.table-list {
+    padding-top: 30px;
+    text-align: left;
+}
+.table-header {
+    font-size: 30px;
+}
+.table-header-label {
+    padding: 10px;
+    padding-right: 30px;
+    padding-left: 30px;
+    font-weight: bold;
+}
+.table-item {
+    margin: 10px;
+}
+.table-data {
+    font-size: 18px;
+}
 /* Set padding to keep content from hitting the edges */
 .body-content {
     padding-left: 15px;
