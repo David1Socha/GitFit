@@ -19,6 +19,7 @@ using OAuth;
 using System.Net.Http.Headers;
 using Microsoft.Owin.Security.Cookies;
 using HealthTrac.Services;
+using System.Web.Security;
 
 namespace HealthTrac.Controllers.Api
 {
@@ -58,6 +59,14 @@ namespace HealthTrac.Controllers.Api
             }
             var grant = LoginService.GenerateAccessGrant(user, credentials);
             return Ok(grant);
+        }
+        
+        [HttpPost]
+        [Route("api/Account/LogOff")]
+        public IHttpActionResult LogOff()
+        {
+            System.Web.HttpContext.Current.Response.Cookies.Add(new HttpCookie(".AspNet.ApplicationCookie", ""));
+            return Ok();
         }
 
         //POST api/Account/Register

@@ -1,4 +1,4 @@
-﻿gitFit.controller('RootController', ['$scope', 'UserApi', 'AccountApi', function ($scope, UserApi, AccountApi) {
+﻿gitFit.controller('RootController', ['$scope', '$window', '$location', 'UserApi', 'AccountApi', function ($scope, $window, $location, UserApi, AccountApi) {
     var currentUserResource = UserApi.GetUser({ userId: "current" });
 
     currentUserResource.$promise.then(function (currentUser) {
@@ -12,7 +12,14 @@
     });
 
     $scope.LogOff = function () {
-        AccountApi.LogOff();
+        logoffResource = AccountApi.LogOff();
+        logoffResource.$promise.then(function () {
+            $window.location.reload();
+        });
+    };
+
+    $scope.viewProfile = function (userId) {
+        $location.path('/User-Profile/' + userId);
     }
     
 }]);
