@@ -33,6 +33,19 @@ namespace HealthTrac.Controllers.Api
             return teamDtos;
         }
 
+        [Route("api/Teams/withUsers/{teamId}")]
+        [HttpGet]
+        [ResponseType(typeof(Team))]
+        public IHttpActionResult GetTeamWithUsers(long teamId)
+        {
+            Team team = teamService.GetTeam(teamId);
+            if (team == null)
+            {
+                return NotFound();
+            }
+            return Ok(team);
+        }
+
         // GET: api/Teams/5
         [ResponseType(typeof(TeamDto))]
         public IHttpActionResult GetTeam(long id)

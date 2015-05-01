@@ -31,6 +31,10 @@ namespace HealthTrac.Controllers.Api
         // GET: api/Activities?userId=xyz
         public IEnumerable<ActivityDto> GetActivities(String userId)
         {
+            if (userId == "current")
+            {
+                userId = User.Identity.GetUserId();
+            }
             return actSvc.GetActivities(userId).Select(a => ActivityDto.FromActivity(a));
         }
 
@@ -89,6 +93,10 @@ namespace HealthTrac.Controllers.Api
             }
 
             String uid = User.Identity.GetUserId();
+            if (uid == null)
+            {
+                uid = activity.UserID;
+            }
             actSvc.CreateActivity(activity, uid);
             uow.Save();
 
