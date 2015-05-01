@@ -28,7 +28,12 @@ gitFit.config(['$httpProvider', '$routeProvider', '$locationProvider', function 
         })
         .when('/', {
             templateUrl: '/WebApp/Views/dashboard.html',
-            controller: 'DashboardController'
+            controller: 'DashboardController',
+            resolve: {
+                activities: ['ActivityApi', function (ActivityApi) {
+                    return ActivityApi.GetActivities();
+                }]
+            }
         })
         .otherwise({ redirectTo: '/' });
     
