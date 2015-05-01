@@ -27,6 +27,12 @@ namespace HealthTrac
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/site.css"));
+            bundles.Add(new ScriptBundle("~/bundles/momentjs").Include(
+                "~/Scripts/moment.js"
+                ));
+            bundles.Add(new ScriptBundle("~/bundles/highchartsjs").Include(
+                "~/Scripts/highcharts.js"
+                ));
             bundles.Add(new ScriptBundle("~/bundles/angularjs").Include(
                 "~/Scripts/angular.js",
                 "~/Scripts/angular-route.js",
