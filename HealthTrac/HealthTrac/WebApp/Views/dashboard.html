@@ -1,1 +1,25 @@
 ﻿DASHBOARD N STUFF
+{{activities[0].Distance}}
+<div>
+    <div class="activity-feed col-sm-6" >
+        <div class="table-list" ng-hide="noUsers" style="padding-top: 10px; margin: 20px; border: 3px solid; background-color: darkgray; height: 200px; overflow-y: scroll; overflow-x:hidden">
+            <div class="row">
+                <div class="table-header">
+                    <span class="table-header-label col-sm-12" style="font-size: 45px; color:black">Activity Feed</span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="table-items">
+                    <div class="row table-item clickable-bubble" ng-repeat="activity in activities | orderBy:'StartDate':true | limitTo:10" style="margin-left: 20px; margin-right: 20px; cursor:default">
+                        <span style="font-size: 12px">
+                            {{activity.FormattedType}} a distance of {{activity.Distance}} feet in {{activity.FormattedDuration}} on {{activity.StartDate.format("MMMM DD, YYYY")}}
+                        </span> 
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6">
+
+    </div>
+</div>
