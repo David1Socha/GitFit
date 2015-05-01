@@ -1,0 +1,3 @@
+Stone: Stones are a metric that vary significantly by field. According to Encyclopædia Britannica (http://www.britannica.com/EBchecked/topic/567177/stone), the stone was established to be equal to 14 pounds when measuring wool by a royal decree in 1389. This is the conversion rate that are app uses.
+
+Foot: In the 12th century during the reign of Henry I, the length of the foot was standardized very close to the present-day length, at what turned out to be 0.3047990 meters long (https://www.unc.edu/~rowlett/units/custom.html). This conversion rate held for some time, so our app uses this rate to convert between meters and feet.
