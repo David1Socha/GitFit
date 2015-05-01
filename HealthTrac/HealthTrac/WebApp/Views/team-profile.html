@@ -1,1 +1,35 @@
-﻿<h1>{{team.Name}}</h1>
+﻿<div>
+    <div class="row" style="padding-left: 30px">
+        <h1 style="font-size: 60px" >{{team.Name}}</h1>
+    </div>
+    <div class="row" style="padding-left: 35px">
+        <div class="user-info">
+            <h3 class="user-info-label">Team Since: {{team.DateCreated}}</h3>
+            <h3 class="user-info-label">Team Description: {{team.Description}}</h3>
+        </div>
+    </div>
+    <!--<div class="row" style="text-align: center">
+        <div id="listContainer" ng-hide="noUsers">
+            <div class="row list-entry" ng-repeat="user in users">
+                {{user.UserName}}
+            </div>
+        </div>
+        <h3 ng-hide="!noUsers"> This team has no members</h3>
+    </div>-->
+    <div class="table-list" ng-hide="noUsers" style="padding-top: 10px">
+        <div class="row">
+            <div class="table-header">
+                <span class="table-header-label col-sm-12" style="font-size: 45px">Team Members</span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="table-items col-sm-6">
+                <div class="row table-item clickable-bubble" ng-repeat="user in users" ng-click="viewProfile(user.Id)" style="margin-left: 20px; margin-right: 20px">
+                    <img class="table-data col-sm-4" ng-src="{{user.ProfilePicture}}" width="50" height="50" style="width: 50px; height: 50px; padding-right: 5px; padding-left: 0px"/>
+                    <span class="table-data col-sm-8" style="font-size: 36px">{{user.DisplayName}}</span>
+                </div>
+            </div>
+        </div>        
+    </div>
+    <h3 ng-hide="!noUsers" style="text-align:center"> This team has no members</h3>
+</div>
