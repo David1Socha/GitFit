@@ -20,7 +20,14 @@ namespace HealthTrac.Services
         {
             var inputs = users.Select(u => new[] { u.Weight }).ToArray();
             var outputs = users.Select(u => u.Height).ToArray();
-            _coeffs = Fit.MultiDim(inputs, outputs, intercept: true);
+            try
+            {
+                _coeffs = Fit.MultiDim(inputs, outputs, intercept: true);
+            }
+            catch (ArgumentException e)
+            {
+                //if no weights entered model won't build correctly
+            }
         }
 
         public double[] GetCoeffs()
