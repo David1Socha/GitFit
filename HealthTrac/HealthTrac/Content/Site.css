@@ -56,9 +56,10 @@ tr {
 }
 .table-item {
     margin: 10px;
+    padding: 5px;
 }
 .table-data {
-    font-size: 18px;
+    font-size: 20px;
 }
 /* Set padding to keep content from hitting the edges */
 .body-content {
