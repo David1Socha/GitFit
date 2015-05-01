@@ -11,6 +11,9 @@
             } else {
                 $scope.searchCompleted = 'complete';
             }
+            angular.forEach($scope.users, function (user) {
+                user.DateCreated = moment(user.DateCreated).format('MMMM DD, YYYY');
+            });
         });
     };
 
