@@ -1,4 +1,4 @@
-﻿gitFit.controller('UserProfileController', ['$scope', '$routeParams', 'UserApi', 'TeamApi', function ($scope, $routeParams, UserApi, TeamApi) {
+﻿gitFit.controller('UserProfileController', ['$scope', '$routeParams', 'UserApi', 'TeamApi', '$location', function ($scope, $routeParams, UserApi, TeamApi, $location) {
     $scope.userId = $routeParams.userId;
 
     $scope.getUser = function () {
@@ -10,6 +10,7 @@
             } else {
                 $scope.user.Sex = 'Female'
             }
+            $scope.user.DateCreated = moment(user.DateCreated).format('MMMM DD, YYYY');
         })
     };
     $scope.noTeams = true;
@@ -22,6 +23,11 @@
             }
         });
     };
+
+    $scope.viewProfile = function (teamId) {
+        $location.path('/Team-Profile/' + teamId);
+    }
+
     $scope.getUser();
     $scope.getTeamsFromUser();
 }]);

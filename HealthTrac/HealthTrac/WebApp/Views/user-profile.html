@@ -21,12 +21,27 @@
             </div>
         </div>
     </div>
-    <div class="row" >
+    <!--<div class="row" >
         <div id="listContainer" ng-hide="noTeams">
             <div class="row list-entry" ng-repeat="team in teams">
                 {{team.Name}}
             </div>
         </div>
         <h3 ng-hide="!noTeams" style="text-align: center"> This user is not a member of any teams</h3>
+    </div>-->
+    <div class="table-list" ng-hide="noTeams" style="padding-top: 10px">
+        <div class="row">
+            <div class="table-header">
+                <span class="table-header-label col-sm-12" style="font-size: 45px">Teams</span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="table-items col-sm-6">
+                <div class="row table-item clickable-bubble" ng-repeat="team in teams" ng-click="viewProfile(team.ID)" style="margin-left: 20px; margin-right: 20px">
+                    <span class="table-data col-sm-8" style="font-size: 36px">{{team.Name}}</span>
+                </div>
+            </div>
+        </div>        
     </div>
+    <h3 ng-hide="!noTeams" style="text-align:center"> This user has no teams</h3>
 </div>
