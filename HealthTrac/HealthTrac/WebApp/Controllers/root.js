@@ -18,7 +18,7 @@
         });
     };
 
-    $scope.viewProfile = function (userId) {
+    $scope.viewCurrentProfile = function (userId) {
         $location.path('/User-Profile/' + userId);
     }
     
