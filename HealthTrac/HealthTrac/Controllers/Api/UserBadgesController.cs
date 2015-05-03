@@ -37,6 +37,10 @@ namespace HealthTrac.Controllers.Api
         // GET: api/UserBadges?userId=xyz
         public IEnumerable<UserBadgeDto> GetUserBadges(String userId)
         {
+            if (userId == "current")
+            {
+                userId = User.Identity.GetUserId();
+            }
             var ubs = ubsvc.GetUserBadges(userId);
             var ubDtos = ubs.Select(t => UserBadgeDto.FromUserBadge(t));
             return ubDtos;
