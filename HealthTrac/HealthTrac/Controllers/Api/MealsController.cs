@@ -12,6 +12,7 @@ using HealthTrac.Models;
 using HealthTrac.DataAccess;
 using HealthTrac.Models.Dto;
 using HealthTrac.Services;
+using Microsoft.AspNet.Identity;
 
 namespace HealthTrac.Controllers.Api
 {
@@ -37,6 +38,10 @@ namespace HealthTrac.Controllers.Api
         // GET: api/Meals?userId=xyz
         public IEnumerable<MealDto> GetMeals(String userId)
         {
+            if (userId == "current")
+            {
+                userId = User.Identity.GetUserId();
+            }
             return msvc.GetMeals(userId).Select(b => MealDto.FromMeal(b));
         }
 
