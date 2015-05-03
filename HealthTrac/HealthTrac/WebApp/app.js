@@ -32,6 +32,15 @@ gitFit.config(['$httpProvider', '$routeProvider', '$locationProvider', function 
             resolve: {
                 activities: ['ActivityApi', function (ActivityApi) {
                     return ActivityApi.GetActivities();
+                }],
+                meals: ['MealApi', function (MealApi) {
+                    return MealApi.GetMeals();
+                }],
+                badges: ['BadgeApi', function (BadgeApi) {
+                    return BadgeApi.GetBadges();
+                }],
+                userBadges: ['UserBadgeApi', function (UserBadgeApi) {
+                    return UserBadgeApi.GetUserBadges();
                 }]
             }
         })
