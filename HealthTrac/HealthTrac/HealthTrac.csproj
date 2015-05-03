@@ -1142,8 +1142,11 @@
     <Content Include="WebApp\Directives\gitfit-Header\gitfit-header.js" />
     <Content Include="WebApp\Services\account-api.js" />
     <Content Include="WebApp\Services\activity-api.js" />
+    <Content Include="WebApp\Services\badge-api.js" />
+    <Content Include="WebApp\Services\meal-api.js" />
     <Content Include="WebApp\Services\team-api.js" />
     <Content Include="WebApp\Services\user-api.js" />
+    <Content Include="WebApp\Services\user-badges-api.js" />
     <Content Include="WebApp\Views\dashboard.html" />
     <Content Include="WebApp\Views\team-profile.html" />
     <Content Include="WebApp\Views\teams.html" />
