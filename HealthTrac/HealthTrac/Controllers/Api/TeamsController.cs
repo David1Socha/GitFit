@@ -70,6 +70,10 @@ namespace HealthTrac.Controllers.Api
         //GET: api/Teams?userId=xxx
         public IEnumerable<TeamDto> GetTeams(string userId)
         {
+            if (userId == "current")
+            {
+                userId = User.Identity.GetUserId();
+            }
             var teams = teamService.GetTeams(userId);
             var teamDtos = teams.Select(t => TeamDto.FromTeam(t));
             return teamDtos;
