@@ -8,12 +8,13 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="table-items">
-                        <div class="row table-item clickable-bubble" ng-repeat="activity in activities | orderBy:'StartDate':true | limitTo:10" style="margin-left: 20px; margin-right: 20px; cursor:default">
+                    <div class="table-items" style="text-align: center">
+                        <div class="row table-item clickable-bubble" ng-repeat="activity in activities | orderBy:'StartDate':true | limitTo:numActivitiesDisplay" style="margin-left: 20px; margin-right: 20px; cursor:default">
                             <span style="font-size: 12px">
                                 {{activity.FormattedType}} a distance of {{activity.Distance}} feet in {{activity.FormattedDuration}} on {{activity.StartDate.format("MMMM DD, YYYY")}}
                             </span>
                         </div>
+                        <button ng-click="showAllActivities()" ng-hide="displayAllActivities">Show all Activities</button>
                     </div>
                 </div>
             </div>
@@ -23,10 +24,17 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-sm-6 badge-list">
+        <div class="col-sm-4 badge-list">
             <div class="badge-item" ng-repeat="badge in userBadges | limitTo: 3">
                 {{badge.badgeName}}
             </div>
         </div>
+        <div class="col-sm-4 activity-distance-graph">
+            <div id="ActivityDistanceContainer" style="margin: 20px; height: 300px"></div>
+        </div>
+        <div class="col-sm-4 activity-breakdwon-chart">
+            <div id="activityTypePieChartContainer" style="margin: 20px; height: 300px"></div>
+        </div>
     </div>
+
 </div>
