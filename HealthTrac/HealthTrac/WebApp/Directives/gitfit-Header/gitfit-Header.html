@@ -1,8 +1,9 @@
 ﻿<div id="mainHeader">
 <!-- Nav tabs -->
     <ul class ="nav nav-tabs">
+        <li><img src="/Content/gitfit-logo.jpg" height="40px"width="40px" style="padding: 4px"/></li>
         <li ng-repeat="tab in headerTabs" ng-class="getClass(tab.route)"><a ng-href="{{tab.route}}" data-toggle="tab">{{tab.label}}</a></li>
-        <li class="navbar-right"><a ng-click="viewCurrentProfile(currentUser.Id)">{{currentUserName}}</a></li>
-        <li class="navbar-right"><a ng-click="LogOff()">Log off</a></li>
+        <li class="navbar-right" style="cursor: pointer"><a ng-click="viewCurrentProfile(currentUser.Id)">{{currentUserName}}</a></li>
+        <li class="navbar-right" style="cursor: pointer"><a ng-click="LogOff()">Log off</a></li>
     </ul>
 </div>
