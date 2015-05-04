@@ -2,6 +2,7 @@
     'use strict';
 
     return $resource('/api/Activities', {}, {
-        GetActivities: { method: 'GET', url: '/api/Activities?userId=current', isArray: true },
+        GetCurrentActivities: { method: 'GET', url: '/api/Activities?userId=current', isArray: true },
+        GetActivities: { method: 'GET', url: '/api/Activities?userId=:userId', isArray: true },
     });
 }]);
