@@ -11,7 +11,14 @@
                 $scope.user.Sex = 'Female'
             }
             $scope.user.DateCreated = moment(user.DateCreated).format('MMMM DD, YYYY');
-        })
+            $scope.user.LifetimeDuration = Math.round($scope.user.LifetimeDuration / 3600);
+            $scope.user.LifetimeDistance = Math.round($scope.user.LifetimeDistance / 5280);
+            if ($scope.user.BirthDate == null){
+                $scope.user.BirthDate = 'n/a'
+            } else {
+                $scope.user.BirthDate = moment($scope.user.BirthDate).format('MMMM DD, YYYY');
+            }
+        });
     };
     $scope.noTeams = true;
     $scope.getTeamsFromUser = function () {
