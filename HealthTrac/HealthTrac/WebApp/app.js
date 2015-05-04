@@ -40,7 +40,7 @@ gitFit.config(['$httpProvider', '$routeProvider', '$locationProvider', function 
             controller: 'DashboardController',
             resolve: {
                 activities: ['ActivityApi', function (ActivityApi) {
-                    return ActivityApi.GetActivities();
+                    return ActivityApi.GetCurrentActivities();
                 }],
                 meals: ['MealApi', function (MealApi) {
                     return MealApi.GetMeals();
