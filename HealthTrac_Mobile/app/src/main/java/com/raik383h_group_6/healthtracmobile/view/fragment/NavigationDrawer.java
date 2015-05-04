@@ -1,27 +1,40 @@
 package com.raik383h_group_6.healthtracmobile.view.fragment;
 
 import android.app.Activity;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.os.Parcelable;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.content.Context;
-import android.os.Build;
 import android.os.Bundle;
-import android.view.Gravity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.support.v4.widget.DrawerLayout;
-import android.widget.ArrayAdapter;
-import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.inject.Inject;
 import com.raik383h_group_6.healthtracmobile.R;
+import com.raik383h_group_6.healthtracmobile.application.ActivityNavigator;
+import com.raik383h_group_6.healthtracmobile.application.IActivityNavigator;
+import com.raik383h_group_6.healthtracmobile.application.RequestCodes;
+import com.raik383h_group_6.healthtracmobile.presenter.GitFitMainPresenter;
+import com.raik383h_group_6.healthtracmobile.presenter.PresenterFactory;
+import com.raik383h_group_6.healthtracmobile.view.GitFitMainView;
 
-public class NavigationDrawer extends ActionBarActivity
-        implements NavigationDrawerFragment.NavigationDrawerCallbacks {
+import roboguice.activity.RoboActionBarActivity;
+
+
+public class NavigationDrawer extends RoboActionBarActivity
+        implements NavigationDrawerFragment.NavigationDrawerCallbacks, GitFitMainView {
+    @Inject
+    PresenterFactory presenterFactory;
+    private GitFitMainPresenter presenter;
 
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
@@ -36,6 +49,9 @@ public class NavigationDrawer extends ActionBarActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        IActivityNavigator nav = new ActivityNavigator(this);
+        presenter = presenterFactory.create(nav, this);
+        presenter.onResume();
         setContentView(R.layout.activity_navigation_drawer);
 
         mNavigationDrawerFragment = (NavigationDrawerFragment)
@@ -46,15 +62,28 @@ public class NavigationDrawer extends ActionBarActivity
         mNavigationDrawerFragment.setUp(
                 R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout));
+
     }
 
     @Override
     public void onNavigationDrawerItemSelected(int position) {
         // update the main content by replacing fragments
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction()
-                .replace(R.id.container, PlaceholderFragment.newInstance(position + 1))
-                .commit();
+
+        if(position == 0) {
+            //feed
+            presenter.onClickUserFeed();
+        } else if (position == 1) {
+            //activity
+        } else if (position == 2) {
+            //teams
+            presenter.onClickShowTeams();
+        } else if (position == 3) {
+            //users
+            presenter.onClickShowUsers();
+        } else if (position == 4) {
+            //account
+            presenter.onClickShowProfile();
+        }
     }
 
     public void onSectionAttached(int number) {
@@ -68,6 +97,12 @@ public class NavigationDrawer extends ActionBarActivity
             case 3:
                 mTitle = getString(R.string.title_section3);
                 break;
+            case 4:
+                mTitle = getString(R.string.title_section4);
+                break;
+            case 5:
+                mTitle = getString(R.string.title_section5);
+                break;
         }
     }
 
@@ -77,7 +112,6 @@ public class NavigationDrawer extends ActionBarActivity
         actionBar.setDisplayShowTitleEnabled(true);
         actionBar.setTitle(mTitle);
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -105,6 +139,75 @@ public class NavigationDrawer extends ActionBarActivity
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        presenter.onResume();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        presenter.onPause();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        Bundle extras = null;
+        if (data != null) {
+            extras = data.getExtras();
+        }
+        presenter.onActivityResult(requestCode, resultCode, extras);
+    }
+
+    @Override
+    public String getResource(int id) {
+        return getResources().getString(id);
+    }
+
+    @Override
+    public String getResource(int id, Object... params) {
+        return getResources().getString(id, params);
+    }
+
+    @Override
+    public String getStringExtra(String key) {
+        return getIntent().getStringExtra(key);
+    }
+
+    @Override
+    public long getLongExtra(String key) {
+        return getIntent().getLongExtra(key, -1l);
+    }
+
+    @Override
+    public Parcelable getParcelableExtra(String key) {
+        return getIntent().getParcelableExtra(key);
+    }
+
+    @Override
+    public String getPref(String key) {
+        return getSharedPreferences(getString(R.string.shared_prefs), MODE_PRIVATE).getString(key, null);
+    }
+
+    @Override
+    public void setPref(String key, String val) {
+        SharedPreferences.Editor editor = getSharedPreferences(getString(R.string.shared_prefs), MODE_PRIVATE).edit();
+        editor.putString(key, val);
+        editor.apply();
+    }
+
+    @Override
+    public void clearPrefs() {
+        getSharedPreferences(getString(R.string.shared_prefs), MODE_PRIVATE).edit().clear().commit();
+    }
+
+    @Override
+    public void displayMessage(String msg) {
+        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
     }
 
     /**

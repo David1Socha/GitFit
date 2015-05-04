@@ -2,13 +2,18 @@ package com.raik383h_group_6.healthtracmobile.view.fragment;
 
 import android.content.SharedPreferences;
 import android.os.Parcelable;
-import android.support.v4.app.Fragment;
 
 import com.raik383h_group_6.healthtracmobile.R;
+import com.raik383h_group_6.healthtracmobile.presenter.BasePresenter;
 import com.raik383h_group_6.healthtracmobile.view.BaseView;
 
+import roboguice.fragment.RoboFragment;
 
-public abstract class BaseFragment extends Fragment implements BaseView {
+
+public abstract class BaseFragment extends RoboFragment implements BaseView {
+
+    public abstract BasePresenter getPresenter();
+
     @Override
     public String getResource(int id) {
         return getResources().getString(id);
@@ -21,17 +26,17 @@ public abstract class BaseFragment extends Fragment implements BaseView {
 
     @Override
     public String getStringExtra(String key) {
-        return super.getActivity().getIntent().getStringExtra(key);
+        return getArguments().getString(key);
     }
 
     @Override
     public long getLongExtra(String key) {
-        return super.getActivity().getIntent().getLongExtra(key, -1l);
+        return getArguments().getLong(key, -1l);
     }
 
     @Override
     public Parcelable getParcelableExtra(String key) {
-        return super.getActivity().getIntent().getParcelableExtra(key);
+        return getArguments().getParcelable(key);
     }
 
     @Override

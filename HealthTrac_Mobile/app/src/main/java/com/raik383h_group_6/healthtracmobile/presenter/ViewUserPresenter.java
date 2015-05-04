@@ -2,6 +2,7 @@ package com.raik383h_group_6.healthtracmobile.presenter;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.Log;
 
 import com.google.inject.Inject;
 import com.google.inject.assistedinject.Assisted;
@@ -26,6 +27,7 @@ public class ViewUserPresenter extends BasePresenter{
         this.view = view;
         user = (User) view.getParcelableExtra(view.getResource(R.string.EXTRA_USER));
         grant = (AccessGrant) view.getParcelableExtra(view.getResource(R.string.EXTRA_ACCESS_GRANT));
+        Log.i("User", user.toString());
     }
 
     public void onClickEditUser() {
@@ -55,6 +57,8 @@ public class ViewUserPresenter extends BasePresenter{
     }
 
     private void updateFields() {
+        Log.i("View", view.toString());
+        Log.i("User", user.toString());
         view.setBirthDate(FormatUtils.format(user.getBirthDate()));
         view.setEmail(user.getEmail());
         view.setFirstName(user.getFirstName());

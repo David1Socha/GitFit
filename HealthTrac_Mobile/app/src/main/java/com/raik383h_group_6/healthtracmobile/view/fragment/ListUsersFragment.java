@@ -23,9 +23,9 @@ import com.raik383h_group_6.healthtracmobile.view.ListUsersView;
 
 import java.util.List;
 
+import roboguice.RoboGuice;
 import roboguice.inject.ContentView;
 import roboguice.inject.InjectView;
-
 
 public class ListUsersFragment extends BaseFragment implements ListUsersView {
     LinearLayout listUsersLayout;
@@ -41,14 +41,19 @@ public class ListUsersFragment extends BaseFragment implements ListUsersView {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         IActivityNavigator nav = new ActivityNavigator(super.getActivity());
         listUsersLayout = (LinearLayout) inflater.inflate(R.layout.activity_list_users,container,false);
+        presenter = presenterFactory.create(nav, this);
+        return listUsersLayout;
+    }
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
         userListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 presenter.onItemClick(parent, view, position, id);
             }
         });
-        presenter = presenterFactory.create(nav, this);
-        return listUsersLayout;
     }
 
     @Override
@@ -61,6 +66,12 @@ public class ListUsersFragment extends BaseFragment implements ListUsersView {
     public void onResume() {
         super.onResume();
         presenter.onResume();
+    }
+
+
+    @Override
+    public BasePresenter getPresenter() {
+        return presenter;
     }
 
     @Override

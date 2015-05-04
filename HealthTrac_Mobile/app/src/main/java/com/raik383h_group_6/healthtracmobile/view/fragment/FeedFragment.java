@@ -1,7 +1,9 @@
 package com.raik383h_group_6.healthtracmobile.view.fragment;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -26,9 +28,8 @@ import java.util.List;
 import roboguice.inject.ContentView;
 import roboguice.inject.InjectView;
 
-@ContentView(R.layout.activity_feed)
-public class FeedActivity extends BaseActivity implements FeedView{
-
+public class FeedFragment extends BaseFragment implements FeedView{
+    LinearLayout feedLayout;
     @InjectView(R.id.goal_listview)
     ListView goalListView;
     @InjectView(R.id.feed_listview)
@@ -50,10 +51,16 @@ public class FeedActivity extends BaseActivity implements FeedView{
     private FeedPresenter presenter;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        IActivityNavigator nav = new ActivityNavigator(this);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        IActivityNavigator nav = new ActivityNavigator(super.getActivity());
+        feedLayout = (LinearLayout) inflater.inflate(R.layout.activity_feed,container,false);
         presenter = presenterFactory.create(nav, this);
+        return feedLayout;
+    }
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -70,7 +77,7 @@ public class FeedActivity extends BaseActivity implements FeedView{
     }
 
     @Override
-    protected void onResume() {
+    public void onResume() {
         super.onResume();
         presenter.onResume();
     }
@@ -82,7 +89,7 @@ public class FeedActivity extends BaseActivity implements FeedView{
 
     @Override
     public void setFeedModels(List<FeedModel> fms) {
-        FeedModelAdapter adapter = new FeedModelAdapter(this, fms);
+        FeedModelAdapter adapter = new FeedModelAdapter(this.getActivity(), fms);
         listView.setAdapter(adapter);
     }
 
@@ -97,7 +104,7 @@ public class FeedActivity extends BaseActivity implements FeedView{
 
     @Override
     public void displayMessage(String msg) {
-        Toast.makeText(this, msg, Toast.LENGTH_LONG).show();
+        Toast.makeText(this.getActivity(), msg, Toast.LENGTH_LONG).show();
     }
 
     @Override
@@ -135,7 +142,7 @@ public class FeedActivity extends BaseActivity implements FeedView{
 
     @Override
     public void setGoalsInProgress(List<GoalProgress> gps) {
-        GoalProgressAdapter adapter = new GoalProgressAdapter(this, gps);
+        GoalProgressAdapter adapter = new GoalProgressAdapter(this.getActivity(), gps);
         goalListView.setAdapter(adapter);
     }
 }

@@ -34,6 +34,7 @@ import com.raik383h_group_6.healthtracmobile.view.ViewGoalView;
 import com.raik383h_group_6.healthtracmobile.view.ViewMealView;
 import com.raik383h_group_6.healthtracmobile.view.ViewUserView;
 import com.raik383h_group_6.healthtracmobile.view.ViewTeamView;
+import com.raik383h_group_6.healthtracmobile.view.fragment.NavigationDrawer;
 
 public interface PresenterFactory {
     OAuthBrowserPresenter create(IAsyncOAuthService serviceAdapter, WebView web, IActivityNavigator nav, BaseView view);

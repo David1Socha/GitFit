@@ -2,9 +2,13 @@ package com.raik383h_group_6.healthtracmobile.view.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.google.inject.Inject;
@@ -21,7 +25,8 @@ import roboguice.inject.ContentView;
 import roboguice.inject.InjectView;
 
 @ContentView(R.layout.activity_view_user)
-public class ViewUserActivity extends BaseActivity implements ViewUserView {
+public class ViewUserFragment extends BaseFragment implements ViewUserView {
+    ScrollView viewUserLayout;
     @InjectView(R.id.birthdate_textview)
     TextView birthDateTextView;
     @InjectView(R.id.email_textview)
@@ -52,14 +57,15 @@ public class ViewUserActivity extends BaseActivity implements ViewUserView {
     private ViewUserPresenter presenter;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        IActivityNavigator nav = new ActivityNavigator(this);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        IActivityNavigator nav = new ActivityNavigator(super.getActivity());
+        viewUserLayout = (ScrollView) inflater.inflate(R.layout.activity_view_user,container,false);
         presenter = presenterFactory.create(nav, this);
+        return viewUserLayout;
     }
 
     @Override
-    protected void onResume() {
+    public void onResume() {
         super.onResume();
         presenter.onResume();
     }
@@ -69,7 +75,7 @@ public class ViewUserActivity extends BaseActivity implements ViewUserView {
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
         Bundle extras = data == null ? null : data.getExtras();
         presenter.onActivityResult(requestCode, resultCode, extras);
     }
@@ -139,7 +145,7 @@ public class ViewUserActivity extends BaseActivity implements ViewUserView {
 
     @Override
     public void setProfilePicture(String profilePicture) {
-        Picasso.with(this)
+        Picasso.with(this.getActivity())
             .load(profilePicture)
             .placeholder(R.drawable.default_profile_picture)
             .resizeDimen(R.dimen.prof_pic_size, R.dimen.prof_pic_size)

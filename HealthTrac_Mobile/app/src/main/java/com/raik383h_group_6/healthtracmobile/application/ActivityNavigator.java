@@ -5,6 +5,11 @@ import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
+import android.util.Log;
 
 
 import com.raik383h_group_6.healthtracmobile.R;
@@ -46,6 +51,10 @@ import com.raik383h_group_6.healthtracmobile.view.activity.ViewMealActivity;
 import com.raik383h_group_6.healthtracmobile.view.activity.ViewPathActivity;
 import com.raik383h_group_6.healthtracmobile.view.activity.ViewTeamActivity;
 import com.raik383h_group_6.healthtracmobile.view.activity.ViewUserActivity;
+import com.raik383h_group_6.healthtracmobile.view.fragment.FeedFragment;
+import com.raik383h_group_6.healthtracmobile.view.fragment.ListTeamsFragment;
+import com.raik383h_group_6.healthtracmobile.view.fragment.ListUsersFragment;
+import com.raik383h_group_6.healthtracmobile.view.fragment.ViewUserFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -164,10 +173,17 @@ public class ActivityNavigator implements IActivityNavigator {
 
     @Override
     public void openViewUser(User u, AccessGrant grant) {
-        Intent intent = new Intent(activity, ViewUserActivity.class);
-        intent.putExtra(activity.getString(R.string.EXTRA_USER), u);
-        intent.putExtra(activity.getString(R.string.EXTRA_ACCESS_GRANT), grant);
-        activity.startActivity(intent);
+        Fragment fragment = new ViewUserFragment();
+        Bundle bundle = new Bundle();
+        bundle.putParcelable(activity.getString(R.string.EXTRA_ACCESS_GRANT), grant);
+        bundle.putParcelable(activity.getString(R.string.EXTRA_USER), u);
+        Log.i("User", u.toString());
+        fragment.setArguments(bundle);
+        FragmentActivity fragmentActivity = (FragmentActivity) activity;
+        FragmentManager fragmentManager = fragmentActivity.getSupportFragmentManager();
+        fragmentManager.beginTransaction()
+                .replace(R.id.container, fragment)
+                .commit();
     }
 
     @Override
@@ -177,9 +193,15 @@ public class ActivityNavigator implements IActivityNavigator {
 
     @Override
     public void openListUsers(AccessGrant g) {
-        Intent intent = new Intent(activity, ListUsersActivity.class);
-        intent.putExtra(activity.getString(R.string.EXTRA_ACCESS_GRANT), g);
-        activity.startActivity(intent);
+        Fragment fragment = new ListUsersFragment();
+        Bundle bundle = new Bundle();
+        bundle.putParcelable(activity.getString(R.string.EXTRA_ACCESS_GRANT), g);
+        fragment.setArguments(bundle);
+        FragmentActivity fragmentActivity = (FragmentActivity) activity;
+        FragmentManager fragmentManager = fragmentActivity.getSupportFragmentManager();
+        fragmentManager.beginTransaction()
+                .replace(R.id.container, fragment)
+                .commit();
     }
 
     @Override
@@ -192,9 +214,15 @@ public class ActivityNavigator implements IActivityNavigator {
 
     @Override
     public void openListTeams(AccessGrant g) {
-        Intent intent = new Intent(activity, ListTeamsActivity.class);
-        intent.putExtra(activity.getString(R.string.EXTRA_ACCESS_GRANT), g);
-        activity.startActivity(intent);
+        Fragment fragment = new ListTeamsFragment();
+        Bundle bundle = new Bundle();
+        bundle.putParcelable(activity.getString(R.string.EXTRA_ACCESS_GRANT), g);
+        fragment.setArguments(bundle);
+        FragmentActivity fragmentActivity = (FragmentActivity) activity;
+        FragmentManager fragmentManager = fragmentActivity.getSupportFragmentManager();
+        fragmentManager.beginTransaction()
+                .replace(R.id.container, fragment)
+                .commit();
     }
 
     @Override
@@ -345,10 +373,16 @@ public class ActivityNavigator implements IActivityNavigator {
 
     @Override
     public void openFeed(String uid, AccessGrant grant) {
-        Intent i = new Intent(activity, FeedActivity.class);
-        i.putExtra(activity.getString(R.string.EXTRA_ACCESS_GRANT), grant);
-        i.putExtra(activity.getString(R.string.EXTRA_USER_ID), uid);
-        activity.startActivity(i);
+        Fragment fragment = new FeedFragment();
+        Bundle bundle = new Bundle();
+        bundle.putParcelable(activity.getString(R.string.EXTRA_ACCESS_GRANT), grant);
+        bundle.putString(activity.getString(R.string.EXTRA_USER_ID), uid);
+        fragment.setArguments(bundle);
+        FragmentActivity fragmentActivity = (FragmentActivity) activity;
+        FragmentManager fragmentManager = fragmentActivity.getSupportFragmentManager();
+        fragmentManager.beginTransaction()
+                .replace(R.id.container, fragment)
+                .commit();
     }
 
     @Override

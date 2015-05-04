@@ -42,11 +42,7 @@
             android:name=".view.activity.GitFitMainActivity"
             android:label="@string/git_fit"
             android:launchMode="singleTop" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".view.activity.AuthenticationActivity"
@@ -264,6 +260,11 @@
         <activity
             android:name=".view.fragment.NavigationDrawer"
             android:label="@string/title_activity_navigation_drawer" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
     </application>
 
