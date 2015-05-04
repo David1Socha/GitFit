@@ -24,13 +24,24 @@
     <div class="table-list" ng-hide="noTeams" style="padding-top: 10px">
         <div class="row">
             <div class="table-header">
-                <span class="table-header-label col-sm-12" style="font-size: 45px">Teams</span>
+                <span class="table-header-label col-sm-6" style="font-size: 45px">Teams</span>
+            </div>
+            <div class="table-header">
+                <span class="table-header-label col-sm-6" style="font-size: 45px">Badges</span>
             </div>
         </div>
         <div class="row">
             <div class="table-items col-sm-6">
                 <div class="row table-item clickable-bubble" ng-repeat="team in teams" ng-click="viewProfile(team.ID)" style="margin-left: 20px; margin-right: 20px">
                     <span class="table-data col-sm-8" style="font-size: 36px">{{team.Name}}</span>
+                </div>
+            </div>
+            <div class="col-sm-6 badge-list">
+                <div class="badge-item" ng-repeat="badge in userBadges | limitTo: 3">
+                    {{badge.badgeName}}
+                    <div style="font-size: 16px">
+                        Badge Earned on {{badge.DateCompleted}}
+                    </div>
                 </div>
             </div>
         </div>        

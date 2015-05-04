@@ -31,6 +31,14 @@ tr {
     background-color: rgb(109, 203, 139);
     color: black;
 }
+
+.badge-item{
+    font-size: 26px;
+    border-radius: 10px;
+    background-color: rgb(20, 92, 98);
+    text-align: center;
+    margin: 10px;
+}
 .user-info-label {
     font-size: 28px;
 }
