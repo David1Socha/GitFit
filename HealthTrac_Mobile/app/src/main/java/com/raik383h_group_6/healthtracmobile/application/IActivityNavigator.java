@@ -45,6 +45,8 @@ public interface IActivityNavigator {
 
     void openViewUser(User u, AccessGrant grant);
 
+    void openViewUserFragment(User u, AccessGrant grant);
+
     void finishViewUser();
 
     void openListUsers(AccessGrant g);
@@ -99,6 +101,8 @@ public interface IActivityNavigator {
 
     void openFeed(String uid, AccessGrant grant);
 
+    void openFeedFragment(String uid, AccessGrant grant);
+
     void openFeed(long teamId, AccessGrant grant);
 
     void openActivityReport(ActivityReport ar, String username, AccessGrant grant);
@@ -109,6 +113,7 @@ public interface IActivityNavigator {
     void openViewActivity(Activity a, String username, AccessGrant grant);
     void openCreateActivity(AccessGrant grant);
     void openViewPath(ArrayList<Point> pts, AccessGrant grant);
+    void openEvent(AccessGrant grant);
 
 
 }

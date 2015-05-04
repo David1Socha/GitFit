@@ -16,15 +16,5 @@ public abstract class BasePresenter {
         getNav().openMain();
     }
 
-    public void onClickCreateMeal() {
-        getNav().openCreateMeal(getGrant());
-    }
 
-    public void onClickCreateEnergyLevel() {
-        getNav().openCreateEnergyLevel(getGrant());
-    }
-
-    public void onClickCreateGoal() {
-        getNav().openCreateGoal(getGrant());
-    }
 }

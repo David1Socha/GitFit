@@ -45,8 +45,9 @@ public class ViewUserActivity extends BaseActivity implements ViewUserView {
     @InjectView(R.id.profile_picture)
     ImageView profileImageView;
     @InjectView(R.id.edit_user_button)
-    private
-    Button editUserButton;
+    private Button editUserButton;
+    @InjectView(R.id.user_feed_button)
+    private Button userFeedButton;
     @Inject
     PresenterFactory presenterFactory;
     private ViewUserPresenter presenter;
@@ -130,6 +131,15 @@ public class ViewUserActivity extends BaseActivity implements ViewUserView {
             editUserButton.setVisibility(View.VISIBLE);
         } else {
             editUserButton.setVisibility(View.GONE);
+        }
+    }
+
+    @Override
+    public void setShowUserFeedButton(boolean enabled) {
+        if (enabled) {
+            userFeedButton.setVisibility(View.VISIBLE);
+        } else {
+            userFeedButton.setVisibility(View.GONE);
         }
     }
 

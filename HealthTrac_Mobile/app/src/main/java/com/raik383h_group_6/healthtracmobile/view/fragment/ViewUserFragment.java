@@ -50,8 +50,9 @@ public class ViewUserFragment extends BaseFragment implements ViewUserView {
     @InjectView(R.id.profile_picture)
     ImageView profileImageView;
     @InjectView(R.id.edit_user_button)
-    private
-    Button editUserButton;
+    private Button editUserButton;
+    @InjectView(R.id.user_feed_button)
+    private Button userFeedButton;
     @Inject
     PresenterFactory presenterFactory;
     private ViewUserPresenter presenter;
@@ -62,6 +63,17 @@ public class ViewUserFragment extends BaseFragment implements ViewUserView {
         viewUserLayout = (ScrollView) inflater.inflate(R.layout.activity_view_user,container,false);
         presenter = presenterFactory.create(nav, this);
         return viewUserLayout;
+    }
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        editUserButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onClickEditUser(v);
+            }
+        });
     }
 
     @Override
@@ -136,6 +148,15 @@ public class ViewUserFragment extends BaseFragment implements ViewUserView {
             editUserButton.setVisibility(View.VISIBLE);
         } else {
             editUserButton.setVisibility(View.GONE);
+        }
+    }
+
+    @Override
+         public void setShowUserFeedButton(boolean enabled) {
+        if (enabled) {
+            userFeedButton.setVisibility(View.VISIBLE);
+        } else {
+            userFeedButton.setVisibility(View.GONE);
         }
     }
 

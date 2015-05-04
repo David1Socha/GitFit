@@ -46,7 +46,7 @@ public class GitFitMainPresenter extends BasePresenter{
         if (grant == null) {
             reconstructGrant();
         }
-        if (grant == null) {
+        if (grantBad()) {
             nav.openAuthentication(RequestCodes.AUTH);
         }
     }
@@ -56,7 +56,6 @@ public class GitFitMainPresenter extends BasePresenter{
     private void reconstructGrant() {
         String serializedGrant = view.getPref(view.getResource(R.string.pref_access_grant));
         if (serializedGrant != null) {
-            Log.i("Reconstructed Grant", "it did");
             grant = json.fromJson(serializedGrant,  AccessGrant.class);
         }
     }
@@ -71,7 +70,6 @@ public class GitFitMainPresenter extends BasePresenter{
     }
 
     public void onClickShowUsers() {
-        Log.i("onClickShowUsers", grantBad() + "");
         if (!grantBad()) {
             nav.openListUsers(grant);
         } else {
@@ -86,7 +84,7 @@ public class GitFitMainPresenter extends BasePresenter{
     public void onClickShowProfile() {
         loadUser();
         if (user != null) {
-            nav.openViewUser(user, grant);
+            nav.openViewUserFragment(user, grant);
         }
     }
 
@@ -121,14 +119,20 @@ public class GitFitMainPresenter extends BasePresenter{
     }
 
     public void onClickUserFeed() {
-        loadUser();
-        nav.openFeed(user.getId(), grant);
+        if (!grantBad()) {
+            loadUser();
+            nav.openFeedFragment(user.getId(), grant);
+        } else {
+            nav.openAuthentication(RequestCodes.AUTH);
+        }
     }
 
-    public void onClickStartActivity() { nav.openActivity(grant); }
-
-    public void onClickCreateActivityManual() {
-        nav.openCreateActivity(grant);
+    public void onClickOpenEvent() {
+        if (!grantBad()) {
+            nav.openEvent(grant);
+        } else {
+            nav.openAuthentication(RequestCodes.AUTH);
+        }
     }
 
     @Override

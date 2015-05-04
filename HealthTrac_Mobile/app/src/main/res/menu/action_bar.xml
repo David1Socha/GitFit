@@ -2,18 +2,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     >
     <item
-        android:id="@+id/create_meal"
-        android:title="@string/create_meal"
-        app:showAsAction="never" />
-    <item
-        android:id="@+id/create_energy_level"
-        android:title="@string/create_energy_level"
-        app:showAsAction="never" />
-    <item
-        android:id="@+id/create_goal"
-        android:title="@string/create_goal"
-        app:showAsAction="never" />
-    <item
         android:id="@+id/logout"
         android:title="@string/logout"
         app:showAsAction="never" />

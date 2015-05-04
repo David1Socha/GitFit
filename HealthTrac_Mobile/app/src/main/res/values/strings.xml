@@ -64,7 +64,7 @@
     <string name="update_user_error">Could not update user.</string>
     <string name="user_updated_message">User successfully updated</string>
     <string name="title_section1">Feed</string>
-    <string name="title_section2">Activity</string>
+    <string name="title_section2">Events</string>
     <string name="title_section3">Teams</string>
     <string name="title_section4">Users</string>
     <string name="title_section5">Account</string>
@@ -220,5 +220,6 @@
     <string name="title_activity_ban_members">Ban Members</string>
     <string name="title_activity_navigation_drawer">NavigationDrawer</string>
     <string name="action_example">Example action</string>
+    <string name="event_title">Enter Events</string>
 
 </resources>

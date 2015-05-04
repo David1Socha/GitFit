@@ -63,12 +63,6 @@ public class GitFitMainActivity extends BaseActivity implements com.raik383h_gro
         presenter.onClickShowTeams();
     }
 
-    public void onClickStartActivity(View view) { presenter.onClickStartActivity(); }
-
-    public void onClickCreateActivityManual(View view) {
-        presenter.onClickCreateActivityManual();
-    }
-
     @Override
     public void displayMessage(String msg) {
         Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();

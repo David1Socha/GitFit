@@ -73,7 +73,8 @@ public class NavigationDrawer extends RoboActionBarActivity
             //feed
             presenter.onClickUserFeed();
         } else if (position == 1) {
-            //activity
+            //events
+            presenter.onClickOpenEvent();
         } else if (position == 2) {
             //teams
             presenter.onClickShowTeams();
@@ -119,7 +120,7 @@ public class NavigationDrawer extends RoboActionBarActivity
             // Only show items in the action bar relevant to this screen
             // if the drawer is not showing. Otherwise, let the drawer
             // decide what to show in the action bar.
-            getMenuInflater().inflate(R.menu.navigation_drawer, menu);
+            getMenuInflater().inflate(R.menu.action_bar, menu);
             restoreActionBar();
             return true;
         }
@@ -128,17 +129,18 @@ public class NavigationDrawer extends RoboActionBarActivity
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        switch (item.getItemId())
+        {
+            case R.id.logout:
+                onClickMenuLogout();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
+    }
 
-        return super.onOptionsItemSelected(item);
+    private void onClickMenuLogout() {
+        presenter.onClickMenuLogout();
     }
 
     @Override
