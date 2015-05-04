@@ -24,15 +24,26 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-sm-4 badge-list">
+        <!--<div class="col-sm-4 badge-list">
             <div class="badge-item" ng-repeat="badge in userBadges | limitTo: 3">
                 {{badge.badgeName}}
             </div>
+        </div>-->
+        <div class="col-sm-4 activity-steps-graph">
+            <div id="ActivityStepsContainer" style="margin: 20px; height: 250px"></div>
+            <span style="margin-left: 20px">Tomorrow's expected steps: {{steps7DaySMA}}</span>
         </div>
         <div class="col-sm-4 activity-distance-graph">
-            <div id="ActivityDistanceContainer" style="margin: 20px; height: 300px"></div>
+            <div id="ActivityDistanceContainer" style="margin: 20px; height: 250px"></div>
+            <span style="margin-left: 20px">Tomorrow's expected distance travelled: {{distance7DaySMA}}</span>
         </div>
-        <div class="col-sm-4 activity-breakdwon-chart">
+        <div class="col-sm-4 activity-duration-graph">
+            <div id="ActivityDurationContainer" style="margin: 20px; height: 250px"></div>
+            <span style="margin-left: 20px">Tomorrow's expected activity time: {{duration7DaySMA}}</span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-6 activity-breakdwon-chart">
             <div id="activityTypePieChartContainer" style="margin: 20px; height: 300px"></div>
         </div>
     </div>

@@ -60,13 +60,29 @@
         $scope.stepsHighchartsData = [];
         $scope.durationKeys = Object.keys($scope.DailyDuration);
         $scope.durationHighchartsData = [];
+        //variables for the SMA data
+        $scope.steps7DaySMA = 0;
+        $scope.distance7DaySMA = 0;
+        $scope.duration7DaySMA = 0;
 
         var i = 0;
+        var dateThreshold = $scope.mostRecentDate.add(-7, 'days');
         angular.forEach($scope.DailyDistance, function (distance) {
             var dataObject = [Date.parse(moment($scope.distanceKeys[i], "MMMM DD, YYYY")), distance];
             $scope.distanceHighchartsData.push(dataObject);
+            
+            if (moment($scope.distanceKeys[i], "MMMM DD, YYYY").isAfter(dateThreshold)) {
+                $scope.distance7DaySMA += $scope.DailyDistance[$scope.distanceKeys[i]];
+                $scope.steps7DaySMA += $scope.DailySteps[$scope.stepsKeys[i]];
+                $scope.duration7DaySMA += $scope.DailyDuration[$scope.durationKeys[i]];
+            }
             i++;
         });
+
+        $scope.steps7DaySMA = Math.round($scope.steps7DaySMA / 7);
+        $scope.distance7DaySMA = Math.round($scope.distance7DaySMA / 7);
+        $scope.duration7DaySMA = Math.round($scope.duration7DaySMA / (60 * 7));
+
 
         var j = 0;
         angular.forEach($scope.DailySteps, function (steps) {
@@ -77,10 +93,11 @@
 
         var k = 0;
         angular.forEach($scope.DailyDuration, function (duration) {
-            var dataObject = [Date.parse(moment($scope.durationKeys[k], "MMMM DD, YYYY")), duration];
+            var dataObject = [Date.parse(moment($scope.durationKeys[k], "MMMM DD, YYYY")), Math.round(duration/60)];
             $scope.durationHighchartsData.push(dataObject);
             k++;
         });
+        
         // Currently Unneccesary logic that adds null entries to days with no distance
         $scope.daysRange = $scope.mostRecentDate.diff($scope.earliestDate, 'days');
         //var tempDate = $scope.earliestDate;
@@ -94,6 +111,11 @@
         $scope.renderActivityDistanceChart();
         $scope.currentUserActivitybreakdown = $scope.getActivityBreakDown(activities);
         $scope.renderActivityTypePieChart();
+        $scope.renderActivityStepsChart();
+        $scope.renderActivityDurationChart();
+
+        
+
     });
 
     $scope.showAllActivities = function () {
@@ -290,6 +312,122 @@
                     name: 'Daily Distance',
                     pointInterval: 24 * 3600 * 1000,
                     data: $scope.distanceHighchartsData
+                }],
+                credits: {
+                    enabled: false
+                }
+            });
+        });
+    };
+
+    $scope.renderActivityStepsChart = function () {
+        $(function () {
+            $('#ActivityStepsContainer').highcharts({
+                chart: {
+                    zoomType: 'x'
+                },
+                tooltip: {
+                    xDateFormat: '%A, %b %e, %Y'
+                },
+                title: {
+                    text: 'Number of steps'
+                },
+                xAxis: {
+                    type: 'datetime',
+                    minRange: 7 * 24 * 3600000
+                },
+                yAxis: {
+                    title: {
+                        text: 'Daily Steps'
+                    }
+                },
+                plotOptions: {
+                    area: {
+                        fillColor: {
+                            linearGradient: { x1: 0, y1: 0, x2: 0, y2: 1 },
+                            stops: [
+                                [0, Highcharts.getOptions().colors[2]],
+                                [1, Highcharts.Color(Highcharts.getOptions().colors[0]).setOpacity(0).get('rgba')]
+                            ]
+                        },
+                        marker: {
+                            radius: 2
+                        },
+                        lineWidth: 1,
+                        states: {
+                            hover: {
+                                lineWidth: 1
+                            }
+                        },
+                        threshold: null
+                    }
+                },
+                legend: {
+                    enabled: false
+                },
+                series: [{
+                    type: 'area',
+                    name: 'Daily Steps',
+                    pointInterval: 24 * 3600 * 1000,
+                    data: $scope.stepsHighchartsData
+                }],
+                credits: {
+                    enabled: false
+                }
+            });
+        });
+    };
+
+    $scope.renderActivityDurationChart = function () {
+        $(function () {
+            $('#ActivityDurationContainer').highcharts({
+                chart: {
+                    zoomType: 'x'
+                },
+                tooltip: {
+                    xDateFormat: '%A, %b %e, %Y'
+                },
+                title: {
+                    text: 'Time Active'
+                },
+                xAxis: {
+                    type: 'datetime',
+                    minRange: 7 * 24 * 3600000
+                },
+                yAxis: {
+                    title: {
+                        text: 'Daily Activity Time (minutes)'
+                    }
+                },
+                plotOptions: {
+                    area: {
+                        fillColor: {
+                            linearGradient: { x1: 0, y1: 0, x2: 0, y2: 1 },
+                            stops: [
+                                [0, Highcharts.getOptions().colors[2]],
+                                [1, Highcharts.Color(Highcharts.getOptions().colors[0]).setOpacity(0).get('rgba')]
+                            ]
+                        },
+                        marker: {
+                            radius: 2
+                        },
+                        lineWidth: 1,
+                        states: {
+                            hover: {
+                                lineWidth: 1
+                            }
+                        },
+                        threshold: null
+                    }
+                },
+                legend: {
+                    enabled: false
+                },
+                series: [{
+                    type: 'area',
+                    name: 'Daily ActivityTime',
+                    pointInterval: 24 * 3600 * 1000,
+                    data: $scope.durationHighchartsData
                 }],
                 credits: {
                     enabled: false
