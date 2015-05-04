@@ -14,9 +14,12 @@
             $scope.user.LifetimeDuration = Math.round($scope.user.LifetimeDuration / 3600);
             $scope.user.LifetimeDistance = Math.round($scope.user.LifetimeDistance / 5280);
             if ($scope.user.BirthDate == null){
-                $scope.user.BirthDate = 'n/a'
+                $scope.user.BirthDate = 'n/a';
             } else {
                 $scope.user.BirthDate = moment($scope.user.BirthDate).format('MMMM DD, YYYY');
+            }
+            if ($scope.user.ProfilePicture.indexOf("square") > -1) {
+                $scope.user.ProfilePicture = $scope.user.ProfilePicture.replace("square", "large");
             }
         });
     };
