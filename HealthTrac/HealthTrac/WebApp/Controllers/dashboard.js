@@ -1,4 +1,4 @@
-﻿gitFit.controller('DashboardController', ['$scope', 'UserApi', '$location', 'activities', 'meals', 'badges', 'userBadges', function ($scope, UserApi, $location, activities, meals, badges, userBadges) {
+﻿gitFit.controller('DashboardController', ['$scope', 'UserApi', '$location', 'activities', 'meals', function ($scope, UserApi, $location, activities, meals) {
 
     activities.$promise.then(function (activities) {
         $scope.numActivitiesDisplay = 10;
@@ -190,19 +190,6 @@
         })
         $scope.renderCalorieChart();
     });
-
-    badges.$promise.then(function (badges) {
-        $scope.getUserBadges(badges);
-    });
-
-    $scope.getUserBadges = function (badges) {
-        userBadges.$promise.then(function (userBadges) {
-            $scope.userBadges = userBadges;
-            angular.forEach($scope.userBadges, function (userBadge) {
-                userBadge.badgeName = badges[userBadge.BadgeID - 1].Name;
-            });
-        });
-    }
 
     $scope.renderCalorieChart = function () {
         $(function () {

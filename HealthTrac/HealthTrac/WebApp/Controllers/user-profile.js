@@ -1,4 +1,4 @@
-﻿gitFit.controller('UserProfileController', ['$scope', '$routeParams', 'UserApi', 'TeamApi', '$location', function ($scope, $routeParams, UserApi, TeamApi, $location) {
+﻿gitFit.controller('UserProfileController', ['$scope', '$routeParams', 'UserApi', 'TeamApi', '$location', 'badges', 'userBadges', function ($scope, $routeParams, UserApi, TeamApi, $location, badges, userBadges) {
     $scope.userId = $routeParams.userId;
 
     $scope.getUser = function () {
@@ -33,6 +33,20 @@
             }
         });
     };
+
+    badges.$promise.then(function (badges) {
+        $scope.getUserBadges(badges);
+    });
+
+    $scope.getUserBadges = function (badges) {
+        userBadges.$promise.then(function (userBadges) {
+            $scope.userBadges = userBadges;
+            angular.forEach($scope.userBadges, function (userBadge) {
+                userBadge.badgeName = badges[userBadge.BadgeID - 1].Name;
+                userBadge.DateCompleted = moment(userBadge.DateCompleted).format("MMMM DD, YYYY");
+            });
+        });
+    }
 
     $scope.viewProfile = function (teamId) {
         $location.path('/Team-Profile/' + teamId);

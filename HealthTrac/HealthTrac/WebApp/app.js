@@ -16,7 +16,16 @@ gitFit.config(['$httpProvider', '$routeProvider', '$locationProvider', function 
         })
         .when('/User-Profile/:userId', {
             templateUrl: '/WebApp/Views/user-profile.html',
-            controller: 'UserProfileController'
+            controller: 'UserProfileController',
+            resolve: {
+                badges: ['BadgeApi', function (BadgeApi) {
+                    return BadgeApi.GetBadges();
+                }],
+                userBadges: ['UserBadgeApi', function (UserBadgeApi) {
+                    return UserBadgeApi.GetUserBadges();
+                }]
+            }
+            
         })
         .when('/Teams', {
             templateUrl: '/WebApp/Views/teams.html',
@@ -35,12 +44,6 @@ gitFit.config(['$httpProvider', '$routeProvider', '$locationProvider', function 
                 }],
                 meals: ['MealApi', function (MealApi) {
                     return MealApi.GetMeals();
-                }],
-                badges: ['BadgeApi', function (BadgeApi) {
-                    return BadgeApi.GetBadges();
-                }],
-                userBadges: ['UserBadgeApi', function (UserBadgeApi) {
-                    return UserBadgeApi.GetUserBadges();
                 }]
             }
         })
