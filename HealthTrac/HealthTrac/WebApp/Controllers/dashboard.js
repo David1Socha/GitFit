@@ -1,4 +1,4 @@
-﻿gitFit.controller('DashboardController', ['$scope', 'UserApi', '$location', 'activities', 'meals', function ($scope, UserApi, $location, activities, meals) {
+﻿gitFit.controller('DashboardController', ['$scope', 'UserApi', '$location', 'activities', 'meals', 'TeamApi', 'ActivityApi', function ($scope, UserApi, $location, activities, meals, TeamApi, ActivityApi) {
 
     activities.$promise.then(function (activities) {
         $scope.numActivitiesDisplay = 10;
@@ -108,18 +108,147 @@
         //    }
         //    tempDate = tempDate.add(1, 'days');
         //}
+
+        $scope.processTeamsGraph();
         $scope.renderActivityDistanceChart();
         $scope.currentUserActivitybreakdown = $scope.getActivityBreakDown(activities);
         $scope.renderActivityTypePieChart();
         $scope.renderActivityStepsChart();
         $scope.renderActivityDurationChart();
-
+        
         
 
     });
 
+    $scope.processTeamsGraph = function () {
+        $scope.noTeams = true;
+        var teamResource = TeamApi.GetTeamsFromUser({ userId: 'current' });
+        teamResource.$promise.then(function (teams) {
+            $scope.teams = teams;
+            if (teams.length != 0) {
+                $scope.noTeams = false;
+                $scope.UserValuePairs = [];
+                $scope.areWeDoneCounter = 0;
+                var teamWithUsersResource = TeamApi.GetTeam({ teamId: teams[0].ID })
+                teamWithUsersResource.$promise.then(function (teamWithUsers) {
+                    angular.forEach(teamWithUsers.Memberships, function (user) {                        
+                        if (user.UserID != null) {
+                            var tempUserValuePair = [];
+                            var stepsAdder = 0;
+                            var distanceAdder = 0;
+                            var durationAdder = 0;
+                            var dateComparer = moment().add(-30, 'days');
+                            var userActivityResource = ActivityApi.GetActivities({ userId: user.UserID });
+                            userActivityResource.$promise.then(function (userActivities) {
+                                angular.forEach(userActivities, function (userActivity) {
+                                    if (moment(userActivity.StartDate).isAfter(dateComparer)) {
+                                        stepsAdder += userActivity.Steps;
+                                        distanceAdder += userActivity.Distance;
+                                        durationAdder += userActivity.Duration;
+                                    }
+                                });
+                                tempUserValuePair = [user.User.UserName, stepsAdder, distanceAdder, durationAdder]
+                                $scope.UserValuePairs.push(tempUserValuePair);
+
+                            });
+                        }
+                    });                                           
+                })
+                setTimeout(function () {
+                    $scope.processTeamData($scope.UserValuePairs)
+                }, 2000)
+            }         
+        });
+    }
+
+    $scope.processTeamData = function (teamData){
+        //process CurrentUserData
+        var dateComparer = moment().add(-30, 'days');
+        currentStepsAdder = 0;
+        currentDistanceAdder = 0;
+        currentDurationAdder = 0;
+        angular.forEach($scope.activities, function (currentUserActivity) {
+            if (moment(currentUserActivity.StartDate).isAfter(dateComparer)) {
+                currentStepsAdder += currentUserActivity.Steps;
+                currentDistanceAdder += currentUserActivity.Distance;
+                currentDurationAdder += currentUserActivity.Duration;
+            }
+        });
+
+        var low = [teamData[0][1], teamData[0][2], teamData[0][3]];
+        var average = [0, 0, 0];
+        var top = [teamData[0][1], teamData[0][2], teamData[0][3]];
+        var current = [currentStepsAdder, currentDistanceAdder, currentDurationAdder];
+
+        angular.forEach(teamData, function (userObj) {
+            if (userObj[1] < low[0]) {
+                low[0] = userObj[1];
+            }
+            if (userObj[1] > top[0]) {
+                top[0] = userObj[1];
+            }
+            if (userObj[2] < low[1]) {
+                low[1] = userObj[2];
+            }
+            if (userObj[2] > top[1]) {
+                top[1] = userObj[2];
+            }
+            if (userObj[3] < low[2]) {
+                low[2] = userObj[3];
+            }
+            if (userObj[3] > top[2]) {
+                top[2] = userObj[3];
+            }
+            average[0] += userObj[1];
+            average[1] += userObj[2];
+            average[2] += userObj[3];
+        });
+        average[0] = average[0]/teamData.length;
+        average[1] = average[1]/teamData.length;
+        average[2] = average[2] / teamData.length;
+
+        //converting to thousands of steps, miles and hours
+        low = $scope.convertData(low);
+        average = $scope.convertData(average);
+        top = $scope.convertData(top);
+        current = $scope.convertData(current);
+        
+        $scope.teamHighChartsData = [{
+            type: 'column',
+            name: 'Low',
+            data: low
+        }, {
+            type: 'column',
+            name: 'Average',
+            data: average
+        }, {
+            type:'column',
+            name: 'Top',
+            data: top
+        }, {
+            type: 'spline',
+            name: 'Average',
+            data: current,
+            marker: {
+                lineWidth: 2,
+                lineColor: Highcharts.getOptions().colors[3],
+                fillColor: 'white'
+            }
+        }];
+        
+        $scope.renderTeamChart();
+    }
+
+    $scope.convertData = function (data){
+        data[0] = Math.round(data[0]/10)/100
+        data[1] = Math.round((data[1]/5280) * 100)/100
+        data[2] = Math.round((data[2] / 3600) * 100) / 100
+        return data;
+    }
+
     $scope.showAllActivities = function () {
-        $scope.numActivitiesDisplay = 10000000;
+        $scope.num
+        ActivitiesDisplay = 10000000;
         $scope.displayAllActivities = true;
     }
 
@@ -190,6 +319,30 @@
         })
         $scope.renderCalorieChart();
     });
+
+    $scope.renderTeamChart = function () {
+        $(function () {
+            $('#teamChartContainer').highcharts({
+                title: {
+                    text: 'Team Comparison'
+                },
+                xAxis: {
+                    categories: ['Steps (in thousands)', 'Distance (miles)', 'Duration (hours)']
+                },
+                //labels: {
+                //    items: [{
+                //        html: 'Total team comparison',
+                //        style: {
+                //            left: '50px',
+                //            top: '18px',
+                //            color: (Highcharts.theme && Highcharts.theme.textColor) || 'black'
+                //        }
+                //    }]
+                //},
+                series: $scope.teamHighChartsData
+            });
+        });
+    }
 
     $scope.renderCalorieChart = function () {
         $(function () {
