@@ -259,7 +259,7 @@
 
         <activity
             android:name=".view.fragment.NavigationDrawer"
-            android:label="@string/title_activity_navigation_drawer" >
+            android:label="@string/git_fit" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
