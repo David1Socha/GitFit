@@ -43,9 +43,11 @@
         </div>        
         
     </div>
-    <div class="row" style="text-align: center; margin-top: 10px" ng-show="isFacebookUser">
+    <div class="row" style="text-align: center; margin-top: 10px">
         <div class="col-sm-12" >
-            <div class="clickable-bubble" ng-click="post_on_wall()" style="width: 200px; font-size: 24px; text-align: center; display: inline-block">Post to Facebook</div>
+            <div ng-show="isFacebookUser" class="clickable-bubble" ng-click="post_on_wall()" style="width: 200px; font-size: 24px; text-align: center; display: inline-block">Post to Facebook</div>
+            <a ng-hide="isFacebookUser" href="https://twitter.com/intent/tweet?button_hashtag=Gitfit" class="twitter-hashtag-button" data-related="BIGMACiejewski">Tweet #Gitfit</a>
+            <script>!function (d, s, id) { var js, fjs = d.getElementsByTagName(s)[0], p = /^http:/.test(d.location) ? 'http' : 'https'; if (!d.getElementById(id)) { js = d.createElement(s); js.id = id; js.src = p + '://platform.twitter.com/widgets.js'; fjs.parentNode.insertBefore(js, fjs); } }(document, 'script', 'twitter-wjs');</script>
         </div>
     </div>
     <div class="row">
