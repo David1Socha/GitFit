@@ -159,7 +159,7 @@
                 $scope.showTeamOptions = false;
                 $scope.UserValuePairs = [];
                 $scope.areWeDoneCounter = 0;
-                var teamWithUsersResource = UserApi.GetUsersFromTeam({ teamId: teamID })
+                var teamWithUsersResource = UserApi.GetUsersFromTeam({ teamId: teamId })
                 teamWithUsersResource.$promise.then(function (users) {
                     angular.forEach(users, function (user) {                        
                         if (user.Id != null) {
