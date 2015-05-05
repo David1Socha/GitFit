@@ -51,6 +51,7 @@ namespace HealthTrac
             BuildLinearModel();
             RecurringJob.AddOrUpdate(() => BuildLinearModel(), Cron.Daily);
             RecurringJob.AddOrUpdate(() => BuildForest(), Cron.Daily);
+
         }
 
         public void BuildLinearModel()

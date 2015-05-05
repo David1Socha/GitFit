@@ -1,6 +1,9 @@
 ﻿@using Microsoft.Owin.Security
-
-<h4>Use another service to log in.</h4>
+<head>
+    @Styles.Render("~/Content/css")
+    <title>Login Choices</title>
+</head>
+<h4 style ="text-align: center">Use another service to log in.</h4>
 <hr />
 @{
     var loginProviders = Context.GetOwinContext().Authentication.GetExternalAuthenticationTypes();
@@ -20,7 +23,7 @@
         using (Html.BeginForm(action, "Account", new { ReturnUrl = returnUrl }))
         {
             @Html.AntiForgeryToken()
-            <div id="socialLoginList">
+            <div id="socialLoginList" style="text-align: center">
                 <p>
                     @foreach (AuthenticationDescription p in loginProviders)
                     {

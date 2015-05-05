@@ -33,6 +33,19 @@ namespace HealthTrac.Controllers.Api
             return teamDtos;
         }
 
+        [Route("api/Teams/withUsers/{teamId}")]
+        [HttpGet]
+        [ResponseType(typeof(Team))]
+        public IHttpActionResult GetTeamWithUsers(long teamId)
+        {
+            Team team = teamService.GetTeam(teamId);
+            if (team == null)
+            {
+                return NotFound();
+            }
+            return Ok(team);
+        }
+
         // GET: api/Teams/5
         [ResponseType(typeof(TeamDto))]
         public IHttpActionResult GetTeam(long id)
@@ -46,9 +59,21 @@ namespace HealthTrac.Controllers.Api
             return Ok(teamDto);
         }
 
+        [Route("api/Teams/Search/{name}")]
+        [HttpGet]
+        public IEnumerable<Team> SearchTeams(string name)
+        {
+            IEnumerable<Team> teams = teamService.SearchTeams(name);
+            return teams;
+        }
+
         //GET: api/Teams?userId=xxx
         public IEnumerable<TeamDto> GetTeams(string userId)
         {
+            if (userId == "current")
+            {
+                userId = User.Identity.GetUserId();
+            }
             var teams = teamService.GetTeams(userId);
             var teamDtos = teams.Select(t => TeamDto.FromTeam(t));
             return teamDtos;

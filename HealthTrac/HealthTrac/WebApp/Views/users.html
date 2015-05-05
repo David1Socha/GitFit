@@ -1,0 +1,39 @@
+﻿<div style="width: 50%; margin: 0 auto; text-align: center">
+    <h1>Search For Users</h1>
+    <div class="search-box">
+        <input style="display: block" type="text" class="form-control" ng-model="name" name="name" ng-change="resetSearch()" />
+    </div>
+    <button class="btn btn-default" ng-click="searchUsers(name)">Search Users</button>
+    <div class="table-list" ng-show="searchCompleted == 'complete'">
+        <!--<table ng-show="searchCompleted == 'complete'">
+                <tr class="table-header">
+                    <th>User Name</th>
+                    <th>Created</th>
+                </tr>
+            <tr class="clickable-bubble" ng-repeat="user in users" ng-click="viewProfile(user.Id)">
+                <td>
+                    {{user.UserName}}
+                </td>
+                <td>
+                    {{user.DateCreated}}
+                </td>
+
+            </tr>
+        </table>-->
+        <div class="row">
+            <div class="table-header">
+                <span class="table-header-label col-sm-6">User Name</span>
+                <span class="table-header-label col-sm-6">Created</span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="table-items">
+                <div class="row table-item clickable-bubble" ng-repeat="user in users" ng-click="viewProfile(user.Id)" >
+                    <span class="table-data col-sm-6">{{user.UserName}}</span><span class="table-data col-sm-6">{{user.DateCreated}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <h3 ng-show="searchCompleted == 'no results'">No results were found for {{name}}</h3>
+</div>

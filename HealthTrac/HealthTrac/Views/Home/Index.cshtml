@@ -1,26 +1,77 @@
-﻿@{
-    ViewBag.Title = "Home Page";
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <base href="/" />
+    <title>GitFit</title>
+</head>
+@if (User.Identity.IsAuthenticated)
+{
+    <body ng-app="gitFit" ng-controller="RootController">
+        <script>
+            window.fbAsyncInit = function () {
+                FB.init({
+                    appId: '512959195512759',
+                    xfbml: true,
+                    version: 'v2.1'
+                });
+            };
+
+            (function (d, s, id) {
+                var js, fjs = d.getElementsByTagName(s)[0];
+                if (d.getElementById(id)) { return; }
+                js = d.createElement(s); js.id = id;
+                js.src = "//connect.facebook.net/en_US/sdk.js";
+                fjs.parentNode.insertBefore(js, fjs);
+            }(document, 'script', 'facebook-jssdk'));
+        </script>
+    <div id="mainContainer">
+        <gitfit-header></gitfit-header>
+        <ng-view></ng-view>
+        @*<div class="jumbotron">
+            <h1>HealthTrac</h1>
+            <p class="lead">HealthTrac is a free fitness tracking app that helps you reach your fitness goals.</p>
+        </div>
+
+        <div class="row">
+            <div class="col-md-4">
+                <h2>Coming Soon</h2>
+                <p>
+                    Your awesome fitness data.
+                </p>
+            </div>
+            <div class="col-md-4">
+                <h2>Coming Soon</h2>
+                <p>Even more of your awesome fitness data</p>
+            </div>
+            <div class="col-md-4">
+                <h2>Coming Soon</h2>
+                <p>Ruby Code</p>
+
+            </div>
+        </div>*@
+    </div>
+    @Scripts.Render("~/bundles/angularjs")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/WebApp")
+    @Scripts.Render("~/bundles/momentjs")
+    @Scripts.Render("~/bundles/highchartsjs")
+    @*@RenderSection("scripts", required: false)*@
+</body>
+}
+else
+{
+    <body>
+        <div class="jumbotron" style="color: green; margin: 30px">
+            <h1>HealthTrac</h1>
+            <p class="lead">HealthTrac is a free fitness tracking app that helps you reach your fitness goals.</p>
+            <a href="/Account/Login"><div class="clickable-bubble" style="text-align: center; width: 400px"> Log in</div></a>
+        </div>
+    </body>
 }
 
-<div class="jumbotron">
-    <h1>HealthTrac</h1>
-    <p class="lead">HealthTrac is a free fitness tracking app that helps you reach your fitness goals.</p>
-</div>
-
-<div class="row">
-    <div class="col-md-4">
-        <h2>Coming Soon</h2>
-        <p>
-            Your awesome fitness data.
-        </p>
-    </div>
-    <div class="col-md-4">
-        <h2>Coming Soon</h2>
-        <p>Even more of your awesome fitness data</p>
-    </div>
-    <div class="col-md-4">
-        <h2>Coming Soon</h2>
-        <p>Ruby Code</p>
-
-    </div>
-</div>
+</html>

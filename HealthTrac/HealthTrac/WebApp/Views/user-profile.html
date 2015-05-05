@@ -1,0 +1,50 @@
+﻿<div>
+    <div class="row" style="padding-left: 30px">
+        <h1>{{user.FirstName}} {{user.LastName}} ({{user.UserName}})</h1>
+    </div>
+    <div class="row" >
+        <div class="col-sm-3" style="padding-left: 30px">
+            <img src="{{user.ProfilePicture}}" width="250" height="250" style="border: groove 10px"/>
+        </div>
+        <div class="user-info col-sm-9">
+            <div class="col-sm-6">
+                <h2 class="user-info-label">User Since: {{user.DateCreated}}</h2>
+                <h2 class="user-info-label">Lifetime Steps: {{user.LifetimeSteps}} Steps</h2>
+                <h2 class="user-info-label">Lifetime Duration: {{user.LifetimeDuration}} Hours</h2>
+                <h2 class="user-info-label">Lifetime Distance: {{user.LifetimeDistance}} Miles</h2>
+            </div>
+            <div class="col-sm-6">
+                <h2 class="user-info-label">Height: {{user.Height}} Feet</h2>
+                <h2 class="user-info-label">Weight: {{user.Weight}} Stones</h2>
+                <h2 class="user-info-label">Birthday: {{user.BirthDate}}</h2>
+                <h2 class="user-info-label">Sex: {{user.Sex}}</h2>
+            </div>
+        </div>
+    </div>
+    <div class="table-list" ng-hide="noTeams" style="padding-top: 10px">
+        <div class="row">
+            <div class="table-header">
+                <span class="table-header-label col-sm-6" style="font-size: 45px">Teams</span>
+            </div>
+            <div class="table-header">
+                <span class="table-header-label col-sm-6" style="font-size: 45px">Badges</span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="table-items col-sm-6">
+                <div class="row table-item clickable-bubble" ng-repeat="team in teams" ng-click="viewProfile(team.ID)" style="margin-left: 20px; margin-right: 20px">
+                    <span class="table-data col-sm-8" style="font-size: 36px">{{team.Name}}</span>
+                </div>
+            </div>
+            <div class="col-sm-6 badge-list">
+                <div class="badge-item" ng-repeat="badge in userBadges | limitTo: 3">
+                    {{badge.badgeName}}
+                    <div style="font-size: 16px">
+                        Badge Earned on {{badge.DateCompleted}}
+                    </div>
+                </div>
+            </div>
+        </div>        
+    </div>
+    <h3 ng-hide="!noTeams" style="text-align:center"> This user has no teams</h3>
+</div>

@@ -21,11 +21,34 @@ namespace HealthTrac
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                       "~/Scripts/bootstrap.js",
-                      "~/Scripts/respond.js"));
+                      "~/Scripts/respond.js",
+                      "~/Scripts/angular-ui/ui-bootstrap-tpls.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/site.css"));
+            bundles.Add(new ScriptBundle("~/bundles/momentjs").Include(
+                "~/Scripts/moment.js"
+                ));
+            bundles.Add(new ScriptBundle("~/bundles/highchartsjs").Include(
+                "~/Scripts/highcharts.js"
+                ));
+            bundles.Add(new ScriptBundle("~/bundles/angularjs").Include(
+                "~/Scripts/angular.js",
+                "~/Scripts/angular-route.js",
+                "~/Scripts/angular-resource.js",
+                "~/Scripts/angular-animate.js",
+                "~/Scripts/angular-cookies.js",
+                "~/Scripts/angular-file-upload.js"));
+            bundles.Add(new ScriptBundle("~/bundles/WebApp").Include(
+                "~/WebApp/app.js",
+                
+                "~/WebApp/controllers/*.js",
+                
+                "~/WebApp/services/*.js",
+
+                "~/WebApp/Directives/*.js",
+                "~/WebApp/Directives/gitfit-Header/gitfit-header.js"));
         }
     }
 }

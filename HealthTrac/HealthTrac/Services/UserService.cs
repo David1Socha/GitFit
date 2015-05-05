@@ -15,7 +15,6 @@ namespace HealthTrac.Services
         {
             _acc = acc;
         }
-
         public Models.User FindUser(string ID)
         {
             return _acc.FindUser(ID);

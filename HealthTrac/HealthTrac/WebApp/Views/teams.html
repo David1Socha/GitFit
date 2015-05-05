@@ -1,0 +1,24 @@
+﻿<div style="width: 50%; margin: 0 auto; text-align: center">
+    <h1>Search For Teams</h1>
+    <div class="search-box">
+        <input style="display: block" type="text" class="form-control" ng-model="name" name="name" ng-change="resetSearch()" />
+    </div>
+    <button class="btn btn-default" ng-click="searchTeams(name)">Search Teams</button>
+    <div class="table-list" ng-show="searchCompleted == 'complete'">
+        <div class="row">
+            <div class="table-header">
+                <span class="table-header-label col-sm-6">Team Name</span>
+                <span class="table-header-label col-sm-6">Created</span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="table-items">
+                <div class="row table-item clickable-bubble" ng-repeat="team in teams" ng-click="viewProfile(team.ID)">
+                    <span class="table-data col-sm-6">{{team.Name}}</span><span class="table-data col-sm-6">{{team.DateCreated}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <h3 ng-show="searchCompleted == 'no results'">No results were found for {{name}}</h3>
+</div>
