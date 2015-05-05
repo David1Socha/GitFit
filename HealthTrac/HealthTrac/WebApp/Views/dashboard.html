@@ -31,19 +31,19 @@
         </div>-->
         <div class="col-sm-4 activity-steps-graph">
             <div id="ActivityStepsContainer" style="margin: 20px; height: 250px"></div>
-            <span style="margin-left: 20px; font-size: 16px">Tomorrow's expected steps: {{steps7DaySMA}}</span>
+            <span style="margin-left: 20px; font-size: 16px">Tomorrow's expected steps: {{steps7DaySMA}} steps</span>
         </div>
         <div class="col-sm-4 activity-distance-graph">
             <div id="ActivityDistanceContainer" style="margin: 20px; height: 250px"></div>
-            <span style="margin-left: 20px; font-size: 16px">Tomorrow's expected distance travelled: {{distance7DaySMA}}</span>            
+            <span style="margin-left: 20px; font-size: 16px">Tomorrow's expected distance travelled: {{distance7DaySMA}} feet</span>            
         </div>
         <div class="col-sm-4 activity-duration-graph">
             <div id="ActivityDurationContainer" style="margin: 20px; height: 250px"></div>
-            <span style="margin-left: 20px; font-size: 16px">Tomorrow's expected activity time: {{duration7DaySMA}}</span>
+            <span style="margin-left: 20px; font-size: 16px">Tomorrow's expected activity time: {{duration7DaySMA}} minutes</span>
         </div>        
         
     </div>
-    <div class="row" style="text-align: center" ng-show="isFacebookUser">
+    <div class="row" style="text-align: center; margin-top: 10px" ng-show="isFacebookUser">
         <div class="col-sm-12" >
             <div class="clickable-bubble" ng-click="post_on_wall()" style="width: 200px; font-size: 24px; text-align: center; display: inline-block">Post to Facebook</div>
         </div>
