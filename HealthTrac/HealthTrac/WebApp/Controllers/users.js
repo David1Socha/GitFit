@@ -3,7 +3,7 @@
     $scope.searchCompleted = 'not completed';
     $scope.users = [];
     $scope.searchUsers = function (name) {
-        UsersResource = UserApi.SearchUsers({ name: name });
+        var UsersResource = UserApi.SearchUsers({ name: name });
         UsersResource.$promise.then(function (users) {
             $scope.users = users;
             if (users.length == 0) {

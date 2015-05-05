@@ -3,7 +3,7 @@
     $scope.searchCompleted = 'not completed';
     $scope.teams = [];
     $scope.searchTeams = function (name) {
-        TeamsResource = TeamApi.SearchTeams({ name: name });
+        var TeamsResource = TeamApi.SearchTeams({ name: name });
         TeamsResource.$promise.then(function (teams) {
             $scope.teams = teams;
             if (teams.length == 0) {
