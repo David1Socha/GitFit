@@ -9,6 +9,10 @@ public interface ViewTeamView  extends BaseView {
 
     void displayMessage(String msg);
 
+    void setShowInviteMembers(boolean enabled);
+
+    void setShowBanMembers(boolean enabled);
+
     void setShowEditTeam(boolean enabled);
 
     void setShowLeaveTeam(boolean enabled);

@@ -9,6 +9,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
+
+
         <TextView
             android:layout_marginTop="10dp"
             android:layout_width="match_parent"
@@ -72,10 +74,51 @@
             android:layout_marginStart="20dp"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
+            android:onClick="onClickViewLeaderboard"
+            android:id="@+id/team_leaderboard_button"
+            android:text="@string/view_leaderboard"/>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:onClick="onClickTeamFeed"
+            android:id="@+id/team_feed_button"
+            android:text="@string/team_feed"/>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
             android:visibility="gone"
             android:onClick="onClickEditTeam"
             android:id="@+id/edit_team_button"
             android:text="@string/edit_team"/>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:visibility="gone"
+            android:onClick="onClickInviteMembers"
+            android:id="@+id/invite_members_button"
+            android:text="@string/invite_members"/>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:visibility="gone"
+            android:onClick="onClickBanMembers"
+            android:id="@+id/ban_members_button"
+            android:text="@string/ban_members"/>
 
         <Button
             android:layout_width="match_parent"

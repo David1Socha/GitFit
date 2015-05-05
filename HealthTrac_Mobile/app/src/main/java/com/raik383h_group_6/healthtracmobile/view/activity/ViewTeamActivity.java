@@ -27,6 +27,10 @@ public class ViewTeamActivity extends BaseActivity implements ViewTeamView {
     TextView descriptionTextView;
     @InjectView(R.id.date_created_textview)
     TextView dateCreatedTextView;
+    @InjectView(R.id.invite_members_button)
+    Button inviteMembersButton;
+    @InjectView(R.id.ban_members_button)
+    Button banMembersButton;
     @InjectView(R.id.edit_team_button)
     Button editTeamButton;
     @InjectView(R.id.join_team_button)
@@ -49,6 +53,14 @@ public class ViewTeamActivity extends BaseActivity implements ViewTeamView {
         super.onResume();
         presenter.onResume();
     }
+
+    public void onClickViewLeaderboard(View v) {
+        presenter.onClickViewLeaderboard();
+    }
+
+    public void onClickInviteMembers(View v) { presenter.onClickInviteMembers(); }
+
+    public void onClickBanMembers(View v) { presenter.onClickBanMembers(); }
 
     public void onClickEditTeam(View v) {
         presenter.onClickEditTeam();
@@ -86,6 +98,28 @@ public class ViewTeamActivity extends BaseActivity implements ViewTeamView {
     @Override
     public void displayMessage(String msg) {
         Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
+    }
+
+    public void onClickTeamFeed(View v) {
+        presenter.onClickTeamFeed();
+    }
+
+    @Override
+    public void setShowInviteMembers(boolean enabled) {
+        if (enabled) {
+            inviteMembersButton.setVisibility(View.VISIBLE);
+        } else {
+            inviteMembersButton.setVisibility(View.GONE);
+        }
+    }
+
+    @Override
+    public void setShowBanMembers(boolean enabled) {
+        if (enabled) {
+            banMembersButton.setVisibility(View.VISIBLE);
+        } else {
+            banMembersButton.setVisibility(View.GONE);
+        }
     }
 
     @Override

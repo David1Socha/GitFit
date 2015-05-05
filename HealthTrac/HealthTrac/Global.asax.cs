@@ -47,9 +47,22 @@ namespace HealthTrac
                 new SqlServerStorage("DefaultConnection");
             _server = new BackgroundJobServer();
             _server.Start();
-            //BuildForest();
-            //RecurringJob.AddOrUpdate(() => BuildForest(), Cron.Minutely);
+            BuildForest();
+            BuildLinearModel();
+            RecurringJob.AddOrUpdate(() => BuildLinearModel(), Cron.Daily);
+            RecurringJob.AddOrUpdate(() => BuildForest(), Cron.Daily);
+
         }
+
+        public void BuildLinearModel()
+        {
+            var users = ((IUserService)GlobalConfiguration.Configuration.DependencyResolver.GetService(typeof(IUserService))).GetUsers();
+            if (users != null && users.Count() > 0)
+            {
+                ((LinearModelBuilder)GlobalConfiguration.Configuration.DependencyResolver.GetService(typeof(LinearModelBuilder))).BuildLinearModel(users);
+            }
+        }
+
         public void BuildForest()
         {
             var activities = ((IActivityService)GlobalConfiguration.Configuration.DependencyResolver.GetService(typeof(IActivityService))).GetActivities();

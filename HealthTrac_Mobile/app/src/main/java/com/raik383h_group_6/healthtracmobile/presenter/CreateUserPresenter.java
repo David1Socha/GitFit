@@ -6,6 +6,7 @@ import com.google.inject.Inject;
 import com.google.inject.assistedinject.Assisted;
 import com.raik383h_group_6.healthtracmobile.R;
 import com.raik383h_group_6.healthtracmobile.application.IActivityNavigator;
+import com.raik383h_group_6.healthtracmobile.model.AccessGrant;
 import com.raik383h_group_6.healthtracmobile.model.Credentials;
 import com.raik383h_group_6.healthtracmobile.model.FacebookUser;
 import com.raik383h_group_6.healthtracmobile.model.User;
@@ -90,6 +91,11 @@ public class CreateUserPresenter extends BasePresenter {
         } else {
             view.displayMessage(view.getResource(R.string.invalid_field_message));
         }
+    }
+
+    @Override
+    protected AccessGrant getGrant() {
+        return null;
     }
 
     private void createUser(User userToCreate) {

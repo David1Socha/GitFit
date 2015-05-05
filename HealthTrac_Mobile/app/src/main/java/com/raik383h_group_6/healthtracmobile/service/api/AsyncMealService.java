@@ -2,6 +2,7 @@ package com.raik383h_group_6.healthtracmobile.service.api;
 
 import android.os.AsyncTask;
 
+import com.google.inject.Inject;
 import com.raik383h_group_6.healthtracmobile.model.Activity;
 import com.raik383h_group_6.healthtracmobile.model.Meal;
 import com.raik383h_group_6.healthtracmobile.service.api.async.IAsyncMealService;
@@ -13,6 +14,7 @@ public class AsyncMealService implements IAsyncMealService {
 
     private MealService service;
 
+    @Inject
     public AsyncMealService(MealService service) {
         this.service = service;
     }

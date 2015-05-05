@@ -36,7 +36,8 @@ public class GitFitMainPresenter extends BasePresenter{
         this.view = view;
     }
 
-    public AccessGrant getGrant() {
+    @Override
+    protected AccessGrant getGrant() {
         return grant;
     }
 
@@ -48,6 +49,8 @@ public class GitFitMainPresenter extends BasePresenter{
             nav.openAuthentication(RequestCodes.AUTH);
         }
     }
+
+
 
     private void reconstructGrant() {
         String serializedGrant = view.getPref(view.getResource(R.string.pref_access_grant));
@@ -106,17 +109,19 @@ public class GitFitMainPresenter extends BasePresenter{
         if (resultCode == Activity.RESULT_OK) {
             switch (requestCode) {
                 case RequestCodes.AUTH:
-                    grant = (AccessGrant) data.getParcelable(view.getResource(R.string.EXTRA_ACCESS_GRANT));
+                    grant = data.getParcelable(view.getResource(R.string.EXTRA_ACCESS_GRANT));
                     break;
                 default:
                     break;
             }
-
         }
     }
 
-    public void onClickPedometer() { nav.openActivity(grant); }
+    public void onClickStartActivity() { nav.openActivity(grant); }
 
+    public void onClickCreateActivityManual() {
+        nav.openCreateActivity(grant);
+    }
 
     @Override
     protected BaseView getView() {
@@ -127,4 +132,5 @@ public class GitFitMainPresenter extends BasePresenter{
     protected IActivityNavigator getNav() {
         return nav;
     }
+
 }

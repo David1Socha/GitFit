@@ -52,6 +52,8 @@ public class ListTeamsActivity extends BaseActivity implements ListTeamsView {
         presenter.onResume();
     }
 
+    public void onClickNewTeam(View view) { presenter.onClickNewTeam(); }
+
     @Override
     public void setListAdapter(ListAdapter adapter) {
         teamListView.setAdapter(adapter);

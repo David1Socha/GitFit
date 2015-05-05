@@ -39,6 +39,11 @@ public class ListUsersPresenter extends BasePresenter{
         this.grant = (AccessGrant) view.getParcelableExtra(view.getResource(R.string.EXTRA_ACCESS_GRANT));
     }
 
+    @Override
+    protected AccessGrant getGrant() {
+        return grant;
+    }
+
     public void onResume() {
         populateUsers();
     }

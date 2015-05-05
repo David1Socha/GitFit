@@ -2,4 +2,12 @@
 <resources>
     <item name="username" type="color">#0066FF</item>
     <color name="team_name">#990099</color>
+    <color name="activity_report">@color/username</color>
+    <color name="energy_level">@color/username</color>
+    <color name="meal">@color/username</color>
+    <color name="goal">#FF9933</color>
+    <color name="feed_header_bg">#FF0066</color>
+    <color name="goal_header_bg">#66FFFF</color>
+    <color name="badge">@color/goal</color>
+    <color name="activity">@color/username</color>
 </resources>

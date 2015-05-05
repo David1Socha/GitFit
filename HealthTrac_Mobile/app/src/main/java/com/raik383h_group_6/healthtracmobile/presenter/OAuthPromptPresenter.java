@@ -7,6 +7,7 @@ import com.google.inject.assistedinject.Assisted;
 import com.raik383h_group_6.healthtracmobile.R;
 import com.raik383h_group_6.healthtracmobile.application.IActivityNavigator;
 import com.raik383h_group_6.healthtracmobile.application.RequestCodes;
+import com.raik383h_group_6.healthtracmobile.model.AccessGrant;
 import com.raik383h_group_6.healthtracmobile.view.BaseView;
 
 public class OAuthPromptPresenter extends BasePresenter{
@@ -29,6 +30,11 @@ public class OAuthPromptPresenter extends BasePresenter{
         } else {
             nav.finishOAuthPromptInShame();
         }
+    }
+
+    @Override
+    protected AccessGrant getGrant() {
+        return null;
     }
 
     public void onClickLoginTwitter() {

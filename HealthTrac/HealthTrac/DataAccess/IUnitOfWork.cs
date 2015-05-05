@@ -10,6 +10,7 @@ namespace HealthTrac.DataAccess
     public interface IUnitOfWork : IDisposable
     {
         IActivityService ActivityService { get; }
+        IActivityReportService ActivityReportService { get; }
         IMembershipService MembershipService { get; }
         ITeamService TeamService { get; }
         IUserService UserService { get; }

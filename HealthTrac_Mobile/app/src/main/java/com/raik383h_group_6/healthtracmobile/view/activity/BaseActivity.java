@@ -29,11 +29,19 @@ public abstract class BaseActivity extends RoboActionBarActivity implements Base
     @Override
     public boolean onOptionsItemSelected(MenuItem item)
     {
-        // Handle item selection
         switch (item.getItemId())
         {
             case android.R.id.home:
                 onBackPressed();
+                return true;
+            case R.id.create_goal:
+                onClickCreateGoal();
+                return true;
+            case R.id.create_energy_level:
+                onClickCreateEnergyLevel();
+                return true;
+            case R.id.create_meal:
+                onClickCreateMeal();
                 return true;
             case R.id.logout:
                 onClickMenuLogout();
@@ -41,6 +49,18 @@ public abstract class BaseActivity extends RoboActionBarActivity implements Base
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    private void onClickCreateGoal() {
+        getPresenter().onClickCreateGoal();
+    }
+
+    private void onClickCreateEnergyLevel() {
+        getPresenter().onClickCreateEnergyLevel();
+    }
+
+    private void onClickCreateMeal() {
+        getPresenter().onClickCreateMeal();
     }
 
     private void onClickMenuLogout() {
@@ -60,6 +80,11 @@ public abstract class BaseActivity extends RoboActionBarActivity implements Base
     @Override
     public String getStringExtra(String key) {
         return getIntent().getStringExtra(key);
+    }
+
+    @Override
+    public long getLongExtra(String key) {
+        return getIntent().getLongExtra(key, -1l);
     }
 
     @Override

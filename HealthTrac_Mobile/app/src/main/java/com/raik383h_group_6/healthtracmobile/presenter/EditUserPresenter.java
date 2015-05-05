@@ -56,6 +56,11 @@ public class EditUserPresenter extends BasePresenter{
         }
     }
 
+    @Override
+    protected AccessGrant getGrant() {
+        return grant;
+    }
+
     public void onClickUpdateUser() {
         User userToUpdate = userValidationPresenter.validateUser(view.getBirthDate(), view.getEmail(), view.getFirstName(), view.getHeight(), view.getLastName(), view.getLocation(), view.getPreferredName(), view.getSex(), view.getUsername(), view.getWeight(), grant.getUserName());
         if (userToUpdate != null) {

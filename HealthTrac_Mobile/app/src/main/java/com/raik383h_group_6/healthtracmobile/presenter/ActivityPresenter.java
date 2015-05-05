@@ -34,6 +34,7 @@ public class ActivityPresenter extends BasePresenter{
     private AccessGrant grant;
     private IAsyncActivityService activityService;
     private IAsyncPointService pointService;
+    private static final double METERS_IN_FOOT = 0.3047990;
 
     @Inject
     public ActivityPresenter(@Assisted IActivityNavigator nav, @Assisted GoogleApiClient gClient, @Assisted ActivityView view, IAsyncActivityService activityService, IAsyncPointService pointService) {
@@ -45,6 +46,19 @@ public class ActivityPresenter extends BasePresenter{
         this.pointService = pointService;
         this.gClient = gClient;
         pts = new ArrayList<Point>();
+    }
+
+    public void setPts(List<Point> pts) {
+        this.pts = pts;
+    }
+
+    public List<Point> getPts() {
+        return pts;
+    }
+
+    @Override
+    protected AccessGrant getGrant() {
+        return grant;
     }
 
     public void onCreate() {
@@ -92,7 +106,7 @@ public class ActivityPresenter extends BasePresenter{
 
     private void postActivityPoints() {
         Activity activity = new Activity();
-        activity.setDistance(distance);
+        activity.setDistance(distance / METERS_IN_FOOT);
         activity.setDuration(duration);
         activity.setStartDate(startDate);
         activity.setSteps(steps);

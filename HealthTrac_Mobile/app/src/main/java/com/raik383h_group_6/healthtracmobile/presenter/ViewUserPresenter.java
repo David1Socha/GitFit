@@ -36,6 +36,11 @@ public class ViewUserPresenter extends BasePresenter{
         updateFields();
     }
 
+    @Override
+    protected AccessGrant getGrant() {
+        return grant;
+    }
+
     public void onActivityResult(int requestCode, int resultCode, Bundle extras) {
         if (resultCode == Activity.RESULT_OK) {
             switch (requestCode) {
@@ -63,6 +68,10 @@ public class ViewUserPresenter extends BasePresenter{
         view.setWeight(FormatUtils.format(user.getWeight()));
         boolean userViewingSelf = user.getId().equals(grant.getId());
         view.setShowEditUserButton(userViewingSelf);
+    }
+
+    public void onClickUserFeed() {
+        nav.openFeed(user.getId(), grant);
     }
 
     @Override

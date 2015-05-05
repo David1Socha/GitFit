@@ -28,4 +28,33 @@ public class AsyncTeamService implements IAsyncTeamService {
             }
         }.execute(authHeader).get();
     }
+
+    @Override
+    public Team createTeamAsync(final Team team, final String authHeader) throws ExecutionException, InterruptedException{
+        return new AsyncTask<String, Void, Team>() {
+            @Override
+            protected Team doInBackground(String... params) {
+                return teamService.createTeam(team, authHeader);
+            }
+        }.execute(authHeader).get();
+    }
+
+    @Override
+    public void updateTeamAsync(final long id, final Team team, final String token) throws Exception {
+        final Exception[] errs = new Exception[1];
+        new AsyncTask<Void, Void, Void>() {
+            @Override
+            protected Void doInBackground(Void... params) {
+                try {
+                    teamService.updateTeam(id, team, token);
+                } catch (Exception ex) {
+                    errs[0] = ex;
+                }
+                return null;
+            }
+        }.execute().get();
+        if (errs[0] != null) {
+            throw errs[0];
+        }
+    }
 }

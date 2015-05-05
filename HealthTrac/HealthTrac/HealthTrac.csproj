@@ -66,6 +66,9 @@
     <Reference Include="Hangfire.SqlServer">
       <HintPath>..\packages\Hangfire.SqlServer.1.3.4\lib\net45\Hangfire.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="MathNet.Numerics">
+      <HintPath>..\packages\MathNet.Numerics.3.6.0\lib\net40\MathNet.Numerics.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.1.0\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
@@ -124,6 +127,7 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
     </Reference>
+    <Reference Include="System.Numerics" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -213,6 +217,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\Api\ActivityReportsController.cs" />
+    <Compile Include="DataAccess\Entity\EntityActivityReportAccessor.cs" />
+    <Compile Include="DataAccess\IActivityReportAccessor.cs" />
+    <Compile Include="Models\ActivityReport.cs" />
+    <Compile Include="Models\Dto\ActivityReportDto.cs" />
     <Compile Include="Services\ActivityForestBuilder.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
@@ -299,12 +308,14 @@
     <Compile Include="Models\UserGoal.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\ApplicationOAuthProvider.cs" />
+    <Compile Include="Services\ActivityReportService.cs" />
     <Compile Include="Services\ActivityService.cs" />
     <Compile Include="Services\BadgeService.cs" />
     <Compile Include="Services\CharonActivityForestAdapter.cs" />
     <Compile Include="Services\EnergyLevelService.cs" />
     <Compile Include="Services\GoalService.cs" />
     <Compile Include="Services\IActivityForest.cs" />
+    <Compile Include="Services\IActivityReportService.cs" />
     <Compile Include="Services\IActivityService.cs" />
     <Compile Include="Services\IBadgeService.cs" />
     <Compile Include="Services\IEnergyLevelService.cs" />
@@ -320,6 +331,7 @@
     <Compile Include="Services\IUserGoalService.cs" />
     <Compile Include="Services\IUserManager.cs" />
     <Compile Include="Services\IUserService.cs" />
+    <Compile Include="Services\LinearModelBuilder.cs" />
     <Compile Include="Services\LoginService.cs" />
     <Compile Include="Services\MealService.cs" />
     <Compile Include="Services\MembershipService.cs" />
