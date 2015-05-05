@@ -1,5 +1,28 @@
 ﻿gitFit.controller('DashboardController', ['$scope', 'UserApi', '$location', 'activities', 'meals', 'TeamApi', 'ActivityApi', function ($scope, UserApi, $location, activities, meals, TeamApi, ActivityApi) {
 
+    $scope.post_on_wall = function () {
+        FB.login(function (response) {
+            if (response.authResponse) {
+                // Post message to your wall
+
+                FB.ui({
+                    method: 'feed',
+                    name: 'Facebook Dialogs',
+                }, function (response) {
+                    if (!response || response.error) {
+                        alert('Posting error occured');
+                    }
+                    else {
+                        alert('Successfuly Posted');
+                    }
+                });
+            }
+            else {
+                alert('Not logged in');
+            }
+        }, { scope: 'publish_stream' });
+    }
+
     activities.$promise.then(function (activities) {
         $scope.numActivitiesDisplay = 10;
         $scope.displayAllActivities = false;
@@ -329,16 +352,6 @@
                 xAxis: {
                     categories: ['Steps (in thousands)', 'Distance (miles)', 'Duration (hours)']
                 },
-                //labels: {
-                //    items: [{
-                //        html: 'Total team comparison',
-                //        style: {
-                //            left: '50px',
-                //            top: '18px',
-                //            color: (Highcharts.theme && Highcharts.theme.textColor) || 'black'
-                //        }
-                //    }]
-                //},
                 series: $scope.teamHighChartsData
             });
         });
@@ -395,9 +408,6 @@
                     pointInterval: 24 * 3600 * 1000,
                     data: $scope.caloriesHighchartsData
                 }],
-                credits: {
-                    enabled: false
-                }
             });
         });
     };
@@ -453,9 +463,6 @@
                     pointInterval: 24 * 3600 * 1000,
                     data: $scope.distanceHighchartsData
                 }],
-                credits: {
-                    enabled: false
-                }
             });
         });
     };
@@ -510,10 +517,7 @@
                     name: 'Daily Steps',
                     pointInterval: 24 * 3600 * 1000,
                     data: $scope.stepsHighchartsData
-                }],
-                credits: {
-                    enabled: false
-                }
+                }]
             });
         });
     };
@@ -568,10 +572,7 @@
                     name: 'Daily ActivityTime',
                     pointInterval: 24 * 3600 * 1000,
                     data: $scope.durationHighchartsData
-                }],
-                credits: {
-                    enabled: false
-                }
+                }]
             });
         });
     };
@@ -610,10 +611,7 @@
                     type: 'pie',
                     name: 'Percent activity time',
                     data: $scope.currentUserActivitybreakdown
-                }],
-                credits: {
-                    enabled: false
-                }
+                }]
             });
         });
 
