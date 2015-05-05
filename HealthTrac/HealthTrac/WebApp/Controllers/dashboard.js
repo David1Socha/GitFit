@@ -50,8 +50,9 @@
             } else {
                 activity.FormattedType = 'Traveled'
             }
+            activity.Distance = Math.round(activity.Distance);
             if (activity.Duration <= 95) {
-                activity.FormattedDuration = activity.Duration + ' seconds';
+                activity.FormattedDuration = Math.round(activity.Duration) + ' seconds';
             } else {
                 activity.FormattedDuration = Math.round(activity.Duration / 60) + ' minutes';
             }
