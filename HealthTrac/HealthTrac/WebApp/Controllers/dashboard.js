@@ -316,7 +316,7 @@
                 }
             }
         });
-        var sedentaryTime = (30 * 24) - (totalTime/3600);
+        var sedentaryTime = (30 * 16) - (totalTime/3600);
         var timeBreakdown = [
             ['Walking', Math.round(walkingTime/3600)],
             ['Jogging', Math.round(joggingTime/3600)],
@@ -603,7 +603,7 @@
                     text: 'Activity Type Breakdown'
                 },
                 subtitle: {
-                    text: 'Over the last 30 days'
+                    text: 'Over the last 30 days (assumes 8 hours of sleep)'
                 },
                 tooltip: {
                     pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
