@@ -25,6 +25,11 @@ namespace HealthTrac.Services
             return _acc.SearchUsers(name);
         }
 
+        public IEnumerable<Models.User> GetUsers(long teamID)
+        {
+            return _acc.GetUsers(teamID);
+        }
+
         public Models.User UpdateUser(Models.User user)
         {
             return _acc.UpdateUser(user);
