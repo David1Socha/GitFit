@@ -46,7 +46,8 @@ public class GitFitMainPresenter extends BasePresenter{
         if (grant == null) {
             reconstructGrant();
         }
-        if (grantBad()) {
+        if (grant == null) {
+            Log.i("onResume", "Authentication");
             nav.openAuthentication(RequestCodes.AUTH);
         }
     }
@@ -123,7 +124,8 @@ public class GitFitMainPresenter extends BasePresenter{
             loadUser();
             nav.openFeedFragment(user.getId(), grant);
         } else {
-            nav.openAuthentication(RequestCodes.AUTH);
+        //    Log.i("onClickUserFeed", "Authentication");
+        //    nav.openAuthentication(RequestCodes.AUTH);
         }
     }
 
