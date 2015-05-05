@@ -60,8 +60,9 @@
         </div>
         <div class="col-sm-6 activity-breakdwon-chart">
             <div ng-hide="noTeams" id="teamChartContainer" style="margin: 20px; height: 300px">
-                <div ng-show="showTeamOptions">
-                    <div class="clickable-bubble" ng-repeat="team in teams" ng-click="processTeamsGraph(team.ID)">{{team.Name}}</div>
+                <div ng-show="showTeamOptions" style="margin-right: 40px; margin-left: 40px; text-align: center">
+                    <h2 style="font-size: 36px">Choose a team to display in depth team statistics</h2>
+                    <div class="clickable-bubble" ng-repeat="team in teams" ng-click="processTeamsGraph(team.ID)" style="font-size: 28px">{{team.Name}}</div>
                 </div>
             </div>           
             <h1 style="text-align: center" ng-show="noTeams">Join a Team to see Team data!</h1>
