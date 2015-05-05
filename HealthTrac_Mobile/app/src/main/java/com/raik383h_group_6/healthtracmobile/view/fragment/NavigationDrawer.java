@@ -47,7 +47,6 @@ public class NavigationDrawer extends RoboActionBarActivity
         super.onCreate(savedInstanceState);
         IActivityNavigator nav = new ActivityNavigator(this);
         presenter = presenterFactory.create(nav, this);
-        presenter.onResume();
         setContentView(R.layout.activity_navigation_drawer);
 
         mNavigationDrawerFragment = (NavigationDrawerFragment)
