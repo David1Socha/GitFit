@@ -87,7 +87,7 @@ public class GitFitMainPresenterTest {
         presenter.onResume();
         when(userService.getUserAsync(grant.getId(), grant.getAuthHeader())).thenReturn(user);
         presenter.onClickShowProfile();
-        verify(nav).openViewUser(user, grant);
+        verify(nav).openViewUserFragment(user, grant);
     }
 
     @Test

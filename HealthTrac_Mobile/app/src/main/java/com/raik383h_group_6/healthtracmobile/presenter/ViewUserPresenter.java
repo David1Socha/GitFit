@@ -56,8 +56,6 @@ public class ViewUserPresenter extends BasePresenter{
     }
 
     private void updateFields() {
-        Log.i("View", view.toString());
-        Log.i("User", user.toString());
         view.setBirthDate(FormatUtils.format(user.getBirthDate()));
         view.setEmail(user.getEmail());
         view.setFirstName(user.getFirstName());
