@@ -103,7 +103,7 @@ namespace HealthTrac.Tests.Controllers.Api
             var result = response as CreatedAtRouteNegotiatedContentResult<ActivityDto>;
             var resultActivity = result.Content;
             Assert.IsTrue(resultActivity.EqualValues(activity));
-            mock.Verify(acc => acc.CreateActivity(activity, null));
+            mock.Verify(acc => acc.CreateActivity(activity, "3"));
             uowMock.Verify(u => u.Save());
         }
 
