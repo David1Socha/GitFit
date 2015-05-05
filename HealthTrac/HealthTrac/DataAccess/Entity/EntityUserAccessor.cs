@@ -39,6 +39,20 @@ namespace HealthTrac.DataAccess.Entity
             return users;
         }
 
+        public IEnumerable<User> GetUsers(long teamID)
+        {
+            var memberships = db.Memberships.Where(m => m.TeamID == teamID &&
+                (m.MembershipStatus == MembershipStatus.ADMIN
+                || m.MembershipStatus == MembershipStatus.MEMBER)).Select(m => new
+                {
+                    m.UserID,
+                });
+            IEnumerable<string> userIdsWhereTeamMember = memberships.Select(m => m.UserID);
+            var users = db.Users.Where(u => userIdsWhereTeamMember.Contains(u.Id) && u.Enabled);
+
+            return users.ToList();
+        }
+
         public User UpdateUser(User user)
         {
             db.Entry(user).State = System.Data.Entity.EntityState.Modified;

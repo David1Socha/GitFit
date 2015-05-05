@@ -6,6 +6,7 @@ namespace HealthTrac.DataAccess
     {
         HealthTrac.Models.User FindUser(string ID);
         IEnumerable<HealthTrac.Models.User> SearchUsers(string name);
+        IEnumerable<HealthTrac.Models.User> GetUsers(long teamID);
         HealthTrac.Models.User UpdateUser(HealthTrac.Models.User user);
         IEnumerable<HealthTrac.Models.User> GetUsers();
         HealthTrac.Models.User DeleteUser(HealthTrac.Models.User user);
