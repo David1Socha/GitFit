@@ -41,6 +41,13 @@ namespace HealthTrac.Controllers.Api
             return users.Select(u => UserDto.FromUser(u));
         }
 
+        //GET: api/Users?teamId=xxx
+        public IEnumerable<UserDto> GetUsers(long teamId)
+        {
+            var users = userService.GetUsers(teamId);
+            var userDtos = users.Select(u => UserDto.FromUser(u));
+            return userDtos;
+        }
 
         [Route("api/Users/Available")]
         [ResponseType(typeof(bool))]
