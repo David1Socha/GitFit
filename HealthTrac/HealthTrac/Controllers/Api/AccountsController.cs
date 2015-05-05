@@ -66,6 +66,7 @@ namespace HealthTrac.Controllers.Api
         public IHttpActionResult LogOff()
         {
             System.Web.HttpContext.Current.Response.Cookies.Add(new HttpCookie(".AspNet.ApplicationCookie", ""));
+            System.Web.HttpContext.Current.Response.Cookies.Add(new HttpCookie(".AspNet.ExternalCookie", ""));
             return Ok();
         }
 
