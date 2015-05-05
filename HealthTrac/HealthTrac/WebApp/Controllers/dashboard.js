@@ -155,11 +155,11 @@
         });
     }
 
-    $scope.processTeamsGraph = function (team) {
+    $scope.processTeamsGraph = function (teamId) {
                 $scope.showTeamOptions = false;
                 $scope.UserValuePairs = [];
                 $scope.areWeDoneCounter = 0;
-                var teamWithUsersResource = UserApi.GetUsersFromTeam({ teamId: team.ID })
+                var teamWithUsersResource = UserApi.GetUsersFromTeam({ teamId: teamID })
                 teamWithUsersResource.$promise.then(function (users) {
                     angular.forEach(users, function (user) {                        
                         if (user.Id != null) {
