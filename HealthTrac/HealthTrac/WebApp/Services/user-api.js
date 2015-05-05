@@ -4,5 +4,6 @@
     return $resource('/api/Users', {}, {
         SearchUsers: { method: 'GET', url: '/api/Users/Search/:name', isArray: true },
         GetUser: { method: 'GET', url: '/api/Users/:userId' },
+        GetUsersFromTeam: { method: 'GET', url: '/api/Users?teamId=:teamId', isArray: true}
     });
 }]);
