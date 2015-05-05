@@ -29,7 +29,7 @@ namespace HealthTrac.DataAccess.Entity
         public IEnumerable<Team> SearchTeams(string name)
         {
             var teams = db.Teams
-                            .Where(t => t.Name.Contains(name)).ToList();
+                            .Where(t => t.Name.Contains(name) && t.Enabled).ToList();
             return teams;
         }
 
