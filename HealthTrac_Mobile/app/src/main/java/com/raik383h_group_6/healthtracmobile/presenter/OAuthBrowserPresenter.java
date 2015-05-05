@@ -34,6 +34,9 @@ public class OAuthBrowserPresenter extends BasePresenter{
         WebViewClient webViewClient = new LoginWebViewClient();
         webView.clearCache(true);
         WebSettings settings = webView.getSettings();
+        settings.setSaveFormData(false);
+        settings.setSavePassword(false);
+        android.webkit.CookieManager.getInstance().removeAllCookie();
         settings.setBuiltInZoomControls(true);
         settings.setDisplayZoomControls(false);
         settings.setJavaScriptEnabled(true);

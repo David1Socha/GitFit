@@ -136,7 +136,7 @@ public class NavigationDrawer extends RoboActionBarActivity
     }
 
     private void onClickMenuLogout() {
-        presenter.onClickMenuLogout();
+        presenter.onClickMenuLogout(this);
     }
 
     @Override

@@ -43,7 +43,7 @@ public abstract class BaseActivity extends RoboActionBarActivity implements Base
     }
 
     private void onClickMenuLogout() {
-        getPresenter().onClickMenuLogout();
+        getPresenter().onClickMenuLogout(this);
     }
 
     @Override
