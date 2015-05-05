@@ -251,7 +251,7 @@
             data: top
         }, {
             type: 'spline',
-            name: 'Average',
+            name: 'My Stats',
             data: current,
             marker: {
                 lineWidth: 2,
