@@ -19,9 +19,13 @@
                 </div>
             </div>
         </div>
-        <div class="col-sm-6 calorie-intake">
+        <div class="col-sm-6 calorie-intake" ng-hide="hideMeals">
             <div id="CalorieContainer" style="margin: 20px; height: 300px"></div>
         </div>
+        <div class="col-sm-6 calorie-intake" ng-show="hideMeals">
+            <div style="margin: 20px; height: 300px">Add some meals from the mobile app to see meal data!</div>
+        </div>
+
     </div>
     <div class="row">
         <!--<div class="col-sm-4 badge-list">

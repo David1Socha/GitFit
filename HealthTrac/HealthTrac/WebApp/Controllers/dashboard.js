@@ -180,7 +180,7 @@
                 })
                 setTimeout(function () {
                     $scope.processTeamData($scope.UserValuePairs)
-                }, 2000)
+                }, 5000)
             }         
         });
     }
@@ -322,25 +322,31 @@
 
     meals.$promise.then(function (meals) {
         $scope.meals = meals;
-        $scope.DailyIntake = {};
-        angular.forEach($scope.meals, function (meal) {
-            meal.DateCreated = moment(meal.DateCreated);
-            meal.FormattedDateCreated = meal.DateCreated.format('MMMM DD, YYYY');
-            if ($scope.DailyIntake[meal.FormattedDateCreated] == 0 || $scope.DailyIntake[meal.FormattedDateCreated] == null) {
-                $scope.DailyIntake[meal.FormattedDateCreated] = meal.Calories;
-            } else {
-                $scope.DailyIntake[meal.FormattedDateCreated] += meal.Calories;
-            }
-        });
-        $scope.calorieKeys = Object.keys($scope.DailyIntake);
-        $scope.caloriesHighchartsData = [];
-        var i = 0;
-        angular.forEach($scope.DailyIntake, function (calories) {
-            var dataObject = [Date.parse(moment($scope.calorieKeys[i], "MMMM DD, YYYY")), calories];
-            $scope.caloriesHighchartsData.push(dataObject);
-            i++;
-        })
-        $scope.renderCalorieChart();
+        $scope.hideMeals = false;
+        if (meals.length > 0) {
+            $scope.DailyIntake = {};
+            angular.forEach($scope.meals, function (meal) {
+                meal.DateCreated = moment(meal.DateCreated);
+                meal.FormattedDateCreated = meal.DateCreated.format('MMMM DD, YYYY');
+                if ($scope.DailyIntake[meal.FormattedDateCreated] == 0 || $scope.DailyIntake[meal.FormattedDateCreated] == null) {
+                    $scope.DailyIntake[meal.FormattedDateCreated] = meal.Calories;
+                } else {
+                    $scope.DailyIntake[meal.FormattedDateCreated] += meal.Calories;
+                }
+            });
+            $scope.calorieKeys = Object.keys($scope.DailyIntake);
+            $scope.caloriesHighchartsData = [];
+            var i = 0;
+            angular.forEach($scope.DailyIntake, function (calories) {
+                var dataObject = [Date.parse(moment($scope.calorieKeys[i], "MMMM DD, YYYY")), calories];
+                $scope.caloriesHighchartsData.push(dataObject);
+                i++;
+            })
+            $scope.renderCalorieChart();
+        } else {
+            $scope.hideMeals = true;
+        }
+        
     });
 
     $scope.renderTeamChart = function () {
