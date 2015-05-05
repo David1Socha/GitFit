@@ -3,22 +3,21 @@
     $scope.noUsers = true;
 
     $scope.getUsersFromTeam = function () {
-        $scope.users = [];
-        angular.forEach($scope.team.Memberships, function (membership) {
-            if (membership.UserID != null) {
-                var userResource = UserApi.GetUser({ userId: membership.UserID });
-                userResource.$promise.then(function (user) {
+        var userResource = UserApi.GetUsersFromTeam({ teamId: $scope.teamId});
+        userResource.$promise.then(function (users){
+            $scope.users = users;
+            if (users.length > 0){
+                angular.forEach($scope.users, function (user){
                     if (user.FirstName == null || user.LastName == null) {
                         user.DisplayName = user.UserName;
                     } else {
                         user.DisplayName = user.FirstName + ' ' + user.LastName;
                     }
-                    $scope.users.push(user);
-                    $scope.noUsers = false;
                 });
+                $scope.noUsers = false;
             }
             
-        });      
+        });   
     };
 
     $scope.getTeam = function () {
@@ -26,7 +25,6 @@
         teamResource.$promise.then(function (team) {
             $scope.team = team;
             $scope.team.DateCreated = moment(team.DateCreated).format('MMMM DD, YYYY');
-            $scope.getUsersFromTeam();
         })
     };
     
@@ -35,5 +33,6 @@
     }
 
     $scope.getTeam();
+    $scope.getUsersFromTeam();
 
 }]);
