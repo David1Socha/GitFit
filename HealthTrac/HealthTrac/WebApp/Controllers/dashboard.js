@@ -39,13 +39,13 @@
             if ($scope.mostRecentDate.isBefore(activity.StartDate)) {
                 $scope.mostRecentDate = activity.StartDate;
             }
-            if (activity.ActivityType == 0) {
+            if (activity.Type == 0) {
                 activity.FormattedType = 'Walked';
-            } else if (activity.ActivityType == 1) {
+            } else if (activity.Type == 1) {
                 activity.FormattedType = 'Jogged';
-            } else if (activity.ActivityType == 2) {
+            } else if (activity.Type == 2) {
                 activity.FormattedType = 'Ran';
-            } else if (activity.ActivityType == 3) {
+            } else if (activity.Type == 3) {
                 activity.FormattedType = 'Biked';
             } else {
                 activity.FormattedType = 'Traveled'
@@ -91,7 +91,7 @@
         var i = 0;
         var dateThreshold = $scope.mostRecentDate.add(-7, 'days');
         angular.forEach($scope.DailyDistance, function (distance) {
-            var dataObject = [Date.parse(moment($scope.distanceKeys[i], "MMMM DD, YYYY")), distance];
+            var dataObject = [Date.parse(moment($scope.distanceKeys[i], "MMMM DD, YYYY")), Math.round(distance)];
             $scope.distanceHighchartsData.push(dataObject);
             
             if (moment($scope.distanceKeys[i], "MMMM DD, YYYY").isAfter(dateThreshold)) {
@@ -290,7 +290,7 @@
         angular.forEach(activities, function (activity){
             //if activity is within the last 30 days then add time to corresponding type
             if (activity.StartDate.isAfter(moment().add(-30, 'days'))){
-                switch (activity.ActivityType){
+                switch (activity.Type){
                     case 0:
                         walkingTime += activity.Duration;
                         totalTime += activity.Duration;
