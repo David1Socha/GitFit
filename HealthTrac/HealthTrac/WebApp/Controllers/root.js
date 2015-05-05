@@ -16,7 +16,7 @@
     });
 
     $scope.LogOff = function () {
-        logoffResource = AccountApi.LogOff();
+        var logoffResource = AccountApi.LogOff();
         logoffResource.$promise.then(function () {
             $window.location.reload();
         });
