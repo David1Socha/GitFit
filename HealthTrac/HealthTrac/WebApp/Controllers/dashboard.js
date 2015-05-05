@@ -132,7 +132,7 @@
         //    tempDate = tempDate.add(1, 'days');
         //}
 
-        $scope.processTeamsGraph();
+        $scope.getTeams();
         $scope.renderActivityDistanceChart();
         $scope.currentUserActivitybreakdown = $scope.getActivityBreakDown(activities);
         $scope.renderActivityTypePieChart();
@@ -143,25 +143,32 @@
 
     });
 
-    $scope.processTeamsGraph = function () {
+    $scope.getTeams = function () {
         $scope.noTeams = true;
+        $scope.showTeamOptions = true;
         var teamResource = TeamApi.GetTeamsFromUser({ userId: 'current' });
         teamResource.$promise.then(function (teams) {
             $scope.teams = teams;
             if (teams.length != 0) {
                 $scope.noTeams = false;
+            }
+        });
+    }
+
+    $scope.processTeamsGraph = function (team) {
+                $scope.showTeamOptions = false;
                 $scope.UserValuePairs = [];
                 $scope.areWeDoneCounter = 0;
-                var teamWithUsersResource = TeamApi.GetTeam({ teamId: teams[0].ID })
-                teamWithUsersResource.$promise.then(function (teamWithUsers) {
-                    angular.forEach(teamWithUsers.Memberships, function (user) {                        
-                        if (user.UserID != null) {
+                var teamWithUsersResource = UserApi.GetUsersFromTeam({ teamId: team.ID })
+                teamWithUsersResource.$promise.then(function (users) {
+                    angular.forEach(users, function (user) {                        
+                        if (user.Id != null) {
                             var tempUserValuePair = [];
                             var stepsAdder = 0;
                             var distanceAdder = 0;
                             var durationAdder = 0;
                             var dateComparer = moment().add(-30, 'days');
-                            var userActivityResource = ActivityApi.GetActivities({ userId: user.UserID });
+                            var userActivityResource = ActivityApi.GetActivities({ userId: user.Id });
                             userActivityResource.$promise.then(function (userActivities) {
                                 if (userActivities.length > 0) {
                                     angular.forEach(userActivities, function (userActivity) {
@@ -171,7 +178,7 @@
                                             durationAdder += userActivity.Duration;
                                         }
                                     });
-                                    tempUserValuePair = [user.User.UserName, stepsAdder, distanceAdder, durationAdder]
+                                    tempUserValuePair = [user.UserName, stepsAdder, distanceAdder, durationAdder]
                                     $scope.UserValuePairs.push(tempUserValuePair);
                                 }                               
                             });
@@ -179,10 +186,8 @@
                     });                                           
                 })
                 setTimeout(function () {
-                    $scope.processTeamData($scope.UserValuePairs)
-                }, 5000)
-            }         
-        });
+                    $scope.processTeamData($scope.UserValuePairs);                    
+                }, 2000)
     }
 
     $scope.processTeamData = function (teamData){
