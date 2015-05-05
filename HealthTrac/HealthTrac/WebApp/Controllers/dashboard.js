@@ -163,16 +163,17 @@
                             var dateComparer = moment().add(-30, 'days');
                             var userActivityResource = ActivityApi.GetActivities({ userId: user.UserID });
                             userActivityResource.$promise.then(function (userActivities) {
-                                angular.forEach(userActivities, function (userActivity) {
-                                    if (moment(userActivity.StartDate).isAfter(dateComparer)) {
-                                        stepsAdder += userActivity.Steps;
-                                        distanceAdder += userActivity.Distance;
-                                        durationAdder += userActivity.Duration;
-                                    }
-                                });
-                                tempUserValuePair = [user.User.UserName, stepsAdder, distanceAdder, durationAdder]
-                                $scope.UserValuePairs.push(tempUserValuePair);
-
+                                if (userActivities.length > 0) {
+                                    angular.forEach(userActivities, function (userActivity) {
+                                        if (moment(userActivity.StartDate).isAfter(dateComparer)) {
+                                            stepsAdder += userActivity.Steps;
+                                            distanceAdder += userActivity.Distance;
+                                            durationAdder += userActivity.Duration;
+                                        }
+                                    });
+                                    tempUserValuePair = [user.User.UserName, stepsAdder, distanceAdder, durationAdder]
+                                    $scope.UserValuePairs.push(tempUserValuePair);
+                                }                               
                             });
                         }
                     });                                           
@@ -187,9 +188,9 @@
     $scope.processTeamData = function (teamData){
         //process CurrentUserData
         var dateComparer = moment().add(-30, 'days');
-        currentStepsAdder = 0;
-        currentDistanceAdder = 0;
-        currentDurationAdder = 0;
+        var currentStepsAdder = 0;
+        var currentDistanceAdder = 0;
+        var currentDurationAdder = 0;
         angular.forEach($scope.activities, function (currentUserActivity) {
             if (moment(currentUserActivity.StartDate).isAfter(dateComparer)) {
                 currentStepsAdder += currentUserActivity.Steps;
