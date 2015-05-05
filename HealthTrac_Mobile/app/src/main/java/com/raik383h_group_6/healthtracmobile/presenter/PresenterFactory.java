@@ -17,6 +17,7 @@ import com.raik383h_group_6.healthtracmobile.view.CreateMealView;
 import com.raik383h_group_6.healthtracmobile.view.CreateUserView;
 import com.raik383h_group_6.healthtracmobile.view.EditTeamView;
 import com.raik383h_group_6.healthtracmobile.view.EditUserView;
+import com.raik383h_group_6.healthtracmobile.view.EventView;
 import com.raik383h_group_6.healthtracmobile.view.FeedView;
 import com.raik383h_group_6.healthtracmobile.view.GitFitMainView;
 import com.raik383h_group_6.healthtracmobile.view.InviteMembersView;
@@ -34,6 +35,7 @@ import com.raik383h_group_6.healthtracmobile.view.ViewGoalView;
 import com.raik383h_group_6.healthtracmobile.view.ViewMealView;
 import com.raik383h_group_6.healthtracmobile.view.ViewUserView;
 import com.raik383h_group_6.healthtracmobile.view.ViewTeamView;
+import com.raik383h_group_6.healthtracmobile.view.fragment.NavigationDrawer;
 
 public interface PresenterFactory {
     OAuthBrowserPresenter create(IAsyncOAuthService serviceAdapter, WebView web, IActivityNavigator nav, BaseView view);
@@ -66,4 +68,5 @@ public interface PresenterFactory {
     ViewActivityPresenter create(IActivityNavigator nav, ViewActivityView view);
     ViewBadgePresenter create(IActivityNavigator nav, ViewBadgeView view);
     CreateActivityPresenter create(IActivityNavigator nav, CreateActivityView view);
+    EventPresenter create(IActivityNavigator nav, EventView view);
 }

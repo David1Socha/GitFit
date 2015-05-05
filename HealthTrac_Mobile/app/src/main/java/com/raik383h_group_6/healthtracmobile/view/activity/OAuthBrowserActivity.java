@@ -1,6 +1,7 @@
 package com.raik383h_group_6.healthtracmobile.view.activity;
 
 import android.os.Bundle;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 import com.google.inject.Inject;
 import com.google.inject.name.Named;

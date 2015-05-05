@@ -23,5 +23,7 @@ public interface ViewUserView  extends BaseView {
 
     void setShowEditUserButton(boolean enabled);
 
+    void setShowUserFeedButton(boolean enabled);
+
     void setProfilePicture(String profilePicture);
 }

@@ -3,6 +3,7 @@ package com.raik383h_group_6.healthtracmobile.presenter;
 import android.app.Activity;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 
 import com.google.gson.Gson;
 import com.google.inject.Inject;
@@ -45,7 +46,7 @@ public class GitFitMainPresenter extends BasePresenter{
         if (grant == null) {
             reconstructGrant();
         }
-        if (grant == null) {
+        if (grantBad()) {
             nav.openAuthentication(RequestCodes.AUTH);
         }
     }
@@ -83,7 +84,7 @@ public class GitFitMainPresenter extends BasePresenter{
     public void onClickShowProfile() {
         loadUser();
         if (user != null) {
-            nav.openViewUser(user, grant);
+            nav.openViewUserFragment(user, grant);
         }
     }
 
@@ -117,10 +118,21 @@ public class GitFitMainPresenter extends BasePresenter{
         }
     }
 
-    public void onClickStartActivity() { nav.openActivity(grant); }
+    public void onClickUserFeed() {
+        if (!grantBad()) {
+            loadUser();
+            nav.openFeedFragment(user.getId(), grant);
+        } else {
+            nav.openAuthentication(RequestCodes.AUTH);
+        }
+    }
 
-    public void onClickCreateActivityManual() {
-        nav.openCreateActivity(grant);
+    public void onClickOpenEvent() {
+        if (!grantBad()) {
+            nav.openEvent(grant);
+        } else {
+            nav.openAuthentication(RequestCodes.AUTH);
+        }
     }
 
     @Override

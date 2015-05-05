@@ -10,4 +10,8 @@
     <color name="goal_header_bg">#66FFFF</color>
     <color name="badge">@color/goal</color>
     <color name="activity">@color/username</color>
+    <color name="windowbackground">#000000</color>
+    <color name="titlebackground">#378c3b</color>
+    <color name="titletext">#378c3b</color>
+    <color name="textColor">#a6ce38</color>
 </resources>

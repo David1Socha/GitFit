@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Healthtrac Mobile</string>
+    <string name="app_name">GitFit</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="facebook_app_id">512959195512759</string>
@@ -63,9 +63,11 @@
     <string name="title_activity_update_user">Update User</string>
     <string name="update_user_error">Could not update user.</string>
     <string name="user_updated_message">User successfully updated</string>
-    <string name="title_section1">Account</string>
-    <string name="title_section2">Teams</string>
-    <string name="title_section3">Feed</string>
+    <string name="title_section1">Feed</string>
+    <string name="title_section2">Events</string>
+    <string name="title_section3">Teams</string>
+    <string name="title_section4">Users</string>
+    <string name="title_section5">Account</string>
     <string name="navigation_drawer_open">Open</string>
     <string name="navigation_drawer_close">Close</string>
     <string name="edit_account">Edit Account</string>
@@ -216,5 +218,8 @@
     <string name="banned_member">banned</string>
     <string name="ban_members">Ban Members</string>
     <string name="title_activity_ban_members">Ban Members</string>
+    <string name="title_activity_navigation_drawer">NavigationDrawer</string>
+    <string name="action_example">Example action</string>
+    <string name="event_title">Enter Events</string>
 
 </resources>

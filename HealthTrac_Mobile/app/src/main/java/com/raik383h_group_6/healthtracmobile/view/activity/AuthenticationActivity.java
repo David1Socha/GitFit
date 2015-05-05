@@ -3,6 +3,8 @@ package com.raik383h_group_6.healthtracmobile.view.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.webkit.CookieManager;
+import android.webkit.CookieSyncManager;
 import android.widget.Toast;
 
 import com.google.inject.Inject;

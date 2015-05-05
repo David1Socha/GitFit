@@ -34,15 +34,6 @@ public abstract class BaseActivity extends RoboActionBarActivity implements Base
             case android.R.id.home:
                 onBackPressed();
                 return true;
-            case R.id.create_goal:
-                onClickCreateGoal();
-                return true;
-            case R.id.create_energy_level:
-                onClickCreateEnergyLevel();
-                return true;
-            case R.id.create_meal:
-                onClickCreateMeal();
-                return true;
             case R.id.logout:
                 onClickMenuLogout();
                 return true;
@@ -51,20 +42,8 @@ public abstract class BaseActivity extends RoboActionBarActivity implements Base
         }
     }
 
-    private void onClickCreateGoal() {
-        getPresenter().onClickCreateGoal();
-    }
-
-    private void onClickCreateEnergyLevel() {
-        getPresenter().onClickCreateEnergyLevel();
-    }
-
-    private void onClickCreateMeal() {
-        getPresenter().onClickCreateMeal();
-    }
-
     private void onClickMenuLogout() {
-        getPresenter().onClickMenuLogout();
+        getPresenter().onClickMenuLogout(this);
     }
 
     @Override
