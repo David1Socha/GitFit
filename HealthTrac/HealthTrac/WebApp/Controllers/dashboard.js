@@ -26,12 +26,14 @@
     activities.$promise.then(function (activities) {
         $scope.numActivitiesDisplay = 10;
         $scope.displayAllActivities = false;
+        $scope.activities = []
         $scope.DailyDistance = {};
         $scope.DailyDuration = {};
         $scope.DailySteps = {};
         $scope.earliestDate = moment(activities[0].StartDate)
         $scope.mostRecentDate = moment(activities[0].StartDate)
-        angular.forEach(activities, function (activity) {
+        for (var p = activities.length - 1; p >= 0; p--) {
+            var activity = activities[p];
             activity.StartDate = moment(activity.StartDate);
             if ($scope.earliestDate.isAfter(activity.StartDate)) {
                 $scope.earliestDate = activity.StartDate;
@@ -75,8 +77,8 @@
             } else {
                 $scope.DailyDuration[activity.FormattedStartDate] = activity.Duration;
             }
-        });
-        $scope.activities = activities;
+            $scope.activities.push(activity);
+        };
         
         $scope.distanceKeys = Object.keys($scope.DailyDistance);
         $scope.distanceHighchartsData = [];
@@ -135,7 +137,7 @@
 
         $scope.getTeams();
         $scope.renderActivityDistanceChart();
-        $scope.currentUserActivitybreakdown = $scope.getActivityBreakDown(activities);
+        $scope.currentUserActivitybreakdown = $scope.getActivityBreakDown($scope.activities);
         $scope.renderActivityTypePieChart();
         $scope.renderActivityStepsChart();
         $scope.renderActivityDurationChart();
