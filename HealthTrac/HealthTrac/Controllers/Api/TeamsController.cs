@@ -61,10 +61,11 @@ namespace HealthTrac.Controllers.Api
 
         [Route("api/Teams/Search/{name}")]
         [HttpGet]
-        public IEnumerable<Team> SearchTeams(string name)
+        public IEnumerable<TeamDto> SearchTeams(string name)
         {
             IEnumerable<Team> teams = teamService.SearchTeams(name);
-            return teams;
+            var teamDtos = teams.Select(t => TeamDto.FromTeam(t));
+            return teamDtos;
         }
 
         //GET: api/Teams?userId=xxx

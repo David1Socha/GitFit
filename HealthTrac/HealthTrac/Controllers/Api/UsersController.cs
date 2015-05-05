@@ -26,12 +26,6 @@ namespace HealthTrac.Controllers.Api
             this.userService = uow.UserService;
         }
 
-        [Route("api/Users/Current")]
-        [HttpGet]
-        public User GetCurrentUser()
-        {
-            return userService.FindUser(User.Identity.GetUserId());
-        }
         // GET: api/Users
         public IEnumerable<UserDto> GetUsers()
         {
@@ -41,10 +35,10 @@ namespace HealthTrac.Controllers.Api
 
         [Route("api/Users/Search/{name}")]
         [HttpGet]
-        public IEnumerable<User> SearchUsers(string name)
+        public IEnumerable<UserDto> SearchUsers(string name)
         {
             IEnumerable<User> users = userService.SearchUsers(name);
-            return users;
+            return users.Select(u => UserDto.FromUser(u));
         }
 
 
