@@ -270,8 +270,7 @@
     }
 
     $scope.showAllActivities = function () {
-        $scope.num
-        ActivitiesDisplay = 10000000;
+        $scope.numActivitiesDisplay = 10000000;
         $scope.displayAllActivities = true;
     }
 
